@@ -1,6 +1,6 @@
 import { computeSeason } from "../../src/engine/season";
-import { type Ctx, byMargin, gridironParams, homeField } from "../ctx";
-import { h, svg } from "../dom";
+import { type Ctx, byMargin, gridironParams, homeField, restLength } from "../ctx";
+import { type Child, h, svg } from "../dom";
 import { pillarIcons } from "../icons";
 import { fetchText, seasonFiles } from "../store";
 
@@ -59,7 +59,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         ? "No preseason poll, brand, conference or home field. Only who won and by how much."
         : "No preseason poll, brand, conference or margin of victory. Only who beat whom.")),
 
-    ...(g ? gridironSections(ctx) : springRankSections(margin)),
+    ...(g ? gridironSections(ctx) : springRankSections(margin, restLength(ctx))),
 
     h("h2", {}, "How data flows"),
     h("div", { class: "pipeline" },
@@ -80,7 +80,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
         ...((g
           ? [["Win bonus", `${g.winBonus} points`], ["Blowout limit", `${g.blowoutLimit} points`], ["Home field (fitted)", `${g.homeFieldPoints.toFixed(3)} points`], ["Solver rounds", String(g.iterations)]]
-          : [["Spring strength", margin ? "Point differential" : "1 per game"]]) as [string, string][]),
+          : [["Each win wants the winner", `${m.restLength ?? 1} ${(m.restLength ?? 1) === 1 ? "unit" : "points"} above the loser`], ["Spring strength", margin ? "Point differential" : "Equal for every game"]]) as [string, string][]),
         ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
         ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
       ] as const).map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
@@ -91,14 +91,17 @@ export function aboutView(ctx: Ctx): HTMLElement {
   );
 }
 
-function springRankSections(margin: boolean): Node[] {
+function springRankSections(margin: boolean, r: number): Child[] {
+  const step = r === 1 ? "one step" : `${r} points`;
   return [
     h("h2", {}, "The idea: springs"),
     h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Imagine every game as a spring that wants the ", h("b", {}, "winner exactly one step above the loser"), ".", margin ? h("span", {}, " The spring is as ", h("b", {}, "stiff as the point differential"), ": a 35-point win pulls 35 times harder than a 1-point win.") : "", " Beat a team that’s high up and you get pulled higher. Lose to a team that’s low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
+      h("p", {}, "Imagine every win as a spring that wants the ", h("b", {}, `winner exactly ${step} above the loser`), ".", margin ? h("span", {}, " The spring is as ", h("b", {}, "stiff as the point differential"), ": a 35-point win pulls 35 times harder than a 1-point win.") : "", " Beat a team that’s high up and you get pulled higher. Lose to a team that’s low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
     h("p", {}, "This is ", h("b", {}, "SpringRank"), " (De Bacco, Larremore & Moore, ", h("i", {}, "Science Advances"), ", 2018). The resting heights are the ones that put the least total strain on all the springs:"),
-    h("pre", { class: "formula" }, "H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − 1)²  +  ½ · α · Σ s[i]²\n\n", h("span", { class: "c" }, margin ? "A[i][j]  total point differential of team i’s wins over team j\n" : "A[i][j]  times team i beat team j\ns[i]     height of team i  (the y-axis of the graph)\nα        tiny equal pull toward 0, so there is always one exact answer")),
+    h("pre", { class: "formula" }, `H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − ${r})²  +  ½ · α · Σ s[i]²\n\n`, h("span", { class: "c" }, margin ? "A[i][j]  total point differential of team i’s wins over team j\n" : `A[i][j]  times team i beat team j\ns[i]     height of team i  (the y-axis of the graph)\n${r}${" ".repeat(Math.max(1, 9 - String(r).length))}how far above the loser each win wants the winner${r === 1 ? "" : " (ranking points, not game points)"}\nα        tiny equal pull toward 0, so there is always one exact answer`)),
     h("p", {}, "Minimising that gives a single system of linear equations, solved exactly with a Cholesky decomposition. No iterations to converge, no random starts. Same input, same answer, on any computer."),
+    margin ? "" : h("h2", {}, "Why wins only"),
+    margin ? "" : h("p", {}, "Score margins can be run up, home field has to be estimated, and both invite arguments about what a game “really” showed. Wins don’t. The trade-off is measurable: on ten past seasons (2015–2025), a wins-only ranking agreed with the most results (83.6% of games have the winner ranked above the loser) but picked next week’s winners less often (67.6%) than margin-based ratings (about 71%). We chose the ranking that best respects what happened on the field. ", h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/BACKTEST.md", target: "_blank", rel: "noopener" }, "See the backtest ↗")),
 
     h("h2", {}, "What counts"),
     h("ul", {},
@@ -113,7 +116,7 @@ function springRankSections(margin: boolean): Node[] {
   ];
 }
 
-function gridironSections(ctx: Ctx): Node[] {
+function gridironSections(ctx: Ctx): Child[] {
   const g = gridironParams(ctx)!;
   const hf = homeField(ctx);
   const row = (cells: string[], best = false) => h("tr", { class: best ? "best" : "" }, ...cells.map((c, i) => (i === 0 ? h("th", {}, c) : h("td", {}, c))));

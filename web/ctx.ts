@@ -18,7 +18,8 @@ export interface Ctx {
 }
 
 export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
-  heightDecimals = base.ranking.manifest.method === "gridiron" ? 1 : 3;
+  const mf = base.ranking.manifest;
+  heightDecimals = mf.method === "gridiron" ? 1 : (mf.restLength ?? 1) > 1 ? 2 : 3;
   const spec = listSnapshots(base.games).find((s) => s.id === base.snapId)!;
   const { edges } = buildEdges(base.games, base.ranking.teams, spec);
   return {
@@ -39,6 +40,11 @@ let heightDecimals = 3;
 export const fmtHeight = (v: number | null) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(heightDecimals));
 export const fmtPoints = (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1);
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
+
+/** SpringRank: how far above the loser each win wants the winner. */
+export const restLength = (ctx: Ctx) => ctx.ranking.manifest.restLength ?? 1;
+/** "7 points" or "one unit", for copy. */
+export const restLabel = (ctx: Ctx) => (restLength(ctx) === 1 ? "one unit" : `${restLength(ctx)} points`);
 
 /** True when springs are weighted by point differential (older files lack the field: win/loss). */
 export const byMargin = (ctx: Ctx) => ctx.ranking.manifest.edgeWeight === "margin";

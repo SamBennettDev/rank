@@ -56,6 +56,11 @@ export interface SeasonConfig {
    * Defaults to "win" when absent. Method "springrank" only.
    */
   edgeWeight?: EdgeWeight;
+  /**
+   * How far above the loser each win wants the winner, in display units (default 1).
+   * Method "springrank" only. Scales every height; never changes the order.
+   */
+  restLength?: number;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
 }
@@ -120,6 +125,8 @@ export interface Manifest {
   alpha: number;
   /** springrank: spring stiffness per game. */
   edgeWeight?: EdgeWeight;
+  /** springrank: how far above the loser each win wants the winner. */
+  restLength?: number;
   /** gridiron: parameters plus what the solver found. */
   gridiron?: GridironConfig & { homeFieldPoints: number; iterations: number };
   classifications: string[];

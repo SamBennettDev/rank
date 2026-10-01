@@ -6,7 +6,7 @@ import { springRank } from "./springrank";
 import type { Edge, EdgeWeight, GridironConfig, Manifest, RankedTeam, Ranking, SeasonConfig, SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-4";
+export const ENGINE_VERSION = "rank-engine-5";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -30,7 +30,7 @@ export function solve(n: number, edges: readonly Edge[], index: ReadonlyMap<numb
   }
   const weighting = config.edgeWeight ?? "win";
   return {
-    heights: springRank(n, edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting) })), config.alpha),
+    heights: springRank(n, edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting) })), config.alpha, config.restLength ?? 1),
   };
 }
 
@@ -120,7 +120,7 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       alpha: config.alpha,
       ...(method === "gridiron"
         ? { gridiron: { ...pickGridiron(config.gridiron!), homeFieldPoints: round6(solved.homeField!), iterations: solved.iterations! } }
-        : { edgeWeight: config.edgeWeight ?? "win" }),
+        : { edgeWeight: config.edgeWeight ?? "win", restLength: config.restLength ?? 1 }),
       classifications: config.classifications,
       teamsSha256,
       gamesSha256,

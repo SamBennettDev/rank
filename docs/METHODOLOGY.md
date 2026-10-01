@@ -4,14 +4,14 @@ This document is the full specification of how rankings are produced. If the cod
 
 ## Goal
 
-Rank every FBS and FCS team from worst to best using only facts anyone can check (final scores, where each game was played, and who played whom), with a process anyone can rerun and get the identical answer.
+Rank every FBS and FCS team from worst to best using only who beat whom, with a process anyone can rerun and get the identical answer.
 
 | Requirement | How it is met |
 |---|---|
-| Deterministic | No randomness anywhere. Fixed input order, fixed arithmetic order, fixed rounding and an exact stopping rule. Same data in, same bytes out. |
+| Deterministic | No randomness anywhere. Fixed input order, fixed arithmetic order, fixed rounding. Same data in, same bytes out. |
 | Auditable | Raw game data, code and output are all in this repository. `npm run verify` and the site's **Recompute** button regenerate every published ranking and compare byte for byte. CI runs it on every change. `npm run backtest` reproduces the evidence for the method. |
-| Transparent | One short method with three published constants, one config file per season, and a per-team page that lists every game behind a rank. Git history shows when each result arrived or was corrected. |
-| Unbiased | No preseason ranking, no human votes, no conference or brand weight, no recency weighting. Every team starts equal and only results move it. |
+| Transparent | One short formula, one config file per season, and a per-team page that lists every game behind a rank. Git history shows when each result arrived or was corrected. |
+| Unbiased | No preseason ranking, no human votes, no margins, no conference or brand weight, no recency weighting. Every team starts equal and only wins and losses move it. |
 
 ## The graph
 
@@ -19,9 +19,60 @@ Rank every FBS and FCS team from worst to best using only facts anyone can check
 - **Edges:** each completed game between two nodes is one spring between the two teams. Rematches and postseason games add more springs.
 - Games that involve a team outside `teams.csv` (for example Division II), games that are not completed, and games with equal scores are not counted. Each snapshot's manifest records how many rows were dropped for each reason.
 
-## The ranking: Gridiron Springs
+## The ranking: Win Springs (wins only)
 
-Seasons whose `config.json` sets `"method": "gridiron"` (2026 onward, `algorithmVersion: gridiron-springs-1`) use Gridiron Springs, a spring model built for football.
+Seasons whose `config.json` sets `"method": "springrank"`, `"edgeWeight": "win"` and `"restLength": 7` (2026 onward, `algorithmVersion: win-springs-1`) are ranked by **wins alone**.
+
+Every win is a spring between the two teams that wants the **winner exactly 7 points above the loser**. The score, the margin and where the game was played don't matter: a 1-point road win and a 50-point home win are the same spring. Each team's height is where all of its springs, and everyone else's, balance out:
+
+```
+H(s) = 1/2 * sum_ij A_ij (s_i - s_j - 7)^2  +  1/2 * alpha * sum_i s_i^2
+```
+
+where `A_ij` is the number of times team *i* beat team *j*. Setting the gradient to zero gives one linear system
+
+```
+(D_out + D_in - (A + A^T) + alpha*I) s = 7 * (d_out - d_in)
+```
+
+where `d_out` is each team's wins and `d_in` its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
+
+This is SpringRank (De Bacco, Larremore & Moore, *A physical model for efficient ranking in networks*, Science Advances, 2018) with a rest length of 7 instead of 1. The 7 is a display unit ("a win is worth a touchdown"): it multiplies every height by 7 and never changes the order. Heights are ranking points, not game points.
+
+How wins-only behaves:
+
+- **Who you beat matters.** Beating a team that sits high pulls you higher; losing to a team that sits low drags you down. Strength of schedule comes from the graph, not a separate formula.
+- **Head-to-head counts but is not absolute.** A win over a team is one spring. If both teams' other results point the other way, the springs can still settle the loser above the winner; the site marks those games as upsets.
+- **Running up the score does nothing**, and home field is ignored.
+
+`alpha = 0.01` is a tiny equal pull toward zero. It exists so the system always has a unique solution, including early in the season when the graph is not yet connected.
+
+### Rank, ties and unplayed teams
+
+- Heights are rounded to 6 decimals. Teams with the same rounded height share a rank (shown `T-n`); the next rank skips accordingly. Ties are never broken by name or reputation.
+- A team with no counted games has no information, so it is **unranked** rather than assigned a guess.
+
+### Snapshots
+
+`week-NN` uses all regular-season games with `week <= NN`. `postseason` uses every game. A snapshot never looks at later games, and each one is recomputed from scratch from the current CSVs, so any historical ranking can be reproduced.
+
+## Why wins only (evidence)
+
+Margin-based ratings predict future games better, but a ranking meant to replace a poll is judged on whether it respects what happened. On ten past seasons the wins-only ranking agreed with the most results. Each method was run through this engine (2015–2025, 2020 skipped, 11,593 predicted games):
+
+| Method | Picks next week's winner | Final ranking agrees with results |
+|---|---|---|
+| **Wins only (Win Springs, published)** | 67.6% | **83.6%** |
+| Margin as spring stiffness | 68.3% | 81.1% |
+| Least squares on margin + home (Massey) | 71.6% | 80.2% |
+| Sports-Reference SRS (margin clamped 7–24) | 70.2% | 81.7% |
+| Gridiron Springs (margin + 7, home field, blowout limit) | 71.2% | 81.9% |
+
+"Agrees with results" is the share of all games where the final ranking puts the winner above the loser. Full protocol, caveats and sources: [BACKTEST.md](BACKTEST.md). Reproduce with `npm run backtest -- --history 2015-2025`.
+
+## Alternative method: Gridiron Springs (available, not in use)
+
+The engine also implements Gridiron Springs (`"method": "gridiron"`), a margin-based model kept for comparison and for any season that chooses it (`algorithmVersion: gridiron-springs-1`).
 
 Every team gets a rating `s` in **points**. Every game is a spring that wants
 
@@ -38,9 +89,9 @@ huber(r; L) = r²/2              if |r| ≤ L
             = L·|r| − L²/2      if |r| > L
 ```
 
-### The four football rules
+#### The four football rules
 
-| Rule | Parameter (2026) | Why |
+| Rule | Parameter | Why |
 |---|---|---|
 | **A win is worth a touchdown.** Each spring wants the winner as many points above the loser as they won by, plus a bonus. | `winBonus: 7` | A ranking that replaces a poll has to reward winning, not only point differential. A bonus keeps every win meaningful (a 3-point win still counts for 10), and in the backtest it makes the final ranking agree with more results at no cost to prediction. |
 | **Home field is measured, not guessed.** `h` is solved together with the ratings, from the same games, every snapshot. | `fitHomeField: true` | Home field in college football is worth a few points and has been shrinking. Fitting it means no hand-picked number. The fitted value is published in every manifest (`homeFieldPoints`; it ranges from about 2.3 to 3.6 points across past seasons). |
@@ -49,7 +100,7 @@ huber(r; L) = r²/2              if |r| ≤ L
 
 `α = 0.01` is a tiny equal pull toward zero on every unknown. It makes the answer unique even early in the season when parts of the graph are not yet connected. Ratings average exactly zero, so a rating is points better or worse than an average FBS/FCS team.
 
-### Solving it
+#### Solving it
 
 The Huber energy is convex, so it has exactly one minimum. It is found by iteratively reweighted least squares (`src/engine/gridiron.ts`):
 
@@ -58,51 +109,28 @@ The Huber energy is convex, so it has exactly one minimum. It is found by iterat
 3. Set each game's pull to 1 if it is within `blowoutLimit` points of expectation, otherwise `blowoutLimit / |surprise|`.
 4. Repeat until no rating moves by more than 1e-9 points (or `maxIterations`, 500, is reached). The number of rounds used is published as `iterations`; full seasons take about 35–55.
 
-### Reading the ratings
+#### Reading the ratings
 
 - **Rank is the team's rating**, highest first. The y-axis of the graph view is that same rating.
 - **Predicted margin** between two teams = rating gap (plus `h` for the home team) **minus the win bonus**, because each spring also credits the winner 7 points. A gap under 7 points is close to a coin flip; the site shows it as a "lean".
 - On a team page, each game shows the **expected** margin from the final ratings, the result **versus expected**, and the spring's **pull** (below 100% means the blowout limit applied). All of these are recomputed in the browser from the published ratings.
 
-### Rank, ties and unplayed teams
+## SpringRank with rest length 1 or margin stiffness
 
-- Ratings are rounded to 6 decimals. Teams with the same rounded rating share a rank (shown `T-n`); the next rank skips accordingly. Ties are never broken by name or reputation.
-- A team with no counted games has no information, so it is **unranked** rather than assigned a guess.
+Older configs (`algorithmVersion: springrank-1`, `springrank-margin-1`) use the same SpringRank solver with `restLength` 1 and `edgeWeight` `"win"` or `"margin"` (stiffness = point differential). The engine keeps them so those configs reproduce exactly.
 
-### Snapshots
-
-`week-NN` uses all regular-season games with `week <= NN`. `postseason` uses every game. A snapshot never looks at later games, and each one is recomputed from scratch from the current CSVs, so any historical ranking can be reproduced.
-
-## Why this method (evidence)
-
-Gridiron Springs combines what the established football ratings agree on: margin carries information (Massey's least squares, Sagarin, SRS); the value of a margin should flatten out (Sagarin's and Massey's diminishing returns); home field is worth a few points; and a résumé ranking must reward winning. It was chosen by backtesting the alternatives through this engine on ten seasons (2015–2025, 2020 skipped; 11,593 predicted games):
-
-| Method | Picks next week's winner | Final ranking agrees with results |
-|---|---|---|
-| Win/loss only (SpringRank) | 67.6% | 83.6% |
-| Margin as spring stiffness | 68.3% | 81.1% |
-| Least squares on margin + home (Massey) | 71.6% | 80.2% |
-| Sports-Reference SRS (margin clamped 7–24) | 70.2% | 81.7% |
-| Gridiron, no blowout limit | 71.7% | 81.6% |
-| **Gridiron Springs** | **71.2%** | **81.9%** |
-
-Full protocol, caveats and sources: [BACKTEST.md](BACKTEST.md). Reproduce with `npm run backtest -- --history 2015-2025`.
-
-## Earlier method: SpringRank
-
-Seasons without `"method": "gridiron"` use SpringRank (De Bacco, Larremore & Moore, *Science Advances*, 2018): each game is a spring that wants the winner exactly 1 unit above the loser, with stiffness 1 per game (`edgeWeight: "win"`) or the point differential (`edgeWeight: "margin"`). Heights minimise `½ Σ A_ij (s_i − s_j − 1)² + ½ α Σ s_i²`, a single linear system. The engine keeps it so older configs reproduce exactly.
 
 ## Determinism rules
 
 1. Teams are ordered by numeric id; games by numeric game id. This fixes the matrix and its summation order, so row order in the CSVs is irrelevant (there is a test for that).
-2. The Gridiron solver's stopping rule compares exact floating-point values, so every machine stops after the same round.
-3. Ratings and the fitted home field are rounded to 1e-6 before they are ranked or written.
+2. (Gridiron Springs only) the solver's stopping rule compares exact floating-point values, so every machine stops after the same round.
+3. Heights (and any fitted home field) are rounded to 1e-6 before they are ranked or written.
 4. JSON is written with a fixed key order and layout (`formatRanking` in `src/engine/season.ts`).
 5. Each ranking file embeds the SHA-256 of the exact `teams.csv` and `games.csv` bytes it was computed from, the full config and the engine version.
 
 ## Graph layout
 
-Only the **vertical** position is meaningful: it is the team's rating. Horizontal position is cosmetic and is computed by the website (`web/layout.ts`), not stored in the ranking files: one lane per conference, lanes ordered by the conference's mean rating, with teams nudged sideways only where their logos would overlap. Line thickness shows each game's pull.
+Only the **vertical** position is meaningful: it is the team's height. Horizontal position is cosmetic and is computed by the website (`web/layout.ts`), not stored in the ranking files: one lane per conference, lanes ordered by the conference's mean height, with teams nudged sideways only where their logos would overlap.
 
 Edges are not stored in the ranking files either. The site rebuilds them from `games.csv` with the same `buildEdges` function the pipeline uses.
 
@@ -116,14 +144,14 @@ CollegeFootballData API --fetch--> data/seasons/<year>/{teams,games}.csv
                            data/rankings/<year>/<snapshot>.json  +  data/index.json
 ```
 
-The API is only a source of raw scores, sites and team ids. `npm run fetch` normalises it to CSV sorted by id and the result is committed, so the git diff of each weekly update shows exactly which games were added or corrected. Anyone who distrusts the source can check the CSV against any other record of the scores; nothing downstream depends on trust.
+The API is only a source of raw scores and team ids. `npm run fetch` normalises it to CSV sorted by id and the result is committed, so the git diff of each weekly update shows exactly which games were added or corrected. Anyone who distrusts the source can check the CSV against any other record of the scores; nothing downstream depends on trust.
 
 ## Known limitations (stated openly)
 
-- **Three chosen constants.** `winBonus` (7), `blowoutLimit` (21) and `α` (0.01) are choices. They are football-meaningful (one touchdown, three touchdowns), published, versioned, and backed by the backtest, but other values are defensible.
-- **Scores only.** Play-by-play efficiency (expected points, success rate) predicts better and is what SP+ and FPI use, but it depends on a modelled input that cannot be checked from public scores, so it is left out.
-- **Early season.** With one or two games per team, ratings are noisy and a single result can move a team dozens of places. Groups of teams not yet linked by a chain of games are not comparable.
-- **Schedule size.** With about 12 games per team, many teams are within a few points of each other; ranks a few places apart are not meaningfully different. The rating column shows how close they are.
+- **Margins are ignored on purpose.** A 1-point win and a 50-point win count the same. That makes the ranking impossible to game by running up the score, but it predicts future games less well than margin-based ratings (see the table above).
+- **Early season.** With one or two games per team, many teams are tied or nearly tied, and undefeated teams with weak schedules can sit low until they play someone. Groups of teams not yet linked by a chain of games are not comparable.
+- **Cycles.** When A beat B, B beat C and C beat A, no order can respect every result; the springs find the order that strains them least.
+- **Schedule size.** With about 12 games per team, many teams are close together and ranks a few places apart are not meaningfully different. The height column shows how close they are.
 - **Source data.** Scores come from the CollegeFootballData API; an error there is an error here until it is corrected upstream and the next update runs.
 - **Out-of-division games.** Games against teams outside FBS/FCS are not counted at all.
 

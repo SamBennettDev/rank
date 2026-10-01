@@ -74,6 +74,24 @@ describe("springRank", () => {
     expect(() => springRank(2, [{ winner: 0, loser: 1, weight: 0 }], 0.1)).toThrow(/weight/);
   });
 
+  it("a rest length of 7 scales every height by exactly 7 and keeps the order", () => {
+    const games = [{ winner: 0, loser: 1 }, { winner: 1, loser: 2 }, { winner: 2, loser: 3 }, { winner: 0, loser: 2 }];
+    const one = springRank(4, games, 0.01);
+    const seven = springRank(4, games, 0.01, 7);
+    one.forEach((v, i) => expect(seven[i]).toBeCloseTo(7 * v, 9));
+    const order = (h: Float64Array) => [...h.keys()].sort((a, b) => h[b]! - h[a]!);
+    expect(order(seven)).toEqual(order(one));
+  });
+
+  it("a lone win puts the winner one rest length above the loser", () => {
+    const s = springRank(2, [{ winner: 0, loser: 1 }], 1e-9, 7);
+    expect(s[0]! - s[1]!).toBeCloseTo(7, 6);
+  });
+
+  it("rejects a non-positive rest length", () => {
+    expect(() => springRank(2, [], 0.1, 0)).toThrow(/restLength/);
+  });
+
   it("rejects non-positive alpha", () => {
     expect(() => springRank(2, [], 0)).toThrow();
   });

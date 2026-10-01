@@ -1,7 +1,7 @@
 import { select } from "d3-selection";
 import { type ZoomTransform, zoom, zoomIdentity } from "d3-zoom";
 import type { Edge, RankedTeam } from "../../src/engine/types";
-import { type Ctx, byMargin, fmtHeight, fmtPoints, homeField, isGridiron, rankLabel, record, springWidth, teamHref, upsets } from "../ctx";
+import { type Ctx, byMargin, restLabel, fmtHeight, fmtPoints, homeField, isGridiron, rankLabel, record, springWidth, teamHref, upsets } from "../ctx";
 import { h, svg } from "../dom";
 import { searchIcon } from "../icons";
 import { computeLayout } from "../layout";
@@ -180,7 +180,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
         h("h3", {}, "How to read it"),
         isGridiron(ctx)
           ? h("p", {}, "Every game is a spring that wants the winner as many points above the loser as they won by, plus a touchdown, after allowing ", h("b", {}, `${fmtPoints(homeField(ctx)).replace("+", "")} points for home field`), ". Where all the springs balance is each team’s height, in points, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank.")
-          : h("p", {}, "Every game is a spring pulling the winner one unit above the loser", byMargin(ctx) ? ", as stiff as the point differential" : "", ". Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+          : h("p", {}, `Every win is a spring pulling the winner ${restLabel(ctx)} above the loser`, byMargin(ctx) ? ", as stiff as the point differential" : "", ". Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),
