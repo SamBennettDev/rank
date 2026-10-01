@@ -1,0 +1,1610 @@
+id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,home_points,away_id,away_team,away_points
+401856634,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,333,Alabama,48,151,East Carolina,10
+401856635,2026,1,regular,2026-09-05T20:15:00.000Z,false,true,8,Arkansas,31,2453,North Alabama,14
+401856636,2026,1,regular,2026-09-05T19:30:00.000Z,true,true,2,Auburn,17,239,Baylor,16
+401856637,2026,1,regular,2026-09-05T23:45:00.000Z,false,true,57,Florida,66,2226,Florida Atlantic,21
+401856658,2026,1,regular,2026-09-05T19:00:00.000Z,false,true,61,Georgia,63,2634,Tennessee State,3
+401856659,2026,1,regular,2026-09-05T17:00:00.000Z,false,true,96,Kentucky,45,2754,Youngstown State,13
+401856660,2026,1,regular,2026-09-05T23:30:00.000Z,false,true,99,LSU,51,228,Clemson,10
+401856661,2026,1,regular,2026-09-06T23:30:00.000Z,true,true,145,Ole Miss,41,97,Louisville,38
+401856662,2026,1,regular,2026-09-05T23:30:00.000Z,false,true,344,Mississippi State,62,2433,UL Monroe,13
+401856663,2026,1,regular,2026-09-04T00:00:00.000Z,false,true,142,Missouri,54,2029,Arkansas-Pine Bluff,14
+401856664,2026,1,regular,2026-09-05T00:00:00.000Z,false,true,201,Oklahoma,51,2638,UTEP,0
+401856665,2026,1,regular,2026-09-05T16:45:00.000Z,false,true,2579,South Carolina,57,2309,Kent State,0
+401856666,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2633,Tennessee,56,231,Furman,9
+401856667,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,251,Texas,59,326,Texas State,7
+401856668,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,245,Texas A&M,50,2623,Missouri State,0
+401856669,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,238,Vanderbilt,28,2046,Austin Peay,9
+401856670,2026,2,regular,2026-09-13T02:15:00.000Z,false,true,254,Utah,43,8,Arkansas,10
+401856671,2026,2,regular,2026-09-12T23:45:00.000Z,false,true,2,Auburn,43,2572,Southern Miss,8
+401856672,2026,2,regular,2026-09-12T21:30:00.000Z,false,true,57,Florida,52,2097,Campbell,3
+401856673,2026,2,regular,2026-09-12T16:45:00.000Z,false,true,61,Georgia,70,98,Western Kentucky,20
+401856674,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,96,Kentucky,17,333,Alabama,45
+401856676,2026,2,regular,2026-09-12T23:45:00.000Z,false,true,145,Ole Miss,41,2429,Charlotte,9
+401856677,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,135,Minnesota,13,344,Mississippi State,38
+401856678,2026,2,regular,2026-09-12T00:00:00.000Z,false,true,2305,Kansas,21,142,Missouri,38
+401856679,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,130,Michigan,17,201,Oklahoma,10
+401856680,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2579,South Carolina,45,119,Towson,9
+401856681,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,59,Georgia Tech,24,2633,Tennessee,45
+401856682,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,251,Texas,24,194,Ohio State,23
+401856683,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,245,Texas A&M,48,9,Arizona State,20
+401856684,2026,2,regular,2026-09-12T20:15:00.000Z,false,true,238,Vanderbilt,35,48,Delaware,26
+401856685,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,333,Alabama,50,52,Florida State,36
+401856686,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,8,Arkansas,17,61,Georgia,45
+401856687,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2,Auburn,39,57,Florida,44
+401856688,2026,3,regular,2026-09-19T23:30:00.000Z,false,true,145,Ole Miss,32,99,LSU,24
+401856689,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,142,Missouri,27,2653,Troy,17
+401856690,2026,3,regular,2026-09-19T23:30:00.000Z,false,true,201,Oklahoma,14,167,New Mexico,6
+401856691,2026,3,regular,2026-09-19T20:15:00.000Z,false,true,2579,South Carolina,34,344,Mississippi State,41
+401856692,2026,3,regular,2026-09-19T23:45:00.000Z,false,true,2633,Tennessee,42,338,Kennesaw State,9
+401856693,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,251,Texas,30,2636,UTSA,6
+401856694,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,245,Texas A&M,21,96,Kentucky,31
+401856695,2026,3,regular,2026-09-19T16:45:00.000Z,false,true,238,Vanderbilt,35,152,NC State,31
+401856696,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,333,Alabama,49,2579,South Carolina,18
+401856697,2026,4,regular,2026-09-27T00:00:00.000Z,false,true,8,Arkansas,34,202,Tulsa,6
+401856698,2026,4,regular,2026-09-26T20:15:00.000Z,false,true,2,Auburn,21,238,Vanderbilt,15
+401856699,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,57,Florida,52,145,Ole Miss,28
+401856700,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,61,Georgia,41,201,Oklahoma,13
+401856702,2026,4,regular,2026-09-26T23:30:00.000Z,false,true,99,LSU,35,245,Texas A&M,6
+401856703,2026,4,regular,2026-09-26T23:45:00.000Z,false,true,344,Mississippi State,31,142,Missouri,24
+401856704,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2633,Tennessee,17,251,Texas,20
+401856705,2026,5,regular,2026-10-03T16:45:00.000Z,false,false,61,Georgia,,238,Vanderbilt,
+401856706,2026,5,regular,2026-10-03T23:45:00.000Z,false,false,99,LSU,,2377,McNeese,
+401856707,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,344,Mississippi State,,333,Alabama,
+401856708,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,142,Missouri,,57,Florida,
+401856709,2026,5,regular,2026-10-03T20:15:00.000Z,false,false,2579,South Carolina,,96,Kentucky,
+401856710,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2633,Tennessee,,2,Auburn,
+401856711,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,245,Texas A&M,,8,Arkansas,
+401856712,2026,6,regular,2026-10-10T23:30:00.000Z,false,false,333,Alabama,,61,Georgia,
+401856713,2026,6,regular,2026-10-10T20:15:00.000Z,false,false,8,Arkansas,,2633,Tennessee,
+401856714,2026,6,regular,2026-10-10T04:00:00.000Z,false,false,57,Florida,,2579,South Carolina,
+401856715,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,96,Kentucky,,99,LSU,
+401856716,2026,6,regular,2026-10-10T04:00:00.000Z,false,false,142,Missouri,,245,Texas A&M,
+401856717,2026,6,regular,2026-10-10T19:30:00.000Z,true,false,201,Oklahoma,,251,Texas,
+401856718,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,238,Vanderbilt,,145,Ole Miss,
+401856719,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,61,Georgia,,2,Auburn,
+401856720,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,99,LSU,,344,Mississippi State,
+401856721,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,145,Ole Miss,,142,Missouri,
+401856722,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,201,Oklahoma,,96,Kentucky,
+401856723,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2633,Tennessee,,333,Alabama,
+401856724,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,251,Texas,,57,Florida,
+401856725,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,245,Texas A&M,,2643,The Citadel,
+401856726,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,238,Vanderbilt,,8,Arkansas,
+401856727,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,333,Alabama,,245,Texas A&M,
+401856728,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2,Auburn,,99,LSU,
+401856729,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,96,Kentucky,,238,Vanderbilt,
+401856730,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,344,Mississippi State,,201,Oklahoma,
+401856731,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2579,South Carolina,,2633,Tennessee,
+401856732,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,251,Texas,,145,Ole Miss,
+401856733,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,8,Arkansas,,142,Missouri,
+401856734,2026,9,regular,2026-10-31T19:30:00.000Z,true,false,61,Georgia,,57,Florida,
+401856735,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,145,Ole Miss,,2,Auburn,
+401856736,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,201,Oklahoma,,2579,South Carolina,
+401856737,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,251,Texas,,344,Mississippi State,
+401856738,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2,Auburn,,8,Arkansas,
+401856739,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,57,Florida,,201,Oklahoma,
+401856740,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,99,LSU,,333,Alabama,
+401856741,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,145,Ole Miss,,61,Georgia,
+401856742,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,344,Mississippi State,,238,Vanderbilt,
+401856743,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,142,Missouri,,251,Texas,
+401856744,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2579,South Carolina,,245,Texas A&M,
+401856745,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2633,Tennessee,,96,Kentucky,
+401856746,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,333,Alabama,,236,Chattanooga,
+401856747,2026,12,regular,2026-11-21T20:30:00.000Z,false,false,2,Auburn,,2535,Samford,
+401856748,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,57,Florida,,238,Vanderbilt,
+401856749,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,145,Ole Miss,,2747,Wofford,
+401856750,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,344,Mississippi State,,2635,Tennessee Tech,
+401856751,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,142,Missouri,,96,Kentucky,
+401856752,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,201,Oklahoma,,245,Texas A&M,
+401856753,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2579,South Carolina,,61,Georgia,
+401856754,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2633,Tennessee,,99,LSU,
+401856755,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,251,Texas,,8,Arkansas,
+401856756,2026,13,regular,2026-11-28T00:30:00.000Z,false,false,245,Texas A&M,,251,Texas,
+401856757,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,333,Alabama,,2,Auburn,
+401856758,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,8,Arkansas,,99,LSU,
+401856759,2026,13,regular,2026-11-27T20:30:00.000Z,false,false,52,Florida State,,57,Florida,
+401856760,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,61,Georgia,,59,Georgia Tech,
+401856761,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,96,Kentucky,,97,Louisville,
+401856762,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,145,Ole Miss,,344,Mississippi State,
+401856763,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,142,Missouri,,201,Oklahoma,
+401856764,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,228,Clemson,,2579,South Carolina,
+401856765,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,238,Vanderbilt,,2633,Tennessee,
+401856766,2026,1,regular,2026-08-29T16:00:00.000Z,true,true,2628,TCU,10,153,North Carolina,15
+401856767,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,2116,UCF,73,2065,Bethune-Cookman,6
+401856768,2026,1,regular,2026-09-04T01:00:00.000Z,false,true,254,Utah,66,70,Idaho,14
+401856769,2026,1,regular,2026-09-05T00:00:00.000Z,false,true,2305,Kansas,51,2341,Long Island University,6
+401856770,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2641,Texas Tech,33,2000,Abilene Christian,10
+401856771,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2306,Kansas State,71,2447,Nicholls,3
+401856772,2026,1,regular,2026-09-05T19:45:00.000Z,false,true,202,Tulsa,24,197,Oklahoma State,10
+401856773,2026,1,regular,2026-09-06T01:30:00.000Z,false,true,12,Arizona,35,2464,Northern Arizona,7
+401856774,2026,1,regular,2026-09-06T02:00:00.000Z,false,true,9,Arizona State,70,2415,Morgan State,7
+401856775,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,252,BYU,63,3101,Utah Tech,7
+401856776,2026,1,regular,2026-09-04T00:00:00.000Z,false,true,59,Georgia Tech,13,38,Colorado,14
+401856777,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2132,Cincinnati,34,103,Boston College,15
+401856778,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,248,Houston,33,204,Oregon State,20
+401856779,2026,1,regular,2026-09-05T17:00:00.000Z,false,true,66,Iowa State,38,2546,Southeast Missouri State,10
+401856780,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,277,West Virginia,31,324,Coastal Carolina,24
+401856781,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2306,Kansas State,34,265,Washington State,7
+401856782,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,197,Oklahoma State,39,2483,Oregon,31
+401856783,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,204,Oregon State,24,2641,Texas Tech,35
+401856784,2026,2,regular,2026-09-13T00:08:00.000Z,false,true,239,Baylor,44,2504,Prairie View A&M,3
+401856785,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,38,Colorado,52,2692,Weber State,21
+401856786,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2132,Cincinnati,62,2717,Western Carolina,10
+401856787,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,248,Houston,77,2582,Southern,6
+401856788,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,2294,Iowa,16,66,Iowa State,13
+401856789,2026,2,regular,2026-09-13T00:00:00.000Z,false,true,2628,TCU,63,2755,Grambling,7
+401856790,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,221,Pittsburgh,12,2116,UCF,7
+401856791,2026,2,regular,2026-09-12T17:00:00.000Z,false,true,277,West Virginia,52,2630,UT Martin,7
+401856792,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,2306,Kansas State,31,2655,Tulane,20
+401856793,2026,3,regular,2026-09-20T02:30:00.000Z,false,true,12,Arizona,42,2459,Northern Illinois,17
+401856795,2026,3,regular,2026-09-19T23:30:00.000Z,false,true,36,Colorado State,23,252,BYU,41
+401856796,2026,3,regular,2026-09-19T23:30:00.000Z,false,true,77,Northwestern,41,38,Colorado,7
+401856797,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,2132,Cincinnati,35,193,Miami (OH),31
+401856798,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,66,Iowa State,55,189,Bowling Green,7
+401856799,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,2628,TCU,31,2032,Arkansas State,7
+401856800,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2116,UCF,44,2247,Georgia State,30
+401856801,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,254,Utah,33,328,Utah State,0
+401856802,2026,3,regular,2026-09-19T23:30:00.000Z,true,true,258,Virginia,27,277,West Virginia,38
+401856803,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,197,Oklahoma State,59,93,Murray State,0
+401856804,2026,4,regular,2026-09-26T23:30:00.000Z,false,true,265,Washington State,24,12,Arizona,34
+401856805,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2641,Texas Tech,49,2534,Sam Houston,14
+401856806,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,290,Georgia Southern,28,248,Houston,42
+401856807,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,2305,Kansas,,2393,Middle Tennessee,
+401856808,2026,6,regular,2026-10-11T02:30:00.000Z,false,false,9,Arizona State,,62,Hawai'i,
+401856809,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,252,BYU,,87,Notre Dame,
+401856810,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,252,BYU,28,12,Arizona,17
+401856811,2026,3,regular,2026-09-19T00:00:00.000Z,false,true,2641,Texas Tech,28,248,Houston,26
+401856812,2026,3,regular,2026-09-19T16:00:00.000Z,true,true,2305,Kansas,17,9,Arizona State,24
+401856813,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,239,Baylor,23,38,Colorado,13
+401856814,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2132,Cincinnati,31,2306,Kansas State,26
+401856815,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,2116,UCF,21,2628,TCU,13
+401856816,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,66,Iowa State,17,254,Utah,31
+401856817,2026,5,regular,2026-10-04T02:30:00.000Z,false,false,9,Arizona State,,239,Baylor,
+401856818,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2628,TCU,,252,BYU,
+401856819,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,248,Houston,,2116,UCF,
+401856820,2026,5,regular,2026-10-04T03:00:00.000Z,false,false,12,Arizona,,2132,Cincinnati,
+401856821,2026,5,regular,2026-10-03T23:30:00.000Z,false,false,38,Colorado,,2641,Texas Tech,
+401856822,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,66,Iowa State,,277,West Virginia,
+401856823,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,277,West Virginia,,12,Arizona,
+401856824,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,197,Oklahoma State,,2116,UCF,
+401856825,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2306,Kansas State,,248,Houston,
+401856826,2026,6,regular,2026-10-10T02:15:00.000Z,false,false,252,BYU,,66,Iowa State,
+401856827,2026,6,regular,2026-10-11T02:15:00.000Z,false,false,254,Utah,,2305,Kansas,
+401856828,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2641,Texas Tech,,9,Arizona State,
+401856829,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,277,West Virginia,,2132,Cincinnati,
+401856830,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2306,Kansas State,,2305,Kansas,
+401856831,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,248,Houston,,197,Oklahoma State,
+401856832,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,239,Baylor,,2628,TCU,
+401856833,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,38,Colorado,,254,Utah,
+401856834,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2305,Kansas,,239,Baylor,
+401856835,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2116,UCF,,252,BYU,
+401856836,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,197,Oklahoma State,,38,Colorado,
+401856837,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,254,Utah,,248,Houston,
+401856838,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,12,Arizona,,66,Iowa State,
+401856839,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,9,Arizona State,,2306,Kansas State,
+401856840,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2132,Cincinnati,,2641,Texas Tech,
+401856841,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2628,TCU,,277,West Virginia,
+401856842,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2641,Texas Tech,,12,Arizona,
+401856843,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,252,BYU,,9,Arizona State,
+401856844,2026,9,regular,2026-10-30T23:30:00.000Z,false,false,2116,UCF,,239,Baylor,
+401856845,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2628,TCU,,2305,Kansas,
+401856846,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,38,Colorado,,2306,Kansas State,
+401856847,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,66,Iowa State,,197,Oklahoma State,
+401856848,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2132,Cincinnati,,254,Utah,
+401856849,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,254,Utah,,252,BYU,
+401856850,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2305,Kansas,,2116,UCF,
+401856851,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,248,Houston,,2132,Cincinnati,
+401856852,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,9,Arizona State,,38,Colorado,
+401856853,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,239,Baylor,,66,Iowa State,
+401856854,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2306,Kansas State,,197,Oklahoma State,
+401856855,2026,10,regular,2026-11-07T03:15:00.000Z,false,false,12,Arizona,,2628,TCU,
+401856856,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2641,Texas Tech,,277,West Virginia,
+401856857,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2116,UCF,,9,Arizona State,
+401856858,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,252,BYU,,239,Baylor,
+401856859,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,66,Iowa State,,2132,Cincinnati,
+401856860,2026,11,regular,2026-11-14T03:15:00.000Z,false,false,38,Colorado,,248,Houston,
+401856861,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,277,West Virginia,,2305,Kansas,
+401856862,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2628,TCU,,2306,Kansas State,
+401856863,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,197,Oklahoma State,,2641,Texas Tech,
+401856864,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,12,Arizona,,254,Utah,
+401856865,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2306,Kansas State,,12,Arizona,
+401856866,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2305,Kansas,,252,BYU,
+401856867,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2132,Cincinnati,,38,Colorado,
+401856868,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,277,West Virginia,,248,Houston,
+401856869,2026,12,regular,2026-11-20T23:00:00.000Z,false,false,2116,UCF,,66,Iowa State,
+401856870,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,9,Arizona State,,197,Oklahoma State,
+401856871,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,239,Baylor,,2641,Texas Tech,
+401856872,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2628,TCU,,254,Utah,
+401856873,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,12,Arizona,,9,Arizona State,
+401856874,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,248,Houston,,239,Baylor,
+401856875,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,38,Colorado,,2116,UCF,
+401856876,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,252,BYU,,2132,Cincinnati,
+401856877,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,197,Oklahoma State,,2305,Kansas,
+401856878,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,66,Iowa State,,2306,Kansas State,
+401856879,2026,13,regular,2026-11-27T01:00:00.000Z,false,false,2641,Texas Tech,,2628,TCU,
+401856880,2026,13,regular,2026-11-28T02:00:00.000Z,false,false,254,Utah,,277,West Virginia,
+401856881,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,277,West Virginia,24,197,Oklahoma State,41
+401856882,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,8,Arkansas,,2579,South Carolina,
+401856883,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,61,Georgia,,142,Missouri,
+401856884,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,96,Kentucky,,57,Florida,
+401856885,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,99,LSU,,251,Texas,
+401856886,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,344,Mississippi State,,2,Auburn,
+401856887,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,201,Oklahoma,,145,Ole Miss,
+401856888,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,245,Texas A&M,,2633,Tennessee,
+401856889,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,238,Vanderbilt,,333,Alabama,
+401858201,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,24,Stanford,37,62,Hawai'i,27
+401858202,2026,1,regular,2026-08-29T19:30:00.000Z,false,true,258,Virginia,34,152,NC State,8
+401858204,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,154,Wake Forest,38,2006,Akron,16
+401858206,2026,1,regular,2026-09-05T01:00:00.000Z,false,true,24,Stanford,6,2390,Miami,45
+401858207,2026,1,regular,2026-09-05T16:30:00.000Z,false,true,221,Pittsburgh,59,193,Miami (OH),14
+401858208,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,183,Syracuse,66,160,New Hampshire,3
+401858209,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,150,Duke,17,2655,Tulane,3
+401858210,2026,1,regular,2026-09-06T02:30:00.000Z,false,true,25,California,24,26,UCLA,45
+401858211,2026,1,regular,2026-09-05T23:30:00.000Z,false,true,259,Virginia Tech,73,2678,VMI,3
+401858212,2026,1,regular,2026-09-07T23:30:00.000Z,false,true,52,Florida State,24,2567,SMU,27
+401858213,2026,2,regular,2026-09-11T00:00:00.000Z,false,true,2390,Miami,77,50,Florida A&M,7
+401858214,2026,2,regular,2026-09-11T23:30:00.000Z,false,true,103,Boston College,28,164,Rutgers,21
+401858215,2026,2,regular,2026-09-11T23:00:00.000Z,false,true,97,Louisville,59,222,Villanova,13
+401858216,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,183,Syracuse,18,25,California,21
+401858217,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,356,Illinois,27,150,Duke,31
+401858218,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,153,North Carolina,35,2193,East Tennessee State,3
+401858219,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,228,Clemson,22,290,Georgia Southern,7
+401858220,2026,2,regular,2026-09-11T23:00:00.000Z,false,true,258,Virginia,59,2450,Norfolk State,3
+401858221,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,259,Virginia Tech,44,295,Old Dominion,21
+401858222,2026,2,regular,2026-09-11T23:00:00.000Z,false,true,152,NC State,73,257,Richmond,0
+401858223,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,2567,SMU,56,302,UC Davis,10
+401858224,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2509,Purdue,36,154,Wake Forest,38
+401858225,2026,3,regular,2026-09-17T23:30:00.000Z,false,true,221,Pittsburgh,27,183,Syracuse,13
+401858226,2026,3,regular,2026-09-18T23:30:00.000Z,false,true,154,Wake Forest,20,2390,Miami,33
+401858227,2026,3,regular,2026-09-19T18:00:00.000Z,false,true,103,Boston College,22,311,Maine,16
+401858228,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,59,Georgia Tech,44,2382,Mercer,11
+401858229,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,228,Clemson,28,153,North Carolina,20
+401858230,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,97,Louisville,41,2567,SMU,31
+401858231,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,150,Duke,35,24,Stanford,7
+401858232,2026,3,regular,2026-09-19T23:30:00.000Z,false,true,120,Maryland,26,259,Virginia Tech,35
+401858233,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,25,California,49,2681,Wagner,7
+401858234,2026,4,regular,2026-09-26T02:30:00.000Z,false,true,25,California,10,228,Clemson,24
+401858236,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,221,Pittsburgh,59,2083,Bucknell,0
+401858237,2026,4,regular,2026-09-26T19:00:00.000Z,false,true,52,Florida State,34,2110,Central Arkansas,7
+401858238,2026,4,regular,2026-09-26T22:30:00.000Z,false,true,2390,Miami,52,2117,Central Michigan,3
+401858239,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,258,Virginia,42,48,Delaware,3
+401858240,2026,4,regular,2026-09-27T02:30:00.000Z,false,true,24,Stanford,34,59,Georgia Tech,27
+401858241,2026,4,regular,2026-09-27T01:00:00.000Z,false,true,2567,SMU,34,2623,Missouri State,24
+401858242,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,103,Boston College,14,259,Virginia Tech,21
+401858243,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,97,Louisville,27,154,Wake Forest,30
+401858244,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,150,Duke,62,2729,William & Mary,7
+401858245,2026,5,regular,2026-10-02T23:00:00.000Z,false,false,259,Virginia Tech,,221,Pittsburgh,
+401858246,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,2567,SMU,,103,Boston College,
+401858247,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2439,UNLV,,25,California,
+401858248,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,152,NC State,,97,Louisville,
+401858249,2026,5,regular,2026-10-03T23:30:00.000Z,false,false,228,Clemson,,2390,Miami,
+401858250,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,153,North Carolina,,87,Notre Dame,
+401858251,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,154,Wake Forest,,24,Stanford,
+401858252,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,41,UConn,,183,Syracuse,
+401858253,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,52,Florida State,,258,Virginia,
+401858254,2026,6,regular,2026-10-09T23:00:00.000Z,false,false,97,Louisville,,52,Florida State,
+401858255,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,59,Georgia Tech,,150,Duke,
+401858256,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,221,Pittsburgh,,153,North Carolina,
+401858257,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,87,Notre Dame,,24,Stanford,
+401858258,2026,6,regular,2026-10-10T23:30:00.000Z,false,false,258,Virginia,,183,Syracuse,
+401858259,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,25,California,,259,Virginia Tech,
+401858260,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,152,NC State,,154,Wake Forest,
+401858261,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,228,Clemson,,2127,Charleston Southern,
+401858262,2026,7,regular,2026-10-17T23:30:00.000Z,false,false,24,Stanford,,2210,Elon,
+401858263,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2390,Miami,,52,Florida State,
+401858264,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,259,Virginia Tech,,59,Georgia Tech,
+401858265,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,183,Syracuse,,97,Louisville,
+401858266,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,150,Duke,,153,North Carolina,
+401858267,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,103,Boston College,,221,Pittsburgh,
+401858268,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2567,SMU,,258,Virginia,
+401858269,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,25,California,,154,Wake Forest,
+401858270,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2567,SMU,,25,California,
+401858271,2026,8,regular,2026-10-23T23:00:00.000Z,false,false,258,Virginia,,150,Duke,
+401858272,2026,8,regular,2026-10-24T02:30:00.000Z,false,false,24,Stanford,,152,NC State,
+401858273,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,59,Georgia Tech,,103,Boston College,
+401858274,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2390,Miami,,221,Pittsburgh,
+401858275,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,153,North Carolina,,183,Syracuse,
+401858276,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,228,Clemson,,259,Virginia Tech,
+401858277,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,152,NC State,,25,California,
+401858278,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,183,Syracuse,,2567,SMU,
+401858279,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,150,Duke,,103,Boston College,
+401858280,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,52,Florida State,,228,Clemson,
+401858281,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,221,Pittsburgh,,59,Georgia Tech,
+401858282,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,153,North Carolina,,2390,Miami,
+401858283,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,97,Louisville,,24,Stanford,
+401858284,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,154,Wake Forest,,258,Virginia,
+401858285,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,183,Syracuse,,228,Clemson,
+401858286,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,152,NC State,,150,Duke,
+401858287,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,59,Georgia Tech,,97,Louisville,
+401858288,2026,10,regular,2026-11-07T00:00:00.000Z,false,false,2567,SMU,,259,Virginia Tech,
+401858289,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,103,Boston College,,52,Florida State,
+401858290,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,154,Wake Forest,,2771,Merrimack,
+401858291,2026,10,regular,2026-11-08T00:30:00.000Z,false,false,87,Notre Dame,,2390,Miami,
+401858292,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,41,UConn,,153,North Carolina,
+401858293,2026,11,regular,2026-11-14T00:00:00.000Z,false,false,221,Pittsburgh,,52,Florida State,
+401858294,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,87,Notre Dame,,103,Boston College,
+401858295,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,258,Virginia,,25,California,
+401858296,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2390,Miami,,150,Duke,
+401858297,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,228,Clemson,,59,Georgia Tech,
+401858298,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,153,North Carolina,,97,Louisville,
+401858299,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,259,Virginia Tech,,24,Stanford,
+401858300,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,152,NC State,,183,Syracuse,
+401858301,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2567,SMU,,154,Wake Forest,
+401858302,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2390,Miami,,259,Virginia Tech,
+401858303,2026,12,regular,2026-11-21T00:30:00.000Z,false,false,150,Duke,,228,Clemson,
+401858304,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,52,Florida State,,152,NC State,
+401858305,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,258,Virginia,,153,North Carolina,
+401858306,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,97,Louisville,,221,Pittsburgh,
+401858307,2026,12,regular,2026-11-22T00:30:00.000Z,false,false,87,Notre Dame,,2567,SMU,
+401858308,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,25,California,,24,Stanford,
+401858309,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,103,Boston College,,183,Syracuse,
+401858310,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,59,Georgia Tech,,154,Wake Forest,
+401858311,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2390,Miami,,103,Boston College,
+401858312,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,154,Wake Forest,,150,Duke,
+401858313,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,153,North Carolina,,152,NC State,
+401858314,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,183,Syracuse,,87,Notre Dame,
+401858315,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,25,California,,221,Pittsburgh,
+401858316,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,24,Stanford,,2567,SMU,
+401858317,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,259,Virginia Tech,,258,Virginia,
+401858422,2026,1,regular,2026-09-04T00:00:00.000Z,false,true,135,Minnesota,59,2197,Eastern Illinois,7
+401858423,2026,1,regular,2026-09-03T22:00:00.000Z,false,true,164,Rutgers,21,113,Massachusetts,37
+401858424,2026,1,regular,2026-09-04T01:00:00.000Z,false,true,356,Illinois,42,5,UAB,23
+401858425,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,84,Indiana,52,249,North Texas,16
+401858426,2026,1,regular,2026-09-05T20:15:00.000Z,false,true,2294,Iowa,40,2459,Northern Illinois,0
+401858427,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,120,Maryland,62,2261,Hampton,0
+401858428,2026,1,regular,2026-09-05T23:30:00.000Z,false,true,130,Michigan,13,2711,Western Michigan,12
+401858429,2026,1,regular,2026-09-05T00:00:00.000Z,false,true,127,Michigan State,30,2649,Toledo,20
+401858430,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,158,Nebraska,49,195,Ohio,21
+401858431,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,77,Northwestern,34,2571,South Dakota State,18
+401858432,2026,1,regular,2026-09-05T16:30:00.000Z,false,true,194,Ohio State,56,2050,Ball State,3
+401858433,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2483,Oregon,34,68,Boise State,27
+401858434,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,213,Penn State,45,276,Marshall,0
+401858435,2026,1,regular,2026-09-04T23:00:00.000Z,false,true,2509,Purdue,44,282,Indiana State,19
+401858436,2026,1,regular,2026-09-05T01:00:00.000Z,false,true,30,USC,39,278,Fresno State,0
+401858437,2026,1,regular,2026-09-06T20:00:00.000Z,false,true,264,Washington,24,265,Washington State,10
+401858438,2026,1,regular,2026-09-06T23:30:00.000Z,true,true,87,Notre Dame,41,275,Wisconsin,13
+401858439,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,84,Indiana,55,47,Howard,0
+401858440,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,127,Michigan State,35,2199,Eastern Michigan,7
+401858441,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,158,Nebraska,56,189,Bowling Green,7
+401858442,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,218,Temple,9,213,Penn State,27
+401858443,2026,2,regular,2026-09-12T23:15:00.000Z,false,true,26,UCLA,28,21,San Diego State,10
+401858444,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,41,UConn,14,120,Maryland,38
+401858445,2026,2,regular,2026-09-13T03:00:00.000Z,false,true,30,USC,49,309,Louisiana,30
+401858446,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,264,Washington,16,328,Utah State,14
+401858447,2026,2,regular,2026-09-12T23:15:00.000Z,false,true,275,Wisconsin,36,2710,Western Illinois,9
+401858448,2026,3,regular,2026-09-19T18:00:00.000Z,false,true,356,Illinois,48,79,Southern Illinois,10
+401858449,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,84,Indiana,38,98,Western Kentucky,0
+401858450,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,130,Michigan,52,2638,UTEP,17
+401858451,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,135,Minnesota,41,2006,Akron,7
+401858452,2026,3,regular,2026-09-19T23:15:00.000Z,false,true,158,Nebraska,34,155,North Dakota,7
+401858453,2026,3,regular,2026-09-19T23:30:00.000Z,false,true,87,Notre Dame,27,127,Michigan State,10
+401858454,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,194,Ohio State,59,2309,Kent State,3
+401858455,2026,3,regular,2026-09-19T02:30:00.000Z,false,true,2483,Oregon,84,2502,Portland State,0
+401858456,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,213,Penn State,55,2084,Buffalo,13
+401858457,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,164,Rutgers,35,30,USC,42
+401858458,2026,3,regular,2026-09-20T03:00:00.000Z,false,true,26,UCLA,52,2509,Purdue,38
+401858459,2026,3,regular,2026-09-19T23:15:00.000Z,false,true,264,Washington,48,331,Eastern Washington,16
+401858460,2026,3,regular,2026-09-19T16:30:00.000Z,false,true,275,Wisconsin,54,2199,Eastern Michigan,10
+401858461,2026,4,regular,2026-09-26T00:00:00.000Z,false,true,84,Indiana,29,77,Northwestern,23
+401858462,2026,4,regular,2026-09-26T17:30:00.000Z,false,true,120,Maryland,3,26,UCLA,54
+401858463,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,130,Michigan,19,2294,Iowa,20
+401858464,2026,4,regular,2026-09-26T21:00:00.000Z,false,true,127,Michigan State,13,158,Nebraska,31
+401858465,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,194,Ohio State,42,356,Illinois,19
+401858466,2026,4,regular,2026-09-26T21:00:00.000Z,false,true,213,Penn State,20,275,Wisconsin,24
+401858467,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2509,Purdue,10,87,Notre Dame,49
+401858468,2026,4,regular,2026-09-25T23:00:00.000Z,false,true,164,Rutgers,58,47,Howard,7
+401858469,2026,4,regular,2026-09-26T23:30:00.000Z,false,true,30,USC,27,2483,Oregon,41
+401858470,2026,4,regular,2026-09-27T03:00:00.000Z,false,true,264,Washington,24,135,Minnesota,27
+401858471,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,2294,Iowa,55,2460,Northern Iowa,0
+401858472,2026,5,regular,2026-10-03T20:15:00.000Z,false,false,356,Illinois,,2509,Purdue,
+401858473,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2294,Iowa,,194,Ohio State,
+401858474,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,135,Minnesota,,130,Michigan,
+401858475,2026,5,regular,2026-10-03T20:00:00.000Z,false,false,158,Nebraska,,120,Maryland,
+401858476,2026,5,regular,2026-10-03T00:00:00.000Z,false,false,77,Northwestern,,213,Penn State,
+401858477,2026,5,regular,2026-10-04T00:00:00.000Z,false,false,164,Rutgers,,84,Indiana,
+401858478,2026,5,regular,2026-10-03T23:30:00.000Z,false,false,30,USC,,264,Washington,
+401858479,2026,5,regular,2026-10-03T16:30:00.000Z,false,false,275,Wisconsin,,127,Michigan State,
+401858480,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,127,Michigan State,,356,Illinois,
+401858481,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,158,Nebraska,,84,Indiana,
+401858482,2026,6,regular,2026-10-10T16:30:00.000Z,false,false,77,Northwestern,,2050,Ball State,
+401858483,2026,6,regular,2026-10-10T20:15:00.000Z,false,false,194,Ohio State,,120,Maryland,
+401858484,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2483,Oregon,,26,UCLA,
+401858485,2026,6,regular,2026-10-10T23:30:00.000Z,false,false,213,Penn State,,30,USC,
+401858486,2026,6,regular,2026-10-11T00:00:00.000Z,false,false,2509,Purdue,,135,Minnesota,
+401858487,2026,6,regular,2026-10-10T01:00:00.000Z,false,false,264,Washington,,2294,Iowa,
+401858488,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,84,Indiana,,194,Ohio State,
+401858489,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,120,Maryland,,164,Rutgers,
+401858490,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,130,Michigan,,213,Penn State,
+401858491,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,127,Michigan State,,77,Northwestern,
+401858492,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2483,Oregon,,158,Nebraska,
+401858493,2026,7,regular,2026-10-17T00:00:00.000Z,false,false,2509,Purdue,,264,Washington,
+401858494,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,26,UCLA,,275,Wisconsin,
+401858495,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,356,Illinois,,2483,Oregon,
+401858496,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,130,Michigan,,84,Indiana,
+401858497,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,135,Minnesota,,2294,Iowa,
+401858498,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,77,Northwestern,,164,Rutgers,
+401858499,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,26,UCLA,,127,Michigan State,
+401858500,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,275,Wisconsin,,30,USC,
+401858501,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,84,Indiana,,135,Minnesota,
+401858502,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2294,Iowa,,275,Wisconsin,
+401858503,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,120,Maryland,,356,Illinois,
+401858504,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,158,Nebraska,,264,Washington,
+401858505,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2483,Oregon,,77,Northwestern,
+401858506,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,213,Penn State,,2509,Purdue,
+401858507,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,164,Rutgers,,130,Michigan,
+401858508,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,26,UCLA,,2440,Nevada,
+401858509,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,30,USC,,194,Ohio State,
+401858510,2026,10,regular,2026-11-07T01:00:00.000Z,false,false,356,Illinois,,158,Nebraska,
+401858511,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,130,Michigan,,127,Michigan State,
+401858512,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,135,Minnesota,,26,UCLA,
+401858513,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,77,Northwestern,,2294,Iowa,
+401858514,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,194,Ohio State,,2483,Oregon,
+401858515,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2509,Purdue,,120,Maryland,
+401858516,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,264,Washington,,213,Penn State,
+401858517,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,275,Wisconsin,,164,Rutgers,
+401858518,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,84,Indiana,,30,USC,
+401858519,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2294,Iowa,,2509,Purdue,
+401858520,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,120,Maryland,,275,Wisconsin,
+401858521,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,127,Michigan State,,264,Washington,
+401858522,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,194,Ohio State,,77,Northwestern,
+401858523,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2483,Oregon,,130,Michigan,
+401858524,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,213,Penn State,,135,Minnesota,
+401858525,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,164,Rutgers,,158,Nebraska,
+401858526,2026,11,regular,2026-11-14T02:00:00.000Z,false,false,26,UCLA,,356,Illinois,
+401858527,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,356,Illinois,,2294,Iowa,
+401858528,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,130,Michigan,,26,UCLA,
+401858529,2026,12,regular,2026-11-21T01:00:00.000Z,false,false,127,Michigan State,,2483,Oregon,
+401858530,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,135,Minnesota,,77,Northwestern,
+401858531,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,158,Nebraska,,194,Ohio State,
+401858532,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,213,Penn State,,164,Rutgers,
+401858533,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2509,Purdue,,275,Wisconsin,
+401858534,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,30,USC,,120,Maryland,
+401858535,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,264,Washington,,84,Indiana,
+401858536,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,2294,Iowa,,158,Nebraska,
+401858537,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,77,Northwestern,,356,Illinois,
+401858538,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,84,Indiana,,2509,Purdue,
+401858539,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,120,Maryland,,213,Penn State,
+401858540,2026,13,regular,2026-11-28T17:00:00.000Z,false,false,194,Ohio State,,130,Michigan,
+401858541,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2483,Oregon,,264,Washington,
+401858542,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,164,Rutgers,,127,Michigan State,
+401858543,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,26,UCLA,,30,USC,
+401858544,2026,13,regular,2026-11-28T00:30:00.000Z,false,false,275,Wisconsin,,135,Minnesota,
+401859184,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,87,Notre Dame,52,242,Rice,0
+401859185,2026,9,regular,2026-10-31T16:00:00.000Z,true,false,2426,Navy,,87,Notre Dame,
+401860878,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,36,Colorado State,35,2751,Wyoming,13
+401860879,2026,1,regular,2026-09-06T01:30:00.000Z,false,true,21,San Diego State,53,2502,Portland State,20
+401860880,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,328,Utah State,17,304,Idaho State,29
+401860881,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,68,Boise State,38,235,Memphis,20
+401860882,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,36,Colorado State,58,253,Southern Utah,24
+401860883,2026,2,regular,2026-09-13T02:30:00.000Z,false,true,278,Fresno State,49,16,Sacramento State,3
+401860884,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,326,Texas State,26,2636,UTSA,31
+401860885,2026,3,regular,2026-09-20T02:00:00.000Z,false,true,68,Boise State,38,233,South Dakota,24
+401860886,2026,3,regular,2026-09-20T03:00:00.000Z,false,true,204,Oregon State,52,149,Montana,17
+401860887,2026,3,regular,2026-09-20T02:00:00.000Z,false,true,21,San Diego State,13,256,James Madison,26
+401860888,2026,3,regular,2026-09-20T03:00:00.000Z,false,true,23,San José State,10,278,Fresno State,26
+401860889,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,326,Texas State,49,249,North Texas,35
+401860890,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,265,Washington State,48,2184,Duquesne,7
+401860891,2026,4,regular,2026-09-27T02:00:00.000Z,false,true,278,Fresno State,38,242,Rice,24
+401860892,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,326,Texas State,63,2916,Incarnate Word,10
+401860893,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2649,Toledo,41,21,San Diego State,16
+401860894,2026,4,regular,2026-09-26T23:30:00.000Z,false,true,328,Utah State,21,2653,Troy,10
+401860895,2026,4,regular,2026-09-27T01:00:00.000Z,false,true,2638,UTEP,7,204,Oregon State,33
+401860896,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2636,UTSA,59,36,Colorado State,45
+401860897,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,2711,Western Michigan,7,68,Boise State,32
+401860898,2026,5,regular,2026-10-03T23:30:00.000Z,false,false,68,Boise State,,328,Utah State,
+401860899,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,36,Colorado State,,204,Oregon State,
+401860900,2026,5,regular,2026-10-04T02:30:00.000Z,false,false,21,San Diego State,,326,Texas State,
+401860901,2026,6,regular,2026-10-11T02:30:00.000Z,false,false,278,Fresno State,,68,Boise State,
+401860902,2026,6,regular,2026-10-10T22:00:00.000Z,false,false,204,Oregon State,,21,San Diego State,
+401860903,2026,7,regular,2026-10-17T22:00:00.000Z,false,false,204,Oregon State,,265,Washington State,
+401860904,2026,7,regular,2026-10-18T02:30:00.000Z,false,false,21,San Diego State,,278,Fresno State,
+401860905,2026,8,regular,2026-10-24T22:30:00.000Z,false,false,36,Colorado State,,21,San Diego State,
+401860906,2026,8,regular,2026-10-24T23:30:00.000Z,false,false,326,Texas State,,328,Utah State,
+401860907,2026,8,regular,2026-10-24T22:00:00.000Z,false,false,265,Washington State,,68,Boise State,
+401860908,2026,9,regular,2026-11-01T02:00:00.000Z,false,false,68,Boise State,,326,Texas State,
+401860909,2026,9,regular,2026-10-31T23:00:00.000Z,false,false,21,San Diego State,,265,Washington State,
+401860910,2026,9,regular,2026-10-31T19:30:00.000Z,false,false,328,Utah State,,36,Colorado State,
+401860911,2026,10,regular,2026-11-07T23:00:00.000Z,false,false,36,Colorado State,,68,Boise State,
+401860912,2026,10,regular,2026-11-08T03:30:00.000Z,false,false,204,Oregon State,,326,Texas State,
+401860913,2026,10,regular,2026-11-08T02:30:00.000Z,false,false,328,Utah State,,278,Fresno State,
+401860914,2026,11,regular,2026-11-14T23:00:00.000Z,false,false,68,Boise State,,204,Oregon State,
+401860915,2026,11,regular,2026-11-15T02:30:00.000Z,false,false,21,San Diego State,,328,Utah State,
+401860916,2026,11,regular,2026-11-14T21:00:00.000Z,false,false,326,Texas State,,278,Fresno State,
+401860917,2026,11,regular,2026-11-15T03:30:00.000Z,false,false,265,Washington State,,36,Colorado State,
+401860918,2026,12,regular,2026-11-22T00:30:00.000Z,false,false,278,Fresno State,,36,Colorado State,
+401860919,2026,12,regular,2026-11-22T03:30:00.000Z,false,false,204,Oregon State,,328,Utah State,
+401860920,2026,12,regular,2026-11-21T23:00:00.000Z,false,false,326,Texas State,,265,Washington State,
+401860921,2026,5,regular,2026-10-04T01:30:00.000Z,false,false,265,Washington State,,278,Fresno State,
+401860922,2026,6,regular,2026-10-10T01:00:00.000Z,false,false,328,Utah State,,265,Washington State,
+401860923,2026,7,regular,2026-10-16T00:00:00.000Z,false,false,326,Texas State,,36,Colorado State,
+401860924,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,278,Fresno State,,204,Oregon State,
+401860925,2026,12,regular,2026-11-22T02:30:00.000Z,false,false,68,Boise State,,21,San Diego State,
+401861962,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,41,UConn,56,322,Lafayette,7
+401861963,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2572,Southern Miss,20,41,UConn,48
+401861964,2026,6,regular,2026-10-10T19:45:00.000Z,false,false,218,Temple,,41,UConn,
+401861965,2026,8,regular,2026-10-23T23:00:00.000Z,false,false,41,UConn,,113,Massachusetts,
+401861966,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2005,Air Force,,41,UConn,
+401861967,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,41,UConn,,256,James Madison,
+401861968,2026,12,regular,2026-11-21T20:30:00.000Z,false,false,41,UConn,,295,Old Dominion,
+401861969,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2751,Wyoming,,41,UConn,
+401861970,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,193,Miami (OH),24,41,UConn,21
+401862693,2026,1,regular,2026-08-30T02:00:00.000Z,false,true,2439,UNLV,21,235,Memphis,27
+401862694,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2429,Charlotte,41,2643,The Citadel,43
+401862695,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,235,Memphis,42,2032,Arkansas State,24
+401862696,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2426,Navy,42,119,Towson,15
+401862697,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,242,Rice,31,2277,Houston Christian,3
+401862698,2026,1,regular,2026-09-05T18:00:00.000Z,false,true,218,Temple,38,227,Rhode Island,14
+401862699,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,58,South Florida,19,2229,Florida International,9
+401862700,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2636,UTSA,45,292,UT Rio Grande Valley,16
+401862701,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,349,Army,59,2803,Bryant,3
+401862702,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,349,Army,24,58,South Florida,28
+401862703,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,2226,Florida Atlantic,38,2426,Navy,30
+401862705,2026,2,regular,2026-09-12T19:45:00.000Z,false,true,249,North Texas,44,2439,UNLV,6
+401862707,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2534,Sam Houston,17,202,Tulsa,23
+401862708,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,5,UAB,26,2433,UL Monroe,20
+401862710,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,295,Old Dominion,17,151,East Carolina,20
+401862771,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2226,Florida Atlantic,16,2229,Florida International,10
+401862772,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,235,Memphis,45,2630,UT Martin,21
+401862773,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,242,Rice,21,2711,Western Michigan,28
+401862774,2026,3,regular,2026-09-19T19:00:00.000Z,false,true,2649,Toledo,49,218,Temple,48
+401862775,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,202,Tulsa,42,2837,East Texas A&M,0
+401862776,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,309,Louisiana,21,5,UAB,14
+401862777,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,58,South Florida,59,2169,Delaware State,17
+401862778,2026,4,regular,2026-09-25T23:00:00.000Z,false,true,5,UAB,24,2426,Navy,20
+401862779,2026,4,regular,2026-09-25T20:00:00.000Z,false,true,218,Temple,17,349,Army,21
+401862780,2026,4,regular,2026-09-26T22:30:00.000Z,false,true,2429,Charlotte,7,309,Louisiana,34
+401862781,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,151,East Carolina,42,2428,North Carolina Central,9
+401862782,2026,4,regular,2026-09-27T00:00:00.000Z,false,true,2433,UL Monroe,17,2226,Florida Atlantic,45
+401862783,2026,4,regular,2026-09-26T23:30:00.000Z,false,true,249,North Texas,63,2277,Houston Christian,14
+401862784,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2655,Tulane,24,2572,Southern Miss,21
+401862785,2026,4,regular,2026-09-26T21:00:00.000Z,false,true,189,Bowling Green,6,58,South Florida,14
+401862786,2026,5,regular,2026-10-02T01:00:00.000Z,false,false,202,Tulsa,,249,North Texas,
+401862787,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2429,Charlotte,,235,Memphis,
+401862788,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,242,Rice,,2636,UTSA,
+401862790,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2226,Florida Atlantic,,2640,Texas Southern,
+401862791,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,2005,Air Force,,2426,Navy,
+401862792,2026,5,regular,2026-10-03T23:30:00.000Z,false,false,58,South Florida,,218,Temple,
+401862793,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,5,UAB,,2535,Samford,
+401862794,2026,6,regular,2026-10-08T23:30:00.000Z,false,false,2636,UTSA,,58,South Florida,
+401862795,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,349,Army,,2655,Tulane,
+401862796,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,249,North Texas,,2429,Charlotte,
+401862797,2026,6,regular,2026-10-10T20:00:00.000Z,false,false,151,East Carolina,,242,Rice,
+401862798,2026,6,regular,2026-10-10T04:00:00.000Z,false,false,235,Memphis,,5,UAB,
+401862799,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2426,Navy,,202,Tulsa,
+401862800,2026,7,regular,2026-10-15T23:30:00.000Z,false,false,5,UAB,,151,East Carolina,
+401862801,2026,7,regular,2026-10-16T23:30:00.000Z,false,false,2655,Tulane,,235,Memphis,
+401862802,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,349,Army,,2226,Florida Atlantic,
+401862803,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,218,Temple,,2429,Charlotte,
+401862804,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2636,UTSA,,2426,Navy,
+401862805,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,242,Rice,,202,Tulsa,
+401862806,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,58,South Florida,,2309,Kent State,
+401862807,2026,8,regular,2026-10-22T23:30:00.000Z,false,false,235,Memphis,,151,East Carolina,
+401862808,2026,8,regular,2026-10-24T00:30:00.000Z,false,false,202,Tulsa,,349,Army,
+401862809,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2226,Florida Atlantic,,242,Rice,
+401862810,2026,8,regular,2026-10-24T19:30:00.000Z,false,false,2426,Navy,,249,North Texas,
+401862811,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2655,Tulane,,2636,UTSA,
+401862812,2026,9,regular,2026-10-29T23:30:00.000Z,false,false,249,North Texas,,2226,Florida Atlantic,
+401862813,2026,9,regular,2026-10-30T23:00:00.000Z,false,false,2429,Charlotte,,2655,Tulane,
+401862814,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,235,Memphis,,349,Army,
+401862815,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,151,East Carolina,,218,Temple,
+401862816,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,58,South Florida,,5,UAB,
+401862817,2026,10,regular,2026-11-06T01:00:00.000Z,false,false,2226,Florida Atlantic,,2636,UTSA,
+401862818,2026,10,regular,2026-11-07T00:30:00.000Z,false,false,151,East Carolina,,58,South Florida,
+401862819,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,5,UAB,,2429,Charlotte,
+401862820,2026,10,regular,2026-11-07T20:30:00.000Z,false,false,2426,Navy,,218,Temple,
+401862821,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,249,North Texas,,242,Rice,
+401862822,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2655,Tulane,,202,Tulsa,
+401862823,2026,10,regular,2026-11-08T00:30:00.000Z,false,false,349,Army,,2005,Air Force,
+401862824,2026,11,regular,2026-11-13T01:00:00.000Z,false,false,58,South Florida,,235,Memphis,
+401862825,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2429,Charlotte,,151,East Carolina,
+401862826,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,202,Tulsa,,2226,Florida Atlantic,
+401862827,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2636,UTSA,,249,North Texas,
+401862828,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,242,Rice,,2655,Tulane,
+401862829,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,218,Temple,,5,UAB,
+401862830,2026,12,regular,2026-11-20T00:30:00.000Z,false,false,218,Temple,,242,Rice,
+401862831,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,349,Army,,151,East Carolina,
+401862832,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,202,Tulsa,,2429,Charlotte,
+401862833,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2226,Florida Atlantic,,58,South Florida,
+401862834,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2426,Navy,,235,Memphis,
+401862835,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2655,Tulane,,249,North Texas,
+401862836,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,5,UAB,,2636,UTSA,
+401862837,2026,13,regular,2026-11-27T05:00:00.000Z,false,false,151,East Carolina,,2226,Florida Atlantic,
+401862838,2026,13,regular,2026-11-27T05:00:00.000Z,false,false,235,Memphis,,218,Temple,
+401862839,2026,13,regular,2026-11-27T05:00:00.000Z,false,false,58,South Florida,,2655,Tulane,
+401862840,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2636,UTSA,,202,Tulsa,
+401862841,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,242,Rice,,349,Army,
+401862842,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2429,Charlotte,,2426,Navy,
+401862843,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,249,North Texas,,5,UAB,
+401862844,2026,15,regular,2026-12-12T20:00:00.000Z,true,false,349,Army,,2426,Navy,
+401864424,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,48,Delaware,42,2771,Merrimack,7
+401864425,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,338,Kennesaw State,47,2698,West Georgia,0
+401864432,2026,1,regular,2026-09-06T02:30:00.000Z,false,true,2440,Nevada,49,98,Western Kentucky,14
+401864443,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2393,Middle Tennessee,27,2440,Nevada,20
+401864494,2026,1,regular,2026-08-29T19:00:00.000Z,false,true,30,USC,42,23,San José State,26
+401864495,2026,1,regular,2026-09-04T22:30:00.000Z,false,true,2199,Eastern Michigan,21,23,San José State,27
+401864496,2026,1,regular,2026-09-05T17:00:00.000Z,false,true,2005,Air Force,34,2184,Duquesne,0
+401864497,2026,1,regular,2026-09-06T02:00:00.000Z,false,true,62,Hawai'i,6,2439,UNLV,21
+401864498,2026,1,regular,2026-09-06T02:00:00.000Z,false,true,167,New Mexico,38,2117,Central Michigan,7
+401864499,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2449,North Dakota State,38,2230,Fordham,0
+401864500,2026,2,regular,2026-09-13T02:30:00.000Z,false,true,2440,Nevada,7,147,Montana State,20
+401864502,2026,2,regular,2026-09-13T02:00:00.000Z,false,true,2005,Air Force,32,2449,North Dakota State,38
+401864503,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2459,Northern Illinois,24,2287,Illinois State,28
+401864504,2026,2,regular,2026-09-13T01:00:00.000Z,false,true,23,San José State,30,13,Cal Poly,20
+401864505,2026,2,regular,2026-09-13T01:00:00.000Z,false,true,2638,UTEP,51,2640,Texas Southern,10
+401864506,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,2751,Wyoming,21,2458,Northern Colorado,13
+401864507,2026,3,regular,2026-09-20T02:30:00.000Z,false,true,16,Sacramento State,10,2449,North Dakota State,31
+401864508,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2117,Central Michigan,24,2751,Wyoming,10
+401864509,2026,4,regular,2026-09-27T02:30:00.000Z,false,true,2440,Nevada,33,2005,Air Force,36
+401864510,2026,4,regular,2026-09-26T19:00:00.000Z,false,true,2751,Wyoming,27,62,Hawai'i,10
+401864511,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2247,Georgia State,35,2459,Northern Illinois,14
+401864512,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2006,Akron,10,2439,UNLV,38
+401864513,2026,5,regular,2026-10-04T03:59:00.000Z,false,false,62,Hawai'i,,23,San José State,
+401864514,2026,5,regular,2026-10-03T20:00:00.000Z,false,false,167,New Mexico,,2638,UTEP,
+401864515,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2449,North Dakota State,,2751,Wyoming,
+401864516,2026,6,regular,2026-10-10T23:30:00.000Z,false,false,2459,Northern Illinois,,2005,Air Force,
+401864517,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,2638,UTEP,,2440,Nevada,
+401864518,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,2439,UNLV,,2449,North Dakota State,
+401864519,2026,6,regular,2026-10-10T01:00:00.000Z,false,false,23,San José State,,2751,Wyoming,
+401864520,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2449,North Dakota State,,2440,Nevada,
+401864521,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,62,Hawai'i,,167,New Mexico,
+401864522,2026,7,regular,2026-10-17T19:30:00.000Z,false,false,2751,Wyoming,,2459,Northern Illinois,
+401864523,2026,7,regular,2026-10-18T01:00:00.000Z,false,false,2638,UTEP,,23,San José State,
+401864524,2026,7,regular,2026-10-17T19:30:00.000Z,false,false,2005,Air Force,,2439,UNLV,
+401864525,2026,8,regular,2026-10-24T01:00:00.000Z,false,false,2751,Wyoming,,2005,Air Force,
+401864526,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2459,Northern Illinois,,62,Hawai'i,
+401864527,2026,8,regular,2026-10-25T02:00:00.000Z,false,false,167,New Mexico,,2449,North Dakota State,
+401864528,2026,8,regular,2026-10-24T21:00:00.000Z,false,false,2440,Nevada,,23,San José State,
+401864529,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,23,San José State,,167,New Mexico,
+401864530,2026,9,regular,2026-11-01T02:30:00.000Z,false,false,2439,UNLV,,2459,Northern Illinois,
+401864531,2026,9,regular,2026-10-31T19:30:00.000Z,false,false,2449,North Dakota State,,2638,UTEP,
+401864532,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2638,UTEP,,62,Hawai'i,
+401864533,2026,10,regular,2026-11-07T02:00:00.000Z,false,false,2440,Nevada,,167,New Mexico,
+401864534,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,23,San José State,,2459,Northern Illinois,
+401864535,2026,10,regular,2026-11-08T03:30:00.000Z,false,false,2439,UNLV,,2751,Wyoming,
+401864536,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2459,Northern Illinois,,2440,Nevada,
+401864537,2026,11,regular,2026-11-15T04:59:00.000Z,false,false,62,Hawai'i,,2449,North Dakota State,
+401864538,2026,11,regular,2026-11-15T00:00:00.000Z,false,false,2005,Air Force,,23,San José State,
+401864539,2026,11,regular,2026-11-15T00:30:00.000Z,false,false,167,New Mexico,,2439,UNLV,
+401864540,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2638,UTEP,,2751,Wyoming,
+401864541,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2440,Nevada,,62,Hawai'i,
+401864542,2026,12,regular,2026-11-22T02:00:00.000Z,false,false,2751,Wyoming,,167,New Mexico,
+401864543,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,2449,North Dakota State,,2459,Northern Illinois,
+401864544,2026,12,regular,2026-11-22T00:00:00.000Z,false,false,23,San José State,,2439,UNLV,
+401864545,2026,12,regular,2026-11-21T01:00:00.000Z,false,false,2005,Air Force,,2638,UTEP,
+401864546,2026,13,regular,2026-11-28T21:30:00.000Z,false,false,167,New Mexico,,2005,Air Force,
+401864547,2026,13,regular,2026-11-29T04:00:00.000Z,false,false,62,Hawai'i,,16,Sacramento State,
+401864548,2026,13,regular,2026-11-29T02:00:00.000Z,false,false,2439,UNLV,,2440,Nevada,
+401864549,2026,13,regular,2026-11-27T20:30:00.000Z,false,false,23,San José State,,2449,North Dakota State,
+401864550,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2459,Northern Illinois,,2638,UTEP,
+401864570,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,52,Florida State,34,166,New Mexico State,17
+401864571,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,151,East Carolina,24,2026,App State,27
+401864572,2026,4,regular,2026-09-26T23:30:00.000Z,false,true,152,NC State,41,2026,App State,31
+401864574,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2026,App State,26,2429,Charlotte,21
+401864575,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2655,Tulane,28,6,South Alabama,24
+401864576,2026,4,regular,2026-09-26T16:45:00.000Z,false,true,96,Kentucky,45,6,South Alabama,21
+401864577,2026,1,regular,2026-08-29T21:30:00.000Z,false,true,2449,North Dakota State,33,55,Jacksonville State,7
+401864578,2026,2,regular,2026-09-13T03:59:00.000Z,false,true,62,Hawai'i,29,166,New Mexico State,19
+401864579,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,166,New Mexico State,18,167,New Mexico,42
+401865252,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,167,New Mexico,70,2385,Mercyhurst,7
+401866408,2026,1,regular,2026-08-29T22:30:00.000Z,false,true,2199,Eastern Michigan,28,16,Sacramento State,17
+401866409,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,2084,Buffalo,21,399,UAlbany,17
+401866410,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,189,Bowling Green,13,2627,Tarleton State,20
+401866411,2026,1,regular,2026-09-06T02:00:00.000Z,false,true,16,Sacramento State,52,2400,Mississippi Valley State,0
+401866412,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,2006,Akron,45,2523,Robert Morris,10
+401866413,2026,2,regular,2026-09-12T18:00:00.000Z,false,true,2050,Ball State,41,2619,Stony Brook,17
+401866414,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2229,Florida International,33,2084,Buffalo,20
+401866415,2026,2,regular,2026-09-12T17:00:00.000Z,false,true,2117,Central Michigan,13,2142,Colgate,10
+401866416,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2309,Kent State,36,2747,Wofford,15
+401866417,2026,2,regular,2026-09-12T17:00:00.000Z,false,true,193,Miami (OH),45,107,Holy Cross,7
+401866418,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,195,Ohio,29,55,Jacksonville State,27
+401866419,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,2649,Toledo,63,2115,Central Connecticut,10
+401866420,2026,2,regular,2026-09-12T19:30:00.000Z,false,true,113,Massachusetts,37,2529,Sacred Heart,10
+401866421,2026,2,regular,2026-09-12T22:30:00.000Z,false,true,2711,Western Michigan,49,2405,Monmouth,14
+401866422,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,2335,Liberty,51,2050,Ball State,15
+401866423,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,6,South Alabama,41,195,Ohio,36
+401866424,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,113,Massachusetts,36,284,Stonehill,14
+401866425,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2309,Kent State,26,2050,Ball State,13
+401866426,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,2084,Buffalo,31,2523,Robert Morris,28
+401866427,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,2199,Eastern Michigan,29,2815,Lindenwood,3
+401866428,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,195,Ohio,35,284,Stonehill,7
+401866429,2026,4,regular,2026-09-27T01:00:00.000Z,false,true,16,Sacramento State,6,113,Massachusetts,35
+401866430,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2117,Central Michigan,,2006,Akron,
+401866431,2026,5,regular,2026-10-03T18:00:00.000Z,false,false,2050,Ball State,,2649,Toledo,
+401866432,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,2084,Buffalo,,2711,Western Michigan,
+401866433,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,113,Massachusetts,,2199,Eastern Michigan,
+401866434,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2309,Kent State,,195,Ohio,
+401866435,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2006,Akron,,2199,Eastern Michigan,
+401866436,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,189,Bowling Green,,16,Sacramento State,
+401866437,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2649,Toledo,,2084,Buffalo,
+401866438,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,195,Ohio,,2117,Central Michigan,
+401866439,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2711,Western Michigan,,2309,Kent State,
+401866440,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,113,Massachusetts,,193,Miami (OH),
+401866441,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,189,Bowling Green,,2050,Ball State,
+401866442,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2084,Buffalo,,113,Massachusetts,
+401866443,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2117,Central Michigan,,2711,Western Michigan,
+401866444,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2199,Eastern Michigan,,2649,Toledo,
+401866445,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,16,Sacramento State,,195,Ohio,
+401866446,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2309,Kent State,,2006,Akron,
+401866447,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2050,Ball State,,16,Sacramento State,
+401866448,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2084,Buffalo,,189,Bowling Green,
+401866449,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,195,Ohio,,2199,Eastern Michigan,
+401866450,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2649,Toledo,,2711,Western Michigan,
+401866451,2026,9,regular,2026-10-31T02:30:00.000Z,false,false,16,Sacramento State,,2309,Kent State,
+401866452,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,2711,Western Michigan,,189,Bowling Green,
+401866453,2026,10,regular,2026-11-04T00:00:00.000Z,false,false,2006,Akron,,195,Ohio,
+401866454,2026,10,regular,2026-11-04T00:00:00.000Z,false,false,193,Miami (OH),,2084,Buffalo,
+401866455,2026,10,regular,2026-11-04T05:00:00.000Z,false,false,113,Massachusetts,,2050,Ball State,
+401866456,2026,10,regular,2026-11-04T05:00:00.000Z,true,false,2199,Eastern Michigan,,2117,Central Michigan,
+401866457,2026,10,regular,2026-11-04T05:00:00.000Z,false,false,16,Sacramento State,,2649,Toledo,
+401866458,2026,11,regular,2026-11-11T00:00:00.000Z,false,false,2006,Akron,,2711,Western Michigan,
+401866459,2026,11,regular,2026-11-11T00:00:00.000Z,false,false,189,Bowling Green,,2309,Kent State,
+401866460,2026,11,regular,2026-11-11T00:00:00.000Z,false,false,193,Miami (OH),,195,Ohio,
+401866461,2026,11,regular,2026-11-11T05:00:00.000Z,false,false,2050,Ball State,,2084,Buffalo,
+401866462,2026,11,regular,2026-11-11T05:00:00.000Z,false,false,2117,Central Michigan,,16,Sacramento State,
+401866463,2026,11,regular,2026-11-11T05:00:00.000Z,false,false,2649,Toledo,,113,Massachusetts,
+401866464,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,195,Ohio,,2050,Ball State,
+401866465,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,2711,Western Michigan,,2199,Eastern Michigan,
+401866466,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,2309,Kent State,,193,Miami (OH),
+401866467,2026,12,regular,2026-11-18T05:00:00.000Z,false,false,113,Massachusetts,,2006,Akron,
+401866468,2026,12,regular,2026-11-21T00:30:00.000Z,false,false,2649,Toledo,,189,Bowling Green,
+401866469,2026,12,regular,2026-11-18T05:00:00.000Z,false,false,2084,Buffalo,,2117,Central Michigan,
+401866470,2026,13,regular,2026-11-25T00:00:00.000Z,false,false,2199,Eastern Michigan,,2309,Kent State,
+401866471,2026,13,regular,2026-11-24T05:00:00.000Z,false,false,2711,Western Michigan,,193,Miami (OH),
+401866472,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,2006,Akron,,2084,Buffalo,
+401866473,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,195,Ohio,,2649,Toledo,
+401866474,2026,13,regular,2026-11-28T17:00:00.000Z,false,false,2050,Ball State,,2117,Central Michigan,
+401866475,2026,13,regular,2026-11-28T17:00:00.000Z,false,false,189,Bowling Green,,113,Massachusetts,
+401866476,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2117,Central Michigan,,193,Miami (OH),
+401866477,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,193,Miami (OH),,189,Bowling Green,
+401866478,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,193,Miami (OH),,2006,Akron,
+401866532,2026,1,regular,2026-08-27T22:00:00.000Z,false,true,119,Towson,18,311,Maine,21
+401866613,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,2261,Hampton,45,2355,Virginia Lynchburg,0
+401866614,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2210,Elon,42,2249,Glenville State,7
+401866615,2026,1,regular,2026-08-27T22:00:00.000Z,false,true,2169,Delaware State,41,2619,Stony Brook,34
+401866616,2026,1,regular,2026-08-28T23:00:00.000Z,false,true,399,UAlbany,28,160,New Hampshire,14
+401866617,2026,1,regular,2026-08-28T22:00:00.000Z,false,true,2771,Merrimack,7,227,Rhode Island,34
+401866618,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,2448,North Carolina A&T,7,2415,Morgan State,17
+401866619,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,284,Stonehill,6,2803,Bryant,24
+401866620,2026,1,regular,2026-08-29T21:30:00.000Z,false,true,2193,East Tennessee State,37,2097,Campbell,49
+401866621,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2635,Tennessee Tech,38,2405,Monmouth,14
+401866622,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,2619,Stony Brook,36,2815,Lindenwood,32
+401866623,2026,1,regular,2026-09-04T23:00:00.000Z,false,true,2247,Georgia State,59,2448,North Carolina A&T,10
+401866624,2026,1,regular,2026-09-05T18:00:00.000Z,false,true,2405,Monmouth,31,2529,Sacred Heart,24
+401866626,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2166,Davidson,0,2210,Elon,38
+401866627,2026,1,regular,2026-09-05T19:30:00.000Z,false,true,2026,App State,55,311,Maine,3
+401866628,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,227,Rhode Island,31,2210,Elon,10
+401866629,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2261,Hampton,3,2803,Bryant,31
+401866630,2026,2,regular,2026-09-12T21:00:00.000Z,false,true,311,Maine,14,2771,Merrimack,23
+401866631,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,160,New Hampshire,42,284,Stonehill,35
+401866632,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2341,Long Island University,13,399,UAlbany,35
+401866633,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2428,North Carolina Central,30,2448,North Carolina A&T,22
+401866634,2026,3,regular,2026-09-19T18:30:00.000Z,false,true,2619,Stony Brook,56,227,Rhode Island,24
+401866635,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,399,UAlbany,20,2405,Monmouth,28
+401866636,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2097,Campbell,42,2448,North Carolina A&T,14
+401866637,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2210,Elon,24,2529,Sacred Heart,21
+401866638,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2803,Bryant,21,163,Princeton,14
+401866639,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,160,New Hampshire,7,108,Harvard,31
+401866640,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,119,Towson,26,2415,Morgan State,41
+401866641,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,2450,Norfolk State,42,2261,Hampton,21
+401866642,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2529,Sacred Heart,20,160,New Hampshire,13
+401866643,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2210,Elon,43,311,Maine,17
+401866644,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,2448,North Carolina A&T,22,227,Rhode Island,18
+401866645,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2261,Hampton,20,2097,Campbell,44
+401866646,2026,4,regular,2026-09-26T19:00:00.000Z,false,true,163,Princeton,22,399,UAlbany,0
+401866647,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,159,Dartmouth,28,2405,Monmouth,31
+401866648,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,2230,Fordham,16,2619,Stony Brook,31
+401866649,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2169,Delaware State,33,119,Towson,28
+401866650,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,160,New Hampshire,,2210,Elon,
+401866651,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,2405,Monmouth,,119,Towson,
+401866652,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,311,Maine,,2529,Sacred Heart,
+401866653,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2803,Bryant,,2448,North Carolina A&T,
+401866654,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,227,Rhode Island,,225,Brown,
+401866655,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,399,UAlbany,,2169,Delaware State,
+401866656,2026,5,regular,2026-10-03T19:00:00.000Z,true,false,2261,Hampton,,47,Howard,
+401866657,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2428,North Carolina Central,,2097,Campbell,
+401866658,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,2448,North Carolina A&T,,160,New Hampshire,
+401866659,2026,6,regular,2026-10-10T20:00:00.000Z,false,false,119,Towson,,2619,Stony Brook,
+401866660,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,2529,Sacred Heart,,284,Stonehill,
+401866661,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,2210,Elon,,2747,Wofford,
+401866662,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,225,Brown,,2803,Bryant,
+401866663,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,2529,Sacred Heart,,2261,Hampton,
+401866664,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,311,Maine,,2803,Bryant,
+401866665,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,160,New Hampshire,,2405,Monmouth,
+401866666,2026,7,regular,2026-10-17T18:30:00.000Z,false,false,2619,Stony Brook,,399,UAlbany,
+401866667,2026,7,regular,2026-10-17T19:30:00.000Z,false,false,2097,Campbell,,119,Towson,
+401866668,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,2448,North Carolina A&T,,2130,Chicago State,
+401866669,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,43,Yale,,227,Rhode Island,
+401866670,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,227,Rhode Island,,399,UAlbany,
+401866671,2026,8,regular,2026-10-24T17:00:00.000Z,false,false,311,Maine,,2097,Campbell,
+401866672,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,2803,Bryant,,2619,Stony Brook,
+401866673,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,2261,Hampton,,2405,Monmouth,
+401866674,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2771,Merrimack,,160,New Hampshire,
+401866675,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,399,UAlbany,,2097,Campbell,
+401866676,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,227,Rhode Island,,311,Maine,
+401866677,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,2619,Stony Brook,,2529,Sacred Heart,
+401866678,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,2405,Monmouth,,2803,Bryant,
+401866679,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,2448,North Carolina A&T,,2210,Elon,
+401866680,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,119,Towson,,2261,Hampton,
+401866681,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2405,Monmouth,,2448,North Carolina A&T,
+401866682,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2529,Sacred Heart,,119,Towson,
+401866683,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2803,Bryant,,399,UAlbany,
+401866684,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2097,Campbell,,2619,Stony Brook,
+401866685,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,2210,Elon,,2261,Hampton,
+401866686,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,160,New Hampshire,,227,Rhode Island,
+401866687,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,399,UAlbany,,311,Maine,
+401866688,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2529,Sacred Heart,,2803,Bryant,
+401866689,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,227,Rhode Island,,119,Towson,
+401866690,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,2261,Hampton,,2448,North Carolina A&T,
+401866691,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,160,New Hampshire,,2619,Stony Brook,
+401866692,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2210,Elon,,2097,Campbell,
+401866693,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2405,Monmouth,,2771,Merrimack,
+401866694,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2448,North Carolina A&T,,399,UAlbany,
+401866695,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2619,Stony Brook,,2261,Hampton,
+401866696,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2803,Bryant,,227,Rhode Island,
+401866697,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2097,Campbell,,2405,Monmouth,
+401866698,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,119,Towson,,2210,Elon,
+401866699,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,311,Maine,,160,New Hampshire,
+401866700,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2771,Merrimack,,2529,Sacred Heart,
+401867684,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2630,UT Martin,42,2130,Chicago State,7
+401867685,2026,2,regular,2026-09-12T17:00:00.000Z,false,true,2130,Chicago State,78,3077,Kentucky Christian,7
+401867686,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2086,Butler,47,2130,Chicago State,20
+401867687,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2130,Chicago State,20,2450,Norfolk State,43
+401867688,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2627,Tarleton State,,2130,Chicago State,
+401867689,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2815,Lindenwood,,2130,Chicago State,
+401867690,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2130,Chicago State,,124110,UFTL,
+401867692,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2729,William & Mary,22,2169,Delaware State,15
+401867796,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,99,LSU,45,2348,Louisiana Tech,14
+401867804,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,239,Baylor,36,2348,Louisiana Tech,19
+401867805,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,2441,New Haven,10,225,Brown,17
+401867806,2026,4,regular,2026-09-25T23:00:00.000Z,false,true,225,Brown,10,108,Harvard,14
+401867807,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,163,Princeton,,225,Brown,
+401867808,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,225,Brown,,172,Cornell,
+401867809,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,225,Brown,,219,Pennsylvania,
+401867810,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,43,Yale,,225,Brown,
+401867811,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,225,Brown,,171,Columbia,
+401867812,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,159,Dartmouth,,225,Brown,
+401867817,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,171,Columbia,40,322,Lafayette,34
+401867818,2026,4,regular,2026-09-26T16:30:00.000Z,false,true,46,Georgetown,17,171,Columbia,20
+401867819,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,171,Columbia,,163,Princeton,
+401867821,2026,7,regular,2026-10-16T23:00:00.000Z,false,false,219,Pennsylvania,,171,Columbia,
+401867822,2026,8,regular,2026-10-24T17:30:00.000Z,false,false,171,Columbia,,159,Dartmouth,
+401867823,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,171,Columbia,,43,Yale,
+401867824,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,108,Harvard,,171,Columbia,
+401867825,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,171,Columbia,,172,Cornell,
+401867826,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2142,Colgate,20,172,Cornell,7
+401867827,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,172,Cornell,38,43,Yale,25
+401867828,2026,5,regular,2026-10-03T16:30:00.000Z,false,false,46,Georgetown,,172,Cornell,
+401867829,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,172,Cornell,,108,Harvard,
+401867830,2026,7,regular,2026-10-17T18:00:00.000Z,false,false,172,Cornell,,2329,Lehigh,
+401867831,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,163,Princeton,,172,Cornell,
+401867832,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,172,Cornell,,219,Pennsylvania,
+401867833,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,172,Cornell,,159,Dartmouth,
+401867834,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,2329,Lehigh,24,159,Dartmouth,20
+401867835,2026,5,regular,2026-10-03T17:30:00.000Z,false,false,159,Dartmouth,,219,Pennsylvania,
+401867836,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,43,Yale,,159,Dartmouth,
+401867837,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,159,Dartmouth,,2771,Merrimack,
+401867838,2026,9,regular,2026-10-30T23:00:00.000Z,false,false,159,Dartmouth,,108,Harvard,
+401867839,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,163,Princeton,,159,Dartmouth,
+401867840,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,108,Harvard,,2142,Colgate,
+401867841,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,108,Harvard,,107,Holy Cross,
+401867842,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,108,Harvard,,163,Princeton,
+401867843,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,219,Pennsylvania,,108,Harvard,
+401867844,2026,12,regular,2026-11-21T20:30:00.000Z,true,false,108,Harvard,,43,Yale,
+401867845,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,2710,Western Illinois,10,2287,Illinois State,41
+401867846,2026,3,regular,2026-09-19T19:00:00.000Z,false,true,2287,Illinois State,49,2197,Eastern Illinois,13
+401867847,2026,4,regular,2026-09-26T21:00:00.000Z,false,true,2460,Northern Iowa,28,2287,Illinois State,21
+401867848,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2287,Illinois State,,2571,South Dakota State,
+401867849,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,79,Southern Illinois,,2287,Illinois State,
+401867850,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2287,Illinois State,,282,Indiana State,
+401867851,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2287,Illinois State,,93,Murray State,
+401867852,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,155,North Dakota,,2287,Illinois State,
+401867853,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2754,Youngstown State,,2287,Illinois State,
+401867854,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2287,Illinois State,,233,South Dakota,
+401867855,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,282,Indiana State,21,2546,Southeast Missouri State,23
+401867856,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2197,Eastern Illinois,35,282,Indiana State,42
+401867857,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,282,Indiana State,39,2674,Valparaiso,16
+401867858,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,282,Indiana State,35,155,North Dakota,42
+401867859,2026,5,regular,2026-10-03T19:00:00.000Z,false,false,233,South Dakota,,282,Indiana State,
+401867860,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,282,Indiana State,,2754,Youngstown State,
+401867861,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2460,Northern Iowa,,282,Indiana State,
+401867862,2026,10,regular,2026-11-07T23:00:00.000Z,false,false,282,Indiana State,,79,Southern Illinois,
+401867863,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,282,Indiana State,,93,Murray State,
+401867864,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2571,South Dakota State,,282,Indiana State,
+401867865,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,93,Murray State,14,2197,Eastern Illinois,28
+401867866,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2393,Middle Tennessee,38,93,Murray State,14
+401867867,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,93,Murray State,27,2674,Valparaiso,18
+401867868,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,93,Murray State,6,79,Southern Illinois,46
+401867869,2026,5,regular,2026-10-03T18:00:00.000Z,false,false,155,North Dakota,,93,Murray State,
+401867870,2026,7,regular,2026-10-17T21:00:00.000Z,false,false,93,Murray State,,233,South Dakota,
+401867871,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2571,South Dakota State,,93,Murray State,
+401867872,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,93,Murray State,,2754,Youngstown State,
+401867873,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,93,Murray State,,2460,Northern Iowa,
+401867874,2026,1,regular,2026-08-28T00:00:00.000Z,false,true,155,North Dakota,42,2341,Long Island University,21
+401867875,2026,1,regular,2026-09-05T20:00:00.000Z,false,true,155,North Dakota,62,2900,St. Thomas (MN),26
+401867876,2026,2,regular,2026-09-13T02:00:00.000Z,false,true,2502,Portland State,23,155,North Dakota,47
+401867877,2026,6,regular,2026-10-10T21:00:00.000Z,false,false,2460,Northern Iowa,,155,North Dakota,
+401867878,2026,7,regular,2026-10-17T18:00:00.000Z,false,false,155,North Dakota,,2571,South Dakota State,
+401867879,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,233,South Dakota,,155,North Dakota,
+401867880,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,2754,Youngstown State,,155,North Dakota,
+401867881,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,155,North Dakota,,79,Southern Illinois,
+401867882,2026,1,regular,2026-08-29T18:00:00.000Z,false,true,233,South Dakota,59,2115,Central Connecticut,20
+401867883,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,2458,Northern Colorado,23,233,South Dakota,38
+401867884,2026,2,regular,2026-09-12T18:00:00.000Z,false,true,233,South Dakota,41,331,Eastern Washington,23
+401867885,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2754,Youngstown State,47,233,South Dakota,28
+401867886,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,233,South Dakota,,79,Southern Illinois,
+401867887,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2571,South Dakota State,,233,South Dakota,
+401867888,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,233,South Dakota,,2460,Northern Iowa,
+401867889,2026,1,regular,2026-09-03T23:00:00.000Z,false,true,2535,Samford,18,79,Southern Illinois,22
+401867890,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,79,Southern Illinois,34,2546,Southeast Missouri State,20
+401867891,2026,5,regular,2026-10-03T21:00:00.000Z,false,false,79,Southern Illinois,,2754,Youngstown State,
+401867892,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,79,Southern Illinois,,2460,Northern Iowa,
+401867893,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,79,Southern Illinois,,2571,South Dakota State,
+401867894,2026,1,regular,2026-08-27T22:00:00.000Z,false,true,2754,Youngstown State,43,2385,Mercyhurst,10
+401867895,2026,2,regular,2026-09-12T18:00:00.000Z,false,true,2754,Youngstown State,70,2184,Duquesne,13
+401867896,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2571,South Dakota State,27,2754,Youngstown State,20
+401867897,2026,7,regular,2026-10-17T22:00:00.000Z,false,false,2754,Youngstown State,,2460,Northern Iowa,
+401867898,2026,3,regular,2026-09-19T19:00:00.000Z,false,true,147,Montana State,35,2115,Central Connecticut,30
+401867899,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,2115,Central Connecticut,,2681,Wagner,
+401867901,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2385,Mercyhurst,,2115,Central Connecticut,
+401867902,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2115,Central Connecticut,,2441,New Haven,
+401867903,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2115,Central Connecticut,,2523,Robert Morris,
+401867904,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,284,Stonehill,,2115,Central Connecticut,
+401867905,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2341,Long Island University,,2115,Central Connecticut,
+401867906,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2115,Central Connecticut,,2184,Duquesne,
+401867907,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,2115,Central Connecticut,,2022,American International,
+401867908,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,2341,Long Island University,16,222,Villanova,20
+401867909,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2229,Florida International,20,2341,Long Island University,3
+401867910,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,2341,Long Island University,,2385,Mercyhurst,
+401867911,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,2184,Duquesne,,2341,Long Island University,
+401867912,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2681,Wagner,,2341,Long Island University,
+401867913,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2341,Long Island University,,284,Stonehill,
+401867914,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2441,New Haven,,2341,Long Island University,
+401867915,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2523,Robert Morris,,2341,Long Island University,
+401867916,2026,1,regular,2026-08-29T16:00:00.000Z,false,true,2681,Wagner,7,2523,Robert Morris,28
+401867917,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2523,Robert Morris,29,2707,West Virginia State,9
+401867918,2026,5,regular,2026-10-03T18:00:00.000Z,false,false,2523,Robert Morris,,2450,Norfolk State,
+401867919,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,2415,Morgan State,,2523,Robert Morris,
+401867920,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,2523,Robert Morris,,2441,New Haven,
+401867921,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,2523,Robert Morris,,2385,Mercyhurst,
+401867922,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2184,Duquesne,,2523,Robert Morris,
+401867923,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2523,Robert Morris,,284,Stonehill,
+401867924,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,2441,New Haven,3,284,Stonehill,21
+401867925,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,284,Stonehill,,2184,Duquesne,
+401867926,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,284,Stonehill,,2385,Mercyhurst,
+401867927,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,284,Stonehill,,2681,Wagner,
+401867928,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,2681,Wagner,31,2583,Southern Connecticut State,7
+401867929,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,256,James Madison,87,2681,Wagner,3
+401867930,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,2681,Wagner,,163,Princeton,
+401867931,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2184,Duquesne,,2681,Wagner,
+401867932,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,2771,Merrimack,,2681,Wagner,
+401867933,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2385,Mercyhurst,,2681,Wagner,
+401867934,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2681,Wagner,,2441,New Haven,
+401867935,2026,1,regular,2026-08-29T23:30:00.000Z,true,true,47,Howard,31,2010,Alabama A&M,24
+401867939,2026,1,regular,2026-09-06T19:00:00.000Z,true,true,50,Florida A&M,13,2569,South Carolina State,31
+401867953,2026,2,regular,2026-09-12T19:00:00.000Z,false,true,2169,Delaware State,21,2075,Bowie State,6
+401867954,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,2169,Delaware State,,112334,Franklin Pierce,
+401867955,2026,8,regular,2026-10-23T21:00:00.000Z,false,false,2169,Delaware State,,2428,North Carolina Central,
+401867956,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2450,Norfolk State,,2169,Delaware State,
+401867957,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2169,Delaware State,,2415,Morgan State,
+401867958,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,47,Howard,,2169,Delaware State,
+401867959,2026,12,regular,2026-11-21T18:30:00.000Z,false,false,2569,South Carolina State,,2169,Delaware State,
+401867960,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,219,Pennsylvania,,47,Howard,
+401867961,2026,7,regular,2026-10-17T19:30:00.000Z,false,false,47,Howard,,60,Morehouse,
+401867962,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2415,Morgan State,,47,Howard,
+401867963,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2428,North Carolina Central,,47,Howard,
+401867964,2026,10,regular,2026-11-05T22:00:00.000Z,false,false,47,Howard,,2569,South Carolina State,
+401867965,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2450,Norfolk State,,47,Howard,
+401867966,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2415,Morgan State,55,2355,Virginia Lynchburg,0
+401867967,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,222,Villanova,,2415,Morgan State,
+401867968,2026,7,regular,2026-10-17T22:30:00.000Z,false,false,2634,Tennessee State,,2415,Morgan State,
+401867969,2026,9,regular,2026-10-29T23:00:00.000Z,false,false,2415,Morgan State,,2569,South Carolina State,
+401867970,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2415,Morgan State,,2450,Norfolk State,
+401867971,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2428,North Carolina Central,,2415,Morgan State,
+401867972,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,2450,Norfolk State,56,2736,Winston-Salem State,0
+401867973,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,295,Old Dominion,31,2450,Norfolk State,10
+401867974,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,2450,Norfolk State,,2355,Virginia Lynchburg,
+401867975,2026,8,regular,2026-10-24T17:30:00.000Z,false,false,2569,South Carolina State,,2450,Norfolk State,
+401867976,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2450,Norfolk State,,2428,North Carolina Central,
+401867977,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2640,Texas Southern,42,2428,North Carolina Central,30
+401867978,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2428,North Carolina Central,27,2207,Elizabeth City State,6
+401867979,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2241,Gardner-Webb,44,2428,North Carolina Central,20
+401867980,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,2428,North Carolina Central,,2729,William & Mary,
+401867981,2026,11,regular,2026-11-14T18:30:00.000Z,false,false,2569,South Carolina State,,2428,North Carolina Central,
+401867982,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,2569,South Carolina State,87,2542,Savannah State,0
+401867983,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2569,South Carolina State,66,330,Virginia State,0
+401867984,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,231,Furman,17,2569,South Carolina State,20
+401867985,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2065,Bethune-Cookman,21,2569,South Carolina State,31
+401867986,2026,5,regular,2026-10-03T18:00:00.000Z,false,false,2569,South Carolina State,,2643,The Citadel,
+401867987,2026,6,regular,2026-10-10T22:00:00.000Z,false,false,2127,Charleston Southern,,2569,South Carolina State,
+401867988,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,257,Richmond,35,2083,Bucknell,14
+401867989,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2083,Bucknell,16,222,Villanova,17
+401867990,2026,2,regular,2026-09-12T17:30:00.000Z,false,true,2678,VMI,3,2083,Bucknell,14
+401867991,2026,3,regular,2026-09-19T19:00:00.000Z,false,true,2083,Bucknell,7,219,Pennsylvania,20
+401867992,2026,6,regular,2026-10-10T16:30:00.000Z,false,false,46,Georgetown,,2083,Bucknell,
+401867993,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2083,Bucknell,,322,Lafayette,
+401867994,2026,8,regular,2026-10-24T17:00:00.000Z,false,false,107,Holy Cross,,2083,Bucknell,
+401867995,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,2329,Lehigh,,2083,Bucknell,
+401867996,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2083,Bucknell,,2230,Fordham,
+401867997,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,2729,William & Mary,,2083,Bucknell,
+401867998,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2083,Bucknell,,2142,Colgate,
+401868000,2026,1,regular,2026-09-05T17:00:00.000Z,false,true,2142,Colgate,35,107,Holy Cross,10
+401868001,2026,4,regular,2026-09-26T18:30:00.000Z,false,true,222,Villanova,21,2142,Colgate,28
+401868002,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,2142,Colgate,,46,Georgetown,
+401868003,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,257,Richmond,,2142,Colgate,
+401868004,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,2142,Colgate,,2729,William & Mary,
+401868005,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2329,Lehigh,,2142,Colgate,
+401868006,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,2142,Colgate,,322,Lafayette,
+401868007,2026,1,regular,2026-08-28T22:00:00.000Z,false,true,2230,Fordham,14,2142,Colgate,24
+401868008,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,324,Coastal Carolina,45,2230,Fordham,7
+401868009,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2729,William & Mary,27,2230,Fordham,52
+401868010,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,2329,Lehigh,,2230,Fordham,
+401868011,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2230,Fordham,,257,Richmond,
+401868012,2026,7,regular,2026-10-17T19:30:00.000Z,false,false,2230,Fordham,,222,Villanova,
+401868013,2026,8,regular,2026-10-24T17:00:00.000Z,false,false,2230,Fordham,,322,Lafayette,
+401868014,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2230,Fordham,,46,Georgetown,
+401868015,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,107,Holy Cross,,2230,Fordham,
+401868017,2026,1,regular,2026-09-05T16:30:00.000Z,false,true,46,Georgetown,14,2329,Lehigh,45
+401868018,2026,3,regular,2026-09-19T19:30:00.000Z,false,true,257,Richmond,24,46,Georgetown,21
+401868019,2026,8,regular,2026-10-24T19:30:00.000Z,false,false,2729,William & Mary,,46,Georgetown,
+401868020,2026,10,regular,2026-11-07T17:30:00.000Z,false,false,46,Georgetown,,107,Holy Cross,
+401868021,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,222,Villanova,,46,Georgetown,
+401868022,2026,1,regular,2026-08-29T19:30:00.000Z,false,true,107,Holy Cross,10,2329,Lehigh,35
+401868023,2026,3,regular,2026-09-19T18:00:00.000Z,false,true,107,Holy Cross,28,43,Yale,38
+401868024,2026,4,regular,2026-09-26T16:30:00.000Z,false,true,322,Lafayette,30,107,Holy Cross,38
+401868025,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2729,William & Mary,,107,Holy Cross,
+401868026,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,107,Holy Cross,,257,Richmond,
+401868027,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,107,Holy Cross,,222,Villanova,
+401868028,2026,2,regular,2026-09-12T16:30:00.000Z,false,true,322,Lafayette,13,2368,Marist,9
+401868029,2026,5,regular,2026-10-03T16:30:00.000Z,false,false,322,Lafayette,,257,Richmond,
+401868030,2026,9,regular,2026-10-31T16:30:00.000Z,false,false,322,Lafayette,,222,Villanova,
+401868031,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2729,William & Mary,,322,Lafayette,
+401868032,2026,12,regular,2026-11-21T17:30:00.000Z,false,false,322,Lafayette,,2329,Lehigh,
+401868033,2026,2,regular,2026-09-12T18:00:00.000Z,false,true,2329,Lehigh,44,2729,William & Mary,20
+401868034,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,219,Pennsylvania,7,2329,Lehigh,20
+401868035,2026,8,regular,2026-10-24T19:30:00.000Z,false,false,222,Villanova,,2329,Lehigh,
+401868036,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,257,Richmond,,2329,Lehigh,
+401868037,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,257,Richmond,13,231,Furman,9
+401868038,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,222,Villanova,,257,Richmond,
+401868039,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,257,Richmond,,2729,William & Mary,
+401868040,2026,1,regular,2026-08-28T22:00:00.000Z,false,true,222,Villanova,32,2729,William & Mary,35
+401868049,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2320,Lamar,21,2000,Abilene Christian,14
+401868050,2026,2,regular,2026-09-13T00:00:00.000Z,false,true,2000,Abilene Christian,7,2617,Stephen F. Austin,26
+401868051,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,70,Idaho,39,2000,Abilene Christian,41
+401868052,2026,4,regular,2026-09-27T00:00:00.000Z,false,true,2000,Abilene Christian,17,2382,Mercer,34
+401868053,2026,5,regular,2026-10-04T00:00:00.000Z,false,false,2000,Abilene Christian,,110242,West Florida,
+401868054,2026,6,regular,2026-10-11T00:00:00.000Z,false,false,2000,Abilene Christian,,2110,Central Arkansas,
+401868055,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2453,North Alabama,,2000,Abilene Christian,
+401868056,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,2000,Abilene Christian,,2698,West Georgia,
+401868057,2026,10,regular,2026-11-08T00:00:00.000Z,false,false,2627,Tarleton State,,2000,Abilene Christian,
+401868058,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2046,Austin Peay,,2000,Abilene Christian,
+401868059,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2000,Abilene Christian,,2198,Eastern Kentucky,
+401868060,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2046,Austin Peay,35,2241,Gardner-Webb,17
+401868061,2026,2,regular,2026-09-12T21:00:00.000Z,false,true,2046,Austin Peay,63,2413,Morehead State,7
+401868062,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,110242,West Florida,16,2046,Austin Peay,38
+401868063,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2046,Austin Peay,35,2630,UT Martin,12
+401868064,2026,5,regular,2026-10-03T21:00:00.000Z,false,false,2046,Austin Peay,,2441,New Haven,
+401868065,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,2046,Austin Peay,,2627,Tarleton State,
+401868066,2026,7,regular,2026-10-17T18:00:00.000Z,false,false,2698,West Georgia,,2046,Austin Peay,
+401868067,2026,8,regular,2026-10-24T23:00:00.000Z,false,false,2453,North Alabama,,2046,Austin Peay,
+401868068,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,2046,Austin Peay,,2198,Eastern Kentucky,
+401868069,2026,12,regular,2026-11-21T22:00:00.000Z,false,false,2110,Central Arkansas,,2046,Austin Peay,
+401868070,2026,1,regular,2026-08-27T23:30:00.000Z,false,true,2630,UT Martin,24,2110,Central Arkansas,36
+401868071,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2110,Central Arkansas,14,110242,West Florida,42
+401868072,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2110,Central Arkansas,59,2122,Central Oklahoma,20
+401868073,2026,1,regular,2026-08-29T02:00:00.000Z,false,true,13,Cal Poly,38,70,Idaho,34
+401868074,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,13,Cal Poly,24,2120,Central Washington,17
+401868075,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,13,Cal Poly,35,301,San Diego,38
+401868076,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,331,Eastern Washington,27,13,Cal Poly,31
+401868077,2026,5,regular,2026-10-04T00:00:00.000Z,false,false,13,Cal Poly,,2692,Weber State,
+401868078,2026,6,regular,2026-10-10T22:00:00.000Z,false,false,304,Idaho State,,13,Cal Poly,
+401868079,2026,7,regular,2026-10-18T00:00:00.000Z,false,false,2458,Northern Colorado,,13,Cal Poly,
+401868080,2026,8,regular,2026-10-24T21:00:00.000Z,false,false,13,Cal Poly,,3101,Utah Tech,
+401868081,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,147,Montana State,,13,Cal Poly,
+401868082,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,13,Cal Poly,,2464,Northern Arizona,
+401868083,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,302,UC Davis,,13,Cal Poly,
+401868084,2026,1,regular,2026-08-29T21:00:00.000Z,false,true,2464,Northern Arizona,34,331,Eastern Washington,27
+401868085,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,331,Eastern Washington,34,2460,Northern Iowa,24
+401868086,2026,5,regular,2026-10-04T02:30:00.000Z,false,false,302,UC Davis,,331,Eastern Washington,
+401868087,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,331,Eastern Washington,,2458,Northern Colorado,
+401868088,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,331,Eastern Washington,,147,Montana State,
+401868089,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,331,Eastern Washington,,149,Montana,
+401868090,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,70,Idaho,,331,Eastern Washington,
+401868091,2026,11,regular,2026-11-14T21:00:00.000Z,false,false,3101,Utah Tech,,331,Eastern Washington,
+401868092,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,331,Eastern Washington,,2502,Portland State,
+401868093,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,70,Idaho,17,2320,Lamar,23
+401868094,2026,5,regular,2026-10-03T02:30:00.000Z,false,false,70,Idaho,,147,Montana State,
+401868095,2026,6,regular,2026-10-10T19:00:00.000Z,false,false,2692,Weber State,,70,Idaho,
+401868096,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,149,Montana,,70,Idaho,
+401868097,2026,8,regular,2026-10-24T21:00:00.000Z,false,false,70,Idaho,,253,Southern Utah,
+401868098,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,2502,Portland State,,70,Idaho,
+401868099,2026,11,regular,2026-11-14T21:00:00.000Z,false,false,70,Idaho,,302,UC Davis,
+401868100,2026,12,regular,2026-11-21T23:00:00.000Z,false,false,304,Idaho State,,70,Idaho,
+401868101,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,304,Idaho State,38,2678,VMI,10
+401868102,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,304,Idaho State,59,301,San Diego,17
+401868103,2026,4,regular,2026-09-27T00:00:00.000Z,false,true,253,Southern Utah,24,304,Idaho State,28
+401868104,2026,5,regular,2026-10-04T00:00:00.000Z,false,false,304,Idaho State,,2464,Northern Arizona,
+401868105,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2692,Weber State,,304,Idaho State,
+401868106,2026,8,regular,2026-10-24T22:00:00.000Z,false,false,304,Idaho State,,2502,Portland State,
+401868107,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,3101,Utah Tech,,304,Idaho State,
+401868108,2026,10,regular,2026-11-07T23:00:00.000Z,false,false,304,Idaho State,,147,Montana State,
+401868109,2026,11,regular,2026-11-15T03:30:00.000Z,false,false,149,Montana,,304,Idaho State,
+401868110,2026,1,regular,2026-08-30T01:00:00.000Z,false,true,149,Montana,28,253,Southern Utah,21
+401868111,2026,1,regular,2026-09-05T19:00:00.000Z,false,true,149,Montana,45,2181,Drake,10
+401868112,2026,2,regular,2026-09-12T19:00:00.000Z,false,true,149,Montana,35,3101,Utah Tech,14
+401868113,2026,4,regular,2026-09-27T02:00:00.000Z,false,true,302,UC Davis,22,149,Montana,62
+401868114,2026,5,regular,2026-10-03T20:00:00.000Z,false,false,149,Montana,,2458,Northern Colorado,
+401868115,2026,6,regular,2026-10-10T21:00:00.000Z,false,false,2464,Northern Arizona,,149,Montana,
+401868116,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,149,Montana,,2502,Portland State,
+401868117,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,147,Montana State,,149,Montana,
+401868118,2026,1,regular,2026-08-30T02:00:00.000Z,false,true,3101,Utah Tech,0,147,Montana State,54
+401868119,2026,1,regular,2026-09-06T00:30:00.000Z,false,true,147,Montana State,51,2086,Butler,24
+401868120,2026,4,regular,2026-09-27T02:30:00.000Z,false,true,147,Montana State,28,2464,Northern Arizona,14
+401868121,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,147,Montana State,,2692,Weber State,
+401868122,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2458,Northern Colorado,,147,Montana State,
+401868123,2026,2,regular,2026-09-12T21:00:00.000Z,false,true,2464,Northern Arizona,38,2916,Incarnate Word,28
+401868124,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,3101,Utah Tech,23,2464,Northern Arizona,35
+401868125,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2464,Northern Arizona,,2502,Portland State,
+401868126,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,253,Southern Utah,,2464,Northern Arizona,
+401868127,2026,11,regular,2026-11-14T21:00:00.000Z,false,false,2464,Northern Arizona,,2692,Weber State,
+401868128,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,2464,Northern Arizona,,2458,Northern Colorado,
+401868129,2026,1,regular,2026-08-29T01:00:00.000Z,false,true,2458,Northern Colorado,29,2692,Weber State,30
+401868130,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,2458,Northern Colorado,23,196,Northeastern State,17
+401868131,2026,4,regular,2026-09-27T00:00:00.000Z,false,true,2458,Northern Colorado,37,3101,Utah Tech,13
+401868132,2026,8,regular,2026-10-24T23:00:00.000Z,false,false,302,UC Davis,,2458,Northern Colorado,
+401868133,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2546,Southeast Missouri State,27,2110,Central Arkansas,9
+401868134,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2627,Tarleton State,,2110,Central Arkansas,
+401868135,2026,8,regular,2026-10-24T21:00:00.000Z,false,false,2110,Central Arkansas,,292,UT Rio Grande Valley,
+401868136,2026,9,regular,2026-10-31T21:00:00.000Z,false,false,2110,Central Arkansas,,2453,North Alabama,
+401868137,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,2110,Central Arkansas,,2698,West Georgia,
+401868138,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2198,Eastern Kentucky,,2110,Central Arkansas,
+401868139,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2717,Western Carolina,45,2198,Eastern Kentucky,21
+401868140,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,55,Jacksonville State,49,2198,Eastern Kentucky,7
+401868141,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2198,Eastern Kentucky,22,236,Chattanooga,17
+401868142,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2198,Eastern Kentucky,14,2168,Dayton,17
+401868143,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2198,Eastern Kentucky,,2453,North Alabama,
+401868144,2026,6,regular,2026-10-10T22:00:00.000Z,false,false,2198,Eastern Kentucky,,2698,West Georgia,
+401868145,2026,7,regular,2026-10-17T18:30:00.000Z,false,false,2635,Tennessee Tech,,2198,Eastern Kentucky,
+401868146,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2198,Eastern Kentucky,,110242,West Florida,
+401868147,2026,9,regular,2026-10-31T23:00:00.000Z,false,false,2627,Tarleton State,,2198,Eastern Kentucky,
+401868149,2026,1,regular,2026-08-29T23:00:00.000Z,true,true,2453,North Alabama,22,2535,Samford,10
+401868150,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2545,SE Louisiana,30,2453,North Alabama,25
+401868151,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2453,North Alabama,38,2016,Alcorn State,20
+401868152,2026,10,regular,2026-11-08T00:00:00.000Z,false,false,2453,North Alabama,,110242,West Florida,
+401868153,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,253,Southern Utah,,2458,Northern Colorado,
+401868154,2026,1,regular,2026-08-29T19:00:00.000Z,false,true,2502,Portland State,24,302,UC Davis,31
+401868155,2026,4,regular,2026-09-27T00:00:00.000Z,false,true,2692,Weber State,41,2502,Portland State,44
+401868156,2026,6,regular,2026-10-10T20:00:00.000Z,false,false,2502,Portland State,,3101,Utah Tech,
+401868157,2026,11,regular,2026-11-14T03:00:00.000Z,false,false,2502,Portland State,,253,Southern Utah,
+401868158,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,253,Southern Utah,47,2692,Weber State,42
+401868159,2026,3,regular,2026-09-19T18:00:00.000Z,false,true,2900,St. Thomas (MN),28,253,Southern Utah,26
+401868160,2026,5,regular,2026-10-04T00:00:00.000Z,false,false,3101,Utah Tech,,253,Southern Utah,
+401868161,2026,7,regular,2026-10-18T00:00:00.000Z,false,false,253,Southern Utah,,302,UC Davis,
+401868163,2026,1,regular,2026-09-06T02:00:00.000Z,false,true,301,San Diego,17,302,UC Davis,49
+401868164,2026,3,regular,2026-09-20T02:00:00.000Z,false,true,302,UC Davis,45,56,Stetson,7
+401868165,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2692,Weber State,,302,UC Davis,
+401868166,2026,10,regular,2026-11-08T00:00:00.000Z,false,false,302,UC Davis,,3101,Utah Tech,
+401868167,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2692,Weber State,,3101,Utah Tech,
+401868168,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,2692,Weber State,49,2466,Northwestern State,20
+401868169,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2815,Lindenwood,20,2127,Charleston Southern,17
+401868170,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,290,Georgia Southern,31,2127,Charleston Southern,0
+401868171,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2643,The Citadel,20,2127,Charleston Southern,26
+401868172,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2127,Charleston Southern,65,3179,Point University,0
+401868173,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2127,Charleston Southern,,2241,Gardner-Webb,
+401868174,2026,8,regular,2026-10-24T19:30:00.000Z,false,false,2634,Tennessee State,,2127,Charleston Southern,
+401868175,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2127,Charleston Southern,,2710,Western Illinois,
+401868176,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,2127,Charleston Southern,,2630,UT Martin,
+401868177,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2127,Charleston Southern,,2546,Southeast Missouri State,
+401868178,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2197,Eastern Illinois,,2127,Charleston Southern,
+401868179,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2571,South Dakota State,42,2197,Eastern Illinois,7
+401868180,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2241,Gardner-Webb,,2197,Eastern Illinois,
+401868181,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2197,Eastern Illinois,,2815,Lindenwood,
+401868182,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2197,Eastern Illinois,,2546,Southeast Missouri State,
+401868183,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2630,UT Martin,,2197,Eastern Illinois,
+401868184,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2197,Eastern Illinois,,2710,Western Illinois,
+401868185,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,2634,Tennessee State,,2197,Eastern Illinois,
+401868186,2026,1,regular,2026-09-05T17:30:00.000Z,false,true,2747,Wofford,17,2241,Gardner-Webb,13
+401868187,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2335,Liberty,24,2241,Gardner-Webb,23
+401868188,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,276,Marshall,36,2241,Gardner-Webb,35
+401868189,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2630,UT Martin,,2241,Gardner-Webb,
+401868190,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2546,Southeast Missouri State,,2241,Gardner-Webb,
+401868191,2026,10,regular,2026-11-07T18:30:00.000Z,false,false,2241,Gardner-Webb,,2815,Lindenwood,
+401868192,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2710,Western Illinois,,2241,Gardner-Webb,
+401868193,2026,12,regular,2026-11-21T18:30:00.000Z,false,false,2241,Gardner-Webb,,2634,Tennessee State,
+401868194,2026,1,regular,2026-08-30T00:30:00.000Z,false,true,2634,Tennessee State,24,2296,Jackson State,26
+401868195,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2010,Alabama A&M,30,2634,Tennessee State,3
+401868196,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,50,Florida A&M,26,2634,Tennessee State,29
+401868197,2026,5,regular,2026-10-03T20:00:00.000Z,false,false,2710,Western Illinois,,2634,Tennessee State,
+401868198,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2634,Tennessee State,,2630,UT Martin,
+401868199,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2815,Lindenwood,,2634,Tennessee State,
+401868200,2026,10,regular,2026-11-07T20:30:00.000Z,false,false,2634,Tennessee State,,2546,Southeast Missouri State,
+401868201,2026,8,regular,2026-10-24T20:00:00.000Z,false,false,2710,Western Illinois,,2630,UT Martin,
+401868202,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2630,UT Martin,,2815,Lindenwood,
+401868203,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2546,Southeast Missouri State,,2630,UT Martin,
+401868204,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2710,Western Illinois,65,2471,Northwestern (IA),14
+401868205,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2710,Western Illinois,59,2413,Morehead State,2
+401868206,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,2453,North Alabama,23,2710,Western Illinois,20
+401868207,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2546,Southeast Missouri State,,2710,Western Illinois,
+401868208,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2815,Lindenwood,,2710,Western Illinois,
+401868209,2026,1,regular,2026-08-29T17:00:00.000Z,false,true,2086,Butler,27,2245,Georgetown College Kentucky,23
+401868210,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2086,Butler,52,2233,Franklin,0
+401868211,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2674,Valparaiso,28,2086,Butler,33
+401868212,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,2086,Butler,,301,San Diego,
+401868213,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,2086,Butler,,2168,Dayton,
+401868214,2026,8,regular,2026-10-24T17:00:00.000Z,false,false,2181,Drake,,2086,Butler,
+401868215,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,2506,Presbyterian,,2086,Butler,
+401868216,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2086,Butler,,2900,St. Thomas (MN),
+401868217,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2368,Marist,,2086,Butler,
+401868218,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2086,Butler,,2413,Morehead State,
+401868219,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,2166,Davidson,32,2181,Drake,51
+401868220,2026,5,regular,2026-10-03T20:00:00.000Z,false,false,301,San Diego,,2166,Davidson,
+401868221,2026,6,regular,2026-10-10T21:30:00.000Z,false,false,2506,Presbyterian,,2166,Davidson,
+401868222,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,2166,Davidson,,2413,Morehead State,
+401868223,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2900,St. Thomas (MN),,2166,Davidson,
+401868224,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2166,Davidson,,56,Stetson,
+401868225,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2168,Dayton,,2166,Davidson,
+401868226,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2166,Davidson,,2368,Marist,
+401868227,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2168,Dayton,30,2646,Thomas More,7
+401868228,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,2181,Drake,,2168,Dayton,
+401868229,2026,6,regular,2026-10-10T16:00:00.000Z,false,false,2168,Dayton,,2413,Morehead State,
+401868230,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2168,Dayton,,301,San Diego,
+401868231,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,56,Stetson,,2168,Dayton,
+401868232,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2168,Dayton,,2674,Valparaiso,
+401868233,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2698,West Georgia,,2453,North Alabama,
+401868234,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,2453,North Alabama,,2627,Tarleton State,
+401868235,2026,1,regular,2026-08-30T01:00:00.000Z,false,true,2627,Tarleton State,49,2504,Prairie View A&M,30
+401868236,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2377,McNeese,24,2627,Tarleton State,27
+401868237,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2627,Tarleton State,45,2771,Merrimack,20
+401868238,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,2698,West Georgia,,2627,Tarleton State,
+401868239,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,110242,West Florida,,2627,Tarleton State,
+401868240,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2698,West Georgia,10,236,Chattanooga,24
+401868241,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2032,Arkansas State,52,2698,West Georgia,7
+401868242,2026,3,regular,2026-09-19T16:00:00.000Z,false,true,2193,East Tennessee State,35,2698,West Georgia,27
+401868243,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2698,West Georgia,49,2232,Fort Valley State,7
+401868244,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2698,West Georgia,,110242,West Florida,
+401868245,2026,1,regular,2026-08-30T00:00:00.000Z,false,true,292,UT Rio Grande Valley,44,110243,UT Permian Basin,0
+401868246,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2447,Nicholls,31,292,UT Rio Grande Valley,28
+401868247,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,292,UT Rio Grande Valley,27,2377,McNeese,10
+401868248,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2837,East Texas A&M,,292,UT Rio Grande Valley,
+401868249,2026,6,regular,2026-10-11T00:00:00.000Z,false,false,292,UT Rio Grande Valley,,2545,SE Louisiana,
+401868250,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2916,Incarnate Word,,292,UT Rio Grande Valley,
+401868251,2026,9,regular,2026-11-01T00:00:00.000Z,false,false,292,UT Rio Grande Valley,,2320,Lamar,
+401868252,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,2466,Northwestern State,,292,UT Rio Grande Valley,
+401868253,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2506,Presbyterian,,2168,Dayton,
+401868254,2026,1,regular,2026-08-27T23:30:00.000Z,false,true,2181,Drake,35,613,South Dakota Mines,38
+401868255,2026,2,regular,2026-09-12T18:00:00.000Z,false,true,2460,Northern Iowa,56,2181,Drake,14
+401868256,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,2674,Valparaiso,,2181,Drake,
+401868257,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,2181,Drake,,2368,Marist,
+401868258,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,2413,Morehead State,,2181,Drake,
+401868259,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2181,Drake,,301,San Diego,
+401868260,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2900,St. Thomas (MN),,2181,Drake,
+401868261,2026,1,regular,2026-08-28T22:00:00.000Z,false,true,2441,New Haven,22,2368,Marist,21
+401868262,2026,1,regular,2026-09-04T23:00:00.000Z,false,true,2368,Marist,27,112334,Franklin Pierce,18
+401868263,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2368,Marist,42,2506,Presbyterian,7
+401868264,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,56,Stetson,,2368,Marist,
+401868265,2026,6,regular,2026-10-09T23:00:00.000Z,false,false,2368,Marist,,171,Columbia,
+401868266,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2368,Marist,,2900,St. Thomas (MN),
+401868267,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,301,San Diego,,2368,Marist,
+401868268,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2368,Marist,,2413,Morehead State,
+401868269,2026,1,regular,2026-09-03T22:00:00.000Z,false,true,2413,Morehead State,75,3077,Kentucky Christian,24
+401868270,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,2413,Morehead State,,2674,Valparaiso,
+401868271,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,2413,Morehead State,,56,Stetson,
+401868272,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2413,Morehead State,,2506,Presbyterian,
+401868273,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2506,Presbyterian,47,2842,UVA Wise,37
+401868274,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2382,Mercer,62,2506,Presbyterian,3
+401868275,2026,3,regular,2026-09-19T18:30:00.000Z,false,true,2717,Western Carolina,58,2506,Presbyterian,14
+401868276,2026,5,regular,2026-10-03T17:00:00.000Z,false,false,2506,Presbyterian,,2900,St. Thomas (MN),
+401868277,2026,7,regular,2026-10-17T18:00:00.000Z,false,false,56,Stetson,,2506,Presbyterian,
+401868278,2026,8,regular,2026-10-24T17:00:00.000Z,false,false,2674,Valparaiso,,2506,Presbyterian,
+401868279,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2900,St. Thomas (MN),15,2851,Winona State,9
+401868280,2026,2,regular,2026-09-12T18:00:00.000Z,false,true,2900,St. Thomas (MN),56,128,Northern Michigan,14
+401868281,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2900,St. Thomas (MN),50,301,San Diego,17
+401868282,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,2900,St. Thomas (MN),,56,Stetson,
+401868283,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2674,Valparaiso,,2900,St. Thomas (MN),
+401868284,2026,1,regular,2026-09-05T15:00:00.000Z,false,true,56,Stetson,45,2691,Webber International,10
+401868285,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,2065,Bethune-Cookman,43,56,Stetson,18
+401868286,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,56,Stetson,,2674,Valparaiso,
+401868287,2026,12,regular,2026-11-22T01:00:00.000Z,false,false,301,San Diego,,56,Stetson,
+401868288,2026,1,regular,2026-08-29T18:00:00.000Z,false,true,2674,Valparaiso,59,102071,Lawrence Tech,13
+401868289,2026,7,regular,2026-10-17T20:00:00.000Z,false,false,301,San Diego,,2674,Valparaiso,
+401868293,2026,11,regular,2026-11-14T23:00:00.000Z,false,false,292,UT Rio Grande Valley,,2617,Stephen F. Austin,
+401868294,2026,12,regular,2026-11-21T22:00:00.000Z,false,false,2277,Houston Christian,,292,UT Rio Grande Valley,
+401868295,2026,5,regular,2026-10-03T21:00:00.000Z,true,false,2296,Jackson State,,2010,Alabama A&M,
+401868296,2026,9,regular,2026-10-31T19:30:00.000Z,true,false,2010,Alabama A&M,,2011,Alabama State,
+401868297,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2010,Alabama A&M,38,2396,Miles,23
+401868298,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2010,Alabama A&M,45,2075,Bowie State,3
+401868299,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,50,Florida A&M,21,2010,Alabama A&M,40
+401868300,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,2010,Alabama A&M,,2065,Bethune-Cookman,
+401868301,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2010,Alabama A&M,,2755,Grambling,
+401868302,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2504,Prairie View A&M,,2010,Alabama A&M,
+401868303,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2010,Alabama A&M,,2640,Texas Southern,
+401868304,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2400,Mississippi Valley State,,2010,Alabama A&M,
+401868305,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2377,McNeese,27,2617,Stephen F. Austin,38
+401868306,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,2617,Stephen F. Austin,44,2837,East Texas A&M,7
+401868307,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,2504,Prairie View A&M,10,2617,Stephen F. Austin,31
+401868308,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2617,Stephen F. Austin,63,196,Northeastern State,14
+401868309,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2617,Stephen F. Austin,,2916,Incarnate Word,
+401868310,2026,7,regular,2026-10-17T20:00:00.000Z,false,false,2447,Nicholls,,2617,Stephen F. Austin,
+401868311,2026,8,regular,2026-10-24T22:00:00.000Z,false,false,2617,Stephen F. Austin,,2545,SE Louisiana,
+401868312,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2617,Stephen F. Austin,,2277,Houston Christian,
+401868313,2026,10,regular,2026-11-07T21:00:00.000Z,false,false,2320,Lamar,,2617,Stephen F. Austin,
+401868314,2026,12,regular,2026-11-20T00:00:00.000Z,false,false,2617,Stephen F. Austin,,2466,Northwestern State,
+401868315,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2545,SE Louisiana,28,2277,Houston Christian,34
+401868316,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,6,South Alabama,39,2545,SE Louisiana,14
+401868317,2026,3,regular,2026-09-19T20:30:00.000Z,false,true,2433,UL Monroe,35,2545,SE Louisiana,38
+401868318,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2466,Northwestern State,21,2545,SE Louisiana,52
+401868319,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2545,SE Louisiana,,2320,Lamar,
+401868320,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,2837,East Texas A&M,,2545,SE Louisiana,
+401868321,2026,10,regular,2026-11-08T00:00:00.000Z,false,false,2545,SE Louisiana,,2916,Incarnate Word,
+401868322,2026,11,regular,2026-11-15T00:00:00.000Z,false,false,2545,SE Louisiana,,2377,McNeese,
+401868323,2026,12,regular,2026-11-20T00:00:00.000Z,false,false,2447,Nicholls,,2545,SE Louisiana,
+401868324,2026,1,regular,2026-08-29T19:00:00.000Z,true,true,2011,Alabama State,30,2582,Southern,17
+401868325,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2011,Alabama State,34,2323,Lane College,0
+401868326,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,2653,Troy,34,2011,Alabama State,17
+401868327,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2011,Alabama State,41,2400,Mississippi Valley State,15
+401868328,2026,5,regular,2026-10-03T20:00:00.000Z,false,false,2065,Bethune-Cookman,,2011,Alabama State,
+401868329,2026,6,regular,2026-10-10T20:00:00.000Z,false,false,2011,Alabama State,,50,Florida A&M,
+401868330,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2029,Arkansas-Pine Bluff,,2011,Alabama State,
+401868331,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2640,Texas Southern,,2011,Alabama State,
+401868332,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2011,Alabama State,,2296,Jackson State,
+401868336,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,236,Chattanooga,9,2635,Tennessee Tech,24
+401868337,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,236,Chattanooga,41,2747,Wofford,7
+401868338,2026,4,regular,2026-09-26T18:00:00.000Z,false,true,2643,The Citadel,8,236,Chattanooga,27
+401868339,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2193,East Tennessee State,,236,Chattanooga,
+401868340,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,236,Chattanooga,,2535,Samford,
+401868341,2026,8,regular,2026-10-24T18:30:00.000Z,false,false,2717,Western Carolina,,236,Chattanooga,
+401868342,2026,9,regular,2026-10-31T17:00:00.000Z,false,false,236,Chattanooga,,2678,VMI,
+401868343,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,236,Chattanooga,,2382,Mercer,
+401868344,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,231,Furman,,236,Chattanooga,
+401868345,2026,1,regular,2026-09-05T21:30:00.000Z,false,true,2193,East Tennessee State,48,2839,Tusculum,14
+401868346,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,2193,East Tennessee State,58,2717,Western Carolina,31
+401868347,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,2643,The Citadel,,2193,East Tennessee State,
+401868348,2026,8,regular,2026-10-24T17:30:00.000Z,false,false,2678,VMI,,2193,East Tennessee State,
+401868349,2026,9,regular,2026-10-31T19:30:00.000Z,false,false,2193,East Tennessee State,,2635,Tennessee Tech,
+401868350,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2193,East Tennessee State,,2535,Samford,
+401868351,2026,11,regular,2026-11-14T18:30:00.000Z,false,false,2747,Wofford,,2193,East Tennessee State,
+401868352,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2382,Mercer,,2193,East Tennessee State,
+401868353,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2011,Alabama State,,2504,Prairie View A&M,
+401868354,2026,13,regular,2026-11-26T20:00:00.000Z,false,false,2011,Alabama State,,2657,Tuskegee,
+401868355,2026,2,regular,2026-09-12T23:00:00.000Z,true,true,2016,Alcorn State,53,2029,Arkansas-Pine Bluff,51
+401868356,2026,1,regular,2026-09-05T21:00:00.000Z,false,true,2572,Southern Miss,49,2016,Alcorn State,3
+401868358,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,2016,Alcorn State,43,2640,Texas Southern,40
+401868359,2026,5,regular,2026-10-03T19:00:00.000Z,false,false,2755,Grambling,,2016,Alcorn State,
+401868360,2026,6,regular,2026-10-10T19:00:00.000Z,false,false,2016,Alcorn State,,124386,Arkansas Baptist,
+401868361,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2504,Prairie View A&M,,2016,Alcorn State,
+401868362,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2400,Mississippi Valley State,,2016,Alcorn State,
+401868363,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2016,Alcorn State,,50,Florida A&M,
+401868364,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2582,Southern,,2016,Alcorn State,
+401868365,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2016,Alcorn State,,2296,Jackson State,
+401868373,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,231,Furman,20,129469,Anderson (SC),3
+401868374,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2382,Mercer,13,231,Furman,20
+401868375,2026,5,regular,2026-10-03T18:00:00.000Z,false,false,231,Furman,,2747,Wofford,
+401868376,2026,6,regular,2026-10-10T19:30:00.000Z,false,false,2635,Tennessee Tech,,231,Furman,
+401868377,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,231,Furman,,2535,Samford,
+401868378,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,231,Furman,,2717,Western Carolina,
+401868379,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,2643,The Citadel,,231,Furman,
+401868380,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2678,VMI,,231,Furman,
+401868381,2026,5,regular,2026-10-03T17:30:00.000Z,false,false,2678,VMI,,2382,Mercer,
+401868382,2026,6,regular,2026-10-10T19:00:00.000Z,false,false,2382,Mercer,,2717,Western Carolina,
+401868383,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2535,Samford,,2382,Mercer,
+401868384,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2382,Mercer,,2643,The Citadel,
+401868385,2026,11,regular,2026-11-14T19:30:00.000Z,false,false,2635,Tennessee Tech,,2382,Mercer,
+401868386,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2635,Tennessee Tech,45,2535,Samford,19
+401868387,2026,4,regular,2026-09-26T19:30:00.000Z,false,true,2535,Samford,45,2678,VMI,7
+401868388,2026,9,regular,2026-10-31T23:00:00.000Z,false,false,2535,Samford,,2747,Wofford,
+401868389,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,2535,Samford,,2717,Western Carolina,
+401868390,2026,4,regular,2026-09-26T17:30:00.000Z,false,true,2747,Wofford,38,2635,Tennessee Tech,42
+401868391,2026,5,regular,2026-10-03T22:00:00.000Z,false,false,2717,Western Carolina,,2635,Tennessee Tech,
+401868392,2026,8,regular,2026-10-24T18:00:00.000Z,false,false,2643,The Citadel,,2635,Tennessee Tech,
+401868393,2026,10,regular,2026-11-07T19:30:00.000Z,false,false,2635,Tennessee Tech,,2678,VMI,
+401868394,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,2747,Wofford,42,2643,The Citadel,14
+401868395,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2678,VMI,,2643,The Citadel,
+401868396,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2717,Western Carolina,,2643,The Citadel,
+401868397,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2166,Davidson,27,2678,VMI,24
+401868398,2026,7,regular,2026-10-17T17:30:00.000Z,false,false,2747,Wofford,,2678,VMI,
+401868399,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2717,Western Carolina,,2747,Wofford,
+401868792,2026,1,regular,2026-08-29T16:00:00.000Z,false,true,2168,Dayton,43,2986,Fairmont State,20
+401868934,2026,1,regular,2026-08-29T23:00:00.000Z,true,true,2029,Arkansas-Pine Bluff,35,60,Morehouse,15
+401868935,2026,3,regular,2026-09-19T22:00:00.000Z,false,true,2029,Arkansas-Pine Bluff,41,2119,Central State,35
+401868936,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2582,Southern,,2029,Arkansas-Pine Bluff,
+401868937,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,50,Florida A&M,,2029,Arkansas-Pine Bluff,
+401868938,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2029,Arkansas-Pine Bluff,,2065,Bethune-Cookman,
+401868939,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2755,Grambling,,2029,Arkansas-Pine Bluff,
+401868940,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2029,Arkansas-Pine Bluff,,2504,Prairie View A&M,
+401868941,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,2640,Texas Southern,,2029,Arkansas-Pine Bluff,
+401868942,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,2065,Bethune-Cookman,62,2355,Virginia Lynchburg,3
+401868943,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2400,Mississippi Valley State,,2065,Bethune-Cookman,
+401868944,2026,8,regular,2026-10-24T17:00:00.000Z,false,false,2065,Bethune-Cookman,,2296,Jackson State,
+401868945,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2582,Southern,,2065,Bethune-Cookman,
+401868946,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,2065,Bethune-Cookman,,2755,Grambling,
+401868947,2026,12,regular,2026-11-21T20:30:00.000Z,true,false,2065,Bethune-Cookman,,50,Florida A&M,
+401868948,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,50,Florida A&M,20,2013,Albany State,7
+401868949,2026,7,regular,2026-10-17T19:00:00.000Z,false,false,2296,Jackson State,,50,Florida A&M,
+401868950,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,50,Florida A&M,,2582,Southern,
+401868951,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,50,Florida A&M,,2400,Mississippi Valley State,
+401868952,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2755,Grambling,49,2805,Clark Atlanta,7
+401868953,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2755,Grambling,48,2119,Central State,26
+401868954,2026,4,regular,2026-09-26T23:00:00.000Z,true,true,2755,Grambling,14,2504,Prairie View A&M,21
+401868955,2026,6,regular,2026-10-10T21:00:00.000Z,false,false,2755,Grambling,,2296,Jackson State,
+401868956,2026,9,regular,2026-11-01T00:30:00.000Z,false,false,2640,Texas Southern,,2755,Grambling,
+401868957,2026,13,regular,2026-11-28T19:00:00.000Z,true,false,2582,Southern,,2755,Grambling,
+401868958,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2296,Jackson State,66,2206,Edward Waters,14
+401868959,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2296,Jackson State,41,2657,Tuskegee,7
+401868960,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2296,Jackson State,35,2582,Southern,17
+401868961,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2296,Jackson State,,2400,Mississippi Valley State,
+401868962,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2447,Nicholls,44,2400,Mississippi Valley State,10
+401868963,2026,2,regular,2026-09-12T20:00:00.000Z,true,true,2400,Mississippi Valley State,31,2339,Lincoln (PA),20
+401868964,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2400,Mississippi Valley State,6,2170,Delta State,21
+401868965,2026,5,regular,2026-10-03T19:00:00.000Z,false,false,2400,Mississippi Valley State,,2504,Prairie View A&M,
+401868966,2026,6,regular,2026-10-10T19:00:00.000Z,false,false,2640,Texas Southern,,2400,Mississippi Valley State,
+401868967,2026,1,regular,2026-09-06T16:00:00.000Z,false,true,2504,Prairie View A&M,52,2640,Texas Southern,14
+401868968,2026,6,regular,2026-10-10T19:00:00.000Z,false,false,2504,Prairie View A&M,,2582,Southern,
+401868969,2026,8,regular,2026-10-24T23:00:00.000Z,false,false,2837,East Texas A&M,,2504,Prairie View A&M,
+401868970,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2582,Southern,34,2310,Kentucky State,15
+401868971,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2582,Southern,50,2347,Louisiana Christian,31
+401868972,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2640,Texas Southern,,2582,Southern,
+401869127,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,47,Howard,21,257,Richmond,28
+401869128,2026,1,regular,2026-08-28T00:00:00.000Z,false,true,2466,Northwestern State,37,2347,Louisiana Christian,42
+401869129,2026,1,regular,2026-09-05T23:30:00.000Z,false,true,2348,Louisiana Tech,80,2466,Northwestern State,6
+401869130,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2837,East Texas A&M,38,2466,Northwestern State,14
+401869131,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2320,Lamar,,2466,Northwestern State,
+401869132,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,2466,Northwestern State,,2377,McNeese,
+401869133,2026,8,regular,2026-10-24T19:00:00.000Z,false,false,2466,Northwestern State,,2447,Nicholls,
+401869134,2026,9,regular,2026-10-31T21:00:00.000Z,false,false,2916,Incarnate Word,,2466,Northwestern State,
+401869135,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2466,Northwestern State,,2277,Houston Christian,
+401869136,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2377,McNeese,52,102626,Texas Wesleyan,0
+401869137,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2377,McNeese,27,2837,East Texas A&M,24
+401869138,2026,8,regular,2026-10-24T21:00:00.000Z,false,false,2916,Incarnate Word,,2377,McNeese,
+401869139,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2377,McNeese,,2447,Nicholls,
+401869140,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,2277,Houston Christian,,2377,McNeese,
+401869141,2026,12,regular,2026-11-22T00:00:00.000Z,false,false,2377,McNeese,,2320,Lamar,
+401869142,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,309,Louisiana,38,2320,Lamar,7
+401869143,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,2447,Nicholls,18,2320,Lamar,49
+401869144,2026,6,regular,2026-10-10T20:00:00.000Z,false,false,2320,Lamar,,2916,Incarnate Word,
+401869145,2026,8,regular,2026-10-24T20:00:00.000Z,false,false,2320,Lamar,,2277,Houston Christian,
+401869146,2026,11,regular,2026-11-14T21:00:00.000Z,false,false,2320,Lamar,,2837,East Texas A&M,
+401869147,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2916,Incarnate Word,30,2277,Houston Christian,23
+401869148,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2916,Incarnate Word,,2447,Nicholls,
+401869149,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,2837,East Texas A&M,,2916,Incarnate Word,
+401869150,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2277,Houston Christian,88,124386,Arkansas Baptist,0
+401869151,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,2277,Houston Christian,,2447,Nicholls,
+401869152,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2277,Houston Christian,,2837,East Texas A&M,
+401869153,2026,10,regular,2026-11-07T21:00:00.000Z,false,false,2447,Nicholls,,2837,East Texas A&M,
+401869154,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,2441,New Haven,,2184,Duquesne,
+401869155,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2184,Duquesne,,2385,Mercyhurst,
+401869156,2026,1,regular,2026-08-29T17:00:00.000Z,false,true,2130,Chicago State,28,127991,Roosevelt,44
+401869842,2026,5,regular,2026-10-03T23:30:00.000Z,false,false,2348,Louisiana Tech,,349,Army,
+401869843,2026,6,regular,2026-10-10T17:00:00.000Z,false,false,2026,App State,,295,Old Dominion,
+401869844,2026,7,regular,2026-10-17T00:00:00.000Z,false,false,324,Coastal Carolina,,2026,App State,
+401869845,2026,8,regular,2026-10-22T23:00:00.000Z,false,false,2026,App State,,256,James Madison,
+401869846,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,290,Georgia Southern,,2026,App State,
+401869927,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2026,App State,,2247,Georgia State,
+401869928,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,276,Marshall,,2026,App State,
+401869929,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2026,App State,,2433,UL Monroe,
+401869930,2026,13,regular,2026-11-27T20:00:00.000Z,false,false,6,South Alabama,,2026,App State,
+401869931,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2032,Arkansas State,17,338,Kennesaw State,14
+401869932,2026,5,regular,2026-10-04T00:00:00.000Z,false,false,309,Louisiana,,2032,Arkansas State,
+401869933,2026,6,regular,2026-10-08T23:30:00.000Z,false,false,2032,Arkansas State,,6,South Alabama,
+401869934,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2572,Southern Miss,,2032,Arkansas State,
+401869935,2026,8,regular,2026-10-24T23:00:00.000Z,false,false,2032,Arkansas State,,2247,Georgia State,
+401869936,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,2032,Arkansas State,,2433,UL Monroe,
+401869937,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,324,Coastal Carolina,,2032,Arkansas State,
+401869938,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2348,Louisiana Tech,,2032,Arkansas State,
+401869939,2026,13,regular,2026-11-28T20:00:00.000Z,false,false,2032,Arkansas State,,2653,Troy,
+401869940,2026,3,regular,2026-09-19T15:30:00.000Z,false,true,48,Delaware,22,324,Coastal Carolina,14
+401869941,2026,4,regular,2026-09-24T23:30:00.000Z,false,true,324,Coastal Carolina,17,2335,Liberty,34
+401869942,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,324,Coastal Carolina,,290,Georgia Southern,
+401869943,2026,6,regular,2026-10-10T23:00:00.000Z,false,false,276,Marshall,,324,Coastal Carolina,
+401869944,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2247,Georgia State,,324,Coastal Carolina,
+401869945,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,324,Coastal Carolina,,295,Old Dominion,
+401869946,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,309,Louisiana,,324,Coastal Carolina,
+401869947,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,256,James Madison,,324,Coastal Carolina,
+401869948,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,55,Jacksonville State,31,290,Georgia Southern,27
+401869949,2026,6,regular,2026-10-10T04:00:00.000Z,false,false,290,Georgia Southern,,256,James Madison,
+401869950,2026,7,regular,2026-10-15T23:30:00.000Z,false,false,295,Old Dominion,,290,Georgia Southern,
+401869951,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,290,Georgia Southern,,276,Marshall,
+401869952,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2247,Georgia State,,290,Georgia Southern,
+401869953,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2653,Troy,,290,Georgia Southern,
+401869954,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,290,Georgia Southern,,2348,Louisiana Tech,
+401869955,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,338,Kennesaw State,17,2247,Georgia State,31
+401869956,2026,5,regular,2026-10-03T19:30:00.000Z,false,false,2247,Georgia State,,295,Old Dominion,
+401869957,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,256,James Madison,,2247,Georgia State,
+401869958,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,276,Marshall,,2247,Georgia State,
+401869959,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2247,Georgia State,,309,Louisiana,
+401869960,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,256,James Madison,20,2335,Liberty,13
+401869961,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,295,Old Dominion,20,256,James Madison,46
+401869962,2026,5,regular,2026-10-03T19:45:00.000Z,false,false,256,James Madison,,276,Marshall,
+401869963,2026,9,regular,2026-10-29T23:30:00.000Z,false,false,256,James Madison,,2653,Troy,
+401869964,2026,10,regular,2026-11-06T01:00:00.000Z,false,false,2572,Southern Miss,,256,James Madison,
+401869965,2026,6,regular,2026-10-10T23:30:00.000Z,false,false,2348,Louisiana Tech,,309,Louisiana,
+401869966,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,309,Louisiana,,2653,Troy,
+401869967,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2572,Southern Miss,,309,Louisiana,
+401869968,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,309,Louisiana,,6,South Alabama,
+401869969,2026,11,regular,2026-11-13T02:00:00.000Z,false,false,2433,UL Monroe,,309,Louisiana,
+401870745,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,98,Western Kentucky,52,2385,Mercyhurst,7
+401870752,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,98,Western Kentucky,,55,Jacksonville State,
+401870763,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2653,Troy,24,2534,Sam Houston,21
+401870764,2026,3,regular,2026-09-19T23:00:00.000Z,false,true,2534,Sam Houston,59,2447,Nicholls,0
+401870766,2026,6,regular,2026-10-08T23:00:00.000Z,false,false,2335,Liberty,,2534,Sam Houston,
+401870769,2026,11,regular,2026-11-14T19:00:00.000Z,false,false,2534,Sam Houston,,338,Kennesaw State,
+401870790,2026,1,regular,2026-09-06T01:00:00.000Z,false,true,166,New Mexico State,51,2385,Mercyhurst,14
+401870795,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,166,New Mexico State,,2335,Liberty,
+401870796,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,2623,Missouri State,,166,New Mexico State,
+401870804,2026,13,regular,2026-11-28T18:00:00.000Z,false,false,98,Western Kentucky,,338,Kennesaw State,
+401870822,2026,2,regular,2026-09-12T16:00:00.000Z,false,true,2166,Davidson,28,2175,Dickinson,14
+401870839,2026,4,regular,2026-09-26T16:00:00.000Z,false,true,2184,Duquesne,53,131239,University of Rio Grande,0
+401870840,2026,5,regular,2026-10-03T16:00:00.000Z,false,false,43,Yale,,2771,Merrimack,
+401870841,2026,8,regular,2026-10-23T23:00:00.000Z,false,false,219,Pennsylvania,,43,Yale,
+401870842,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,43,Yale,,163,Princeton,
+401871045,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,276,Marshall,28,2393,Middle Tennessee,26
+401871046,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2623,Missouri State,48,2815,Lindenwood,14
+401871047,2026,3,regular,2026-09-19T22:30:00.000Z,false,true,2623,Missouri State,24,276,Marshall,30
+401871048,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,55,Jacksonville State,23,2393,Middle Tennessee,13
+401871049,2026,5,regular,2026-10-02T00:00:00.000Z,false,false,166,New Mexico State,,98,Western Kentucky,
+401871050,2026,5,regular,2026-10-02T23:00:00.000Z,false,false,48,Delaware,,2335,Liberty,
+401871051,2026,6,regular,2026-10-07T23:00:00.000Z,false,false,338,Kennesaw State,,55,Jacksonville State,
+401871052,2026,6,regular,2026-10-08T23:00:00.000Z,false,false,98,Western Kentucky,,2623,Missouri State,
+401871053,2026,7,regular,2026-10-14T00:00:00.000Z,false,false,55,Jacksonville State,,2229,Florida International,
+401871054,2026,7,regular,2026-10-14T23:30:00.000Z,false,false,2623,Missouri State,,338,Kennesaw State,
+401871055,2026,8,regular,2026-10-20T23:00:00.000Z,false,false,2229,Florida International,,2393,Middle Tennessee,
+401871056,2026,8,regular,2026-10-22T23:00:00.000Z,false,false,338,Kennesaw State,,2335,Liberty,
+401871057,2026,9,regular,2026-10-29T00:00:00.000Z,false,false,166,New Mexico State,,55,Jacksonville State,
+401871058,2026,9,regular,2026-10-28T23:00:00.000Z,false,false,2393,Middle Tennessee,,338,Kennesaw State,
+401871059,2026,9,regular,2026-10-31T19:30:00.000Z,false,false,2335,Liberty,,2229,Florida International,
+401871060,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,48,Delaware,,2229,Florida International,
+401871061,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,2335,Liberty,,2393,Middle Tennessee,
+401871062,2026,13,regular,2026-11-28T20:30:00.000Z,false,false,48,Delaware,,55,Jacksonville State,
+401871063,2026,13,regular,2026-11-28T19:00:00.000Z,false,false,2623,Missouri State,,2335,Liberty,
+401871066,2026,6,regular,2026-10-07T23:30:00.000Z,false,false,2229,Florida International,,166,New Mexico State,
+401871067,2026,7,regular,2026-10-13T23:00:00.000Z,false,false,2393,Middle Tennessee,,48,Delaware,
+401871068,2026,7,regular,2026-10-15T00:00:00.000Z,false,false,2534,Sam Houston,,98,Western Kentucky,
+401871069,2026,8,regular,2026-10-20T23:00:00.000Z,false,false,48,Delaware,,2623,Missouri State,
+401871070,2026,8,regular,2026-10-22T00:00:00.000Z,false,false,2534,Sam Houston,,166,New Mexico State,
+401871071,2026,9,regular,2026-10-27T23:00:00.000Z,false,false,98,Western Kentucky,,48,Delaware,
+401871072,2026,9,regular,2026-10-28T00:00:00.000Z,false,false,2623,Missouri State,,2534,Sam Houston,
+401871073,2026,10,regular,2026-11-07T20:00:00.000Z,false,false,338,Kennesaw State,,48,Delaware,
+401871074,2026,10,regular,2026-11-07T21:00:00.000Z,false,false,2229,Florida International,,2623,Missouri State,
+401871075,2026,10,regular,2026-11-08T00:00:00.000Z,false,false,55,Jacksonville State,,2534,Sam Houston,
+401871076,2026,10,regular,2026-11-07T20:30:00.000Z,false,false,2393,Middle Tennessee,,98,Western Kentucky,
+401871077,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,166,New Mexico State,,48,Delaware,
+401871078,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,338,Kennesaw State,,2229,Florida International,
+401871079,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,55,Jacksonville State,,2623,Missouri State,
+401871080,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2335,Liberty,,98,Western Kentucky,
+401871081,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2534,Sam Houston,,2393,Middle Tennessee,
+401871082,2026,13,regular,2026-11-28T19:00:00.000Z,false,false,2229,Florida International,,2534,Sam Houston,
+401871083,2026,13,regular,2026-11-28T19:00:00.000Z,false,false,2393,Middle Tennessee,,166,New Mexico State,
+401871089,2026,5,regular,2026-10-03T23:00:00.000Z,false,false,6,South Alabama,,2433,UL Monroe,
+401871090,2026,6,regular,2026-10-07T00:00:00.000Z,false,false,2653,Troy,,2572,Southern Miss,
+401871091,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2433,UL Monroe,,2348,Louisiana Tech,
+401871092,2026,8,regular,2026-10-20T23:30:00.000Z,false,false,276,Marshall,,6,South Alabama,
+401871093,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2348,Louisiana Tech,,295,Old Dominion,
+401871094,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2653,Troy,,2433,UL Monroe,
+401871095,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2433,UL Monroe,,2572,Southern Miss,
+401871096,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,295,Old Dominion,,276,Marshall,
+401871097,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,6,South Alabama,,2348,Louisiana Tech,
+401871098,2026,10,regular,2026-11-07T05:00:00.000Z,false,false,2653,Troy,,2348,Louisiana Tech,
+401871099,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2348,Louisiana Tech,,2572,Southern Miss,
+401871100,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,6,South Alabama,,2653,Troy,
+401871101,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,2572,Southern Miss,,6,South Alabama,
+401871102,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,2433,UL Monroe,,276,Marshall,
+401871103,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,295,Old Dominion,,2572,Southern Miss,
+401871472,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2546,Southeast Missouri State,17,110242,West Florida,20
+401871473,2026,6,regular,2026-10-10T18:00:00.000Z,false,false,2815,Lindenwood,,2546,Southeast Missouri State,
+401872615,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2571,South Dakota State,70,56,Stetson,7
+401872616,2026,2,regular,2026-09-12T23:00:00.000Z,false,true,2571,South Dakota State,57,2441,New Haven,14
+401872617,2026,10,regular,2026-11-07T19:00:00.000Z,false,false,2460,Northern Iowa,,2571,South Dakota State,
+401872618,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,2771,Merrimack,17,2441,New Haven,10
+401872619,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,163,Princeton,,219,Pennsylvania,
+401872643,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2385,Mercyhurst,,2441,New Haven,
+401873620,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2385,Mercyhurst,49,2249,Glenville State,20
+401874035,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,110242,West Florida,34,79,Southern Illinois,31
+401874036,2026,6,regular,2026-10-10T21:00:00.000Z,false,false,110242,West Florida,,196,Northeastern State,
+401874037,2026,7,regular,2026-10-17T21:00:00.000Z,false,false,110242,West Florida,,2695,West Alabama,
+401874042,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2382,Mercer,23,2837,East Texas A&M,15
+401891330,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,253,Southern Utah,,2130,Chicago State,
+401891332,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2287,Illinois State,76,2595,St. Francis (IL),0
+401896383,2026,1,regular,2026-08-27T22:00:00.000Z,false,true,2413,Morehead State,40,2477,Ohio Dominican,42
+401896384,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,2166,Davidson,35,2148,Concord,41
+401896385,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2016,Alcorn State,56,2396,Miles,7
+401913104,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2916,Incarnate Word,76,2824,Oklahoma Panhandle,14
+401915931,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,2130,Chicago State,,2355,Virginia Lynchburg,
+401917058,2026,1,regular,2026-09-06T15:00:00.000Z,false,true,2097,Campbell,28,2717,Western Carolina,19

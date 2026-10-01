@@ -1,0 +1,10 @@
+{
+  "label": "2026 season",
+  "demo": false,
+  "algorithmVersion": "springrank-1",
+  "alpha": 0.01,
+  "classifications": [
+    "fbs",
+    "fcs"
+  ]
+}
