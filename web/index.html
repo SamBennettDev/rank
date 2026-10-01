@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rank · College football, computed</title>
+  <meta name="description" content="Every FBS and FCS team ranked worst to best by an open, deterministic graph algorithm. No votes. No preseason bias. Verify it yourself." />
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)" />
+  <meta property="og:title" content="Rank · College football, computed" />
+  <meta property="og:description" content="Every FBS and FCS team ranked by who beat whom. Open data, open code, byte-for-byte reproducible." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0d12'/%3E%3Crect x='7' y='19' width='5' height='7' rx='1.5' fill='%23ffb020' opacity='.55'/%3E%3Crect x='13.5' y='12' width='5' height='14' rx='1.5' fill='%23ffb020' opacity='.8'/%3E%3Crect x='20' y='6' width='5' height='20' rx='1.5' fill='%23ffb020'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://a.espncdn.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-inner">
+      <a class="brand" href="#/" aria-label="Rank home">
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="17" width="7" height="12" rx="2" class="b1"/><rect x="12.5" y="10" width="7" height="19" rx="2" class="b2"/><rect x="22" y="3" width="7" height="26" rx="2" class="b3"/></svg>
+        <span>RANK</span>
+      </a>
+      <nav id="nav" aria-label="Sections"></nav>
+      <div id="picker" class="picker"></div>
+    </div>
+  </header>
+  <main id="app"><div class="loading"><span></span><span></span><span></span></div></main>
+  <footer class="foot">
+    <div class="foot-inner">
+      <div><b>Rank</b> is computed, not voted. Open data, open code, MIT licensed.</div>
+      <div class="foot-links">
+        <a href="https://github.com/sambennettdev/rank">GitHub</a>
+        <a href="#/about" id="foot-method">Methodology</a>
+        <span class="muted">Logos via ESPN · scores via CollegeFootballData</span>
+      </div>
+    </div>
+  </footer>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
