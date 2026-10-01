@@ -2,14 +2,14 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: each team is a node in a graph, each game is a spring between two teams, and a team's rank is its **y-coordinate** once the springs settle. The model, **Gridiron Springs**, is built for football: each spring wants the winner as many points above the loser as they won by plus a touchdown, home field is solved from the data, and blowouts stop pulling harder after three touchdowns. Ratings are in points. No preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md) behind it.
+The AP Poll is a vote. This is a calculation: each team is a node in a graph, each win is a spring that wants the winner 7 points above the loser, and a team's rank is its **y-coordinate** once the springs settle. **Only wins count**: no margins, no home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md) behind the choice.
 
 | | |
 |---|---|
 | **Deterministic** | Same data in, byte-identical rankings out. No randomness. |
 | **Auditable** | Raw data, code and output are all here. `npm run verify` and the site's *Recompute* button regenerate every ranking and compare it with what is published. |
 | **Transparent** | One short [methodology](docs/METHODOLOGY.md), one config file per season, and a page per team showing every game behind its rank. |
-| **Unbiased** | The only inputs are final scores, game sites and who played whom. |
+| **Unbiased** | The only input is who beat whom. |
 
 ## Where the data lives
 
@@ -18,7 +18,7 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    method and its constants (win bonus, blowout limit), alpha, divisions
+data/seasons/<year>/config.json    method (wins only, 7-point springs), alpha, divisions
 data/rankings/<year>/<snapshot>.json   published output (heights, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```

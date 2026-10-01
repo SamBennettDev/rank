@@ -1,5 +1,5 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, type Site, byMargin, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
+import { type Ctx, type Site, byMargin, restLabel, restLength, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
 import { logo, svgLogo, teamVars } from "../team";
@@ -50,8 +50,8 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
           h("p", { class: "hint" }, isGridiron(ctx)
             ? `Each game is a spring that wants the winner as many points above the loser as they won by, plus ${gridironParams(ctx)!.winBonus} for winning, after home field. Thinner lines are blowouts the ${gridironParams(ctx)!.blowoutLimit}-point limit stopped from pulling harder.`
             : byMargin(ctx)
-            ? "Each game is a spring pulling the winner one unit above the loser, as stiff as the point differential (thicker line = bigger margin). This team rests where its springs balance."
-            : "Each game is a spring pulling the winner one unit above the loser. This team rests where its springs balance."),
+            ? `Each game is a spring pulling the winner ${restLabel(ctx)} above the loser, as stiff as the point differential (thicker line = bigger margin). This team rests where its springs balance.`
+            : `Each win is a spring pulling the winner ${restLabel(ctx)} above the loser. The score doesn’t matter, only who won. This team rests where its springs balance.`),
           springs(ctx, teamId, games)),
         history),
       isGridiron(ctx) ? matchup(ctx, teamId) : "",
@@ -218,7 +218,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     const won = e.winner === teamId;
     const o = ctx.byId.get(won ? e.loser : e.winner)!;
     const gap = me.height! - o.height!;
-    const tension = ctx.byId.get(e.winner)!.height! - ctx.byId.get(e.loser)!.height! - 1;
+    const tension = ctx.byId.get(e.winner)!.height! - ctx.byId.get(e.loser)!.height! - restLength(ctx);
     const upset = (won && gap < 0) || (!won && gap > 0);
     return h("a", { class: "grow2", href: teamHref(ctx, o.id) },
       h("span", { class: "wk" }, e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`),
@@ -229,7 +229,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h("span", { class: `pill ${won ? "w" : "l"}` }, h("i", {}, won ? "W" : "L"), `${won ? e.winnerPoints : e.loserPoints}–${won ? e.loserPoints : e.winnerPoints}`),
       h("span", { class: "r hide-sm" }, fmtHeight(o.height)),
       h("span", { class: `r ${gap >= 0 ? "pos" : "neg"}` }, sign(gap)),
-      h("span", { class: "r hide-sm", title: "Winner height − loser height − 1. Zero means the result is exactly explained." }, sign(tension)),
+      h("span", { class: "r hide-sm", title: `Winner height − loser height − ${restLength(ctx)}. Zero means the spring is at rest; negative means it is stretched pulling the winner up.` }, sign(tension)),
     );
   });
   return h("section", { class: "ladder games" },

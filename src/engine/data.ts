@@ -65,6 +65,9 @@ export function parseConfig(json: string): SeasonConfig {
       throw new Error("config.gridiron must set winBonus, blowoutLimit, fitHomeField and maxIterations");
     }
   }
+  if (c.restLength !== undefined && !(typeof c.restLength === "number" && c.restLength > 0)) {
+    throw new Error("config.restLength must be a positive number");
+  }
   if (c.edgeWeight !== undefined && c.edgeWeight !== "win" && c.edgeWeight !== "margin") {
     throw new Error('config.edgeWeight must be "win" or "margin"');
   }
