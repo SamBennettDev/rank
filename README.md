@@ -2,14 +2,14 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: each team is a node in a graph, each game is an edge from loser to winner, and a team's rank is its **y-coordinate** in that graph ([SpringRank](https://www.science.org/doi/10.1126/sciadv.aar8260)). No preseason bias, no human opinions, no margin of victory.
+The AP Poll is a vote. This is a calculation: each team is a node in a graph, each game is an edge from loser to winner, and a team's rank is its **y-coordinate** in that graph ([SpringRank](https://www.science.org/doi/10.1126/sciadv.aar8260)). No preseason bias, no human opinions: each game is a spring whose strength is its point differential.
 
 | | |
 |---|---|
 | **Deterministic** | Same data in, byte-identical rankings out. No randomness. |
 | **Auditable** | Raw data, code and output are all here. `npm run verify` and the site's *Recompute* button regenerate every ranking and compare it with what is published. |
 | **Transparent** | One short [methodology](docs/METHODOLOGY.md), one config file per season, and a page per team showing every game behind its rank. |
-| **Unbiased** | The only input is who beat whom. |
+| **Unbiased** | The only inputs are final scores. |
 
 ## Where the data lives
 
@@ -18,7 +18,7 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    algorithm version, alpha, divisions
+data/seasons/<year>/config.json    algorithm version, alpha, spring strength (edgeWeight), divisions
 data/rankings/<year>/<snapshot>.json   published output (heights, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```

@@ -1,7 +1,7 @@
 import { select } from "d3-selection";
 import { type ZoomTransform, zoom, zoomIdentity } from "d3-zoom";
 import type { Edge, RankedTeam } from "../../src/engine/types";
-import { type Ctx, fmtHeight, rankLabel, record, teamHref, upsets } from "../ctx";
+import { type Ctx, byMargin, fmtHeight, rankLabel, record, springWidth, teamHref, upsets } from "../ctx";
 import { h, svg } from "../dom";
 import { searchIcon } from "../icons";
 import { computeLayout } from "../layout";
@@ -107,7 +107,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     for (const e of adj.get(id) ?? []) {
       const won = e.winner === id;
       nodeEls.get(won ? e.loser : e.winner)?.classList.add("hi");
-      gFocus.appendChild(svg("path", { class: `e ${won ? "w" : "l"}${isUpset(e) ? " up" : ""}`, d: curve(e) }));
+      gFocus.appendChild(svg("path", { class: `e ${won ? "w" : "l"}${isUpset(e) ? " up" : ""}`, d: curve(e), style: `stroke-width:${springWidth(ctx, e)}` }));
     }
     // keep the focused node on top
     const el = nodeEls.get(id);
@@ -178,7 +178,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-        h("p", {}, "Every game is a spring pulling the winner one unit above the loser. Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+        h("p", {}, "Every game is a spring pulling the winner one unit above the loser", byMargin(ctx) ? ", as stiff as the point differential" : "", ". Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),

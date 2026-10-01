@@ -2,12 +2,17 @@ import { parseConfig, parseGames, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
 import { springRank } from "./springrank";
-import type { Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
+import type { Edge, EdgeWeight, Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-2";
+export const ENGINE_VERSION = "rank-engine-3";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
+
+/** Spring stiffness of one game under the season's weighting. */
+export function edgeWeight(e: Pick<Edge, "winnerPoints" | "loserPoints">, weighting: EdgeWeight): number {
+  return weighting === "margin" ? e.winnerPoints - e.loserPoints : 1;
+}
 
 export interface SeasonInput {
   season: string;
@@ -33,6 +38,7 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
   const teamsSha256 = await sha256Hex(input.teamsCsv);
   const gamesSha256 = await sha256Hex(input.gamesCsv);
 
+  const weighting = config.edgeWeight ?? "win";
   const index = new Map(teams.map((t, i) => [t.id, i]));
   const files: SeasonOutput["files"] = [];
   const snapshots = listSnapshots(games);
@@ -50,7 +56,7 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
 
     const s = springRank(
       teams.length,
-      edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)! })),
+      edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting) })),
       config.alpha,
     );
     const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
@@ -81,6 +87,7 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       engine: ENGINE_VERSION,
       algorithmVersion: config.algorithmVersion,
       alpha: config.alpha,
+      edgeWeight: weighting,
       classifications: config.classifications,
       teamsSha256,
       gamesSha256,

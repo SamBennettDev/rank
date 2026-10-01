@@ -23,6 +23,8 @@ export interface Game {
   awayPoints: number | null;
 }
 
+export type EdgeWeight = "win" | "margin";
+
 export interface SeasonConfig {
   /** Display name, e.g. "2026 season". */
   label: string;
@@ -32,6 +34,12 @@ export interface SeasonConfig {
   algorithmVersion: string;
   /** Weak shrinkage toward zero applied equally to every team (SpringRank alpha). */
   alpha: number;
+  /**
+   * Spring stiffness per game. "win": every game weighs 1. "margin": a game weighs
+   * its point differential, so a 30-point win pulls 30x harder than a 1-point win.
+   * Defaults to "win" when absent.
+   */
+  edgeWeight?: EdgeWeight;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
 }
@@ -93,6 +101,7 @@ export interface Manifest {
   engine: string;
   algorithmVersion: string;
   alpha: number;
+  edgeWeight: EdgeWeight;
   classifications: string[];
   teamsSha256: string;
   gamesSha256: string;

@@ -1,5 +1,5 @@
 import { computeSeason } from "../../src/engine/season";
-import { type Ctx } from "../ctx";
+import { type Ctx, byMargin } from "../ctx";
 import { h, svg } from "../dom";
 import { pillarIcons } from "../icons";
 import { fetchText, seasonFiles } from "../store";
@@ -8,6 +8,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const m = ctx.ranking.manifest;
   const season = ctx.entry.season;
   const files = seasonFiles(season);
+  const margin = byMargin(ctx);
 
   const result = h("div");
   const button = h("button", { class: "btn primary", onclick: async () => {
@@ -51,19 +52,23 @@ export function aboutView(ctx: Ctx): HTMLElement {
       pillar(pillarIcons.deterministic(), "Deterministic", "Same games in, identical bytes out. No randomness, no tuning, no judgement calls."),
       pillar(pillarIcons.auditable(), "Auditable", "Every input, line of code and published result is public. Check any week yourself below."),
       pillar(pillarIcons.transparent(), "Transparent", "One short formula and one config file. Every team page shows the exact games behind its rank."),
-      pillar(pillarIcons.unbiased(), "Unbiased", "No preseason poll, brand, conference or margin of victory. Only who beat whom.")),
+      pillar(pillarIcons.unbiased(), "Unbiased", margin
+        ? "No preseason poll, brand, conference or home field. Only who won and by how much."
+        : "No preseason poll, brand, conference or margin of victory. Only who beat whom.")),
 
     h("h2", {}, "The idea: springs"),
     h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Imagine every game as a spring that wants the ", h("b", {}, "winner exactly one step above the loser"), ". Beat a team that’s high up and you get pulled higher. Lose to a team that’s low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
+      h("p", {}, "Imagine every game as a spring that wants the ", h("b", {}, "winner exactly one step above the loser"), ".", margin ? h("span", {}, " The spring is as ", h("b", {}, "stiff as the point differential"), ": a 35-point win pulls 35 times harder than a 1-point win.") : "", " Beat a team that’s high up and you get pulled higher. Lose to a team that’s low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
     h("p", {}, "This is ", h("b", {}, "SpringRank"), " (De Bacco, Larremore & Moore, ", h("i", {}, "Science Advances"), ", 2018). The resting heights are the ones that put the least total strain on all the springs:"),
-    h("pre", { class: "formula" }, "H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − 1)²  +  ½ · α · Σ s[i]²\n\n", h("span", { class: "c" }, "A[i][j]  times team i beat team j\ns[i]     height of team i  (the y-axis of the graph)\nα        tiny equal pull toward 0, so there is always one exact answer")),
+    h("pre", { class: "formula" }, "H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − 1)²  +  ½ · α · Σ s[i]²\n\n", h("span", { class: "c" }, margin ? "A[i][j]  total point differential of team i’s wins over team j\n" : "A[i][j]  times team i beat team j\ns[i]     height of team i  (the y-axis of the graph)\nα        tiny equal pull toward 0, so there is always one exact answer")),
     h("p", {}, "Minimising that gives a single system of linear equations, solved exactly with a Cholesky decomposition. No iterations to converge, no random starts. Same input, same answer, on any computer."),
 
     h("h2", {}, "What counts"),
     h("ul", {},
       h("li", {}, h("b", {}, "Final scores of completed games"), " between two FBS or FCS teams. Regular season and postseason."),
-      h("li", {}, h("b", {}, "A win is a win."), " Margin, home field, brand, conference, preseason polls and opinions are all ignored."),
+      margin
+        ? h("li", {}, h("b", {}, "Margin matters."), " Each game counts with a weight equal to its point differential. Home field, brand, conference, preseason polls and opinions are all ignored.")
+        : h("li", {}, h("b", {}, "A win is a win."), " Margin, home field, brand, conference, preseason polls and opinions are all ignored."),
       h("li", {}, "Games against teams outside FBS/FCS are left out, and the count is published below."),
       h("li", {}, "A team with no counted games is ", h("b", {}, "unranked"), " rather than guessed."),
       h("li", {}, "Equal heights share a rank (shown T-n). Ties are never broken by name or reputation."),
@@ -85,7 +90,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}, ${season}`),
     h("table", { class: "mf" }, h("tbody", {},
       ...([
-        ["Engine", m.engine], ["Algorithm", m.algorithmVersion], ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
+        ["Engine", m.engine], ["Algorithm", m.algorithmVersion], ["Spring strength", margin ? "Point differential" : "1 per game"], ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
         ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
       ] as const).map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
       h("tr", {}, h("th", {}, "teams.csv SHA-256"), h("td", {}, h("code", {}, m.teamsSha256))),

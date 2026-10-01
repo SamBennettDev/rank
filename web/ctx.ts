@@ -36,6 +36,13 @@ export const rankLabel = (rank: number | null, tied: boolean) => (rank === null 
 export const fmtHeight = (v: number | null) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(3));
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 
+/** True when springs are weighted by point differential (older files lack the field: win/loss). */
+export const byMargin = (ctx: Ctx) => ctx.ranking.manifest.edgeWeight === "margin";
+
+/** Spring stroke width for a game: thicker for bigger margins when weighting by margin. */
+export const springWidth = (ctx: Ctx, e: Edge, base = 2) =>
+  byMargin(ctx) ? Math.min(base + 5, base * 0.6 + (e.winnerPoints - e.loserPoints) / 9) : base;
+
 /** A game is an upset when the winner finished below the loser. */
 export function upsets(ctx: Ctx): { edge: Edge; gap: number }[] {
   return ctx.edges

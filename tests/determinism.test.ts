@@ -31,6 +31,28 @@ describe("determinism", () => {
 
 });
 
+describe("margin weighting", () => {
+  const marginConfig = JSON.stringify({ ...JSON.parse(input.configJson), edgeWeight: "margin" });
+
+  it("is deterministic and recorded in the manifest", async () => {
+    const a = await computeSeason({ ...input, configJson: marginConfig });
+    const b = await computeSeason({ ...input, configJson: marginConfig });
+    expect(b).toEqual(a);
+    expect(JSON.parse(a.files.at(-1)!.json).manifest.edgeWeight).toBe("margin");
+  });
+
+  it("changes heights relative to win/loss weighting", async () => {
+    const win = JSON.parse((await computeSeason(input)).files.at(-1)!.json);
+    const margin = JSON.parse((await computeSeason({ ...input, configJson: marginConfig })).files.at(-1)!.json);
+    expect(win.manifest.edgeWeight).toBe("win");
+    expect(margin.teams.map((t: { height: number }) => t.height)).not.toEqual(win.teams.map((t: { height: number }) => t.height));
+  });
+
+  it("rejects an unknown weighting", async () => {
+    await expect(computeSeason({ ...input, configJson: JSON.stringify({ ...JSON.parse(input.configJson), edgeWeight: "points" }) })).rejects.toThrow(/edgeWeight/);
+  });
+});
+
 describe("snapshots", () => {
   const teams = parseTeams(input.teamsCsv);
   const games = parseGames(input.gamesCsv);
