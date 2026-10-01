@@ -53,6 +53,32 @@ describe("margin weighting", () => {
   });
 });
 
+describe("gridiron method", () => {
+  const gridiron = JSON.stringify({
+    ...JSON.parse(input.configJson),
+    method: "gridiron",
+    gridiron: { winBonus: 7, blowoutLimit: 21, fitHomeField: true, maxIterations: 100 },
+  });
+
+  it("is deterministic, row-order independent and records what it found", async () => {
+    const a = await computeSeason({ ...input, configJson: gridiron });
+    const b = await computeSeason({ ...input, configJson: gridiron });
+    expect(b).toEqual(a);
+    const m = JSON.parse(a.files.at(-1)!.json).manifest;
+    expect(m.method).toBe("gridiron");
+    expect(typeof m.gridiron.homeFieldPoints).toBe("number");
+    expect(m.gridiron.iterations).toBeLessThan(100);
+    const reversed = (csv: string) => { const [h, ...rows] = parseCsv(csv); return toCsv(h!, rows.reverse()); };
+    const c = await computeSeason({ ...input, configJson: gridiron, gamesCsv: reversed(input.gamesCsv) });
+    const strip = (s: string) => s.replace(/"gamesSha256": "[0-9a-f]+",?\n\s*/g, "");
+    expect(c.files.map((f) => strip(f.json))).toEqual(a.files.map((f) => strip(f.json)));
+  });
+
+  it("rejects incomplete gridiron settings", async () => {
+    await expect(computeSeason({ ...input, configJson: JSON.stringify({ ...JSON.parse(input.configJson), method: "gridiron" }) })).rejects.toThrow(/gridiron/);
+  });
+});
+
 describe("snapshots", () => {
   const teams = parseTeams(input.teamsCsv);
   const games = parseGames(input.gamesCsv);

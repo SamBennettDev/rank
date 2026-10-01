@@ -45,9 +45,10 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "springrank-margin-1",
+  algorithmVersion: "gridiron-springs-1",
+  method: "gridiron",
   alpha: 0.01,
-  edgeWeight: "margin",
+  gridiron: { winBonus: 7, blowoutLimit: 21, fitHomeField: true, maxIterations: 500 },
   classifications: ["fbs", "fcs"],
 };
 mkdirSync(dir, { recursive: true });

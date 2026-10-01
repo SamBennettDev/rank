@@ -24,6 +24,18 @@ export interface Game {
 }
 
 export type EdgeWeight = "win" | "margin";
+export type Method = "springrank" | "gridiron";
+
+export interface GridironConfig {
+  /** Points a win is worth on top of the margin (7 = a touchdown). */
+  winBonus: number;
+  /** Points beyond expectation after which a game stops pulling harder (21 = three touchdowns). */
+  blowoutLimit: number;
+  /** Solve home-field advantage from the data. */
+  fitHomeField: boolean;
+  /** Safety cap on solver rounds. */
+  maxIterations: number;
+}
 
 export interface SeasonConfig {
   /** Display name, e.g. "2026 season". */
@@ -32,12 +44,16 @@ export interface SeasonConfig {
   demo: boolean;
   /** Identifier of the ranking method. Bump it when the math changes. */
   algorithmVersion: string;
-  /** Weak shrinkage toward zero applied equally to every team (SpringRank alpha). */
+  /** Ranking model. Defaults to "springrank" when absent (seasons configured before Gridiron Springs). */
+  method?: Method;
+  /** Weak pull toward zero applied equally to every unknown; makes the answer unique. */
   alpha: number;
+  /** Parameters for method "gridiron". */
+  gridiron?: GridironConfig;
   /**
    * Spring stiffness per game. "win": every game weighs 1. "margin": a game weighs
    * its point differential, so a 30-point win pulls 30x harder than a 1-point win.
-   * Defaults to "win" when absent.
+   * Defaults to "win" when absent. Method "springrank" only.
    */
   edgeWeight?: EdgeWeight;
   /** Classifications in scope, matched against teams.csv. */
@@ -100,8 +116,12 @@ export interface RankedTeam {
 export interface Manifest {
   engine: string;
   algorithmVersion: string;
+  method: Method;
   alpha: number;
-  edgeWeight: EdgeWeight;
+  /** springrank: spring stiffness per game. */
+  edgeWeight?: EdgeWeight;
+  /** gridiron: parameters plus what the solver found. */
+  gridiron?: GridironConfig & { homeFieldPoints: number; iterations: number };
   classifications: string[];
   teamsSha256: string;
   gamesSha256: string;
