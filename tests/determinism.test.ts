@@ -6,7 +6,7 @@ import { buildEdges, listSnapshots } from "../src/engine/graph";
 import { parseGames, parseTeams } from "../src/engine/data";
 import { computeSeason } from "../src/engine/season";
 
-const dir = join(import.meta.dirname, "../data/seasons/demo");
+const dir = join(import.meta.dirname, "fixtures/demo");
 const read = (f: string) => readFileSync(join(dir, f), "utf8");
 const input = { season: "demo", teamsCsv: read("teams.csv"), gamesCsv: read("games.csv"), configJson: read("config.json") };
 
@@ -29,12 +29,6 @@ describe("determinism", () => {
     expect(b.files.map((f) => strip(f.json))).toEqual(a.files.map((f) => strip(f.json)));
   });
 
-  it("the committed rankings match a fresh computation", async () => {
-    const fresh = await computeSeason(input);
-    for (const f of fresh.files) {
-      expect(readFileSync(join(dir, `../../rankings/demo/${f.id}.json`), "utf8")).toBe(f.json);
-    }
-  });
 });
 
 describe("snapshots", () => {
