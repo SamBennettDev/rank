@@ -1,5 +1,5 @@
-import { parseGames } from "../src/engine/data";
-import type { Game, Ranking, SeasonIndexEntry } from "../src/engine/types";
+import { parseGames, parseTeams } from "../src/engine/data";
+import type { Game, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 const cache = new Map<string, Promise<string>>();
 
@@ -27,6 +27,10 @@ export async function loadRanking(season: string, snap: string): Promise<Ranking
 
 export async function loadGames(season: string): Promise<Game[]> {
   return parseGames(await fetchText(`seasons/${season}/games.csv`));
+}
+
+export async function loadTeams(season: string): Promise<Map<number, Team>> {
+  return new Map(parseTeams(await fetchText(`seasons/${season}/teams.csv`)).map((t) => [t.id, t]));
 }
 
 export const seasonFiles = (season: string) => ({
