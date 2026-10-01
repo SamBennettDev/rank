@@ -4,14 +4,14 @@ This document is the full specification of how rankings are produced. If the cod
 
 ## Goal
 
-Rank every FBS and FCS team from worst to best using only who beat whom, with a process anyone can rerun and get the identical answer.
+Rank every FBS and FCS team from worst to best using only who beat whom and by how much, with a process anyone can rerun and get the identical answer.
 
 | Requirement | How it is met |
 |---|---|
 | Deterministic | No randomness anywhere. Fixed input order, fixed arithmetic order, fixed rounding. Same data in, same bytes out. |
 | Auditable | Raw game data, code and output are all in this repository. `npm run verify` and the site's **Recompute** button regenerate every published ranking and compare byte for byte. CI runs it on every change. `npm run backtest` reproduces the evidence for the method. |
 | Transparent | One short formula, one config file per season, and a per-team page that lists every game behind a rank. Git history shows when each result arrived or was corrected. |
-| Unbiased | No preseason ranking, no human votes, no margins, no conference or brand weight, no recency weighting. Every team starts equal and only wins and losses move it. |
+| Unbiased | No preseason ranking, no human votes, no home field, no conference or brand weight, no recency weighting. Every team starts equal and only game results move it. |
 
 ## The graph
 
@@ -19,31 +19,33 @@ Rank every FBS and FCS team from worst to best using only who beat whom, with a 
 - **Edges:** each completed game between two nodes is one spring between the two teams. Rematches and postseason games add more springs.
 - Games that involve a team outside `teams.csv` (for example Division II), games that are not completed, and games with equal scores are not counted. Each snapshot's manifest records how many rows were dropped for each reason.
 
-## The ranking: Win Springs (wins only)
+## The ranking: Margin Springs
 
-Seasons whose `config.json` sets `"method": "springrank"`, `"edgeWeight": "win"` and `"restLength": 7` (2026 onward, `algorithmVersion: win-springs-1`) are ranked by **wins alone**.
+Seasons whose `config.json` sets `"method": "springrank"`, `"edgeWeight": "margin"` and `"restLength": 7` (2026 onward, `algorithmVersion: margin-springs-1`) are ranked by **wins, weighted by how much they were won by**.
 
-Every win is a spring between the two teams that wants the **winner exactly 7 points above the loser**. The score, the margin and where the game was played don't matter: a 1-point road win and a 50-point home win are the same spring. Each team's height is where all of its springs, and everyone else's, balance out:
+Every win is a spring between the two teams that wants the **winner exactly 7 points above the loser**. The spring's **stiffness is the winning margin**: a 35-point win is 35 times stiffer than a 1-point win. There is no minimum and no maximum. Where the game was played is ignored. Each team's height is where all of its springs, and everyone else's, balance out:
 
 ```
 H(s) = 1/2 * sum_ij A_ij (s_i - s_j - 7)^2  +  1/2 * alpha * sum_i s_i^2
 ```
 
-where `A_ij` is the number of times team *i* beat team *j*. Setting the gradient to zero gives one linear system
+where `A_ij` is the total winning margin of team *i*'s wins over team *j* (the summed stiffness of those springs). Setting the gradient to zero gives one linear system
 
 ```
 (D_out + D_in - (A + A^T) + alpha*I) s = 7 * (d_out - d_in)
 ```
 
-where `d_out` is each team's wins and `d_in` its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
+where `d_out` is the total margin of each team's wins and `d_in` of its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
 
-This is SpringRank (De Bacco, Larremore & Moore, *A physical model for efficient ranking in networks*, Science Advances, 2018) with a rest length of 7 instead of 1. The 7 is a display unit ("a win is worth a touchdown"): it multiplies every height by 7 and never changes the order. Heights are ranking points, not game points.
+This is SpringRank (De Bacco, Larremore & Moore, *A physical model for efficient ranking in networks*, Science Advances, 2018) with margin-weighted edges and a rest length of 7 instead of 1. The 7 is a display unit: it multiplies every height by 7 and never changes the order. Heights are ranking points, not game points.
 
-How wins-only behaves:
+How it behaves:
 
+- **Margin changes how hard a game pulls, never how far.** One game on its own always puts the winner about 7 above the loser, whatever the score. Margin matters when results disagree: stiff springs from lopsided games win the tug-of-war, close games bend easily.
+- **Lopsided losses tie teams together.** A team that loses badly is held tightly 7 below the team that beat it. Wherever its other games push it, it carries that team along, so a team can be lifted because the teams it crushed went on to do well (and the reverse).
 - **Who you beat matters.** Beating a team that sits high pulls you higher; losing to a team that sits low drags you down. Strength of schedule comes from the graph, not a separate formula.
-- **Head-to-head counts but is not absolute.** A win over a team is one spring. If both teams' other results point the other way, the springs can still settle the loser above the winner; the site marks those games as upsets.
-- **Running up the score does nothing**, and home field is ignored.
+- **Running up the score adds stiffness.** A bigger margin makes that game's spring dominate. There is no cap.
+- **Head-to-head is one spring among many.** If both teams' other results point the other way, the loser can still settle above the winner; the site marks those games as upsets.
 
 `alpha = 0.01` is a tiny equal pull toward zero. It exists so the system always has a unique solution, including early in the season when the graph is not yet connected.
 
@@ -56,14 +58,14 @@ How wins-only behaves:
 
 `week-NN` uses all regular-season games with `week <= NN`. `postseason` uses every game. A snapshot never looks at later games, and each one is recomputed from scratch from the current CSVs, so any historical ranking can be reproduced.
 
-## Why wins only (evidence)
+## How it compares (evidence)
 
-Margin-based ratings predict future games better, but a ranking meant to replace a poll is judged on whether it respects what happened. On ten past seasons the wins-only ranking agreed with the most results. Each method was run through this engine (2015–2025, 2020 skipped, 11,593 predicted games):
+Each method was run through this engine on ten past seasons (2015–2025, 2020 skipped, 11,593 predicted games):
 
 | Method | Picks next week's winner | Final ranking agrees with results |
 |---|---|---|
-| **Wins only (Win Springs, published)** | 67.6% | **83.6%** |
-| Margin as spring stiffness | 68.3% | 81.1% |
+| Wins only (rest length 7, equal stiffness) | 67.6% | 83.6% |
+| **Margin as spring stiffness (Margin Springs, published)** | 68.3% | 81.1% |
 | Least squares on margin + home (Massey) | 71.6% | 80.2% |
 | Sports-Reference SRS (margin clamped 7–24) | 70.2% | 81.7% |
 | Gridiron Springs (margin + 7, home field, blowout limit) | 71.2% | 81.9% |
@@ -115,9 +117,9 @@ The Huber energy is convex, so it has exactly one minimum. It is found by iterat
 - **Predicted margin** between two teams = rating gap (plus `h` for the home team) **minus the win bonus**, because each spring also credits the winner 7 points. A gap under 7 points is close to a coin flip; the site shows it as a "lean".
 - On a team page, each game shows the **expected** margin from the final ratings, the result **versus expected**, and the spring's **pull** (below 100% means the blowout limit applied). All of these are recomputed in the browser from the published ratings.
 
-## SpringRank with rest length 1 or margin stiffness
+## Other SpringRank configurations
 
-Older configs (`algorithmVersion: springrank-1`, `springrank-margin-1`) use the same SpringRank solver with `restLength` 1 and `edgeWeight` `"win"` or `"margin"` (stiffness = point differential). The engine keeps them so those configs reproduce exactly.
+The same solver also runs wins only (`edgeWeight: "win"`, `algorithmVersion: win-springs-1`) and the paper's original rest length of 1 (`springrank-1`, `springrank-margin-1`). The engine keeps them so those configs reproduce exactly.
 
 
 ## Determinism rules
@@ -148,7 +150,8 @@ The API is only a source of raw scores and team ids. `npm run fetch` normalises 
 
 ## Known limitations (stated openly)
 
-- **Margins are ignored on purpose.** A 1-point win and a 50-point win count the same. That makes the ranking impossible to game by running up the score, but it predicts future games less well than margin-based ratings (see the table above).
+- **Uncapped margins.** A blowout's spring is far stiffer than a close game's, so lopsided wins, often over much weaker opponents, carry a lot of weight, and running up the score has an effect. Garbage-time points count like any others.
+- **Beating a much weaker team can lower you.** A win wants the winner 7 above the loser; if the winner already sits far higher, that spring pulls it down, harder the bigger the margin. Every averaging rating (Colley, Massey, SRS) has a version of this. A bye adds no spring, so it is neutral, but a team can still move during a bye as its past opponents' results change.
 - **Early season.** With one or two games per team, many teams are tied or nearly tied, and undefeated teams with weak schedules can sit low until they play someone. Groups of teams not yet linked by a chain of games are not comparable.
 - **Cycles.** When A beat B, B beat C and C beat A, no order can respect every result; the springs find the order that strains them least.
 - **Schedule size.** With about 12 games per team, many teams are close together and ranks a few places apart are not meaningfully different. The height column shows how close they are.
