@@ -59,7 +59,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         ? "No preseason poll, brand, conference or home field. Only who won and by how much."
         : "No preseason poll, brand, conference or margin of victory. Only who beat whom.")),
 
-    ...(g ? gridironSections(ctx) : springRankSections(margin, restLength(ctx))),
+    ...(g ? gridironSections(ctx) : springRankSections(margin, restLength(ctx), m.minMargin, m.maxMargin)),
 
     h("h2", {}, "How data flows"),
     h("div", { class: "pipeline" },
@@ -80,7 +80,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
         ...((g
           ? [["Win bonus", `${g.winBonus} points`], ["Blowout limit", `${g.blowoutLimit} points`], ["Home field (fitted)", `${g.homeFieldPoints.toFixed(3)} points`], ["Solver rounds", String(g.iterations)]]
-          : [["Each win wants the winner", `${m.restLength ?? 1} ${(m.restLength ?? 1) === 1 ? "unit" : "points"} above the loser`], ["Spring strength", margin ? "Point differential" : "Equal for every game"]]) as [string, string][]),
+          : [["Each win wants the winner", `${m.restLength ?? 1} ${(m.restLength ?? 1) === 1 ? "unit" : "points"} above the loser`], ["Spring strength", margin ? `Winning margin${m.minMargin !== undefined || m.maxMargin !== undefined ? `, clamped ${m.minMargin ?? 0}–${m.maxMargin ?? "∞"}` : ""}` : "Equal for every game"]]) as [string, string][]),
         ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
         ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
       ] as const).map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
@@ -91,24 +91,29 @@ export function aboutView(ctx: Ctx): HTMLElement {
   );
 }
 
-function springRankSections(margin: boolean, r: number): Child[] {
+function springRankSections(margin: boolean, r: number, lo?: number, hi?: number): Child[] {
   const step = r === 1 ? "one step" : `${r} points`;
+  const clamp = lo !== undefined && hi !== undefined ? ` (counted between ${lo} and ${hi})` : "";
   return [
     h("h2", {}, "The idea: springs"),
     h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Imagine every win as a spring that wants the ", h("b", {}, `winner exactly ${step} above the loser`), ".", margin ? h("span", {}, " The spring is as ", h("b", {}, "stiff as the point differential"), ": a 35-point win pulls 35 times harder than a 1-point win.") : "", " Beat a team that’s high up and you get pulled higher. Lose to a team that’s low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
+      h("p", {}, "Imagine every win as a spring that wants the ", h("b", {}, `winner exactly ${step} above the loser`), ".", margin ? h("span", {}, " The spring is as ", h("b", {}, `stiff as the winning margin${clamp}`), clamp ? `: a 3-point win holds like a ${lo ?? 3}-point win, a 56-point win like a ${hi ?? 56}-point win.` : ": a 35-point win pulls 35 times harder than a 1-point win.") : "", " Beat a team that’s high up and you get pulled higher. Lose to a team that’s low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
     h("p", {}, "This is ", h("b", {}, "SpringRank"), " (De Bacco, Larremore & Moore, ", h("i", {}, "Science Advances"), ", 2018). The resting heights are the ones that put the least total strain on all the springs:"),
-    h("pre", { class: "formula" }, `H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − ${r})²  +  ½ · α · Σ s[i]²\n\n`, h("span", { class: "c" }, `${margin ? "A[i][j]  total winning margin of team i’s wins over team j (spring stiffness)" : "A[i][j]  times team i beat team j"}\ns[i]     height of team i  (the y-axis of the graph)\n${r}${" ".repeat(Math.max(1, 9 - String(r).length))}how far above the loser each win wants the winner${r === 1 ? "" : " (ranking points, not game points)"}\nα        tiny equal pull toward 0, so there is always one exact answer`)),
+    h("pre", { class: "formula" }, `H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − ${r})²  +  ½ · α · Σ s[i]²\n\n`, h("span", { class: "c" }, `${margin ? `A[i][j]  total winning margin of team i’s wins over team j${clamp} (spring stiffness)` : "A[i][j]  times team i beat team j"}\ns[i]     height of team i  (the y-axis of the graph)\n${r}${" ".repeat(Math.max(1, 9 - String(r).length))}how far above the loser each win wants the winner${r === 1 ? "" : " (ranking points, not game points)"}\nα        tiny equal pull toward 0, so there is always one exact answer`)),
     h("p", {}, "Minimising that gives a single system of linear equations, solved exactly with a Cholesky decomposition. No iterations to converge, no random starts. Same input, same answer, on any computer."),
     margin ? h("h2", {}, "Why margin sets the stiffness") : h("h2", {}, "Why wins only"),
-    margin ? h("p", {}, "A win always wants the winner the same 7 points above the loser; the margin decides how hard that spring holds. A 35-point win is 35 times stiffer than a 1-point win, so lopsided results dominate the tug-of-war when results disagree, and close games bend easily. There is no minimum and no maximum. A team that loses badly is tied tightly to the teams that beat it: wherever its other games push it, it carries them along. ", h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/BACKTEST.md", target: "_blank", rel: "noopener" }, "How this compares in the backtest ↗")) : "",
+    margin ? h("p", {}, "A win always wants the winner the same 7 points above the loser; the margin decides how hard that spring holds. ",
+      clamp
+        ? `Each margin counts between ${lo} and ${hi} points: every win holds at least as firmly as a ${lo}-point win, so close wins still count, and nothing counts for more than ${hi}, so running up the score past that adds nothing. Within that range, bigger margins hold harder and win the tug-of-war when results disagree. `
+        : "A 35-point win is 35 times stiffer than a 1-point win, so lopsided results dominate the tug-of-war when results disagree, and close games bend easily. There is no minimum and no maximum. ",
+      "A team that loses badly is tied tightly to the teams that beat it: wherever its other games push it, it carries them along. ", h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/BACKTEST.md", target: "_blank", rel: "noopener" }, "How this compares in the backtest ↗")) : "",
     margin ? "" : h("p", {}, "Score margins can be run up, home field has to be estimated, and both invite arguments about what a game “really” showed. Wins don’t. The trade-off is measurable: on ten past seasons (2015–2025), a wins-only ranking agreed with the most results (83.6% of games have the winner ranked above the loser) but picked next week’s winners less often (67.6%) than margin-based ratings (about 71%). We chose the ranking that best respects what happened on the field. ", h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/BACKTEST.md", target: "_blank", rel: "noopener" }, "See the backtest ↗")),
 
     h("h2", {}, "What counts"),
     h("ul", {},
       h("li", {}, h("b", {}, "Final scores of completed games"), " between two FBS or FCS teams. Regular season and postseason."),
       margin
-        ? h("li", {}, h("b", {}, "Margin matters."), " Each game counts with a weight equal to its point differential. Home field, brand, conference, preseason polls and opinions are all ignored.")
+        ? h("li", {}, h("b", {}, "Margin matters."), ` Each game counts with a weight equal to its winning margin${clamp}. Home field, brand, conference, preseason polls and opinions are all ignored.`)
         : h("li", {}, h("b", {}, "A win is a win."), " Margin, home field, brand, conference, preseason polls and opinions are all ignored."),
       h("li", {}, "Games against teams outside FBS/FCS are left out, and the count is published below."),
       h("li", {}, "A team with no counted games is ", h("b", {}, "unranked"), " rather than guessed."),

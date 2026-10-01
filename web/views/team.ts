@@ -1,5 +1,5 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, type Site, byMargin, restLabel, restLength, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
+import { type Ctx, type Site, byMargin, clampNote, restLabel, restLength, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
 import { logo, svgLogo, teamVars } from "../team";
@@ -50,7 +50,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
           h("p", { class: "hint" }, isGridiron(ctx)
             ? `Each game is a spring that wants the winner as many points above the loser as they won by, plus ${gridironParams(ctx)!.winBonus} for winning, after home field. Thinner lines are blowouts the ${gridironParams(ctx)!.blowoutLimit}-point limit stopped from pulling harder.`
             : byMargin(ctx)
-            ? `Each game is a spring pulling the winner ${restLabel(ctx)} above the loser, as stiff as the point differential (thicker line = bigger margin). This team rests where its springs balance.`
+            ? `Each game is a spring pulling the winner ${restLabel(ctx)} above the loser, as stiff as the winning margin${clampNote(ctx)} (thicker line = stiffer spring). This team rests where its springs balance.`
             : `Each win is a spring pulling the winner ${restLabel(ctx)} above the loser. The score doesn’t matter, only who won. This team rests where its springs balance.`),
           springs(ctx, teamId, games)),
         history),

@@ -6,13 +6,19 @@ import { springRank } from "./springrank";
 import type { Edge, EdgeWeight, GridironConfig, Manifest, RankedTeam, Ranking, SeasonConfig, SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-5";
+export const ENGINE_VERSION = "rank-engine-6";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
 /** Spring stiffness of one game under the season's weighting. */
-export function edgeWeight(e: Pick<Edge, "winnerPoints" | "loserPoints">, weighting: EdgeWeight): number {
-  return weighting === "margin" ? e.winnerPoints - e.loserPoints : 1;
+export function edgeWeight(
+  e: Pick<Edge, "winnerPoints" | "loserPoints">,
+  weighting: EdgeWeight,
+  bounds: { minMargin?: number; maxMargin?: number } = {},
+): number {
+  if (weighting !== "margin") return 1;
+  const m = e.winnerPoints - e.loserPoints;
+  return Math.min(bounds.maxMargin ?? Infinity, Math.max(bounds.minMargin ?? 0, m));
 }
 
 export interface Solved {
@@ -30,7 +36,7 @@ export function solve(n: number, edges: readonly Edge[], index: ReadonlyMap<numb
   }
   const weighting = config.edgeWeight ?? "win";
   return {
-    heights: springRank(n, edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting) })), config.alpha, config.restLength ?? 1),
+    heights: springRank(n, edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting, config) })), config.alpha, config.restLength ?? 1),
   };
 }
 
@@ -120,7 +126,12 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       alpha: config.alpha,
       ...(method === "gridiron"
         ? { gridiron: { ...pickGridiron(config.gridiron!), homeFieldPoints: round6(solved.homeField!), iterations: solved.iterations! } }
-        : { edgeWeight: config.edgeWeight ?? "win", restLength: config.restLength ?? 1 }),
+        : {
+            edgeWeight: config.edgeWeight ?? "win",
+            ...(config.minMargin !== undefined ? { minMargin: config.minMargin } : {}),
+            ...(config.maxMargin !== undefined ? { maxMargin: config.maxMargin } : {}),
+            restLength: config.restLength ?? 1,
+          }),
       classifications: config.classifications,
       teamsSha256,
       gamesSha256,

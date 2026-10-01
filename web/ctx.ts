@@ -1,4 +1,5 @@
 import { buildEdges, listSnapshots } from "../src/engine/graph";
+import { edgeWeight } from "../src/engine/season";
 import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 export type View = "list" | "graph" | "team" | "about";
@@ -50,9 +51,24 @@ export const restLabel = (ctx: Ctx) => (restLength(ctx) === 1 ? "one unit" : `${
 export const byMargin = (ctx: Ctx) => ctx.ranking.manifest.edgeWeight === "margin";
 
 /** Spring stroke width for a game: thicker for bigger margins when weighting by margin. */
+/** " (counted between 7 and 24 points)" when the margin is clamped, else "". */
+export function clampNote(ctx: Ctx): string {
+  const { minMargin: lo, maxMargin: hi } = ctx.ranking.manifest;
+  if (lo !== undefined && hi !== undefined) return ` (counted between ${lo} and ${hi} points)`;
+  if (lo !== undefined) return ` (at least ${lo} points)`;
+  if (hi !== undefined) return ` (at most ${hi} points)`;
+  return "";
+}
+
+/** Stiffness of a game's spring under the snapshot's SpringRank settings (margin clamped when configured). */
+export function stiffness(ctx: Ctx, e: Edge): number {
+  const m = ctx.ranking.manifest;
+  return edgeWeight(e, m.edgeWeight ?? "win", m);
+}
+
 export const springWidth = (ctx: Ctx, e: Edge, base = 2) =>
   isGridiron(ctx) ? Math.max(0.8, base * 1.25 * springPull(ctx, e))
-  : byMargin(ctx) ? Math.min(base + 5, base * 0.6 + (e.winnerPoints - e.loserPoints) / 9) : base;
+  : byMargin(ctx) ? Math.min(base + 5, base * 0.6 + stiffness(ctx, e) / 9) : base;
 
 // ---- Gridiron Springs helpers ------------------------------------------------
 

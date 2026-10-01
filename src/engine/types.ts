@@ -61,6 +61,9 @@ export interface SeasonConfig {
    * Method "springrank" only. Scales every height; never changes the order.
    */
   restLength?: number;
+  /** edgeWeight "margin" only: a win's stiffness is its margin clamped to [minMargin, maxMargin]. */
+  minMargin?: number;
+  maxMargin?: number;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
 }
@@ -125,6 +128,9 @@ export interface Manifest {
   alpha: number;
   /** springrank: spring stiffness per game. */
   edgeWeight?: EdgeWeight;
+  /** springrank: margin clamp for edgeWeight "margin". */
+  minMargin?: number;
+  maxMargin?: number;
   /** springrank: how far above the loser each win wants the winner. */
   restLength?: number;
   /** gridiron: parameters plus what the solver found. */

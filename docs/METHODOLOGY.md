@@ -21,21 +21,21 @@ Rank every FBS and FCS team from worst to best using only who beat whom and by h
 
 ## The ranking: Margin Springs
 
-Seasons whose `config.json` sets `"method": "springrank"`, `"edgeWeight": "margin"` and `"restLength": 7` (2026 onward, `algorithmVersion: margin-springs-1`) are ranked by **wins, weighted by how much they were won by**.
+Seasons whose `config.json` sets `"method": "springrank"`, `"edgeWeight": "margin"`, `"minMargin": 7`, `"maxMargin": 24` and `"restLength": 7` (2026 onward, `algorithmVersion: margin-springs-2`) are ranked by **wins, weighted by how much they were won by**.
 
-Every win is a spring between the two teams that wants the **winner exactly 7 points above the loser**. The spring's **stiffness is the winning margin**: a 35-point win is 35 times stiffer than a 1-point win. There is no minimum and no maximum. Where the game was played is ignored. Each team's height is where all of its springs, and everyone else's, balance out:
+Every win is a spring between the two teams that wants the **winner exactly 7 points above the loser**. The spring's **stiffness is the winning margin, counted between 7 and 24**: a 3-point win holds like a 7-point win, a 17-point win holds at 17, and a 56-point win holds like a 24-point win. Where the game was played is ignored. Each team's height is where all of its springs, and everyone else's, balance out:
 
 ```
 H(s) = 1/2 * sum_ij A_ij (s_i - s_j - 7)^2  +  1/2 * alpha * sum_i s_i^2
 ```
 
-where `A_ij` is the total winning margin of team *i*'s wins over team *j* (the summed stiffness of those springs). Setting the gradient to zero gives one linear system
+where `A_ij` is the summed stiffness of team *i*'s wins over team *j*, each win's stiffness being `min(24, max(7, margin))`. Setting the gradient to zero gives one linear system
 
 ```
 (D_out + D_in - (A + A^T) + alpha*I) s = 7 * (d_out - d_in)
 ```
 
-where `d_out` is the total margin of each team's wins and `d_in` of its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
+where `d_out` is the total stiffness of each team's wins and `d_in` of its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
 
 This is SpringRank (De Bacco, Larremore & Moore, *A physical model for efficient ranking in networks*, Science Advances, 2018) with margin-weighted edges and a rest length of 7 instead of 1. The 7 is a display unit: it multiplies every height by 7 and never changes the order. Heights are ranking points, not game points.
 
@@ -44,7 +44,7 @@ How it behaves:
 - **Margin changes how hard a game pulls, never how far.** One game on its own always puts the winner about 7 above the loser, whatever the score. Margin matters when results disagree: stiff springs from lopsided games win the tug-of-war, close games bend easily.
 - **Lopsided losses tie teams together.** A team that loses badly is held tightly 7 below the team that beat it. Wherever its other games push it, it carries that team along, so a team can be lifted because the teams it crushed went on to do well (and the reverse).
 - **Who you beat matters.** Beating a team that sits high pulls you higher; losing to a team that sits low drags you down. Strength of schedule comes from the graph, not a separate formula.
-- **Running up the score adds stiffness.** A bigger margin makes that game's spring dominate. There is no cap.
+- **Close wins still count, blowouts are capped.** Every win holds at least as firmly as a 7-point win (one touchdown), and nothing counts for more than 24 (the same cap Sports-Reference's college football SRS uses), so running up the score past 24 adds nothing.
 - **Head-to-head is one spring among many.** If both teams' other results point the other way, the loser can still settle above the winner; the site marks those games as upsets.
 
 `alpha = 0.01` is a tiny equal pull toward zero. It exists so the system always has a unique solution, including early in the season when the graph is not yet connected.
@@ -65,7 +65,8 @@ Each method was run through this engine on ten past seasons (2015–2025, 2020 s
 | Method | Picks next week's winner | Final ranking agrees with results |
 |---|---|---|
 | Wins only (rest length 7, equal stiffness) | 67.6% | 83.6% |
-| **Margin as spring stiffness (Margin Springs, published)** | 68.3% | 81.1% |
+| Margin as spring stiffness, uncapped | 68.3% | 81.1% |
+| **Margin Springs: stiffness = margin clamped 7–24 (published)** | **68.6%** | **82.4%** |
 | Least squares on margin + home (Massey) | 71.6% | 80.2% |
 | Sports-Reference SRS (margin clamped 7–24) | 70.2% | 81.7% |
 | Gridiron Springs (margin + 7, home field, blowout limit) | 71.2% | 81.9% |
@@ -150,8 +151,8 @@ The API is only a source of raw scores and team ids. `npm run fetch` normalises 
 
 ## Known limitations (stated openly)
 
-- **Uncapped margins.** A blowout's spring is far stiffer than a close game's, so lopsided wins, often over much weaker opponents, carry a lot of weight, and running up the score has an effect. Garbage-time points count like any others.
-- **Beating a much weaker team can lower you.** A win wants the winner 7 above the loser; if the winner already sits far higher, that spring pulls it down, harder the bigger the margin. Every averaging rating (Colley, Massey, SRS) has a version of this. A bye adds no spring, so it is neutral, but a team can still move during a bye as its past opponents' results change.
+- **Two chosen constants.** The 7-point floor and 24-point cap are choices (a touchdown; Sports-Reference's SRS cap). They are published and versioned, and the clamp beats the uncapped version on both backtest measures, but other values are defensible.
+- **Beating a much weaker team can lower you.** A win wants the winner 7 above the loser; if the winner already sits far higher, that spring pulls it down, harder the bigger the margin (up to the 24 cap). Every averaging rating (Colley, Massey, SRS) has a version of this. A bye adds no spring, so it is neutral, but a team can still move during a bye as its past opponents' results change.
 - **Early season.** With one or two games per team, many teams are tied or nearly tied, and undefeated teams with weak schedules can sit low until they play someone. Groups of teams not yet linked by a chain of games are not comparable.
 - **Cycles.** When A beat B, B beat C and C beat A, no order can respect every result; the springs find the order that strains them least.
 - **Schedule size.** With about 12 games per team, many teams are close together and ranks a few places apart are not meaningfully different. The height column shows how close they are.

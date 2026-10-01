@@ -68,6 +68,12 @@ export function parseConfig(json: string): SeasonConfig {
   if (c.restLength !== undefined && !(typeof c.restLength === "number" && c.restLength > 0)) {
     throw new Error("config.restLength must be a positive number");
   }
+  for (const k of ["minMargin", "maxMargin"] as const) {
+    if (c[k] !== undefined && !(typeof c[k] === "number" && c[k]! > 0)) throw new Error(`config.${k} must be a positive number`);
+  }
+  if (c.minMargin !== undefined && c.maxMargin !== undefined && c.minMargin > c.maxMargin) {
+    throw new Error("config.minMargin must not exceed config.maxMargin");
+  }
   if (c.edgeWeight !== undefined && c.edgeWeight !== "win" && c.edgeWeight !== "margin") {
     throw new Error('config.edgeWeight must be "win" or "margin"');
   }

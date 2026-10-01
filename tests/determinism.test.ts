@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { parseCsv, toCsv } from "../src/engine/csv";
 import { buildEdges, listSnapshots } from "../src/engine/graph";
 import { parseGames, parseTeams } from "../src/engine/data";
-import { computeSeason } from "../src/engine/season";
+import { computeSeason, edgeWeight } from "../src/engine/season";
 
 const dir = join(import.meta.dirname, "fixtures/demo");
 const read = (f: string) => readFileSync(join(dir, f), "utf8");
@@ -50,6 +50,26 @@ describe("margin weighting", () => {
 
   it("rejects an unknown weighting", async () => {
     await expect(computeSeason({ ...input, configJson: JSON.stringify({ ...JSON.parse(input.configJson), edgeWeight: "points" }) })).rejects.toThrow(/edgeWeight/);
+  });
+});
+
+describe("margin clamp", () => {
+  it("clamps each win's stiffness to [minMargin, maxMargin]", () => {
+    const g = (w: number, l: number) => ({ winnerPoints: w, loserPoints: l });
+    const bounds = { minMargin: 7, maxMargin: 24 };
+    expect(edgeWeight(g(24, 21), "margin", bounds)).toBe(7);
+    expect(edgeWeight(g(31, 14), "margin", bounds)).toBe(17);
+    expect(edgeWeight(g(59, 3), "margin", bounds)).toBe(24);
+    expect(edgeWeight(g(59, 3), "margin")).toBe(56);
+    expect(edgeWeight(g(59, 3), "win", bounds)).toBe(1);
+  });
+
+  it("records the clamp in the manifest and validates it", async () => {
+    const clamped = JSON.stringify({ ...JSON.parse(input.configJson), edgeWeight: "margin", minMargin: 7, maxMargin: 24 });
+    const m = JSON.parse((await computeSeason({ ...input, configJson: clamped })).files.at(-1)!.json).manifest;
+    expect([m.minMargin, m.maxMargin]).toEqual([7, 24]);
+    const bad = JSON.stringify({ ...JSON.parse(input.configJson), edgeWeight: "margin", minMargin: 30, maxMargin: 24 });
+    await expect(computeSeason({ ...input, configJson: bad })).rejects.toThrow(/minMargin/);
   });
 });
 

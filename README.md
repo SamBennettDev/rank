@@ -2,7 +2,7 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: each team is a node in a graph, each win is a spring that wants the winner 7 points above the loser, **as stiff as the winning margin** (no cap), and a team's rank is its **y-coordinate** once the springs settle. No home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md).
+The AP Poll is a vote. This is a calculation: each team is a node in a graph, each win is a spring that wants the winner 7 points above the loser, **as stiff as the winning margin** (counted between 7 and 24), and a team's rank is its **y-coordinate** once the springs settle. No home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md).
 
 | | |
 |---|---|
@@ -18,7 +18,7 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    method (7-point springs, stiffness = margin), alpha, divisions
+data/seasons/<year>/config.json    method (7-point springs, stiffness = margin clamped 7–24), alpha, divisions
 data/rankings/<year>/<snapshot>.json   published output (heights, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```

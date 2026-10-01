@@ -45,10 +45,12 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "margin-springs-1",
+  algorithmVersion: "margin-springs-2",
   method: "springrank",
   alpha: 0.01,
   edgeWeight: "margin",
+  minMargin: 7,
+  maxMargin: 24,
   restLength: 7,
   classifications: ["fbs", "fcs"],
 };
