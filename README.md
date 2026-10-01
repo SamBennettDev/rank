@@ -2,14 +2,14 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: each team is a node in a graph, each win is a spring that wants the winner 7 points above the loser, **as stiff as the winning margin** (counted between 7 and 24), and a team's rank is its **y-coordinate** once the springs settle. No home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md).
+The AP Poll is a vote. This is a calculation: teams that played are connected by springs, every spring pulls equally to put the winner above the loser, and a team's rank is its **y-coordinate** once the springs settle. **Only wins count**: no margins, no home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md).
 
 | | |
 |---|---|
 | **Deterministic** | Same data in, byte-identical rankings out. No randomness. |
 | **Auditable** | Raw data, code and output are all here. `npm run verify` and the site's *Recompute* button regenerate every ranking and compare it with what is published. |
 | **Transparent** | One short [methodology](docs/METHODOLOGY.md), one config file per season, and a page per team showing every game behind its rank. |
-| **Unbiased** | The only inputs are who beat whom and by how much. |
+| **Unbiased** | The only input is who beat whom. |
 
 ## Where the data lives
 
@@ -18,7 +18,7 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    method (7-point springs, stiffness = margin clamped 7–24), alpha, divisions
+data/seasons/<year>/config.json    method (equal win springs, 7 points), alpha, divisions
 data/rankings/<year>/<snapshot>.json   published output (heights, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```

@@ -1,6 +1,6 @@
 # Backtest: choosing the method
 
-How the ranking methods compare, and how to check it yourself. The published ranking (2026 onward) is **Margin Springs**: wins as 7-point springs whose stiffness is the winning margin, counted between 7 and 24. Wins only agrees with the most results; Gridiron Springs predicts best of the spring models. Both remain available in the engine.
+How the ranking methods compare, and how to check it yourself. The published ranking (2026 onward) is **Win Springs**: every game is an equal spring that wants the winner 7 points above the loser. It agrees with the most results. Margin-weighted springs and Gridiron Springs predict next week better and remain available in the engine.
 
 ## Reproduce it
 
@@ -23,9 +23,9 @@ The two measures pull in opposite directions: win/loss-only methods respect resu
 
 | Method | Picks next week's winner | Final ranking agrees with results | Home field (avg) |
 |---|---|---|---|
-| Wins only (Win Springs) | 67.6% | 83.6% | — |
+| **Wins only, equal springs (Win Springs, published)** | 67.6% | **83.6%** | — |
 | Margin as spring stiffness, uncapped | 68.3% | 81.1% | — |
-| **Margin Springs: stiffness = margin clamped 7–24 (published)** | **68.6%** | **82.4%** | — |
+| Margin as spring stiffness, clamped 7–24 | 68.6% | 82.4% | — |
 | Least squares on margin + home (Massey) | 71.6% | 80.2% | 2.27 pts |
 | Sports-Reference SRS (margin clamped 7–24) | 70.2% | 81.7% | — |
 | Gridiron, no blowout limit | 71.7% | 81.6% | 2.94 pts |
