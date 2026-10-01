@@ -43,6 +43,37 @@ describe("springRank", () => {
     expect(s[0]!).toBeGreaterThan(s[2]!);
   });
 
+  it("weight 1 on every game is identical to the unweighted model", () => {
+    const games = [{ winner: 0, loser: 1 }, { winner: 1, loser: 2 }, { winner: 2, loser: 0 }, { winner: 0, loser: 2 }];
+    const plain = springRank(3, games, 0.01);
+    const weighted = springRank(3, games.map((g) => ({ ...g, weight: 1 })), 0.01);
+    expect(Array.from(weighted)).toEqual(Array.from(plain));
+  });
+
+  it("stiffness does not change the one-unit rest length of a lone game", () => {
+    const close = springRank(2, [{ winner: 0, loser: 1, weight: 1 }], 1e-9);
+    const blowout = springRank(2, [{ winner: 0, loser: 1, weight: 40 }], 1e-9);
+    expect(close[0]! - close[1]!).toBeCloseTo(1, 6);
+    expect(blowout[0]! - blowout[1]!).toBeCloseTo(1, 6);
+  });
+
+  it("in a cycle, the stiffest spring wins", () => {
+    // 0 beat 1 by 3, 1 beat 2 by 3, 2 beat 0 by 30: the blowout should put 2 above 0.
+    const s = springRank(3, [
+      { winner: 0, loser: 1, weight: 3 },
+      { winner: 1, loser: 2, weight: 3 },
+      { winner: 2, loser: 0, weight: 30 },
+    ], 0.01);
+    expect(s[2]!).toBeGreaterThan(s[0]!);
+    // Without weights the same cycle is a three-way tie.
+    const flat = springRank(3, [{ winner: 0, loser: 1 }, { winner: 1, loser: 2 }, { winner: 2, loser: 0 }], 0.01);
+    expect(flat[2]).toBeCloseTo(flat[0]!, 12);
+  });
+
+  it("rejects non-positive game weights", () => {
+    expect(() => springRank(2, [{ winner: 0, loser: 1, weight: 0 }], 0.1)).toThrow(/weight/);
+  });
+
   it("rejects non-positive alpha", () => {
     expect(() => springRank(2, [], 0)).toThrow();
   });

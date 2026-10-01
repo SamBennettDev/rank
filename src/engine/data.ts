@@ -56,5 +56,8 @@ export function parseConfig(json: string): SeasonConfig {
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
   }
+  if (c.edgeWeight !== undefined && c.edgeWeight !== "win" && c.edgeWeight !== "margin") {
+    throw new Error('config.edgeWeight must be "win" or "margin"');
+  }
   return c;
 }

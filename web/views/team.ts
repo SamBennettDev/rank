@@ -1,5 +1,5 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
+import { type Ctx, byMargin, fmtHeight, href, rankLabel, record, springWidth, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
 import { logo, logoUrl, prefersDark, teamVars } from "../team";
@@ -47,7 +47,9 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h("div", { class: "tgrid" },
         h("div", { class: "panel springs" },
           h("h2", {}, "Why it’s here"),
-          h("p", { class: "hint" }, "Each game is a spring pulling the winner one unit above the loser. This team rests where its springs balance."),
+          h("p", { class: "hint" }, byMargin(ctx)
+            ? "Each game is a spring pulling the winner one unit above the loser, as stiff as the point differential (thicker line = bigger margin). This team rests where its springs balance."
+            : "Each game is a spring pulling the winner one unit above the loser. This team rests where its springs balance."),
           springs(ctx, teamId, games)),
         history),
       gameLog(ctx, teamId, games)),
@@ -100,7 +102,7 @@ function springs(ctx: Ctx, teamId: number, games: Edge[]): SVGSVGElement {
       placed.push({ x, y: oy });
       const upset = item.won ? me.height! < item.o.height! : item.o.height! < me.height!;
       const c1 = cx + (x - cx) * 0.55;
-      root.appendChild(svg("path", { class: `s ${item.won ? "w" : "l"}${upset ? " up" : ""}`, d: `M${x},${oy} C${c1},${oy} ${c1},${y(me.height!)} ${cx},${y(me.height!)}` }));
+      root.appendChild(svg("path", { class: `s ${item.won ? "w" : "l"}${upset ? " up" : ""}`, d: `M${x},${oy} C${c1},${oy} ${c1},${y(me.height!)} ${cx},${y(me.height!)}`, style: `stroke-width:${springWidth(ctx, item.e)}` }));
       const a = svg("a", { href: teamHref(ctx, item.o.id) });
       a.appendChild(svg("circle", { cx: x, cy: oy, r: sz / 2 + 2, fill: "var(--surface)", stroke: "var(--line-2)" }));
       const img = svg("image", { x: x - sz / 2 + 2, y: oy - sz / 2 + 2, width: sz - 4, height: sz - 4, href: logoUrl(item.o.id, 64, prefersDark()) });

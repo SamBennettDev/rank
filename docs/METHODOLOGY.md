@@ -4,14 +4,14 @@ This document is the full specification of how rankings are produced. If the cod
 
 ## Goal
 
-Rank every FBS and FCS team from worst to best using only who beat whom, with a process anyone can rerun and get the identical answer.
+Rank every FBS and FCS team from worst to best using only game results (who won, and by how much), with a process anyone can rerun and get the identical answer.
 
 | Requirement | How it is met |
 |---|---|
 | Deterministic | No randomness anywhere. Fixed input order, fixed arithmetic order, fixed rounding. Same data in, same bytes out. |
 | Auditable | Raw game data, code and output are all in this repository. `npm run verify` and the site's **Recompute** button regenerate every published ranking and compare byte for byte. CI runs it on every change. |
 | Transparent | One short method, one config file per season, and a per-team page that lists every game behind a rank. Git history shows when each result arrived or was corrected. |
-| Unbiased | No preseason ranking, no human votes, no margin of victory, no home field, no conference or brand weight. Every team starts equal and only results move it. |
+| Unbiased | No preseason ranking, no human votes, no home field, no conference or brand weight. Every team starts equal and only results move it. |
 
 ## The graph
 
@@ -29,13 +29,24 @@ Treat each game as a spring that wants the winner exactly 1 unit above the loser
 H(s) = 1/2 * sum_ij A_ij (s_i - s_j - 1)^2  +  1/2 * alpha * sum_i s_i^2
 ```
 
-where `A_ij` is the number of times team *i* beat team *j*. Setting the gradient to zero gives a linear system
+where `A_ij` is the total **spring strength** of team *i*'s wins over team *j*. Setting the gradient to zero gives a linear system
 
 ```
 (D_out + D_in - (A + A^T) + alpha*I) s = d_out - d_in
 ```
 
-where `d_out` is each team's wins and `d_in` its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754.
+where `d_out` is the total strength of each team's wins and `d_in` of its losses. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754.
+
+### Spring strength: point differential
+
+Each game's spring strength (its stiffness) is set by `edgeWeight` in the season's `config.json`:
+
+| `edgeWeight` | Strength of one game | Used by |
+|---|---|---|
+| `"margin"` | winner's points − loser's points | 2026 onward (`algorithmVersion: springrank-margin-1`) |
+| `"win"` | 1 | default when the field is absent (`springrank-1`) |
+
+Strength changes **how hard** a game pulls, never **how far**: every spring still wants the winner exactly 1 unit above the loser. So a single game always puts its winner about 1 unit above its loser, but when results conflict (A beat B, B beat C, C beat A) the springs from bigger margins win the tug-of-war. Margins are used raw, with no cap, so the formula has no extra tunable constant.
 
 `alpha` is a tiny shrinkage (default `0.01`, in `config.json`). It exists so the system always has a unique solution, including early in the season when the graph is not yet connected, and it is applied identically to every team.
 
@@ -64,6 +75,8 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 
 ## Per-game quantities on a team page
 
+- **Line thickness** in the springs diagram and graph = spring strength (point differential).
+
 - **Gap** = winner height − loser height.
 - **Tension** = gap − 1. Zero means the result is fully explained by the final heights.
 - **Upset** = negative gap: the winner ended up below the loser.
@@ -82,7 +95,7 @@ The API is only a source of raw scores. `npm run fetch` normalises it to CSV sor
 
 ## Known limitations (stated openly)
 
-- **Win/loss only.** Margin of victory is ignored on purpose: it cannot be gamed by running up the score, but it also discards information.
+- **Margin of victory counts, uncapped.** A blowout pulls much harder than a close game, so lopsided wins (often against much weaker opponents) carry a lot of weight, and a team can raise its rank by running up the score. Garbage-time points count the same as any others.
 - **Connectivity.** Rankings between groups of teams that have never been linked by a chain of games are not comparable. FBS vs FCS games link most teams, but early in a season some separate groups exist. The heights of such groups are each centred on zero by `alpha`.
 - **Schedule size.** With only 12 games per team, many teams are close together and ranks within a few places are not statistically meaningful. The height column shows how close they are.
 - **Source data.** Scores come from the CollegeFootballData API; an error there is an error here until it is corrected upstream and the next update runs.
