@@ -53,6 +53,37 @@ describe("margin weighting", () => {
   });
 });
 
+describe("power view", () => {
+  const withPower = JSON.stringify({
+    ...JSON.parse(input.configJson),
+    power: { algorithmVersion: "gridiron-springs-1", method: "gridiron", alpha: 0.01, gridiron: { winBonus: 7, blowoutLimit: 21, fitHomeField: true, maxIterations: 500 } },
+  });
+
+  it("publishes a second, independent ranking under power/", async () => {
+    const plain = await computeSeason(input);
+    const both = await computeSeason({ ...input, configJson: withPower });
+    const main = both.files.filter((f) => !f.id.startsWith("power/"));
+    const power = both.files.filter((f) => f.id.startsWith("power/"));
+    expect(main).toEqual(plain.files); // the main ranking is unchanged by adding a power view
+    expect(power.map((f) => f.id)).toEqual(plain.files.map((f) => `power/${f.id}`));
+    expect(JSON.parse(power.at(-1)!.json).manifest.method).toBe("gridiron");
+    expect(both.index.views).toEqual(["resume", "power"]);
+    expect(plain.index.views).toBeUndefined();
+  });
+
+  it("does not inherit springrank fields into the power model", async () => {
+    const cfg = JSON.stringify({ ...JSON.parse(withPower), edgeWeight: "margin", minMargin: 7, maxMargin: 24, restLength: 7 });
+    const m = JSON.parse((await computeSeason({ ...input, configJson: cfg })).files.find((f) => f.id.startsWith("power/"))!.json).manifest;
+    expect(m.edgeWeight).toBeUndefined();
+    expect(m.minMargin).toBeUndefined();
+  });
+
+  it("validates the power block", async () => {
+    const bad = JSON.stringify({ ...JSON.parse(input.configJson), power: { algorithmVersion: "x", method: "gridiron", alpha: 0.01 } });
+    await expect(computeSeason({ ...input, configJson: bad })).rejects.toThrow(/config.power/);
+  });
+});
+
 describe("margin clamp", () => {
   it("clamps each win's stiffness to [minMargin, maxMargin]", () => {
     const g = (w: number, l: number) => ({ winnerPoints: w, loserPoints: l });

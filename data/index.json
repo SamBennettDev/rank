@@ -21,6 +21,10 @@
           "id": "week-04",
           "label": "Week 4"
         }
+      ],
+      "views": [
+        "resume",
+        "power"
       ]
     }
   ]

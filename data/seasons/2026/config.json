@@ -9,5 +9,16 @@
   "classifications": [
     "fbs",
     "fcs"
-  ]
+  ],
+  "power": {
+    "algorithmVersion": "gridiron-springs-1",
+    "method": "gridiron",
+    "alpha": 0.01,
+    "gridiron": {
+      "winBonus": 7,
+      "blowoutLimit": 21,
+      "fitHomeField": true,
+      "maxIterations": 500
+    }
+  }
 }

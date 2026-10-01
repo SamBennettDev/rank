@@ -13,13 +13,28 @@ Rank every FBS and FCS team from worst to best using only who beat whom, with a 
 | Transparent | One short formula, one config file per season, and a per-team page that lists every game behind a rank. Git history shows when each result arrived or was corrected. |
 | Unbiased | No preseason ranking, no human votes, no margins, no home field, no conference or brand weight, no recency weighting. Every team starts equal and only wins and losses move it. |
 
+## Two published rankings
+
+Every snapshot is published twice, from the same games, because "who has earned it" and "who would win" are different questions (the same split as Massey's Rating vs Power, or ESPN's Strength of Record vs FPI):
+
+| | **Résumé** (main ranking) | **Power** |
+|---|---|---|
+| Question | Who has earned it? | Who would win? |
+| Model | Win Springs: equal springs, wins only | Gridiron Springs: margin + 7, fitted home field, blowout limit |
+| Inputs | Who beat whom | Final scores and game sites |
+| Strength (backtest) | Agrees with the most results (83.6%) | Picks the most next-week winners of the spring models (71.2%) |
+| Files | `data/rankings/<year>/<snapshot>.json` | `data/rankings/<year>/power/<snapshot>.json` |
+| Config | the season's top-level model fields | the season config's `power` block |
+
+The `power` block lists only model fields (`algorithmVersion`, `method`, `alpha`, `gridiron`, …); everything else (divisions, games) is shared. Adding or changing the Power view never changes a byte of the Résumé ranking. Both are recomputed, hashed and verified the same way, and the site's **Recompute** button checks both.
+
 ## The graph
 
 - **Nodes:** teams in `teams.csv` whose classification is listed in the season's `config.json` (FBS and FCS).
 - **Edges:** each completed game between two nodes is one spring between the two teams. Rematches and postseason games add more springs.
 - Games that involve a team outside `teams.csv` (for example Division II), games that are not completed, and games with equal scores are not counted. Each snapshot's manifest records how many rows were dropped for each reason.
 
-## The ranking: Win Springs (wins only)
+## Résumé ranking: Win Springs (wins only)
 
 Seasons whose `config.json` sets `"method": "springrank"`, `"edgeWeight": "win"` and `"restLength": 7` (2026 onward, `algorithmVersion: win-springs-1`) are ranked by **wins alone**.
 
@@ -72,9 +87,9 @@ Each method was run through this engine on ten past seasons (2015–2025, 2020 s
 
 "Agrees with results" is the share of all games where the final ranking puts the winner above the loser. Full protocol, caveats and sources: [BACKTEST.md](BACKTEST.md). Reproduce with `npm run backtest -- --history 2015-2025`.
 
-## Alternative method: Gridiron Springs (available, not in use)
+## Power ranking: Gridiron Springs
 
-The engine also implements Gridiron Springs (`"method": "gridiron"`), a margin-based model kept for comparison and for any season that chooses it (`algorithmVersion: gridiron-springs-1`).
+The Power view uses Gridiron Springs (`"method": "gridiron"`, `algorithmVersion: gridiron-springs-1`), set in the season config's `power` block.
 
 Every team gets a rating `s` in **points**. Every game is a spring that wants
 

@@ -52,6 +52,25 @@ export function gamesToCsv(games: Game[]): string {
 
 export function parseConfig(json: string): SeasonConfig {
   const c = JSON.parse(json) as SeasonConfig;
+  validateModel(c);
+  if (c.power !== undefined) {
+    if (typeof c.power !== "object" || c.power === null) throw new Error("config.power must be an object");
+    try {
+      validateModel(powerConfig(c));
+    } catch (e) {
+      throw new Error(`config.power: ${(e as Error).message}`);
+    }
+  }
+  return c;
+}
+
+/** The full config for the Power view: the season config with the power block's model fields applied. */
+export function powerConfig(c: SeasonConfig): SeasonConfig {
+  const { power, ...rest } = c;
+  return { ...rest, edgeWeight: undefined, restLength: undefined, minMargin: undefined, maxMargin: undefined, gridiron: undefined, ...power };
+}
+
+function validateModel(c: SeasonConfig): void {
   if (typeof c.alpha !== "number" || !(c.alpha > 0)) throw new Error("config.alpha must be a positive number");
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
@@ -77,5 +96,5 @@ export function parseConfig(json: string): SeasonConfig {
   if (c.edgeWeight !== undefined && c.edgeWeight !== "win" && c.edgeWeight !== "margin") {
     throw new Error('config.edgeWeight must be "win" or "margin"');
   }
-  return c;
+  if (typeof c.algorithmVersion !== "string" || c.algorithmVersion === "") throw new Error("config.algorithmVersion must be set");
 }

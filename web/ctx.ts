@@ -1,6 +1,6 @@
 import { buildEdges, listSnapshots } from "../src/engine/graph";
 import { edgeWeight } from "../src/engine/season";
-import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
+import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team, ViewId } from "../src/engine/types";
 
 export type View = "list" | "graph" | "team" | "about";
 
@@ -16,11 +16,19 @@ export interface Ctx {
   byId: Map<number, RankedTeam>;
   /** Teams with a rank, best first. */
   ranked: RankedTeam[];
+  /** Which published ranking is being shown. */
+  mode: ViewId;
+  /** The other published ranking for this snapshot, when the season has two. */
+  alt: Ranking | null;
+  altById: Map<number, RankedTeam>;
 }
 
-export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
+type CtxBase = Omit<Ctx, "edges" | "byId" | "ranked" | "altById">;
+
+/** Builds the context. `format` sets how heights print (only the page's main ranking should). */
+export function makeCtx(base: CtxBase, format = true): Ctx {
   const mf = base.ranking.manifest;
-  heightDecimals = mf.method === "gridiron" ? 1 : (mf.restLength ?? 1) > 1 ? 2 : 3;
+  if (format) heightDecimals = mf.method === "gridiron" ? 1 : (mf.restLength ?? 1) > 1 ? 2 : 3;
   const spec = listSnapshots(base.games).find((s) => s.id === base.snapId)!;
   const { edges } = buildEdges(base.games, base.ranking.teams, spec);
   return {
@@ -28,11 +36,25 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
     edges,
     byId: new Map(base.ranking.teams.map((t) => [t.id, t])),
     ranked: base.ranking.teams.filter((t) => t.rank !== null),
+    altById: new Map((base.alt?.teams ?? []).map((t) => [t.id, t])),
   };
 }
 
-export const href = (season: string, snap: string, view: View, teamId?: number) =>
-  `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}`;
+/** The same snapshot seen through the other ranking (e.g. Power numbers on a Résumé page). */
+export function otherCtx(ctx: Ctx): Ctx | null {
+  if (!ctx.alt) return null;
+  return makeCtx({ ...ctx, ranking: ctx.alt, alt: ctx.ranking, mode: ctx.mode === "power" ? "resume" : "power" }, false);
+}
+
+export const hasPower = (ctx: Ctx) => (ctx.entry.views ?? []).includes("power");
+export const MODE_LABEL: Record<ViewId, string> = { resume: "Résumé", power: "Power" };
+
+/** The view mode carried in every link (`?by=power`); set by the router on each navigation. */
+let currentMode: ViewId = "resume";
+export const setMode = (m: ViewId) => (currentMode = m);
+
+export const href = (season: string, snap: string, view: View, teamId?: number, mode: ViewId = currentMode) =>
+  `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}${mode === "power" ? "?by=power" : ""}`;
 export const teamHref = (ctx: Ctx, id: number) => href(ctx.entry.season, ctx.snapId, "team", id);
 
 export const rankLabel = (rank: number | null, tied: boolean) => (rank === null ? "—" : `${tied ? "T-" : ""}${rank}`);

@@ -2,7 +2,7 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: teams that played are connected by springs, every spring pulls equally to put the winner above the loser, and a team's rank is its **y-coordinate** once the springs settle. **Only wins count**: no margins, no home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md).
+The AP Poll is a vote. This is a calculation, published two ways from the same games: **Résumé** (who has earned it) connects teams that played with equal springs that put each winner above the loser, and a team's rank is its **y-coordinate** once the springs settle; **Power** (who would win) adds margins and home field (Gridiron Springs) and predicts matchups. No preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md).
 
 | | |
 |---|---|
@@ -18,8 +18,9 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    method (equal win springs, 7 points), alpha, divisions
-data/rankings/<year>/<snapshot>.json   published output (heights, ranks, manifest with SHA-256 of the inputs)
+data/seasons/<year>/config.json    Résumé model (equal win springs), Power model (power block), divisions
+data/rankings/<year>/<snapshot>.json         Résumé ranking (heights, ranks, manifest with SHA-256 of the inputs)
+data/rankings/<year>/power/<snapshot>.json   Power ranking, same format
 data/index.json                    seasons and snapshots available to the site
 ```
 

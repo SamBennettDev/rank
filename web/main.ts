@@ -1,11 +1,11 @@
 import { h } from "./dom";
-import { type Ctx, type View, href, makeCtx } from "./ctx";
+import { type Ctx, type View, href, makeCtx, setMode } from "./ctx";
 import { loadGames, loadIndex, loadRanking, loadTeams } from "./store";
 import { aboutView } from "./views/about";
 import { graphView } from "./views/graph";
 import { listView } from "./views/list";
 import { teamView } from "./views/team";
-import type { SeasonIndexEntry } from "../src/engine/types";
+import type { SeasonIndexEntry, ViewId } from "../src/engine/types";
 
 const app = document.getElementById("app")!;
 const nav = document.getElementById("nav")!;
@@ -57,7 +57,9 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
 async function route() {
   try {
     if (seasons.length === 0) seasons = await loadIndex();
-    const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+    const [path, query = ""] = location.hash.replace(/^#\/?/, "").split("?");
+    const parts = path!.split("/").filter(Boolean);
+    const wantPower = new URLSearchParams(query).get("by") === "power";
     const [season, snapId] = parts;
     let view = (parts[2] ?? "list") as View;
 
@@ -74,8 +76,17 @@ async function route() {
     if (!["list", "graph", "team", "about"].includes(view)) view = "list";
     const teamId = view === "team" ? Number(parts[3]) : undefined;
 
-    const [ranking, games, teams] = await Promise.all([loadRanking(season, snapId), loadGames(season), loadTeams(season)]);
-    const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
+    const twoViews = (entry.views ?? []).includes("power");
+    const mode: ViewId = wantPower && twoViews ? "power" : "resume";
+    setMode(mode);
+    const other: ViewId = mode === "power" ? "resume" : "power";
+    const [ranking, alt, games, teams] = await Promise.all([
+      loadRanking(season, snapId, mode),
+      twoViews ? loadRanking(season, snapId, other) : Promise.resolve(null),
+      loadGames(season),
+      loadTeams(season),
+    ]);
+    const ctx = makeCtx({ seasons, entry, snapId, ranking, alt, mode, games, teams });
     renderChrome(ctx, view, teamId);
 
     cleanup?.();

@@ -51,6 +51,12 @@ const config: SeasonConfig = {
   edgeWeight: "win",
   restLength: 7,
   classifications: ["fbs", "fcs"],
+  power: {
+    algorithmVersion: "gridiron-springs-1",
+    method: "gridiron",
+    alpha: 0.01,
+    gridiron: { winBonus: 7, blowoutLimit: 21, fitHomeField: true, maxIterations: 500 },
+  },
 };
 mkdirSync(dir, { recursive: true });
 if (existsSync(configPath)) Object.assign(config, JSON.parse(readFileSync(configPath, "utf8")));

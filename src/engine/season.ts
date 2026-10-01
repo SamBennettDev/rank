@@ -1,12 +1,12 @@
-import { parseConfig, parseGames, parseTeams } from "./data";
+import { parseConfig, parseGames, parseTeams, powerConfig } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
 import { gridironSprings } from "./gridiron";
 import { springRank } from "./springrank";
-import type { Edge, EdgeWeight, GridironConfig, Manifest, RankedTeam, Ranking, SeasonConfig, SeasonIndexEntry } from "./types";
+import type { Edge, EdgeWeight, Game, GridironConfig, Manifest, RankedTeam, Ranking, SeasonConfig, SeasonIndexEntry, SnapshotSpec, Team, ViewId } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-6";
+export const ENGINE_VERSION = "rank-engine-7";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -74,13 +74,37 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
   const teams = parseTeams(input.teamsCsv).sort((a, b) => a.id - b.id);
   const games = parseGames(input.gamesCsv);
   const config = parseConfig(input.configJson);
-  const teamsSha256 = await sha256Hex(input.teamsCsv);
-  const gamesSha256 = await sha256Hex(input.gamesCsv);
+  const hashes = { teamsSha256: await sha256Hex(input.teamsCsv), gamesSha256: await sha256Hex(input.gamesCsv) };
+  const snapshots = listSnapshots(games);
 
+  // The main ("Résumé") ranking, then the optional predictive ("Power") one under power/.
+  const files = computeView(input.season, teams, games, snapshots, config, hashes, "");
+  if (config.power) files.push(...computeView(input.season, teams, games, snapshots, powerConfig(config), hashes, "power/"));
+
+  return {
+    files,
+    index: {
+      season: input.season,
+      label: config.label,
+      demo: config.demo,
+      snapshots: snapshots.map((s) => ({ id: s.id, label: s.label })),
+      ...(config.power ? { views: ["resume", "power"] as ViewId[] } : {}),
+    },
+  };
+}
+
+function computeView(
+  season: string,
+  teams: Team[],
+  games: Game[],
+  snapshots: SnapshotSpec[],
+  config: SeasonConfig,
+  hashes: { teamsSha256: string; gamesSha256: string },
+  prefix: string,
+): SeasonOutput["files"] {
   const method = config.method ?? "springrank";
   const index = new Map(teams.map((t, i) => [t.id, i]));
   const files: SeasonOutput["files"] = [];
-  const snapshots = listSnapshots(games);
   let previous = new Map<number, number>();
 
   for (const snap of snapshots) {
@@ -133,22 +157,12 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
             restLength: config.restLength ?? 1,
           }),
       classifications: config.classifications,
-      teamsSha256,
-      gamesSha256,
+      ...hashes,
       counts,
     };
-    files.push({ id: snap.id, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, teams: ranked }) });
+    files.push({ id: prefix + snap.id, json: formatRanking({ schema: 1, season, snapshot: snap, manifest, teams: ranked }) });
   }
-
-  return {
-    files,
-    index: {
-      season: input.season,
-      label: config.label,
-      demo: config.demo,
-      snapshots: snapshots.map((s) => ({ id: s.id, label: s.label })),
-    },
-  };
+  return files;
 }
 
 /** Copies the gridiron parameters in a fixed key order. */

@@ -4,6 +4,7 @@ import type { Edge, RankedTeam } from "../../src/engine/types";
 import { type Ctx, byMargin, clampNote, restLabel, fmtHeight, fmtPoints, homeField, isGridiron, rankLabel, record, springWidth, teamHref, upsets } from "../ctx";
 import { h, svg } from "../dom";
 import { searchIcon } from "../icons";
+import { lens } from "../lens";
 import { computeLayout } from "../layout";
 import { logo, shortConf, svgLogo, teamVars } from "../team";
 
@@ -248,6 +249,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     } });
   const tools = h("div", { class: "gtools" },
     h("h1", {}, "The Graph"),
+    lens(ctx, "graph", undefined, true),
     modeSeg,
     h("label", { class: "search" }, searchIcon(), finder, h("datalist", { id: listId }, ...nodes.map((t) => h("option", { value: t.school })))),
     h("div", { class: "zoom" },

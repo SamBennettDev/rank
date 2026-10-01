@@ -66,7 +66,18 @@ export interface SeasonConfig {
   maxMargin?: number;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
+  /**
+   * Optional second, predictive ranking ("Power") published alongside the main
+   * ("Résumé") one. Its fields override the model fields above for that view only.
+   */
+  power?: ModelConfig;
 }
+
+/** The fields of SeasonConfig that choose and tune a ranking model. */
+export type ModelConfig = Pick<SeasonConfig, "algorithmVersion" | "method" | "alpha" | "edgeWeight" | "restLength" | "minMargin" | "maxMargin" | "gridiron">;
+
+/** Published ranking views. "resume" is the main ranking; "power" the optional predictive one. */
+export type ViewId = "resume" | "power";
 
 /** One game that counts: an edge from loser to winner. */
 export interface Edge {
@@ -154,4 +165,6 @@ export interface SeasonIndexEntry {
   label: string;
   demo: boolean;
   snapshots: { id: string; label: string }[];
+  /** Views published for this season (absent = ["resume"]). Power files live under rankings/<season>/power/. */
+  views?: ViewId[];
 }

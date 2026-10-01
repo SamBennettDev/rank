@@ -3,7 +3,7 @@
   "season": "2026",
   "snapshot": {"id":"week-04","label":"Week 4","throughWeek":4,"includePostseason":false},
   "manifest": {
-    "engine": "rank-engine-6",
+    "engine": "rank-engine-7",
     "algorithmVersion": "win-springs-1",
     "method": "springrank",
     "alpha": 0.01,

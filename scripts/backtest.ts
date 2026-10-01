@@ -33,13 +33,13 @@ const gridiron = (winBonus: number, blowoutLimit: number, fitHomeField: boolean)
   ...base, algorithmVersion: "bt", method: "gridiron", gridiron: { winBonus, blowoutLimit, fitHomeField, maxIterations: 500 },
 });
 const METHODS: { name: string; config: SeasonConfig; clampMargin?: [number, number] }[] = [
-  { name: "Wins only, equal springs (Win Springs, published)", config: { ...base, algorithmVersion: "bt", method: "springrank", edgeWeight: "win", restLength: 7 } },
+  { name: "Wins only, equal springs (Résumé, published)", config: { ...base, algorithmVersion: "bt", method: "springrank", edgeWeight: "win", restLength: 7 } },
   { name: "Margin as spring stiffness, uncapped", config: { ...base, algorithmVersion: "bt", method: "springrank", edgeWeight: "margin", restLength: 7 } },
   { name: "Margin as spring stiffness, clamped 7-24", config: { ...base, algorithmVersion: "bt", method: "springrank", edgeWeight: "margin", minMargin: 7, maxMargin: 24, restLength: 7 } },
   { name: "Least squares on margin + home (Massey)", config: gridiron(0, 1e9, true) },
   { name: "Sports-Reference SRS (margin clamped 7-24)", config: gridiron(0, 1e9, false), clampMargin: [7, 24] },
   { name: "Gridiron, no blowout limit", config: gridiron(7, 1e9, true) },
-  { name: "Gridiron Springs", config: gridiron(7, 21, true) },
+  { name: "Gridiron Springs (Power, published)", config: gridiron(7, 21, true) },
 ];
 
 function rate(games: BtGame[], config: SeasonConfig, clampMargin?: [number, number]) {

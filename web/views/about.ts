@@ -1,15 +1,21 @@
 import { computeSeason } from "../../src/engine/season";
-import { type Ctx, byMargin, gridironParams, homeField, restLength } from "../ctx";
+import { type Ctx, gridironParams, homeField, restLength } from "../ctx";
+import type { Ranking, ViewId } from "../../src/engine/types";
 import { type Child, h, svg } from "../dom";
 import { pillarIcons } from "../icons";
-import { fetchText, seasonFiles } from "../store";
+import { fetchText, rankingPath, seasonFiles } from "../store";
 
 export function aboutView(ctx: Ctx): HTMLElement {
-  const m = ctx.ranking.manifest;
   const season = ctx.entry.season;
   const files = seasonFiles(season);
-  const margin = byMargin(ctx);
-  const g = gridironParams(ctx);
+  // Résumé is the main ranking; Power (if published) the predictive one.
+  const resume = ctx.mode === "resume" ? ctx.ranking : ctx.alt!;
+  const power = ctx.mode === "power" ? ctx.ranking : ctx.alt;
+  const two = power !== null && resume !== undefined;
+  const view = (r: Ranking): Ctx => ({ ...ctx, ranking: r });
+  const rm = (two ? resume : ctx.ranking).manifest;
+  const margin = rm.edgeWeight === "margin";
+  const g = two ? undefined : gridironParams(ctx);
 
   const result = h("div");
   const button = h("button", { class: "btn primary", onclick: async () => {
@@ -29,7 +35,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       const ms = Math.round(performance.now() - t0);
       if (bad.length === 0) {
         result.className = "result ok";
-        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} snapshots from the raw data in ${ms} ms and produced the published files byte for byte.`));
+        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} published ${season} ranking files (${out.index.views?.length === 2 ? "Résumé and Power, " : ""}every week) from the raw data in ${ms} ms, byte for byte.`));
       } else {
         result.className = "result bad";
         result.replaceChildren(h("b", {}, "✗"), h("span", {}, `Mismatch in ${bad.join(", ")}. The published rankings do not follow from the published data. Please open an issue.`));
@@ -53,13 +59,29 @@ export function aboutView(ctx: Ctx): HTMLElement {
       pillar(pillarIcons.deterministic(), "Deterministic", "Same games in, identical bytes out. No randomness and no judgement calls; every constant is published."),
       pillar(pillarIcons.auditable(), "Auditable", "Every input, line of code and published result is public. Check any week yourself below."),
       pillar(pillarIcons.transparent(), "Transparent", "One short formula and one config file. Every team page shows the exact games behind its rank."),
-      pillar(pillarIcons.unbiased(), "Unbiased", g
+      pillar(pillarIcons.unbiased(), "Unbiased", two
+        ? "No preseason poll, brand, conference or opinions. Résumé uses only who beat whom; Power adds margins and home field."
+        : g
         ? "No preseason poll, brand, conference or opinions. Only final scores, who played whom, and where."
         : margin
         ? "No preseason poll, brand, conference or home field. Only who won and by how much."
         : "No preseason poll, brand, conference or margin of victory. Only who beat whom.")),
 
-    ...(g ? gridironSections(ctx) : springRankSections(margin, restLength(ctx), m.minMargin, m.maxMargin)),
+    ...(two
+      ? [
+          h("h2", {}, "Two rankings, one graph"),
+          h("p", {}, "Every week we publish two rankings from the same games. They answer different questions, and the best rating systems keep them separate too (Massey’s Rating vs Power, ESPN’s Strength of Record vs FPI)."),
+          h("div", { class: "twocards" },
+            twoCard("resume", "Résumé", "Who has earned it?", "Every game is an equal spring that wants the winner above the loser. Only wins count.",
+              [["Inputs", "Who beat whom"], ["Best at", "Respecting results: 83.6% of games have the winner ranked above the loser"], ["Use it for", "Who deserves a spot"]]),
+            twoCard("power", "Power", "Who would win?", "Springs want the winner its margin plus a touchdown above the loser, after home field. Blowouts are limited.",
+              [["Inputs", "Final scores and game sites"], ["Best at", "Predicting: picks 71.2% of next week’s winners"], ["Use it for", "Predicting matchups"]])),
+          h("h2", { id: "resume" }, "Résumé: equal win springs"),
+          ...springRankSections(margin, rm.restLength ?? 1, rm.minMargin, rm.maxMargin).slice(1),
+          h("h2", { id: "power" }, "Power: Gridiron Springs"),
+          ...gridironSections(view(power!), false),
+        ]
+      : g ? gridironSections(ctx) : springRankSections(margin, restLength(ctx), rm.minMargin, rm.maxMargin)),
 
     h("h2", {}, "How data flows"),
     h("div", { class: "pipeline" },
@@ -74,7 +96,31 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h("p", { class: "muted" }, `This downloads the exact CSV files the ${season} rankings were built from, runs the same engine in your browser, and compares the result with every published file.`),
       button, result),
 
-    h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}, ${season}`),
+    ...(two
+      ? [receipt(resume, `Receipt: Résumé, ${resume.snapshot.label} ${season}`), receipt(power!, `Receipt: Power, ${power!.snapshot.label} ${season}`)]
+      : [receipt(ctx.ranking, `Receipt: ${ctx.ranking.snapshot.label}, ${season}`)]).flat(),
+    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson), file(rankingPath(season, ctx.snapId, "resume")), two ? file(rankingPath(season, ctx.snapId, "power")) : "",
+      h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/METHODOLOGY.md", target: "_blank", rel: "noopener" }, "METHODOLOGY.md ↗")),
+  );
+}
+
+function twoCard(mode: ViewId, title: string, question: string, how: string, rows: [string, string][]): HTMLElement {
+  const ic = svg("svg", { viewBox: "0 0 24 24", width: 18, height: 18, fill: "none", stroke: "currentColor", "stroke-width": 2, "stroke-linecap": "round", "stroke-linejoin": "round" });
+  ic.innerHTML = mode === "resume" ? '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3a3 3 0 0 1-3 4M7 5H4a3 3 0 0 0 3 4"/>' : '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>';
+  return h("div", { class: "twocard" },
+    h("div", { class: "hd" }, h("span", { class: "ic" }, ic), h("b", {}, title)),
+    h("p", {}, h("strong", {}, question), " ", how),
+    h("dl", {}, ...rows.flatMap(([k, v]) => [h("dt", {}, k), h("dd", {}, v)])),
+    h("p", {}, h("a", { href: `#${mode}`, onclick: (e: Event) => { e.preventDefault(); document.getElementById(mode)?.scrollIntoView({ behavior: "smooth" }); } }, "How it works ↓")));
+}
+
+/** The published manifest of one ranking view as a table. */
+function receipt(r: Ranking, title: string): Child[] {
+  const m = r.manifest;
+  const g = m.gridiron;
+  const margin = m.edgeWeight === "margin";
+  return [
+    h("h2", {}, title),
     h("table", { class: "mf" }, h("tbody", {},
       ...([
         ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
@@ -86,9 +132,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       ] as const).map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
       h("tr", {}, h("th", {}, "teams.csv SHA-256"), h("td", {}, h("code", {}, m.teamsSha256))),
       h("tr", {}, h("th", {}, "games.csv SHA-256"), h("td", {}, h("code", {}, m.gamesSha256))))),
-    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson), file(`rankings/${season}/${ctx.snapId}.json`),
-      h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/METHODOLOGY.md", target: "_blank", rel: "noopener" }, "METHODOLOGY.md ↗")),
-  );
+  ];
 }
 
 function springRankSections(margin: boolean, r: number, lo?: number, hi?: number): Child[] {
@@ -122,15 +166,15 @@ function springRankSections(margin: boolean, r: number, lo?: number, hi?: number
   ];
 }
 
-function gridironSections(ctx: Ctx): Child[] {
+function gridironSections(ctx: Ctx, intro = true): Child[] {
   const g = gridironParams(ctx)!;
   const hf = homeField(ctx);
   const row = (cells: string[], best = false) => h("tr", { class: best ? "best" : "" }, ...cells.map((c, i) => (i === 0 ? h("th", {}, c) : h("td", {}, c))));
   return [
-    h("h2", {}, "The idea: springs"),
-    h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Imagine every game as a spring between the two teams. Let every spring settle at once and each team comes to rest at a height. That height is its ", h("b", {}, "rating, in points"), ", and the ranking is just the teams sorted by height. Beat a team that sits high and you get pulled up; lose to a team that sits low and you get dragged down.")),
-    h("h2", {}, "Gridiron Springs: four football rules"),
+    intro ? h("h2", {}, "The idea: springs") : "",
+    intro ? h("div", { class: "springdemo" }, springDemo(),
+      h("p", {}, "Imagine every game as a spring between the two teams. Let every spring settle at once and each team comes to rest at a height. That height is its ", h("b", {}, "rating, in points"), ", and the ranking is just the teams sorted by height. Beat a team that sits high and you get pulled up; lose to a team that sits low and you get dragged down.")) : "",
+    h("h2", {}, intro ? "Gridiron Springs: four football rules" : "Four football rules"),
     h("ol", { class: "rules" },
       h("li", {}, h("b", {}, `A win is worth a touchdown.`), ` Each spring wants the winner as many points above the loser as they won by, plus ${g.winBonus}. Winning always matters, and a 3-point win still says something.`),
       h("li", {}, h("b", {}, "Home field is measured, not guessed."), ` The home edge is solved from the same games, at the same time as the ratings. This week it is worth `, h("b", {}, `${hf.toFixed(1)} points`), ". Neutral-site games get none."),
@@ -151,13 +195,13 @@ function gridironSections(ctx: Ctx): Child[] {
         row(["Sports-Reference SRS (7–24 clamp)", "70.2%", "81.7%"]),
         row(["Gridiron Springs", "71.2%", "81.9%"], true))),
     h("p", { class: "muted" }, "11,593 predicted games. “Agrees with results” is the share of all games where the final ranking puts the winner above the loser. Details and the script to reproduce it: ", h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/BACKTEST.md", target: "_blank", rel: "noopener" }, "BACKTEST.md ↗")),
-    h("h2", {}, "What counts"),
-    h("ul", {},
+    intro ? h("h2", {}, "What counts") : "",
+    intro ? h("ul", {},
       h("li", {}, h("b", {}, "Final scores, location and opponent"), " of completed games between two FBS or FCS teams, regular season and postseason. Nothing else: no stats, injuries, recruiting or opinions."),
       h("li", {}, "Games against teams outside FBS/FCS are left out, and the count is published below."),
       h("li", {}, "A team with no counted games is ", h("b", {}, "unranked"), " rather than guessed."),
       h("li", {}, "Equal ratings share a rank (shown T-n). Ties are never broken by name or reputation."),
-      h("li", {}, "Week N uses only games through week N, recomputed from scratch.")),
+      h("li", {}, "Week N uses only games through week N, recomputed from scratch.")) : "",
   ];
 }
 

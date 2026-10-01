@@ -1,8 +1,9 @@
 import type { RankedTeam } from "../../src/engine/types";
 import { delta, divTag } from "../bits";
-import { type Ctx, byMargin, fmtHeight, isGridiron, rankLabel, record, teamHref, upsets } from "../ctx";
+import { type Ctx, MODE_LABEL, byMargin, fmtHeight, isGridiron, rankLabel, record, teamHref, upsets } from "../ctx";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
+import { lens } from "../lens";
 import { logo, teamVars } from "../team";
 
 export function listView(ctx: Ctx): HTMLElement {
@@ -19,10 +20,13 @@ export function listView(ctx: Ctx): HTMLElement {
   const fbs = ranked.filter((t) => t.classification === "fbs").length;
   const hero = h("section", { class: "hero" },
     h("div", { class: "eyebrow" }, `${ctx.entry.season} season · ${ctx.ranking.snapshot.label}`),
-    h("h1", {}, "Every team.", h("br"), h("em", {}, "One ladder.")),
+    ctx.mode === "power"
+      ? h("h1", {}, "Who would win?", h("br"), h("em", {}, "Power ratings."))
+      : h("h1", {}, "Every team.", h("br"), h("em", {}, "One ladder.")),
     isGridiron(ctx)
       ? h("p", { class: "lede" }, "All ", h("b", {}, `${ranked.length} FBS and FCS teams`), " ranked from best to worst using only final scores: ", h("b", {}, "who won, by how much, and where"), ". Ratings are in points, so any two teams can be compared directly. No votes, no preseason bias, no reputation.")
       : h("p", { class: "lede" }, "All ", h("b", {}, `${ranked.length} FBS and FCS teams`), " ranked from best to worst by one thing only: ", h("b", {}, byMargin(ctx) ? "who beat whom, and by how much" : "who beat whom"), ". No votes, no preseason bias, no reputation. Anyone can recompute it."),
+    lens(ctx, "list"),
     h("div", { class: "chips" },
       h("span", { class: "chip" }, h("b", {}, String(ctx.ranking.manifest.counts.included)), "games counted"),
       h("span", { class: "chip" }, h("b", {}, String(fbs)), "FBS ·", h("b", {}, String(ranked.length - fbs)), "FCS"),
@@ -55,6 +59,13 @@ export function listView(ctx: Ctx): HTMLElement {
   const body = h("div");
   const count = h("span", { class: "count" });
 
+  // The other published ranking, shown as a column so disagreements stand out.
+  const alt = ctx.alt ? MODE_LABEL[ctx.mode === "power" ? "resume" : "power"] : null;
+  const altCell = (t: RankedTeam) => {
+    const o = ctx.altById.get(t.id);
+    const diff = o?.rank != null && t.rank !== null ? o.rank - t.rank : 0;
+    return h("div", { class: `alt${Math.abs(diff) >= 25 ? " far" : ""}`, title: o?.rank == null ? "" : `${alt} rank ${o.rank}${diff ? ` (${Math.abs(diff)} ${diff > 0 ? "lower" : "higher"})` : ""}` }, o ? `#${rankLabel(o.rank, o.tied)}` : "—");
+  };
   const row = (t: RankedTeam) => {
     const tl = look(t);
     return h("a", { class: "row tv", href: teamHref(ctx, t.id), style: teamVars(tl?.color) },
@@ -65,6 +76,7 @@ export function listView(ctx: Ctx): HTMLElement {
       h("div", { class: "meter", title: `Height ${fmtHeight(t.height)}` },
         h("div", { class: "track" }, h("div", { class: "fill", style: `width:${pct(t.height!)}%` }), h("div", { class: "knob", style: `left:${pct(t.height!)}%` })),
         h("span", { class: "v" }, fmtHeight(t.height))),
+      alt ? altCell(t) : "",
       h("div", { class: "r ch" }, delta(t.change)),
     );
   };
@@ -110,8 +122,8 @@ export function listView(ctx: Ctx): HTMLElement {
     hero,
     podium,
     toolbar,
-    h("section", { class: "ladder", "aria-label": "Full ranking" },
-      h("div", { class: "lhead" }, h("div", { style: "text-align:center" }, "Rank"), h("div"), h("div", {}, "Team"), h("div", { class: "r" }, "W-L"), h("div", { class: "hm" }, isGridiron(ctx) ? "Rating (points vs. average team)" : "Height in the graph"), h("div", { class: "r ch" }, "Week")),
+    h("section", { class: `ladder${alt ? " two" : ""}`, "aria-label": "Full ranking" },
+      h("div", { class: "lhead" }, h("div", { style: "text-align:center" }, "Rank"), h("div"), h("div", {}, "Team"), h("div", { class: "r" }, "W-L"), h("div", { class: "hm" }, isGridiron(ctx) ? "Rating (points vs. average team)" : "Height in the graph"), alt ? h("div", { class: "r alt" }, alt) : "", h("div", { class: "r ch" }, "Week")),
       body),
   );
 }

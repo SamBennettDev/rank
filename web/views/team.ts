@@ -1,7 +1,8 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, type Site, byMargin, clampNote, restLabel, restLength, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
+import { type Ctx, type Site, MODE_LABEL, otherCtx, byMargin, clampNote, restLabel, restLength, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
+import { lens } from "../lens";
 import { logo, svgLogo, teamVars } from "../team";
 import { loadRanking } from "../store";
 
@@ -14,7 +15,10 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
     .filter((e) => e.winner === teamId || e.loser === teamId)
     .sort((a, b) => (a.seasonType === b.seasonType ? 0 : a.seasonType === "regular" ? -1 : 1) || a.week - b.week || a.gameId - b.gameId);
 
-  const stat = (label: string, value: Node | string) => h("div", { class: "tstat" }, h("b", {}, value), h("span", {}, label));
+  const stat = (label: string, value: Node | string, cur = false) => h("div", { class: `tstat${cur ? " cur" : ""}` }, h("b", {}, value), h("span", {}, label));
+  const altTeam = ctx.altById.get(teamId);
+  const resumeTeam = ctx.mode === "resume" ? team : altTeam;
+  const powerTeam = ctx.mode === "power" ? team : altTeam;
   const hero = h("section", { class: "thero tv", style: teamVars(tl?.color) },
     logo(tl, 520, { className: "wm" }),
     h("div", { class: "thero-inner" },
@@ -27,18 +31,21 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
             h("span", { class: "chip" }, h("b", {}, team.conference)),
             h("span", { class: "chip" }, team.classification.toUpperCase()),
             h("span", { class: "chip" }, `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`)))),
-      h("div", { class: "tstats" },
-        stat("Rank", rankLabel(team.rank, team.tied)),
+      h("div", { class: `tstats${ctx.alt ? " five" : ""}` },
+        ...(ctx.alt && resumeTeam && powerTeam
+          ? [stat("Résumé rank", rankLabel(resumeTeam.rank, resumeTeam.tied), ctx.mode === "resume"), stat("Power rank", rankLabel(powerTeam.rank, powerTeam.tied), ctx.mode === "power")]
+          : [stat("Rank", rankLabel(team.rank, team.tied))]),
         stat("Record", record(team)),
         stat(isGridiron(ctx) ? "Rating" : "Height", fmtHeight(team.height)),
-        stat("This week", team.change === null ? "New" : team.change === 0 ? "—" : h("span", { class: team.change > 0 ? "upc" : "downc" }, `${team.change > 0 ? "▲" : "▼"}${Math.abs(team.change)}`)))),
+        stat("This week", team.change === null ? "New" : team.change === 0 ? "—" : h("span", { class: team.change > 0 ? "upc" : "downc" }, `${team.change > 0 ? "▲" : "▼"}${Math.abs(team.change)}`))),
+      ctx.alt ? h("div", { class: "tlens" }, lens(ctx, "team", teamId)) : ""),
   );
 
   if (team.rank === null) {
     return h("div", {}, hero, h("div", { class: "tbody" }, h("div", { class: "panel" }, h("p", { class: "hint" }, "No counted games yet, so this team is unranked. It will appear once it plays an FBS or FCS opponent."))));
   }
 
-  const history = h("div", { class: "panel tv", style: teamVars(tl?.color) }, h("h2", {}, "Rank by week"), h("p", { class: "hint" }, "Recomputed from scratch each week using only games played so far."), h("div", { class: "loading" }, h("span"), h("span"), h("span")));
+  const history = h("div", { class: "panel tv", style: teamVars(tl?.color) }, h("h2", {}, ctx.alt ? `${MODE_LABEL[ctx.mode]} rank by week` : "Rank by week"), h("p", { class: "hint" }, "Recomputed from scratch each week using only games played so far."), h("div", { class: "loading" }, h("span"), h("span"), h("span")));
   void loadHistory(ctx, teamId).then((pts) => history.lastElementChild!.replaceWith(historyChart(pts, ctx.snapId)));
 
   return h("div", {},
@@ -54,7 +61,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
             : `Each win is a spring pulling the winner ${restLabel(ctx)} above the loser. The score doesn’t matter, only who won. This team rests where its springs balance.`),
           springs(ctx, teamId, games)),
         history),
-      isGridiron(ctx) ? matchup(ctx, teamId) : "",
+      matchupCtx(ctx) ? matchup(matchupCtx(ctx)!, teamId) : "",
       isGridiron(ctx) ? gridironLog(ctx, teamId, games) : gameLog(ctx, teamId, games)),
   );
 }
@@ -162,7 +169,7 @@ function badge(ctx: Ctx, id: number, x: number, y: number, size: number): SVGGEl
 async function loadHistory(ctx: Ctx, teamId: number): Promise<{ id: string; label: string; rank: number | null }[]> {
   const upto = ctx.entry.snapshots.findIndex((s) => s.id === ctx.snapId);
   const snaps = ctx.entry.snapshots.slice(0, upto + 1);
-  const rankings: Ranking[] = await Promise.all(snaps.map((s) => loadRanking(ctx.entry.season, s.id)));
+  const rankings: Ranking[] = await Promise.all(snaps.map((s) => loadRanking(ctx.entry.season, s.id, ctx.mode)));
   return snaps.map((s, i) => ({ id: s.id, label: s.label.replace("Week ", "W").replace("Postseason", "Post"), rank: rankings[i]!.teams.find((t) => t.id === teamId)?.rank ?? null }));
 }
 
@@ -268,6 +275,13 @@ function gridironLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     ...rows);
 }
 
+/** Matchups always use Power ratings: this page's if it shows Power, otherwise the other view's. */
+function matchupCtx(ctx: Ctx): Ctx | null {
+  if (isGridiron(ctx)) return ctx;
+  const other = otherCtx(ctx);
+  return other && isGridiron(other) ? other : null;
+}
+
 function matchup(ctx: Ctx, teamId: number): HTMLElement {
   const me = ctx.byId.get(teamId)!;
   const others = ctx.ranked.filter((t) => t.id !== teamId);
@@ -281,13 +295,13 @@ function matchup(ctx: Ctx, teamId: number): HTMLElement {
     const pm = predictedMargin(ctx, gap);
     const fav = gap >= 0 ? me : o;
     out.replaceChildren(
-      h("div", { class: "mu-side" }, logo(ctx.teams.get(teamId), 56), h("b", {}, me.school), h("span", {}, fmtHeight(me.height))),
+      h("div", { class: "mu-side" }, logo(ctx.teams.get(teamId), 56), h("b", {}, me.school), h("span", {}, `Power ${fmtPoints(me.height!)}`)),
       h("div", { class: "mu-mid" },
         h("div", { class: "mu-big" }, gap === 0 ? "Dead even" : pm === 0 ? `Lean ${fav.school}` : `${fav.school} by ${Math.abs(pm).toFixed(1)}`),
         h("div", { class: "mu-sub" }, pm === 0
           ? `Rating gap ${fmtPoints(gap)}${site === "neutral" ? "" : ` incl. ${homeField(ctx).toFixed(1)} home field`}: under one touchdown, close to a coin flip.`
           : `Rating gap ${fmtPoints(gap)}${site === "neutral" ? "" : ` incl. ${homeField(ctx).toFixed(1)} home field`}, minus the ${gridironParams(ctx)!.winBonus}-point win credit.`)),
-      h("div", { class: "mu-side" }, logo(ctx.teams.get(oppId), 56), h("b", {}, o.school), h("span", {}, fmtHeight(o.height))),
+      h("div", { class: "mu-side" }, logo(ctx.teams.get(oppId), 56), h("b", {}, o.school), h("span", {}, `Power ${fmtPoints(o.height!)}`)),
     );
   };
   const sel = h("select", { "aria-label": "Opponent", onchange: (e: Event) => { oppId = Number((e.target as HTMLSelectElement).value); draw(); } },
@@ -299,7 +313,7 @@ function matchup(ctx: Ctx, teamId: number): HTMLElement {
   draw();
   return h("section", { class: "panel matchup" },
     h("h2", {}, "Predict a matchup"),
-    h("p", { class: "hint" }, "From this week’s ratings only. Not a forecast of injuries, weather or motivation."),
+    h("p", { class: "hint" }, "From this week’s Power ratings only. Not a forecast of injuries, weather or motivation."),
     h("div", { class: "mu-ctl" }, h("div", { class: "sel" }, sel), seg),
     out);
 }
