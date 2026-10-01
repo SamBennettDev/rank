@@ -331,6 +331,16 @@ select:hover { border-color: var(--faint); }
 .hist .pt { fill: var(--surface); stroke: var(--ta); stroke-width: 2.5; }
 .hist .pv { fill: var(--text); font: 700 13px var(--display); text-anchor: middle; }
 .games { margin-top: 16px; }
+.matchup { margin-top: 16px; }
+.mu-ctl { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 14px; }
+.mu-out { display: grid; grid-template-columns: 1fr 1.6fr 1fr; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: var(--surface-2); }
+.mu-side { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 0; }
+.mu-side b { font-weight: 650; font-size: 14px; }
+.mu-side span { font: 600 14px var(--display); color: var(--muted); letter-spacing: .03em; }
+.mu-mid { text-align: center; }
+.mu-big { font: 800 30px/1.05 var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.mu-sub { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+@media (max-width: 720px) { .mu-out { grid-template-columns: 1fr; } .mu-big { font-size: 24px; } }
 .games .lhead, .games .grow2 { display: grid; grid-template-columns: 58px 40px minmax(140px, 1fr) 96px 70px 80px 80px; gap: 12px; align-items: center; padding: 0 18px; }
 .games .grow2 { height: 60px; border-bottom: 1px solid var(--line); }
 .games .grow2:last-child { border-bottom: 0; }
@@ -359,7 +369,11 @@ select:hover { border-color: var(--faint); }
 .method h2 { font: 800 30px/1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 44px 0 12px; }
 .method p, .method li { color: var(--muted); font-size: 15.5px; }
 .method p b, .method li b { color: var(--text); font-weight: 600; }
-.method ul { padding-left: 20px; } .method li { margin: 6px 0; }
+.method ul, .method ol { padding-left: 20px; } .method li { margin: 6px 0; }
+.method ol.rules li { margin: 10px 0; padding-left: 4px; }
+.method ol.rules li::marker { font: 800 18px var(--display); color: var(--brand); }
+.mf.bt thead th, .mf.bt thead td { font: 700 12px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); background: var(--surface-2); }
+.mf.bt tr.best th, .mf.bt tr.best td { color: var(--text); font-weight: 700; background: var(--brand-soft); }
 .formula { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; overflow-x: auto; font: 500 15px/1.7 ui-monospace, "SF Mono", Menlo, monospace; color: var(--text); box-shadow: var(--shadow); }
 .formula .c { color: var(--faint); }
 .springdemo { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; margin: 16px 0; box-shadow: var(--shadow); }

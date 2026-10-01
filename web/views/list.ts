@@ -1,6 +1,6 @@
 import type { RankedTeam } from "../../src/engine/types";
 import { delta, divTag } from "../bits";
-import { type Ctx, byMargin, fmtHeight, rankLabel, record, teamHref, upsets } from "../ctx";
+import { type Ctx, byMargin, fmtHeight, isGridiron, rankLabel, record, teamHref, upsets } from "../ctx";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import { logo, teamVars } from "../team";
@@ -20,7 +20,9 @@ export function listView(ctx: Ctx): HTMLElement {
   const hero = h("section", { class: "hero" },
     h("div", { class: "eyebrow" }, `${ctx.entry.season} season · ${ctx.ranking.snapshot.label}`),
     h("h1", {}, "Every team.", h("br"), h("em", {}, "One ladder.")),
-    h("p", { class: "lede" }, "All ", h("b", {}, `${ranked.length} FBS and FCS teams`), " ranked from best to worst by one thing only: ", h("b", {}, byMargin(ctx) ? "who beat whom, and by how much" : "who beat whom"), ". No votes, no preseason bias, no reputation. Anyone can recompute it."),
+    isGridiron(ctx)
+      ? h("p", { class: "lede" }, "All ", h("b", {}, `${ranked.length} FBS and FCS teams`), " ranked from best to worst using only final scores: ", h("b", {}, "who won, by how much, and where"), ". Ratings are in points, so any two teams can be compared directly. No votes, no preseason bias, no reputation.")
+      : h("p", { class: "lede" }, "All ", h("b", {}, `${ranked.length} FBS and FCS teams`), " ranked from best to worst by one thing only: ", h("b", {}, byMargin(ctx) ? "who beat whom, and by how much" : "who beat whom"), ". No votes, no preseason bias, no reputation. Anyone can recompute it."),
     h("div", { class: "chips" },
       h("span", { class: "chip" }, h("b", {}, String(ctx.ranking.manifest.counts.included)), "games counted"),
       h("span", { class: "chip" }, h("b", {}, String(fbs)), "FBS ·", h("b", {}, String(ranked.length - fbs)), "FCS"),
@@ -109,7 +111,7 @@ export function listView(ctx: Ctx): HTMLElement {
     podium,
     toolbar,
     h("section", { class: "ladder", "aria-label": "Full ranking" },
-      h("div", { class: "lhead" }, h("div", { style: "text-align:center" }, "Rank"), h("div"), h("div", {}, "Team"), h("div", { class: "r" }, "W-L"), h("div", { class: "hm" }, "Height in the graph"), h("div", { class: "r ch" }, "Week")),
+      h("div", { class: "lhead" }, h("div", { style: "text-align:center" }, "Rank"), h("div"), h("div", {}, "Team"), h("div", { class: "r" }, "W-L"), h("div", { class: "hm" }, isGridiron(ctx) ? "Rating (points vs. average team)" : "Height in the graph"), h("div", { class: "r ch" }, "Week")),
       body),
   );
 }
