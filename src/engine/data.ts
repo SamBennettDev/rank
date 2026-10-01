@@ -56,6 +56,15 @@ export function parseConfig(json: string): SeasonConfig {
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
   }
+  if (c.method !== undefined && c.method !== "springrank" && c.method !== "gridiron") {
+    throw new Error('config.method must be "springrank" or "gridiron"');
+  }
+  if (c.method === "gridiron") {
+    const g = c.gridiron;
+    if (!g || typeof g.winBonus !== "number" || typeof g.blowoutLimit !== "number" || typeof g.fitHomeField !== "boolean" || typeof g.maxIterations !== "number") {
+      throw new Error("config.gridiron must set winBonus, blowoutLimit, fitHomeField and maxIterations");
+    }
+  }
   if (c.edgeWeight !== undefined && c.edgeWeight !== "win" && c.edgeWeight !== "margin") {
     throw new Error('config.edgeWeight must be "win" or "margin"');
   }

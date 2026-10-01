@@ -1,17 +1,50 @@
 import { parseConfig, parseGames, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
+import { gridironSprings } from "./gridiron";
 import { springRank } from "./springrank";
-import type { Edge, EdgeWeight, Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
+import type { Edge, EdgeWeight, GridironConfig, Manifest, RankedTeam, Ranking, SeasonConfig, SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-3";
+export const ENGINE_VERSION = "rank-engine-4";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
 /** Spring stiffness of one game under the season's weighting. */
 export function edgeWeight(e: Pick<Edge, "winnerPoints" | "loserPoints">, weighting: EdgeWeight): number {
   return weighting === "margin" ? e.winnerPoints - e.loserPoints : 1;
+}
+
+export interface Solved {
+  heights: Float64Array;
+  /** gridiron only */
+  homeField?: number;
+  iterations?: number;
+}
+
+/** Ratings for one set of counted games under the season's configured method. */
+export function solve(n: number, edges: readonly Edge[], index: ReadonlyMap<number, number>, config: SeasonConfig): Solved {
+  if ((config.method ?? "springrank") === "gridiron") {
+    const r = gridironSprings(n, edges.map((e) => toFieldGame(e, index)), config.alpha, config.gridiron!);
+    return { heights: r.heights, homeField: r.homeField, iterations: r.iterations };
+  }
+  const weighting = config.edgeWeight ?? "win";
+  return {
+    heights: springRank(n, edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting) })), config.alpha),
+  };
+}
+
+/** An edge seen from the home side, as the gridiron solver wants it. */
+export function toFieldGame(e: Edge, index: ReadonlyMap<number, number>) {
+  const home = e.winnerIsHome ? e.winner : e.loser;
+  const away = e.winnerIsHome ? e.loser : e.winner;
+  return {
+    home: index.get(home)!,
+    away: index.get(away)!,
+    homePoints: e.winnerIsHome ? e.winnerPoints : e.loserPoints,
+    awayPoints: e.winnerIsHome ? e.loserPoints : e.winnerPoints,
+    neutral: e.neutralSite,
+  };
 }
 
 export interface SeasonInput {
@@ -38,7 +71,7 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
   const teamsSha256 = await sha256Hex(input.teamsCsv);
   const gamesSha256 = await sha256Hex(input.gamesCsv);
 
-  const weighting = config.edgeWeight ?? "win";
+  const method = config.method ?? "springrank";
   const index = new Map(teams.map((t, i) => [t.id, i]));
   const files: SeasonOutput["files"] = [];
   const snapshots = listSnapshots(games);
@@ -54,11 +87,8 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
     }
     const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
-    const s = springRank(
-      teams.length,
-      edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)!, weight: edgeWeight(e, weighting) })),
-      config.alpha,
-    );
+    const solved = solve(teams.length, edges, index, config);
+    const s = solved.heights;
     const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
     const sortedHeights = [...heights.values()].sort((a, b) => b - a);
 
@@ -86,8 +116,11 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
     const manifest: Manifest = {
       engine: ENGINE_VERSION,
       algorithmVersion: config.algorithmVersion,
+      method,
       alpha: config.alpha,
-      edgeWeight: weighting,
+      ...(method === "gridiron"
+        ? { gridiron: { ...pickGridiron(config.gridiron!), homeFieldPoints: round6(solved.homeField!), iterations: solved.iterations! } }
+        : { edgeWeight: config.edgeWeight ?? "win" }),
       classifications: config.classifications,
       teamsSha256,
       gamesSha256,
@@ -105,6 +138,11 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       snapshots: snapshots.map((s) => ({ id: s.id, label: s.label })),
     },
   };
+}
+
+/** Copies the gridiron parameters in a fixed key order. */
+function pickGridiron(g: GridironConfig): GridironConfig {
+  return { winBonus: g.winBonus, blowoutLimit: g.blowoutLimit, fitHomeField: g.fitHomeField, maxIterations: g.maxIterations };
 }
 
 /** Fixed key order, one team per line, so git diffs of published rankings stay readable. */

@@ -1,7 +1,7 @@
 import { select } from "d3-selection";
 import { type ZoomTransform, zoom, zoomIdentity } from "d3-zoom";
 import type { Edge, RankedTeam } from "../../src/engine/types";
-import { type Ctx, byMargin, fmtHeight, rankLabel, record, springWidth, teamHref, upsets } from "../ctx";
+import { type Ctx, byMargin, fmtHeight, fmtPoints, homeField, isGridiron, rankLabel, record, springWidth, teamHref, upsets } from "../ctx";
 import { h, svg } from "../dom";
 import { searchIcon } from "../icons";
 import { computeLayout } from "../layout";
@@ -133,7 +133,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     tip.replaceChildren(
       h("div", { class: "rk" }, rankLabel(t.rank, t.tied)),
       logo(ctx.teams.get(t.id), 30),
-      h("div", {}, h("div", { class: "t1" }, t.school), h("div", { class: "t2" }, `${record(t)} · height ${fmtHeight(t.height)} · ${t.conference}`)),
+      h("div", {}, h("div", { class: "t1" }, t.school), h("div", { class: "t2" }, `${record(t)} · ${isGridiron(ctx) ? "rating" : "height"} ${fmtHeight(t.height)} · ${t.conference}`)),
     );
     tip.style.display = "flex";
     if (ev) moveTip(ev);
@@ -178,7 +178,9 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-        h("p", {}, "Every game is a spring pulling the winner one unit above the loser", byMargin(ctx) ? ", as stiff as the point differential" : "", ". Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+        isGridiron(ctx)
+          ? h("p", {}, "Every game is a spring that wants the winner as many points above the loser as they won by, plus a touchdown, after allowing ", h("b", {}, `${fmtPoints(homeField(ctx)).replace("+", "")} points for home field`), ". Where all the springs balance is each team’s height, in points, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank.")
+          : h("p", {}, "Every game is a spring pulling the winner one unit above the loser", byMargin(ctx) ? ", as stiff as the point differential" : "", ". Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),
@@ -208,7 +210,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
         h("div", { class: "stats" },
           h("div", {}, h("b", {}, rankLabel(t.rank, t.tied)), h("span", {}, "Rank")),
           h("div", {}, h("b", {}, record(t)), h("span", {}, "Record")),
-          h("div", {}, h("b", {}, fmtHeight(t.height)), h("span", {}, "Height")))),
+          h("div", {}, h("b", {}, fmtHeight(t.height)), h("span", {}, isGridiron(ctx) ? "Rating" : "Height")))),
       h("div", { class: "glist" },
         ...games.map((e) => {
           const won = e.winner === id;

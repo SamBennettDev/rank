@@ -17,7 +17,8 @@
     "fetch": "tsx scripts/fetch-cfbd.ts",
     "demo": "tsx scripts/make-demo.ts",
     "compute": "tsx scripts/compute.ts",
-    "verify": "tsx scripts/verify.ts"
+    "verify": "tsx scripts/verify.ts",
+    "backtest": "tsx scripts/backtest.ts"
   },
   "dependencies": {
     "d3-selection": "^3.0.0",

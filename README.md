@@ -2,14 +2,14 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: each team is a node in a graph, each game is an edge from loser to winner, and a team's rank is its **y-coordinate** in that graph ([SpringRank](https://www.science.org/doi/10.1126/sciadv.aar8260)). No preseason bias, no human opinions: each game is a spring whose strength is its point differential.
+The AP Poll is a vote. This is a calculation: each team is a node in a graph, each game is a spring between two teams, and a team's rank is its **y-coordinate** once the springs settle. The model, **Gridiron Springs**, is built for football: each spring wants the winner as many points above the loser as they won by plus a touchdown, home field is solved from the data, and blowouts stop pulling harder after three touchdowns. Ratings are in points. No preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md) and the [backtest](docs/BACKTEST.md) behind it.
 
 | | |
 |---|---|
 | **Deterministic** | Same data in, byte-identical rankings out. No randomness. |
 | **Auditable** | Raw data, code and output are all here. `npm run verify` and the site's *Recompute* button regenerate every ranking and compare it with what is published. |
 | **Transparent** | One short [methodology](docs/METHODOLOGY.md), one config file per season, and a page per team showing every game behind its rank. |
-| **Unbiased** | The only inputs are final scores. |
+| **Unbiased** | The only inputs are final scores, game sites and who played whom. |
 
 ## Where the data lives
 
@@ -18,7 +18,7 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    algorithm version, alpha, spring strength (edgeWeight), divisions
+data/seasons/<year>/config.json    method and its constants (win bonus, blowout limit), alpha, divisions
 data/rankings/<year>/<snapshot>.json   published output (heights, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```
@@ -33,6 +33,7 @@ npm run dev        # site at http://localhost:5173
 npm test           # unit + determinism tests
 npm run compute    # CSVs -> rankings
 npm run verify     # fail if any published ranking differs from a fresh computation
+npm run backtest -- --history 2015-2025   # reproduce the method comparison
 npm run build      # static site in dist/
 ```
 
@@ -55,12 +56,12 @@ In GitHub, the **Update data** workflow does this weekly (and daily in bowl seas
 ## Layout
 
 ```
-src/engine/   the whole algorithm: csv, graph, Cholesky, SpringRank, layout, season pipeline
-scripts/      fetch (API -> CSV), compute, verify, make-demo
+src/engine/   the whole algorithm: csv, graph, Cholesky, Gridiron Springs, SpringRank, season pipeline
+scripts/      fetch (API -> CSV), compute, verify, backtest, make-demo
 web/          the static site (vanilla TypeScript + d3-zoom); imports the same engine.
               Team logos load from ESPN's logo CDN by team id (CFBD ids are ESPN ids).
 tests/        linear algebra, SpringRank, determinism
-docs/         METHODOLOGY.md
+docs/         METHODOLOGY.md, BACKTEST.md
 ```
 
 ## License

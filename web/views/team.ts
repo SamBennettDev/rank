@@ -1,8 +1,8 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, byMargin, fmtHeight, href, rankLabel, record, springWidth, teamHref } from "../ctx";
+import { type Ctx, type Site, byMargin, expectedMargin, fmtHeight, fmtPoints, gridironParams, homeField, href, isGridiron, predictedMargin, rankLabel, record, siteFor, springPull, springWidth, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
-import { logo, logoUrl, prefersDark, teamVars } from "../team";
+import { logo, svgLogo, teamVars } from "../team";
 import { loadRanking } from "../store";
 
 export function teamView(ctx: Ctx, teamId: number): HTMLElement {
@@ -30,7 +30,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h("div", { class: "tstats" },
         stat("Rank", rankLabel(team.rank, team.tied)),
         stat("Record", record(team)),
-        stat("Height", fmtHeight(team.height)),
+        stat(isGridiron(ctx) ? "Rating" : "Height", fmtHeight(team.height)),
         stat("This week", team.change === null ? "New" : team.change === 0 ? "—" : h("span", { class: team.change > 0 ? "upc" : "downc" }, `${team.change > 0 ? "▲" : "▼"}${Math.abs(team.change)}`)))),
   );
 
@@ -47,12 +47,15 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h("div", { class: "tgrid" },
         h("div", { class: "panel springs" },
           h("h2", {}, "Why it’s here"),
-          h("p", { class: "hint" }, byMargin(ctx)
+          h("p", { class: "hint" }, isGridiron(ctx)
+            ? `Each game is a spring that wants the winner as many points above the loser as they won by, plus ${gridironParams(ctx)!.winBonus} for winning, after home field. Thinner lines are blowouts the ${gridironParams(ctx)!.blowoutLimit}-point limit stopped from pulling harder.`
+            : byMargin(ctx)
             ? "Each game is a spring pulling the winner one unit above the loser, as stiff as the point differential (thicker line = bigger margin). This team rests where its springs balance."
             : "Each game is a spring pulling the winner one unit above the loser. This team rests where its springs balance."),
           springs(ctx, teamId, games)),
         history),
-      gameLog(ctx, teamId, games)),
+      isGridiron(ctx) ? matchup(ctx, teamId) : "",
+      isGridiron(ctx) ? gridironLog(ctx, teamId, games) : gameLog(ctx, teamId, games)),
   );
 }
 
@@ -75,7 +78,8 @@ function springs(ctx: Ctx, teamId: number, games: Edge[]): SVGSVGElement {
   const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Springs diagram of this team's games" });
 
   // height ticks
-  const step = span > 3 ? 1 : span > 1.2 ? 0.5 : 0.25;
+  // ~6 guide lines whatever the scale (points for Gridiron Springs, units for SpringRank)
+  const step = [0.25, 0.5, 1, 2, 5, 10, 20, 50].find((st) => span / st <= 7) ?? 100;
   for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
     root.appendChild(svg("line", { class: "tl", x1: 40, x2: W - 10, y1: y(v), y2: y(v) }));
     const t = svg("text", { class: "tk", x: 4, y: y(v) + 4 });
@@ -105,9 +109,7 @@ function springs(ctx: Ctx, teamId: number, games: Edge[]): SVGSVGElement {
       root.appendChild(svg("path", { class: `s ${item.won ? "w" : "l"}${upset ? " up" : ""}`, d: `M${x},${oy} C${c1},${oy} ${c1},${y(me.height!)} ${cx},${y(me.height!)}`, style: `stroke-width:${springWidth(ctx, item.e)}` }));
       const a = svg("a", { href: teamHref(ctx, item.o.id) });
       a.appendChild(svg("circle", { cx: x, cy: oy, r: sz / 2 + 2, fill: "var(--surface)", stroke: "var(--line-2)" }));
-      const img = svg("image", { x: x - sz / 2 + 2, y: oy - sz / 2 + 2, width: sz - 4, height: sz - 4, href: logoUrl(item.o.id, 64, prefersDark()) });
-      img.addEventListener("error", () => img.setAttribute("href", logoUrl(item.o.id, 64)), { once: true });
-      a.appendChild(img);
+      a.appendChild(badge(ctx, item.o.id, x, oy, sz - 4));
       const title = svg("title", {});
       title.textContent = `${item.o.school} (#${rankLabel(item.o.rank, item.o.tied)}), ${item.won ? "W" : "L"} ${item.won ? item.e.winnerPoints : item.e.loserPoints}–${item.won ? item.e.loserPoints : item.e.winnerPoints}`;
       a.appendChild(title);
@@ -136,10 +138,23 @@ function springs(ctx: Ctx, teamId: number, games: Edge[]): SVGSVGElement {
   // the team itself, on top
   const my = y(me.height!);
   root.appendChild(svg("circle", { cx, cy: my, r: 25, fill: "var(--surface)", stroke: "var(--ta)", "stroke-width": 3 }));
-  const img = svg("image", { x: cx - 20, y: my - 20, width: 40, height: 40, href: logoUrl(teamId, 96, prefersDark()) });
-  img.addEventListener("error", () => img.setAttribute("href", logoUrl(teamId, 96)), { once: true });
-  root.appendChild(img);
+  root.appendChild(badge(ctx, teamId, cx, my, 40));
   return root;
+}
+
+/** Team logo centred at (x, y); falls back to a monogram in team colours if no logo loads. */
+function badge(ctx: Ctx, id: number, x: number, y: number, size: number): SVGGElement {
+  const t = ctx.teams.get(id);
+  const g = svg("g", { class: "badge", style: teamVars(t?.color) });
+  const mono = svg("g", { class: "bmono", style: "display:none" });
+  mono.appendChild(svg("circle", { cx: x, cy: y, r: size / 2, fill: "var(--tc)" }));
+  const txt = svg("text", { x, y, "text-anchor": "middle", "dominant-baseline": "central", fill: "var(--tc-ink)", style: `font:800 ${Math.round(size * 0.32)}px var(--display)` });
+  txt.textContent = (t?.abbreviation ?? "?").slice(0, 4);
+  mono.appendChild(txt);
+  const img = svg("image", { x: x - size / 2, y: y - size / 2, width: size, height: size });
+  g.append(mono, img);
+  svgLogo(img, id, Math.ceil(size * 2.5), () => mono.setAttribute("style", ""));
+  return g;
 }
 
 // ---------------------------------------------------------------------------
@@ -222,3 +237,69 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     ...rows);
 }
 
+
+// ---------------------------------------------------------------------------
+// Gridiron Springs: predicted vs actual for every game, and a matchup predictor.
+function gridironLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
+  const me = ctx.byId.get(teamId)!;
+  const rows = games.map((e) => {
+    const won = e.winner === teamId;
+    const o = ctx.byId.get(won ? e.loser : e.winner)!;
+    const site = siteFor(e, teamId);
+    const expected = predictedMargin(ctx, expectedMargin(ctx, teamId, o.id, site));
+    const actual = won ? e.winnerPoints - e.loserPoints : e.loserPoints - e.winnerPoints;
+    const diff = actual - expected;
+    const pull = springPull(ctx, e);
+    const upset = (won && me.height! < o.height!) || (!won && me.height! > o.height!);
+    return h("a", { class: "grow2", href: teamHref(ctx, o.id) },
+      h("span", { class: "wk" }, e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`),
+      logo(ctx.teams.get(o.id), 34, { lazy: true }),
+      h("span", { class: "op" },
+        h("span", { class: "n" }, site === "away" ? `at ${o.school}` : `vs ${o.school}`),
+        h("span", { class: "c" }, `#${rankLabel(o.rank, o.tied)} · ${record(o)} · ${site === "neutral" ? "neutral site" : o.conference}`, upset ? " " : "", upset ? h("span", { class: "tag-up" }, "UPSET") : "")),
+      h("span", { class: `pill ${won ? "w" : "l"}` }, h("i", {}, won ? "W" : "L"), `${won ? e.winnerPoints : e.loserPoints}–${won ? e.loserPoints : e.winnerPoints}`),
+      h("span", { class: "r hide-sm", title: "Predicted margin from the final ratings, including home field" }, fmtPoints(expected)),
+      h("span", { class: `r ${diff >= 0 ? "pos" : "neg"}`, title: "Actual margin minus predicted margin" }, fmtPoints(diff)),
+      h("span", { class: "r hide-sm", title: pull < 1 ? "Blowout limit: this game pulls with reduced force" : "Full pull" }, pull < 1 ? `${Math.round(pull * 100)}%` : "100%"),
+    );
+  });
+  return h("section", { class: "ladder games" },
+    h("div", { class: "lhead" }, h("div", {}, "When"), h("div"), h("div", {}, "Opponent"), h("div", {}, "Result"), h("div", { class: "r hide-sm" }, "Expected"), h("div", { class: "r" }, "vs exp."), h("div", { class: "r hide-sm" }, "Pull")),
+    ...rows);
+}
+
+function matchup(ctx: Ctx, teamId: number): HTMLElement {
+  const me = ctx.byId.get(teamId)!;
+  const others = ctx.ranked.filter((t) => t.id !== teamId);
+  const near = others.find((t) => t.rank! > me.rank!) ?? others.at(-1)!;
+  let oppId = near.id;
+  let site: Site = "neutral";
+  const out = h("div", { class: "mu-out" });
+  const draw = () => {
+    const o = ctx.byId.get(oppId)!;
+    const gap = expectedMargin(ctx, teamId, oppId, site);
+    const pm = predictedMargin(ctx, gap);
+    const fav = gap >= 0 ? me : o;
+    out.replaceChildren(
+      h("div", { class: "mu-side" }, logo(ctx.teams.get(teamId), 56), h("b", {}, me.school), h("span", {}, fmtHeight(me.height))),
+      h("div", { class: "mu-mid" },
+        h("div", { class: "mu-big" }, gap === 0 ? "Dead even" : pm === 0 ? `Lean ${fav.school}` : `${fav.school} by ${Math.abs(pm).toFixed(1)}`),
+        h("div", { class: "mu-sub" }, pm === 0
+          ? `Rating gap ${fmtPoints(gap)}${site === "neutral" ? "" : ` incl. ${homeField(ctx).toFixed(1)} home field`}: under one touchdown, close to a coin flip.`
+          : `Rating gap ${fmtPoints(gap)}${site === "neutral" ? "" : ` incl. ${homeField(ctx).toFixed(1)} home field`}, minus the ${gridironParams(ctx)!.winBonus}-point win credit.`)),
+      h("div", { class: "mu-side" }, logo(ctx.teams.get(oppId), 56), h("b", {}, o.school), h("span", {}, fmtHeight(o.height))),
+    );
+  };
+  const sel = h("select", { "aria-label": "Opponent", onchange: (e: Event) => { oppId = Number((e.target as HTMLSelectElement).value); draw(); } },
+    ...others.map((t) => h("option", { value: t.id, selected: t.id === oppId }, `#${rankLabel(t.rank, t.tied)} ${t.school}`)));
+  const seg = h("div", { class: "seg", role: "group", "aria-label": "Site" });
+  const drawSeg = () => seg.replaceChildren(...(([["Home", "home"], ["Neutral", "neutral"], ["Away", "away"]] as [string, Site][]).map(([label, v]) =>
+    h("button", { class: site === v ? "on" : "", "aria-pressed": site === v, onclick: () => { site = v; drawSeg(); draw(); } }, label))));
+  drawSeg();
+  draw();
+  return h("section", { class: "panel matchup" },
+    h("h2", {}, "Predict a matchup"),
+    h("p", { class: "hint" }, "From this week’s ratings only. Not a forecast of injuries, weather or motivation."),
+    h("div", { class: "mu-ctl" }, h("div", { class: "sel" }, sel), seg),
+    out);
+}
