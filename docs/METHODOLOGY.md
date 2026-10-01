@@ -58,9 +58,9 @@ where `d_out` is each team's wins and `d_in` its losses. For `alpha > 0` the mat
 
 ## Graph layout
 
-Only the **vertical** position is meaningful. Horizontal position is a cosmetic, deterministic layout: one lane per conference (alphabetical), with teams nudged sideways only if they would overlap. It is computed by `src/engine/layout.ts` using plain arithmetic and published in the ranking JSON.
+Only the **vertical** position is meaningful: it is the team's height. Horizontal position is cosmetic and is computed by the website (`web/layout.ts`), not stored in the ranking files: one lane per conference, lanes ordered by the conference's mean height, with teams nudged sideways only where their logos would overlap.
 
-Edges are not stored in the ranking files. The site rebuilds them from `games.csv` with the same `buildEdges` function the pipeline uses.
+Edges are not stored in the ranking files either. The site rebuilds them from `games.csv` with the same `buildEdges` function the pipeline uses.
 
 ## Per-game quantities on a team page
 

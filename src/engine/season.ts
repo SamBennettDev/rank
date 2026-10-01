@@ -1,12 +1,11 @@
 import { parseConfig, parseGames, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
-import { layoutX } from "./layout";
 import { springRank } from "./springrank";
 import type { Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
 
-/** Bump when anything that changes output bytes changes (formatting, rounding, layout). */
-export const ENGINE_VERSION = "rank-engine-1";
+/** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
+export const ENGINE_VERSION = "rank-engine-2";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -55,7 +54,6 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       config.alpha,
     );
     const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
-    const xs = heights.size > 0 ? layoutX(heights, new Map(teams.map((t) => [t.id, t.conference]))) : new Map<number, number>();
     const sortedHeights = [...heights.values()].sort((a, b) => b - a);
 
     const ranked: RankedTeam[] = teams.map((t) => {
@@ -74,7 +72,6 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
         wins: wins.get(t.id) ?? 0,
         losses: losses.get(t.id) ?? 0,
         change: rank !== null && prev !== undefined ? prev - rank : null,
-        x: xs.get(t.id) ?? null,
       };
     });
     ranked.sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id);

@@ -87,8 +87,6 @@ export interface RankedTeam {
   losses: number;
   /** Places gained since the previous snapshot (positive = moved up). */
   change: number | null;
-  /** Horizontal layout position. Carries no ranking meaning. */
-  x: number | null;
 }
 
 export interface Manifest {

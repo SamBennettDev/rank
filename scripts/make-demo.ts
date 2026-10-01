@@ -1,13 +1,12 @@
 /**
- * Generates the FICTIONAL demo season (data/seasons/demo). It exists so the site
- * and tests have something to show before real data is fetched. Seeded, so the
+ * Generates the FICTIONAL test fixture season (tests/fixtures/demo) used by the
+ * determinism tests. Seeded, so the
  * output is identical on every run. Nothing here is real football data.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { gamesToCsv, teamsToCsv } from "../src/engine/data";
 import type { Game, Team } from "../src/engine/types";
-import { DATA_DIR } from "./lib";
 
 function mulberry32(seed: number) {
   return () => {
@@ -75,7 +74,7 @@ for (let week = 1; week <= 12; week++) {
   }
 }
 
-const dir = join(DATA_DIR, "seasons/demo");
+const dir = join(import.meta.dirname, "../tests/fixtures/demo");
 mkdirSync(dir, { recursive: true });
 writeFileSync(join(dir, "teams.csv"), teamsToCsv(teams));
 writeFileSync(join(dir, "games.csv"), gamesToCsv(games));
