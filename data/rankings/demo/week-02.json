@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "season": "demo",
+  "snapshot": {"id":"week-02","label":"Week 2","throughWeek":2,"includePostseason":false},
+  "manifest": {
+    "engine": "rank-engine-1",
+    "algorithmVersion": "springrank-1",
+    "alpha": 0.01,
+    "classifications": [
+      "fbs"
+    ],
+    "teamsSha256": "29f196dd6ac3d7bffff0c65acefd999087cf6f624b23cc374b427033ed5f4636",
+    "gamesSha256": "0e08517329f295cfb5343a5b10ed7375f4dd72a8f3301e72b5fd561c672f3c80",
+    "counts": {
+      "inWindow": 32,
+      "included": 32,
+      "outOfScope": 0,
+      "incomplete": 0,
+      "tied": 0
+    }
+  },
+  "teams": [
+    {"id":9009,"school":"Ash Ridge","abbreviation":"D09","conference":"Demo Alpha","classification":"fbs","rank":1,"tied":false,"height":1.870531,"wins":2,"losses":0,"change":0,"x":-135},
+    {"id":9004,"school":"Dune Hollow","abbreviation":"D04","conference":"Demo Delta","classification":"fbs","rank":2,"tied":false,"height":1.782434,"wins":2,"losses":0,"change":-1,"x":45},
+    {"id":9027,"school":"Cedar Fields","abbreviation":"D27","conference":"Demo Gamma","classification":"fbs","rank":3,"tied":false,"height":1.773208,"wins":2,"losses":0,"change":-2,"x":135},
+    {"id":9022,"school":"Fern Vale","abbreviation":"D22","conference":"Demo Beta","classification":"fbs","rank":4,"tied":false,"height":1.730025,"wins":2,"losses":0,"change":-3,"x":-45},
+    {"id":9019,"school":"Cedar Vale","abbreviation":"D19","conference":"Demo Gamma","classification":"fbs","rank":5,"tied":false,"height":1.726991,"wins":2,"losses":0,"change":-4,"x":145},
+    {"id":9002,"school":"Birch Hollow","abbreviation":"D02","conference":"Demo Beta","classification":"fbs","rank":6,"tied":false,"height":0.941987,"wins":1,"losses":1,"change":11,"x":-45},
+    {"id":9008,"school":"Hazel Hollow","abbreviation":"D08","conference":"Demo Delta","classification":"fbs","rank":7,"tied":false,"height":0.941275,"wins":2,"losses":0,"change":-6,"x":45},
+    {"id":9007,"school":"Glen Hollow","abbreviation":"D07","conference":"Demo Gamma","classification":"fbs","rank":8,"tied":false,"height":0.830225,"wins":1,"losses":1,"change":-7,"x":135},
+    {"id":9029,"school":"Elm Fields","abbreviation":"D29","conference":"Demo Alpha","classification":"fbs","rank":9,"tied":false,"height":0.817781,"wins":0,"losses":2,"change":8,"x":-135},
+    {"id":9012,"school":"Dune Ridge","abbreviation":"D12","conference":"Demo Delta","classification":"fbs","rank":10,"tied":false,"height":0.752467,"wins":0,"losses":2,"change":7,"x":45},
+    {"id":9028,"school":"Dune Fields","abbreviation":"D28","conference":"Demo Delta","classification":"fbs","rank":11,"tied":false,"height":0.746367,"wins":0,"losses":2,"change":6,"x":59},
+    {"id":9026,"school":"Birch Fields","abbreviation":"D26","conference":"Demo Beta","classification":"fbs","rank":12,"tied":false,"height":0.724883,"wins":0,"losses":2,"change":5,"x":-45},
+    {"id":9030,"school":"Fern Fields","abbreviation":"D30","conference":"Demo Beta","classification":"fbs","rank":13,"tied":false,"height":0.327209,"wins":2,"losses":0,"change":-12,"x":-45},
+    {"id":9006,"school":"Fern Hollow","abbreviation":"D06","conference":"Demo Beta","classification":"fbs","rank":14,"tied":false,"height":0.229768,"wins":2,"losses":0,"change":-13,"x":-45},
+    {"id":9011,"school":"Cedar Ridge","abbreviation":"D11","conference":"Demo Gamma","classification":"fbs","rank":15,"tied":false,"height":0.125196,"wins":2,"losses":0,"change":-14,"x":135},
+    {"id":9015,"school":"Glen Ridge","abbreviation":"D15","conference":"Demo Gamma","classification":"fbs","rank":16,"tied":false,"height":0.022863,"wins":1,"losses":1,"change":-15,"x":135},
+    {"id":9031,"school":"Glen Fields","abbreviation":"D31","conference":"Demo Gamma","classification":"fbs","rank":17,"tied":false,"height":0.005644,"wins":1,"losses":1,"change":0,"x":149},
+    {"id":9005,"school":"Elm Hollow","abbreviation":"D05","conference":"Demo Alpha","classification":"fbs","rank":18,"tied":false,"height":-0.113682,"wins":0,"losses":2,"change":-1,"x":-135},
+    {"id":9021,"school":"Elm Vale","abbreviation":"D21","conference":"Demo Alpha","classification":"fbs","rank":19,"tied":false,"height":-0.626153,"wins":2,"losses":0,"change":-18,"x":-135},
+    {"id":9001,"school":"Ash Hollow","abbreviation":"D01","conference":"Demo Alpha","classification":"fbs","rank":20,"tied":false,"height":-0.6475,"wins":1,"losses":1,"change":-3,"x":-121},
+    {"id":9016,"school":"Hazel Ridge","abbreviation":"D16","conference":"Demo Delta","classification":"fbs","rank":21,"tied":false,"height":-0.649916,"wins":2,"losses":0,"change":-20,"x":45},
+    {"id":9024,"school":"Hazel Vale","abbreviation":"D24","conference":"Demo Delta","classification":"fbs","rank":22,"tied":false,"height":-0.694811,"wins":1,"losses":1,"change":-21,"x":55},
+    {"id":9014,"school":"Fern Ridge","abbreviation":"D14","conference":"Demo Beta","classification":"fbs","rank":23,"tied":false,"height":-0.71974,"wins":1,"losses":1,"change":-22,"x":-45},
+    {"id":9023,"school":"Glen Vale","abbreviation":"D23","conference":"Demo Gamma","classification":"fbs","rank":24,"tied":false,"height":-0.769983,"wins":2,"losses":0,"change":-23,"x":135},
+    {"id":9017,"school":"Ash Vale","abbreviation":"D17","conference":"Demo Alpha","classification":"fbs","rank":25,"tied":false,"height":-0.818426,"wins":0,"losses":2,"change":-8,"x":-135},
+    {"id":9020,"school":"Dune Vale","abbreviation":"D20","conference":"Demo Delta","classification":"fbs","rank":26,"tied":false,"height":-0.896033,"wins":1,"losses":1,"change":-9,"x":45},
+    {"id":9013,"school":"Elm Ridge","abbreviation":"D13","conference":"Demo Alpha","classification":"fbs","rank":27,"tied":false,"height":-0.929931,"wins":0,"losses":2,"change":-10,"x":-135},
+    {"id":9032,"school":"Hazel Fields","abbreviation":"D32","conference":"Demo Delta","classification":"fbs","rank":28,"tied":false,"height":-1.628683,"wins":0,"losses":2,"change":-11,"x":45},
+    {"id":9018,"school":"Birch Vale","abbreviation":"D18","conference":"Demo Beta","classification":"fbs","rank":29,"tied":false,"height":-1.629885,"wins":0,"losses":2,"change":-12,"x":-45},
+    {"id":9003,"school":"Cedar Hollow","abbreviation":"D03","conference":"Demo Gamma","classification":"fbs","rank":30,"tied":false,"height":-1.676446,"wins":0,"losses":2,"change":-13,"x":135},
+    {"id":9010,"school":"Birch Ridge","abbreviation":"D10","conference":"Demo Beta","classification":"fbs","rank":31,"tied":false,"height":-1.723778,"wins":0,"losses":2,"change":-14,"x":-45},
+    {"id":9025,"school":"Ash Fields","abbreviation":"D25","conference":"Demo Alpha","classification":"fbs","rank":32,"tied":false,"height":-1.823889,"wins":0,"losses":2,"change":-15,"x":-135}
+  ]
+}

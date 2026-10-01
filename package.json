@@ -1,0 +1,35 @@
+{
+  "name": "rank",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic, auditable, transparent college football rankings derived from a game graph.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "fetch": "tsx scripts/fetch-cfbd.ts",
+    "demo": "tsx scripts/make-demo.ts",
+    "compute": "tsx scripts/compute.ts",
+    "verify": "tsx scripts/verify.ts"
+  },
+  "dependencies": {
+    "d3-selection": "^3.0.0",
+    "d3-zoom": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/d3-selection": "^3.0.12",
+    "@types/d3-zoom": "^3.0.9",
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.3"
+  }
+}

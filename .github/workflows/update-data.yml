@@ -1,0 +1,68 @@
+name: Update data
+on:
+  schedule:
+    - cron: "17 8 * * 0,1"     # Sunday and Monday mornings UTC, after the weekend's games
+    - cron: "17 8 15-31 12 *"  # daily through bowl season
+    - cron: "17 8 1-20 1 *"
+  workflow_dispatch:
+    inputs:
+      year:
+        description: Season year to fetch (defaults to the current season)
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Fetch results
+        env:
+          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
+          INPUT_YEAR: ${{ inputs.year }}
+        run: |
+          YEAR="${INPUT_YEAR:-}"
+          if [ -z "$YEAR" ]; then
+            # The season runs August to January, so Jan-May still belongs to last year's season.
+            if [ "$(date -u +%m)" -ge 6 ]; then YEAR=$(date -u +%Y); else YEAR=$(( $(date -u +%Y) - 1 )); fi
+          fi
+          echo "YEAR=$YEAR" >> "$GITHUB_ENV"
+          npm run fetch -- "$YEAR"
+      - run: npm run compute
+      - run: npm run verify
+      - name: Commit changes
+        id: commit
+        run: |
+          git add data
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new results."
+            exit 0
+          fi
+          STAT=$(git diff --cached --numstat -- "data/seasons/$YEAR/games.csv" | awk '{print "+" $1 " / -" $2 " game rows"}')
+          git config user.name "rank-bot"
+          git config user.email "rank-bot@users.noreply.github.com"
+          git commit -m "Update $YEAR results (${STAT:-no game changes})"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
