@@ -1,7 +1,7 @@
 import { select } from "d3-selection";
 import { type ZoomTransform, zoom, zoomIdentity } from "d3-zoom";
 import type { Edge, RankedTeam } from "../../src/engine/types";
-import { type Ctx, restLabel, fmtHeight, rankLabel, record, teamHref, upsets } from "../ctx";
+import { type Ctx, fmtHeight, rankLabel, record, teamHref, upsets } from "../ctx";
 import { h, svg } from "../dom";
 import { searchIcon } from "../icons";
 import { computeLayout } from "../layout";
@@ -178,7 +178,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-          h("p", {}, `Every win is a spring pulling the winner ${restLabel(ctx)} above the loser`, ". Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+          h("p", {}, "Every game's spring pulls the winner above the loser by the raw score difference. Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),

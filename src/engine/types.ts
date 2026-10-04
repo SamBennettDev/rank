@@ -32,8 +32,6 @@ export interface SeasonConfig {
   algorithmVersion: string;
   /** Weak pull toward zero applied equally to every team; makes the answer unique. */
   alpha: number;
-  /** How far above the loser each win wants the winner (default 1). Scales every height, never the order. */
-  restLength?: number;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
 }
@@ -95,7 +93,6 @@ export interface Manifest {
   engine: string;
   algorithmVersion: string;
   alpha: number;
-  restLength: number;
   classifications: string[];
   teamsSha256: string;
   gamesSha256: string;

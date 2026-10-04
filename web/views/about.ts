@@ -1,5 +1,5 @@
 import { computeSeason } from "../../src/engine/season";
-import { type Ctx, restLength } from "../ctx";
+import type { Ctx } from "../ctx";
 import { h, svg } from "../dom";
 import { pillarIcons } from "../icons";
 import { fetchText, seasonFiles } from "../store";
@@ -8,8 +8,6 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const m = ctx.ranking.manifest;
   const season = ctx.entry.season;
   const files = seasonFiles(season);
-  const r = restLength(ctx);
-  const step = r === 1 ? "one step" : `${r} points`;
 
   const result = h("div");
   const button = h("button", { class: "btn primary", onclick: async () => {
@@ -45,7 +43,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const file = (path: string) => h("a", { href: `./data/${path}`, target: "_blank", rel: "noopener" }, path.split("/").slice(-2).join("/"));
   const rows: [string, string][] = [
     ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
-    ["Each win wants the winner", `${r} ${r === 1 ? "unit" : "points"} above the loser`], ["Spring strength", "Equal for every game"],
+    ["Each game's target gap", "Winner score − loser score (uncapped)"],
     ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
     ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
   ];
@@ -59,23 +57,23 @@ export function aboutView(ctx: Ctx): HTMLElement {
       pillar(pillarIcons.deterministic(), "Deterministic", "Same games in, identical bytes out. No randomness, no tuning, no judgement calls."),
       pillar(pillarIcons.auditable(), "Auditable", "Every input, line of code and published result is public. Check any week yourself below."),
       pillar(pillarIcons.transparent(), "Transparent", "One short formula and one config file. Every team page shows the exact games behind its rank."),
-      pillar(pillarIcons.unbiased(), "Unbiased", "No preseason poll, brand, conference, home field or margin of victory. Only who beat whom.")),
+      pillar(pillarIcons.unbiased(), "Unbiased", "No preseason poll, brand, conference or home field. Only game results and raw score margins.")),
 
     h("h2", {}, "The idea: springs"),
     h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Teams that played are connected by springs. Every spring pulls equally and wants the ", h("b", {}, `winner exactly ${step} above the loser`), ". Beat a team that sits high and you get pulled higher; lose to a team that sits low and you get dragged down. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
-    h("p", {}, "This is ", h("b", {}, "SpringRank"), " (De Bacco, Larremore & Moore, ", h("i", {}, "Science Advances"), ", 2018) with every game weighted equally. The resting heights are the ones that put the least total strain on all the springs:"),
-    h("pre", { class: "formula" }, `H(s) = ½ · Σ  A[i][j] · (s[i] − s[j] − ${r})²  +  ½ · α · Σ s[i]²\n\n`,
-      h("span", { class: "c" }, `A[i][j]  times team i beat team j\ns[i]     height of team i  (the y-axis of the graph)\n${r}${" ".repeat(Math.max(1, 9 - String(r).length))}how far above the loser each win wants the winner${r === 1 ? "" : " (ranking points, not game points)"}\nα        tiny equal pull toward 0, so there is always one exact answer`)),
+      h("p", {}, "Teams that played are connected by springs. Each spring wants the ", h("b", {}, "winner above the loser by the raw score difference"), ". A 28-point win targets a 28-point gap; a 1-point win targets a 1-point gap. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
+    h("p", {}, "The resting heights are the ones that put the least total strain on all the springs, fitting the raw score margins across the game graph:"),
+    h("pre", { class: "formula" }, "H(s) = ½ · Σ games (s[w] − s[l] − margin)²  +  ½ · α · Σ s[i]²\n\n",
+      h("span", { class: "c" }, "w, l     winner and loser of each game\nmargin   winning score − losing score, with no cap or scaling\ns[i]     height of team i  (the y-axis of the graph, in score points)\nα        tiny equal pull toward 0, so there is always one exact answer")),
     h("p", {}, "Minimising that gives a single system of linear equations, solved exactly with a Cholesky decomposition. No iterations to converge, no random starts. Same input, same answer, on any computer."),
 
-    h("h2", {}, "Why wins only"),
-    h("p", {}, "Score margins can be run up, home field has to be estimated, and both invite arguments about what a game “really” showed. Wins don’t. On ten past seasons (2015–2025), this ranking put the winner above the loser in 83.6% of all games, the most of any spring model we tested. Margin-based ratings pick next week’s winners more often (about 71% vs 67.6%), but a ranking that replaces a poll should first respect what happened on the field. ", h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/METHODOLOGY.md#how-it-performs", target: "_blank", rel: "noopener" }, "How it performs ↗")),
+    h("h2", {}, "Raw winning margins"),
+    h("p", {}, "Each spring’s target gap is simply the winner’s score minus the loser’s score. There is no fixed rest length, clamping, cap, scaling or home-field adjustment. Every point of margin counts in where the teams settle."),
 
     h("h2", {}, "What counts"),
     h("ul", {},
       h("li", {}, h("b", {}, "Who won each completed game"), " between two FBS or FCS teams. Regular season and postseason."),
-      h("li", {}, h("b", {}, "A win is a win."), " Margin, home field, brand, conference, preseason polls and opinions are all ignored."),
+      h("li", {}, h("b", {}, "Every margin counts in full."), " Home field, brand, conference, preseason polls and opinions are ignored."),
       h("li", {}, "Games against teams outside FBS/FCS are left out, and the count is published below."),
       h("li", {}, "A team with no counted games is ", h("b", {}, "unranked"), " rather than guessed."),
       h("li", {}, "Equal heights share a rank (shown T-n). Ties are never broken by name or reputation."),

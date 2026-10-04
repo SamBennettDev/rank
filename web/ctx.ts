@@ -18,7 +18,6 @@ export interface Ctx {
 }
 
 export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
-  heightDecimals = (base.ranking.manifest.restLength ?? 1) > 1 ? 2 : 3;
   const spec = listSnapshots(base.games).find((s) => s.id === base.snapId)!;
   const { edges } = buildEdges(base.games, base.ranking.teams, spec);
   return {
@@ -34,15 +33,9 @@ export const href = (season: string, snap: string, view: View, teamId?: number) 
 export const teamHref = (ctx: Ctx, id: number) => href(ctx.entry.season, ctx.snapId, "team", id);
 
 export const rankLabel = (rank: number | null, tied: boolean) => (rank === null ? "—" : `${tied ? "T-" : ""}${rank}`);
-/** Heights print with 2 decimals at a 7-point rest length, 3 at the paper's 1. Set per snapshot by makeCtx. */
-let heightDecimals = 3;
-export const fmtHeight = (v: number | null) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(heightDecimals));
+/** Heights are in score points and print with 2 decimals. */
+export const fmtHeight = (v: number | null) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2));
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
-
-/** How far above the loser each win wants the winner. */
-export const restLength = (ctx: Ctx) => ctx.ranking.manifest.restLength ?? 1;
-/** "7 points" or "one unit", for copy. */
-export const restLabel = (ctx: Ctx) => (restLength(ctx) === 1 ? "one unit" : `${restLength(ctx)} points`);
 
 /** A game is an upset when the winner finished below the loser. */
 export function upsets(ctx: Ctx): { edge: Edge; gap: number }[] {

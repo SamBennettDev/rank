@@ -27,13 +27,16 @@ interface BtGame { id: number; order: number; home: number; away: number; hp: nu
 
 // ---------------------------------------------------------------- model
 const ALPHA = 0.01;
-const REST_LENGTH = 7;
 
 function rate(games: BtGame[]): Map<number, number> {
   const ids = [...new Set(games.flatMap((g) => [g.home, g.away]))].sort((a, b) => a - b);
   const index = new Map(ids.map((id, i) => [id, i]));
-  const beats = games.map((g) => (g.hp > g.ap ? { winner: index.get(g.home)!, loser: index.get(g.away)! } : { winner: index.get(g.away)!, loser: index.get(g.home)! }));
-  const s = springRank(ids.length, beats, ALPHA, REST_LENGTH);
+  const beats = games.map((g) => ({
+    winner: index.get(g.hp > g.ap ? g.home : g.away)!,
+    loser: index.get(g.hp > g.ap ? g.away : g.home)!,
+    margin: Math.abs(g.hp - g.ap),
+  }));
+  const s = springRank(ids.length, beats, ALPHA);
   return new Map(ids.map((id, i) => [id, s[i]!]));
 }
 

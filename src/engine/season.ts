@@ -5,7 +5,7 @@ import { springRank } from "./springrank";
 import type { Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-1";
+export const ENGINE_VERSION = "rank-engine-2";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -50,9 +50,12 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
 
     const s = springRank(
       teams.length,
-      edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)! })),
+      edges.map((e) => ({
+        winner: index.get(e.winner)!,
+        loser: index.get(e.loser)!,
+        margin: e.winnerPoints - e.loserPoints,
+      })),
       config.alpha,
-      config.restLength ?? 1,
     );
     const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
     const sortedHeights = [...heights.values()].sort((a, b) => b - a);
@@ -82,7 +85,6 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       engine: ENGINE_VERSION,
       algorithmVersion: config.algorithmVersion,
       alpha: config.alpha,
-      restLength: config.restLength ?? 1,
       classifications: config.classifications,
       teamsSha256,
       gamesSha256,

@@ -84,7 +84,7 @@ writeFileSync(
     {
       label: "Demo season (fictional data)",
       demo: true,
-      algorithmVersion: "springrank-1",
+      algorithmVersion: "margin-springs-1",
       alpha: 0.01,
       classifications: ["fbs"],
     },

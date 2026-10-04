@@ -45,9 +45,8 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "win-springs-1",
+  algorithmVersion: "margin-springs-1",
   alpha: 0.01,
-  restLength: 7,
   classifications: ["fbs", "fcs"],
 };
 mkdirSync(dir, { recursive: true });
