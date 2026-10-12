@@ -20,17 +20,17 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parseCsvObjects } from "../src/engine/csv";
 import { parseGames, parseTeams } from "../src/engine/data";
-import { springRank } from "../src/engine/springrank";
+import { rankHeights } from "../src/engine/springrank";
 import { METHODS, type Method } from "../src/engine/types";
 import { DATA_DIR } from "./lib";
 
 interface BtGame { id: number; order: number; home: number; away: number; hp: number; ap: number; neutral: boolean }
 
 // ---------------------------------------------------------------- model
-const ALPHA = 0.01;
+const SETTINGS = { alpha: 0.01, softness: 7 };
 const WIN_REST_LENGTH = 7;
 
-/** Heights for one method: win springs target a fixed gap, margin springs the raw score difference. */
+/** Heights for one method (one-way springs, fewest upsets): win springs target a fixed gap, margin springs the raw score difference. */
 function rate(games: BtGame[], method: Method): Map<number, number> {
   const ids = [...new Set(games.flatMap((g) => [g.home, g.away]))].sort((a, b) => a - b);
   const index = new Map(ids.map((id, i) => [id, i]));
@@ -39,7 +39,7 @@ function rate(games: BtGame[], method: Method): Map<number, number> {
     loser: index.get(g.hp > g.ap ? g.away : g.home)!,
     gap: method === "win" ? WIN_REST_LENGTH : Math.abs(g.hp - g.ap),
   }));
-  const s = springRank(ids.length, beats, ALPHA);
+  const s = rankHeights(ids.length, beats, SETTINGS).heights;
   return new Map(ids.map((id, i) => [id, s[i]!]));
 }
 

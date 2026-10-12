@@ -45,8 +45,10 @@ export interface SeasonConfig {
   label: string;
   /** True for the fictional fixture season. */
   demo: boolean;
-  /** Weak pull toward zero applied equally to every team; makes the answer unique. */
+  /** Small pull toward zero applied equally to every team; makes the answer unique. */
   alpha: number;
+  /** How gradually a spring lets go once its winner passes the target gap, in points. */
+  softness: number;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
   /** The ranking methods to publish. Each is written to rankings/<season>/<method>/. */
@@ -111,6 +113,7 @@ export interface Manifest {
   method: Method;
   algorithmVersion: string;
   alpha: number;
+  softness: number;
   /** "win" only. */
   restLength?: number;
   classifications: string[];
@@ -124,6 +127,8 @@ export interface Ranking {
   season: string;
   snapshot: SnapshotSpec;
   manifest: Manifest;
+  /** Game ids accepted as upsets (their winner may finish below their loser). Ascending. */
+  upsets: number[];
   teams: RankedTeam[];
 }
 

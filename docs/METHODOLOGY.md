@@ -19,38 +19,65 @@ Rank every FBS and FCS team from worst to best using game results, with a proces
 - **Springs:** each completed game between two nodes is one spring between the two teams. Rematches and postseason games add more springs.
 - Games that involve a team outside `teams.csv` (for example Division II), games that are not completed, and games with equal scores are not counted. Each snapshot's manifest records how many rows were dropped for each reason.
 
-## The ranking: springs
+## The ranking: one-way springs, fewest upsets
 
-Every game is a spring between the two teams that wants the **winner above the loser by a target gap**. Each team's height is where all of its springs, and everyone else's, balance out:
+Two rules define the ranking:
 
-```
-H(s) = 1/2 * sum_games (s_w - s_l - gap)^2  +  1/2 * alpha * sum_i s_i^2
-```
+1. **A win never costs a team.** Every game is a spring that pushes the winner up and the loser down. It never pulls the other way. It pushes hardest while the result is surprising and fades as the winner pulls further ahead, so beating a weak team still helps a little and losing to a strong team still hurts a little.
+2. **Winners finish above losers as often as possible.** When results form a cycle (A beat B, B beat C, C beat A) no order can respect them all, so some games must be upsets. The ranking accepts as few as it can find, and every other game's winner is held above its loser.
 
-where `w` and `l` are each game's winner and loser. Every game adds one spring with the same stiffness, including rematches. Two methods are published, and they differ only in `gap`:
+Two methods are published. They differ only in each game's target `gap`, the point where its push starts to fade:
 
 | Method | `gap` for each game | What it measures |
 |---|---|---|
-| **Wins** (`win`, the site default) | `restLength` (7) for every win | Only who won. A 1-point win and a 40-point win pull the same. |
-| **Margin** (`margin`) | winning score − losing score, uncapped | Results and how decisive they were. A 28-point win targets a 28-point gap. |
+| **Wins** (`win`, the site default) | `restLength` (7) for every win | Only who won. A 1-point win and a 40-point win push the same. |
+| **Margin** (`margin`) | winning score − losing score, uncapped | Results and how decisive they were. A 28-point win pushes hard until the winner is 28 points above. |
 
-There is no clamping, cap, scaling or home-field adjustment in either method. Setting the gradient to zero gives one linear system
+### The spring
+
+For a game with winner `w`, loser `l` and heights `s`, let `u = (s_w − s_l − gap) / τ`. The game pushes `w` up and `l` down with force
 
 ```
-(L + alpha*I) s = gaps_won - gaps_lost
+push(u) = (1 − u / sqrt(1 + u²)) / 2
 ```
 
-where `L` is the game-count graph Laplacian: each game adds 1 to both teams' diagonal entries and −1 to both entries connecting them. The right-hand side adds each game's gap to the winner and subtracts it from the loser. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
+This is nearly 1 while the winner is below the loser or well short of the gap. It is exactly 1/2 at the gap and fades toward 0 as the winner pulls ahead. It is never negative. `τ` (`softness`, 7 points) sets how gradually it fades. The push is the slope of the energy `τ/2 · (sqrt(1 + u²) − u)`, a smooth hinge. It uses only `sqrt`, so it is exactly reproducible under IEEE-754, unlike `exp` or `log`.
 
-Under Margin this is a least-squares fit of score margins over the game graph, and heights are in score points. Under Wins, `restLength` only sets the scale: changing it multiplies every height by the same factor and leaves the order unchanged.
+### Step 1: starting order
+
+Heights `s` minimise
+
+```
+H(s) = sum_games τ/2 · (sqrt(1 + u²) − u)  +  α/2 · sum_i s_i²
+```
+
+`α = 0.01` is a small equal pull toward zero. It makes the minimum unique and stops an unbeaten team's height from running off to infinity. `H` is strictly convex. It is minimised by Newton's method (`oneWaySprings` in `src/engine/springrank.ts`). Each step solves `(Hessian) · step = −gradient` with a dense Cholesky decomposition (`src/engine/linalg.ts`), and halves the step while it does not lower `H`. The loop stops when a step moves no height by more than 1e-9. Teams sorted by these heights give the starting order; exact height ties go by team id, which only affects the starting point.
+
+### Step 2: fewest upsets
+
+Visit the teams in id order. Move each to the place in the order that leaves the fewest upsets (games whose winner is placed below its loser). Ties go to the place nearest the team's current place, then the higher one. Only move a team if that strictly lowers the count. Repeat until a full pass moves no one. Every move removes at least one upset, so this always stops. Where it stops, **no single team can be moved to another place to remove an upset**; tests check that by brute force (`fewestUpsetsOrder`).
+
+The games still upside down in that order are the **accepted upsets**. They are published in each ranking file's `upsets` array.
+
+Finding the order with the absolute fewest upsets is the *minimum feedback arc set* problem. It is NP-hard, and it usually has many equally good answers, which would make the ranking depend on how a tie was broken. The local search above is deterministic and leaves no single-move improvement. It is not proven to be the global minimum.
+
+### Step 3: final heights
+
+Every game that is not an accepted upset gets a **stop**: a very stiff spring that engages only if its winner comes within ½ point of its loser. Heights minimise
+
+```
+H(s) = sum_games τ/2 · (sqrt(1 + u²) − u)
+     + 500 · sum_kept max(0, ½ − (s_w − s_l))²
+     + α/2 · sum_i s_i²
+```
+
+solved the same way, starting from step 1's heights. The stops keep **every kept winner above its loser**; a test checks every published file, and across ten past seasons the smallest kept gap was 0.49. Accepted upsets keep their ordinary spring, so the upset still pushes its winner up and its loser down. The resulting heights are the ranking.
 
 How it behaves:
 
-- **Who you beat matters.** Beating a team that sits high pulls you higher; losing to a team that sits low drags you down. Strength of schedule comes from the graph, not a separate formula.
-- **Wins:** the score is ignored. **Margin:** a larger win asks for more separation, and every point counts, including large blowouts.
-- **Head-to-head counts but is not absolute.** A win over a team is one spring. If both teams' other results point the other way, the springs can still settle the loser above the winner; the site marks those games as upsets.
-
-`alpha = 0.01` is a tiny equal pull toward zero. It exists so the system always has a unique solution, including early in the season when the graph is not yet connected.
+- **Every game counts.** Each win pushes up and each loss pushes down, so records matter, and who you played sets how hard each game pushes. Strength of schedule comes from the graph, not a separate formula.
+- **Head-to-head is respected wherever results allow.** If A beat B, A finishes above B unless that game is one of the accepted upsets.
+- **Wins:** the score is ignored. **Margin:** a bigger win keeps pushing until the winner is further ahead.
 
 ### Configuration
 
@@ -61,15 +88,16 @@ How it behaves:
   "label": "2026 season",
   "demo": false,
   "alpha": 0.01,
+  "softness": 7,
   "classifications": ["fbs", "fcs"],
   "methods": {
-    "win": { "algorithmVersion": "win-springs-1", "restLength": 7 },
-    "margin": { "algorithmVersion": "margin-springs-1" }
+    "win": { "algorithmVersion": "win-springs-2", "restLength": 7 },
+    "margin": { "algorithmVersion": "margin-springs-2" }
   }
 }
 ```
 
-Each method listed under `methods` is computed and published separately to `data/rankings/<year>/<method>/`. Every ranking file's manifest records the engine version, `method`, that method's `algorithmVersion`, `alpha` and (for Wins) `restLength`.
+Each method listed under `methods` is computed and published separately to `data/rankings/<year>/<method>/`. Every ranking file's manifest records the engine version, `method`, that method's `algorithmVersion`, `alpha`, `softness` and (for Wins) `restLength`. Each file also lists its accepted upsets by game id.
 
 On the site, Wins is the default; `?method=margin` at the end of any link shows the Margin ranking, and the header toggle switches between them while keeping the current view, week and team.
 
@@ -87,12 +115,22 @@ On the site, Wins is the default; `?method=margin` at the end of any link shows 
 
 `npm run backtest -- --history 2015-2025` runs this exact model on ten past seasons (2020 skipped), using public season-complete schedules from the [sportsdataverse cfbfastR-data](https://github.com/sportsdataverse/cfbfastR-data) project (downloaded to a temp folder, never committed). It reports, for each method, how often the final ranking puts the winner above the loser and how often rankings using only earlier games pick the next week's winner. `npm run backtest` uses the seasons currently in this repository.
 
+| 2015–2025, 15,054 games | Winner above loser (final ranking) | Picks next week's winner |
+|---|---|---|
+| Wins | 90.5% | 67.2% |
+| Margin | 90.3% | 69.4% |
+| *Before (two-sided springs): Wins* | *83.6%* | *67.6%* |
+| *Before (two-sided springs): Margin* | *80.2%* | *70.7%* |
+
+Putting winners above losers as often as possible makes the ranking describe the season's results far more faithfully, at a cost of about one point in predicting games it has not seen yet.
+
 ## Determinism rules
 
 1. Teams are ordered by numeric id; games by numeric game id. This fixes the matrix and its summation order, so row order in the CSVs is irrelevant (there is a test for that).
-2. Heights are rounded to 1e-6 before they are ranked or written.
-3. JSON is written with a fixed key order and layout (`formatRanking` in `src/engine/season.ts`).
-4. Each ranking file embeds the SHA-256 of the exact `teams.csv` and `games.csv` bytes it was computed from, the model settings and the engine version.
+2. The solver and the upset search have no randomness. They use only `+ − × /` and `sqrt`, which IEEE-754 defines exactly, in a fixed loop order. Newton stops at a fixed threshold (no step larger than 1e-9) and the search stops when a full pass moves no team, so the same input takes the same steps on every computer.
+3. Heights are rounded to 1e-6 before they are ranked or written.
+4. JSON is written with a fixed key order and layout (`formatRanking` in `src/engine/season.ts`).
+5. Each ranking file embeds the SHA-256 of the exact `teams.csv` and `games.csv` bytes it was computed from, the model settings and the engine version.
 
 ## Graph layout
 
@@ -103,8 +141,8 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 ## Per-game quantities on a team page
 
 - **Gap** = this team's height − the opponent's height.
-- **Spring** = winner height − loser height − gap, where gap is 7 under Wins and the score margin under Margin. Zero means that spring is at rest; negative means it is stretched and pulling the winner up and the loser down; positive means the height gap exceeds the target and it pulls them back together.
-- **Upset** = the winner finished below the loser.
+- **Push**: how hard the game pushes this team up (↑, a win) or down (↓, a loss), as a share of full force: `push(u)` above with the target gap of 7 under Wins or the score margin under Margin.
+- **Upset** = a game in the file's `upsets` list.
 
 ## Data pipeline
 
@@ -122,8 +160,9 @@ The API is only a source of raw scores and team ids. `npm run fetch` normalises 
 
 - **Wins ignores how close a game was.** A 1-point win counts the same as a 50-point win.
 - **Margin rewards running up the score.** A 50-point win targets a 50-point height gap, while a 1-point win targets a 1-point gap. Raw margins are deliberately uncapped.
-- **Beating a much weaker team can lower you** (both methods). If the winner's height gap already exceeds the game's target gap, that game's spring pulls it back down a little. A bye adds no spring, so it is neutral, but a team can still move during a bye as its past opponents' results change.
-- **Cycles.** When A beat B, B beat C and C beat A, no order can respect every result; the springs find the order that strains them least.
+- **Expected results carry little weight.** A win over a much weaker team, or a loss to a much stronger one, pushes only a little. That is deliberate, but it means a team gains little from a soft schedule even when unbeaten. A bye adds no spring, so it is neutral, but a team can still move during a bye as other results change.
+- **α and τ are choices.** `α = 0.01` and `τ = 7` were chosen once, by checking the ten-season backtest, and are fixed in each season's config. Changing either changes heights and can change ranks, and needs a new `algorithmVersion`.
+- **Fewest upsets is a local search.** No single team can be moved to remove an upset, but a better order that needs several teams moved at once may exist. The exact minimum is NP-hard and usually not unique.
 - **Early season.** With one or two games per team, many teams are nearly tied, and undefeated teams with weak schedules can sit low until they play someone. Groups of teams not yet linked by a chain of games are not comparable.
 - **Schedule size.** With about 12 games per team, ranks a few places apart are not meaningfully different. The height column shows how close teams are.
 - **Source data.** Scores come from the CollegeFootballData API; an error there is an error here until it is corrected upstream and the next update runs.

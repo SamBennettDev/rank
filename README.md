@@ -2,10 +2,15 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation: teams that played are connected by springs, and a team's rank is its **y-coordinate** once the springs settle. A toggle in the header switches between two methods:
+The AP Poll is a vote. This is a calculation: teams that played are connected by springs, and a team's rank is its **y-coordinate** once the springs settle.
 
-- **Wins** (default): every win is an equal spring with a 7-point target gap. Only who won matters.
-- **Margin**: each spring targets the **raw winning score minus the losing score**, uncapped.
+- **Springs only push.** Each game's spring pushes the winner up and the loser down, hardest while the result is surprising, fading once the winner is a target gap ahead. It never pulls the other way, so a win never costs a team.
+- **Winners above losers, as often as possible.** When results form cycles, the ranking accepts the fewest upsets it can find and holds every other game's winner above its loser (about 90% of games over ten past seasons).
+
+A toggle in the header switches the target gap:
+
+- **Wins** (default): 7 points for every win. Only who won matters.
+- **Margin**: the **raw winning score minus the losing score**, uncapped.
 
 No home field, no preseason bias, no human opinions. See the [methodology](docs/METHODOLOGY.md).
 
@@ -23,8 +28,8 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/config.json    algorithm version, alpha, divisions
-data/rankings/<year>/<method>/<snapshot>.json   published output for each method (win, margin) (heights, ranks, manifest with SHA-256 of the inputs)
+data/seasons/<year>/config.json    algorithm versions, alpha, softness, divisions
+data/rankings/<year>/<method>/<snapshot>.json   published output for each method (win, margin) (heights, ranks, accepted upsets, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```
 
@@ -61,7 +66,7 @@ In GitHub, the **Update data** workflow does this weekly (and daily in bowl seas
 ## Layout
 
 ```
-src/engine/   the whole algorithm: csv, graph, Cholesky, win and margin springs, season pipeline
+src/engine/   the whole algorithm: csv, graph, Cholesky, one-way springs, fewest-upsets order, season pipeline
 scripts/      fetch (API -> CSV), compute, verify, backtest, make-demo
 web/          the static site (vanilla TypeScript + d3-zoom); imports the same engine.
               Team logos load from ESPN's logo CDN by team id (CFBD ids are ESPN ids).

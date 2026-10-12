@@ -46,10 +46,11 @@ const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
   alpha: 0.01,
+  softness: 7,
   classifications: ["fbs", "fcs"],
   methods: {
-    win: { algorithmVersion: "win-springs-1", restLength: 7 },
-    margin: { algorithmVersion: "margin-springs-1" },
+    win: { algorithmVersion: "win-springs-2", restLength: 7 },
+    margin: { algorithmVersion: "margin-springs-2" },
   },
 };
 mkdirSync(dir, { recursive: true });

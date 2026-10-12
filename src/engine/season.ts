@@ -1,11 +1,11 @@
 import { parseConfig, parseGames, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
-import { springRank } from "./springrank";
+import { rankHeights } from "./springrank";
 import { METHODS, type Manifest, type RankedTeam, type Ranking, type SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-3";
+export const ENGINE_VERSION = "rank-engine-4";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -26,7 +26,11 @@ export interface SeasonOutput {
  * The whole pipeline: CSV bytes in, ranking JSON out. The Node scripts and the
  * in-browser "Recompute" button both call exactly this function.
  */
-export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
+export async function computeSeason(
+  input: SeasonInput,
+  /** Called after each ranking file; the browser uses it to show progress and stay responsive. */
+  onProgress?: (done: number, total: number) => void | Promise<void>,
+): Promise<SeasonOutput> {
   const teams = parseTeams(input.teamsCsv).sort((a, b) => a.id - b.id);
   const games = parseGames(input.gamesCsv);
   const config = parseConfig(input.configJson);
@@ -53,15 +57,16 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       }
       const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
-      const s = springRank(
+      const { heights: s, upset } = rankHeights(
         teams.length,
         edges.map((e) => ({
           winner: index.get(e.winner)!,
           loser: index.get(e.loser)!,
           gap: method === "win" ? restLength : e.winnerPoints - e.loserPoints,
         })),
-        config.alpha,
+        { alpha: config.alpha, softness: config.softness },
       );
+      const upsets = edges.filter((_, i) => upset[i]).map((e) => e.gameId);
       const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
       const sortedHeights = [...heights.values()].sort((a, b) => b - a);
 
@@ -91,13 +96,15 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
         method,
         algorithmVersion: mc.algorithmVersion,
         alpha: config.alpha,
+        softness: config.softness,
         ...(method === "win" ? { restLength } : {}),
         classifications: config.classifications,
         teamsSha256,
         gamesSha256,
         counts,
       };
-      files.push({ id: `${method}/${snap.id}`, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, teams: ranked }) });
+      files.push({ id: `${method}/${snap.id}`, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, upsets, teams: ranked }) });
+      await onProgress?.(files.length, methods.length * snapshots.length);
     }
   }
 
@@ -122,6 +129,7 @@ export function formatRanking(r: Ranking): string {
     `  "season": ${JSON.stringify(r.season)},`,
     `  "snapshot": ${JSON.stringify(r.snapshot)},`,
     `  "manifest": ${indent(JSON.stringify(r.manifest, null, 2))},`,
+    `  "upsets": ${JSON.stringify(r.upsets)},`,
     '  "teams": [',
     ...r.teams.map((t, i) => `    ${JSON.stringify(t)}${i < r.teams.length - 1 ? "," : ""}`),
     "  ]",

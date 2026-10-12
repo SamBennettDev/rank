@@ -23,13 +23,16 @@ export function aboutView(ctx: Ctx): HTMLElement {
         teamsCsv: await fetchText(files.teamsCsv),
         gamesCsv: await fetchText(files.gamesCsv),
         configJson: await fetchText(files.configJson),
+      }, async (done, total) => {
+        result.textContent = `Recomputing ${season} from the raw CSVs in your browser: ${done} of ${total} ranking files…`;
+        await new Promise((r) => setTimeout(r, 0));
       });
       const bad: string[] = [];
       for (const f of out.files) if ((await fetchText(`rankings/${season}/${f.id}.json`)) !== f.json) bad.push(f.id);
       const ms = Math.round(performance.now() - t0);
       if (bad.length === 0) {
         result.className = "result ok";
-        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} ranking files (${ctx.entry.snapshots.length} snapshots × ${ctx.entry.methods.length} methods) from the raw data in ${ms} ms and produced the published files byte for byte.`));
+        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} ranking files (${ctx.entry.snapshots.length} snapshots × ${ctx.entry.methods.length} methods) from the raw data in ${(ms / 1000).toFixed(1)} s and produced the published files byte for byte.`));
       } else {
         result.className = "result bad";
         result.replaceChildren(h("b", {}, "✗"), h("span", {}, `Mismatch in ${bad.join(", ")}. The published rankings do not follow from the published data. Please open an issue.`));
@@ -46,7 +49,8 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const rows: [string, string][] = [
     ["Engine", m.engine], ["Method", METHOD_LABEL[m.method]], ["Algorithm", m.algorithmVersion],
     ["Each game's target gap", win ? `${rest} points for every win` : "Winner score − loser score (uncapped)"],
-    ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
+    ["Accepted upsets", `${ctx.upsetIds.size} of ${m.counts.included} games`],
+    ["α (alpha)", String(m.alpha)], ["τ (softness)", `${m.softness} points`], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
     ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
   ];
 
@@ -61,23 +65,26 @@ export function aboutView(ctx: Ctx): HTMLElement {
       pillar(pillarIcons.transparent(), "Transparent", "One short formula and one config file. Every team page shows the exact games behind its rank."),
       pillar(pillarIcons.unbiased(), "Unbiased", `No preseason poll, brand, conference or home field. Only ${win ? "who won each game" : "game results and raw score margins"}.`)),
 
-    h("h2", {}, "The idea: springs"),
+    h("h2", {}, "The idea: springs that only push"),
     h("div", { class: "springdemo" }, springDemo(),
-      win
-        ? h("p", {}, "Teams that played are connected by springs. Every spring is equal and wants the ", h("b", {}, `winner ${rest} points above the loser`), ". A 1-point win and a 40-point win pull exactly the same. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")
-        : h("p", {}, "Teams that played are connected by springs. Each spring wants the ", h("b", {}, "winner above the loser by the raw score difference"), ". A 28-point win targets a 28-point gap; a 1-point win targets a 1-point gap. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
-    h("p", {}, `The resting heights are the ones that put the least total strain on all the springs${win ? "" : ", fitting the raw score margins across the game graph"}:`),
-    h("pre", { class: "formula" }, `H(s) = ½ · Σ games (s[w] − s[l] − ${win ? rest : "margin"})²  +  ½ · α · Σ s[i]²\n\n`,
-      h("span", { class: "c" }, win
-        ? `w, l     winner and loser of each game\n${rest}        the same target gap for every win, whatever the score\ns[i]     height of team i  (the y-axis of the graph)\nα        tiny equal pull toward 0, so there is always one exact answer`
-        : "w, l     winner and loser of each game\nmargin   winning score − losing score, with no cap or scaling\ns[i]     height of team i  (the y-axis of the graph, in score points)\nα        tiny equal pull toward 0, so there is always one exact answer")),
-    h("p", {}, "Minimising that gives a single system of linear equations, solved exactly with a Cholesky decomposition. No iterations to converge, no random starts. Same input, same answer, on any computer."),
+      h("p", {}, "Teams that played are connected by springs. Each spring ", h("b", {}, "pushes the winner up and the loser down"), `, hardest while the winner is less than ${win ? `${rest} points` : "its score margin"} above the loser, then fading as the winner pulls further ahead. It never pulls the other way, so `, h("b", {}, "a win never costs a team and a loss never helps one"), ". Beating a weak team still helps a little; losing to a strong team still hurts a little. Let the springs settle and each team comes to rest at its height. That height is the ranking.")),
+
+    h("h2", {}, "Winners above losers, as often as possible"),
+    h("p", {}, "When results form a cycle (A beat B, B beat C, C beat A) no order can put every winner above its loser, so some games have to count as upsets. The ranking accepts as few as it can:"),
+    h("ol", {},
+      h("li", {}, "Settle the springs once, to get a starting order."),
+      h("li", {}, "Move teams one at a time to the place in the order that leaves the fewest upsets, until no single move removes another one."),
+      h("li", {}, "The games still upside down are the ", h("b", {}, "accepted upsets"), ". Every other game gets a stop that holds its winner at least ", h("b", {}, "½ point above its loser"), ". Settle the springs again with the stops in place.")),
+    h("p", {}, "The settled heights are the ones with the least total energy:"),
+    h("pre", { class: "formula" }, `H(s) = Σ games  τ/2 · (√(1 + u²) − u)     u = (s[w] − s[l] − ${win ? rest : "margin"}) / τ\n     + Σ kept   500 · max(0, ½ − (s[w] − s[l]))²\n     + α/2 · Σ s[i]²\n\n`,
+      h("span", { class: "c" }, `w, l     winner and loser of each game\n${win ? `${rest}        the gap every win pushes for, whatever the score` : "margin   winning score − losing score, with no cap or scaling"}\nτ = ${m.softness}    how gradually a spring lets go past that gap\nkept     every game except the accepted upsets: the stop\ns[i]     height of team i  (the y-axis of the graph)\nα = ${m.alpha}  small equal pull toward 0, so there is one exact answer`)),
+    h("p", {}, "Each game’s push is the slope of its term: (1 − u/√(1 + u²)) / 2, between 0 and 1 and never negative. The function has exactly one minimum, found with Newton’s method and exact Cholesky solves using only + − × / and √, in a fixed order with no randomness. The same games give the same answer, to the last bit, on any computer. Each ranking file lists its accepted upsets, so you can check that every other game’s winner sits above its loser."),
 
     h("h2", {}, "Two methods"),
     h("p", {}, "The toggle in the header switches between two published rankings built from the same games. Both are verified below."),
     h("ul", {},
-      h("li", {}, h("b", {}, "Wins (default). "), `Every win is an equal spring with a ${rest}-point target gap. Only who won matters, so running up the score earns nothing.`),
-      h("li", {}, h("b", {}, "Margin. "), "Each spring’s target gap is the winner’s score minus the loser’s score, with no cap, scaling or home-field adjustment. Every point of margin counts.")),
+      h("li", {}, h("b", {}, "Wins (default). "), `Every win pushes hardest up to the same ${rest}-point gap. Only who won matters, so running up the score earns nothing.`),
+      h("li", {}, h("b", {}, "Margin. "), "Each win pushes hardest up to a gap equal to the winner’s score minus the loser’s score, with no cap, scaling or home-field adjustment. Bigger wins push further.")),
 
     h("h2", {}, "What counts"),
     h("ul", {},

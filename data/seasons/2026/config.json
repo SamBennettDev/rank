@@ -2,17 +2,18 @@
   "label": "2026 season",
   "demo": false,
   "alpha": 0.01,
+  "softness": 7,
   "classifications": [
     "fbs",
     "fcs"
   ],
   "methods": {
     "win": {
-      "algorithmVersion": "win-springs-1",
+      "algorithmVersion": "win-springs-2",
       "restLength": 7
     },
     "margin": {
-      "algorithmVersion": "margin-springs-1"
+      "algorithmVersion": "margin-springs-2"
     }
   }
 }

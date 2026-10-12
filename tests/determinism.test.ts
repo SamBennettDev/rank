@@ -29,7 +29,7 @@ describe("determinism", () => {
     expect(b.files.map((f) => strip(f.json))).toEqual(a.files.map((f) => strip(f.json)));
   });
 
-  it("uses home and away wins' raw score differences throughout the pipeline", async () => {
+  it("accepts one game of a split series as an upset, the smaller win", async () => {
     const base = parseGames(input.gamesCsv)[0]!;
     const gamesCsv = gamesToCsv([
       { ...base, id: 1, week: 1, homePoints: 3, awayPoints: 84 },
@@ -40,15 +40,35 @@ describe("determinism", () => {
       gamesCsv,
       configJson: JSON.stringify({ ...JSON.parse(input.configJson), alpha: 2 }),
     });
-    const teams = JSON.parse(out.files.find((f) => f.id === "margin/week-01")!.json).teams;
+    const ranking = JSON.parse(out.files.find((f) => f.id === "margin/week-01")!.json);
+    const teams = ranking.teams;
     const home = teams.find((t: { id: number }) => t.id === base.homeId);
     const away = teams.find((t: { id: number }) => t.id === base.awayId);
     expect(away.rank).toBe(1);
     expect(home.rank).toBe(2);
-    expect(away.height - home.height).toBeCloseTo((81 - 1) / (2 + 1), 5);
+    // The teams split two games, so one must be an upset. The 81-point win pushes harder,
+    // so its winner starts higher and the 1-point win is accepted as the upset.
+    expect(ranking.upsets).toEqual([2]);
+    expect(away.height).toBeGreaterThan(home.height);
     expect([home.wins, home.losses, away.wins, away.losses]).toEqual([1, 1, 1, 1]);
   });
 
+});
+
+describe("upsets", () => {
+  it("publishes accepted upsets, and every other game's winner sits above its loser", async () => {
+    const out = await computeSeason(input);
+    const games = parseGames(input.gamesCsv);
+    for (const f of out.files) {
+      const r = JSON.parse(f.json);
+      const height = new Map(r.teams.map((t: { id: number; height: number }) => [t.id, t.height]));
+      const upsets = new Set(r.upsets);
+      expect([...upsets]).toEqual([...upsets].sort((a: any, b: any) => a - b));
+      const spec = out.index.snapshots.find((s) => `${r.manifest.method}/${s.id}` === f.id)!;
+      const { edges } = buildEdges(games, parseTeams(input.teamsCsv), listSnapshots(games).find((s) => s.id === spec.id)!);
+      for (const e of edges) if (!upsets.has(e.gameId)) expect(height.get(e.winner)).toBeGreaterThan(height.get(e.loser) as number);
+    }
+  });
 });
 
 describe("methods", () => {
@@ -64,8 +84,8 @@ describe("methods", () => {
     const out = await computeSeason(input);
     const win = JSON.parse(out.files.find((f) => f.id.startsWith("win/"))!.json).manifest;
     const margin = JSON.parse(out.files.find((f) => f.id.startsWith("margin/"))!.json).manifest;
-    expect([win.engine, win.method, win.algorithmVersion, win.alpha, win.restLength]).toEqual(["rank-engine-3", "win", "win-springs-1", 0.01, 7]);
-    expect([margin.method, margin.algorithmVersion]).toEqual(["margin", "margin-springs-1"]);
+    expect([win.engine, win.method, win.algorithmVersion, win.alpha, win.restLength]).toEqual(["rank-engine-4", "win", "win-springs-2", 0.01, 7]);
+    expect([margin.method, margin.algorithmVersion]).toEqual(["margin", "margin-springs-2"]);
     expect(margin).not.toHaveProperty("restLength");
   });
 
@@ -89,6 +109,7 @@ describe("methods", () => {
     const cfg = JSON.parse(input.configJson);
     const bad = (patch: object) => computeSeason({ ...input, configJson: JSON.stringify({ ...cfg, ...patch }) });
     await expect(bad({ alpha: 0 })).rejects.toThrow(/alpha/);
+    await expect(bad({ softness: 0 })).rejects.toThrow(/softness/);
     await expect(bad({ classifications: [] })).rejects.toThrow(/classifications/);
     await expect(bad({ methods: {} })).rejects.toThrow(/methods/);
     await expect(bad({ methods: { points: { algorithmVersion: "x" } } })).rejects.toThrow(/unknown method/);

@@ -359,7 +359,8 @@ select:hover { border-color: var(--faint); }
 .springs .tl { stroke: var(--line); stroke-dasharray: 2 4; }
 .springs .s { fill: none; stroke-width: 2; }
 .springs .s.w { stroke: var(--win); } .springs .s.l { stroke: var(--loss); }
-.springs .s.up { stroke-dasharray: 5 4; }
+.springs .s.up { stroke-dasharray: 5 4; stroke: var(--upset); }
+.games .sp { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--muted); background: linear-gradient(90deg, transparent calc(100% - var(--p)), color-mix(in srgb, var(--muted) 14%, transparent) 0) no-repeat; border-radius: 4px; padding: 2px 4px; }
 .springs .none { fill: var(--faint); font: 600 13px var(--body); }
 .springs .on { fill: var(--muted); font: 600 12px var(--body); }
 .springs a:hover .on { fill: var(--text); }
@@ -399,7 +400,7 @@ select:hover { border-color: var(--faint); }
 .method h2 { font: 800 30px/1 var(--display); text-transform: uppercase; letter-spacing: .02em; margin: 44px 0 12px; }
 .method p, .method li { color: var(--muted); font-size: 15.5px; }
 .method p b, .method li b { color: var(--text); font-weight: 600; }
-.method ul { padding-left: 20px; } .method li { margin: 6px 0; }
+.method ul, .method ol { padding-left: 20px; } .method li { margin: 6px 0; }
 .formula { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; overflow-x: auto; font: 500 15px/1.7 ui-monospace, "SF Mono", Menlo, monospace; color: var(--text); box-shadow: var(--shadow); }
 .formula .c { color: var(--faint); }
 .springdemo { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; margin: 16px 0; box-shadow: var(--shadow); }

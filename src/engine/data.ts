@@ -53,6 +53,7 @@ export function gamesToCsv(games: Game[]): string {
 export function parseConfig(json: string): SeasonConfig {
   const c = JSON.parse(json) as SeasonConfig;
   if (typeof c.alpha !== "number" || !(c.alpha > 0)) throw new Error("config.alpha must be a positive number");
+  if (typeof c.softness !== "number" || !(c.softness > 0)) throw new Error("config.softness must be a positive number");
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
   }
