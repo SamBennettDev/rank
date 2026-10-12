@@ -6,7 +6,7 @@ import { fetchText, rankingPath, seasonFiles } from "../store";
 
 /** Held-out test, 2021–2025 plus 2026 through week 6 (research/). [name, next-week picks, winner above loser at season end] */
 const ACCURACY: [string, number, number][] = [
-  ["This rating", 70.3, 86.5],
+  ["This rating", 70.3, 85.2],
   ["Same rating without record bonus or tiebreaker", 70.5, 80.9],
   ["Massey with home field", 70.2, 80.4],
   ["Elo carried over from last season", 69.7, 80.3],
@@ -93,7 +93,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h("p", {}, "Setting the slope to zero gives one symmetric linear system, solved exactly with a Cholesky decomposition using only + − × / and √ in a fixed order. No iterations, no random starts. The same scores give the same answer, to the last bit, on any computer."),
 
     h("h2", {}, "Every loss costs something"),
-    h("p", {}, "On top of the rating from games, each team gets a record bonus: ", h("b", {}, `${m.recordWeight} points × (wins − losses) ÷ games`), `. An unbeaten team gets +${m.recordWeight}, a .500 team 0, a winless team −${m.recordWeight}. So a loss always costs points, even a close loss to a good team, and costs more early in the season when each game is a bigger share of the record. In testing it cost under a tenth of a point of prediction.`),
+    h("p", {}, "On top of the rating from games, each team gets a record bonus: ", h("b", {}, `${m.recordWeight} points × (wins − losses) ÷ games`), `. An unbeaten team gets +${m.recordWeight}, a .500 team 0, a winless team −${m.recordWeight}. So a loss always costs points, even a close loss to a good team, and costs more early in the season when each game is a bigger share of the record. The weight is set high enough that a team with two losses has to have beaten a lot of good teams to stay near the top. In testing it cost nothing in prediction on the held-out seasons.`),
 
     h("h2", {}, "Head-to-head breaks close calls"),
     h("p", {}, "If two teams are rated within ", h("b", {}, `${m.headToHeadWindow} points`), " (a field goal, record bonus included) and the lower one beat the higher one, head-to-head decides: the winner is held at least ½ point above the loser, and the whole ladder is worked out again with that hold, so everyone around them adjusts consistently. New close pairs that appear are checked the same way until nothing changes. Teams further apart keep their places: one upset doesn’t outweigh a season of results."),
@@ -113,7 +113,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     bars(1, 60),
     h("p", {}, "Second: at the end of each season, how often the final ranking has the winner of a game above the loser."),
     bars(2, 70),
-    h("p", { class: "muted" }, "The record bonus and the tiebreaker together cost a fifth of a point of prediction (70.3% against 70.5%) and put the winner above the loser in 86.5% of games instead of 80.9%. With it, the rating is still level with the best known predictor (Massey with home field) and ahead of the rest, including Elo carried over from last season. A window of 3 points was chosen on 2014–2019: wider windows let head-to-head pull teams too far and made both measures worse. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
+    h("p", { class: "muted" }, "The record bonus and the tiebreaker together cost a fifth of a point of prediction (70.3% against 70.5%) and put the winner above the loser in 85.2% of games instead of 80.9%. With it, the rating is still level with the best known predictor (Massey with home field) and ahead of the rest, including Elo carried over from last season. A window of 3 points was chosen on 2014–2019: wider windows let head-to-head pull teams too far and made both measures worse. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
 
     h("h2", {}, "What counts"),
     h("ul", {},

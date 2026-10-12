@@ -38,9 +38,9 @@ describe("determinism", () => {
     const away = teams.find((t: { id: number }) => t.id === base.awayId);
     expect([away.rank, home.rank]).toEqual([1, 2]);
     // One neutral game, result 21 + 3 = 24, shrink 0.05 per team: the rating gap from games is
-    // 24 / (1 + 0.05 / 2); the 1-0 team gets +6 for its record and the 0-1 team -6.
-    expect(away.height - home.height).toBeCloseTo(24 / 1.025 + 12, 5);
-    expect([away.recordBonus, home.recordBonus]).toEqual([6, -6]);
+    // 24 / (1 + 0.05 / 2); the 1-0 team gets +24 for its record and the 0-1 team -24.
+    expect(away.height - home.height).toBeCloseTo(24 / 1.025 + 48, 5);
+    expect([away.recordBonus, home.recordBonus]).toEqual([24, -24]);
   });
 });
 
@@ -72,7 +72,7 @@ describe("pipeline", () => {
   it("records the settings, home field and inputs in every manifest", async () => {
     const out = await computeSeason(input);
     const m = JSON.parse(out.files[0]!.json).manifest;
-    expect([m.engine, m.algorithmVersion, m.winBonus, m.shrink, m.headToHeadWindow, m.recordWeight]).toEqual(["rank-engine-10", "margin-5", 3, 0.05, 3, 6]);
+    expect([m.engine, m.algorithmVersion, m.winBonus, m.shrink, m.headToHeadWindow, m.recordWeight]).toEqual(["rank-engine-10", "margin-6", 3, 0.05, 3, 24]);
     expect(m).not.toHaveProperty("priorSeason");
     expect(JSON.parse(out.files[0]!.json).teams[0]).not.toHaveProperty("prior");
     expect(typeof m.homeField).toBe("number");

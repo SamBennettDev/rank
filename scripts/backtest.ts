@@ -69,7 +69,7 @@ async function historySeason(y: number): Promise<SeasonFiles> {
   return { season: String(y), teamsCsv: teamsToCsv([...teams.values()]), gamesCsv: gamesToCsv(games) };
 }
 
-const CONFIG = JSON.stringify({ label: "", demo: false, algorithmVersion: "backtest", classifications: ["fbs", "fcs"], winBonus: 3, shrink: 0.05, headToHeadWindow: 3, recordWeight: 6 });
+const CONFIG = JSON.stringify({ label: "", demo: false, algorithmVersion: "backtest", classifications: ["fbs", "fcs"], winBonus: 3, shrink: 0.05, headToHeadWindow: 3, recordWeight: 24 });
 
 // ---------------------------------------------------------------- scoring
 async function score(current: SeasonFiles, configJson: string) {

@@ -6,9 +6,9 @@ The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how 
 
 - **Every game counts.** A game says a team is worth its opponent's rating plus its margin, with 3 extra points for winning (3 fewer for losing), adjusted for home field. A team's rating is the average of what its games say, with all teams solved together in one exact linear system.
 - **Every team starts level.** No preseason ranking, no carry-over from last season, no recruiting or reputation: only this season's games count.
-- **Every loss costs something.** A record bonus of 6 × (wins − losses) ÷ games is added to the rating, so an unbeaten team gets +6 and a .500 team 0.
+- **Every loss costs something.** A record bonus of 24 × (wins − losses) ÷ games is added to the rating, so an unbeaten team gets +24, a .500 team 0 and a winless team −24.
 - **Head-to-head breaks close calls.** If two teams are rated within a field goal and the lower one beat the higher one, the winner is moved just in front and the whole ladder adjusts. Teams further apart keep their places.
-- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 70.3% of the next week's winners using this season's games only, level with the best known predictor (Massey with home field, 70.2%), and its final rankings have the winner above the loser in 86.5% of games (about 80% for Massey, Elo, LRMC). See [`research/`](research/).
+- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 70.3% of the next week's winners using this season's games only, level with the best known predictor (Massey with home field, 70.2%), and its final rankings have the winner above the loser in 85.2% of games (about 80% for Massey, Elo, LRMC). See [`research/`](research/).
 
 - **Offense, defense and special teams.** Separate rankings from public play-by-play (expected points per snap, garbage time removed, adjusted for opponents and home field). They explain how teams win; they don't change the overall rank, because in testing they predicted no better than final scores.
 

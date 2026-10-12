@@ -87,7 +87,7 @@ cycle are skipped, closest first). `run_close.py`:
 | 10 | 68.44% | 79.9% | 66.58% | 79.4% |
 | 14 | 65.41% | 73.3% | 64.72% | 73.0% |
 
-## Record bonus (published)
+## Record bonus (published, weight 24)
 
 Raising the win bonus does not make losses count more against good schedules (`run_bonus.py`: bonus 3→28 cost
 up to 1 point of picks and pushed unbeaten Utah *down*, because it also inflates the teams that beat 3-2 Oregon).
@@ -98,6 +98,17 @@ tiebreaker applied to that combined score (`run_record2.py`):
 |---|---|---|---|---|
 | 0 | 71.47% | 86.9% | 70.32% | 86.5% |
 | 4 | 71.61% | 86.7% | 70.46% | 86.4% |
-| **6 (published)** | 71.34% | 86.5% | 70.26% | 86.5% |
+| 6 | 71.34% | 86.5% | 70.26% | 86.5% |
 | 8 | 71.44% | 86.4% | 69.91% | 86.6% |
 | 10 | 71.52% | 86.3% | 70.19% | 86.3% |
+| 14 | 71.28% | 86.2% | 70.51% | 86.0% |
+| 18 | 71.08% | 85.8% | 70.69% | 85.8% |
+| 22 | 70.71% | 85.6% | 70.46% | 85.3% |
+| **24 (published)** | 70.53% | 85.5% | 70.27% | 85.2% |
+| 26 | 70.40% | 85.2% | 70.05% | 85.0% |
+| 30 | 70.10% | 84.9% | 69.91% | 84.8% |
+
+Where 3-2 Oregon lands in 2026 week 6: #16 at k = 6, #21 at 14, #24 at 18–22, #29 at 24, #30 at 26–30.
+Held-out picks are flat up to about 24 and fall after; agreement drifts down slowly as k grows. 24 is the
+smallest weight that takes a 2-loss team with a thin résumé out of the top 25 (the only 2-loss team left
+in it is LSU, #18: both losses were close, to top-25 Kentucky and Ole Miss, and it won its other four by 29–49).

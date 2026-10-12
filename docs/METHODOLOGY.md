@@ -67,7 +67,7 @@ The published rating is the rating from games plus a **record bonus**:
 rating[i] = r[i] + recordWeight × (wins[i] − losses[i]) / games[i]
 ```
 
-with `recordWeight = 6`: +6 for an unbeaten team, 0 at .500, −6 winless. A loss always costs points, even a close loss to a good team, and costs more early in the season when each game is a bigger share of the record. Head-to-head (below) compares these combined ratings. On the held-out seasons the bonus cost under a tenth of a point of next-week picks (weights from 4 to 10 were all within noise); 6 was chosen so records matter visibly. Each team's bonus is published as `recordBonus`, and the team page shows the rating from games and the bonus separately.
+with `recordWeight = 24`: +24 for an unbeaten team, 0 at .500, −24 winless. A loss always costs points, even a close loss to a good team, and costs more early in the season when each game is a bigger share of the record. Head-to-head (below) compares these combined ratings. On the held-out seasons weight 24 picked next-week winners exactly as well as weight 6 (70.27% vs 70.26%; 0.8 points worse on the 2014–2019 design seasons) and cost about a point of season-end agreement (85.2% vs 86.5%), because a heavy record term more often puts a team with more losses below a team it beat. 24 is the smallest weight that keeps teams with two losses and a thin résumé (3-2 Oregon in 2026) out of the top 25. Each team's bonus is published as `recordBonus`, and the team page shows the rating from games and the bonus separately.
 
 ### Head-to-head breaks close calls
 
@@ -106,7 +106,7 @@ This costs some early-season accuracy, deliberately. In the held-out test, start
   "winBonus": 3,
   "shrink": 0.05,
   "headToHeadWindow": 3,
-  "recordWeight": 6
+  "recordWeight": 24
 }
 ```
 
@@ -154,7 +154,7 @@ The model came out of a walk-forward benchmark in [`research/`](../research/): e
 
 | Method (held-out seasons) | Next-week winners | Winner above loser at season end |
 |---|---|---|
-| **This rating** | **70.3%** | **86.5%** |
+| **This rating** | **70.3%** | **85.2%** |
 | Same rating without record bonus or tiebreaker | 70.5% | 80.9% |
 | Massey (least squares on margin) with home field | 70.2% | 80.4% |
 | Elo carried over from last season | 69.7% | 80.3% |
@@ -168,9 +168,9 @@ The model came out of a walk-forward benchmark in [`research/`](../research/): e
 | Win percentage | 66.2% | 78.9% |
 | PageRank | 64.3% | 78.2% |
 
-Without the tiebreaker the rating (this season's games only) is level with the best known predictor, Massey with home field (+0.3 points, 95% interval −0.1 to +0.7), and ahead of plain Massey, LRMC, Elo and even Elo carried over from last season. The record bonus and tiebreaker give up a fifth of a point of that (70.3%) and lifts season-end agreement with results to 86.5%, above every other method. Starting each team from 90% of last season's rating would add about 1.4 points of prediction; it was removed so the ranking judges this season only. A stronger head-to-head step (holding every winner above the team it beat, except the fewest upsets cycles force) reached 90.3% agreement but cut picks to 69.6% and let one result move teams a long way; it was removed in favour of the 3-point tiebreaker. Ideas that did not help on 2014–2019 and were dropped: treating blowout margins as censored, robust losses, recency weighting, conference layers and play-by-play (see below). Systems that use recruiting, returning players or betting markets (SP+, FPI, Sagarin, Vegas) were not tested.
+Without the tiebreaker the rating (this season's games only) is level with the best known predictor, Massey with home field (+0.3 points, 95% interval −0.1 to +0.7), and ahead of plain Massey, LRMC, Elo and even Elo carried over from last season. The record bonus and tiebreaker give up a fifth of a point of that (70.3%) and lift season-end agreement with results to 85.2%, above every other method. Starting each team from 90% of last season's rating would add about 1.4 points of prediction; it was removed so the ranking judges this season only. A stronger head-to-head step (holding every winner above the team it beat, except the fewest upsets cycles force) reached 90.3% agreement but cut picks to 69.6% and let one result move teams a long way; it was removed in favour of the 3-point tiebreaker. Ideas that did not help on 2014–2019 and were dropped: treating blowout margins as censored, robust losses, recency weighting, conference layers and play-by-play (see below). Systems that use recruiting, returning players or betting markets (SP+, FPI, Sagarin, Vegas) were not tested.
 
-`npm run backtest -- --history 2021-2025` runs the published pipeline itself (`computeSeason`) on those seasons, from public sportsdataverse schedules, and reports 70.3% of next-week winners and 86.3% agreement with results.
+`npm run backtest -- --history 2021-2025` runs the published pipeline itself (`computeSeason`) on those seasons, from public sportsdataverse schedules, and reports 70.4% of next-week winners and 85.0% agreement with results.
 
 ## Determinism rules
 
