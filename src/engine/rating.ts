@@ -14,8 +14,10 @@ export interface FitOptions {
   winBonus: number;
   /** Games' worth of pull toward an average rating (0), the same for every team. Must be > 0. */
   shrink: number;
-  /** Per game: true where a head-to-head hold must keep the winner at least STOP_GAP above the loser. */
+  /** Per game: true where a head-to-head hold must keep the winner above the loser. */
   kept?: readonly boolean[];
+  /** Per game: how far above the loser a held winner's rating must be (default STOP_GAP). */
+  need?: readonly number[];
   /** Where to start the search (ratings then home field); speeds up the constrained fit. */
   from?: Float64Array;
 }
@@ -57,7 +59,7 @@ export const HOME_FIELD_RIDGE = 1e-4;
  * at home or plus H away (see `gameValue`). That is the explanation the site shows.
  * `games` must already be in a canonical order; summation order follows it.
  */
-export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, shrink, kept, from }: FitOptions): { ratings: Float64Array; homeField: number } {
+export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, shrink, kept, need, from }: FitOptions): { ratings: Float64Array; homeField: number } {
   if (!(shrink > 0)) throw new Error("shrink must be > 0");
   const N = n + 1; // last unknown is the home-field edge
   const ys = games.map((g) => result(g.margin, winBonus));
@@ -90,14 +92,15 @@ export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, s
   // kept game whose winner is less than STOP_GAP above its loser. Each step solves the linear
   // system for the stops currently engaged; when the engaged set repeats, the answer is exact.
   const pairs = games.map((g) => (g.margin > 0 ? [g.home, g.away] : [g.away, g.home]) as [number, number]);
-  const engaged = (x: Float64Array) => pairs.map(([w, l], i) => kept[i]! && x[w]! - x[l]! < STOP_GAP);
+  const gapOf = (i: number) => need?.[i] ?? STOP_GAP;
+  const engaged = (x: Float64Array) => pairs.map(([w, l], i) => kept[i]! && x[w]! - x[l]! < gapOf(i));
   const objective = (x: Float64Array) => {
     let e = 0;
     games.forEach((g, i) => {
       const r = ys[i]! - (x[g.home]! - x[g.away]! + (g.neutral ? 0 : x[n]!));
       e += r * r;
       const [w, l] = pairs[i]!;
-      const short = STOP_GAP - (x[w]! - x[l]!);
+      const short = gapOf(i) - (x[w]! - x[l]!);
       if (kept[i] && short > 0) e += STOP_STIFFNESS * short * short;
     });
     for (let i = 0; i < n; i++) e += shrink * x[i]! * x[i]!;
@@ -114,8 +117,8 @@ export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, s
       m[l * N + l]! += STOP_STIFFNESS;
       m[w * N + l]! -= STOP_STIFFNESS;
       m[l * N + w]! -= STOP_STIFFNESS;
-      b[w]! += STOP_STIFFNESS * STOP_GAP;
-      b[l]! -= STOP_STIFFNESS * STOP_GAP;
+      b[w]! += STOP_STIFFNESS * gapOf(i);
+      b[l]! -= STOP_STIFFNESS * gapOf(i);
     });
     const next = choleskySolve(m, b, N);
     const now = engaged(next);

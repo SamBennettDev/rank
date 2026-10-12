@@ -3,9 +3,10 @@ import { type FitOptions, type RatedGame, STOP_GAP, fitRatings } from "./rating"
 /**
  * Head-to-head as a tiebreaker between close teams.
  *
- * Start from the plain rating. Any game whose winner is rated below its loser by less
- * than `window` points (or above it by less than STOP_GAP) gets a hold: the winner must
- * stay at least STOP_GAP above the loser. The whole ladder is then fitted again with
+ * Teams are compared on their score: rating + `offset` (the record bonus). Start from the
+ * plain rating. Any game whose winner scores below its loser by less than `window` points
+ * (or above it by less than STOP_GAP) gets a hold: the winner's score must stay at least
+ * STOP_GAP above the loser's. The whole ladder is then fitted again with
  * those holds, which can bring new close pairs into the window, so this repeats until
  * no new hold is added. Holds are only ever added, so it always stops.
  *
@@ -14,11 +15,13 @@ import { type FitOptions, type RatedGame, STOP_GAP, fitRatings } from "./rating"
  * holds, to stay above the winner) is skipped, so cycles of close results never fight.
  * Games further apart than `window` are left to the rating alone.
  */
-export function closeHeadToHead(n: number, games: readonly RatedGame[], options: Omit<FitOptions, "kept" | "from">, window: number): { ratings: Float64Array; homeField: number; held: boolean[] } {
+export function closeHeadToHead(n: number, games: readonly RatedGame[], options: Omit<FitOptions, "kept" | "need" | "from">, window: number, offset: Float64Array = new Float64Array(n)): { ratings: Float64Array; homeField: number; held: boolean[] } {
   let fit = fitRatings(n, games, options);
   const held = games.map(() => false);
   if (!(window > 0)) return { ...fit, held };
   const pairs = games.map((g) => (g.margin > 0 ? [g.home, g.away] : [g.away, g.home]) as [number, number]);
+  // The rating gap a hold needs so that the score gap reaches STOP_GAP.
+  const need = pairs.map(([w, l]) => STOP_GAP - (offset[w]! - offset[l]!));
   const above: number[][] = Array.from({ length: n }, () => []);
   const requiredAbove = (a: number, b: number) => {
     const stack = [a];
@@ -35,7 +38,7 @@ export function closeHeadToHead(n: number, games: readonly RatedGame[], options:
   for (let round = 0; round < 100; round++) {
     const r = fit.ratings;
     const candidates = pairs
-      .map(([w, l], i) => ({ i, w, l, short: r[l]! - r[w]! }))
+      .map(([w, l], i) => ({ i, w, l, short: r[l]! + offset[l]! - (r[w]! + offset[w]!) }))
       .filter((c) => !held[c.i] && c.short > -STOP_GAP && c.short < window)
       .sort((a, b) => a.short - b.short || a.i - b.i);
     let added = false;
@@ -49,7 +52,7 @@ export function closeHeadToHead(n: number, games: readonly RatedGame[], options:
     const from = new Float64Array(n + 1);
     from.set(fit.ratings);
     from[n] = fit.homeField;
-    fit = fitRatings(n, games, { ...options, kept: held, from });
+    fit = fitRatings(n, games, { ...options, kept: held, need, from });
   }
   throw new Error("head-to-head holds did not settle");
 }

@@ -14,11 +14,12 @@ def solve(S, idx, kept=None, bonus=3.0, shrink=0.05, K=1000.0, gap=0.5, start=No
         r, H = th[:n], th[n]
         res = y - (r[h] - r[a] + H * x)
         d = r[w] - r[l]
-        act = (kept & (d < gap)) if kept is not None else np.zeros(len(idx), bool)
+        act = (kept & (d < gap)) if kept is not None else np.zeros(len(idx), bool)   # gap may be a per-game array
         return res, d, act
     def obj(th):
         res, d, act = parts(th)
-        return (res ** 2).sum() + shrink * (th[:n] ** 2).sum() + 1e-4 * th[n] ** 2 + K * ((gap - d[act]) ** 2).sum()
+        g = gap[act] if np.ndim(gap) else gap
+        return (res ** 2).sum() + shrink * (th[:n] ** 2).sum() + 1e-4 * th[n] ** 2 + K * ((g - d[act]) ** 2).sum()
     th = np.zeros(N) if start is None else start.copy()
     for _ in range(100):
         res, d, act = parts(th)
@@ -31,7 +32,8 @@ def solve(S, idx, kept=None, bonus=3.0, shrink=0.05, K=1000.0, gap=0.5, start=No
         # stops on active kept games: K (gap - (r_w - r_l))^2
         ww, ll = w[act], l[act]
         np.add.at(A, (ww, ww), K); np.add.at(A, (ll, ll), K); np.add.at(A, (ww, ll), -K); np.add.at(A, (ll, ww), -K)
-        np.add.at(b, ww, K * gap); np.add.at(b, ll, -K * gap)
+        g = gap[act] if np.ndim(gap) else gap
+        np.add.at(b, ww, K * g); np.add.at(b, ll, -K * g)
         new = np.linalg.solve(A, b)
         _, d2, act2 = parts(new)
         if np.array_equal(act2, act): return new

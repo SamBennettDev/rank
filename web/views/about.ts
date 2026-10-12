@@ -7,7 +7,7 @@ import { fetchText, rankingPath, seasonFiles } from "../store";
 /** Held-out test, 2021–2025 plus 2026 through week 6 (research/). [name, next-week picks, winner above loser at season end] */
 const ACCURACY: [string, number, number][] = [
   ["This rating", 70.3, 86.5],
-  ["Same rating without the tiebreaker", 70.5, 80.9],
+  ["Same rating without record bonus or tiebreaker", 70.5, 80.9],
   ["Massey with home field", 70.2, 80.4],
   ["Elo carried over from last season", 69.7, 80.3],
   ["Massey", 69.7, 80.2],
@@ -61,7 +61,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const file = (path: string) => h("a", { href: `./data/${path}`, target: "_blank", rel: "noopener" }, path.split("/").slice(-2).join("/"));
   const rows: [string, string][] = [
     ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
-    ["Win bonus", `${m.winBonus} points`], ["Pull toward average", `${m.shrink} games’ worth, the same for every team`], ["Head-to-head window", `${m.headToHeadWindow} points`],
+    ["Win bonus", `${m.winBonus} points`], ["Pull toward average", `${m.shrink} games’ worth, the same for every team`], ["Record bonus", `${m.recordWeight} × (wins − losses) ÷ games`], ["Head-to-head window", `${m.headToHeadWindow} points`],
     ["Home field (fitted)", `${m.homeField.toFixed(2)} points`], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
     ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
   ];
@@ -92,8 +92,11 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h("span", { class: "c" }, `result   home margin, plus ${m.winBonus} if home won, minus ${m.winBonus} if home lost\nr[i]     rating of team i (the y-axis of the graph), in points\nH        home-field edge in points; home is 1 for a true home game, 0 at a neutral site\n${m.shrink}     the same small pull toward 0 (average) for every team`)),
     h("p", {}, "Setting the slope to zero gives one symmetric linear system, solved exactly with a Cholesky decomposition using only + − × / and √ in a fixed order. No iterations, no random starts. The same scores give the same answer, to the last bit, on any computer."),
 
+    h("h2", {}, "Every loss costs something"),
+    h("p", {}, "On top of the rating from games, each team gets a record bonus: ", h("b", {}, `${m.recordWeight} points × (wins − losses) ÷ games`), `. An unbeaten team gets +${m.recordWeight}, a .500 team 0, a winless team −${m.recordWeight}. So a loss always costs points, even a close loss to a good team, and costs more early in the season when each game is a bigger share of the record. In testing it cost under a tenth of a point of prediction.`),
+
     h("h2", {}, "Head-to-head breaks close calls"),
-    h("p", {}, "If two teams are rated within ", h("b", {}, `${m.headToHeadWindow} points`), " (a field goal) and the lower one beat the higher one, head-to-head decides: the winner is held at least ½ point above the loser, and the whole ladder is worked out again with that hold, so everyone around them adjusts consistently. New close pairs that appear are checked the same way until nothing changes. Teams further apart keep their places: one upset doesn’t outweigh a season of results."),
+    h("p", {}, "If two teams are rated within ", h("b", {}, `${m.headToHeadWindow} points`), " (a field goal, record bonus included) and the lower one beat the higher one, head-to-head decides: the winner is held at least ½ point above the loser, and the whole ladder is worked out again with that hold, so everyone around them adjusts consistently. New close pairs that appear are checked the same way until nothing changes. Teams further apart keep their places: one upset doesn’t outweigh a season of results."),
     h("p", {}, "When close results contradict each other (A beat B, B beat C, C beat A), the closest calls are applied first and a hold that would contradict them is skipped. ", `This week ${ctx.ranking.held.length} games were decided this way; team pages tag them H2H.`),
 
     h("h2", {}, "Every team starts level"),
@@ -110,7 +113,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     bars(1, 60),
     h("p", {}, "Second: at the end of each season, how often the final ranking has the winner of a game above the loser."),
     bars(2, 70),
-    h("p", { class: "muted" }, "The tiebreaker costs a fifth of a point of prediction (70.3% against 70.5%) and puts the winner above the loser in 86.5% of games instead of 80.9%. With it, the rating is still level with the best known predictor (Massey with home field) and ahead of the rest, including Elo carried over from last season. A window of 3 points was chosen on 2014–2019: wider windows let head-to-head pull teams too far and made both measures worse. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
+    h("p", { class: "muted" }, "The record bonus and the tiebreaker together cost a fifth of a point of prediction (70.3% against 70.5%) and put the winner above the loser in 86.5% of games instead of 80.9%. With it, the rating is still level with the best known predictor (Massey with home field) and ahead of the rest, including Elo carried over from last season. A window of 3 points was chosen on 2014–2019: wider windows let head-to-head pull teams too far and made both measures worse. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
 
     h("h2", {}, "What counts"),
     h("ul", {},

@@ -86,12 +86,11 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const sum = lines.reduce((s, l) => s + l.value, 0);
   return h("div", { class: "panel why" },
     h("h2", {}, "Why it’s here"),
-    h("p", { class: "hint" }, `Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those. Every team starts level, so only this season’s games count. When two teams are rated within ${ctx.ranking.manifest.headToHeadWindow} points and one beat the other, head-to-head breaks the tie: the winner is held just above. Dots right of the line pull the rating up; dots left pull it down.`),
-    breakdownChart(ctx, me.height!, lines),
+    h("p", { class: "hint" }, `Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those. Every team starts level, so only this season’s games count. Then the record bonus is added: ${ctx.ranking.manifest.recordWeight} points × (wins − losses) ÷ games, so every loss costs something. When two teams end up within ${ctx.ranking.manifest.headToHeadWindow} points and one beat the other, head-to-head breaks the tie: the winner is held just above. Dots right of the line pull the rating up; dots left pull it down.`),
+    breakdownChart(ctx, b.fromGames, lines),
     h("p", { class: "sum" },
-      Math.abs(b.holds) > 0.05
-        ? `(${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)}, head-to-head ${fmtHeight(b.holds)}) ÷ ${lines.length + b.shrink} = `
-        : `${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)} ÷ ${lines.length + b.shrink} = `,
+      `(${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)}${Math.abs(b.holds) > 0.05 ? `, head-to-head ${fmtHeight(b.holds)}` : ""}) ÷ ${lines.length + b.shrink} = ${fmtHeight(b.fromGames)} from games, `,
+      `${b.recordBonus >= 0 ? "+" : "−"} ${Math.abs(b.recordBonus).toFixed(1)} for a ${me.wins}-${me.losses} record = `,
       h("b", {}, fmtHeight(b.average)),
       Math.abs(b.average - me.height!) > 0.05 ? ` (published ${fmtHeight(me.height)})` : ""));
 }
@@ -139,11 +138,11 @@ function breakdownChart(ctx: Ctx, rating: number, lines: GameLine[]): SVGSVGElem
     const score = `${l.won ? "W" : "L"} ${l.won ? l.edge.winnerPoints : l.edge.loserPoints}–${l.won ? l.edge.loserPoints : l.edge.winnerPoints}`;
     label(y, `${l.where === 1 ? "vs" : l.where === -1 ? "at" : "vs"} ${o.abbreviation || o.school} · ${score}`);
     const site = l.where === 1 ? ` − ${homeField.toFixed(1)} home field` : l.where === -1 ? ` + ${homeField.toFixed(1)} away` : " (neutral site)";
-    stem(y, l.value, `${o.school} rated ${fmtHeight(o.height)}; ${score} → ${l.result > 0 ? "+" : "−"}${Math.abs(l.result)} with the win bonus${site} = ${fmtHeight(l.value)}`, o.id);
+    stem(y, l.value, `${o.school}’s rating from games ${fmtHeight(o.height! - o.recordBonus)}; ${score} → ${l.result > 0 ? "+" : "−"}${Math.abs(l.result)} with the win bonus${site} = ${fmtHeight(l.value)}`, o.id);
   });
   root.appendChild(svg("line", { class: "rline", x1: rx, x2: rx, y1: pad.t - 6, y2: H - pad.b + 4 }));
   const rt = svg("text", { class: "rlab", x: Math.min(Math.max(rx, pad.l + 40), W - pad.r - 40), y: H - 6, "text-anchor": "middle" });
-  rt.textContent = `Rating ${fmtHeight(rating)}`;
+  rt.textContent = `From games ${fmtHeight(rating)}`;
   root.appendChild(rt);
   return root;
 }
@@ -223,7 +222,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     const l = byGame.get(e.gameId)!;
     const o = l.opponent;
     const upset = (l.won && me.height! < o.height!) || (!l.won && o.height! < me.height!);
-    const pull = l.value - me.height!;
+    const pull = l.value - (me.height! - me.recordBonus);
     return h("a", { class: "grow2", href: teamHref(ctx, o.id) },
       h("span", { class: "wk" }, e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`),
       logo(ctx.teams.get(o.id), 34, { lazy: true }),
@@ -232,8 +231,8 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         h("span", { class: "c" }, `#${rankLabel(o.rank, o.tied)} · ${record(o)} · ${o.conference}`, upset || l.held ? " " : "", upset ? h("span", { class: "tag-up" }, "UPSET") : "", l.held ? h("span", { class: "tag-held", title: l.won ? `Rated within ${ctx.ranking.manifest.headToHeadWindow} points of ${o.school}, and this team won, so it is held just above them.` : `Rated within ${ctx.ranking.manifest.headToHeadWindow} points of ${o.school}, who won, so this team is held just below them.` }, "H2H") : "")),
       h("span", { class: `pill ${l.won ? "w" : "l"}` }, h("i", {}, l.won ? "W" : "L"), `${l.won ? e.winnerPoints : e.loserPoints}–${l.won ? e.loserPoints : e.winnerPoints}`),
       h("span", { class: "r hide-sm" }, fmtHeight(o.height)),
-      h("span", { class: "r hide-sm", title: "What this game alone says this team's rating is: opponent rating + margin (±3 for the result), adjusted for home field" }, fmtHeight(l.value)),
-      h("span", { class: `r ${pull >= 0 ? "pos" : "neg"}`, title: "How far this game pulls the rating up (+) or down (−)" }, fmtHeight(pull)),
+      h("span", { class: "r hide-sm", title: "What this game alone says this team's rating from games is: the opponent's rating from games (its rating without its record bonus) + margin (±3 for the result), adjusted for home field" }, fmtHeight(l.value)),
+      h("span", { class: `r ${pull >= 0 ? "pos" : "neg"}`, title: "How far this game pulls the rating from games up (+) or down (−)" }, fmtHeight(pull)),
     );
   });
   return h("section", { class: "ladder games" },

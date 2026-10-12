@@ -38,6 +38,8 @@ export interface SeasonConfig {
   shrink: number;
   /** Head-to-head breaks ties between teams rated within this many points (0 turns it off). */
   headToHeadWindow: number;
+  /** Record bonus: this many points × (wins − losses) / games, added to the rating (0 turns it off). */
+  recordWeight: number;
 }
 
 /** One team's play-by-play summary for one game (see scripts/fetch-plays.ts). */
@@ -100,8 +102,10 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Rating in points (the graph's y-coordinate), rounded to 1e-6; null with no counted games. */
+  /** Rating in points (the graph's y-coordinate): rating from games + record bonus, rounded to 1e-6; null with no counted games. */
   height: number | null;
+  /** The record bonus included in `height`: recordWeight × (wins − losses) / games, rounded to 1e-6. */
+  recordBonus: number;
   /** Offense, defense and special teams from play-by-play, in points per game better than average; null without play-by-play. */
   offense: number | null;
   defense: number | null;
@@ -118,6 +122,7 @@ export interface Manifest {
   winBonus: number;
   shrink: number;
   headToHeadWindow: number;
+  recordWeight: number;
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
   classifications: string[];

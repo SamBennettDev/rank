@@ -7,7 +7,7 @@ import type { Edge, Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./ty
 import { fitUnits } from "./units";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-9";
+export const ENGINE_VERSION = "rank-engine-10";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -71,7 +71,14 @@ export async function computeSeason(
     }
     const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
-    const { ratings, homeField, held: isHeld } = closeHeadToHead(teams.length, rated(edges, index), { winBonus: config.winBonus, shrink: config.shrink }, config.headToHeadWindow);
+    // Record bonus: recordWeight x (wins - losses) / games, added to every team's rating.
+    const bonus = new Float64Array(teams.length);
+    teams.forEach((t, i) => {
+      const w = wins.get(t.id) ?? 0, l = losses.get(t.id) ?? 0;
+      bonus[i] = w + l > 0 ? (config.recordWeight * (w - l)) / (w + l) : 0;
+    });
+    const { ratings: fromGames, homeField, held: isHeld } = closeHeadToHead(teams.length, rated(edges, index), { winBonus: config.winBonus, shrink: config.shrink }, config.headToHeadWindow, bonus);
+    const ratings = fromGames.map((r, i) => r + bonus[i]!);
     const held = edges.filter((_, i) => isHeld[i]).map((e) => e.gameId);
     const units = plays ? fitUnits(teams.length, index, edges, plays, config.shrink) : null;
     const unit = (v: number | null | undefined) => (v === null || v === undefined ? null : round6(v));
@@ -91,6 +98,7 @@ export async function computeSeason(
         rank,
         tied: height !== null && sortedHeights.filter((h) => h === height).length > 1,
         height,
+        recordBonus: round6(bonus[i]!),
         offense: unit(units?.offense[i]),
         defense: unit(units?.defense[i]),
         special: unit(units?.special[i]),
@@ -108,6 +116,7 @@ export async function computeSeason(
       winBonus: config.winBonus,
       shrink: config.shrink,
       headToHeadWindow: config.headToHeadWindow,
+      recordWeight: config.recordWeight,
       homeField: round6(homeField),
       classifications: config.classifications,
       teamsSha256,

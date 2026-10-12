@@ -6,6 +6,7 @@ The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how 
 
 - **Every game counts.** A game says a team is worth its opponent's rating plus its margin, with 3 extra points for winning (3 fewer for losing), adjusted for home field. A team's rating is the average of what its games say, with all teams solved together in one exact linear system.
 - **Every team starts level.** No preseason ranking, no carry-over from last season, no recruiting or reputation: only this season's games count.
+- **Every loss costs something.** A record bonus of 6 × (wins − losses) ÷ games is added to the rating, so an unbeaten team gets +6 and a .500 team 0.
 - **Head-to-head breaks close calls.** If two teams are rated within a field goal and the lower one beat the higher one, the winner is moved just in front and the whole ladder adjusts. Teams further apart keep their places.
 - **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 70.3% of the next week's winners using this season's games only, level with the best known predictor (Massey with home field, 70.2%), and its final rankings have the winner above the loser in 86.5% of games (about 80% for Massey, Elo, LRMC). See [`research/`](research/).
 
@@ -28,7 +29,7 @@ Plain files in this repository; git history is the audit log.
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
 data/seasons/<year>/plays.csv      per team per game: snaps, expected points, successes, special-teams EPA (from play-by-play)
-data/seasons/<year>/config.json    algorithm version, win bonus, shrink, head-to-head window, divisions
+data/seasons/<year>/config.json    algorithm version, win bonus, shrink, head-to-head window, record weight, divisions
 data/rankings/<year>/<snapshot>.json   published output (ratings, unit ratings, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```

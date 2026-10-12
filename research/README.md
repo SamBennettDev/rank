@@ -86,3 +86,18 @@ cycle are skipped, closest first). `run_close.py`:
 | 7 | 70.06% | 85.6% | 68.32% | 84.5% |
 | 10 | 68.44% | 79.9% | 66.58% | 79.4% |
 | 14 | 65.41% | 73.3% | 64.72% | 73.0% |
+
+## Record bonus (published)
+
+Raising the win bonus does not make losses count more against good schedules (`run_bonus.py`: bonus 3→28 cost
+up to 1 point of picks and pushed unbeaten Utah *down*, because it also inflates the teams that beat 3-2 Oregon).
+A per-team record term does: `close_rec.py` ranks by rating + k × (wins − losses) / games, with the field-goal
+tiebreaker applied to that combined score (`run_record2.py`):
+
+| k | 2014–19 picks | 2014–19 agreement | 2021–26 picks | 2021–26 agreement |
+|---|---|---|---|---|
+| 0 | 71.47% | 86.9% | 70.32% | 86.5% |
+| 4 | 71.61% | 86.7% | 70.46% | 86.4% |
+| **6 (published)** | 71.34% | 86.5% | 70.26% | 86.5% |
+| 8 | 71.44% | 86.4% | 69.91% | 86.6% |
+| 10 | 71.52% | 86.3% | 70.19% | 86.3% |
