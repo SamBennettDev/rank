@@ -1,12 +1,12 @@
 import { h } from "./dom";
 import { navIcons } from "./icons";
-import { type Ctx, type View, METHOD_HINT, METHOD_LABEL, href, makeCtx, setMethod } from "./ctx";
+import { type Ctx, type View, href, makeCtx } from "./ctx";
 import { loadGames, loadIndex, loadRanking, loadTeams } from "./store";
 import { aboutView } from "./views/about";
 import { graphView } from "./views/graph";
 import { listView } from "./views/list";
 import { teamView } from "./views/team";
-import type { Method, SeasonIndexEntry } from "../src/engine/types";
+import type { SeasonIndexEntry } from "../src/engine/types";
 
 const app = document.getElementById("app")!;
 const nav = document.getElementById("nav")!;
@@ -55,19 +55,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
   const weekFace = h("label", { class: "sel week" },
     h("span", { class: "face" }, h("span", { class: "long" }, label), h("span", { class: "short" }, label.replace(/^Week /, "Wk ").replace(/^Postseason$/, "Bowls"))),
     weekSel);
-  // Win / Margin toggle: keeps the page, week and team.
-  const methods = ctx.entry.methods;
-  const methodToggle = methods.length > 1
-    ? h("div", { class: "seg method", role: "group", "aria-label": "Ranking method" },
-        ...methods.map((m) => h("a", {
-          href: href(s, ctx.snapId, view, view === "team" ? teamId : undefined, m),
-          class: m === ctx.method ? "on" : "",
-          "aria-current": m === ctx.method ? "true" : false,
-          title: METHOD_HINT[m],
-        }, METHOD_LABEL[m])))
-    : "";
   picker.replaceChildren(
-    methodToggle,
     seasons.length > 1 ? h("div", { class: "sel season" }, seasonSel) : h("span", { class: "season-tag" }, s),
     h("div", { class: "weekpick" }, step(-1), weekFace, step(1)),
   );
@@ -76,9 +64,9 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
 async function route() {
   try {
     if (seasons.length === 0) seasons = await loadIndex();
-    const [path = "", query = ""] = location.hash.replace(/^#\/?/, "").split("?");
+    // Old links may still carry "?method=…"; it no longer means anything.
+    const [path = ""] = location.hash.replace(/^#\/?/, "").split("?");
     const parts = path.split("/").filter(Boolean);
-    const wanted = new URLSearchParams(query).get("method");
     const [season, snapId] = parts;
     let view = (parts[2] ?? "list") as View;
 
@@ -95,11 +83,8 @@ async function route() {
     if (!["list", "graph", "team", "about"].includes(view)) view = "list";
     const teamId = view === "team" ? Number(parts[3]) : undefined;
 
-    // Win is the default; fall back to whatever the season publishes.
-    const method: Method = entry.methods.includes(wanted as Method) ? (wanted as Method) : entry.methods.includes("win") ? "win" : entry.methods[0]!;
-    setMethod(method);
-    const [ranking, games, teams] = await Promise.all([loadRanking(season, snapId, method), loadGames(season), loadTeams(season)]);
-    const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams, method });
+    const [ranking, games, teams] = await Promise.all([loadRanking(season, snapId), loadGames(season), loadTeams(season)]);
+    const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
     renderChrome(ctx, view, teamId);
 
     cleanup?.();

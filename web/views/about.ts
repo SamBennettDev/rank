@@ -1,15 +1,28 @@
 import { computeSeason } from "../../src/engine/season";
-import { type Ctx, METHOD_LABEL } from "../ctx";
-import { h, svg } from "../dom";
+import type { Ctx } from "../ctx";
+import { h } from "../dom";
 import { pillarIcons } from "../icons";
 import { fetchText, rankingPath, seasonFiles } from "../store";
+
+/** Held-out test, 2021–2025 plus 2026 through week 6 (research/holdout-results.txt). */
+const ACCURACY: [string, number][] = [
+  ["This rating", 71.9],
+  ["Massey with home field", 70.2],
+  ["Elo carried over from last season", 69.7],
+  ["LRMC", 69.5],
+  ["Elo", 68.5],
+  ["Keener", 68.2],
+  ["Bradley–Terry", 67.3],
+  ["Colley", 67.0],
+  ["Win percentage", 66.2],
+];
 
 export function aboutView(ctx: Ctx): HTMLElement {
   const m = ctx.ranking.manifest;
   const season = ctx.entry.season;
   const files = seasonFiles(season);
-  const win = ctx.method === "win";
-  const rest = m.restLength ?? 1;
+  const prior = ctx.entry.priorSeason;
+  const priorFiles = prior ? seasonFiles(prior) : null;
 
   const result = h("div");
   const button = h("button", { class: "btn primary", onclick: async () => {
@@ -23,16 +36,17 @@ export function aboutView(ctx: Ctx): HTMLElement {
         teamsCsv: await fetchText(files.teamsCsv),
         gamesCsv: await fetchText(files.gamesCsv),
         configJson: await fetchText(files.configJson),
+        previous: prior && priorFiles ? { season: prior, teamsCsv: await fetchText(priorFiles.teamsCsv), gamesCsv: await fetchText(priorFiles.gamesCsv) } : undefined,
       }, async (done, total) => {
         result.textContent = `Recomputing ${season} from the raw CSVs in your browser: ${done} of ${total} ranking files…`;
         await new Promise((r) => setTimeout(r, 0));
       });
       const bad: string[] = [];
-      for (const f of out.files) if ((await fetchText(`rankings/${season}/${f.id}.json`)) !== f.json) bad.push(f.id);
+      for (const f of out.files) if ((await fetchText(rankingPath(season, f.id))) !== f.json) bad.push(f.id);
       const ms = Math.round(performance.now() - t0);
       if (bad.length === 0) {
         result.className = "result ok";
-        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} ranking files (${ctx.entry.snapshots.length} snapshots × ${ctx.entry.methods.length} methods) from the raw data in ${(ms / 1000).toFixed(1)} s and produced the published files byte for byte.`));
+        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} rankings from the raw data${prior ? ` (and ${prior}’s for the starting points)` : ""} in ${(ms / 1000).toFixed(1)} s and produced the published files byte for byte.`));
       } else {
         result.className = "result bad";
         result.replaceChildren(h("b", {}, "✗"), h("span", {}, `Mismatch in ${bad.join(", ")}. The published rankings do not follow from the published data. Please open an issue.`));
@@ -47,94 +61,78 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const pillar = (icon: SVGSVGElement, title: string, text: string) => h("div", { class: "pillar" }, h("div", { class: "ic" }, icon), h("b", {}, title), h("p", {}, text));
   const file = (path: string) => h("a", { href: `./data/${path}`, target: "_blank", rel: "noopener" }, path.split("/").slice(-2).join("/"));
   const rows: [string, string][] = [
-    ["Engine", m.engine], ["Method", METHOD_LABEL[m.method]], ["Algorithm", m.algorithmVersion],
-    ["Each game's target gap", win ? `${rest} points for every win` : "Winner score − loser score (uncapped)"],
-    ["Accepted upsets", `${ctx.upsetIds.size} of ${m.counts.included} games`],
-    ["α (alpha)", String(m.alpha)], ["τ (softness)", `${m.softness} points`], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
+    ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
+    ["Win bonus", `${m.winBonus} points`], ["Starting point", `${Math.round(m.carryover * 100)}% of last season’s final rating, counted as ${m.priorWeight} games`],
+    ["Home field (fitted)", `${m.homeField.toFixed(2)} points`], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
     ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
   ];
+  const best = ACCURACY[0]![1];
 
   return h("div", { class: "method" },
     h("section", { class: "hero" },
       h("div", { class: "eyebrow" }, "Methodology"),
       h("h1", {}, "Computed,", h("br"), h("em", {}, "not voted.")),
-      h("p", { class: "lede" }, "Polls ask people what they think. This asks the games. Every FBS and FCS team is a point in a graph, every game is a spring between the two teams, and a team’s rank is simply ", h("b", {}, "how high it sits"), " once the springs settle.")),
+      h("p", { class: "lede" }, "Polls ask people what they think. This asks the scoreboard. Every FBS and FCS team gets a ", h("b", {}, "rating"), ": how many points better it is than an average FBS team, judged by every score this season and who it came against. The higher the rating, the higher the rank.")),
     h("div", { class: "pillars" },
-      pillar(pillarIcons.deterministic(), "Deterministic", "Same games in, identical bytes out. No randomness, no tuning, no judgement calls."),
-      pillar(pillarIcons.auditable(), "Auditable", "Every input, line of code and published result is public. Check any week yourself below."),
-      pillar(pillarIcons.transparent(), "Transparent", "One short formula and one config file. Every team page shows the exact games behind its rank."),
-      pillar(pillarIcons.unbiased(), "Unbiased", `No preseason poll, brand, conference or home field. Only ${win ? "who won each game" : "game results and raw score margins"}.`)),
+      pillar(pillarIcons.deterministic(), "Deterministic", "Same scores in, identical bytes out. One exact calculation, no randomness, no judgement calls."),
+      pillar(pillarIcons.auditable(), "Auditable", "Every score, line of code and published result is public. Recompute any week yourself below."),
+      pillar(pillarIcons.transparent(), "Transparent", "One formula and one config file. Every team page shows exactly which games put it where it is."),
+      pillar(pillarIcons.unbiased(), "Unbiased", "No votes, no brand, no conference bonus. Every input is a final score. Last season counts only as a starting point that this season’s games quickly outweigh.")),
 
-    h("h2", {}, "The idea: springs that only push"),
-    h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Teams that played are connected by springs. Each spring ", h("b", {}, "pushes the winner up and the loser down"), `, hardest while the winner is less than ${win ? `${rest} points` : "its score margin"} above the loser, then fading as the winner pulls further ahead. It never pulls the other way, so `, h("b", {}, "a win never costs a team and a loss never helps one"), ". Beating a weak team still helps a little; losing to a strong team still hurts a little. Let the springs settle and each team comes to rest at its height. That height is the ranking.")),
+    h("h2", {}, "What each game says"),
+    h("p", {}, "Every game is evidence about both teams. If you beat a team rated +10 by 14 points on a neutral field, that game says you are about ", h("b", {}, `+10 + 14 + ${m.winBonus} = +${24 + m.winBonus}`), ": the opponent’s rating, plus your margin, plus ", h("b", {}, `${m.winBonus} points for winning`), ` (a loss takes ${m.winBonus} off instead). Home teams have to win by more: a home game’s value is reduced by the home-field edge, which the data sets each week (`, h("b", {}, `${m.homeField.toFixed(1)} points`), " right now), and an away game’s is raised by it."),
+    h("p", {}, "A team’s rating is the ", h("b", {}, "average of what all its games say"), ", together with its starting point counted as ", h("b", {}, `${m.priorWeight} games`), ". Because every opponent’s rating depends on its own games, all teams are solved together, in one exact system of equations."),
+    h("pre", { class: "formula" }, `minimise   Σ games (result − (r[home] − r[away] + H · home))²\n         + ${m.priorWeight} · Σ teams (r[i] − start[i])²\n\n`,
+      h("span", { class: "c" }, `result   home margin, plus ${m.winBonus} if home won, minus ${m.winBonus} if home lost\nr[i]     rating of team i (the y-axis of the graph), in points\nH        home-field edge in points; home is 1 for a true home game, 0 at a neutral site\nstart[i] ${m.carryover} × team i's final rating last season`)),
+    h("p", {}, "Setting the slope to zero gives one symmetric linear system, solved exactly with a Cholesky decomposition using only + − × / and √ in a fixed order. No iterations, no random starts. The same scores give the same answer, to the last bit, on any computer."),
 
-    h("h2", {}, "Winners above losers, as often as possible"),
-    h("p", {}, "When results form a cycle (A beat B, B beat C, C beat A) no order can put every winner above its loser, so some games have to count as upsets. The ranking accepts as few as it can:"),
-    h("ol", {},
-      h("li", {}, "Settle the springs once, to get a starting order."),
-      h("li", {}, "Move teams one at a time to the place in the order that leaves the fewest upsets, until no single move removes another one."),
-      h("li", {}, "The games still upside down are the ", h("b", {}, "accepted upsets"), ". Every other game gets a stop that holds its winner at least ", h("b", {}, "½ point above its loser"), ". Settle the springs again with the stops in place.")),
-    h("p", {}, "The settled heights are the ones with the least total energy:"),
-    h("pre", { class: "formula" }, `H(s) = Σ games  τ/2 · (√(1 + u²) − u)     u = (s[w] − s[l] − ${win ? rest : "margin"}) / τ\n     + Σ kept   500 · max(0, ½ − (s[w] − s[l]))²\n     + α/2 · Σ s[i]²\n\n`,
-      h("span", { class: "c" }, `w, l     winner and loser of each game\n${win ? `${rest}        the gap every win pushes for, whatever the score` : "margin   winning score − losing score, with no cap or scaling"}\nτ = ${m.softness}    how gradually a spring lets go past that gap\nkept     every game except the accepted upsets: the stop\ns[i]     height of team i  (the y-axis of the graph)\nα = ${m.alpha}  small equal pull toward 0, so there is one exact answer`)),
-    h("p", {}, "Each game’s push is the slope of its term: (1 − u/√(1 + u²)) / 2, between 0 and 1 and never negative. The function has exactly one minimum, found with Newton’s method and exact Cholesky solves using only + − × / and √, in a fixed order with no randomness. The same games give the same answer, to the last bit, on any computer. Each ranking file lists its accepted upsets, so you can check that every other game’s winner sits above its loser."),
+    h("h2", {}, "The starting point"),
+    h("p", {}, `Each team starts the season at ${Math.round(m.carryover * 100)}% of its final rating from last season, worked out from last season’s games alone (average FBS team = 0). A team that wasn’t in last season’s data starts at its division’s average. The starting point counts as ${m.priorWeight} games, so it matters most in September; by midseason a team’s own games outweigh it several times over. No polls, recruiting rankings or opinions go into it: it is last season’s scores.`),
+    prior ? h("p", { class: "muted" }, `This season starts from ${prior}.`) : "",
 
-    h("h2", {}, "Two methods"),
-    h("p", {}, "The toggle in the header switches between two published rankings built from the same games. Both are verified below."),
-    h("ul", {},
-      h("li", {}, h("b", {}, "Wins (default). "), `Every win pushes hardest up to the same ${rest}-point gap. Only who won matters, so running up the score earns nothing.`),
-      h("li", {}, h("b", {}, "Margin. "), "Each win pushes hardest up to a gap equal to the winner’s score minus the loser’s score, with no cap, scaling or home-field adjustment. Bigger wins push further.")),
+    h("h2", {}, "How accurate it is"),
+    h("p", {}, "The test: every week from week 4, each method ranks teams using only the games already played and predicts the next week’s games (the higher-ranked team wins). Settings were chosen on 2014–2019 and then frozen. These numbers are from 2021–2025 plus 2026 so far, which the model never saw while it was designed: 6,287 games."),
+    h("div", { class: "acc" }, ...ACCURACY.map(([name, pct], i) =>
+      h("div", { class: `accrow${i === 0 ? " me" : ""}` },
+        h("span", { class: "n" }, name),
+        h("span", { class: "bar" }, h("i", { style: `width:${((pct - 60) / (best - 60)) * 100}%` })),
+        h("span", { class: "v" }, `${pct.toFixed(1)}%`)))),
+    h("p", { class: "muted" }, "It beat the best known method in each of those six seasons, by 1.6 points overall (95% confidence interval +0.9 to +2.4). On FBS-vs-FBS games it also beats CollegeFootballData’s own Elo rating by 0.7 points. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
 
     h("h2", {}, "What counts"),
     h("ul", {},
-      h("li", {}, h("b", {}, "Who won each completed game"), " between two FBS or FCS teams. Regular season and postseason."),
-      h("li", {}, h("b", {}, win ? "The score is ignored;" : "Every margin counts in full."), win ? " only the result counts. Home field" : " Home field, brand, conference, preseason polls and opinions are ignored."),
+      h("li", {}, h("b", {}, "The final score of each completed game"), " between two FBS or FCS teams, regular season and postseason, and whether it was at home or on a neutral field."),
+      h("li", {}, "Brand, conference, polls and opinions are ignored. Conference strength comes only from games between conferences."),
       h("li", {}, "Games against teams outside FBS/FCS are left out, and the count is published below."),
-      h("li", {}, "A team with no counted games is ", h("b", {}, "unranked"), " rather than guessed."),
-      h("li", {}, "Equal heights share a rank (shown T-n). Ties are never broken by name or reputation."),
+      h("li", {}, "A team with no counted games yet is ", h("b", {}, "unranked"), " rather than placed by its starting point alone."),
+      h("li", {}, "Equal ratings share a rank (shown T-n). Ties are never broken by name or reputation."),
       h("li", {}, "Week N uses only games through week N, recomputed from scratch.")),
 
     h("h2", {}, "How data flows"),
     h("div", { class: "pipeline" },
       h("div", { class: "pipe" }, h("div", { class: "n" }, "01"), h("b", {}, "Fetch"), "Scores pulled weekly from CollegeFootballData."),
       h("div", { class: "pipe" }, h("div", { class: "n" }, "02"), h("b", {}, "Commit"), "Saved as plain CSV in git, so every change is on the record."),
-      h("div", { class: "pipe" }, h("div", { class: "n" }, "03"), h("b", {}, "Compute"), "Open-source engine turns games into heights."),
+      h("div", { class: "pipe" }, h("div", { class: "n" }, "03"), h("b", {}, "Compute"), "Open-source engine turns scores into ratings."),
       h("div", { class: "pipe" }, h("div", { class: "n" }, "04"), h("b", {}, "Verify"), "CI and your browser recompute and compare byte for byte.")),
 
     h("h2", {}, "Check it yourself"),
     h("div", { class: "verify" },
       h("h3", {}, "Don’t trust us. Recompute it."),
-      h("p", { class: "muted" }, `This downloads the exact CSV files the ${season} rankings were built from, runs the same engine in your browser, and compares the result with every published file for both methods.`),
+      h("p", { class: "muted" }, `This downloads the exact CSV files the ${season} rankings were built from${prior ? `, plus ${prior}’s for the starting points` : ""}, runs the same engine in your browser, and compares the result with every published file.`),
       button, result),
 
-    h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}, ${season} (${METHOD_LABEL[m.method]})`),
+    h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}, ${season}`),
     h("table", { class: "mf" }, h("tbody", {},
       ...rows.map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
       h("tr", {}, h("th", {}, "teams.csv SHA-256"), h("td", {}, h("code", {}, m.teamsSha256))),
-      h("tr", {}, h("th", {}, "games.csv SHA-256"), h("td", {}, h("code", {}, m.gamesSha256))))),
-    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson), file(rankingPath(season, ctx.snapId, ctx.method)),
+      h("tr", {}, h("th", {}, "games.csv SHA-256"), h("td", {}, h("code", {}, m.gamesSha256))),
+      ...(m.priorSeason ? [
+        h("tr", {}, h("th", {}, `${m.priorSeason.season} teams.csv SHA-256`), h("td", {}, h("code", {}, m.priorSeason.teamsSha256))),
+        h("tr", {}, h("th", {}, `${m.priorSeason.season} games.csv SHA-256`), h("td", {}, h("code", {}, m.priorSeason.gamesSha256))),
+      ] : []))),
+    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson),
+      ...(priorFiles ? [file(priorFiles.teamsCsv), file(priorFiles.gamesCsv)] : []),
+      file(rankingPath(season, ctx.snapId)),
       h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/METHODOLOGY.md", target: "_blank", rel: "noopener" }, "METHODOLOGY.md ↗")),
   );
-}
-
-/** Three teams, three springs: A beat B and C, B beat C, so they settle A > B > C. */
-function springDemo(): SVGSVGElement {
-  const s = svg("svg", { viewBox: "0 0 220 170", "aria-hidden": "true" });
-  s.innerHTML = `
-    <line x1="30" y1="10" x2="30" y2="160" stroke="var(--line-2)"/>
-    <text x="26" y="18" text-anchor="end" fill="var(--faint)" font-size="10" font-family="var(--display)">HIGH</text>
-    <text x="26" y="160" text-anchor="end" fill="var(--faint)" font-size="10" font-family="var(--display)">LOW</text>
-    <path d="M110 30 Q90 60 70 85" fill="none" stroke="var(--win)" stroke-width="2.5" stroke-dasharray="4 3"/>
-    <path d="M70 85 Q110 115 150 140" fill="none" stroke="var(--win)" stroke-width="2.5" stroke-dasharray="4 3"/>
-    <path d="M110 30 Q160 80 150 140" fill="none" stroke="var(--win)" stroke-width="2.5" stroke-dasharray="4 3"/>
-    <g font-family="var(--display)" font-weight="800" font-size="13" text-anchor="middle">
-      <circle cx="110" cy="30" r="16" fill="var(--brand)"/><text x="110" y="35" fill="#111">A</text>
-      <circle cx="70" cy="85" r="16" fill="var(--surface-3)" stroke="var(--line-2)"/><text x="70" y="90" fill="var(--text)">B</text>
-      <circle cx="150" cy="140" r="16" fill="var(--surface-3)" stroke="var(--line-2)"/><text x="150" y="145" fill="var(--text)">C</text>
-    </g>
-    <text x="200" y="35" fill="var(--muted)" font-size="10" text-anchor="end">2–0</text>
-    <text x="200" y="90" fill="var(--muted)" font-size="10" text-anchor="end">1–1</text>
-    <text x="200" y="145" fill="var(--muted)" font-size="10" text-anchor="end">0–2</text>`;
-  return s;
 }

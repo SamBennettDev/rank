@@ -1,120 +1,136 @@
 /**
- * Backtest both ranking methods on past seasons: how well does each (a) agree
- * with the season's results and (b) pick next week's winners? Uses the engine's solver.
+ * Backtest the published pipeline on past seasons: how often does each week's ranking
+ * pick the winners of the following week's games, and how often does the final ranking
+ * agree with the season's results?
  *
  *   npm run backtest                      # seasons in data/seasons
  *   npm run backtest -- --history 2015-2025
  *
  * --history downloads public, season-complete schedules from the sportsdataverse
- * cfbfastR-data project on GitHub (FBS + FCS games only). Nothing downloaded is
- * published or committed.
+ * cfbfastR-data project on GitHub (FBS + FCS games), converts them to this repository's
+ * CSV format and runs `computeSeason` on them, each season starting from the one before.
+ * Nothing downloaded is published or committed.
  *
- * Protocol, per season: for every week w >= 4, rank using only that season's games
- * before week w (no priors, no earlier seasons) and predict the winner of each
- * week-w game between teams already ranked (higher height wins); postseason counts
- * as one final week. "Agrees with results" ranks the whole season and counts games
- * where the winner sits above the loser.
+ * Protocol: every game from week 4 on, between two teams that are already ranked, is
+ * predicted by the latest snapshot that uses only earlier games (higher rating wins;
+ * a tie counts as half). Postseason games use the final regular-season snapshot.
+ * "Agrees with results" uses the season's last snapshot and counts games where the
+ * winner is rated above the loser.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parseCsvObjects } from "../src/engine/csv";
-import { parseGames, parseTeams } from "../src/engine/data";
-import { rankHeights } from "../src/engine/springrank";
-import { METHODS, type Method } from "../src/engine/types";
+import { gamesToCsv, parseGames, teamsToCsv } from "../src/engine/data";
+import { type SeasonFiles, computeSeason } from "../src/engine/season";
+import type { Game, Ranking, Team } from "../src/engine/types";
 import { DATA_DIR } from "./lib";
 
-interface BtGame { id: number; order: number; home: number; away: number; hp: number; ap: number; neutral: boolean }
-
-// ---------------------------------------------------------------- model
-const SETTINGS = { alpha: 0.01, softness: 7 };
-const WIN_REST_LENGTH = 7;
-
-/** Heights for one method (one-way springs, fewest upsets): win springs target a fixed gap, margin springs the raw score difference. */
-function rate(games: BtGame[], method: Method): Map<number, number> {
-  const ids = [...new Set(games.flatMap((g) => [g.home, g.away]))].sort((a, b) => a - b);
-  const index = new Map(ids.map((id, i) => [id, i]));
-  const beats = games.map((g) => ({
-    winner: index.get(g.hp > g.ap ? g.home : g.away)!,
-    loser: index.get(g.hp > g.ap ? g.away : g.home)!,
-    gap: method === "win" ? WIN_REST_LENGTH : Math.abs(g.hp - g.ap),
-  }));
-  const s = rankHeights(ids.length, beats, SETTINGS).heights;
-  return new Map(ids.map((id, i) => [id, s[i]!]));
-}
-
 // ---------------------------------------------------------------- data
-function fromRepo(): Map<string, BtGame[]> {
-  const out = new Map<string, BtGame[]>();
+function fromRepo(): Map<string, SeasonFiles & { configJson: string }> {
+  const out = new Map<string, SeasonFiles & { configJson: string }>();
   const dir = join(DATA_DIR, "seasons");
   for (const season of readdirSync(dir).sort()) {
-    const f = join(dir, season, "games.csv");
-    if (!existsSync(f)) continue;
-    const teams = new Set(parseTeams(readFileSync(join(dir, season, "teams.csv"), "utf8")).map((t) => t.id));
-    const games = parseGames(readFileSync(f, "utf8"));
-    const lastWeek = Math.max(0, ...games.filter((g) => g.seasonType === "regular").map((g) => g.week));
-    out.set(season, games
-      .filter((g) => g.completed && g.homePoints !== null && g.awayPoints !== null && g.homePoints !== g.awayPoints && teams.has(g.homeId) && teams.has(g.awayId))
-      .map((g) => ({ id: g.id, order: g.seasonType === "postseason" ? lastWeek + 1 : g.week, home: g.homeId, away: g.awayId, hp: g.homePoints!, ap: g.awayPoints!, neutral: g.neutralSite }))
-      .sort((a, b) => a.id - b.id));
+    if (!existsSync(join(dir, season, "games.csv"))) continue;
+    out.set(season, { season, teamsCsv: readFileSync(join(dir, season, "teams.csv"), "utf8"), gamesCsv: readFileSync(join(dir, season, "games.csv"), "utf8"), configJson: readFileSync(join(dir, season, "config.json"), "utf8") });
   }
   return out;
 }
 
-async function fromHistory(range: string): Promise<Map<string, BtGame[]>> {
-  const [a, b] = range.split("-").map(Number);
+async function historySeason(y: number): Promise<SeasonFiles> {
   const cache = join(tmpdir(), "rank-backtest");
   mkdirSync(cache, { recursive: true });
-  const out = new Map<string, BtGame[]>();
-  for (let y = a!; y <= (b ?? a!); y++) {
-    if (y === 2020) continue; // COVID season: conferences played wildly different schedules
-    const file = join(cache, `cfb_schedules_${y}.csv`);
-    if (!existsSync(file)) {
-      const url = `https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_${y}.csv`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`${res.status} downloading ${url}`);
-      writeFileSync(file, await res.text());
-    }
-    const ok = (d: string | undefined) => d === "fbs" || d === "fcs";
-    const rows = parseCsvObjects(readFileSync(file, "utf8")).filter((r) =>
-      r.completed === "TRUE" && ok(r.home_division) && ok(r.away_division) && /^\d+$/.test(r.home_points ?? "") && /^\d+$/.test(r.away_points ?? "") && r.home_points !== r.away_points);
-    const lastWeek = Math.max(...rows.filter((r) => r.season_type === "regular").map((r) => Number(r.week)));
-    out.set(String(y), rows
-      .map((r) => ({ id: Number(r.game_id), order: r.season_type === "postseason" ? lastWeek + 1 : Number(r.week), home: Number(r.home_id), away: Number(r.away_id),
-        hp: Number(r.home_points), ap: Number(r.away_points), neutral: r.neutral_site === "TRUE" }))
-      .sort((x, z) => x.id - z.id));
+  const file = join(cache, `cfb_schedules_${y}.csv`);
+  if (!existsSync(file)) {
+    const url = `https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_${y}.csv`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`${res.status} downloading ${url}`);
+    writeFileSync(file, await res.text());
   }
-  return out;
+  const ok = (d: string | undefined) => d === "fbs" || d === "fcs";
+  const teams = new Map<number, Team>();
+  const games: Game[] = [];
+  const pts = (v?: string) => (v && /^\d+$/.test(v) ? Number(v) : null);
+  for (const r of parseCsvObjects(readFileSync(file, "utf8"))) {
+    if (!ok(r.home_division) && !ok(r.away_division)) continue;
+    for (const side of ["home", "away"] as const) {
+      const id = Number(r[`${side}_id`]);
+      if (ok(r[`${side}_division`]) && !teams.has(id)) {
+        teams.set(id, { id, school: r[`${side}_team`]!, abbreviation: "", conference: r[`${side}_conference`] ?? "", classification: r[`${side}_division`]!, color: "" });
+      }
+    }
+    games.push({
+      id: Number(r.game_id), season: String(y), week: Number(r.week), seasonType: r.season_type === "postseason" ? "postseason" : "regular",
+      startDate: r.start_date ?? "", neutralSite: r.neutral_site === "TRUE", completed: r.completed === "TRUE",
+      homeId: Number(r.home_id), homeTeam: r.home_team ?? "", homePoints: pts(r.home_points),
+      awayId: Number(r.away_id), awayTeam: r.away_team ?? "", awayPoints: pts(r.away_points),
+    });
+  }
+  return { season: String(y), teamsCsv: teamsToCsv([...teams.values()]), gamesCsv: gamesToCsv(games) };
+}
+
+const CONFIG = (carryover: number) => JSON.stringify({ label: "", demo: false, algorithmVersion: "backtest", classifications: ["fbs", "fcs"], winBonus: 3, carryover, priorWeight: 2 });
+
+// ---------------------------------------------------------------- scoring
+async function score(current: SeasonFiles, configJson: string, previous: SeasonFiles | undefined) {
+  const out = await computeSeason({ ...current, configJson, previous });
+  const snaps = out.files.map((f) => JSON.parse(f.json) as Ranking);
+  const regular = snaps.filter((s) => !s.snapshot.includePostseason);
+  const games = parseGames(current.gamesCsv).filter((g) => g.completed && g.homePoints !== null && g.awayPoints !== null && g.homePoints !== g.awayPoints);
+  const lastWeek = Math.max(...regular.map((s) => s.snapshot.throughWeek));
+  const pick = (r: Ranking | undefined, g: Game) => {
+    const h = r?.teams.find((t) => t.id === g.homeId)?.height ?? null;
+    const a = r?.teams.find((t) => t.id === g.awayId)?.height ?? null;
+    if (h === null || a === null) return null;
+    return h === a ? 0.5 : (h > a) === (g.homePoints! > g.awayPoints!) ? 1 : 0;
+  };
+  let right = 0, predicted = 0, agree = 0, rated = 0;
+  for (const g of games) {
+    const week = g.seasonType === "postseason" ? lastWeek + 1 : g.week;
+    if (week < 4) continue;
+    const before = regular.filter((s) => s.snapshot.throughWeek < week).at(-1);
+    const p = pick(before, g);
+    if (p === null) continue;
+    predicted++;
+    right += p;
+  }
+  const final = snaps.at(-1);
+  for (const g of games) {
+    const p = pick(final, g);
+    if (p === null) continue;
+    rated++;
+    agree += p;
+  }
+  return { right, predicted, agree, rated };
 }
 
 // ---------------------------------------------------------------- run
 const args = process.argv.slice(2);
 const hi = args.indexOf("--history");
-const seasons = hi >= 0 ? await fromHistory(args[hi + 1] ?? "2015-2025") : fromRepo();
 const pct = (a: number, b: number) => (b ? `${((100 * a) / b).toFixed(1)}%` : "—");
-console.log(`\nSeasons: ${[...seasons.keys()].join(", ")}`);
-
-for (const method of METHODS) {
-  let right = 0, predicted = 0, agree = 0, games = 0;
-  for (const list of seasons.values()) {
-    const weeks = [...new Set(list.map((g) => g.order))].sort((x, z) => x - z).filter((w) => w >= 4);
-    for (const w of weeks) {
-      const s = rate(list.filter((g) => g.order < w), method);
-      for (const g of list.filter((x) => x.order === w)) {
-        if (!s.has(g.home) || !s.has(g.away)) continue;
-        predicted++;
-        const gap = s.get(g.home)! - s.get(g.away)!;
-        if (gap !== 0 && gap > 0 === g.hp > g.ap) right++;
-      }
-    }
-    const s = rate(list, method);
-    for (const g of list) {
-      games++;
-      const gap = s.get(g.home)! - s.get(g.away)!;
-      if (gap !== 0 && gap > 0 === g.hp > g.ap) agree++;
-    }
+const runs: { season: string; current: SeasonFiles; configJson?: string; previous?: SeasonFiles }[] = [];
+if (hi >= 0) {
+  const [a, b] = (args[hi + 1] ?? "2015-2025").split("-").map(Number);
+  for (let y = a!; y <= (b ?? a!); y++) {
+    if (y === 2020) continue; // COVID season: conferences played wildly different schedules
+    runs.push({ season: String(y), current: await historySeason(y), previous: await historySeason(y - 1) });
   }
-  console.log(`\n${method}:`);
-  console.log(`  Final ranking agrees with results: ${pct(agree, games)} of ${games} games`);
+} else {
+  const repo = fromRepo();
+  for (const [season, s] of repo) {
+    if (JSON.parse(s.configJson).publish === false) continue;
+    runs.push({ season, current: s, configJson: s.configJson, previous: repo.get(String(Number(season) - 1)) });
+  }
+}
+console.log(`\nSeasons: ${runs.map((r) => r.season).join(", ")}`);
+for (const [label, carryover] of [["This rating (starts from last season)", 0.9], ["Same model, every team starting at 0", 0]] as const) {
+  let right = 0, predicted = 0, agree = 0, rated = 0;
+  for (const r of runs) {
+    const cfg = r.configJson && carryover > 0 ? r.configJson : CONFIG(carryover);
+    const s = await score(r.current, cfg, carryover > 0 ? r.previous : undefined);
+    right += s.right; predicted += s.predicted; agree += s.agree; rated += s.rated;
+  }
+  console.log(`\n${label}:`);
   console.log(`  Picks next week's winner:          ${pct(right, predicted)} of ${predicted} games`);
+  console.log(`  Final ranking agrees with results: ${pct(agree, rated)} of ${rated} games`);
 }

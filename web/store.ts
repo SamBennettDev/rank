@@ -1,5 +1,5 @@
 import { parseGames, parseTeams } from "../src/engine/data";
-import type { Game, Ranking, SeasonIndexEntry, Team, Method } from "../src/engine/types";
+import type { Game, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 const cache = new Map<string, Promise<string>>();
 
@@ -21,10 +21,10 @@ export async function loadIndex(): Promise<SeasonIndexEntry[]> {
   return (JSON.parse(await fetchText("index.json")) as { seasons: SeasonIndexEntry[] }).seasons;
 }
 
-export const rankingPath = (season: string, snap: string, method: Method) => `rankings/${season}/${method}/${snap}.json`;
+export const rankingPath = (season: string, snap: string) => `rankings/${season}/${snap}.json`;
 
-export async function loadRanking(season: string, snap: string, method: Method): Promise<Ranking> {
-  return JSON.parse(await fetchText(rankingPath(season, snap, method))) as Ranking;
+export async function loadRanking(season: string, snap: string): Promise<Ranking> {
+  return JSON.parse(await fetchText(rankingPath(season, snap))) as Ranking;
 }
 
 export async function loadGames(season: string): Promise<Game[]> {

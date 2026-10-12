@@ -1,6 +1,6 @@
 import { buildEdges, listSnapshots } from "../src/engine/graph";
-import { push } from "../src/engine/springrank";
-import type { Edge, Game, Method, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
+import { gameValue, result } from "../src/engine/rating";
+import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 export type View = "list" | "graph" | "team" | "about";
 
@@ -16,13 +16,9 @@ export interface Ctx {
   byId: Map<number, RankedTeam>;
   /** Teams with a rank, best first. */
   ranked: RankedTeam[];
-  /** Which published ranking method is shown. */
-  method: Method;
-  /** Games accepted as upsets in this ranking (their winner may finish below their loser). */
-  upsetIds: Set<number>;
 }
 
-export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked" | "upsetIds">): Ctx {
+export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
   const spec = listSnapshots(base.games).find((s) => s.id === base.snapId)!;
   const { edges } = buildEdges(base.games, base.ranking.teams, spec);
   return {
@@ -30,44 +26,58 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked" | "upsetIds"
     edges,
     byId: new Map(base.ranking.teams.map((t) => [t.id, t])),
     ranked: base.ranking.teams.filter((t) => t.rank !== null),
-    upsetIds: new Set(base.ranking.upsets ?? []),
   };
 }
 
-export const METHOD_LABEL: Record<Method, string> = { win: "Wins", margin: "Margin" };
-export const METHOD_HINT: Record<Method, string> = {
-  win: "Every win counts the same: only who won matters",
-  margin: "Each game counts by its score margin",
-};
-
-/** The height gap a game's spring wants between winner and loser under the shown method. */
-export const targetGap = (ctx: Ctx, e: Edge) =>
-  ctx.method === "win" ? ctx.ranking.manifest.restLength ?? 1 : e.winnerPoints - e.loserPoints;
-
-/** Win is the default; links carry `?method=margin` otherwise. Set by the router on each navigation. */
-let currentMethod: Method = "win";
-export const setMethod = (m: Method) => (currentMethod = m);
-
-export const href = (season: string, snap: string, view: View, teamId?: number, method: Method = currentMethod) =>
-  `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}${method === "win" ? "" : `?method=${method}`}`;
+export const href = (season: string, snap: string, view: View, teamId?: number) =>
+  `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}`;
 export const teamHref = (ctx: Ctx, id: number) => href(ctx.entry.season, ctx.snapId, "team", id);
 
 export const rankLabel = (rank: number | null, tied: boolean) => (rank === null ? "—" : `${tied ? "T-" : ""}${rank}`);
-/** Heights are in score points and print with 2 decimals. */
-export const fmtHeight = (v: number | null) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2));
+/** Ratings are in points and print with 1 decimal. */
+export const fmtHeight = (v: number | null, d = 1) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d));
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 
-/** Upsets are the games the ranking accepted as upsets (published in the ranking file), biggest height gap first. */
+/** A game is an upset when the winner is rated below the loser; biggest gap first. */
 export function upsets(ctx: Ctx): { edge: Edge; gap: number }[] {
   return ctx.edges
-    .filter((edge) => ctx.upsetIds.has(edge.gameId))
     .map((edge) => ({ edge, gap: ctx.byId.get(edge.loser)!.height! - ctx.byId.get(edge.winner)!.height! }))
+    .filter((u) => u.gap > 0)
     .sort((a, b) => b.gap - a.gap || a.edge.gameId - b.edge.gameId);
 }
 
-/** How hard a game's spring pushes its winner up and its loser down (0 to 1), with the gap it pushes for. */
-export function springPush(ctx: Ctx, e: Edge): { push: number; target: number; upset: boolean } {
-  const target = targetGap(ctx, e);
-  const gap = ctx.byId.get(e.winner)!.height! - ctx.byId.get(e.loser)!.height!;
-  return { push: push(gap, target, ctx.ranking.manifest.softness), target, upset: ctx.upsetIds.has(e.gameId) };
+export interface GameLine {
+  edge: Edge;
+  won: boolean;
+  opponent: RankedTeam;
+  /** +1 home, -1 away, 0 neutral, from this team's side. */
+  where: -1 | 0 | 1;
+  /** This team's points minus the opponent's. */
+  margin: number;
+  /** Margin plus the win bonus (or minus it in a loss). */
+  result: number;
+  /** What this game alone says the team's rating is. */
+  value: number;
+}
+
+/**
+ * Rebuilds a team's rating the way the model defines it: the average of what each of its
+ * games says (opponent rating + result, adjusted for home field) and its starting rating
+ * counted `priorWeight` times. At the published solution this reproduces the rating.
+ */
+export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; prior: number; priorWeight: number; average: number } {
+  const m = ctx.ranking.manifest;
+  const me = ctx.byId.get(teamId)!;
+  const lines = ctx.edges
+    .filter((e) => e.winner === teamId || e.loser === teamId)
+    .map((edge) => {
+      const won = edge.winner === teamId;
+      const opponent = ctx.byId.get(won ? edge.loser : edge.winner)!;
+      const atHome = won ? edge.winnerIsHome : !edge.winnerIsHome;
+      const where: -1 | 0 | 1 = edge.neutralSite ? 0 : atHome ? 1 : -1;
+      const margin = won ? edge.winnerPoints - edge.loserPoints : edge.loserPoints - edge.winnerPoints;
+      return { edge, won, opponent, where, margin, result: result(margin, m.winBonus), value: gameValue(opponent.height!, margin, where, m.homeField, m.winBonus) };
+    });
+  const average = (lines.reduce((s, l) => s + l.value, 0) + m.priorWeight * me.prior) / (lines.length + m.priorWeight);
+  return { lines, prior: me.prior, priorWeight: m.priorWeight, average };
 }

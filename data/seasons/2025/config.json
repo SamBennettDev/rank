@@ -1,0 +1,13 @@
+{
+  "label": "2025 season",
+  "demo": false,
+  "algorithmVersion": "margin-prior-1",
+  "classifications": [
+    "fbs",
+    "fcs"
+  ],
+  "winBonus": 3,
+  "carryover": 0.9,
+  "priorWeight": 2,
+  "publish": false
+}

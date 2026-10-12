@@ -1,5 +1,5 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, fmtHeight, href, rankLabel, record, springPush, teamHref } from "../ctx";
+import { type Ctx, type GameLine, breakdown, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
 import { logo, svgLogo, teamVars } from "../team";
@@ -30,7 +30,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h("div", { class: "tstats" },
         stat("Rank", rankLabel(team.rank, team.tied)),
         stat("Record", record(team)),
-        stat("Height", fmtHeight(team.height)),
+        stat("Rating", fmtHeight(team.height)),
         stat("This week", team.change === null ? "New" : team.change === 0 ? "—" : h("span", { class: team.change > 0 ? "upc" : "downc" }, `${team.change > 0 ? "▲" : "▼"}${Math.abs(team.change)}`)))),
   );
 
@@ -45,101 +45,87 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
     hero,
     h("div", { class: "tbody" },
       h("div", { class: "tgrid" },
-        h("div", { class: "panel springs" },
-          h("h2", {}, "Why it’s here"),
-          h("p", { class: "hint" }, ctx.method === "win"
-            ? `Each game's spring pushes the winner up and the loser down, hardest until the winner is ${ctx.ranking.manifest.restLength ?? 1} points above, then fading (fainter lines). It never pulls the other way, so a win never costs a team. Dashed lines are accepted upsets.`
-            : "Each game's spring pushes the winner up and the loser down, hardest until the winner is its score margin above, then fading (fainter lines). It never pulls the other way, so a win never costs a team. Dashed lines are accepted upsets."),
-          springs(ctx, teamId, games)),
+        whyPanel(ctx, teamId),
         history),
       gameLog(ctx, teamId, games)),
   );
 }
 
 // ---------------------------------------------------------------------------
-// Springs diagram: opponents at their real heights, wins on the left, losses right.
-function springs(ctx: Ctx, teamId: number, games: Edge[]): SVGSVGElement {
-  const W = 560;
-  const H = 440;
-  const pad = { t: 34, b: 24 };
+// How the rating is built: every game's value and the starting rating, averaged.
+function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const me = ctx.byId.get(teamId)!;
-  const opp = games.map((e) => ({ e, won: e.winner === teamId, o: ctx.byId.get(e.winner === teamId ? e.loser : e.winner)! }));
-  const hs = [me.height!, ...opp.map((x) => x.o.height!)];
-  let lo = Math.min(...hs);
-  let hi = Math.max(...hs);
-  const span = Math.max(hi - lo, 0.6);
-  lo -= span * 0.08;
-  hi += span * 0.08;
-  const y = (v: number) => pad.t + ((hi - v) / (hi - lo)) * (H - pad.t - pad.b);
-  const cx = W / 2;
-  const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Springs diagram of this team's games" });
+  const b = breakdown(ctx, teamId);
+  const order = (l: GameLine) => (l.edge.seasonType === "postseason" ? 99 : l.edge.week) * 1e9 + l.edge.gameId;
+  const lines = [...b.lines].sort((x, y) => order(x) - order(y));
+  const sum = lines.reduce((s, l) => s + l.value, 0);
+  return h("div", { class: "panel why" },
+    h("h2", {}, "Why it’s here"),
+    h("p", { class: "hint" }, "Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those, with last season’s starting point counted as ", h("b", {}, `${b.priorWeight} games`), ". Dots right of the line pull the rating up; dots left pull it down."),
+    breakdownChart(ctx, me.height!, b.prior, b.priorWeight, lines),
+    h("p", { class: "sum" },
+      `(${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)} + ${b.priorWeight} × start ${fmtHeight(b.prior)}) ÷ ${lines.length + b.priorWeight} = `,
+      h("b", {}, fmtHeight(b.average)),
+      Math.abs(b.average - me.height!) > 0.05 ? ` (published ${fmtHeight(me.height)})` : ""));
+}
 
-  // height ticks
-  // about 6 guide lines across the height range
-  const step = [0.25, 0.5, 1, 2, 5, 10, 20, 50].find((st) => span / st <= 7) ?? 100;
+function breakdownChart(ctx: Ctx, rating: number, prior: number, priorWeight: number, lines: GameLine[]): SVGSVGElement {
+  const W = 560;
+  const row = 30;
+  const pad = { l: 178, r: 24, t: 24, b: 28 };
+  const H = pad.t + row * (lines.length + 1) + pad.b;
+  const vals = [rating, prior, ...lines.map((l) => l.value)];
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  const span = Math.max(hi - lo, 10);
+  lo -= span * 0.06;
+  hi += span * 0.06;
+  const x = (v: number) => pad.l + ((v - lo) / (hi - lo)) * (W - pad.l - pad.r);
+  const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "How this team's rating is built from its games" });
+  const step = [1, 2, 5, 10, 20, 25, 50].find((st) => span / st <= 6) ?? 100;
   for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
-    root.appendChild(svg("line", { class: "tl", x1: 40, x2: W - 10, y1: y(v), y2: y(v) }));
-    const t = svg("text", { class: "tk", x: 4, y: y(v) + 4 });
-    t.textContent = (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(step < 1 ? 2 : 0);
+    root.appendChild(svg("line", { class: "tl", x1: x(v), x2: x(v), y1: pad.t - 6, y2: H - pad.b }));
+    const t = svg("text", { class: "tk", x: x(v), y: 12, "text-anchor": "middle" });
+    t.textContent = (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v);
     root.appendChild(t);
   }
-  const head = (x: number, text: string, anchor: string) => {
-    const t = svg("text", { class: "lbl", x, y: 14, "text-anchor": anchor });
+  const rx = x(rating);
+  const lineY = (i: number) => pad.t + row * i + row / 2;
+  const label = (y: number, text: string, cls = "rl") => {
+    const t = svg("text", { class: cls, x: 40, y: y + 4 });
     t.textContent = text;
     root.appendChild(t);
   };
-  head(150, "Beat", "middle");
-  head(W - 130, "Lost to", "middle");
-  head(cx, "", "middle");
-
-  const sz = 26;
-  const place = (list: typeof opp, baseX: number, dir: 1 | -1) => {
-    const placed: { x: number; y: number }[] = [];
-    let lastLabelY = -99;
-    for (const item of [...list].sort((a, b) => b.o.height! - a.o.height!)) {
-      const oy = y(item.o.height!);
-      let x = baseX;
-      for (let k = 0; placed.some((p) => Math.hypot(p.x - x, p.y - oy) < sz + 2) && k < 12; k++) x = baseX + dir * (k + 1) * (sz + 4) * (k % 2 === 0 ? 1 : -1) * 0.5;
-      placed.push({ x, y: oy });
-      const sp = springPush(ctx, item.e);
-      const c1 = cx + (x - cx) * 0.55;
-      root.appendChild(svg("path", { class: `s ${item.won ? "w" : "l"}${sp.upset ? " up" : ""}`, "stroke-opacity": (0.2 + 0.8 * sp.push).toFixed(3), d: `M${x},${oy} C${c1},${oy} ${c1},${y(me.height!)} ${cx},${y(me.height!)}` }));
-      const a = svg("a", { href: teamHref(ctx, item.o.id) });
-      a.appendChild(svg("circle", { cx: x, cy: oy, r: sz / 2 + 2, fill: "var(--surface)", stroke: "var(--line-2)" }));
-      a.appendChild(badge(ctx, item.o.id, x, oy, sz - 4));
-      const title = svg("title", {});
-      title.textContent = `${item.o.school} (#${rankLabel(item.o.rank, item.o.tied)}), ${item.won ? "W" : "L"} ${item.won ? item.e.winnerPoints : item.e.loserPoints}–${item.won ? item.e.loserPoints : item.e.winnerPoints}`;
-      a.appendChild(title);
-      if (Math.abs(oy - lastLabelY) >= 14) {
-        const lx = dir < 0 ? Math.min(...placed.filter((p) => Math.abs(p.y - oy) < 1).map((p) => p.x)) - sz / 2 - 6 : Math.max(...placed.filter((p) => Math.abs(p.y - oy) < 1).map((p) => p.x)) + sz / 2 + 6;
-        const t = svg("text", { class: "on", x: lx, y: oy + 4, "text-anchor": dir < 0 ? "end" : "start" });
-        t.textContent = `#${rankLabel(item.o.rank, item.o.tied)} ${item.o.abbreviation || item.o.school}`;
-        a.appendChild(t);
-        lastLabelY = oy;
-      }
-      root.appendChild(a);
-    }
+  const stem = (y: number, v: number, title: string, shape: "dot" | "diamond", logoId?: number) => {
+    const g = svg("g", { class: `brow ${v >= rating ? "up" : "down"}` });
+    g.appendChild(svg("line", { class: "stem", x1: rx, x2: x(v), y1: y, y2: y }));
+    g.appendChild(shape === "dot"
+      ? svg("circle", { class: "pt", cx: x(v), cy: y, r: 5 })
+      : svg("path", { class: "pt", d: `M${x(v)},${y - 7} L${x(v) + 7},${y} L${x(v)},${y + 7} L${x(v) - 7},${y} Z` }));
+    const tt = svg("title", {});
+    tt.textContent = title;
+    g.appendChild(tt);
+    root.appendChild(g);
+    if (logoId !== undefined) root.appendChild(badge(ctx, logoId, 18, y, 22));
   };
-  const wins = opp.filter((x) => x.won);
-  const losses = opp.filter((x) => !x.won);
-  place(wins, 170, -1);
-  place(losses, W - 150, 1);
-  const none = (x: number, text: string) => {
-    const t = svg("text", { class: "none", x, y: H / 2, "text-anchor": "middle" });
-    t.textContent = text;
-    root.appendChild(t);
-  };
-  if (losses.length === 0) none(W - 130, "Undefeated");
-  if (wins.length === 0) none(150, "No wins yet");
-
-  // the team itself, on top
-  const my = y(me.height!);
-  root.appendChild(svg("circle", { cx, cy: my, r: 25, fill: "var(--surface)", stroke: "var(--ta)", "stroke-width": 3 }));
-  root.appendChild(badge(ctx, teamId, cx, my, 40));
+  // Starting point (counts priorWeight times)
+  label(lineY(0), `Start ×${priorWeight}`);
+  stem(lineY(0), prior, `Starting rating ${fmtHeight(prior)}: 90% of last season’s final rating, counted as ${priorWeight} games`, "diamond");
+  const homeField = ctx.ranking.manifest.homeField;
+  lines.forEach((l, i) => {
+    const y = lineY(i + 1);
+    const o = l.opponent;
+    const score = `${l.won ? "W" : "L"} ${l.won ? l.edge.winnerPoints : l.edge.loserPoints}–${l.won ? l.edge.loserPoints : l.edge.winnerPoints}`;
+    label(y, `${l.where === 1 ? "vs" : l.where === -1 ? "at" : "vs"} ${o.abbreviation || o.school} · ${score}`);
+    const site = l.where === 1 ? ` − ${homeField.toFixed(1)} home field` : l.where === -1 ? ` + ${homeField.toFixed(1)} away` : " (neutral site)";
+    stem(y, l.value, `${o.school} rated ${fmtHeight(o.height)}; ${score} → ${l.result > 0 ? "+" : "−"}${Math.abs(l.result)} with the win bonus${site} = ${fmtHeight(l.value)}`, "dot", o.id);
+  });
+  root.appendChild(svg("line", { class: "rline", x1: rx, x2: rx, y1: pad.t - 6, y2: H - pad.b + 4 }));
+  const rt = svg("text", { class: "rlab", x: Math.min(Math.max(rx, pad.l + 40), W - pad.r - 40), y: H - 6, "text-anchor": "middle" });
+  rt.textContent = `Rating ${fmtHeight(rating)}`;
+  root.appendChild(rt);
   return root;
 }
 
-/** Team logo centred at (x, y); falls back to a monogram in team colours if no logo loads. */
 function badge(ctx: Ctx, id: number, x: number, y: number, size: number): SVGGElement {
   const t = ctx.teams.get(id);
   const g = svg("g", { class: "badge", style: teamVars(t?.color) });
@@ -159,7 +145,7 @@ function badge(ctx: Ctx, id: number, x: number, y: number, size: number): SVGGEl
 async function loadHistory(ctx: Ctx, teamId: number): Promise<{ id: string; label: string; rank: number | null }[]> {
   const upto = ctx.entry.snapshots.findIndex((s) => s.id === ctx.snapId);
   const snaps = ctx.entry.snapshots.slice(0, upto + 1);
-  const rankings: Ranking[] = await Promise.all(snaps.map((s) => loadRanking(ctx.entry.season, s.id, ctx.method)));
+  const rankings: Ranking[] = await Promise.all(snaps.map((s) => loadRanking(ctx.entry.season, s.id)));
   return snaps.map((s, i) => ({ id: s.id, label: s.label.replace("Week ", "W").replace("Postseason", "Post"), rank: rankings[i]!.teams.find((t) => t.id === teamId)?.rank ?? null }));
 }
 
@@ -210,32 +196,25 @@ function historyChart(pts: { id: string; label: string; rank: number | null }[],
 // ---------------------------------------------------------------------------
 function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
   const me = ctx.byId.get(teamId)!;
-  const sign = (v: number, d = 2) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+  const byGame = new Map(breakdown(ctx, teamId).lines.map((l) => [l.edge.gameId, l]));
   const rows = games.map((e) => {
-    const won = e.winner === teamId;
-    const o = ctx.byId.get(won ? e.loser : e.winner)!;
-    const gap = me.height! - o.height!;
-    const sp = springPush(ctx, e);
-    const upset = sp.upset;
-    const unit = ctx.method === "win" ? "win gap" : "score margin";
-    const springCell = h("span", {
-      class: "r hide-sm sp",
-      style: `--p:${Math.round(sp.push * 100)}%`,
-      title: `This game pushes ${won ? "this team up" : "this team down"} with ${Math.round(sp.push * 100)}% of full force. A spring pushes hardest when the winner is below the loser or short of the ${unit} (${sp.target}), and fades as the winner pulls further ahead. It never pulls the other way.${upset ? " Accepted upset: one of the fewest games that must finish upside down, so it has no stop holding the winner above." : ""}`,
-    }, `${won ? "↑" : "↓"} ${Math.round(sp.push * 100)}%`);
+    const l = byGame.get(e.gameId)!;
+    const o = l.opponent;
+    const upset = (l.won && me.height! < o.height!) || (!l.won && o.height! < me.height!);
+    const pull = l.value - me.height!;
     return h("a", { class: "grow2", href: teamHref(ctx, o.id) },
       h("span", { class: "wk" }, e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`),
       logo(ctx.teams.get(o.id), 34, { lazy: true }),
       h("span", { class: "op" },
-        h("span", { class: "n" }, e.neutralSite ? `vs ${o.school}` : (won ? e.winnerIsHome : !e.winnerIsHome) ? `vs ${o.school}` : `at ${o.school}`),
+        h("span", { class: "n" }, `${l.where === -1 ? "at" : "vs"} ${o.school}`),
         h("span", { class: "c" }, `#${rankLabel(o.rank, o.tied)} · ${record(o)} · ${o.conference}`, upset ? " " : "", upset ? h("span", { class: "tag-up" }, "UPSET") : "")),
-      h("span", { class: `pill ${won ? "w" : "l"}` }, h("i", {}, won ? "W" : "L"), `${won ? e.winnerPoints : e.loserPoints}–${won ? e.loserPoints : e.winnerPoints}`),
+      h("span", { class: `pill ${l.won ? "w" : "l"}` }, h("i", {}, l.won ? "W" : "L"), `${l.won ? e.winnerPoints : e.loserPoints}–${l.won ? e.loserPoints : e.winnerPoints}`),
       h("span", { class: "r hide-sm" }, fmtHeight(o.height)),
-      h("span", { class: `r ${gap >= 0 ? "pos" : "neg"}` }, sign(gap)),
-      springCell,
+      h("span", { class: "r hide-sm", title: "What this game alone says this team's rating is: opponent rating + margin (±3 for the result), adjusted for home field" }, fmtHeight(l.value)),
+      h("span", { class: `r ${pull >= 0 ? "pos" : "neg"}`, title: "How far this game pulls the rating up (+) or down (−)" }, fmtHeight(pull)),
     );
   });
   return h("section", { class: "ladder games" },
-    h("div", { class: "lhead" }, h("div", {}, "When"), h("div"), h("div", {}, "Opponent"), h("div", {}, "Result"), h("div", { class: "r hide-sm" }, "Opp. ht"), h("div", { class: "r" }, "Gap"), h("div", { class: "r hide-sm" }, "Push")),
+    h("div", { class: "lhead" }, h("div", {}, "When"), h("div"), h("div", {}, "Opponent"), h("div", {}, "Result"), h("div", { class: "r hide-sm" }, "Opp. rating"), h("div", { class: "r hide-sm" }, "Game says"), h("div", { class: "r" }, "Pull")),
     ...rows);
 }

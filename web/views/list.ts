@@ -45,7 +45,7 @@ export function listView(ctx: Ctx): HTMLElement {
       logo(tl, 40, { lazy: true }),
       h("div", { class: "who" }, h("span", { class: "n" }, t.school), h("span", { class: "c" }, divTag(t), t.conference)),
       h("div", { class: "rec" }, record(t)),
-      h("div", { class: "meter", title: `Height ${fmtHeight(t.height)}` },
+      h("div", { class: "meter", title: `Rating ${fmtHeight(t.height)}` },
         h("div", { class: "track" }, h("div", { class: "fill", style: `width:${pct(t.height!)}%` }), h("div", { class: "knob", style: `left:${pct(t.height!)}%` })),
         h("span", { class: "v" }, fmtHeight(t.height))),
       h("div", { class: "r ch" }, delta(t.change)),
@@ -131,7 +131,7 @@ export function listView(ctx: Ctx): HTMLElement {
     podium,
     toolbar,
     h("section", { class: "ladder", "aria-label": "Full ranking" },
-      h("div", { class: "lhead" }, h("div", { style: "text-align:center" }, "Rank"), h("div"), h("div", {}, "Team"), h("div", { class: "r" }, "W-L"), h("div", { class: "hm" }, "Height in the graph"), h("div", { class: "r ch" }, "Week")),
+      h("div", { class: "lhead" }, h("div", { style: "text-align:center" }, "Rank"), h("div"), h("div", {}, "Team"), h("div", { class: "r" }, "W-L"), h("div", { class: "hm" }, "Rating"), h("div", { class: "r ch" }, "Week")),
       body),
   );
 }

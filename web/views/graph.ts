@@ -22,7 +22,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
   for (const e of ctx.edges) for (const id of [e.winner, e.loser]) (adj.get(id) ?? adj.set(id, []).get(id)!).push(e);
 
   // ---------------------------------------------------------------- svg scene
-  const root = svg("svg", { role: "img", "aria-label": "The game graph. Each team sits at its ranking height; higher is better." });
+  const root = svg("svg", { role: "img", "aria-label": "The game graph. Each team sits at its rating; higher is better." });
   const scene = svg("g");
   const gBack = svg("g");
   const gEdges = svg("g");
@@ -178,14 +178,11 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-          h("p", {}, ctx.method === "win"
-            ? `Every game is a spring that pushes the winner up and the loser down, hardest until the winner is ${ctx.ranking.manifest.restLength ?? 1} points above, whatever the score, then fading. It never pulls the other way, so a win never costs a team.`
-            : "Every game is a spring that pushes the winner up and the loser down, hardest until the winner is its score margin above, then fading. It never pulls the other way, so a win never costs a team."),
-        h("p", {}, "When results form a cycle, no order can respect them all, so the ranking accepts the fewest upsets it can; every other winner is held above its loser. Where it all settles is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+          h("p", {}, "Each team sits at its rating: how many points better it is than an average FBS team, judged by every score this season, who it came against, home field, and a fading head start from last season. Height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),
-        ups.length === 0 ? h("p", {}, "None. Every winner sits above every team it beat.") : h("p", { class: "muted" }, ctx.upsetIds.size > ups.length ? `${ctx.upsetIds.size} accepted upsets; the ${ups.length} biggest:` : `${ctx.upsetIds.size} accepted upset${ctx.upsetIds.size === 1 ? "" : "s"}:`),
+        ups.length === 0 ? h("p", {}, "None. Every winner is rated above every team it beat.") : h("p", { class: "muted" }, "Games where the winner is still rated below the loser."),
         ...ups.map((u, i) => {
           const w = ctx.byId.get(u.edge.winner)!;
           const l = ctx.byId.get(u.edge.loser)!;
@@ -196,7 +193,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
               h("div", { class: "txt" },
                 h("span", { class: "w" }, `#${rankLabel(w.rank, w.tied)} ${w.school}`),
                 h("span", { class: "bt" }, `beat #${rankLabel(l.rank, l.tied)} ${l.school}, ${u.edge.winnerPoints}–${u.edge.loserPoints}`))),
-            h("span", { class: "g", title: "How far below the loser the winner finished" }, fmtHeight(-u.gap)));
+            h("span", { class: "g", title: "How far below the loser the winner is rated" }, fmtHeight(-u.gap)));
         })),
     );
   };
@@ -260,7 +257,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     h("span", { class: "up-arrow" }, "↑ Higher is better"),
     h("span", {}, h("i", { class: "lw" }), "Beat"),
     h("span", {}, h("i", { class: "ll" }), "Lost to"),
-    h("span", {}, h("i", { class: "lu" }), "Accepted upset"));
+    h("span", {}, h("i", { class: "lu" }), "Upset (winner rated lower)"));
   canvas.appendChild(legend);
 
   const onKey = (ev: KeyboardEvent) => { if (ev.key === "Escape") selectTeam(null); };
