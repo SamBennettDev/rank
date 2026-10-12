@@ -17,8 +17,8 @@
     "gamesSha256": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c",
     "priorSeason": {
       "season": "2025",
-      "teamsSha256": "3beb95b4a2637e4fab9a2ad6b4190fabb03c3a3982d0113949792a0b7ae8a510",
-      "gamesSha256": "79c613599635b420b29177d9a5d57182b615d5eee058e9e63c6817c8877a97d5"
+      "teamsSha256": "432adca13961ea957fa82e2397e214da16b5911a68002bedb4a050aaa211c000",
+      "gamesSha256": "ff9b9bc2cbc2b5122c809c0f8cf85ab7e8313984303e392044598d8642b4ac36"
     },
     "counts": {
       "inWindow": 339,

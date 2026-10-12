@@ -655,7 +655,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401760424,2025,14,regular,2025-11-30T04:00:00.000Z,false,true,62,Hawai'i,27,2751,Wyoming,7
 401760425,2025,14,regular,2025-11-30T02:00:00.000Z,false,true,2440,Nevada,17,2439,UNLV,42
 401760426,2025,14,regular,2025-11-28T20:30:00.000Z,false,true,167,New Mexico,23,21,San Diego State,17
-401761588,2025,1,regular,2025-08-28T23:00:00.000Z,false,true,2433,UL Monroe,29,2598,St. Francis (PA),0
+401761588,2025,1,regular,2025-08-28T23:00:00.000Z,false,true,2433,UL Monroe,29,2598,Saint Francis,0
 401761589,2025,1,regular,2025-08-29T23:00:00.000Z,true,true,2429,Charlotte,11,2026,App State,34
 401761590,2025,1,regular,2025-08-30T22:00:00.000Z,false,true,256,James Madison,45,2692,Weber State,10
 401761591,2025,1,regular,2025-08-30T23:00:00.000Z,false,true,2032,Arkansas State,42,2546,Southeast Missouri State,24
@@ -815,7 +815,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401762791,2025,1,regular,2025-08-29T01:00:00.000Z,false,true,275,Wisconsin,17,193,Miami (OH),0
 401762792,2025,1,regular,2025-08-30T16:00:00.000Z,false,true,2309,Kent State,21,2771,Merrimack,17
 401762793,2025,1,regular,2025-08-30T19:30:00.000Z,false,true,2459,Northern Illinois,19,107,Holy Cross,17
-401762794,2025,2,regular,2025-09-06T19:30:00.000Z,false,true,2084,Buffalo,45,2598,St. Francis (PA),6
+401762794,2025,2,regular,2025-09-06T19:30:00.000Z,false,true,2084,Buffalo,45,2598,Saint Francis,6
 401762795,2025,2,regular,2025-09-06T23:00:00.000Z,false,true,2199,Eastern Michigan,23,2341,Long Island University,28
 401762816,2025,2,regular,2025-09-06T19:30:00.000Z,false,true,113,Massachusetts,26,2803,Bryant,27
 401762817,2025,3,regular,2025-09-13T16:00:00.000Z,false,true,2309,Kent State,28,2084,Buffalo,31
@@ -943,7 +943,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767116,2025,7,regular,2025-10-11T23:00:00.000Z,false,true,302,UC Davis,45,2464,Northern Arizona,24
 401767117,2025,11,regular,2025-11-08T23:00:00.000Z,false,true,2464,Northern Arizona,49,2458,Northern Colorado,10
 401767118,2025,13,regular,2025-11-22T20:00:00.000Z,false,true,2692,Weber State,48,2464,Northern Arizona,28
-401767119,2025,1,regular,2025-08-30T19:00:00.000Z,false,true,2458,Northern Colorado,17,2123,Chadron St,3
+401767119,2025,1,regular,2025-08-30T19:00:00.000Z,false,true,2458,Northern Colorado,17,2123,Chadron State,3
 401767120,2025,3,regular,2025-09-13T18:00:00.000Z,false,true,233,South Dakota,24,2458,Northern Colorado,17
 401767121,2025,4,regular,2025-09-20T23:00:00.000Z,false,true,2277,Houston Christian,23,2458,Northern Colorado,26
 401767122,2025,7,regular,2025-10-11T21:00:00.000Z,false,true,70,Idaho,33,2458,Northern Colorado,49
@@ -1163,7 +1163,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767339,2025,1,regular,2025-08-30T18:00:00.000Z,false,true,231,Furman,23,2729,William & Mary,21
 401767340,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,2729,William & Mary,21,257,Richmond,28
 401767341,2025,3,regular,2025-09-13T19:00:00.000Z,false,true,2169,Delaware State,36,2075,Bowie State,14
-401767342,2025,4,regular,2025-09-20T17:00:00.000Z,false,true,2598,St. Francis (PA),10,2169,Delaware State,39
+401767342,2025,4,regular,2025-09-20T17:00:00.000Z,false,true,2598,Saint Francis,10,2169,Delaware State,39
 401767343,2025,5,regular,2025-09-27T16:00:00.000Z,false,true,2529,Sacred Heart,35,2169,Delaware State,31
 401767344,2025,7,regular,2025-10-11T16:00:00.000Z,false,true,2169,Delaware State,70,2583,Southern Connecticut State,23
 401767345,2025,9,regular,2025-10-25T17:00:00.000Z,false,true,2428,North Carolina Central,26,2169,Delaware State,35
@@ -1172,7 +1172,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767348,2025,12,regular,2025-11-15T18:00:00.000Z,false,true,2169,Delaware State,26,47,Howard,13
 401767349,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,2169,Delaware State,17,2569,South Carolina State,28
 401767350,2025,1,regular,2025-08-30T20:00:00.000Z,true,true,50,Florida A&M,9,47,Howard,10
-401767351,2025,3,regular,2025-09-13T17:00:00.000Z,true,true,47,Howard,38,60,Morehouse College,10
+401767351,2025,3,regular,2025-09-13T17:00:00.000Z,true,true,47,Howard,38,60,Morehouse,10
 401767352,2025,5,regular,2025-09-27T18:00:00.000Z,false,true,257,Richmond,13,47,Howard,12
 401767353,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2529,Sacred Heart,32,47,Howard,14
 401767354,2025,9,regular,2025-10-25T19:30:00.000Z,false,true,47,Howard,33,2415,Morgan State,27
@@ -1181,7 +1181,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767357,2025,12,regular,2025-11-15T20:00:00.000Z,false,true,2010,Alabama A&M,23,50,Florida A&M,26
 401767358,2025,13,regular,2025-11-22T20:00:00.000Z,false,true,2640,Texas Southern,24,2010,Alabama A&M,7
 401767359,2025,2,regular,2025-09-06T23:00:00.000Z,false,true,2582,Southern,7,2011,Alabama State,30
-401767360,2025,3,regular,2025-09-13T21:00:00.000Z,false,true,2011,Alabama State,37,2396,Miles College,9
+401767360,2025,3,regular,2025-09-13T21:00:00.000Z,false,true,2011,Alabama State,37,2396,Miles,9
 401767361,2025,5,regular,2025-09-27T19:00:00.000Z,false,true,50,Florida A&M,14,2011,Alabama State,42
 401767362,2025,6,regular,2025-10-04T19:00:00.000Z,false,true,2011,Alabama State,52,2065,Bethune-Cookman,35
 401767363,2025,7,regular,2025-10-11T19:30:00.000Z,false,true,2296,Jackson State,38,2011,Alabama State,34
@@ -1218,13 +1218,13 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767395,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,2755,Grambling,37,2310,Kentucky State,31
 401767396,2025,11,regular,2025-11-08T18:30:00.000Z,false,true,2569,South Carolina State,42,47,Howard,12
 401767397,2025,13,regular,2025-11-22T20:30:00.000Z,true,true,47,Howard,44,2450,Norfolk State,15
-401767398,2025,5,regular,2025-09-27T19:00:00.000Z,true,true,2415,Morgan State,24,2396,Miles College,17
+401767398,2025,5,regular,2025-09-27T19:00:00.000Z,true,true,2415,Morgan State,24,2396,Miles,17
 401767399,2025,6,regular,2025-10-04T17:00:00.000Z,false,true,46,Georgetown,27,2415,Morgan State,24
-401767400,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2415,Morgan State,44,2355,Virginia University Of Lynchburg,6
+401767400,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2415,Morgan State,44,2355,Virginia Lynchburg,6
 401767401,2025,10,regular,2025-11-01T18:00:00.000Z,false,true,2569,South Carolina State,36,2415,Morgan State,30
 401767402,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2450,Norfolk State,28,2415,Morgan State,35
 401767403,2025,13,regular,2025-11-22T17:00:00.000Z,false,true,2415,Morgan State,14,2428,North Carolina Central,33
-401767404,2025,2,regular,2025-09-06T22:00:00.000Z,false,true,2450,Norfolk State,34,330,Virginia St,31
+401767404,2025,2,regular,2025-09-06T22:00:00.000Z,false,true,2450,Norfolk State,34,330,Virginia State,31
 401767405,2025,4,regular,2025-09-20T20:00:00.000Z,false,true,2450,Norfolk State,28,2529,Sacred Heart,31
 401767406,2025,5,regular,2025-09-27T16:00:00.000Z,false,true,2681,Wagner,18,2450,Norfolk State,13
 401767407,2025,7,regular,2025-10-11T17:30:00.000Z,false,true,2747,Wofford,31,2450,Norfolk State,14
@@ -1256,7 +1256,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767433,2025,4,regular,2025-09-20T23:00:00.000Z,false,true,2504,Prairie View A&M,27,2466,Northwestern State,24
 401767434,2025,8,regular,2025-10-18T21:00:00.000Z,false,true,2582,Southern,3,2504,Prairie View A&M,24
 401767435,2025,9,regular,2025-10-25T19:00:00.000Z,false,true,2504,Prairie View A&M,38,124179,Lincoln (CA),0
-401767436,2025,6,regular,2025-10-04T17:30:00.000Z,false,true,2569,South Carolina State,49,2542,Savannah St,6
+401767436,2025,6,regular,2025-10-04T17:30:00.000Z,false,true,2569,South Carolina State,49,2542,Savannah State,6
 401767437,2025,2,regular,2025-09-06T23:00:00.000Z,false,true,2287,Illinois State,41,2413,Morehead State,13
 401767438,2025,6,regular,2025-10-04T23:00:00.000Z,false,true,2287,Illinois State,16,2449,North Dakota State,33
 401767439,2025,7,regular,2025-10-11T23:00:00.000Z,false,true,93,Murray State,32,2287,Illinois State,46
@@ -1279,7 +1279,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767456,2025,9,regular,2025-10-25T21:00:00.000Z,false,true,2582,Southern,35,50,Florida A&M,43
 401767457,2025,12,regular,2025-11-15T20:00:00.000Z,false,true,2582,Southern,30,2640,Texas Southern,35
 401767458,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,2640,Texas Southern,7,2320,Lamar,31
-401767459,2025,8,regular,2025-10-18T18:00:00.000Z,false,true,2640,Texas Southern,61,2355,Virginia University Of Lynchburg,10
+401767459,2025,8,regular,2025-10-18T18:00:00.000Z,false,true,2640,Texas Southern,61,2355,Virginia Lynchburg,10
 401767460,2025,6,regular,2025-10-04T23:00:00.000Z,false,true,2466,Northwestern State,10,2837,East Texas A&M,40
 401767461,2025,7,regular,2025-10-11T23:00:00.000Z,false,true,2837,East Texas A&M,23,2320,Lamar,33
 401767462,2025,8,regular,2025-10-18T21:30:00.000Z,false,true,2916,Incarnate Word,45,2837,East Texas A&M,52
@@ -1288,7 +1288,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767465,2025,11,regular,2025-11-08T22:00:00.000Z,false,true,2837,East Texas A&M,20,2377,McNeese,35
 401767466,2025,12,regular,2025-11-15T22:00:00.000Z,false,true,2837,East Texas A&M,37,2277,Houston Christian,32
 401767467,2025,13,regular,2025-11-22T23:00:00.000Z,false,true,292,UT Rio Grande Valley,33,2837,East Texas A&M,14
-401767468,2025,1,regular,2025-08-28T23:30:00.000Z,false,true,2277,Houston Christian,69,124386,Little Rock,0
+401767468,2025,1,regular,2025-08-28T23:30:00.000Z,false,true,2277,Houston Christian,69,124386,Arkansas Baptist,0
 401767469,2025,6,regular,2025-10-05T00:00:00.000Z,false,true,292,UT Rio Grande Valley,27,2277,Houston Christian,7
 401767470,2025,7,regular,2025-10-11T23:00:00.000Z,false,true,2277,Houston Christian,20,2466,Northwestern State,17
 401767471,2025,8,regular,2025-10-18T23:00:00.000Z,false,true,2377,McNeese,27,2277,Houston Christian,0
@@ -1310,7 +1310,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767487,2025,11,regular,2025-11-08T21:00:00.000Z,false,true,2320,Lamar,14,2545,SE Louisiana,12
 401767488,2025,12,regular,2025-11-15T22:00:00.000Z,false,true,2617,Stephen F. Austin,26,2320,Lamar,15
 401767489,2025,13,regular,2025-11-22T21:00:00.000Z,false,true,2320,Lamar,19,2377,McNeese,21
-401767490,2025,1,regular,2025-08-30T23:00:00.000Z,false,true,2377,McNeese,54,2347,Louisiana College,9
+401767490,2025,1,regular,2025-08-30T23:00:00.000Z,false,true,2377,McNeese,54,2347,Louisiana Christian,9
 401767491,2025,5,regular,2025-09-28T00:00:00.000Z,false,true,2617,Stephen F. Austin,34,2377,McNeese,17
 401767492,2025,6,regular,2025-10-04T23:00:00.000Z,false,true,2377,McNeese,0,2545,SE Louisiana,38
 401767493,2025,9,regular,2025-10-25T20:00:00.000Z,false,true,2447,Nicholls,31,2377,McNeese,7
@@ -1346,7 +1346,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767524,2025,3,regular,2025-09-14T00:00:00.000Z,false,true,2617,Stephen F. Austin,63,2834,Sul Ross State,0
 401767525,2025,10,regular,2025-11-01T23:00:00.000Z,false,true,2617,Stephen F. Austin,41,292,UT Rio Grande Valley,17
 401767526,2025,1,regular,2025-08-31T00:00:00.000Z,false,true,292,UT Rio Grande Valley,66,2834,Sul Ross State,0
-401767527,2025,3,regular,2025-09-14T00:00:00.000Z,false,true,292,UT Rio Grande Valley,80,2324,Langston University,0
+401767527,2025,3,regular,2025-09-14T00:00:00.000Z,false,true,292,UT Rio Grande Valley,80,2324,Langston,0
 401767528,2025,4,regular,2025-09-21T00:00:00.000Z,false,true,292,UT Rio Grande Valley,61,102626,Texas Wesleyan,13
 401767529,2025,3,regular,2025-09-13T22:00:00.000Z,false,true,236,Chattanooga,63,56,Stetson,0
 401767530,2025,5,regular,2025-09-27T22:00:00.000Z,false,true,236,Chattanooga,10,2643,The Citadel,28
@@ -1366,7 +1366,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767544,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,2571,South Dakota State,37,2181,Drake,21
 401767545,2025,5,regular,2025-09-27T19:00:00.000Z,false,true,2571,South Dakota State,51,2385,Mercyhurst,7
 401767546,2025,6,regular,2025-10-04T22:00:00.000Z,false,true,2754,Youngstown State,30,2571,South Dakota State,35
-401767547,2025,1,regular,2025-08-30T23:00:00.000Z,false,true,79,Southern Illinois,49,2646,Thomas More College,3
+401767547,2025,1,regular,2025-08-30T23:00:00.000Z,false,true,79,Southern Illinois,49,2646,Thomas More,3
 401767548,2025,11,regular,2025-11-08T19:00:00.000Z,false,true,2754,Youngstown State,48,79,Southern Illinois,38
 401767549,2025,1,regular,2025-08-28T22:00:00.000Z,false,true,2754,Youngstown State,24,2385,Mercyhurst,15
 401767550,2025,2,regular,2025-09-06T18:00:00.000Z,false,true,2754,Youngstown State,56,2523,Robert Morris,17
@@ -1422,7 +1422,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767600,2025,12,regular,2025-11-15T21:00:00.000Z,false,true,301,San Diego,29,2086,Butler,7
 401767601,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,2086,Butler,27,2674,Valparaiso,20
 401767602,2025,1,regular,2025-08-30T17:00:00.000Z,false,true,2166,Davidson,14,46,Georgetown,51
-401767603,2025,4,regular,2025-09-20T23:00:00.000Z,false,true,2166,Davidson,48,2256,Greensboro College,0
+401767603,2025,4,regular,2025-09-20T23:00:00.000Z,false,true,2166,Davidson,48,2256,Greensboro,0
 401767604,2025,6,regular,2025-10-04T17:00:00.000Z,false,true,56,Stetson,35,2166,Davidson,32
 401767605,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2166,Davidson,13,2900,St. Thomas (MN),57
 401767606,2025,8,regular,2025-10-18T17:00:00.000Z,false,true,2181,Drake,45,2166,Davidson,0
@@ -1431,7 +1431,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767609,2025,11,regular,2025-11-08T18:00:00.000Z,false,true,2166,Davidson,14,2506,Presbyterian,13
 401767610,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2368,Marist,37,2166,Davidson,10
 401767611,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,2166,Davidson,14,2168,Dayton,42
-401767612,2025,2,regular,2025-09-06T16:00:00.000Z,false,true,2168,Dayton,38,2646,Thomas More College,0
+401767612,2025,2,regular,2025-09-06T16:00:00.000Z,false,true,2168,Dayton,38,2646,Thomas More,0
 401767613,2025,4,regular,2025-09-20T18:00:00.000Z,false,true,2523,Robert Morris,14,2168,Dayton,17
 401767614,2025,5,regular,2025-09-27T16:00:00.000Z,false,true,2168,Dayton,48,56,Stetson,14
 401767615,2025,6,regular,2025-10-04T17:00:00.000Z,false,true,2413,Morehead State,28,2168,Dayton,35
@@ -1439,7 +1439,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767617,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,2168,Dayton,35,2506,Presbyterian,19
 401767618,2025,10,regular,2025-11-01T20:00:00.000Z,false,true,301,San Diego,31,2168,Dayton,13
 401767619,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2168,Dayton,6,2181,Drake,14
-401767620,2025,1,regular,2025-08-28T23:30:00.000Z,false,true,2181,Drake,41,389,Upper Iowa University,7
+401767620,2025,1,regular,2025-08-28T23:30:00.000Z,false,true,2181,Drake,41,389,Upper Iowa,7
 401767621,2025,6,regular,2025-10-04T17:00:00.000Z,false,true,2181,Drake,41,2674,Valparaiso,0
 401767622,2025,7,regular,2025-10-11T21:00:00.000Z,false,true,301,San Diego,16,2181,Drake,19
 401767623,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,2368,Marist,17,2181,Drake,31
@@ -1458,7 +1458,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767636,2025,5,regular,2025-09-27T17:00:00.000Z,false,true,2506,Presbyterian,41,2413,Morehead State,0
 401767637,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,56,Stetson,21,2413,Morehead State,14
 401767638,2025,9,regular,2025-10-25T17:00:00.000Z,false,true,2674,Valparaiso,13,2413,Morehead State,17
-401767639,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,2506,Presbyterian,42,101784,ERSKINE,14
+401767639,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,2506,Presbyterian,42,101784,Erskine,14
 401767640,2025,4,regular,2025-09-20T17:00:00.000Z,false,true,2506,Presbyterian,76,495,BLUEFIELD,3
 401767641,2025,8,regular,2025-10-18T17:00:00.000Z,false,true,2506,Presbyterian,42,56,Stetson,7
 401767642,2025,10,regular,2025-11-01T17:00:00.000Z,false,true,2506,Presbyterian,43,2674,Valparaiso,14
@@ -1471,20 +1471,20 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767649,2025,8,regular,2025-10-18T18:00:00.000Z,false,true,2900,St. Thomas (MN),55,2674,Valparaiso,17
 401767650,2025,9,regular,2025-10-25T17:00:00.000Z,false,true,56,Stetson,10,2900,St. Thomas (MN),52
 401767651,2025,1,regular,2025-08-30T22:00:00.000Z,false,true,56,Stetson,21,2691,Webber International,31
-401767652,2025,2,regular,2025-09-06T22:00:00.000Z,false,true,56,Stetson,59,2683,Warner University,13
+401767652,2025,2,regular,2025-09-06T22:00:00.000Z,false,true,56,Stetson,59,2683,Warner,13
 401767653,2025,4,regular,2025-09-20T17:00:00.000Z,false,true,56,Stetson,7,108,Harvard,59
 401767654,2025,12,regular,2025-11-15T18:00:00.000Z,false,true,2674,Valparaiso,32,56,Stetson,31
-401767655,2025,1,regular,2025-08-30T18:00:00.000Z,false,true,2674,Valparaiso,67,2355,Virginia University Of Lynchburg,10
+401767655,2025,1,regular,2025-08-30T18:00:00.000Z,false,true,2674,Valparaiso,67,2355,Virginia Lynchburg,10
 401767656,2025,2,regular,2025-09-06T23:00:00.000Z,false,true,2674,Valparaiso,7,2003,Adrian,10
 401767657,2025,1,regular,2025-08-30T18:00:00.000Z,false,true,2529,Sacred Heart,12,284,Stonehill,7
 401767658,2025,2,regular,2025-09-06T16:00:00.000Z,false,true,2329,Lehigh,28,2529,Sacred Heart,10
 401767659,2025,3,regular,2025-09-13T16:00:00.000Z,false,true,2341,Long Island University,21,2529,Sacred Heart,24
 401767660,2025,6,regular,2025-10-04T16:00:00.000Z,false,true,2115,Central Connecticut,42,2529,Sacred Heart,35
 401767661,2025,10,regular,2025-11-01T16:00:00.000Z,false,true,2529,Sacred Heart,35,2441,New Haven,20
-401767662,2025,11,regular,2025-11-08T17:00:00.000Z,false,true,2529,Sacred Heart,56,2355,Virginia University Of Lynchburg,10
+401767662,2025,11,regular,2025-11-08T17:00:00.000Z,false,true,2529,Sacred Heart,56,2355,Virginia Lynchburg,10
 401767663,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2529,Sacred Heart,42,2771,Merrimack,37
 401767664,2025,4,regular,2025-09-20T22:00:00.000Z,false,true,2083,Bucknell,24,2329,Lehigh,41
-401767665,2025,5,regular,2025-09-27T22:00:00.000Z,false,true,2083,Bucknell,30,2598,St. Francis (PA),23
+401767665,2025,5,regular,2025-09-27T22:00:00.000Z,false,true,2083,Bucknell,30,2598,Saint Francis,23
 401767666,2025,6,regular,2025-10-04T16:00:00.000Z,false,true,2083,Bucknell,33,257,Richmond,28
 401767667,2025,7,regular,2025-10-11T16:30:00.000Z,false,true,322,Lafayette,62,2083,Bucknell,24
 401767668,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,2083,Bucknell,24,46,Georgetown,31
@@ -1548,7 +1548,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767739,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2142,Colgate,19,257,Richmond,24
 401767740,2025,12,regular,2025-11-15T19:00:00.000Z,false,true,257,Richmond,28,322,Lafayette,35
 401767741,2025,2,regular,2025-09-06T16:00:00.000Z,false,true,2115,Central Connecticut,34,2022,American International,7
-401767742,2025,3,regular,2025-09-13T16:00:00.000Z,false,true,2115,Central Connecticut,31,2598,St. Francis (PA),7
+401767742,2025,3,regular,2025-09-13T16:00:00.000Z,false,true,2115,Central Connecticut,31,2598,Saint Francis,7
 401767743,2025,4,regular,2025-09-20T22:00:00.000Z,false,true,2771,Merrimack,16,2115,Central Connecticut,14
 401767744,2025,7,regular,2025-10-11T18:00:00.000Z,false,true,2523,Robert Morris,12,2115,Central Connecticut,24
 401767745,2025,8,regular,2025-10-18T21:00:00.000Z,false,true,2681,Wagner,17,2115,Central Connecticut,24
@@ -1558,7 +1558,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767749,2025,13,regular,2025-11-22T17:00:00.000Z,false,true,2115,Central Connecticut,35,2385,Mercyhurst,28
 401767750,2025,2,regular,2025-09-06T16:00:00.000Z,false,true,2184,Duquesne,55,2339,Lincoln (PA),14
 401767751,2025,6,regular,2025-10-04T16:00:00.000Z,false,true,2184,Duquesne,34,284,Stonehill,14
-401767752,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2184,Duquesne,52,2598,St. Francis (PA),7
+401767752,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2184,Duquesne,52,2598,Saint Francis,7
 401767753,2025,8,regular,2025-10-18T22:00:00.000Z,false,true,2385,Mercyhurst,0,2184,Duquesne,37
 401767754,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,2681,Wagner,24,2184,Duquesne,13
 401767755,2025,11,regular,2025-11-08T17:00:00.000Z,false,true,2341,Long Island University,29,2184,Duquesne,11
@@ -1566,24 +1566,24 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401767757,2025,6,regular,2025-10-04T17:00:00.000Z,false,true,2385,Mercyhurst,22,2341,Long Island University,13
 401767758,2025,5,regular,2025-09-27T17:00:00.000Z,false,true,284,Stonehill,10,2341,Long Island University,3
 401767759,2025,8,regular,2025-10-18T16:00:00.000Z,false,true,2341,Long Island University,17,2523,Robert Morris,7
-401767760,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2598,St. Francis (PA),3,2341,Long Island University,10
+401767760,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2598,Saint Francis,3,2341,Long Island University,10
 401767761,2025,13,regular,2025-11-22T17:00:00.000Z,false,true,2341,Long Island University,24,2681,Wagner,17
 401767762,2025,3,regular,2025-09-13T22:00:00.000Z,false,true,2523,Robert Morris,28,2699,West Liberty,14
 401767763,2025,6,regular,2025-10-04T17:00:00.000Z,false,true,2771,Merrimack,24,2523,Robert Morris,7
-401767764,2025,9,regular,2025-10-25T19:00:00.000Z,false,true,2598,St. Francis (PA),14,2523,Robert Morris,24
+401767764,2025,9,regular,2025-10-25T19:00:00.000Z,false,true,2598,Saint Francis,14,2523,Robert Morris,24
 401767765,2025,10,regular,2025-11-01T17:00:00.000Z,false,true,284,Stonehill,17,2523,Robert Morris,20
 401767766,2025,11,regular,2025-11-08T17:00:00.000Z,false,true,2523,Robert Morris,20,2681,Wagner,24
 401767767,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2385,Mercyhurst,27,2523,Robert Morris,13
-401767768,2025,10,regular,2025-11-01T16:00:00.000Z,false,true,2598,St. Francis (PA),20,2681,Wagner,23
-401767769,2025,11,regular,2025-11-08T17:00:00.000Z,false,true,2598,St. Francis (PA),15,2385,Mercyhurst,16
-401767770,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,284,Stonehill,20,2598,St. Francis (PA),10
+401767768,2025,10,regular,2025-11-01T16:00:00.000Z,false,true,2598,Saint Francis,20,2681,Wagner,23
+401767769,2025,11,regular,2025-11-08T17:00:00.000Z,false,true,2598,Saint Francis,15,2385,Mercyhurst,16
+401767770,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,284,Stonehill,20,2598,Saint Francis,10
 401767771,2025,2,regular,2025-09-06T17:00:00.000Z,false,true,284,Stonehill,26,322,Lafayette,42
 401767772,2025,4,regular,2025-09-20T17:00:00.000Z,false,true,284,Stonehill,21,219,Pennsylvania,24
 401767773,2025,8,regular,2025-10-18T16:00:00.000Z,false,true,43,Yale,47,284,Stonehill,7
 401767774,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,2385,Mercyhurst,15,284,Stonehill,22
 401767775,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,2681,Wagner,20,284,Stonehill,14
 401767776,2025,7,regular,2025-10-11T16:00:00.000Z,false,true,2681,Wagner,7,2385,Mercyhurst,19
-401769067,2025,2,regular,2025-09-06T17:00:00.000Z,false,true,2771,Merrimack,31,2830,St. Anselm,6
+401769067,2025,2,regular,2025-09-06T17:00:00.000Z,false,true,2771,Merrimack,31,2830,Saint Anselm,6
 401769068,2025,10,regular,2025-11-01T17:00:00.000Z,false,true,2142,Colgate,23,2771,Merrimack,20
 401769070,2025,1,postseason,2026-01-01T00:30:00.000Z,true,true,194,Ohio State,14,2390,Miami,24
 401769071,2025,1,postseason,2026-01-01T17:00:00.000Z,true,true,2641,Texas Tech,0,2483,Oregon,23
@@ -1592,15 +1592,15 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401769074,2025,1,postseason,2026-01-10T00:30:00.000Z,true,true,84,Indiana,56,2483,Oregon,22
 401769075,2025,1,postseason,2026-01-09T00:30:00.000Z,true,true,145,Ole Miss,27,2390,Miami,31
 401769076,2025,1,postseason,2026-01-20T00:30:00.000Z,true,true,84,Indiana,27,2390,Miami,21
-401769832,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,50,Florida A&M,33,2013,Albany State GA,25
+401769832,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,50,Florida A&M,33,2013,Albany State,25
 401769849,2025,11,regular,2025-11-08T17:30:00.000Z,false,true,322,Lafayette,59,2142,Colgate,42
 401769866,2025,5,regular,2025-09-27T19:30:00.000Z,false,true,322,Lafayette,28,163,Princeton,38
 401769868,2025,2,regular,2025-09-06T23:00:00.000Z,false,true,2447,Nicholls,10,2698,West Georgia,34
 401769869,2025,6,regular,2025-10-04T21:00:00.000Z,false,true,2110,Central Arkansas,23,3101,Utah Tech,17
 401769891,2025,2,regular,2025-09-06T17:00:00.000Z,false,true,2086,Butler,37,2654,Truman State,27
-401769892,2025,3,regular,2025-09-13T17:30:00.000Z,false,true,2262,Hanover College,7,2086,Butler,16
+401769892,2025,3,regular,2025-09-13T17:30:00.000Z,false,true,2262,Hanover,7,2086,Butler,16
 401773491,2025,4,regular,2025-09-20T17:00:00.000Z,false,true,2441,New Haven,35,129,Saginaw Valley State,28
-401774013,2025,4,regular,2025-09-20T16:00:00.000Z,false,true,2415,Morgan State,27,2119,Central State (OH),0
+401774013,2025,4,regular,2025-09-20T16:00:00.000Z,false,true,2415,Morgan State,27,2119,Central State,0
 401777324,2025,15,regular,2025-12-06T01:00:00.000Z,false,true,2655,Tulane,34,249,North Texas,21
 401777325,2025,15,regular,2025-12-06T00:00:00.000Z,false,true,55,Jacksonville State,15,338,Kennesaw State,19
 401777326,2025,15,regular,2025-12-06T01:00:00.000Z,false,true,68,Boise State,38,2439,UNLV,21
@@ -1650,14 +1650,14 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401779329,2025,1,regular,2025-08-29T23:00:00.000Z,false,true,2368,Marist,31,2441,New Haven,14
 401779510,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,2341,Long Island University,38,2441,New Haven,16
 401779511,2025,2,regular,2025-09-06T16:00:00.000Z,false,true,2385,Mercyhurst,48,2441,New Haven,14
-401779512,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2441,New Haven,69,2843,Western Connecticut St,0
+401779512,2025,7,regular,2025-10-11T17:00:00.000Z,false,true,2441,New Haven,69,2843,Western Connecticut State,0
 401779840,2025,1,postseason,2025-12-20T01:00:00.000Z,false,true,201,Oklahoma,24,333,Alabama,34
 401779841,2025,1,postseason,2025-12-20T17:00:00.000Z,false,true,245,Texas A&M,3,2390,Miami,10
 401779842,2025,1,postseason,2025-12-20T20:30:00.000Z,false,true,145,Ole Miss,41,2655,Tulane,10
 401779843,2025,1,postseason,2025-12-21T00:30:00.000Z,false,true,2483,Oregon,51,256,James Madison,34
 401783278,2025,3,regular,2025-09-13T23:00:00.000Z,false,true,399,UAlbany,17,2441,New Haven,24
 401783279,2025,11,regular,2025-11-08T20:30:00.000Z,false,true,2441,New Haven,41,2771,Merrimack,31
-401788977,2025,1,regular,2025-08-30T23:00:00.000Z,true,true,2755,Grambling,55,2324,Langston University,7
+401788977,2025,1,regular,2025-08-30T23:00:00.000Z,true,true,2755,Grambling,55,2324,Langston,7
 401788996,2025,13,regular,2025-11-22T18:00:00.000Z,false,true,219,Pennsylvania,17,163,Princeton,6
 401788997,2025,9,regular,2025-10-25T16:00:00.000Z,false,true,43,Yale,35,219,Pennsylvania,13
 401788998,2025,12,regular,2025-11-15T17:00:00.000Z,false,true,163,Princeton,10,43,Yale,13
