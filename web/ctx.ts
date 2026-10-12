@@ -1,5 +1,5 @@
 import { buildEdges, listSnapshots } from "../src/engine/graph";
-import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
+import type { Edge, Game, Method, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 export type View = "list" | "graph" | "team" | "about";
 
@@ -15,6 +15,8 @@ export interface Ctx {
   byId: Map<number, RankedTeam>;
   /** Teams with a rank, best first. */
   ranked: RankedTeam[];
+  /** Which published ranking method is shown. */
+  method: Method;
 }
 
 export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
@@ -28,8 +30,22 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
   };
 }
 
-export const href = (season: string, snap: string, view: View, teamId?: number) =>
-  `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}`;
+export const METHOD_LABEL: Record<Method, string> = { win: "Wins", margin: "Margin" };
+export const METHOD_HINT: Record<Method, string> = {
+  win: "Every win counts the same: only who won matters",
+  margin: "Each game counts by its score margin",
+};
+
+/** The height gap a game's spring wants between winner and loser under the shown method. */
+export const targetGap = (ctx: Ctx, e: Edge) =>
+  ctx.method === "win" ? ctx.ranking.manifest.restLength ?? 1 : e.winnerPoints - e.loserPoints;
+
+/** Win is the default; links carry `?method=margin` otherwise. Set by the router on each navigation. */
+let currentMethod: Method = "win";
+export const setMethod = (m: Method) => (currentMethod = m);
+
+export const href = (season: string, snap: string, view: View, teamId?: number, method: Method = currentMethod) =>
+  `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}${method === "win" ? "" : `?method=${method}`}`;
 export const teamHref = (ctx: Ctx, id: number) => href(ctx.entry.season, ctx.snapId, "team", id);
 
 export const rankLabel = (rank: number | null, tied: boolean) => (rank === null ? "—" : `${tied ? "T-" : ""}${rank}`);

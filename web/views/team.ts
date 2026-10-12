@@ -1,5 +1,5 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
+import { type Ctx, fmtHeight, href, rankLabel, record, targetGap, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
 import { logo, svgLogo, teamVars } from "../team";
@@ -47,7 +47,9 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h("div", { class: "tgrid" },
         h("div", { class: "panel springs" },
           h("h2", {}, "Why it’s here"),
-          h("p", { class: "hint" }, "Each game's spring pulls the teams toward their raw score difference. A 28-point win targets a 28-point gap, with no fixed rest length, cap or scaling. This team rests where its springs balance."),
+          h("p", { class: "hint" }, ctx.method === "win"
+            ? `Each game is an equal spring pulling the winner ${ctx.ranking.manifest.restLength ?? 1} points above the loser, whatever the score. This team rests where its springs balance.`
+            : "Each game's spring pulls the teams toward their raw score difference. A 28-point win targets a 28-point gap, with no fixed rest length, cap or scaling. This team rests where its springs balance."),
           springs(ctx, teamId, games)),
         history),
       gameLog(ctx, teamId, games)),
@@ -157,7 +159,7 @@ function badge(ctx: Ctx, id: number, x: number, y: number, size: number): SVGGEl
 async function loadHistory(ctx: Ctx, teamId: number): Promise<{ id: string; label: string; rank: number | null }[]> {
   const upto = ctx.entry.snapshots.findIndex((s) => s.id === ctx.snapId);
   const snaps = ctx.entry.snapshots.slice(0, upto + 1);
-  const rankings: Ranking[] = await Promise.all(snaps.map((s) => loadRanking(ctx.entry.season, s.id)));
+  const rankings: Ranking[] = await Promise.all(snaps.map((s) => loadRanking(ctx.entry.season, s.id, ctx.method)));
   return snaps.map((s, i) => ({ id: s.id, label: s.label.replace("Week ", "W").replace("Postseason", "Post"), rank: rankings[i]!.teams.find((t) => t.id === teamId)?.rank ?? null }));
 }
 
@@ -213,8 +215,8 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     const won = e.winner === teamId;
     const o = ctx.byId.get(won ? e.loser : e.winner)!;
     const gap = me.height! - o.height!;
-    const margin = e.winnerPoints - e.loserPoints;
-    const tension = ctx.byId.get(e.winner)!.height! - ctx.byId.get(e.loser)!.height! - margin;
+    const target = targetGap(ctx, e);
+    const tension = ctx.byId.get(e.winner)!.height! - ctx.byId.get(e.loser)!.height! - target;
     const upset = (won && gap < 0) || (!won && gap > 0);
     return h("a", { class: "grow2", href: teamHref(ctx, o.id) },
       h("span", { class: "wk" }, e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`),
@@ -225,7 +227,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h("span", { class: `pill ${won ? "w" : "l"}` }, h("i", {}, won ? "W" : "L"), `${won ? e.winnerPoints : e.loserPoints}–${won ? e.loserPoints : e.winnerPoints}`),
       h("span", { class: "r hide-sm" }, fmtHeight(o.height)),
       h("span", { class: `r ${gap >= 0 ? "pos" : "neg"}` }, sign(gap)),
-      h("span", { class: "r hide-sm", title: `Winner height − loser height − score margin (${margin}). Zero means the spring is at rest; negative means it is stretched pulling the winner up.` }, sign(tension)),
+      h("span", { class: "r hide-sm", title: `Winner height − loser height − ${ctx.method === "win" ? "win gap" : "score margin"} (${target}). Zero means the spring is at rest; negative means it is stretched pulling the winner up.` }, sign(tension)),
     );
   });
   return h("section", { class: "ladder games" },

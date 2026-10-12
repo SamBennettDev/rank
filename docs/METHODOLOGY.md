@@ -4,14 +4,14 @@ This document is the full specification of how rankings are produced. If the cod
 
 ## Goal
 
-Rank every FBS and FCS team from worst to best using game results and raw score margins, with a process anyone can rerun and get the identical answer.
+Rank every FBS and FCS team from worst to best using game results, with a process anyone can rerun and get the identical answer.
 
 | Requirement | How it is met |
 |---|---|
 | Deterministic | No randomness anywhere. Fixed input order, fixed arithmetic order, fixed rounding. Same data in, same bytes out. |
 | Auditable | Raw game data, code and output are all in this repository. `npm run verify` and the site's **Recompute** button regenerate every published ranking and compare byte for byte. CI runs it on every change. |
 | Transparent | One short formula, one config file per season, and a per-team page that lists every game behind a rank. Git history shows when each result arrived or was corrected. |
-| Unbiased | No preseason ranking, no human votes, no home field, no conference or brand weight, no recency weighting. Every team starts equal and only game results and raw score margins move it. |
+| Unbiased | No preseason ranking, no human votes, no home field, no conference or brand weight, no recency weighting. Every team starts equal and only game results (and, for the Margin method, raw score margins) move it. |
 
 ## The graph
 
@@ -19,28 +19,35 @@ Rank every FBS and FCS team from worst to best using game results and raw score 
 - **Springs:** each completed game between two nodes is one spring between the two teams. Rematches and postseason games add more springs.
 - Games that involve a team outside `teams.csv` (for example Division II), games that are not completed, and games with equal scores are not counted. Each snapshot's manifest records how many rows were dropped for each reason.
 
-## The ranking: raw margin springs
+## The ranking: springs
 
-Every game is a spring between the two teams that wants the **winner above the loser by the raw winning score minus the losing score**. A 28-point win targets a 28-point height gap; a 1-point win targets a 1-point gap. There is no fixed rest length, clamping, cap, scaling or home-field adjustment. Each team's height is where all of its springs, and everyone else's, balance out:
-
-```
-H(s) = 1/2 * sum_games (s_w - s_l - margin)^2  +  1/2 * alpha * sum_i s_i^2
-```
-
-where `w` and `l` are each game's winner and loser and `margin` is the raw score difference. Every game adds one spring, including rematches. Setting the gradient to zero gives one linear system
+Every game is a spring between the two teams that wants the **winner above the loser by a target gap**. Each team's height is where all of its springs, and everyone else's, balance out:
 
 ```
-(L + alpha*I) s = winning_margins - losing_margins
+H(s) = 1/2 * sum_games (s_w - s_l - gap)^2  +  1/2 * alpha * sum_i s_i^2
 ```
 
-where `L` is the game-count graph Laplacian: each game adds 1 to both teams' diagonal entries and −1 to both entries connecting them. The right-hand side adds each raw margin to the winner and subtracts it from the loser. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
+where `w` and `l` are each game's winner and loser. Every game adds one spring with the same stiffness, including rematches. Two methods are published, and they differ only in `gap`:
 
-This is a least-squares fit of score margins over the game graph. Heights are in score points, centred around zero, and their differences fit the observed game margins.
+| Method | `gap` for each game | What it measures |
+|---|---|---|
+| **Wins** (`win`, the site default) | `restLength` (7) for every win | Only who won. A 1-point win and a 40-point win pull the same. |
+| **Margin** (`margin`) | winning score − losing score, uncapped | Results and how decisive they were. A 28-point win targets a 28-point gap. |
+
+There is no clamping, cap, scaling or home-field adjustment in either method. Setting the gradient to zero gives one linear system
+
+```
+(L + alpha*I) s = gaps_won - gaps_lost
+```
+
+where `L` is the game-count graph Laplacian: each game adds 1 to both teams' diagonal entries and −1 to both entries connecting them. The right-hand side adds each game's gap to the winner and subtracts it from the loser. For `alpha > 0` the matrix is symmetric positive definite, so there is exactly one solution. It is solved with a dense Cholesky decomposition (`src/engine/linalg.ts`) written with only `+ - * /` and `sqrt`, in a fixed loop order, which are exactly reproducible under IEEE-754. No iteration, no tuning.
+
+Under Margin this is a least-squares fit of score margins over the game graph, and heights are in score points. Under Wins, `restLength` only sets the scale: changing it multiplies every height by the same factor and leaves the order unchanged.
 
 How it behaves:
 
 - **Who you beat matters.** Beating a team that sits high pulls you higher; losing to a team that sits low drags you down. Strength of schedule comes from the graph, not a separate formula.
-- **Margins set each game's target gap.** A larger win asks for more separation between the teams. Every point of margin counts, including large blowouts.
+- **Wins:** the score is ignored. **Margin:** a larger win asks for more separation, and every point counts, including large blowouts.
 - **Head-to-head counts but is not absolute.** A win over a team is one spring. If both teams' other results point the other way, the springs can still settle the loser above the winner; the site marks those games as upsets.
 
 `alpha = 0.01` is a tiny equal pull toward zero. It exists so the system always has a unique solution, including early in the season when the graph is not yet connected.
@@ -53,13 +60,18 @@ How it behaves:
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "margin-springs-1",
   "alpha": 0.01,
-  "classifications": ["fbs", "fcs"]
+  "classifications": ["fbs", "fcs"],
+  "methods": {
+    "win": { "algorithmVersion": "win-springs-1", "restLength": 7 },
+    "margin": { "algorithmVersion": "margin-springs-1" }
+  }
 }
 ```
 
-Every ranking file's manifest records the engine version, `algorithmVersion` and `alpha` it was computed with.
+Each method listed under `methods` is computed and published separately to `data/rankings/<year>/<method>/`. Every ranking file's manifest records the engine version, `method`, that method's `algorithmVersion`, `alpha` and (for Wins) `restLength`.
+
+On the site, Wins is the default; `?method=margin` at the end of any link shows the Margin ranking, and the header toggle switches between them while keeping the current view, week and team.
 
 ### Rank, ties and unplayed teams
 
@@ -73,7 +85,7 @@ Every ranking file's manifest records the engine version, `algorithmVersion` and
 
 ## How it performs
 
-`npm run backtest -- --history 2015-2025` runs this exact model on ten past seasons (2020 skipped), using public season-complete schedules from the [sportsdataverse cfbfastR-data](https://github.com/sportsdataverse/cfbfastR-data) project (downloaded to a temp folder, never committed). It reports how often the final ranking puts the winner above the loser and how often rankings using only earlier games pick the next week's winner. `npm run backtest` uses the seasons currently in this repository.
+`npm run backtest -- --history 2015-2025` runs this exact model on ten past seasons (2020 skipped), using public season-complete schedules from the [sportsdataverse cfbfastR-data](https://github.com/sportsdataverse/cfbfastR-data) project (downloaded to a temp folder, never committed). It reports, for each method, how often the final ranking puts the winner above the loser and how often rankings using only earlier games pick the next week's winner. `npm run backtest` uses the seasons currently in this repository.
 
 ## Determinism rules
 
@@ -91,7 +103,7 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 ## Per-game quantities on a team page
 
 - **Gap** = this team's height − the opponent's height.
-- **Spring** = winner height − loser height − (winning score − losing score). Zero means that spring is at rest; negative means it is stretched and pulling the winner up and the loser down; positive means the height gap exceeds the raw score margin and it pulls them back together.
+- **Spring** = winner height − loser height − gap, where gap is 7 under Wins and the score margin under Margin. Zero means that spring is at rest; negative means it is stretched and pulling the winner up and the loser down; positive means the height gap exceeds the target and it pulls them back together.
 - **Upset** = the winner finished below the loser.
 
 ## Data pipeline
@@ -101,15 +113,16 @@ CollegeFootballData API --fetch--> data/seasons/<year>/{teams,games}.csv
                                          |
                            compute (src/engine, deterministic)
                                          v
-                           data/rankings/<year>/<snapshot>.json  +  data/index.json
+                           data/rankings/<year>/<method>/<snapshot>.json  +  data/index.json
 ```
 
 The API is only a source of raw scores and team ids. `npm run fetch` normalises it to CSV sorted by id and the result is committed, so the git diff of each weekly update shows exactly which games were added or corrected. Anyone who distrusts the source can check the CSV against any other record of the scores; nothing downstream depends on trust.
 
 ## Known limitations (stated openly)
 
-- **Running up the score matters.** A 50-point win targets a 50-point height gap, while a 1-point win targets a 1-point gap. Raw margins are deliberately uncapped.
-- **Beating a much weaker team can lower you.** If the winner's height gap already exceeds the winning score margin, that game's spring pulls it back down a little. A bye adds no spring, so it is neutral, but a team can still move during a bye as its past opponents' results change.
+- **Wins ignores how close a game was.** A 1-point win counts the same as a 50-point win.
+- **Margin rewards running up the score.** A 50-point win targets a 50-point height gap, while a 1-point win targets a 1-point gap. Raw margins are deliberately uncapped.
+- **Beating a much weaker team can lower you** (both methods). If the winner's height gap already exceeds the game's target gap, that game's spring pulls it back down a little. A bye adds no spring, so it is neutral, but a team can still move during a bye as its past opponents' results change.
 - **Cycles.** When A beat B, B beat C and C beat A, no order can respect every result; the springs find the order that strains them least.
 - **Early season.** With one or two games per team, many teams are nearly tied, and undefeated teams with weak schedules can sit low until they play someone. Groups of teams not yet linked by a chain of games are not comparable.
 - **Schedule size.** With about 12 games per team, ranks a few places apart are not meaningfully different. The height column shows how close teams are.

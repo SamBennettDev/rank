@@ -1,5 +1,5 @@
 import { parseCsvObjects, toCsv } from "./csv";
-import type { Game, SeasonConfig, Team } from "./types";
+import { METHODS, type Game, type Method, type SeasonConfig, type Team } from "./types";
 
 export const TEAM_COLUMNS = ["id", "school", "abbreviation", "conference", "classification", "color"];
 export const GAME_COLUMNS = [
@@ -52,10 +52,19 @@ export function gamesToCsv(games: Game[]): string {
 
 export function parseConfig(json: string): SeasonConfig {
   const c = JSON.parse(json) as SeasonConfig;
-  if (typeof c.algorithmVersion !== "string" || c.algorithmVersion === "") throw new Error("config.algorithmVersion must be set");
   if (typeof c.alpha !== "number" || !(c.alpha > 0)) throw new Error("config.alpha must be a positive number");
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
+  }
+  const methods = Object.keys(c.methods ?? {});
+  if (methods.length === 0) throw new Error("config.methods must list at least one method");
+  for (const name of methods) {
+    if (!METHODS.includes(name as Method)) throw new Error(`config.methods.${name}: unknown method (use ${METHODS.join(" or ")})`);
+    const m = c.methods[name as Method]!;
+    if (typeof m.algorithmVersion !== "string" || m.algorithmVersion === "") throw new Error(`config.methods.${name}.algorithmVersion must be set`);
+    if (m.restLength !== undefined && !(typeof m.restLength === "number" && m.restLength > 0)) {
+      throw new Error(`config.methods.${name}.restLength must be a positive number`);
+    }
   }
   return c;
 }

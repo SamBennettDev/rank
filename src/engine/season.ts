@@ -2,10 +2,10 @@ import { parseConfig, parseGames, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
 import { springRank } from "./springrank";
-import type { Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
+import { METHODS, type Manifest, type RankedTeam, type Ranking, type SeasonIndexEntry } from "./types";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-2";
+export const ENGINE_VERSION = "rank-engine-3";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -36,61 +36,69 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
   const index = new Map(teams.map((t, i) => [t.id, i]));
   const files: SeasonOutput["files"] = [];
   const snapshots = listSnapshots(games);
-  let previous = new Map<number, number>();
+  const methods = METHODS.filter((m) => config.methods[m]);
 
-  for (const snap of snapshots) {
-    const { edges, counts } = buildEdges(games, teams, snap);
-    const wins = new Map<number, number>();
-    const losses = new Map<number, number>();
-    for (const e of edges) {
-      wins.set(e.winner, (wins.get(e.winner) ?? 0) + 1);
-      losses.set(e.loser, (losses.get(e.loser) ?? 0) + 1);
-    }
-    const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
+  for (const method of methods) {
+    const mc = config.methods[method]!;
+    const restLength = mc.restLength ?? 1;
+    let previous = new Map<number, number>();
 
-    const s = springRank(
-      teams.length,
-      edges.map((e) => ({
-        winner: index.get(e.winner)!,
-        loser: index.get(e.loser)!,
-        margin: e.winnerPoints - e.loserPoints,
-      })),
-      config.alpha,
-    );
-    const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
-    const sortedHeights = [...heights.values()].sort((a, b) => b - a);
+    for (const snap of snapshots) {
+      const { edges, counts } = buildEdges(games, teams, snap);
+      const wins = new Map<number, number>();
+      const losses = new Map<number, number>();
+      for (const e of edges) {
+        wins.set(e.winner, (wins.get(e.winner) ?? 0) + 1);
+        losses.set(e.loser, (losses.get(e.loser) ?? 0) + 1);
+      }
+      const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
-    const ranked: RankedTeam[] = teams.map((t) => {
-      const height = heights.get(t.id) ?? null;
-      const rank = height === null ? null : sortedHeights.findIndex((h) => h === height) + 1;
-      const prev = previous.get(t.id);
-      return {
-        id: t.id,
-        school: t.school,
-        abbreviation: t.abbreviation,
-        conference: t.conference,
-        classification: t.classification,
-        rank,
-        tied: height !== null && sortedHeights.filter((h) => h === height).length > 1,
-        height,
-        wins: wins.get(t.id) ?? 0,
-        losses: losses.get(t.id) ?? 0,
-        change: rank !== null && prev !== undefined ? prev - rank : null,
+      const s = springRank(
+        teams.length,
+        edges.map((e) => ({
+          winner: index.get(e.winner)!,
+          loser: index.get(e.loser)!,
+          gap: method === "win" ? restLength : e.winnerPoints - e.loserPoints,
+        })),
+        config.alpha,
+      );
+      const heights = new Map(played.map((t) => [t.id, round6(s[index.get(t.id)!]!)]));
+      const sortedHeights = [...heights.values()].sort((a, b) => b - a);
+
+      const ranked: RankedTeam[] = teams.map((t) => {
+        const height = heights.get(t.id) ?? null;
+        const rank = height === null ? null : sortedHeights.findIndex((h) => h === height) + 1;
+        const prev = previous.get(t.id);
+        return {
+          id: t.id,
+          school: t.school,
+          abbreviation: t.abbreviation,
+          conference: t.conference,
+          classification: t.classification,
+          rank,
+          tied: height !== null && sortedHeights.filter((h) => h === height).length > 1,
+          height,
+          wins: wins.get(t.id) ?? 0,
+          losses: losses.get(t.id) ?? 0,
+          change: rank !== null && prev !== undefined ? prev - rank : null,
+        };
+      });
+      ranked.sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id);
+      previous = new Map(ranked.filter((t) => t.rank !== null).map((t) => [t.id, t.rank!]));
+
+      const manifest: Manifest = {
+        engine: ENGINE_VERSION,
+        method,
+        algorithmVersion: mc.algorithmVersion,
+        alpha: config.alpha,
+        ...(method === "win" ? { restLength } : {}),
+        classifications: config.classifications,
+        teamsSha256,
+        gamesSha256,
+        counts,
       };
-    });
-    ranked.sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id);
-    previous = new Map(ranked.filter((t) => t.rank !== null).map((t) => [t.id, t.rank!]));
-
-    const manifest: Manifest = {
-      engine: ENGINE_VERSION,
-      algorithmVersion: config.algorithmVersion,
-      alpha: config.alpha,
-      classifications: config.classifications,
-      teamsSha256,
-      gamesSha256,
-      counts,
-    };
-    files.push({ id: snap.id, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, teams: ranked }) });
+      files.push({ id: `${method}/${snap.id}`, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, teams: ranked }) });
+    }
   }
 
   return {
@@ -100,6 +108,7 @@ export async function computeSeason(input: SeasonInput): Promise<SeasonOutput> {
       label: config.label,
       demo: config.demo,
       snapshots: snapshots.map((s) => ({ id: s.id, label: s.label })),
+      methods,
     },
   };
 }

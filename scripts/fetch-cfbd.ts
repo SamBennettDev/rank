@@ -45,9 +45,12 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "margin-springs-1",
   alpha: 0.01,
   classifications: ["fbs", "fcs"],
+  methods: {
+    win: { algorithmVersion: "win-springs-1", restLength: 7 },
+    margin: { algorithmVersion: "margin-springs-1" },
+  },
 };
 mkdirSync(dir, { recursive: true });
 if (existsSync(configPath)) Object.assign(config, JSON.parse(readFileSync(configPath, "utf8")));

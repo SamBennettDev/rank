@@ -178,7 +178,9 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-          h("p", {}, "Every game's spring pulls the winner above the loser by the raw score difference. Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+          h("p", {}, ctx.method === "win"
+            ? `Every game is an equal spring pulling the winner ${ctx.ranking.manifest.restLength ?? 1} points above the loser; the score does not matter. Where`
+            : "Every game's spring pulls the winner above the loser by the raw score difference. Where all the springs balance is each team’s height, and height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),

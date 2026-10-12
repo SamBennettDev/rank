@@ -1,11 +1,11 @@
 import { h } from "./dom";
-import { type Ctx, type View, href, makeCtx } from "./ctx";
+import { type Ctx, type View, METHOD_HINT, METHOD_LABEL, href, makeCtx, setMethod } from "./ctx";
 import { loadGames, loadIndex, loadRanking, loadTeams } from "./store";
 import { aboutView } from "./views/about";
 import { graphView } from "./views/graph";
 import { listView } from "./views/list";
 import { teamView } from "./views/team";
-import type { SeasonIndexEntry } from "../src/engine/types";
+import type { Method, SeasonIndexEntry } from "../src/engine/types";
 
 const app = document.getElementById("app")!;
 const nav = document.getElementById("nav")!;
@@ -48,8 +48,20 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
   };
   const weekSel = h("select", { "aria-label": "Week", onchange: (e: Event) => go(s, (e.target as HTMLSelectElement).value) },
     ...[...ctx.entry.snapshots].reverse().map((x) => h("option", { value: x.id, selected: x.id === ctx.snapId }, x.label)));
+  // Win / Margin toggle: keeps the page, week and team.
+  const methods = ctx.entry.methods;
+  const methodToggle = methods.length > 1
+    ? h("div", { class: "seg method", role: "group", "aria-label": "Ranking method" },
+        ...methods.map((m) => h("a", {
+          href: href(s, ctx.snapId, view, view === "team" ? teamId : undefined, m),
+          class: m === ctx.method ? "on" : "",
+          "aria-current": m === ctx.method ? "true" : false,
+          title: METHOD_HINT[m],
+        }, METHOD_LABEL[m])))
+    : "";
   picker.replaceChildren(
-    seasons.length > 1 ? h("div", { class: "sel" }, seasonSel) : h("span", { class: "season-tag" }, s),
+    methodToggle,
+    seasons.length > 1 ? h("div", { class: "sel season" }, seasonSel) : h("span", { class: "season-tag" }, s),
     h("div", { class: "weekpick" }, step(-1), h("div", { class: "sel" }, weekSel), step(1)),
   );
 }
@@ -57,7 +69,9 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
 async function route() {
   try {
     if (seasons.length === 0) seasons = await loadIndex();
-    const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+    const [path = "", query = ""] = location.hash.replace(/^#\/?/, "").split("?");
+    const parts = path.split("/").filter(Boolean);
+    const wanted = new URLSearchParams(query).get("method");
     const [season, snapId] = parts;
     let view = (parts[2] ?? "list") as View;
 
@@ -74,8 +88,11 @@ async function route() {
     if (!["list", "graph", "team", "about"].includes(view)) view = "list";
     const teamId = view === "team" ? Number(parts[3]) : undefined;
 
-    const [ranking, games, teams] = await Promise.all([loadRanking(season, snapId), loadGames(season), loadTeams(season)]);
-    const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
+    // Win is the default; fall back to whatever the season publishes.
+    const method: Method = entry.methods.includes(wanted as Method) ? (wanted as Method) : entry.methods.includes("win") ? "win" : entry.methods[0]!;
+    setMethod(method);
+    const [ranking, games, teams] = await Promise.all([loadRanking(season, snapId, method), loadGames(season), loadTeams(season)]);
+    const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams, method });
     renderChrome(ctx, view, teamId);
 
     cleanup?.();

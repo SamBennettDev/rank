@@ -23,17 +23,34 @@ export interface Game {
   awayPoints: number | null;
 }
 
+/**
+ * How a game's spring sets its target gap (winner height − loser height):
+ * "win"    every win targets the same fixed gap (restLength), so only who won matters;
+ * "margin" each game targets its raw score difference.
+ */
+export type Method = "win" | "margin";
+
+/** Fixed publishing order; the site shows the first published method by default. */
+export const METHODS: readonly Method[] = ["win", "margin"];
+
+export interface MethodConfig {
+  /** Identifier of this method's math. Bump it when the math changes. */
+  algorithmVersion: string;
+  /** "win" only: the gap every win targets (default 1). Scales every height, never the order. */
+  restLength?: number;
+}
+
 export interface SeasonConfig {
   /** Display name, e.g. "2026 season". */
   label: string;
   /** True for the fictional fixture season. */
   demo: boolean;
-  /** Identifier of the ranking method. Bump it when the math changes. */
-  algorithmVersion: string;
   /** Weak pull toward zero applied equally to every team; makes the answer unique. */
   alpha: number;
   /** Classifications in scope, matched against teams.csv. */
   classifications: string[];
+  /** The ranking methods to publish. Each is written to rankings/<season>/<method>/. */
+  methods: Partial<Record<Method, MethodConfig>>;
 }
 
 /** One game that counts: an edge from loser to winner. */
@@ -91,8 +108,11 @@ export interface RankedTeam {
 
 export interface Manifest {
   engine: string;
+  method: Method;
   algorithmVersion: string;
   alpha: number;
+  /** "win" only. */
+  restLength?: number;
   classifications: string[];
   teamsSha256: string;
   gamesSha256: string;
@@ -112,4 +132,6 @@ export interface SeasonIndexEntry {
   label: string;
   demo: boolean;
   snapshots: { id: string; label: string }[];
+  /** Published methods, in METHODS order. */
+  methods: Method[];
 }

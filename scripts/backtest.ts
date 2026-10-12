@@ -1,6 +1,6 @@
 /**
- * Backtest the ranking on past seasons: how well does it (a) agree with the
- * season's results and (b) pick next week's winners? Runs the real engine.
+ * Backtest both ranking methods on past seasons: how well does each (a) agree
+ * with the season's results and (b) pick next week's winners? Uses the engine's solver.
  *
  *   npm run backtest                      # seasons in data/seasons
  *   npm run backtest -- --history 2015-2025
@@ -21,20 +21,23 @@ import { join } from "node:path";
 import { parseCsvObjects } from "../src/engine/csv";
 import { parseGames, parseTeams } from "../src/engine/data";
 import { springRank } from "../src/engine/springrank";
+import { METHODS, type Method } from "../src/engine/types";
 import { DATA_DIR } from "./lib";
 
 interface BtGame { id: number; order: number; home: number; away: number; hp: number; ap: number; neutral: boolean }
 
 // ---------------------------------------------------------------- model
 const ALPHA = 0.01;
+const WIN_REST_LENGTH = 7;
 
-function rate(games: BtGame[]): Map<number, number> {
+/** Heights for one method: win springs target a fixed gap, margin springs the raw score difference. */
+function rate(games: BtGame[], method: Method): Map<number, number> {
   const ids = [...new Set(games.flatMap((g) => [g.home, g.away]))].sort((a, b) => a - b);
   const index = new Map(ids.map((id, i) => [id, i]));
   const beats = games.map((g) => ({
     winner: index.get(g.hp > g.ap ? g.home : g.away)!,
     loser: index.get(g.hp > g.ap ? g.away : g.home)!,
-    margin: Math.abs(g.hp - g.ap),
+    gap: method === "win" ? WIN_REST_LENGTH : Math.abs(g.hp - g.ap),
   }));
   const s = springRank(ids.length, beats, ALPHA);
   return new Map(ids.map((id, i) => [id, s[i]!]));
@@ -88,29 +91,30 @@ async function fromHistory(range: string): Promise<Map<string, BtGame[]>> {
 const args = process.argv.slice(2);
 const hi = args.indexOf("--history");
 const seasons = hi >= 0 ? await fromHistory(args[hi + 1] ?? "2015-2025") : fromRepo();
-let right = 0, predicted = 0, agree = 0, games = 0;
-
-for (const [season, list] of seasons) {
-  const weeks = [...new Set(list.map((g) => g.order))].sort((x, z) => x - z).filter((w) => w >= 4);
-  for (const w of weeks) {
-    const s = rate(list.filter((g) => g.order < w));
-    for (const g of list.filter((x) => x.order === w)) {
-      if (!s.has(g.home) || !s.has(g.away)) continue;
-      predicted++;
-      const gap = s.get(g.home)! - s.get(g.away)!;
-      if (gap !== 0 && gap > 0 === g.hp > g.ap) right++;
-    }
-  }
-  const s = rate(list);
-  for (const g of list) {
-    games++;
-    const gap = s.get(g.home)! - s.get(g.away)!;
-    if (gap !== 0 && gap > 0 === g.hp > g.ap) agree++;
-  }
-  process.stderr.write(`  ${season}: ${list.length} games\n`);
-}
-
 const pct = (a: number, b: number) => (b ? `${((100 * a) / b).toFixed(1)}%` : "—");
 console.log(`\nSeasons: ${[...seasons.keys()].join(", ")}`);
-console.log(`Final ranking agrees with results: ${pct(agree, games)} of ${games} games`);
-console.log(`Picks next week's winner:          ${pct(right, predicted)} of ${predicted} games`);
+
+for (const method of METHODS) {
+  let right = 0, predicted = 0, agree = 0, games = 0;
+  for (const list of seasons.values()) {
+    const weeks = [...new Set(list.map((g) => g.order))].sort((x, z) => x - z).filter((w) => w >= 4);
+    for (const w of weeks) {
+      const s = rate(list.filter((g) => g.order < w), method);
+      for (const g of list.filter((x) => x.order === w)) {
+        if (!s.has(g.home) || !s.has(g.away)) continue;
+        predicted++;
+        const gap = s.get(g.home)! - s.get(g.away)!;
+        if (gap !== 0 && gap > 0 === g.hp > g.ap) right++;
+      }
+    }
+    const s = rate(list, method);
+    for (const g of list) {
+      games++;
+      const gap = s.get(g.home)! - s.get(g.away)!;
+      if (gap !== 0 && gap > 0 === g.hp > g.ap) agree++;
+    }
+  }
+  console.log(`\n${method}:`);
+  console.log(`  Final ranking agrees with results: ${pct(agree, games)} of ${games} games`);
+  console.log(`  Picks next week's winner:          ${pct(right, predicted)} of ${predicted} games`);
+}

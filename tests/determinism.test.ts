@@ -40,7 +40,7 @@ describe("determinism", () => {
       gamesCsv,
       configJson: JSON.stringify({ ...JSON.parse(input.configJson), alpha: 2 }),
     });
-    const teams = JSON.parse(out.files[0]!.json).teams;
+    const teams = JSON.parse(out.files.find((f) => f.id === "margin/week-01")!.json).teams;
     const home = teams.find((t: { id: number }) => t.id === base.homeId);
     const away = teams.find((t: { id: number }) => t.id === base.awayId);
     expect(away.rank).toBe(1);
@@ -51,17 +51,48 @@ describe("determinism", () => {
 
 });
 
-describe("config", () => {
-  it("records the model settings in every manifest", async () => {
-    const m = JSON.parse((await computeSeason(input)).files.at(-1)!.json).manifest;
-    expect([m.engine, m.algorithmVersion, m.alpha]).toEqual(["rank-engine-2", "margin-springs-1", 0.01]);
-    expect(m).not.toHaveProperty("restLength");
+describe("methods", () => {
+  it("publishes win and margin rankings for every snapshot, win first", async () => {
+    const out = await computeSeason(input);
+    const ids = out.files.map((f) => f.id);
+    const weeks = out.index.snapshots.map((s) => s.id);
+    expect(ids).toEqual([...weeks.map((w) => `win/${w}`), ...weeks.map((w) => `margin/${w}`)]);
+    expect(out.index.methods).toEqual(["win", "margin"]);
+  });
+
+  it("records each method's settings in its manifests", async () => {
+    const out = await computeSeason(input);
+    const win = JSON.parse(out.files.find((f) => f.id.startsWith("win/"))!.json).manifest;
+    const margin = JSON.parse(out.files.find((f) => f.id.startsWith("margin/"))!.json).manifest;
+    expect([win.engine, win.method, win.algorithmVersion, win.alpha, win.restLength]).toEqual(["rank-engine-3", "win", "win-springs-1", 0.01, 7]);
+    expect([margin.method, margin.algorithmVersion]).toEqual(["margin", "margin-springs-1"]);
+    expect(margin).not.toHaveProperty("restLength");
+  });
+
+  it("win springs ignore the score: only who won changes the ranking", async () => {
+    const games = parseGames(input.gamesCsv);
+    const blowouts = gamesToCsv(games.map((g) => (g.homePoints! > g.awayPoints! ? { ...g, homePoints: g.awayPoints! + 40 } : { ...g, awayPoints: g.homePoints! + 40 })));
+    const a = await computeSeason(input);
+    const b = await computeSeason({ ...input, gamesCsv: blowouts });
+    const teamsOf = (out: typeof a) => out.files.filter((f) => f.id.startsWith("win/")).map((f) => JSON.parse(f.json).teams);
+    expect(teamsOf(b)).toEqual(teamsOf(a));
+  });
+
+  it("publishes only the configured methods", async () => {
+    const cfg = JSON.parse(input.configJson);
+    const out = await computeSeason({ ...input, configJson: JSON.stringify({ ...cfg, methods: { win: cfg.methods.win } }) });
+    expect(out.files.every((f) => f.id.startsWith("win/"))).toBe(true);
+    expect(out.index.methods).toEqual(["win"]);
   });
 
   it("rejects invalid settings", async () => {
-    const bad = (patch: object) => computeSeason({ ...input, configJson: JSON.stringify({ ...JSON.parse(input.configJson), ...patch }) });
+    const cfg = JSON.parse(input.configJson);
+    const bad = (patch: object) => computeSeason({ ...input, configJson: JSON.stringify({ ...cfg, ...patch }) });
     await expect(bad({ alpha: 0 })).rejects.toThrow(/alpha/);
     await expect(bad({ classifications: [] })).rejects.toThrow(/classifications/);
+    await expect(bad({ methods: {} })).rejects.toThrow(/methods/);
+    await expect(bad({ methods: { points: { algorithmVersion: "x" } } })).rejects.toThrow(/unknown method/);
+    await expect(bad({ methods: { win: { algorithmVersion: "x", restLength: 0 } } })).rejects.toThrow(/restLength/);
   });
 });
 

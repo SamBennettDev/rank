@@ -1,13 +1,15 @@
 import { computeSeason } from "../../src/engine/season";
-import type { Ctx } from "../ctx";
+import { type Ctx, METHOD_LABEL } from "../ctx";
 import { h, svg } from "../dom";
 import { pillarIcons } from "../icons";
-import { fetchText, seasonFiles } from "../store";
+import { fetchText, rankingPath, seasonFiles } from "../store";
 
 export function aboutView(ctx: Ctx): HTMLElement {
   const m = ctx.ranking.manifest;
   const season = ctx.entry.season;
   const files = seasonFiles(season);
+  const win = ctx.method === "win";
+  const rest = m.restLength ?? 1;
 
   const result = h("div");
   const button = h("button", { class: "btn primary", onclick: async () => {
@@ -27,7 +29,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       const ms = Math.round(performance.now() - t0);
       if (bad.length === 0) {
         result.className = "result ok";
-        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} snapshots from the raw data in ${ms} ms and produced the published files byte for byte.`));
+        result.replaceChildren(h("b", {}, "✓"), h("span", {}, `Exact match. Your browser rebuilt all ${out.files.length} ${season} ranking files (${ctx.entry.snapshots.length} snapshots × ${ctx.entry.methods.length} methods) from the raw data in ${ms} ms and produced the published files byte for byte.`));
       } else {
         result.className = "result bad";
         result.replaceChildren(h("b", {}, "✗"), h("span", {}, `Mismatch in ${bad.join(", ")}. The published rankings do not follow from the published data. Please open an issue.`));
@@ -42,8 +44,8 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const pillar = (icon: SVGSVGElement, title: string, text: string) => h("div", { class: "pillar" }, h("div", { class: "ic" }, icon), h("b", {}, title), h("p", {}, text));
   const file = (path: string) => h("a", { href: `./data/${path}`, target: "_blank", rel: "noopener" }, path.split("/").slice(-2).join("/"));
   const rows: [string, string][] = [
-    ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
-    ["Each game's target gap", "Winner score − loser score (uncapped)"],
+    ["Engine", m.engine], ["Method", METHOD_LABEL[m.method]], ["Algorithm", m.algorithmVersion],
+    ["Each game's target gap", win ? `${rest} points for every win` : "Winner score − loser score (uncapped)"],
     ["α (alpha)", String(m.alpha)], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
     ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
   ];
@@ -57,23 +59,30 @@ export function aboutView(ctx: Ctx): HTMLElement {
       pillar(pillarIcons.deterministic(), "Deterministic", "Same games in, identical bytes out. No randomness, no tuning, no judgement calls."),
       pillar(pillarIcons.auditable(), "Auditable", "Every input, line of code and published result is public. Check any week yourself below."),
       pillar(pillarIcons.transparent(), "Transparent", "One short formula and one config file. Every team page shows the exact games behind its rank."),
-      pillar(pillarIcons.unbiased(), "Unbiased", "No preseason poll, brand, conference or home field. Only game results and raw score margins.")),
+      pillar(pillarIcons.unbiased(), "Unbiased", `No preseason poll, brand, conference or home field. Only ${win ? "who won each game" : "game results and raw score margins"}.`)),
 
     h("h2", {}, "The idea: springs"),
     h("div", { class: "springdemo" }, springDemo(),
-      h("p", {}, "Teams that played are connected by springs. Each spring wants the ", h("b", {}, "winner above the loser by the raw score difference"), ". A 28-point win targets a 28-point gap; a 1-point win targets a 1-point gap. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
-    h("p", {}, "The resting heights are the ones that put the least total strain on all the springs, fitting the raw score margins across the game graph:"),
-    h("pre", { class: "formula" }, "H(s) = ½ · Σ games (s[w] − s[l] − margin)²  +  ½ · α · Σ s[i]²\n\n",
-      h("span", { class: "c" }, "w, l     winner and loser of each game\nmargin   winning score − losing score, with no cap or scaling\ns[i]     height of team i  (the y-axis of the graph, in score points)\nα        tiny equal pull toward 0, so there is always one exact answer")),
+      win
+        ? h("p", {}, "Teams that played are connected by springs. Every spring is equal and wants the ", h("b", {}, `winner ${rest} points above the loser`), ". A 1-point win and a 40-point win pull exactly the same. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")
+        : h("p", {}, "Teams that played are connected by springs. Each spring wants the ", h("b", {}, "winner above the loser by the raw score difference"), ". A 28-point win targets a 28-point gap; a 1-point win targets a 1-point gap. Let all the springs settle at once and each team comes to rest at its height. That height is the ranking.")),
+    h("p", {}, `The resting heights are the ones that put the least total strain on all the springs${win ? "" : ", fitting the raw score margins across the game graph"}:`),
+    h("pre", { class: "formula" }, `H(s) = ½ · Σ games (s[w] − s[l] − ${win ? rest : "margin"})²  +  ½ · α · Σ s[i]²\n\n`,
+      h("span", { class: "c" }, win
+        ? `w, l     winner and loser of each game\n${rest}        the same target gap for every win, whatever the score\ns[i]     height of team i  (the y-axis of the graph)\nα        tiny equal pull toward 0, so there is always one exact answer`
+        : "w, l     winner and loser of each game\nmargin   winning score − losing score, with no cap or scaling\ns[i]     height of team i  (the y-axis of the graph, in score points)\nα        tiny equal pull toward 0, so there is always one exact answer")),
     h("p", {}, "Minimising that gives a single system of linear equations, solved exactly with a Cholesky decomposition. No iterations to converge, no random starts. Same input, same answer, on any computer."),
 
-    h("h2", {}, "Raw winning margins"),
-    h("p", {}, "Each spring’s target gap is simply the winner’s score minus the loser’s score. There is no fixed rest length, clamping, cap, scaling or home-field adjustment. Every point of margin counts in where the teams settle."),
+    h("h2", {}, "Two methods"),
+    h("p", {}, "The toggle in the header switches between two published rankings built from the same games. Both are verified below."),
+    h("ul", {},
+      h("li", {}, h("b", {}, "Wins (default). "), `Every win is an equal spring with a ${rest}-point target gap. Only who won matters, so running up the score earns nothing.`),
+      h("li", {}, h("b", {}, "Margin. "), "Each spring’s target gap is the winner’s score minus the loser’s score, with no cap, scaling or home-field adjustment. Every point of margin counts.")),
 
     h("h2", {}, "What counts"),
     h("ul", {},
       h("li", {}, h("b", {}, "Who won each completed game"), " between two FBS or FCS teams. Regular season and postseason."),
-      h("li", {}, h("b", {}, "Every margin counts in full."), " Home field, brand, conference, preseason polls and opinions are ignored."),
+      h("li", {}, h("b", {}, win ? "The score is ignored;" : "Every margin counts in full."), win ? " only the result counts. Home field" : " Home field, brand, conference, preseason polls and opinions are ignored."),
       h("li", {}, "Games against teams outside FBS/FCS are left out, and the count is published below."),
       h("li", {}, "A team with no counted games is ", h("b", {}, "unranked"), " rather than guessed."),
       h("li", {}, "Equal heights share a rank (shown T-n). Ties are never broken by name or reputation."),
@@ -89,15 +98,15 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h("h2", {}, "Check it yourself"),
     h("div", { class: "verify" },
       h("h3", {}, "Don’t trust us. Recompute it."),
-      h("p", { class: "muted" }, `This downloads the exact CSV files the ${season} rankings were built from, runs the same engine in your browser, and compares the result with every published file.`),
+      h("p", { class: "muted" }, `This downloads the exact CSV files the ${season} rankings were built from, runs the same engine in your browser, and compares the result with every published file for both methods.`),
       button, result),
 
-    h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}, ${season}`),
+    h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}, ${season} (${METHOD_LABEL[m.method]})`),
     h("table", { class: "mf" }, h("tbody", {},
       ...rows.map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
       h("tr", {}, h("th", {}, "teams.csv SHA-256"), h("td", {}, h("code", {}, m.teamsSha256))),
       h("tr", {}, h("th", {}, "games.csv SHA-256"), h("td", {}, h("code", {}, m.gamesSha256))))),
-    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson), file(`rankings/${season}/${ctx.snapId}.json`),
+    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson), file(rankingPath(season, ctx.snapId, ctx.method)),
       h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/METHODOLOGY.md", target: "_blank", rel: "noopener" }, "METHODOLOGY.md ↗")),
   );
 }
