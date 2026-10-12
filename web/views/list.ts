@@ -2,7 +2,7 @@ import type { RankedTeam } from "../../src/engine/types";
 import { delta, divTag } from "../bits";
 import { type Ctx, fmtHeight, rankLabel, record, teamHref } from "../ctx";
 import { h } from "../dom";
-import { searchIcon } from "../icons";
+import { filterIcon, searchIcon } from "../icons";
 import { logo, teamVars } from "../team";
 
 export function listView(ctx: Ctx): HTMLElement {
@@ -69,26 +69,64 @@ export function listView(ctx: Ctx): HTMLElement {
     if (rows.length === 0) rows.push(h("div", { class: "noresults" }, "No teams match."));
     const extra = unranked.filter(match);
     body.replaceChildren(...rows, extra.length ? h("div", { class: "unranked-note" }, `Not yet ranked (no counted games): ${extra.map((t) => t.school).join(", ")}`) : "");
-    count.textContent = `${list.length} of ${ranked.length} teams`;
+    count.textContent = list.length === ranked.length ? `${ranked.length} teams` : `${list.length} of ${ranked.length}`;
   };
 
   const segOf = <T extends string>(opts: [string, T][], get: () => T, set: (v: T) => void) => {
     const el = h("div", { class: "seg", role: "group" });
-    const draw = () => el.replaceChildren(...opts.map(([label, v]) => h("button", { class: get() === v ? "on" : "", "aria-pressed": get() === v, onclick: () => { set(v); draw(); render(); } }, label)));
+    const draw = () => el.replaceChildren(...opts.map(([label, v]) => h("button", { class: get() === v ? "on" : "", "aria-pressed": get() === v, onclick: () => { set(v); draw(); update(); } }, label)));
     draw();
-    return el;
+    return { el, draw };
   };
   const conferences = [...new Set(ranked.map((t) => t.conference))].sort();
+  const divSeg = segOf<"all" | "fbs" | "fcs">([["All", "all"], ["FBS", "fbs"], ["FCS", "fcs"]], () => division, (v) => { division = v; fillConferences(); });
+  const orderSeg = segOf<"best" | "worst">([["Best → worst", "best"], ["Worst → best", "worst"]], () => (worstFirst ? "worst" : "best"), (v) => (worstFirst = v === "worst"));
+  const confSel = h("select", { "aria-label": "Conference", onchange: (e: Event) => { conference = (e.target as HTMLSelectElement).value; update(); } });
+  // Only offer conferences in the chosen division; drop a selection that no longer applies.
+  const fillConferences = () => {
+    const pool = conferences.filter((c) => division === "all" || ranked.some((t) => t.conference === c && t.classification === division));
+    if (!pool.includes(conference)) conference = "";
+    confSel.replaceChildren(h("option", { value: "" }, "All conferences"), ...pool.map((c) => h("option", { value: c, selected: c === conference }, c)));
+    confSel.value = conference;
+  };
+  fillConferences();
+
+  // Filters live in a popover behind one icon button; a badge counts the non-default settings.
+  const badge = h("span", { class: "badge" });
+  const filterBtn = h("button", { class: "fbtn", type: "button", "aria-label": "Filters", title: "Filters", "aria-haspopup": "dialog", "aria-expanded": "false", onclick: (e: Event) => { e.stopPropagation(); setOpen(!filterBtn.classList.contains("open")); } }, filterIcon(), badge);
+  const reset = h("button", { class: "freset", type: "button", onclick: () => {
+    division = "all"; conference = ""; worstFirst = false; fillConferences(); divSeg.draw(); orderSeg.draw(); update();
+  } }, "Reset");
+  const panel = h("div", { class: "fpanel", role: "dialog", "aria-label": "Filters", hidden: true, onclick: (e: Event) => e.stopPropagation() },
+    h("div", { class: "fsec" }, h("div", { class: "flabel" }, "Division"), divSeg.el),
+    h("div", { class: "fsec" }, h("div", { class: "flabel" }, "Conference"), h("div", { class: "sel" }, confSel)),
+    h("div", { class: "fsec" }, h("div", { class: "flabel" }, "Order"), orderSeg.el),
+    h("div", { class: "ffoot" }, reset, h("button", { class: "btn primary fdone", type: "button", onclick: () => setOpen(false) }, "Done")));
+  const setOpen = (open: boolean) => {
+    panel.hidden = !open;
+    filterBtn.setAttribute("aria-expanded", String(open));
+    filterBtn.classList.toggle("open", open);
+  };
+  const close = (e: Event) => {
+    if (!panel.isConnected) return document.removeEventListener("click", close), document.removeEventListener("keydown", close);
+    if (e.type === "click" || (e as KeyboardEvent).key === "Escape") setOpen(false);
+  };
+  document.addEventListener("click", close);
+  document.addEventListener("keydown", close);
+  const update = () => {
+    const n = Number(division !== "all") + Number(conference !== "") + Number(worstFirst);
+    badge.textContent = n ? String(n) : "";
+    filterBtn.classList.toggle("active", n > 0);
+    reset.disabled = n === 0;
+    render();
+  };
+
   const toolbar = h("div", { class: "toolbar" },
-    h("label", { class: "search" }, searchIcon(), h("input", { type: "search", placeholder: "Find a team", "aria-label": "Find a team", oninput: (e: Event) => { query = (e.target as HTMLInputElement).value.trim().toLowerCase(); render(); } })),
-    segOf<"all" | "fbs" | "fcs">([["All", "all"], ["FBS", "fbs"], ["FCS", "fcs"]], () => division, (v) => (division = v)),
-    h("div", { class: "sel" }, h("select", { "aria-label": "Conference", onchange: (e: Event) => { conference = (e.target as HTMLSelectElement).value; render(); } },
-      h("option", { value: "" }, "All conferences"), ...conferences.map((c) => h("option", { value: c }, c)))),
-    segOf<"best" | "worst">([["Best → worst", "best"], ["Worst → best", "worst"]], () => (worstFirst ? "worst" : "best"), (v) => (worstFirst = v === "worst")),
-    count,
+    h("label", { class: "search" }, searchIcon(), h("input", { type: "search", placeholder: "Find a team", "aria-label": "Find a team", oninput: (e: Event) => { query = (e.target as HTMLInputElement).value.trim().toLowerCase(); render(); } }), count),
+    h("div", { class: "filter" }, filterBtn, panel),
   );
 
-  render();
+  update();
   return h("div", {},
     podium,
     toolbar,

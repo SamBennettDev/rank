@@ -1,4 +1,5 @@
 import { h } from "./dom";
+import { navIcons } from "./icons";
 import { type Ctx, type View, METHOD_HINT, METHOD_LABEL, href, makeCtx, setMethod } from "./ctx";
 import { loadGames, loadIndex, loadRanking, loadTeams } from "./store";
 import { aboutView } from "./views/about";
@@ -23,12 +24,13 @@ function defaultEntry(): SeasonIndexEntry {
 
 function renderChrome(ctx: Ctx, view: View, teamId?: number) {
   const s = ctx.entry.season;
-  const link = (label: string, v: View, on: boolean) =>
-    h("a", { href: href(s, ctx.snapId, v), class: on ? "on" : "", "aria-current": on ? "page" : false }, label);
+  // Icons always; labels hide on narrow screens so the header stays on one row.
+  const link = (label: string, icon: SVGSVGElement, v: View, on: boolean) =>
+    h("a", { href: href(s, ctx.snapId, v), class: on ? "on" : "", "aria-current": on ? "page" : false, "aria-label": label, title: label }, icon, h("span", { class: "lbl" }, label));
   nav.replaceChildren(
-    link("Rankings", "list", view === "list" || view === "team"),
-    link("Graph", "graph", view === "graph"),
-    link("Method", "about", view === "about"),
+    link("Rankings", navIcons.list(), "list", view === "list" || view === "team"),
+    link("Graph", navIcons.graph(), "graph", view === "graph"),
+    link("Method", navIcons.about(), "about", view === "about"),
   );
   document.getElementById("foot-method")?.setAttribute("href", href(s, ctx.snapId, "about"));
 
@@ -48,6 +50,11 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
   };
   const weekSel = h("select", { "aria-label": "Week", onchange: (e: Event) => go(s, (e.target as HTMLSelectElement).value) },
     ...[...ctx.entry.snapshots].reverse().map((x) => h("option", { value: x.id, selected: x.id === ctx.snapId }, x.label)));
+  // The native select sits invisibly over a styled face, so narrow screens can show "Wk 4".
+  const label = ctx.entry.snapshots[idx]?.label ?? ctx.snapId;
+  const weekFace = h("label", { class: "sel week" },
+    h("span", { class: "face" }, h("span", { class: "long" }, label), h("span", { class: "short" }, label.replace(/^Week /, "Wk ").replace(/^Postseason$/, "Bowls"))),
+    weekSel);
   // Win / Margin toggle: keeps the page, week and team.
   const methods = ctx.entry.methods;
   const methodToggle = methods.length > 1
@@ -62,7 +69,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
   picker.replaceChildren(
     methodToggle,
     seasons.length > 1 ? h("div", { class: "sel season" }, seasonSel) : h("span", { class: "season-tag" }, s),
-    h("div", { class: "weekpick" }, step(-1), h("div", { class: "sel" }, weekSel), step(1)),
+    h("div", { class: "weekpick" }, step(-1), weekFace, step(1)),
   );
 }
 

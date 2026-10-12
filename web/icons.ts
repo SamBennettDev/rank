@@ -7,6 +7,12 @@ const icon = (d: string, size = 16) => {
 };
 
 export const searchIcon = () => icon('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>');
+export const filterIcon = () => icon('<path d="M4 6h16M7 12h10M10 18h4"/>', 18);
+export const navIcons = {
+  list: () => icon('<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/>', 18),
+  graph: () => icon('<circle cx="12" cy="5" r="2.5"/><circle cx="5.5" cy="18" r="2.5"/><circle cx="18.5" cy="15" r="2.5"/><path d="M10.8 7.2 6.7 15.8M13.3 7.1l4 5.6M8 17.6l8-2"/>', 18),
+  about: () => icon('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>', 18),
+};
 export const arrowLeft = () => icon('<path d="M15 18l-6-6 6-6"/>', 14);
 export const tri = (up: boolean) => {
   const s = svg("svg", { viewBox: "0 0 10 10", "aria-hidden": "true" });
