@@ -1,0 +1,28 @@
+HOLDOUT 2021-2026, next-week picks from week 4 (n=6287)
+
+model                          all  FBSvFBS   retro    wk2+    2021   2022   2023   2024   2025   2026
+NEW (last-season prior)     71.88%   69.90%   80.4%  73.04%    71.1   71.5   71.0   70.6   75.5   70.1
+NEW pure (no prior)         70.48%   69.14%   80.9%  70.88%    70.4   70.6   70.0   69.3   72.4   69.2
+massey +hfa                 70.24%   68.87%   80.4%  69.12%    70.4   70.2   69.2   69.7   71.9   69.2
+elo carryover               69.68%   68.81%   80.3%  70.17%    69.1   69.6   69.6   69.3   71.6   66.3
+massey                      69.65%   68.21%   80.2%  68.53%    69.2   69.6   69.0   69.1   71.8   67.5
+lrmc                        69.46%   68.21%   80.7%  68.35%    68.3   70.6   69.2   69.1   71.3   64.8
+current engine (margin)     68.70%   67.48%   90.6%  68.12%    68.3   69.5   67.8   67.6   71.0   66.3
+elo (in-season)             68.52%   66.79%   81.8%  67.57%    68.1   69.5   68.3   68.1   69.7   65.1
+keener                      68.17%   67.33%   77.5%  67.31%    68.2   68.1   68.4   67.7   69.4   64.8
+pythagorean                 68.16%   67.35%   76.2%  67.43%    69.3   67.8   67.0   67.6   70.4   63.0
+bradley-terry               67.28%   65.64%   83.2%  66.19%    67.4   67.8   67.3   66.6   68.9   61.8
+colley                      67.04%   65.58%   82.5%  66.12%    67.2   67.3   67.8   66.2   68.3   61.8
+current engine (win)        66.26%   64.25%   90.9%  65.41%    66.0   66.7   65.8   65.7   68.3   61.5
+win pct                     66.22%   64.94%   78.9%  65.02%    67.5   66.9   66.3   64.5   67.4   61.4
+pagerank                    64.30%   62.99%   78.2%  63.47%    65.1   64.2   64.3   62.1   67.2   59.3
+CFBD Elo (external)                  69.16%
+
+Paired comparisons (bootstrap 95% CI of accuracy difference, McNemar p):
+  NEW (last-season prior)  vs massey +hfa           : +1.64 pts  [+0.91, +2.40]  p=0.0000
+  NEW (last-season prior)  vs massey                : +2.23 pts  [+1.48, +3.01]  p=0.0000
+  NEW (last-season prior)  vs elo carryover         : +2.20 pts  [+1.30, +3.10]  p=0.0000
+  NEW pure (no prior)      vs massey +hfa           : +0.24 pts  [-0.13, +0.60]  p=0.1934
+  NEW pure (no prior)      vs massey                : +0.83 pts  [+0.40, +1.27]  p=0.0002
+  NEW pure (no prior)      vs elo carryover         : +0.80 pts  [-0.25, +1.81]  p=0.1289
+  NEW (last-season prior)  vs CFBD Elo on FBS-v-FBS: +0.74 pts (n=3309)

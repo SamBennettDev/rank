@@ -1,0 +1,31 @@
+massey (margin)            next-week 71.63%  (n=6797)   retro 80.65%
+massey +hfa                next-week 71.63%  (n=6797)   retro 80.64%
+massey cap 28              next-week 70.93%  (n=6797)   retro 81.51%
+lrmc 0.06                  next-week 70.56%  (n=6797)   retro 80.70%
+massey cap 21              next-week 70.53%  (n=6797)   retro 81.81%
+massey cap21 +hfa          next-week 70.53%  (n=6797)   retro 81.71%
+massey cap 14              next-week 70.25%  (n=6797)   retro 82.51%
+engine margin (current)    next-week 70.12%  (n=6797)   retro 90.62%
+lrmc 0.03                  next-week 69.85%  (n=6797)   retro 80.70%
+lrmc 0.12                  next-week 69.84%  (n=6797)   retro 80.05%
+elo K40 x3 passes          next-week 69.41%  (n=6797)   retro 81.98%
+pythagorean                next-week 69.38%  (n=6797)   retro 75.79%
+elo K20                    next-week 69.16%  (n=6797)   retro 79.54%
+elo K60                    next-week 69.07%  (n=6797)   retro 79.64%
+elo K40                    next-week 68.99%  (n=6797)   retro 79.92%
+keener                     next-week 68.74%  (n=6797)   retro 77.96%
+springs win (old)          next-week 68.25%  (n=6797)   retro 84.21%
+bradley-terry p=2          next-week 68.07%  (n=6797)   retro 83.17%
+engine win (current)       next-week 68.04%  (n=6797)   retro 90.67%
+colley                     next-week 67.96%  (n=6797)   retro 82.84%
+bradley-terry p=1          next-week 67.38%  (n=6797)   retro 81.76%
+bradley-terry p=0.5        next-week 67.04%  (n=6797)   retro 80.38%
+pagerank margin            next-week 66.80%  (n=6797)   retro 77.41%
+win pct                    next-week 66.52%  (n=6797)   retro 79.30%
+pagerank                   next-week 65.40%  (n=6797)   retro 78.37%
+
+real	16m40.744s
+user	65m26.020s
+sys	0m3.744s
+
+[exited with code 0]
