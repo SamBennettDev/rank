@@ -416,9 +416,9 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401858489,2026,7,regular,2026-10-17T16:30:00.000Z,false,false,120,Maryland,,164,Rutgers,
 401858490,2026,7,regular,2026-10-17T19:30:00.000Z,false,false,130,Michigan,,213,Penn State,
 401858491,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,127,Michigan State,,77,Northwestern,
-401858492,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2483,Oregon,,158,Nebraska,
+401858492,2026,7,regular,2026-10-18T03:00:00.000Z,false,false,2483,Oregon,,158,Nebraska,
 401858493,2026,7,regular,2026-10-17T00:00:00.000Z,false,false,2509,Purdue,,264,Washington,
-401858494,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,26,UCLA,,275,Wisconsin,
+401858494,2026,7,regular,2026-10-17T23:30:00.000Z,false,false,26,UCLA,,275,Wisconsin,
 401858495,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,356,Illinois,,2483,Oregon,
 401858496,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,130,Michigan,,84,Indiana,
 401858497,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,135,Minnesota,,2294,Iowa,
@@ -945,7 +945,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401867897,2026,7,regular,2026-10-17T22:00:00.000Z,false,false,2754,Youngstown State,,2460,Northern Iowa,
 401867898,2026,3,regular,2026-09-19T19:00:00.000Z,false,true,147,Montana State,35,2115,Central Connecticut,30
 401867899,2026,5,regular,2026-10-03T16:00:00.000Z,false,true,2115,Central Connecticut,45,2681,Wagner,14
-401867901,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2385,Mercyhurst,,2115,Central Connecticut,
+401867901,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,2385,Mercyhurst,,2115,Central Connecticut,
 401867902,2026,8,regular,2026-10-24T16:00:00.000Z,false,false,2115,Central Connecticut,,2441,New Haven,
 401867903,2026,9,regular,2026-10-31T04:00:00.000Z,false,false,2115,Central Connecticut,,2523,Robert Morris,
 401867904,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,284,Stonehill,,2115,Central Connecticut,
@@ -956,7 +956,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401867909,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,2229,Florida International,20,2341,Long Island University,3
 401867910,2026,5,regular,2026-10-03T16:00:00.000Z,false,true,2341,Long Island University,27,2385,Mercyhurst,24
 401867911,2026,6,regular,2026-10-10T17:00:00.000Z,false,true,2184,Duquesne,14,2341,Long Island University,17
-401867912,2026,7,regular,2026-10-17T04:00:00.000Z,false,false,2681,Wagner,,2341,Long Island University,
+401867912,2026,7,regular,2026-10-17T21:00:00.000Z,false,false,2681,Wagner,,2341,Long Island University,
 401867913,2026,8,regular,2026-10-24T04:00:00.000Z,false,false,2341,Long Island University,,284,Stonehill,
 401867914,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2441,New Haven,,2341,Long Island University,
 401867915,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2523,Robert Morris,,2341,Long Island University,
@@ -969,7 +969,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401867922,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,2184,Duquesne,,2523,Robert Morris,
 401867923,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2523,Robert Morris,,284,Stonehill,
 401867924,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,2441,New Haven,3,284,Stonehill,21
-401867925,2026,7,regular,2026-10-17T17:00:00.000Z,false,false,284,Stonehill,,2184,Duquesne,
+401867925,2026,7,regular,2026-10-17T16:00:00.000Z,false,false,284,Stonehill,,2184,Duquesne,
 401867926,2026,9,regular,2026-10-31T16:00:00.000Z,false,false,284,Stonehill,,2385,Mercyhurst,
 401867927,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,284,Stonehill,,2681,Wagner,
 401867928,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,2681,Wagner,31,2583,Southern Connecticut State,7
@@ -1332,7 +1332,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868316,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,6,South Alabama,39,2545,SE Louisiana,14
 401868317,2026,3,regular,2026-09-19T20:30:00.000Z,false,true,2433,UL Monroe,35,2545,SE Louisiana,38
 401868318,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2466,Northwestern State,21,2545,SE Louisiana,52
-401868319,2026,7,regular,2026-10-17T23:00:00.000Z,false,false,2545,SE Louisiana,,2320,Lamar,
+401868319,2026,7,regular,2026-10-17T21:00:00.000Z,false,false,2545,SE Louisiana,,2320,Lamar,
 401868320,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,2837,East Texas A&M,,2545,SE Louisiana,
 401868321,2026,10,regular,2026-11-08T00:00:00.000Z,false,false,2545,SE Louisiana,,2916,Incarnate Word,
 401868322,2026,11,regular,2026-11-15T00:00:00.000Z,false,false,2545,SE Louisiana,,2377,McNeese,
