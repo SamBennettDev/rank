@@ -54,3 +54,11 @@ Tested on 2015–2019 (`tune_units.py`, `tune_epa.py`), next-week winners from w
 
 None beat final scores, so play-by-play feeds only the separate unit rankings. Per game, EPA margin and points margin
 correlate at 0.93 (2015–2019).
+
+## Published model: no preseason input
+
+The site no longer uses the last-season prior. The published model is `prior.fit` with `rho=0` (every team starts
+at 0) and `lam_p=0.05` (chosen on 2014–2019 among 0.005–2): margin + 3-point win bonus, home field fitted, a
+0.05-game pull toward 0 for every team. Held-out 2021–2026: 70.53% of next-week winners (vs 71.88% with the
+last-season prior), level with Massey + home field (70.24%, +0.29, 95% CI −0.11 to +0.67) and ahead of Elo with
+carryover (69.68%), Massey (69.65%), LRMC (69.46%) and in-season Elo (68.52%). FBS-vs-FBS: 69.30% vs CFBD Elo 69.16%.

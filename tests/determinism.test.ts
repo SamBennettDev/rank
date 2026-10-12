@@ -37,8 +37,8 @@ describe("determinism", () => {
     const home = teams.find((t: { id: number }) => t.id === base.homeId);
     const away = teams.find((t: { id: number }) => t.id === base.awayId);
     expect([away.rank, home.rank]).toEqual([1, 2]);
-    // One neutral game, result 21 + 3 = 24, prior weight 2 per team: the gap is 24 / 2.
-    expect(away.height - home.height).toBeCloseTo(12, 5);
+    // One neutral game, result 21 + 3 = 24, shrink 0.05 per team: the gap is 24 / (1 + 0.05 / 2).
+    expect(away.height - home.height).toBeCloseTo(24 / 1.025, 5);
   });
 });
 
@@ -46,38 +46,15 @@ describe("pipeline", () => {
   it("publishes one ranking file per snapshot", async () => {
     const out = await computeSeason(input);
     expect(out.files.map((f) => f.id)).toEqual(out.index.snapshots.map((s) => s.id));
-    expect(out.index.priorSeason).toBeNull();
   });
 
   it("records the settings, home field and inputs in every manifest", async () => {
     const out = await computeSeason(input);
     const m = JSON.parse(out.files[0]!.json).manifest;
-    expect([m.engine, m.algorithmVersion, m.winBonus, m.carryover, m.priorWeight, m.priorSeason]).toEqual(["rank-engine-6", "margin-prior-1", 3, 0.9, 2, null]);
+    expect([m.engine, m.algorithmVersion, m.winBonus, m.shrink]).toEqual(["rank-engine-7", "margin-2", 3, 0.05]);
+    expect(m).not.toHaveProperty("priorSeason");
+    expect(JSON.parse(out.files[0]!.json).teams[0]).not.toHaveProperty("prior");
     expect(typeof m.homeField).toBe("number");
-  });
-
-  it("starts each team at carryover x last season's final rating, centred on the FBS average", async () => {
-    const previous = { season: "prev", teamsCsv: input.teamsCsv, gamesCsv: input.gamesCsv };
-    const out = await computeSeason({ ...input, previous });
-    const first = JSON.parse(out.files[0]!.json);
-    const last = JSON.parse((await computeSeason({ ...input, configJson: JSON.stringify({ ...JSON.parse(input.configJson), priorWeight: 0.01 }) })).files.at(-1)!.json);
-    const final = new Map(last.teams.map((t: { id: number; height: number }) => [t.id, t.height]));
-    const mean = [...final.values()].reduce((a: number, b) => a + (b as number), 0) / final.size;
-    for (const t of first.teams) expect(t.prior).toBeCloseTo(0.9 * ((final.get(t.id) as number) - mean), 3);
-    expect(first.manifest.priorSeason.season).toBe("prev");
-    expect(out.index.priorSeason).toBe("prev");
-  });
-
-  it("starts a team that was not in last season's data at its classification's average", async () => {
-    const teams = parseTeams(input.teamsCsv);
-    const newcomer = teams[0]!;
-    const prevTeams = teams.filter((t) => t.id !== newcomer.id);
-    const prevGames = parseGames(input.gamesCsv).filter((g) => g.homeId !== newcomer.id && g.awayId !== newcomer.id);
-    const previous = { season: "prev", teamsCsv: toCsv(["id", "school", "abbreviation", "conference", "classification", "color"], prevTeams.map((t) => [t.id, t.school, t.abbreviation, t.conference, t.classification, t.color])), gamesCsv: gamesToCsv(prevGames) };
-    const first = JSON.parse((await computeSeason({ ...input, previous })).files[0]!.json).teams;
-    const others = first.filter((t: { id: number }) => t.id !== newcomer.id).map((t: { prior: number }) => t.prior);
-    const avg = others.reduce((a: number, b: number) => a + b, 0) / others.length;
-    expect(first.find((t: { id: number }) => t.id === newcomer.id).prior).toBeCloseTo(avg, 5);
   });
 
   it("adds offense, defense and special teams from a play-by-play summary without moving the overall rating", async () => {
@@ -102,9 +79,7 @@ describe("pipeline", () => {
     await expect(bad({ algorithmVersion: "" })).rejects.toThrow(/algorithmVersion/);
     await expect(bad({ classifications: [] })).rejects.toThrow(/classifications/);
     await expect(bad({ winBonus: -1 })).rejects.toThrow(/winBonus/);
-    await expect(bad({ carryover: 1.5 })).rejects.toThrow(/carryover/);
-    await expect(bad({ priorWeight: 0 })).rejects.toThrow(/priorWeight/);
-    await expect(bad({ publish: "no" })).rejects.toThrow(/publish/);
+    await expect(bad({ shrink: 0 })).rejects.toThrow(/shrink/);
   });
 });
 

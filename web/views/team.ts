@@ -72,7 +72,7 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
   const total = me.offense + me.defense! + me.special!;
   return h("div", { class: "panel unitsp" },
     h("h2", {}, "Offense · Defense · Special teams"),
-    h("p", { class: "hint" }, `From play-by-play: expected points per snap for and against (garbage time removed) and on kicks, adjusted for opponents and home field. Together they come to ${fmtHeight(total)} points per game; the overall rating (${fmtHeight(me.height)}) comes from final scores, which predicted games better in testing.`),
+    h("p", { class: "hint" }, `From this season’s play-by-play: expected points per snap for and against (garbage time removed) and on kicks, adjusted for opponents and home field. Together they come to ${fmtHeight(total)} points per game; the overall rating (${fmtHeight(me.height)}) comes from final scores, which predicted games better in testing.`),
     h("div", { class: "units" }, card("offense"), card("defense"), card("special")));
 }
 
@@ -86,20 +86,20 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const sum = lines.reduce((s, l) => s + l.value, 0);
   return h("div", { class: "panel why" },
     h("h2", {}, "Why it’s here"),
-    h("p", { class: "hint" }, "Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those, with last season’s starting point counted as ", h("b", {}, `${b.priorWeight} games`), ". Dots right of the line pull the rating up; dots left pull it down."),
-    breakdownChart(ctx, me.height!, b.prior, b.priorWeight, lines),
+    h("p", { class: "hint" }, "Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those. Every team starts level, so only this season’s games count. Dots right of the line pull the rating up; dots left pull it down."),
+    breakdownChart(ctx, me.height!, lines),
     h("p", { class: "sum" },
-      `(${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)} + ${b.priorWeight} × start ${fmtHeight(b.prior)}) ÷ ${lines.length + b.priorWeight} = `,
+      `${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)} ÷ ${lines.length + b.shrink} = `,
       h("b", {}, fmtHeight(b.average)),
       Math.abs(b.average - me.height!) > 0.05 ? ` (published ${fmtHeight(me.height)})` : ""));
 }
 
-function breakdownChart(ctx: Ctx, rating: number, prior: number, priorWeight: number, lines: GameLine[]): SVGSVGElement {
+function breakdownChart(ctx: Ctx, rating: number, lines: GameLine[]): SVGSVGElement {
   const W = 560;
   const row = 30;
   const pad = { l: 178, r: 24, t: 24, b: 28 };
-  const H = pad.t + row * (lines.length + 1) + pad.b;
-  const vals = [rating, prior, ...lines.map((l) => l.value)];
+  const H = pad.t + row * lines.length + pad.b;
+  const vals = [rating, ...lines.map((l) => l.value)];
   let lo = Math.min(...vals), hi = Math.max(...vals);
   const span = Math.max(hi - lo, 10);
   lo -= span * 0.06;
@@ -120,29 +120,24 @@ function breakdownChart(ctx: Ctx, rating: number, prior: number, priorWeight: nu
     t.textContent = text;
     root.appendChild(t);
   };
-  const stem = (y: number, v: number, title: string, shape: "dot" | "diamond", logoId?: number) => {
+  const stem = (y: number, v: number, title: string, logoId?: number) => {
     const g = svg("g", { class: `brow ${v >= rating ? "up" : "down"}` });
     g.appendChild(svg("line", { class: "stem", x1: rx, x2: x(v), y1: y, y2: y }));
-    g.appendChild(shape === "dot"
-      ? svg("circle", { class: "pt", cx: x(v), cy: y, r: 5 })
-      : svg("path", { class: "pt", d: `M${x(v)},${y - 7} L${x(v) + 7},${y} L${x(v)},${y + 7} L${x(v) - 7},${y} Z` }));
+    g.appendChild(svg("circle", { class: "pt", cx: x(v), cy: y, r: 5 }));
     const tt = svg("title", {});
     tt.textContent = title;
     g.appendChild(tt);
     root.appendChild(g);
     if (logoId !== undefined) root.appendChild(badge(ctx, logoId, 18, y, 22));
   };
-  // Starting point (counts priorWeight times)
-  label(lineY(0), `Start ×${priorWeight}`);
-  stem(lineY(0), prior, `Starting rating ${fmtHeight(prior)}: 90% of last season’s final rating, counted as ${priorWeight} games`, "diamond");
   const homeField = ctx.ranking.manifest.homeField;
   lines.forEach((l, i) => {
-    const y = lineY(i + 1);
+    const y = lineY(i);
     const o = l.opponent;
     const score = `${l.won ? "W" : "L"} ${l.won ? l.edge.winnerPoints : l.edge.loserPoints}–${l.won ? l.edge.loserPoints : l.edge.winnerPoints}`;
     label(y, `${l.where === 1 ? "vs" : l.where === -1 ? "at" : "vs"} ${o.abbreviation || o.school} · ${score}`);
     const site = l.where === 1 ? ` − ${homeField.toFixed(1)} home field` : l.where === -1 ? ` + ${homeField.toFixed(1)} away` : " (neutral site)";
-    stem(y, l.value, `${o.school} rated ${fmtHeight(o.height)}; ${score} → ${l.result > 0 ? "+" : "−"}${Math.abs(l.result)} with the win bonus${site} = ${fmtHeight(l.value)}`, "dot", o.id);
+    stem(y, l.value, `${o.school} rated ${fmtHeight(o.height)}; ${score} → ${l.result > 0 ? "+" : "−"}${Math.abs(l.result)} with the win bonus${site} = ${fmtHeight(l.value)}`, o.id);
   });
   root.appendChild(svg("line", { class: "rline", x1: rx, x2: rx, y1: pad.t - 6, y2: H - pad.b + 4 }));
   const rt = svg("text", { class: "rlab", x: Math.min(Math.max(rx, pad.l + 40), W - pad.r - 40), y: H - 6, "text-anchor": "middle" });

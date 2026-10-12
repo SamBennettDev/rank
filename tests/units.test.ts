@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import type { Edge, TeamGamePlays } from "../src/engine/types";
 import { fitUnits } from "../src/engine/units";
 
-const zeros = (n: number) => ({ offense: new Float64Array(n), defense: new Float64Array(n), special: new Float64Array(n) });
 const edge = (gameId: number, home: number, away: number, neutral = false): Edge => ({ gameId, winner: home, loser: away, week: 1, seasonType: "regular", winnerPoints: 21, loserPoints: 14, neutralSite: neutral, winnerIsHome: true });
 
 /** Round robin, home and away, where offense[t] - defense[u] sets EPA per snap exactly. */
@@ -24,7 +23,7 @@ describe("fitUnits", () => {
   it("separates offense from defense and reports them in points per game", () => {
     const off = [0.2, 0.1, 0, -0.1, -0.2], def = [-0.1, 0.2, 0, 0.1, -0.2];
     const L = league(off, def);
-    const u = fitUnits(L.n, L.index, L.edges, L.rows, zeros(L.n), 0.01);
+    const u = fitUnits(L.n, L.index, L.edges, L.rows, 0.01);
     expect(u.snapsPerGame).toBe(60);
     const o = u.offense.map((v) => v!), d = u.defense.map((v) => v!);
     // Each unit is recovered up to a shared shift, scaled by 60 snaps per game.
@@ -36,15 +35,15 @@ describe("fitUnits", () => {
 
   it("does not credit home field to the offense", () => {
     const off = [0.1, 0, -0.1, 0], def = [0, 0, 0, 0];
-    const flat = fitUnits(4, league(off, def).index, league(off, def).edges, league(off, def).rows, zeros(4), 0.01);
+    const flat = fitUnits(4, league(off, def).index, league(off, def).edges, league(off, def).rows, 0.01);
     const L = league(off, def, 0.05);
-    const homey = fitUnits(4, L.index, L.edges, L.rows, zeros(4), 0.01);
+    const homey = fitUnits(4, L.index, L.edges, L.rows, 0.01);
     for (let i = 0; i < 4; i++) expect(homey.offense[i]!).toBeCloseTo(flat.offense[i]!, 3);
   });
 
   it("rates special teams from each game's net special-teams EPA", () => {
     const L = league([0, 0, 0], [0, 0, 0], 0, [2, 0, -2]);
-    const s = fitUnits(3, L.index, L.edges, L.rows, zeros(3), 0.01).special.map((v) => v!);
+    const s = fitUnits(3, L.index, L.edges, L.rows, 0.01).special.map((v) => v!);
     expect(s[0]! - s[2]!).toBeCloseTo(4, 1);
     expect(s[0]! + s[1]! + s[2]!).toBeCloseTo(0, 6);
   });
@@ -52,15 +51,15 @@ describe("fitUnits", () => {
   it("leaves teams without play-by-play unrated", () => {
     const L = league([0.1, -0.1], [0, 0]);
     const index = new Map([...L.index, [99, 2]]);
-    const u = fitUnits(3, index, L.edges, L.rows, zeros(3), 2);
+    const u = fitUnits(3, index, L.edges, L.rows, 2);
     expect([u.offense[2], u.defense[2], u.special[2]]).toEqual([null, null, null]);
   });
 
   it("ignores rows for games that are not counted", () => {
     const L = league([0.1, -0.1], [0, 0]);
     const extra = { gameId: 999, teamId: 1, opponentId: 2, snaps: 60, epa: 600, success: 60, specialEpa: 50 };
-    const a = fitUnits(2, L.index, L.edges, L.rows, zeros(2), 2);
-    const b = fitUnits(2, L.index, L.edges, [...L.rows, extra], zeros(2), 2);
+    const a = fitUnits(2, L.index, L.edges, L.rows, 2);
+    const b = fitUnits(2, L.index, L.edges, [...L.rows, extra], 2);
     expect(b).toEqual(a);
   });
 });

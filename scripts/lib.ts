@@ -28,9 +28,7 @@ export async function expectedOutputs(): Promise<Map<string, string>> {
     const current = files(season);
     if (!current) continue;
     const configJson = readFileSync(join(seasonsDir, season, "config.json"), "utf8");
-    if (JSON.parse(configJson).publish === false) continue; // kept only as the next season's starting point
-    // Each season starts from the one before it, when that season's data is in the repository.
-    const result = await computeSeason({ ...current, configJson, previous: files(String(Number(season) - 1)) });
+    const result = await computeSeason({ ...current, configJson });
     for (const f of result.files) out.set(`rankings/${season}/${f.id}.json`, f.json);
     index.push(result.index);
   }

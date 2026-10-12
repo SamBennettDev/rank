@@ -34,12 +34,8 @@ export interface SeasonConfig {
   classifications: string[];
   /** Points added to the winner's margin for winning at all. */
   winBonus: number;
-  /** Share of last season's final rating each team starts with (0 to 1). */
-  carryover: number;
-  /** How many games' worth of evidence that starting rating counts for. */
-  priorWeight: number;
-  /** false: keep this season only as the next season's starting point; publish no rankings. */
-  publish?: boolean;
+  /** Games' worth of pull toward an average rating, the same for every team. */
+  shrink: number;
 }
 
 /** One team's play-by-play summary for one game (see scripts/fetch-plays.ts). */
@@ -104,8 +100,6 @@ export interface RankedTeam {
   tied: boolean;
   /** Rating in points (the graph's y-coordinate), rounded to 1e-6; null with no counted games. */
   height: number | null;
-  /** Starting rating from last season (carryover x last season's final rating), rounded to 1e-6. */
-  prior: number;
   /** Offense, defense and special teams from play-by-play, in points per game better than average; null without play-by-play. */
   offense: number | null;
   defense: number | null;
@@ -120,8 +114,7 @@ export interface Manifest {
   engine: string;
   algorithmVersion: string;
   winBonus: number;
-  carryover: number;
-  priorWeight: number;
+  shrink: number;
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
   classifications: string[];
@@ -131,8 +124,6 @@ export interface Manifest {
   playsSha256: string | null;
   /** Average scrimmage snaps per team per game, used to turn EPA per snap into points per game; null without plays. */
   snapsPerGame: number | null;
-  /** The season the starting ratings came from, with the hashes of its CSVs; null if none. */
-  priorSeason: { season: string; teamsSha256: string; gamesSha256: string; playsSha256: string | null } | null;
   counts: GameCounts;
 }
 
@@ -149,6 +140,4 @@ export interface SeasonIndexEntry {
   label: string;
   demo: boolean;
   snapshots: { id: string; label: string }[];
-  /** The season whose final ratings this one starts from, or null. */
-  priorSeason: string | null;
 }

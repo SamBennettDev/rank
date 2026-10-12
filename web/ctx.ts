@@ -61,13 +61,12 @@ export interface GameLine {
 }
 
 /**
- * Rebuilds a team's rating the way the model defines it: the average of what each of its
- * games says (opponent rating + result, adjusted for home field) and its starting rating
- * counted `priorWeight` times. At the published solution this reproduces the rating.
+ * Rebuilds a team's rating the way the model defines it: what each of its games says
+ * (opponent rating + result, adjusted for home field), summed and divided by games +
+ * shrink. At the published solution this reproduces the rating.
  */
-export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; prior: number; priorWeight: number; average: number } {
+export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink: number; average: number } {
   const m = ctx.ranking.manifest;
-  const me = ctx.byId.get(teamId)!;
   const lines = ctx.edges
     .filter((e) => e.winner === teamId || e.loser === teamId)
     .map((edge) => {
@@ -78,15 +77,15 @@ export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; prior:
       const margin = won ? edge.winnerPoints - edge.loserPoints : edge.loserPoints - edge.winnerPoints;
       return { edge, won, opponent, where, margin, result: result(margin, m.winBonus), value: gameValue(opponent.height!, margin, where, m.homeField, m.winBonus) };
     });
-  const average = (lines.reduce((s, l) => s + l.value, 0) + m.priorWeight * me.prior) / (lines.length + m.priorWeight);
-  return { lines, prior: me.prior, priorWeight: m.priorWeight, average };
+  const average = lines.reduce((s, l) => s + l.value, 0) / (lines.length + m.shrink);
+  return { lines, shrink: m.shrink, average };
 }
 
 export type Metric = "overall" | "offense" | "defense" | "special";
 export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
 export const METRIC_LABEL: Record<Metric, string> = { overall: "Overall", offense: "Offense", defense: "Defense", special: "Special teams" };
 export const METRIC_HINT: Record<Metric, string> = {
-  overall: "Points better than an average FBS team, from every score this season, opponents, home field and a fading start from last season.",
+  overall: "Points better than an average FBS or FCS team, from every score this season, who it came against and home field. Every team starts the season level.",
   offense: "Points per game the offense adds over an average offense: expected points per snap from play-by-play, garbage time removed, adjusted for the defenses it faced and home field.",
   defense: "Points per game the defense saves compared with an average defense: expected points per snap allowed, garbage time removed, adjusted for the offenses it faced and home field.",
   special: "Points per game gained on kickoffs, punts, field goals and returns compared with an average team, adjusted for opponents.",

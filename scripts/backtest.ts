@@ -8,7 +8,7 @@
  *
  * --history downloads public, season-complete schedules from the sportsdataverse
  * cfbfastR-data project on GitHub (FBS + FCS games), converts them to this repository's
- * CSV format and runs `computeSeason` on them, each season starting from the one before.
+ * CSV format and runs `computeSeason` on them.
  * Nothing downloaded is published or committed.
  *
  * Protocol: every game from week 4 on, between two teams that are already ranked, is
@@ -69,11 +69,11 @@ async function historySeason(y: number): Promise<SeasonFiles> {
   return { season: String(y), teamsCsv: teamsToCsv([...teams.values()]), gamesCsv: gamesToCsv(games) };
 }
 
-const CONFIG = (carryover: number) => JSON.stringify({ label: "", demo: false, algorithmVersion: "backtest", classifications: ["fbs", "fcs"], winBonus: 3, carryover, priorWeight: 2 });
+const CONFIG = JSON.stringify({ label: "", demo: false, algorithmVersion: "backtest", classifications: ["fbs", "fcs"], winBonus: 3, shrink: 0.05 });
 
 // ---------------------------------------------------------------- scoring
-async function score(current: SeasonFiles, configJson: string, previous: SeasonFiles | undefined) {
-  const out = await computeSeason({ ...current, configJson, previous });
+async function score(current: SeasonFiles, configJson: string) {
+  const out = await computeSeason({ ...current, configJson });
   const snaps = out.files.map((f) => JSON.parse(f.json) as Ranking);
   const regular = snaps.filter((s) => !s.snapshot.includePostseason);
   const games = parseGames(current.gamesCsv).filter((g) => g.completed && g.homePoints !== null && g.awayPoints !== null && g.homePoints !== g.awayPoints);
@@ -108,29 +108,21 @@ async function score(current: SeasonFiles, configJson: string, previous: SeasonF
 const args = process.argv.slice(2);
 const hi = args.indexOf("--history");
 const pct = (a: number, b: number) => (b ? `${((100 * a) / b).toFixed(1)}%` : "—");
-const runs: { season: string; current: SeasonFiles; configJson?: string; previous?: SeasonFiles }[] = [];
+const runs: { season: string; current: SeasonFiles; configJson: string }[] = [];
 if (hi >= 0) {
   const [a, b] = (args[hi + 1] ?? "2015-2025").split("-").map(Number);
   for (let y = a!; y <= (b ?? a!); y++) {
     if (y === 2020) continue; // COVID season: conferences played wildly different schedules
-    runs.push({ season: String(y), current: await historySeason(y), previous: await historySeason(y - 1) });
+    runs.push({ season: String(y), current: await historySeason(y), configJson: CONFIG });
   }
 } else {
-  const repo = fromRepo();
-  for (const [season, s] of repo) {
-    if (JSON.parse(s.configJson).publish === false) continue;
-    runs.push({ season, current: s, configJson: s.configJson, previous: repo.get(String(Number(season) - 1)) });
-  }
+  for (const [season, s] of fromRepo()) runs.push({ season, current: s, configJson: s.configJson });
 }
 console.log(`\nSeasons: ${runs.map((r) => r.season).join(", ")}`);
-for (const [label, carryover] of [["This rating (starts from last season)", 0.9], ["Same model, every team starting at 0", 0]] as const) {
-  let right = 0, predicted = 0, agree = 0, rated = 0;
-  for (const r of runs) {
-    const cfg = r.configJson && carryover > 0 ? r.configJson : CONFIG(carryover);
-    const s = await score(r.current, cfg, carryover > 0 ? r.previous : undefined);
-    right += s.right; predicted += s.predicted; agree += s.agree; rated += s.rated;
-  }
-  console.log(`\n${label}:`);
-  console.log(`  Picks next week's winner:          ${pct(right, predicted)} of ${predicted} games`);
-  console.log(`  Final ranking agrees with results: ${pct(agree, rated)} of ${rated} games`);
+let right = 0, predicted = 0, agree = 0, rated = 0;
+for (const r of runs) {
+  const s = await score(r.current, r.configJson);
+  right += s.right; predicted += s.predicted; agree += s.agree; rated += s.rated;
 }
+console.log(`  Picks next week's winner:          ${pct(right, predicted)} of ${predicted} games`);
+console.log(`  Final ranking agrees with results: ${pct(agree, rated)} of ${rated} games`);

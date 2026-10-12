@@ -60,9 +60,7 @@ export function parseConfig(json: string): SeasonConfig {
     throw new Error("config.classifications must be a non-empty array");
   }
   num("winBonus", (v) => v >= 0, "a number >= 0");
-  num("carryover", (v) => v >= 0 && v <= 1, "a number from 0 to 1");
-  num("priorWeight", (v) => v > 0, "a positive number");
-  if (c.publish !== undefined && typeof c.publish !== "boolean") throw new Error("config.publish must be true or false");
+  num("shrink", (v) => v > 0, "a positive number");
   return c;
 }
 

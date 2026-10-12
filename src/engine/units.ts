@@ -10,13 +10,6 @@ export interface UnitRatings {
   snapsPerGame: number;
 }
 
-/** Starting points for the three units, per team: offense and defense in EPA per snap, special teams in points per game. */
-export interface UnitStart {
-  offense: Float64Array;
-  defense: Float64Array;
-  special: Float64Array;
-}
-
 /** Used when there is no play-by-play yet to measure snaps per game. */
 export const DEFAULT_SNAPS = 65;
 
@@ -29,13 +22,13 @@ export const DEFAULT_SNAPS = 65;
  *   epa / snaps  ≈  mu + O[team] - D[opponent] + h * x            (weighted by snaps)
  *
  * Special teams: each game's net special-teams EPA for one side ≈ S[team] - S[opponent].
- * Each unit is pulled toward its starting point with `priorWeight` games' worth of
- * evidence (snaps for offense and defense). Both systems are symmetric positive
+ * Every team starts level: each unit is pulled toward average (0) with `shrink` games'
+ * worth of evidence (snaps for offense and defense), the same for every team. Both systems are symmetric positive
  * definite and solved exactly by Cholesky. Results are converted to points per game:
  * offense = O × snapsPerGame, defense = D × snapsPerGame, special = S.
  * `rows` and `edges` must already be in a canonical order; summation follows it.
  */
-export function fitUnits(n: number, index: Map<number, number>, edges: readonly Edge[], rows: readonly TeamGamePlays[], start: UnitStart, priorWeight: number): UnitRatings {
+export function fitUnits(n: number, index: Map<number, number>, edges: readonly Edge[], rows: readonly TeamGamePlays[], shrink: number): UnitRatings {
   const site = new Map<number, { home: number; neutral: boolean }>();
   for (const e of edges) site.set(e.gameId, { home: e.winnerIsHome ? e.winner : e.loser, neutral: e.neutralSite });
   const used = rows.filter((r) => site.has(r.gameId) && index.has(r.teamId) && index.has(r.opponentId) && r.snaps > 0);
@@ -64,12 +57,10 @@ export function fitUnits(n: number, index: Map<number, number>, edges: readonly 
       for (let b = 0; b < 4; b++) if (coef[b] !== 0) add(cols[a]!, cols[b]!, w * coef[a]! * coef[b]!);
     }
   }
-  const lam = priorWeight * snapsPerGame;
+  const lam = shrink * snapsPerGame;
   for (let i = 0; i < n; i++) {
     add(i, i, lam);
-    rhs[i]! += lam * start.offense[i]!;
     add(n + i, n + i, lam);
-    rhs[n + i]! += lam * start.defense[i]!;
   }
   add(2 * n, 2 * n, 1e-6);
   add(2 * n + 1, 2 * n + 1, 1e-6);
@@ -95,10 +86,7 @@ export function fitUnits(n: number, index: Map<number, number>, edges: readonly 
     rs[t]! += row.specialEpa;
     rs[u]! -= row.specialEpa;
   }
-  for (let i = 0; i < n; i++) {
-    ms[i * n + i]! += priorWeight;
-    rs[i]! += priorWeight * start.special[i]!;
-  }
+  for (let i = 0; i < n; i++) ms[i * n + i]! += shrink;
   const st = choleskySolve(ms, rs, n);
 
   return {

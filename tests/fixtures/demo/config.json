@@ -1,11 +1,10 @@
 {
   "label": "Demo season (fictional data)",
   "demo": true,
-  "algorithmVersion": "margin-prior-1",
+  "algorithmVersion": "margin-2",
   "classifications": [
     "fbs"
   ],
   "winBonus": 3,
-  "carryover": 0.9,
-  "priorWeight": 2
+  "shrink": 0.05
 }

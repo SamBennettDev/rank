@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { type RatedGame, fitRatings, gameValue, result } from "../src/engine/rating";
 
-const zeros = (n: number) => new Float64Array(n);
-const opts = (n: number, over: Partial<{ winBonus: number; prior: Float64Array; priorWeight: number }> = {}) => ({ winBonus: 3, prior: zeros(n), priorWeight: 2, ...over });
+const opts = (_n: number, over: Partial<{ winBonus: number; shrink: number }> = {}) => ({ winBonus: 3, shrink: 2, ...over });
 
 /** A fixed pseudo-random season: `n` teams, `m` games, stronger teams (lower ids) usually win. */
 function season(n: number, m: number, seed: number): RatedGame[] {
@@ -34,19 +33,24 @@ describe("fitRatings", () => {
     expect(ratings[0]! + ratings[1]!).toBeCloseTo(0, 10);
   });
 
-  it("leaves a team with no games at its starting rating", () => {
-    const prior = Float64Array.from([0, 0, 12.5]);
-    const { ratings } = fitRatings(3, [{ home: 0, away: 1, margin: 7, neutral: false }], opts(3, { prior }));
-    expect(ratings[2]).toBeCloseTo(12.5, 12);
+  it("leaves a team with no games at average (0)", () => {
+    const { ratings } = fitRatings(3, [{ home: 0, away: 1, margin: 7, neutral: false }], opts(3));
+    expect(ratings[2]).toBe(0);
   });
 
-  it("each rating is exactly the weighted average of its game values and its starting rating", () => {
+  it("treats every team the same before it plays", () => {
+    // Two teams with mirror-image results end up mirror-image ratings: nothing but games matters.
+    const { ratings } = fitRatings(4, [{ home: 0, away: 1, margin: 10, neutral: true }, { home: 2, away: 3, margin: 10, neutral: true }], opts(4));
+    expect(ratings[0]).toBeCloseTo(ratings[2]!, 12);
+    expect(ratings[1]).toBeCloseTo(ratings[3]!, 12);
+  });
+
+  it("each rating is exactly its game values summed and divided by games + shrink", () => {
     const n = 20;
     const games = season(n, 90, 4);
-    const prior = Float64Array.from({ length: n }, (_, i) => 10 - i);
-    const { ratings, homeField } = fitRatings(n, games, opts(n, { prior }));
+    const { ratings, homeField } = fitRatings(n, games, opts(n));
     for (let t = 0; t < n; t++) {
-      let sum = 2 * prior[t]!, count = 2;
+      let sum = 0, count = 2;
       for (const g of games) {
         if (g.home !== t && g.away !== t) continue;
         const home = g.home === t;
@@ -66,13 +70,12 @@ describe("fitRatings", () => {
     for (const r of ratings) expect(r).toBeCloseTo(0, 6);
   });
 
-  it("the starting rating fades as games accumulate", () => {
-    const prior = Float64Array.from([20, 0]);
-    const one = fitRatings(2, [{ home: 1, away: 0, margin: 14, neutral: true }], opts(2, { prior })).ratings;
-    const many = fitRatings(2, Array.from({ length: 12 }, () => ({ home: 1, away: 0, margin: 14, neutral: true })), opts(2, { prior })).ratings;
+  it("one game moves a team less than many games saying the same", () => {
+    const one = fitRatings(2, [{ home: 1, away: 0, margin: 14, neutral: true }], opts(2)).ratings;
+    const many = fitRatings(2, Array.from({ length: 12 }, () => ({ home: 1, away: 0, margin: 14, neutral: true })), opts(2)).ratings;
     // Team 1 keeps beating team 0 by 14 (+3): with more games its edge approaches 17.
     expect(many[1]! - many[0]!).toBeGreaterThan(one[1]! - one[0]!);
-    expect(many[1]! - many[0]!).toBeGreaterThan(12);
+    expect(many[1]! - many[0]!).toBeGreaterThan(14);
   });
 
   it("is bit-identical across runs", () => {
@@ -80,7 +83,7 @@ describe("fitRatings", () => {
     expect(fitRatings(30, games, opts(30))).toEqual(fitRatings(30, games, opts(30)));
   });
 
-  it("rejects a non-positive prior weight", () => {
-    expect(() => fitRatings(2, [], opts(2, { priorWeight: 0 }))).toThrow(/priorWeight/);
+  it("rejects a non-positive shrink", () => {
+    expect(() => fitRatings(2, [], opts(2, { shrink: 0 }))).toThrow(/shrink/);
   });
 });

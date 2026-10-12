@@ -2,11 +2,11 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how many points better it is than an average FBS team, worked out from every final score this season, who each game was against and where it was played. Rank is the rating; the graph view plots it as each team's height.
+The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how many points better it is than an average FBS or FCS team, worked out from every final score this season, who each game was against and where it was played. Rank is the rating; the graph view plots it as each team's height.
 
 - **Every game counts.** A game says a team is worth its opponent's rating plus its margin, with 3 extra points for winning (3 fewer for losing), adjusted for home field. A team's rating is the average of what its games say, with all teams solved together in one exact linear system.
-- **A fading head start.** Each team starts at 90% of its final rating from last season, counted as two games. This season's games outweigh it within weeks.
-- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 71.9% of the next week's winners, ahead of every known method tested: Massey with home field 70.2%, Elo with carryover 69.7%, LRMC 69.5%, Colley 67.0%. It also beats CollegeFootballData's own Elo by 0.7 points on FBS games. See [`research/`](research/).
+- **Every team starts level.** No preseason ranking, no carry-over from last season, no recruiting or reputation: only this season's games count.
+- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 70.5% of the next week's winners using this season's games only: level with the best known method (Massey with home field, 70.2%) and ahead of Elo carried over from last season (69.7%), LRMC (69.5%) and Colley (67.0%). See [`research/`](research/).
 
 - **Offense, defense and special teams.** Separate rankings from public play-by-play (expected points per snap, garbage time removed, adjusted for opponents and home field). They explain how teams win; they don't change the overall rank, because in testing they predicted no better than final scores.
 
@@ -17,7 +17,7 @@ No polls, no votes, no brand, no conference bonus. See the [methodology](docs/ME
 | **Deterministic** | Same data in, byte-identical rankings out. One exact linear solve, no randomness. |
 | **Auditable** | Raw data, code and output are all here. `npm run verify` and the site's *Recompute* button regenerate every ranking and compare it with what is published. |
 | **Transparent** | One formula, one config file per season, and a page per team that rebuilds its rating game by game. |
-| **Unbiased** | The only inputs are final scores, opponents and home/neutral site. Last season enters only as a starting point. |
+| **Unbiased** | The only inputs are this season's final scores, opponents and home/neutral site. Every team starts level. |
 
 ## Where the data lives
 
@@ -27,8 +27,8 @@ Plain files in this repository; git history is the audit log.
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
 data/seasons/<year>/plays.csv      per team per game: snaps, expected points, successes, special-teams EPA (from play-by-play)
-data/seasons/<year>/config.json    algorithm version, win bonus, carryover, prior weight, divisions
-data/rankings/<year>/<snapshot>.json   published output (ratings, ranks, starting points, manifest with SHA-256 of the inputs)
+data/seasons/<year>/config.json    algorithm version, win bonus, shrink, divisions
+data/rankings/<year>/<snapshot>.json   published output (ratings, unit ratings, ranks, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
 ```
 
@@ -54,7 +54,6 @@ npm run build      # static site in dist/
 2. `CFBD_API_KEY=... npm run fetch -- 2026 && npm run fetch-plays -- 2026 && npm run compute`
 3. Commit the changed files under `data/`.
 
-Each season starts from the season before it, so keep last season's `data/seasons/<year>/` in the repository. A season whose config has `"publish": false` is kept only for that purpose. `data/seasons/2025` was built from the public sportsdataverse schedule files; `npm run fetch -- 2025` refreshes it from the API.
 
 In GitHub, the **Update data** workflow does this weekly (and daily in bowl season) using a `CFBD_API_KEY` repository secret, commits the diff as `rank-bot`, and redeploys.
 

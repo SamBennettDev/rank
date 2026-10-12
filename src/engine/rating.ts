@@ -12,10 +12,8 @@ export interface RatedGame {
 export interface FitOptions {
   /** Points added to the winner's margin for winning at all. */
   winBonus: number;
-  /** Each team's starting rating (the prior), one per team. */
-  prior: Float64Array;
-  /** How many games' worth of evidence the prior counts for. Must be > 0. */
-  priorWeight: number;
+  /** Games' worth of pull toward an average rating (0), the same for every team. Must be > 0. */
+  shrink: number;
 }
 
 /** Tiny pull of the home-field estimate toward 0, so it is defined before any home game is played. */
@@ -29,24 +27,26 @@ export const HOME_FIELD_RIDGE = 1e-4;
  * Ratings r and a home-field edge H minimise
  *
  *   sum_games (result - (r_home - r_away + H * home))^2
- *     + priorWeight * sum_teams (r_i - prior_i)^2
+ *     + shrink * sum_teams r_i^2
  *     + HOME_FIELD_RIDGE * H^2
  *
- * where home is 1 for a true home game and 0 at a neutral site. Setting the
+ * where home is 1 for a true home game and 0 at a neutral site. Every team starts
+ * level: the shrink term pulls every rating equally toward 0 (an average team), so a
+ * team with few games is not pushed around by one result. Setting the
  * gradient to zero gives one symmetric positive-definite linear system, solved
  * exactly with a Cholesky decomposition. Only + - * / and sqrt are used, in a
  * fixed order, so the answer is bit-identical on every IEEE-754 machine.
  *
  * At the solution each team's rating is exactly the weighted average
  *
- *   r_i = (sum over its games of game value + priorWeight * prior_i) / (games + priorWeight)
+ *   r_i = (sum over its games of game value) / (games + shrink)
  *
  * where a game's value is the opponent's rating plus this team's result, minus H
  * at home or plus H away (see `gameValue`). That is the explanation the site shows.
  * `games` must already be in a canonical order; summation order follows it.
  */
-export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, prior, priorWeight }: FitOptions): { ratings: Float64Array; homeField: number } {
-  if (!(priorWeight > 0)) throw new Error("priorWeight must be > 0");
+export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, shrink }: FitOptions): { ratings: Float64Array; homeField: number } {
+  if (!(shrink > 0)) throw new Error("shrink must be > 0");
   const N = n + 1; // last unknown is the home-field edge
   const m = new Float64Array(N * N);
   const rhs = new Float64Array(N);
@@ -67,10 +67,7 @@ export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, p
     rhs[a]! -= y;
     rhs[n]! += x * y;
   }
-  for (let i = 0; i < n; i++) {
-    m[i * N + i]! += priorWeight;
-    rhs[i]! += priorWeight * prior[i]!;
-  }
+  for (let i = 0; i < n; i++) m[i * N + i]! += shrink;
   m[n * N + n]! += HOME_FIELD_RIDGE;
   const x = choleskySolve(m, rhs, N);
   return { ratings: x.slice(0, n), homeField: x[n]! };
