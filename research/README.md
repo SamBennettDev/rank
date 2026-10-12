@@ -62,3 +62,16 @@ at 0) and `lam_p=0.05` (chosen on 2014–2019 among 0.005–2): margin + 3-point
 0.05-game pull toward 0 for every team. Held-out 2021–2026: 70.53% of next-week winners (vs 71.88% with the
 last-season prior), level with Massey + home field (70.24%, +0.29, 95% CI −0.11 to +0.67) and ahead of Elo with
 carryover (69.68%), Massey (69.65%), LRMC (69.46%) and in-season Elo (68.52%). FBS-vs-FBS: 69.30% vs CFBD Elo 69.16%.
+
+## Head-to-head step (published)
+
+`h2h.py` adds the fewest-upsets step to the published rating: from the rating order, a one-team-at-a-time search
+finds the fewest upsets; those games are accepted, and every other winner is held at least ½ point above its
+loser (stiff one-sided penalty, Newton on the engaged set). `run_h2h.py`:
+
+| | Next-week winners | Winner above loser at season end |
+|---|---|---|
+| 2014–19, rating without the step | 71.91% | 81.3% |
+| 2014–19, with the step | 70.52% | 90.5% |
+| 2021–26, rating without the step | 70.53% | 80.9% |
+| 2021–26, with the step (published) | 69.59% | 90.3% |

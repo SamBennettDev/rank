@@ -6,7 +6,8 @@ The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how 
 
 - **Every game counts.** A game says a team is worth its opponent's rating plus its margin, with 3 extra points for winning (3 fewer for losing), adjusted for home field. A team's rating is the average of what its games say, with all teams solved together in one exact linear system.
 - **Every team starts level.** No preseason ranking, no carry-over from last season, no recruiting or reputation: only this season's games count.
-- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 70.5% of the next week's winners using this season's games only: level with the best known method (Massey with home field, 70.2%) and ahead of Elo carried over from last season (69.7%), LRMC (69.5%) and Colley (67.0%). See [`research/`](research/).
+- **Winners above losers.** If a team beat another, it is ranked above it, except for the fewest upsets that cycles of results make unavoidable (32 of 748 games so far this season).
+- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), the final ranking has the winner above the loser in 90.3% of games (about 80% for Massey, Elo, LRMC and Colley), and it picks 69.6% of the next week's winners using this season's games only, within a point of the best known predictor (Massey with home field, 70.2%). See [`research/`](research/).
 
 - **Offense, defense and special teams.** Separate rankings from public play-by-play (expected points per snap, garbage time removed, adjusted for opponents and home field). They explain how teams win; they don't change the overall rank, because in testing they predicted no better than final scores.
 

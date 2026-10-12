@@ -132,6 +132,8 @@ export interface Ranking {
   season: string;
   snapshot: SnapshotSpec;
   manifest: Manifest;
+  /** Game ids accepted as upsets (fewest the search found); every other winner is held above its loser. Ascending. */
+  upsets: number[];
   teams: RankedTeam[];
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type RatedGame, fitRatings, gameValue, result } from "../src/engine/rating";
+import { type RatedGame, STOP_GAP, fitRatings, gameValue, result } from "../src/engine/rating";
 
 const opts = (_n: number, over: Partial<{ winBonus: number; shrink: number }> = {}) => ({ winBonus: 3, shrink: 2, ...over });
 
@@ -76,6 +76,26 @@ describe("fitRatings", () => {
     // Team 1 keeps beating team 0 by 14 (+3): with more games its edge approaches 17.
     expect(many[1]! - many[0]!).toBeGreaterThan(one[1]! - one[0]!);
     expect(many[1]! - many[0]!).toBeGreaterThan(14);
+  });
+
+  it("holds every kept winner above its loser", () => {
+    const games = season(30, 140, 6);
+    const kept = games.map(() => true);
+    // Break cycles crudely for the test: only keep games consistent with team order by index.
+    games.forEach((g, i) => (kept[i] = (g.margin > 0 ? g.home : g.away) < (g.margin > 0 ? g.away : g.home)));
+    const { ratings } = fitRatings(30, games, { ...opts(30), kept });
+    games.forEach((g, i) => {
+      if (!kept[i]) return;
+      const [w, l] = g.margin > 0 ? [g.home, g.away] : [g.away, g.home];
+      expect(ratings[w]! - ratings[l]!).toBeGreaterThan(STOP_GAP * 0.8);
+    });
+  });
+
+  it("changes nothing when no stop needs to engage", () => {
+    const games: RatedGame[] = [{ home: 0, away: 1, margin: 20, neutral: true }, { home: 1, away: 2, margin: 20, neutral: true }];
+    const plain = fitRatings(3, games, opts(3));
+    const held = fitRatings(3, games, { ...opts(3), kept: [true, true] });
+    plain.ratings.forEach((r, i) => expect(held.ratings[i]).toBeCloseTo(r, 9));
   });
 
   it("is bit-identical across runs", () => {

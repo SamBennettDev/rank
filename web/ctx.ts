@@ -1,5 +1,5 @@
 import { buildEdges, listSnapshots } from "../src/engine/graph";
-import { gameValue, result } from "../src/engine/rating";
+import { STOP_GAP, STOP_STIFFNESS, gameValue, result } from "../src/engine/rating";
 import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 export type View = "list" | "graph" | "team" | "about";
@@ -16,9 +16,11 @@ export interface Ctx {
   byId: Map<number, RankedTeam>;
   /** Teams with a rank, best first. */
   ranked: RankedTeam[];
+  /** Games accepted as upsets; every other winner is held above its loser. */
+  upsetIds: Set<number>;
 }
 
-export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
+export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked" | "upsetIds">): Ctx {
   const spec = listSnapshots(base.games).find((s) => s.id === base.snapId)!;
   const { edges } = buildEdges(base.games, base.ranking.teams, spec);
   return {
@@ -26,6 +28,7 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
     edges,
     byId: new Map(base.ranking.teams.map((t) => [t.id, t])),
     ranked: base.ranking.teams.filter((t) => t.rank !== null),
+    upsetIds: new Set(base.ranking.upsets ?? []),
   };
 }
 
@@ -38,11 +41,11 @@ export const rankLabel = (rank: number | null, tied: boolean) => (rank === null 
 export const fmtHeight = (v: number | null, d = 1) => (v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d));
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 
-/** A game is an upset when the winner is rated below the loser; biggest gap first. */
+/** The games accepted as upsets (published in the ranking file), biggest rating gap first. */
 export function upsets(ctx: Ctx): { edge: Edge; gap: number }[] {
   return ctx.edges
+    .filter((edge) => ctx.upsetIds.has(edge.gameId))
     .map((edge) => ({ edge, gap: ctx.byId.get(edge.loser)!.height! - ctx.byId.get(edge.winner)!.height! }))
-    .filter((u) => u.gap > 0)
     .sort((a, b) => b.gap - a.gap || a.edge.gameId - b.edge.gameId);
 }
 
@@ -58,14 +61,18 @@ export interface GameLine {
   result: number;
   /** What this game alone says the team's rating is. */
   value: number;
+  /** Accepted as an upset: no hold. */
+  upset: boolean;
+  /** Push from this game's head-to-head hold on this team's rating sum (+ holds it up, − holds it down); 0 if not engaged. */
+  hold: number;
 }
 
 /**
  * Rebuilds a team's rating the way the model defines it: what each of its games says
- * (opponent rating + result, adjusted for home field), summed and divided by games +
- * shrink. At the published solution this reproduces the rating.
+ * (opponent rating + result, adjusted for home field) plus any head-to-head holds,
+ * summed and divided by games + shrink. At the published solution this reproduces the rating.
  */
-export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink: number; average: number } {
+export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink: number; holds: number; average: number } {
   const m = ctx.ranking.manifest;
   const lines = ctx.edges
     .filter((e) => e.winner === teamId || e.loser === teamId)
@@ -75,17 +82,22 @@ export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink
       const atHome = won ? edge.winnerIsHome : !edge.winnerIsHome;
       const where: -1 | 0 | 1 = edge.neutralSite ? 0 : atHome ? 1 : -1;
       const margin = won ? edge.winnerPoints - edge.loserPoints : edge.loserPoints - edge.winnerPoints;
-      return { edge, won, opponent, where, margin, result: result(margin, m.winBonus), value: gameValue(opponent.height!, margin, where, m.homeField, m.winBonus) };
+      const upset = ctx.upsetIds.has(edge.gameId);
+      const me = ctx.byId.get(teamId)!;
+      const gap = won ? me.height! - opponent.height! : opponent.height! - me.height!;
+      const push = !upset && gap < STOP_GAP ? STOP_STIFFNESS * (STOP_GAP - gap) : 0;
+      return { edge, won, opponent, where, margin, result: result(margin, m.winBonus), value: gameValue(opponent.height!, margin, where, m.homeField, m.winBonus), upset, hold: won ? push : -push };
     });
-  const average = lines.reduce((s, l) => s + l.value, 0) / (lines.length + m.shrink);
-  return { lines, shrink: m.shrink, average };
+  const holds = lines.reduce((s, l) => s + l.hold, 0);
+  const average = (lines.reduce((s, l) => s + l.value, 0) + holds) / (lines.length + m.shrink);
+  return { lines, shrink: m.shrink, holds, average };
 }
 
 export type Metric = "overall" | "offense" | "defense" | "special";
 export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
 export const METRIC_LABEL: Record<Metric, string> = { overall: "Overall", offense: "Offense", defense: "Defense", special: "Special teams" };
 export const METRIC_HINT: Record<Metric, string> = {
-  overall: "Points better than an average FBS or FCS team, from every score this season, who it came against and home field. Every team starts the season level.",
+  overall: "Points better than an average FBS or FCS team, from every score this season, who it came against and home field, with every winner kept above the team it beat except the fewest unavoidable upsets. Every team starts level.",
   offense: "Points per game the offense adds over an average offense: expected points per snap from play-by-play, garbage time removed, adjusted for the defenses it faced and home field.",
   defense: "Points per game the defense saves compared with an average defense: expected points per snap allowed, garbage time removed, adjusted for the offenses it faced and home field.",
   special: "Points per game gained on kickoffs, punts, field goals and returns compared with an average team, adjusted for opponents.",

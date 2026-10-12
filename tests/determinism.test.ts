@@ -42,6 +42,22 @@ describe("determinism", () => {
   });
 });
 
+describe("head-to-head", () => {
+  it("publishes accepted upsets, and every other game's winner is rated above its loser", async () => {
+    const out = await computeSeason(input);
+    const games = parseGames(input.gamesCsv);
+    const teams = parseTeams(input.teamsCsv);
+    for (const f of out.files) {
+      const r = JSON.parse(f.json);
+      const height = new Map(r.teams.map((t: { id: number; height: number }) => [t.id, t.height]));
+      const upsets = new Set<number>(r.upsets);
+      expect([...upsets]).toEqual([...upsets].sort((a, b) => a - b));
+      const { edges } = buildEdges(games, teams, listSnapshots(games).find((s) => s.id === r.snapshot.id)!);
+      for (const e of edges) if (!upsets.has(e.gameId)) expect(height.get(e.winner) as number).toBeGreaterThan(height.get(e.loser) as number);
+    }
+  });
+});
+
 describe("pipeline", () => {
   it("publishes one ranking file per snapshot", async () => {
     const out = await computeSeason(input);
@@ -51,7 +67,7 @@ describe("pipeline", () => {
   it("records the settings, home field and inputs in every manifest", async () => {
     const out = await computeSeason(input);
     const m = JSON.parse(out.files[0]!.json).manifest;
-    expect([m.engine, m.algorithmVersion, m.winBonus, m.shrink]).toEqual(["rank-engine-7", "margin-2", 3, 0.05]);
+    expect([m.engine, m.algorithmVersion, m.winBonus, m.shrink]).toEqual(["rank-engine-8", "margin-3", 3, 0.05]);
     expect(m).not.toHaveProperty("priorSeason");
     expect(JSON.parse(out.files[0]!.json).teams[0]).not.toHaveProperty("prior");
     expect(typeof m.homeField).toBe("number");

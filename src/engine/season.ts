@@ -1,12 +1,13 @@
 import { parseConfig, parseGames, parsePlays, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
+import { fewestUpsetsOrder } from "./order";
 import { type RatedGame, fitRatings } from "./rating";
 import type { Edge, Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
 import { fitUnits } from "./units";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-7";
+export const ENGINE_VERSION = "rank-engine-8";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -70,7 +71,20 @@ export async function computeSeason(
     }
     const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
-    const { ratings, homeField } = fitRatings(teams.length, rated(edges, index), { winBonus: config.winBonus, shrink: config.shrink });
+    // 1. The plain rating. 2. From its order, the fewest upsets a one-team-at-a-time search
+    // finds. 3. The rating again, with every other winner held above its loser.
+    const counted = rated(edges, index);
+    const plain = fitRatings(teams.length, counted, { winBonus: config.winBonus, shrink: config.shrink });
+    const results = edges.map((e) => ({ winner: index.get(e.winner)!, loser: index.get(e.loser)! }));
+    const start = teams.map((_, i) => i).sort((a, b) => plain.ratings[b]! - plain.ratings[a]! || a - b);
+    const place = new Int32Array(teams.length);
+    fewestUpsetsOrder(teams.length, results, start).forEach((t, i) => (place[t] = i));
+    const kept = results.map((r) => place[r.winner]! < place[r.loser]!);
+    const from = new Float64Array(teams.length + 1);
+    from.set(plain.ratings);
+    from[teams.length] = plain.homeField;
+    const { ratings, homeField } = fitRatings(teams.length, counted, { winBonus: config.winBonus, shrink: config.shrink, kept, from });
+    const upsets = edges.filter((_, i) => !kept[i]).map((e) => e.gameId);
     const units = plays ? fitUnits(teams.length, index, edges, plays, config.shrink) : null;
     const unit = (v: number | null | undefined) => (v === null || v === undefined ? null : round6(v));
     const heights = new Map(played.map((t) => [t.id, round6(ratings[index.get(t.id)!]!)]));
@@ -113,7 +127,7 @@ export async function computeSeason(
       snapsPerGame: units ? round6(units.snapsPerGame) : null,
       counts,
     };
-    files.push({ id: snap.id, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, teams: ranked }) });
+    files.push({ id: snap.id, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, upsets, teams: ranked }) });
     await onProgress?.(files.length, snapshots.length);
   }
 
@@ -137,6 +151,7 @@ export function formatRanking(r: Ranking): string {
     `  "season": ${JSON.stringify(r.season)},`,
     `  "snapshot": ${JSON.stringify(r.snapshot)},`,
     `  "manifest": ${indent(JSON.stringify(r.manifest, null, 2))},`,
+    `  "upsets": ${JSON.stringify(r.upsets)},`,
     '  "teams": [',
     ...r.teams.map((t, i) => `    ${JSON.stringify(t)}${i < r.teams.length - 1 ? "," : ""}`),
     "  ]",

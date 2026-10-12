@@ -84,7 +84,7 @@ writeFileSync(
     {
       label: "Demo season (fictional data)",
       demo: true,
-      algorithmVersion: "margin-2",
+      algorithmVersion: "margin-3",
       classifications: ["fbs"],
       winBonus: 3,
       shrink: 0.05,
