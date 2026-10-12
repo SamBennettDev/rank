@@ -178,7 +178,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-          h("p", {}, "Each team sits at its rating: how many points better it is than an average FBS or FCS team, judged only by this season’s scores, who it came against and home field. Every team starts level. Height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+          h("p", {}, "Each team sits at its rating: how many points better it is than an average FBS or FCS team, judged only by this season’s scores, who it came against and home field. Every team starts level; head-to-head breaks ties between teams within a field goal. Height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),

@@ -1,5 +1,5 @@
 import { buildEdges, listSnapshots } from "../src/engine/graph";
-import { gameValue, result } from "../src/engine/rating";
+import { STOP_GAP, STOP_STIFFNESS, gameValue, result } from "../src/engine/rating";
 import type { Edge, Game, RankedTeam, Ranking, SeasonIndexEntry, Team } from "../src/engine/types";
 
 export type View = "list" | "graph" | "team" | "about";
@@ -16,9 +16,11 @@ export interface Ctx {
   byId: Map<number, RankedTeam>;
   /** Teams with a rank, best first. */
   ranked: RankedTeam[];
+  /** Games where head-to-head broke a close call (the winner is held above the loser). */
+  heldIds: Set<number>;
 }
 
-export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
+export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked" | "heldIds">): Ctx {
   const spec = listSnapshots(base.games).find((s) => s.id === base.snapId)!;
   const { edges } = buildEdges(base.games, base.ranking.teams, spec);
   return {
@@ -26,6 +28,7 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
     edges,
     byId: new Map(base.ranking.teams.map((t) => [t.id, t])),
     ranked: base.ranking.teams.filter((t) => t.rank !== null),
+    heldIds: new Set(base.ranking.held ?? []),
   };
 }
 
@@ -58,14 +61,18 @@ export interface GameLine {
   result: number;
   /** What this game alone says the team's rating is. */
   value: number;
+  /** Head-to-head broke a close call in this game. */
+  held: boolean;
+  /** That hold's push on this team's rating sum (+ up, − down); 0 when it is not engaged. */
+  hold: number;
 }
 
 /**
  * Rebuilds a team's rating the way the model defines it: what each of its games says
- * (opponent rating + result, adjusted for home field), summed and divided by games +
- * shrink. At the published solution this reproduces the rating.
+ * (opponent rating + result, adjusted for home field) plus any head-to-head holds,
+ * summed and divided by games + shrink. At the published solution this reproduces the rating.
  */
-export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink: number; average: number } {
+export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink: number; holds: number; average: number } {
   const m = ctx.ranking.manifest;
   const lines = ctx.edges
     .filter((e) => e.winner === teamId || e.loser === teamId)
@@ -75,17 +82,22 @@ export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; shrink
       const atHome = won ? edge.winnerIsHome : !edge.winnerIsHome;
       const where: -1 | 0 | 1 = edge.neutralSite ? 0 : atHome ? 1 : -1;
       const margin = won ? edge.winnerPoints - edge.loserPoints : edge.loserPoints - edge.winnerPoints;
-      return { edge, won, opponent, where, margin, result: result(margin, m.winBonus), value: gameValue(opponent.height!, margin, where, m.homeField, m.winBonus) };
+      const held = ctx.heldIds.has(edge.gameId);
+      const me = ctx.byId.get(teamId)!;
+      const gap = won ? me.height! - opponent.height! : opponent.height! - me.height!;
+      const push = held && gap < STOP_GAP ? STOP_STIFFNESS * (STOP_GAP - gap) : 0;
+      return { edge, won, opponent, where, margin, result: result(margin, m.winBonus), value: gameValue(opponent.height!, margin, where, m.homeField, m.winBonus), held, hold: won ? push : -push };
     });
-  const average = lines.reduce((s, l) => s + l.value, 0) / (lines.length + m.shrink);
-  return { lines, shrink: m.shrink, average };
+  const holds = lines.reduce((s, l) => s + l.hold, 0);
+  const average = (lines.reduce((s, l) => s + l.value, 0) + holds) / (lines.length + m.shrink);
+  return { lines, shrink: m.shrink, holds, average };
 }
 
 export type Metric = "overall" | "offense" | "defense" | "special";
 export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
 export const METRIC_LABEL: Record<Metric, string> = { overall: "Overall", offense: "Offense", defense: "Defense", special: "Special teams" };
 export const METRIC_HINT: Record<Metric, string> = {
-  overall: "Points better than an average FBS or FCS team, from every score this season, who it came against and home field. Every team starts the season level.",
+  overall: "Points better than an average FBS or FCS team, from every score this season, who it came against and home field; head-to-head breaks ties within a field goal. Every team starts the season level.",
   offense: "Points per game the offense adds over an average offense: expected points per snap from play-by-play, garbage time removed, adjusted for the defenses it faced and home field.",
   defense: "Points per game the defense saves compared with an average defense: expected points per snap allowed, garbage time removed, adjusted for the offenses it faced and home field.",
   special: "Points per game gained on kickoffs, punts, field goals and returns compared with an average team, adjusted for opponents.",

@@ -1,12 +1,13 @@
 import { parseConfig, parseGames, parsePlays, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
-import { type RatedGame, fitRatings } from "./rating";
+import { closeHeadToHead } from "./headtohead";
+import type { RatedGame } from "./rating";
 import type { Edge, Manifest, RankedTeam, Ranking, SeasonIndexEntry } from "./types";
 import { fitUnits } from "./units";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-7";
+export const ENGINE_VERSION = "rank-engine-9";
 
 const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 
@@ -70,7 +71,8 @@ export async function computeSeason(
     }
     const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
-    const { ratings, homeField } = fitRatings(teams.length, rated(edges, index), { winBonus: config.winBonus, shrink: config.shrink });
+    const { ratings, homeField, held: isHeld } = closeHeadToHead(teams.length, rated(edges, index), { winBonus: config.winBonus, shrink: config.shrink }, config.headToHeadWindow);
+    const held = edges.filter((_, i) => isHeld[i]).map((e) => e.gameId);
     const units = plays ? fitUnits(teams.length, index, edges, plays, config.shrink) : null;
     const unit = (v: number | null | undefined) => (v === null || v === undefined ? null : round6(v));
     const heights = new Map(played.map((t) => [t.id, round6(ratings[index.get(t.id)!]!)]));
@@ -105,6 +107,7 @@ export async function computeSeason(
       algorithmVersion: config.algorithmVersion,
       winBonus: config.winBonus,
       shrink: config.shrink,
+      headToHeadWindow: config.headToHeadWindow,
       homeField: round6(homeField),
       classifications: config.classifications,
       teamsSha256,
@@ -113,7 +116,7 @@ export async function computeSeason(
       snapsPerGame: units ? round6(units.snapsPerGame) : null,
       counts,
     };
-    files.push({ id: snap.id, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, teams: ranked }) });
+    files.push({ id: snap.id, json: formatRanking({ schema: 1, season: input.season, snapshot: snap, manifest, held, teams: ranked }) });
     await onProgress?.(files.length, snapshots.length);
   }
 
@@ -137,6 +140,7 @@ export function formatRanking(r: Ranking): string {
     `  "season": ${JSON.stringify(r.season)},`,
     `  "snapshot": ${JSON.stringify(r.snapshot)},`,
     `  "manifest": ${indent(JSON.stringify(r.manifest, null, 2))},`,
+    `  "held": ${JSON.stringify(r.held)},`,
     '  "teams": [',
     ...r.teams.map((t, i) => `    ${JSON.stringify(t)}${i < r.teams.length - 1 ? "," : ""}`),
     "  ]",

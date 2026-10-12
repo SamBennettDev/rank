@@ -45,10 +45,11 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "margin-2",
+  algorithmVersion: "margin-4",
   classifications: ["fbs", "fcs"],
   winBonus: 3,
   shrink: 0.05,
+  headToHeadWindow: 3,
 };
 mkdirSync(dir, { recursive: true });
 if (existsSync(configPath)) Object.assign(config, JSON.parse(readFileSync(configPath, "utf8")));

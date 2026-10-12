@@ -61,6 +61,7 @@ export function parseConfig(json: string): SeasonConfig {
   }
   num("winBonus", (v) => v >= 0, "a number >= 0");
   num("shrink", (v) => v > 0, "a positive number");
+  num("headToHeadWindow", (v) => v >= 0, "a number >= 0");
   return c;
 }
 

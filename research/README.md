@@ -70,3 +70,19 @@ fewest upsets; those games are accepted, and every other winner is held at least
 `run_h2h.py`: on 2021–26 it raises "winner above loser at season end" from 80.9% to 90.3% but lowers next-week
 picks from 70.53% to 69.59% (2014–19: 81.3% → 90.5%, 71.91% → 70.52%). It was published briefly and removed:
 head-to-head holds let one result move a team, and everyone held below it, a long way.
+
+## Head-to-head tiebreaker (published)
+
+`close_h2h.py`: if a team is rated below a team it beat by less than `window` points, hold it ½ point above and
+refit the whole ladder; repeat until no new close upset appears (holds that would contradict earlier ones in a
+cycle are skipped, closest first). `run_close.py`:
+
+| Window | 2014–19 picks | 2014–19 agreement | 2021–26 picks | 2021–26 agreement |
+|---|---|---|---|---|
+| 0 (off) | 71.91% | 81.3% | 70.53% | 80.9% |
+| 1 | 71.83% | 83.5% | 70.53% | 83.3% |
+| **3 (published)** | 71.47% | 86.9% | 70.32% | 86.5% |
+| 5 | 71.33% | 87.6% | 70.11% | 87.3% |
+| 7 | 70.06% | 85.6% | 68.32% | 84.5% |
+| 10 | 68.44% | 79.9% | 66.58% | 79.4% |
+| 14 | 65.41% | 73.3% | 64.72% | 73.0% |

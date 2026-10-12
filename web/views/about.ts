@@ -4,18 +4,18 @@ import { h } from "../dom";
 import { pillarIcons } from "../icons";
 import { fetchText, rankingPath, seasonFiles } from "../store";
 
-/** Held-out test, 2021–2025 plus 2026 through week 6 (research/holdout-results.txt). */
-const ACCURACY: [string, number][] = [
-  ["This rating", 70.5],
-  ["Massey with home field", 70.2],
-  ["Elo carried over from last season", 69.7],
-  ["Massey", 69.7],
-  ["LRMC", 69.5],
-  ["Elo", 68.5],
-  ["Keener", 68.2],
-  ["Bradley–Terry", 67.3],
-  ["Colley", 67.0],
-  ["Win percentage", 66.2],
+/** Held-out test, 2021–2025 plus 2026 through week 6 (research/). [name, next-week picks, winner above loser at season end] */
+const ACCURACY: [string, number, number][] = [
+  ["This rating", 70.3, 86.5],
+  ["Same rating without the tiebreaker", 70.5, 80.9],
+  ["Massey with home field", 70.2, 80.4],
+  ["Elo carried over from last season", 69.7, 80.3],
+  ["Massey", 69.7, 80.2],
+  ["LRMC", 69.5, 80.7],
+  ["Elo", 68.5, 81.8],
+  ["Bradley–Terry", 67.3, 83.2],
+  ["Colley", 67.0, 82.5],
+  ["Win percentage", 66.2, 78.9],
 ];
 
 export function aboutView(ctx: Ctx): HTMLElement {
@@ -61,11 +61,18 @@ export function aboutView(ctx: Ctx): HTMLElement {
   const file = (path: string) => h("a", { href: `./data/${path}`, target: "_blank", rel: "noopener" }, path.split("/").slice(-2).join("/"));
   const rows: [string, string][] = [
     ["Engine", m.engine], ["Algorithm", m.algorithmVersion],
-    ["Win bonus", `${m.winBonus} points`], ["Pull toward average", `${m.shrink} games’ worth, the same for every team`],
+    ["Win bonus", `${m.winBonus} points`], ["Pull toward average", `${m.shrink} games’ worth, the same for every team`], ["Head-to-head window", `${m.headToHeadWindow} points`],
     ["Home field (fitted)", `${m.homeField.toFixed(2)} points`], ["Divisions", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
     ["Games counted", String(m.counts.included)], ["Outside FBS/FCS", String(m.counts.outOfScope)], ["Not yet played", String(m.counts.incomplete)], ["Tied scores", String(m.counts.tied)],
   ];
-  const best = ACCURACY[0]![1];
+  const bars = (k: 1 | 2, lo: number) => {
+    const best = Math.max(...ACCURACY.map((r) => r[k]));
+    return h("div", { class: "acc" }, ...[...ACCURACY].sort((a, b) => b[k] - a[k]).map((r) =>
+      h("div", { class: `accrow${r[0] === "This rating" ? " me" : ""}` },
+        h("span", { class: "n" }, r[0]),
+        h("span", { class: "bar" }, h("i", { style: `width:${((r[k] - lo) / (best - lo)) * 100}%` })),
+        h("span", { class: "v" }, `${r[k].toFixed(1)}%`))));
+  };
 
   return h("div", { class: "method" },
     h("section", { class: "hero" },
@@ -80,10 +87,14 @@ export function aboutView(ctx: Ctx): HTMLElement {
 
     h("h2", {}, "What each game says"),
     h("p", {}, "Every game is evidence about both teams. If you beat a team rated +10 by 14 points on a neutral field, that game says you are about ", h("b", {}, `+10 + 14 + ${m.winBonus} = +${24 + m.winBonus}`), ": the opponent’s rating, plus your margin, plus ", h("b", {}, `${m.winBonus} points for winning`), ` (a loss takes ${m.winBonus} off instead). Home teams have to win by more: a home game’s value is reduced by the home-field edge, which the data sets each week (`, h("b", {}, `${m.homeField.toFixed(1)} points`), " right now), and an away game’s is raised by it."),
-    h("p", {}, "A team’s rating is the ", h("b", {}, "average of what all its games say"), ". Because every opponent’s rating depends on its own games, all teams are solved together, in one exact system of equations. Every rating is also nudged very slightly toward average, as if each team had played ", h("b", {}, `${m.shrink} of a game`), " against an average opponent, so one game can’t send a team to an extreme. The nudge is the same for every team."),
+    h("p", {}, "A team’s rating is the ", h("b", {}, "average of what all its games say"), " (plus any head-to-head holds, below). Because every opponent’s rating depends on its own games, all teams are solved together, in one exact system of equations. Every rating is also nudged very slightly toward average, as if each team had played ", h("b", {}, `${m.shrink} of a game`), " against an average opponent, so one game can’t send a team to an extreme. The nudge is the same for every team."),
     h("pre", { class: "formula" }, `minimise   Σ games (result − (r[home] − r[away] + H · home))²\n         + ${m.shrink} · Σ teams r[i]²\n\n`,
       h("span", { class: "c" }, `result   home margin, plus ${m.winBonus} if home won, minus ${m.winBonus} if home lost\nr[i]     rating of team i (the y-axis of the graph), in points\nH        home-field edge in points; home is 1 for a true home game, 0 at a neutral site\n${m.shrink}     the same small pull toward 0 (average) for every team`)),
     h("p", {}, "Setting the slope to zero gives one symmetric linear system, solved exactly with a Cholesky decomposition using only + − × / and √ in a fixed order. No iterations, no random starts. The same scores give the same answer, to the last bit, on any computer."),
+
+    h("h2", {}, "Head-to-head breaks close calls"),
+    h("p", {}, "If two teams are rated within ", h("b", {}, `${m.headToHeadWindow} points`), " (a field goal) and the lower one beat the higher one, head-to-head decides: the winner is held at least ½ point above the loser, and the whole ladder is worked out again with that hold, so everyone around them adjusts consistently. New close pairs that appear are checked the same way until nothing changes. Teams further apart keep their places: one upset doesn’t outweigh a season of results."),
+    h("p", {}, "When close results contradict each other (A beat B, B beat C, C beat A), the closest calls are applied first and a hold that would contradict them is skipped. ", `This week ${ctx.ranking.held.length} games were decided this way; team pages tag them H2H.`),
 
     h("h2", {}, "Every team starts level"),
     h("p", {}, "There is no preseason ranking, no carry-over from last season and no recruiting or reputation input. In week 1 every team is equal, and only this season’s games move anyone. Early-season rankings are therefore volatile: until teams have played a few connected games, one blowout can move a team a long way."),
@@ -95,13 +106,11 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h("p", { class: "muted" }, "Why doesn’t play-by-play drive the overall ranking? We tested it. Unit ratings on their own, mixes of them with the score rating, and expected points or success rate folded into each game’s result all picked next week’s winners slightly worse than final scores did on 2015–2019 (best 73.0% vs 73.1%). Per game, expected-points margin and the final margin correlate at 0.93, so scores already carry most of what the plays say."),
 
     h("h2", {}, "How accurate it is"),
-    h("p", {}, "The test: every week from week 4, each method ranks teams using only the games already played and predicts the next week’s games (the higher-ranked team wins). Settings were chosen on 2014–2019 and then frozen. These numbers are from 2021–2025 plus 2026 so far, which the model never saw while it was designed: 6,287 games."),
-    h("div", { class: "acc" }, ...ACCURACY.map(([name, pct], i) =>
-      h("div", { class: `accrow${i === 0 ? " me" : ""}` },
-        h("span", { class: "n" }, name),
-        h("span", { class: "bar" }, h("i", { style: `width:${((pct - 60) / (best - 60)) * 100}%` })),
-        h("span", { class: "v" }, `${pct.toFixed(1)}%`)))),
-    h("p", { class: "muted" }, "Using only this season’s games, it is level with the best known method (Massey with home field; +0.3 points, within the margin of error) and ahead of the rest, including Elo carried over from last season (+0.9) and LRMC (+1.1). On FBS-vs-FBS games it matches CollegeFootballData’s own Elo rating (69.3% vs 69.2%), which starts each season from the last. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
+    h("p", {}, "Two tests on seasons the model never saw while it was designed (2021–2025 plus 2026 so far). First: every week from week 4, each method ranks teams using only the games already played and predicts the next week’s games (6,287 games)."),
+    bars(1, 60),
+    h("p", {}, "Second: at the end of each season, how often the final ranking has the winner of a game above the loser."),
+    bars(2, 70),
+    h("p", { class: "muted" }, "The tiebreaker costs a fifth of a point of prediction (70.3% against 70.5%) and puts the winner above the loser in 86.5% of games instead of 80.9%. With it, the rating is still level with the best known predictor (Massey with home field) and ahead of the rest, including Elo carried over from last season. A window of 3 points was chosen on 2014–2019: wider windows let head-to-head pull teams too far and made both measures worse. The full benchmark is in the repository’s research folder. Systems built on recruiting, returning players or betting markets were not tested."),
 
     h("h2", {}, "What counts"),
     h("ul", {},

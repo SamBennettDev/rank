@@ -36,6 +36,8 @@ export interface SeasonConfig {
   winBonus: number;
   /** Games' worth of pull toward an average rating, the same for every team. */
   shrink: number;
+  /** Head-to-head breaks ties between teams rated within this many points (0 turns it off). */
+  headToHeadWindow: number;
 }
 
 /** One team's play-by-play summary for one game (see scripts/fetch-plays.ts). */
@@ -115,6 +117,7 @@ export interface Manifest {
   algorithmVersion: string;
   winBonus: number;
   shrink: number;
+  headToHeadWindow: number;
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
   classifications: string[];
@@ -132,6 +135,8 @@ export interface Ranking {
   season: string;
   snapshot: SnapshotSpec;
   manifest: Manifest;
+  /** Game ids where head-to-head broke a close call: the winner is held at least ½ point above the loser. Ascending. */
+  held: number[];
   teams: RankedTeam[];
 }
 

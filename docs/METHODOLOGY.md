@@ -59,6 +59,24 @@ value = opponent's rating + this team's result − H (at home) / + H (away) / ±
 
 A team's rating is the average of what its games say (divided by games + 0.05 rather than games). The team page draws exactly this: one row per game at its value, and the rating as their average.
 
+### Head-to-head breaks close calls
+
+If two teams are rated within `headToHeadWindow` points (3, a field goal) and the lower one beat the higher one, head-to-head decides (`closeHeadToHead` in `src/engine/headtohead.ts`):
+
+1. From the fit above, every game whose winner is rated below its loser by less than 3 points (or above it by less than ½ point) gets a **hold**. Candidates are taken closest first, then by game order; a hold is skipped if the loser is already required, directly or through other holds, to stay above the winner, so cycles of close results never fight.
+2. The whole ladder is fitted again with those holds. Each adds a very stiff spring that engages only if its winner is less than ½ point above its loser:
+
+```
+  + 1000 × sum_held max(0, ½ − (r[winner] − r[loser]))²
+```
+
+   solved by Newton steps on the set of engaged holds, each an exact Cholesky solve, until that set repeats.
+3. The refit can bring new close pairs into the window, so steps 1–2 repeat until no hold is added. Holds are only ever added, so this stops.
+
+Teams further apart than 3 points keep their places: one upset doesn't outweigh a season of results. Held games are published in each ranking file's `held` array, and every held winner is rated above its loser (a test checks every published file). With holds, the team-page identity becomes `r[i] = (sum of game values + sum of hold pushes) / (games + shrink)`, where an engaged hold pushes 1000 × (½ − gap) up on its winner and down on its loser.
+
+The window was chosen on 2014–2019: 3 points cost 0.4 points of prediction there and raised season-end agreement with results from 81.3% to 86.9%; windows of 7 points or more made both worse.
+
 ### Every team starts level
 
 There is no preseason ranking, no carry-over from last season, and no recruiting, reputation or conference input. In week 1 every team is equal (rating 0); only this season's games move anyone. A rating of 0 is the average of all FBS and FCS teams in scope.
@@ -73,14 +91,15 @@ This costs some early-season accuracy, deliberately. In the held-out test, start
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "margin-2",
+  "algorithmVersion": "margin-4",
   "classifications": ["fbs", "fcs"],
   "winBonus": 3,
-  "shrink": 0.05
+  "shrink": 0.05,
+  "headToHeadWindow": 3
 }
 ```
 
-Every ranking file's manifest records the engine version, `algorithmVersion`, `winBonus`, `shrink`, the fitted home-field edge, and the SHA-256 of the season's CSVs.
+Every ranking file's manifest records the engine version, `algorithmVersion`, `winBonus`, `shrink`, `headToHeadWindow`, the fitted home-field edge, and the SHA-256 of the season's CSVs.
 
 ### Rank, ties and unplayed teams
 
@@ -122,29 +141,30 @@ Every team starts level: each unit is pulled toward average (0) with `shrink` ga
 
 The model came out of a walk-forward benchmark in [`research/`](../research/): every week, each method ranks teams using only the games played before that week and predicts that week's games, with the higher-ranked team picked to win. All settings (win bonus, carryover, prior weight) were chosen on 2014–2019, then frozen and tested once on 2021–2025 plus 2026 through week 6, which played no part in the design (6,287 games from week 4 on).
 
-| Method (held-out seasons) | Next-week winners |
-|---|---|
-| **This rating** | **70.5%** |
-| Massey (least squares on margin) with home field | 70.2% |
-| Elo carried over from last season | 69.7% |
-| Massey | 69.7% |
-| LRMC | 69.5% |
-| Elo (in season) | 68.5% |
-| Keener | 68.2% |
-| Pythagorean | 68.2% |
-| Bradley–Terry | 67.3% |
-| Colley | 67.0% |
-| Win percentage | 66.2% |
-| PageRank | 64.3% |
+| Method (held-out seasons) | Next-week winners | Winner above loser at season end |
+|---|---|---|
+| **This rating** | **70.3%** | **86.5%** |
+| Same rating without the tiebreaker | 70.5% | 80.9% |
+| Massey (least squares on margin) with home field | 70.2% | 80.4% |
+| Elo carried over from last season | 69.7% | 80.3% |
+| Massey | 69.7% | 80.2% |
+| LRMC | 69.5% | 80.7% |
+| Elo (in season) | 68.5% | 81.8% |
+| Keener | 68.2% | 77.5% |
+| Pythagorean | 68.2% | 76.2% |
+| Bradley–Terry | 67.3% | 83.2% |
+| Colley | 67.0% | 82.5% |
+| Win percentage | 66.2% | 78.9% |
+| PageRank | 64.3% | 78.2% |
 
-With no preseason input it is level with the best known method, Massey with home field (+0.3 points, 95% interval −0.1 to +0.7), and ahead of the rest: plain Massey (+0.9), LRMC (+1.1), in-season Elo (+2.0) and even Elo carried over from last season (+0.9). On FBS-vs-FBS games it matches CollegeFootballData's own pregame Elo (69.3% vs 69.2%), which starts each season from the last. The same model starting each team from 90% of last season's rating scored 71.9%; that start was removed so the ranking judges this season only. Ideas that did not help on 2014–2019 and were dropped: treating blowout margins as censored, robust losses, recency weighting and conference layers. A head-to-head step was also tried and removed: holding every winner above the team it beat, except the fewest upsets that cycles force, raised agreement with results from 80.9% to 90.3% of games but cut next-week picks to 69.6%, and let a single result move a team (and everyone below it) a long way. Systems that use recruiting, returning players, play-by-play or betting markets (SP+, FPI, Sagarin, Vegas) were not tested.
+Without the tiebreaker the rating (this season's games only) is level with the best known predictor, Massey with home field (+0.3 points, 95% interval −0.1 to +0.7), and ahead of plain Massey, LRMC, Elo and even Elo carried over from last season. The tiebreaker gives up a fifth of a point of that (70.3%) and lifts season-end agreement with results to 86.5%, above every other method. Starting each team from 90% of last season's rating would add about 1.4 points of prediction; it was removed so the ranking judges this season only. A stronger head-to-head step (holding every winner above the team it beat, except the fewest upsets cycles force) reached 90.3% agreement but cut picks to 69.6% and let one result move teams a long way; it was removed in favour of the 3-point tiebreaker. Ideas that did not help on 2014–2019 and were dropped: treating blowout margins as censored, robust losses, recency weighting, conference layers and play-by-play (see below). Systems that use recruiting, returning players or betting markets (SP+, FPI, Sagarin, Vegas) were not tested.
 
-`npm run backtest -- --history 2021-2025` runs the published pipeline itself (`computeSeason`) on those seasons, from public sportsdataverse schedules, and reports 70.6% of next-week winners.
+`npm run backtest -- --history 2021-2025` runs the published pipeline itself (`computeSeason`) on those seasons, from public sportsdataverse schedules, and reports 70.4% of next-week winners and 86.3% agreement with results.
 
 ## Determinism rules
 
 1. Teams are ordered by numeric id; games by numeric game id. This fixes the matrix and its summation order, so row order in the CSVs is irrelevant (there is a test for that).
-2. The fit is one linear solve using only `+ − × /` and `sqrt`, which IEEE-754 defines exactly, in a fixed loop order.
+2. The fit is a few linear solves using only `+ − × /` and `sqrt`, which IEEE-754 defines exactly, in a fixed loop order.
 3. Ratings are rounded to 1e-6 before they are ranked or written.
 4. JSON is written with a fixed key order and layout (`formatRanking` in `src/engine/season.ts`).
 5. Each ranking file embeds the SHA-256 of the exact CSV bytes it was computed from (teams, games and plays), the settings and the engine version.
@@ -161,7 +181,8 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 - **Opp. rating**: the opponent's rating.
 - **Game says**: the game's value (above): the opponent's rating plus this team's result, adjusted for home field.
 - **Pull**: game value − this team's rating. Positive games pull the rating up, negative games pull it down; together they balance at (almost exactly) zero.
-- **Upset**: the winner is rated below the loser.
+- **Upset**: the winner is rated below the loser (its teams were more than 3 points apart, so head-to-head did not decide it).
+- **H2H**: head-to-head broke a close call in this game; the winner is held at least ½ point above the loser.
 
 ## Data pipeline
 
