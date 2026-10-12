@@ -34,3 +34,23 @@ pip install numpy scipy
 python3 run_baselines.py      # tuning seasons
 python3 holdout.py && python3 analyze.py
 ```
+
+## Play-by-play (offense, defense, special teams)
+
+`pbp_agg.py` condenses the public cfbfastR play-by-play release (downloaded to `/tmp/rank-pbp/pbp_<year>.parquet`;
+needs `pyarrow pandas`) into one row per team per game: snaps and EPA (with and without garbage time), successes,
+turnover-free EPA, and net special-teams EPA. `units.py` fits opponent-adjusted offense/defense/special-teams
+ratings; `epa_result.py` folds EPA or success-rate margins into each game's result in the score model.
+
+Tested on 2015–2019 (`tune_units.py`, `tune_epa.py`), next-week winners from week 4:
+
+| Model | All games | FBS vs FBS |
+|---|---|---|
+| Score rating (published model) | 73.07% | 72.92% |
+| + success-rate margin mixed in (25%) | 72.93% | 72.92% |
+| + turnover-free EPA margin mixed in (50%) | 73.02% | 72.85% |
+| Blend with unit overall (30–50%) | 72.6% | 72.1–72.6% |
+| Unit overall alone | 68.60% | 71.04% |
+
+None beat final scores, so play-by-play feeds only the separate unit rankings. Per game, EPA margin and points margin
+correlate at 0.93 (2015–2019).

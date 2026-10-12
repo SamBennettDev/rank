@@ -97,6 +97,32 @@ A season with `"publish": false` is kept only as the next season's starting poin
 
 `week-NN` uses all regular-season games with `week <= NN`. `postseason` uses every game. A snapshot never looks at later games, and each one is recomputed from scratch from the current CSVs, so any historical ranking can be reproduced.
 
+## Offense, defense and special teams
+
+Separate unit ratings come from play-by-play. They describe *how* a team plays; they do not change the overall rank (see below for why).
+
+**Source.** `npm run fetch-plays -- <year>` downloads the public cfbfastR play-by-play release from the [sportsdataverse](https://github.com/sportsdataverse/sportsdataverse-data) project (CFBD-derived; covers games with at least one FBS team, and most FCS games from 2022). Each play carries an expected-points-added (EPA) value from cfbfastR's open-source expected-points model. The script condenses it to `data/seasons/<year>/plays.csv`, one row per team per game:
+
+| column | meaning |
+|---|---|
+| `snaps` | the team's scrimmage plays (rushes and passes by the offense) outside garbage time |
+| `epa` | expected points added on those snaps |
+| `success` | how many of them were successful |
+| `special_epa` | net EPA on kickoffs, punts and field goals and their returns, from this team's side (the two teams' values sum to zero) |
+
+Garbage time is a score gap above 38 points in the 2nd quarter, 28 in the 3rd or 22 in the 4th. Plays are summed in game and play-id order.
+
+**The fit** (`fitUnits` in `src/engine/units.ts`). For each team-game row, with site x = +1 at home, −1 away, 0 neutral:
+
+```
+epa / snaps ≈ mu + O[team] − D[opponent] + h × x          (weighted by snaps)
+special_epa ≈ S[team] − S[opponent]                       (one row per game)
+```
+
+Each unit is pulled toward its starting point (0.9 × last season's final unit rating, centred on the FBS average) with `priorWeight` games' worth of evidence: 2 games, or 2 × the average snaps per game for offense and defense. Both systems are solved exactly by Cholesky. Ratings are published in points per game better than average: offense = O × snaps per game, defense = D × snaps per game, special teams = S. Teams with no play-by-play this season (mostly FCS teams that have only played FCS opponents) have no unit ratings.
+
+**Why play-by-play does not drive the overall rank.** It was tested on 2015–2019 (research folder): the unit ratings on their own (68.6% of next-week winners), blends of them with the score rating (72.3–72.7%), and expected points, turnover-free expected points or success rate mixed into each game's result (72.3–73.0%) all did no better than final scores alone (73.1%). Per game, the expected-points margin and the final margin correlate at 0.93, so final scores already carry most of what the plays say about who will win.
+
 ## How it was chosen, and how accurate it is
 
 The model came out of a walk-forward benchmark in [`research/`](../research/): every week, each method ranks teams using only the games played before that week and predicts that week's games, with the higher-ranked team picked to win. All settings (win bonus, carryover, prior weight) were chosen on 2014–2019, then frozen and tested once on 2021–2025 plus 2026 through week 6, which played no part in the design (6,287 games from week 4 on).
@@ -126,7 +152,7 @@ It beat the best known method in all six held-out seasons, by 1.6 points overall
 2. The fit is one linear solve using only `+ − × /` and `sqrt`, which IEEE-754 defines exactly, in a fixed loop order.
 3. Ratings and starting points are rounded to 1e-6 before they are ranked or written.
 4. JSON is written with a fixed key order and layout (`formatRanking` in `src/engine/season.ts`).
-5. Each ranking file embeds the SHA-256 of the exact CSV bytes it was computed from (this season's and last season's), the settings and the engine version.
+5. Each ranking file embeds the SHA-256 of the exact CSV bytes it was computed from (this season's and last season's teams, games and plays), the settings and the engine version.
 
 ## Graph layout
 
@@ -136,6 +162,7 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 
 ## Per-game quantities on a team page
 
+- **Offense, defense, special teams**: the unit ratings above, with each team's rank among teams that have play-by-play.
 - **Opp. rating**: the opponent's rating.
 - **Game says**: the game's value (above): the opponent's rating plus this team's result, adjusted for home field.
 - **Pull**: game value − this team's rating. Positive games pull the rating up, negative games pull it down; together with the starting point (counted twice) they balance at zero.
@@ -145,6 +172,8 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 
 ```
 CollegeFootballData API --fetch--> data/seasons/<year>/{teams,games}.csv
+                                         |
+public play-by-play --fetch-plays--> data/seasons/<year>/plays.csv
                                          |
                     compute (src/engine, deterministic; also reads <year − 1>)
                                          v

@@ -39,4 +39,5 @@ export const seasonFiles = (season: string) => ({
   teamsCsv: `seasons/${season}/teams.csv`,
   gamesCsv: `seasons/${season}/games.csv`,
   configJson: `seasons/${season}/config.json`,
+  playsCsv: `seasons/${season}/plays.csv`,
 });

@@ -1,5 +1,5 @@
 import { parseCsvObjects, toCsv } from "./csv";
-import type { Game, SeasonConfig, Team } from "./types";
+import type { Game, SeasonConfig, Team, TeamGamePlays } from "./types";
 
 export const TEAM_COLUMNS = ["id", "school", "abbreviation", "conference", "classification", "color"];
 export const GAME_COLUMNS = [
@@ -64,4 +64,26 @@ export function parseConfig(json: string): SeasonConfig {
   num("priorWeight", (v) => v > 0, "a positive number");
   if (c.publish !== undefined && typeof c.publish !== "boolean") throw new Error("config.publish must be true or false");
   return c;
+}
+
+export const PLAY_COLUMNS = ["game_id", "team_id", "opponent_id", "snaps", "epa", "success", "special_epa"];
+
+export function parsePlays(csv: string): TeamGamePlays[] {
+  return parseCsvObjects(csv).map((r) => ({
+    gameId: Number(r.game_id),
+    teamId: Number(r.team_id),
+    opponentId: Number(r.opponent_id),
+    snaps: Number(r.snaps),
+    epa: Number(r.epa),
+    success: Number(r.success),
+    specialEpa: Number(r.special_epa),
+  }));
+}
+
+const fixed6 = (v: number) => (Math.abs(v) < 5e-7 ? 0 : v).toFixed(6);
+
+/** EPA columns keep 6 decimals; rows sorted by game then team. */
+export function playsToCsv(rows: TeamGamePlays[]): string {
+  return toCsv(PLAY_COLUMNS, [...rows].sort((a, b) => a.gameId - b.gameId || a.teamId - b.teamId)
+    .map((r) => [r.gameId, r.teamId, r.opponentId, r.snaps, fixed6(r.epa), r.success, fixed6(r.specialEpa)]));
 }

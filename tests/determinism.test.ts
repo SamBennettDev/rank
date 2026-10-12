@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseCsv, toCsv } from "../src/engine/csv";
 import { buildEdges, listSnapshots } from "../src/engine/graph";
-import { gamesToCsv, parseGames, parseTeams } from "../src/engine/data";
+import { gamesToCsv, parseGames, parseTeams, playsToCsv } from "../src/engine/data";
 import { computeSeason } from "../src/engine/season";
 
 const dir = join(import.meta.dirname, "fixtures/demo");
@@ -52,7 +52,7 @@ describe("pipeline", () => {
   it("records the settings, home field and inputs in every manifest", async () => {
     const out = await computeSeason(input);
     const m = JSON.parse(out.files[0]!.json).manifest;
-    expect([m.engine, m.algorithmVersion, m.winBonus, m.carryover, m.priorWeight, m.priorSeason]).toEqual(["rank-engine-5", "margin-prior-1", 3, 0.9, 2, null]);
+    expect([m.engine, m.algorithmVersion, m.winBonus, m.carryover, m.priorWeight, m.priorSeason]).toEqual(["rank-engine-6", "margin-prior-1", 3, 0.9, 2, null]);
     expect(typeof m.homeField).toBe("number");
   });
 
@@ -78,6 +78,22 @@ describe("pipeline", () => {
     const others = first.filter((t: { id: number }) => t.id !== newcomer.id).map((t: { prior: number }) => t.prior);
     const avg = others.reduce((a: number, b: number) => a + b, 0) / others.length;
     expect(first.find((t: { id: number }) => t.id === newcomer.id).prior).toBeCloseTo(avg, 5);
+  });
+
+  it("adds offense, defense and special teams from a play-by-play summary without moving the overall rating", async () => {
+    const plays = parseGames(input.gamesCsv).filter((g) => g.completed && g.homePoints !== null).flatMap((g) => [
+      { gameId: g.id, teamId: g.homeId, opponentId: g.awayId, snaps: 60, epa: g.homePoints! / 2, success: 25, specialEpa: 1 },
+      { gameId: g.id, teamId: g.awayId, opponentId: g.homeId, snaps: 60, epa: g.awayPoints! / 2, success: 25, specialEpa: -1 },
+    ]);
+    const without = await computeSeason(input);
+    const withPlays = await computeSeason({ ...input, playsCsv: playsToCsv(plays) });
+    const a = JSON.parse(without.files.at(-1)!.json), b = JSON.parse(withPlays.files.at(-1)!.json);
+    expect(b.teams.map((t: { height: number }) => t.height)).toEqual(a.teams.map((t: { height: number }) => t.height));
+    expect(a.teams.every((t: { offense: number | null }) => t.offense === null)).toBe(true);
+    expect(b.teams.filter((t: { rank: number | null }) => t.rank !== null).every((t: { offense: number | null; defense: number | null; special: number | null }) => t.offense !== null && t.defense !== null && t.special !== null)).toBe(true);
+    expect(b.manifest.playsSha256).toMatch(/^[0-9a-f]{64}$/);
+    expect(b.manifest.snapsPerGame).toBe(60);
+    expect(a.manifest.playsSha256).toBeNull();
   });
 
   it("rejects invalid settings", async () => {

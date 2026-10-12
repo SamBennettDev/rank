@@ -36,7 +36,13 @@ export function aboutView(ctx: Ctx): HTMLElement {
         teamsCsv: await fetchText(files.teamsCsv),
         gamesCsv: await fetchText(files.gamesCsv),
         configJson: await fetchText(files.configJson),
-        previous: prior && priorFiles ? { season: prior, teamsCsv: await fetchText(priorFiles.teamsCsv), gamesCsv: await fetchText(priorFiles.gamesCsv) } : undefined,
+        ...(m.playsSha256 ? { playsCsv: await fetchText(files.playsCsv) } : {}),
+        previous: prior && priorFiles ? {
+          season: prior,
+          teamsCsv: await fetchText(priorFiles.teamsCsv),
+          gamesCsv: await fetchText(priorFiles.gamesCsv),
+          ...(m.priorSeason?.playsSha256 ? { playsCsv: await fetchText(priorFiles.playsCsv) } : {}),
+        } : undefined,
       }, async (done, total) => {
         result.textContent = `Recomputing ${season} from the raw CSVs in your browser: ${done} of ${total} ranking files…`;
         await new Promise((r) => setTimeout(r, 0));
@@ -90,6 +96,11 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h("p", {}, `Each team starts the season at ${Math.round(m.carryover * 100)}% of its final rating from last season, worked out from last season’s games alone (average FBS team = 0). A team that wasn’t in last season’s data starts at its division’s average. The starting point counts as ${m.priorWeight} games, so it matters most in September; by midseason a team’s own games outweigh it several times over. No polls, recruiting rankings or opinions go into it: it is last season’s scores.`),
     prior ? h("p", { class: "muted" }, `This season starts from ${prior}.`) : "",
 
+    h("h2", {}, "Offense, defense and special teams"),
+    h("p", {}, "Separate rankings come from play-by-play (public cfbfastR data from the sportsdataverse project, which covers games with an FBS team). Every snap carries an expected-points value: how much it changed the points the offense could expect to score. For each team and game we add up its offense’s expected points per snap, leaving out garbage time (a lead of more than 38 points in the second quarter, 28 in the third or 22 in the fourth), and its net expected points on kickoffs, punts and field goals."),
+    h("p", {}, "Then the same kind of fit as the overall rating: a team’s offense is judged against the defenses it faced, its defense against the offenses, both adjusted for home field, each starting from 90% of last season’s value counted as two games. Ratings are shown as points per game better than average."),
+    h("p", { class: "muted" }, "Why doesn’t play-by-play drive the overall ranking? We tested it. Unit ratings on their own, mixes of them with the score rating, and expected points or success rate folded into each game’s result all picked next week’s winners slightly worse than final scores did on 2015–2019 (best 73.0% vs 73.1%). Per game, expected-points margin and the final margin correlate at 0.93, so scores already carry most of what the plays say."),
+
     h("h2", {}, "How accurate it is"),
     h("p", {}, "The test: every week from week 4, each method ranks teams using only the games already played and predicts the next week’s games (the higher-ranked team wins). Settings were chosen on 2014–2019 and then frozen. These numbers are from 2021–2025 plus 2026 so far, which the model never saw while it was designed: 6,287 games."),
     h("div", { class: "acc" }, ...ACCURACY.map(([name, pct], i) =>
@@ -126,11 +137,12 @@ export function aboutView(ctx: Ctx): HTMLElement {
       ...rows.map(([k, v]) => h("tr", {}, h("th", {}, k), h("td", {}, v))),
       h("tr", {}, h("th", {}, "teams.csv SHA-256"), h("td", {}, h("code", {}, m.teamsSha256))),
       h("tr", {}, h("th", {}, "games.csv SHA-256"), h("td", {}, h("code", {}, m.gamesSha256))),
+      ...(m.playsSha256 ? [h("tr", {}, h("th", {}, "plays.csv SHA-256"), h("td", {}, h("code", {}, m.playsSha256)))] : []),
       ...(m.priorSeason ? [
         h("tr", {}, h("th", {}, `${m.priorSeason.season} teams.csv SHA-256`), h("td", {}, h("code", {}, m.priorSeason.teamsSha256))),
         h("tr", {}, h("th", {}, `${m.priorSeason.season} games.csv SHA-256`), h("td", {}, h("code", {}, m.priorSeason.gamesSha256))),
       ] : []))),
-    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson),
+    h("div", { class: "files" }, file(files.teamsCsv), file(files.gamesCsv), file(files.configJson), ...(m.playsSha256 ? [file(files.playsCsv)] : []),
       ...(priorFiles ? [file(priorFiles.teamsCsv), file(priorFiles.gamesCsv)] : []),
       file(rankingPath(season, ctx.snapId)),
       h("a", { href: "https://github.com/sambennettdev/rank/blob/main/docs/METHODOLOGY.md", target: "_blank", rel: "noopener" }, "METHODOLOGY.md ↗")),

@@ -81,3 +81,25 @@ export function breakdown(ctx: Ctx, teamId: number): { lines: GameLine[]; prior:
   const average = (lines.reduce((s, l) => s + l.value, 0) + m.priorWeight * me.prior) / (lines.length + m.priorWeight);
   return { lines, prior: me.prior, priorWeight: m.priorWeight, average };
 }
+
+export type Metric = "overall" | "offense" | "defense" | "special";
+export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
+export const METRIC_LABEL: Record<Metric, string> = { overall: "Overall", offense: "Offense", defense: "Defense", special: "Special teams" };
+export const METRIC_HINT: Record<Metric, string> = {
+  overall: "Points better than an average FBS team, from every score this season, opponents, home field and a fading start from last season.",
+  offense: "Points per game the offense adds over an average offense: expected points per snap from play-by-play, garbage time removed, adjusted for the defenses it faced and home field.",
+  defense: "Points per game the defense saves compared with an average defense: expected points per snap allowed, garbage time removed, adjusted for the offenses it faced and home field.",
+  special: "Points per game gained on kickoffs, punts, field goals and returns compared with an average team, adjusted for opponents.",
+};
+
+export interface BoardEntry { team: RankedTeam; value: number; rank: number; tied: boolean }
+
+/** Ranked teams by one metric, best first; teams without a value for it are left out. Equal values share a rank. */
+export function board(ctx: Ctx, metric: Metric): BoardEntry[] {
+  const pick = (t: RankedTeam) => (metric === "overall" ? t.height : t[metric]);
+  const list = ctx.ranked.flatMap((t) => (pick(t) === null ? [] : [{ team: t, value: pick(t)! }])).sort((a, b) => b.value - a.value || a.team.id - b.team.id);
+  return list.map((e) => {
+    const rank = list.findIndex((x) => x.value === e.value) + 1;
+    return { ...e, rank, tied: list.filter((x) => x.value === e.value).length > 1 };
+  });
+}

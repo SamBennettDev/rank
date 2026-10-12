@@ -16,7 +16,13 @@ export async function expectedOutputs(): Promise<Map<string, string>> {
   const files = (season: string) => {
     const dir = join(seasonsDir, season);
     if (!existsSync(join(dir, "games.csv"))) return undefined;
-    return { season, teamsCsv: readFileSync(join(dir, "teams.csv"), "utf8"), gamesCsv: readFileSync(join(dir, "games.csv"), "utf8") };
+    const plays = join(dir, "plays.csv");
+    return {
+      season,
+      teamsCsv: readFileSync(join(dir, "teams.csv"), "utf8"),
+      gamesCsv: readFileSync(join(dir, "games.csv"), "utf8"),
+      ...(existsSync(plays) ? { playsCsv: readFileSync(plays, "utf8") } : {}),
+    };
   };
   for (const season of seasons) {
     const current = files(season);

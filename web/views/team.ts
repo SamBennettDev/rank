@@ -1,5 +1,5 @@
 import type { Edge, Ranking } from "../../src/engine/types";
-import { type Ctx, type GameLine, breakdown, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
+import { type Ctx, type GameLine, METRIC_HINT, METRIC_LABEL, board, breakdown, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
 import { logo, svgLogo, teamVars } from "../team";
@@ -44,11 +44,36 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   return h("div", {},
     hero,
     h("div", { class: "tbody" },
+      unitsPanel(ctx, teamId),
       h("div", { class: "tgrid" },
         whyPanel(ctx, teamId),
         history),
       gameLog(ctx, teamId, games)),
   );
+}
+
+// ---------------------------------------------------------------------------
+// Offense, defense and special teams from play-by-play.
+function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
+  const me = ctx.byId.get(teamId)!;
+  if (me.offense === null) {
+    return ctx.ranked.some((t) => t.offense !== null)
+      ? h("div", { class: "panel unitsp" }, h("h2", {}, "Offense · Defense · Special teams"), h("p", { class: "hint" }, "No play-by-play for this team’s games yet (the public play-by-play covers games with an FBS team), so it has no unit ratings."))
+      : "";
+  }
+  const card = (m: "offense" | "defense" | "special") => {
+    const b = board(ctx, m);
+    const e = b.find((x) => x.team.id === teamId)!;
+    return h("div", { class: "unit", title: METRIC_HINT[m] },
+      h("div", { class: "k" }, METRIC_LABEL[m]),
+      h("div", { class: "rk" }, `#${rankLabel(e.rank, e.tied)}`, h("small", {}, `of ${b.length}`)),
+      h("div", { class: "v" }, h("b", {}, fmtHeight(e.value)), " points per game vs average"));
+  };
+  const total = me.offense + me.defense! + me.special!;
+  return h("div", { class: "panel unitsp" },
+    h("h2", {}, "Offense · Defense · Special teams"),
+    h("p", { class: "hint" }, `From play-by-play: expected points per snap for and against (garbage time removed) and on kicks, adjusted for opponents and home field. Together they come to ${fmtHeight(total)} points per game; the overall rating (${fmtHeight(me.height)}) comes from final scores, which predicted games better in testing.`),
+    h("div", { class: "units" }, card("offense"), card("defense"), card("special")));
 }
 
 // ---------------------------------------------------------------------------

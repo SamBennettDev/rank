@@ -8,6 +8,8 @@ The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how 
 - **A fading head start.** Each team starts at 90% of its final rating from last season, counted as two games. This season's games outweigh it within weeks.
 - **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 71.9% of the next week's winners, ahead of every known method tested: Massey with home field 70.2%, Elo with carryover 69.7%, LRMC 69.5%, Colley 67.0%. It also beats CollegeFootballData's own Elo by 0.7 points on FBS games. See [`research/`](research/).
 
+- **Offense, defense and special teams.** Separate rankings from public play-by-play (expected points per snap, garbage time removed, adjusted for opponents and home field). They explain how teams win; they don't change the overall rank, because in testing they predicted no better than final scores.
+
 No polls, no votes, no brand, no conference bonus. See the [methodology](docs/METHODOLOGY.md).
 
 | | |
@@ -24,6 +26,7 @@ Plain files in this repository; git history is the audit log.
 ```
 data/seasons/<year>/teams.csv      teams in scope
 data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
+data/seasons/<year>/plays.csv      per team per game: snaps, expected points, successes, special-teams EPA (from play-by-play)
 data/seasons/<year>/config.json    algorithm version, win bonus, carryover, prior weight, divisions
 data/rankings/<year>/<snapshot>.json   published output (ratings, ranks, starting points, manifest with SHA-256 of the inputs)
 data/index.json                    seasons and snapshots available to the site
@@ -48,7 +51,7 @@ npm run build      # static site in dist/
 ## Updating with real results
 
 1. Get a free API key at <https://collegefootballdata.com/key>.
-2. `CFBD_API_KEY=... npm run fetch -- 2026 && npm run compute`
+2. `CFBD_API_KEY=... npm run fetch -- 2026 && npm run fetch-plays -- 2026 && npm run compute`
 3. Commit the changed files under `data/`.
 
 Each season starts from the season before it, so keep last season's `data/seasons/<year>/` in the repository. A season whose config has `"publish": false` is kept only for that purpose. `data/seasons/2025` was built from the public sportsdataverse schedule files; `npm run fetch -- 2025` refreshes it from the API.
@@ -64,8 +67,8 @@ In GitHub, the **Update data** workflow does this weekly (and daily in bowl seas
 ## Layout
 
 ```
-src/engine/   the whole algorithm: csv, graph, Cholesky, rating fit, season pipeline
-scripts/      fetch (API -> CSV), compute, verify, backtest, make-demo
+src/engine/   the whole algorithm: csv, graph, Cholesky, rating fit, unit ratings, season pipeline
+scripts/      fetch (API -> CSV), fetch-plays (play-by-play -> plays.csv), compute, verify, backtest, make-demo
 web/          the static site (vanilla TypeScript + d3-zoom); imports the same engine.
               Team logos load from ESPN's logo CDN by team id (CFBD ids are ESPN ids).
 tests/        linear algebra, rating, determinism

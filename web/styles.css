@@ -508,3 +508,20 @@ body[data-view="graph"] .foot { display: none; }
 .accrow.me .n, .accrow.me .v { color: var(--text); font-weight: 700; }
 .accrow.me .bar i { background: var(--brand); }
 @media (max-width: 720px) { .accrow { grid-template-columns: minmax(0, 130px) 1fr 48px; gap: 8px; font-size: 13px; } }
+.metric-tabs { display: flex; align-items: center; gap: 4px; margin: 22px 0 4px; overflow-x: auto; scrollbar-width: none; }
+.metric-tabs::-webkit-scrollbar { display: none; }
+.metric-tabs .lbl { font: 700 11.5px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-right: 8px; white-space: nowrap; }
+.metric-tabs button { flex: none; border: 1px solid var(--line-2); background: var(--surface); color: var(--muted); border-radius: 999px; padding: 7px 14px; font-weight: 600; font-size: 13.5px; cursor: pointer; white-space: nowrap; transition: color .15s, background .15s, border-color .15s; }
+.metric-tabs button:hover:not(:disabled) { color: var(--text); border-color: var(--faint); }
+.metric-tabs button.on { background: var(--brand-soft); color: var(--brand); border-color: color-mix(in srgb, var(--brand) 55%, transparent); }
+.metric-tabs button:disabled { opacity: .4; cursor: default; }
+.metric-hint { margin: 6px 0 14px; font-size: 13px; color: var(--muted); max-width: 780px; }
+.units { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.unit { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 12px; }
+.unit .k { font: 700 11.5px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.unit .rk { font: 700 30px/1.1 var(--display); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.unit .rk small { font-size: 14px; color: var(--faint); font-weight: 600; margin-left: 6px; letter-spacing: .02em; }
+.unit .v { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.unit .v b { color: var(--text); }
+@media (max-width: 720px) { .units { grid-template-columns: 1fr; gap: 8px; } .metric-tabs { margin-top: 16px; } }
+.unitsp { margin-bottom: 16px; }

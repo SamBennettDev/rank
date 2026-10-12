@@ -42,6 +42,21 @@ export interface SeasonConfig {
   publish?: boolean;
 }
 
+/** One team's play-by-play summary for one game (see scripts/fetch-plays.ts). */
+export interface TeamGamePlays {
+  gameId: number;
+  teamId: number;
+  opponentId: number;
+  /** Scrimmage snaps (rushes and passes) outside garbage time. */
+  snaps: number;
+  /** Expected points added on those snaps. */
+  epa: number;
+  /** How many of those snaps were successful. */
+  success: number;
+  /** Net expected points on kickoffs, punts and field goals (and their returns), from this team's side. */
+  specialEpa: number;
+}
+
 /** One game that counts: an edge from loser to winner. */
 export interface Edge {
   gameId: number;
@@ -91,6 +106,10 @@ export interface RankedTeam {
   height: number | null;
   /** Starting rating from last season (carryover x last season's final rating), rounded to 1e-6. */
   prior: number;
+  /** Offense, defense and special teams from play-by-play, in points per game better than average; null without play-by-play. */
+  offense: number | null;
+  defense: number | null;
+  special: number | null;
   wins: number;
   losses: number;
   /** Places gained since the previous snapshot (positive = moved up). */
@@ -108,8 +127,12 @@ export interface Manifest {
   classifications: string[];
   teamsSha256: string;
   gamesSha256: string;
+  /** SHA-256 of plays.csv, or null when the season has no play-by-play summary. */
+  playsSha256: string | null;
+  /** Average scrimmage snaps per team per game, used to turn EPA per snap into points per game; null without plays. */
+  snapsPerGame: number | null;
   /** The season the starting ratings came from, with the hashes of its CSVs; null if none. */
-  priorSeason: { season: string; teamsSha256: string; gamesSha256: string } | null;
+  priorSeason: { season: string; teamsSha256: string; gamesSha256: string; playsSha256: string | null } | null;
   counts: GameCounts;
 }
 

@@ -18,7 +18,8 @@
     "demo": "tsx scripts/make-demo.ts",
     "compute": "tsx scripts/compute.ts",
     "verify": "tsx scripts/verify.ts",
-    "backtest": "tsx scripts/backtest.ts"
+    "backtest": "tsx scripts/backtest.ts",
+    "fetch-plays": "tsx scripts/fetch-plays.ts"
   },
   "dependencies": {
     "d3-selection": "^3.0.0",
@@ -28,6 +29,7 @@
     "@types/d3-selection": "^3.0.12",
     "@types/d3-zoom": "^3.0.9",
     "@types/node": "^26.6.3",
+    "hyparquet": "1.31.3",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",
