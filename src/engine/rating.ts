@@ -14,16 +14,7 @@ export interface FitOptions {
   winBonus: number;
   /** Games' worth of pull toward an average rating (0), the same for every team. Must be > 0. */
   shrink: number;
-  /** Per game: true where a stop must hold the winner at least STOP_GAP above the loser. */
-  kept?: readonly boolean[];
-  /** Where to start the search (ratings then home field); speeds up the constrained fit. */
-  from?: Float64Array;
 }
-
-/** A kept game's stop engages when its winner is less than this far above its loser... */
-export const STOP_GAP = 0.5;
-/** ...and pushes back this stiffly, so kept winners finish above their losers. */
-export const STOP_STIFFNESS = 1000;
 
 /** Tiny pull of the home-field estimate toward 0, so it is defined before any home game is played. */
 export const HOME_FIELD_RIDGE = 1e-4;
@@ -46,92 +37,40 @@ export const HOME_FIELD_RIDGE = 1e-4;
  * exactly with a Cholesky decomposition. Only + - * / and sqrt are used, in a
  * fixed order, so the answer is bit-identical on every IEEE-754 machine.
  *
- * Without stops, each team's rating is exactly
+ * At the solution each team's rating is exactly the weighted average
  *
  *   r_i = (sum over its games of game value) / (games + shrink)
- *
- * With stops (see `kept`), add each engaged stop's push to the sum: +STOP_STIFFNESS ×
- * (STOP_GAP − (r_w − r_l)) for its winner, the same amount subtracted for its loser.
  *
  * where a game's value is the opponent's rating plus this team's result, minus H
  * at home or plus H away (see `gameValue`). That is the explanation the site shows.
  * `games` must already be in a canonical order; summation order follows it.
  */
-export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, shrink, kept, from }: FitOptions): { ratings: Float64Array; homeField: number } {
+export function fitRatings(n: number, games: readonly RatedGame[], { winBonus, shrink }: FitOptions): { ratings: Float64Array; homeField: number } {
   if (!(shrink > 0)) throw new Error("shrink must be > 0");
   const N = n + 1; // last unknown is the home-field edge
-  const ys = games.map((g) => result(g.margin, winBonus));
-  // The least-squares part is the same every step.
-  const base = new Float64Array(N * N);
+  const m = new Float64Array(N * N);
   const rhs = new Float64Array(N);
-  games.forEach((g, i) => {
-    const y = ys[i]!;
+  for (const g of games) {
+    const y = result(g.margin, winBonus);
     const x = g.neutral ? 0 : 1;
     const h = g.home, a = g.away;
-    base[h * N + h]! += 1;
-    base[a * N + a]! += 1;
-    base[h * N + a]! -= 1;
-    base[a * N + h]! -= 1;
-    base[h * N + n]! += x;
-    base[a * N + n]! -= x;
-    base[n * N + h]! += x;
-    base[n * N + a]! -= x;
-    base[n * N + n]! += x * x;
+    m[h * N + h]! += 1;
+    m[a * N + a]! += 1;
+    m[h * N + a]! -= 1;
+    m[a * N + h]! -= 1;
+    m[h * N + n]! += x;
+    m[a * N + n]! -= x;
+    m[n * N + h]! += x;
+    m[n * N + a]! -= x;
+    m[n * N + n]! += x * x;
     rhs[h]! += y;
     rhs[a]! -= y;
     rhs[n]! += x * y;
-  });
-  for (let i = 0; i < n; i++) base[i * N + i]! += shrink;
-  base[n * N + n]! += HOME_FIELD_RIDGE;
-  const split = (x: Float64Array) => ({ ratings: x.slice(0, n), homeField: x[n]! });
-  if (!kept) return split(choleskySolve(base, rhs, N));
-
-  // With stops: minimise the same sum plus STOP_STIFFNESS * (STOP_GAP - (r_w - r_l))^2 on every
-  // kept game whose winner is less than STOP_GAP above its loser. Each step solves the linear
-  // system for the stops currently engaged; when the engaged set repeats, the answer is exact.
-  const pairs = games.map((g) => (g.margin > 0 ? [g.home, g.away] : [g.away, g.home]) as [number, number]);
-  const engaged = (x: Float64Array) => pairs.map(([w, l], i) => kept[i]! && x[w]! - x[l]! < STOP_GAP);
-  const objective = (x: Float64Array) => {
-    let e = 0;
-    games.forEach((g, i) => {
-      const r = ys[i]! - (x[g.home]! - x[g.away]! + (g.neutral ? 0 : x[n]!));
-      e += r * r;
-      const [w, l] = pairs[i]!;
-      const short = STOP_GAP - (x[w]! - x[l]!);
-      if (kept[i] && short > 0) e += STOP_STIFFNESS * short * short;
-    });
-    for (let i = 0; i < n; i++) e += shrink * x[i]! * x[i]!;
-    return e + HOME_FIELD_RIDGE * x[n]! * x[n]!;
-  };
-  let x: Float64Array = from ? Float64Array.from(from) : choleskySolve(base, rhs, N);
-  let active = engaged(x);
-  for (let iter = 0; iter < 200; iter++) {
-    const m = Float64Array.from(base);
-    const b = Float64Array.from(rhs);
-    pairs.forEach(([w, l], i) => {
-      if (!active[i]) return;
-      m[w * N + w]! += STOP_STIFFNESS;
-      m[l * N + l]! += STOP_STIFFNESS;
-      m[w * N + l]! -= STOP_STIFFNESS;
-      m[l * N + w]! -= STOP_STIFFNESS;
-      b[w]! += STOP_STIFFNESS * STOP_GAP;
-      b[l]! -= STOP_STIFFNESS * STOP_GAP;
-    });
-    const next = choleskySolve(m, b, N);
-    const now = engaged(next);
-    if (now.every((v, i) => v === active[i])) return split(next);
-    // Move toward the step's answer, halving until the objective drops.
-    const e0 = objective(x);
-    let t = 1;
-    let y: Float64Array = next;
-    while (objective(y) >= e0 && t > 1e-10) {
-      t /= 2;
-      y = x.map((v, i) => v + t * (next[i]! - v));
-    }
-    x = y;
-    active = engaged(x);
   }
-  throw new Error("head-to-head stops did not settle");
+  for (let i = 0; i < n; i++) m[i * N + i]! += shrink;
+  m[n * N + n]! += HOME_FIELD_RIDGE;
+  const x = choleskySolve(m, rhs, N);
+  return { ratings: x.slice(0, n), homeField: x[n]! };
 }
 
 /** A game's result for the team that scored `margin` more points than its opponent. */

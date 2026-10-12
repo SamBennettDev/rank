@@ -525,4 +525,3 @@ body[data-view="graph"] .foot { display: none; }
 .unit .v b { color: var(--text); }
 @media (max-width: 720px) { .units { grid-template-columns: 1fr; gap: 8px; } .metric-tabs { margin-top: 16px; } }
 .unitsp { margin-bottom: 16px; }
-.tag-held { font: 700 10px var(--display); letter-spacing: .12em; color: var(--brand); border: 1px solid color-mix(in srgb, var(--brand) 50%, transparent); padding: 2px 6px; border-radius: 5px; cursor: help; }

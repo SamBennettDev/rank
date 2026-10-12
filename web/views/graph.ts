@@ -178,11 +178,11 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     panel.replaceChildren(
       h("div", { class: "sec" },
         h("h3", {}, "How to read it"),
-          h("p", {}, "Each team sits at its rating: how many points better it is than an average FBS or FCS team, judged only by this season’s scores, who it came against and home field. Every team starts level, and every winner stays above the team it beat except for the fewest upsets that results allow. Height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
+          h("p", {}, "Each team sits at its rating: how many points better it is than an average FBS or FCS team, judged only by this season’s scores, who it came against and home field. Every team starts level. Height is rank. Columns group conferences, strongest on the left; sideways position carries no rank."),
         h("p", {}, "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.")),
       h("div", { class: "sec" },
         h("h3", {}, "Biggest upsets"),
-        ups.length === 0 ? h("p", {}, "None. Every winner is rated above every team it beat.") : h("p", { class: "muted" }, ctx.upsetIds.size > ups.length ? `${ctx.upsetIds.size} accepted upsets (cycles make some unavoidable); the ${ups.length} biggest:` : `${ctx.upsetIds.size} accepted upset${ctx.upsetIds.size === 1 ? "" : "s"} (cycles make some unavoidable):`),
+        ups.length === 0 ? h("p", {}, "None. Every winner is rated above every team it beat.") : h("p", { class: "muted" }, "Games where the winner is still rated below the loser."),
         ...ups.map((u, i) => {
           const w = ctx.byId.get(u.edge.winner)!;
           const l = ctx.byId.get(u.edge.loser)!;
@@ -257,7 +257,7 @@ export function graphView(ctx: Ctx, onCleanup: (fn: () => void) => void): HTMLEl
     h("span", { class: "up-arrow" }, "↑ Higher is better"),
     h("span", {}, h("i", { class: "lw" }), "Beat"),
     h("span", {}, h("i", { class: "ll" }), "Lost to"),
-    h("span", {}, h("i", { class: "lu" }), "Accepted upset"));
+    h("span", {}, h("i", { class: "lu" }), "Upset (winner rated lower)"));
   canvas.appendChild(legend);
 
   const onKey = (ev: KeyboardEvent) => { if (ev.key === "Escape") selectTeam(null); };

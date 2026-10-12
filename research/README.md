@@ -63,15 +63,10 @@ at 0) and `lam_p=0.05` (chosen on 2014–2019 among 0.005–2): margin + 3-point
 last-season prior), level with Massey + home field (70.24%, +0.29, 95% CI −0.11 to +0.67) and ahead of Elo with
 carryover (69.68%), Massey (69.65%), LRMC (69.46%) and in-season Elo (68.52%). FBS-vs-FBS: 69.30% vs CFBD Elo 69.16%.
 
-## Head-to-head step (published)
+## Head-to-head step (tried, not published)
 
-`h2h.py` adds the fewest-upsets step to the published rating: from the rating order, a one-team-at-a-time search
-finds the fewest upsets; those games are accepted, and every other winner is held at least ½ point above its
-loser (stiff one-sided penalty, Newton on the engaged set). `run_h2h.py`:
-
-| | Next-week winners | Winner above loser at season end |
-|---|---|---|
-| 2014–19, rating without the step | 71.91% | 81.3% |
-| 2014–19, with the step | 70.52% | 90.5% |
-| 2021–26, rating without the step | 70.53% | 80.9% |
-| 2021–26, with the step (published) | 69.59% | 90.3% |
+`h2h.py` adds a fewest-upsets step to the rating: from the rating order, a one-team-at-a-time search finds the
+fewest upsets; those games are accepted, and every other winner is held at least ½ point above its loser.
+`run_h2h.py`: on 2021–26 it raises "winner above loser at season end" from 80.9% to 90.3% but lowers next-week
+picks from 70.53% to 69.59% (2014–19: 81.3% → 90.5%, 71.91% → 70.52%). It was published briefly and removed:
+head-to-head holds let one result move a team, and everyone held below it, a long way.

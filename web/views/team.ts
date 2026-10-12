@@ -72,7 +72,7 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
   const total = me.offense + me.defense! + me.special!;
   return h("div", { class: "panel unitsp" },
     h("h2", {}, "Offense · Defense · Special teams"),
-    h("p", { class: "hint" }, `From this season’s play-by-play: expected points per snap for and against (garbage time removed) and on kicks, adjusted for opponents and home field. Together they come to ${fmtHeight(total)} points per game; the overall rating (${fmtHeight(me.height)}) comes from final scores and head-to-head results.`),
+    h("p", { class: "hint" }, `From this season’s play-by-play: expected points per snap for and against (garbage time removed) and on kicks, adjusted for opponents and home field. Together they come to ${fmtHeight(total)} points per game; the overall rating (${fmtHeight(me.height)}) comes from final scores, which predicted games better in testing.`),
     h("div", { class: "units" }, card("offense"), card("defense"), card("special")));
 }
 
@@ -86,10 +86,10 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const sum = lines.reduce((s, l) => s + l.value, 0);
   return h("div", { class: "panel why" },
     h("h2", {}, "Why it’s here"),
-    h("p", { class: "hint" }, "Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those, except where a head-to-head result holds it: a team stays at least ½ point above every team it beat, unless that game is one of the fewest upsets that must be accepted. Dots right of the line pull the rating up; dots left pull it down."),
+    h("p", { class: "hint" }, "Each game says what this team’s rating should be: the opponent’s rating plus this team’s margin (with 3 points for winning), adjusted for home field. The rating is the average of those. Every team starts level, so only this season’s games count. Dots right of the line pull the rating up; dots left pull it down."),
     breakdownChart(ctx, me.height!, lines),
     h("p", { class: "sum" },
-      `(${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)}${Math.abs(b.holds) > 0.05 ? `, head-to-head holds ${fmtHeight(b.holds)}` : ""}) ÷ ${lines.length + b.shrink} = `,
+      `${lines.length} game${lines.length === 1 ? "" : "s"} totalling ${fmtHeight(sum)} ÷ ${lines.length + b.shrink} = `,
       h("b", {}, fmtHeight(b.average)),
       Math.abs(b.average - me.height!) > 0.05 ? ` (published ${fmtHeight(me.height)})` : ""));
 }
@@ -220,16 +220,14 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
   const rows = games.map((e) => {
     const l = byGame.get(e.gameId)!;
     const o = l.opponent;
-    const upset = l.upset;
-    const held = Math.abs(l.hold) > 0.005;
-    const heldTag = held ? h("span", { class: "tag-held", title: l.won ? `This team beat ${o.school}, so it is held at least ½ point above them.` : `${o.school} beat this team, so this team is held at least ½ point below them.` }, "HELD") : "";
+    const upset = (l.won && me.height! < o.height!) || (!l.won && o.height! < me.height!);
     const pull = l.value - me.height!;
     return h("a", { class: "grow2", href: teamHref(ctx, o.id) },
       h("span", { class: "wk" }, e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`),
       logo(ctx.teams.get(o.id), 34, { lazy: true }),
       h("span", { class: "op" },
         h("span", { class: "n" }, `${l.where === -1 ? "at" : "vs"} ${o.school}`),
-        h("span", { class: "c" }, `#${rankLabel(o.rank, o.tied)} · ${record(o)} · ${o.conference}`, upset || held ? " " : "", upset ? h("span", { class: "tag-up", title: "Accepted upset: one of the fewest games that must finish upside down, because results form cycles." }, "UPSET") : heldTag)),
+        h("span", { class: "c" }, `#${rankLabel(o.rank, o.tied)} · ${record(o)} · ${o.conference}`, upset ? " " : "", upset ? h("span", { class: "tag-up" }, "UPSET") : "")),
       h("span", { class: `pill ${l.won ? "w" : "l"}` }, h("i", {}, l.won ? "W" : "L"), `${l.won ? e.winnerPoints : e.loserPoints}–${l.won ? e.loserPoints : e.winnerPoints}`),
       h("span", { class: "r hide-sm" }, fmtHeight(o.height)),
       h("span", { class: "r hide-sm", title: "What this game alone says this team's rating is: opponent rating + margin (±3 for the result), adjusted for home field" }, fmtHeight(l.value)),

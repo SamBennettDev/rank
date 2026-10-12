@@ -59,22 +59,6 @@ value = opponent's rating + this team's result − H (at home) / + H (away) / ±
 
 A team's rating is the average of what its games say (divided by games + 0.05 rather than games). The team page draws exactly this: one row per game at its value, and the rating as their average.
 
-### Winners above losers, as often as possible
-
-If a team beat another, it should be ranked above it. When results form a cycle (A beat B, B beat C, C beat A) no order can honour every one, so some games must stay upsets. After the fit above:
-
-1. **Fewest upsets.** Starting from the rating order (exact ties by team id), visit teams in id order and move each to the place that leaves the fewest upsets (games whose winner is placed below its loser). Ties go to the place nearest the team's current place, then the higher one; a team moves only if that strictly lowers the count. Repeat until a full pass moves no one (`fewestUpsetsOrder` in `src/engine/order.ts`). Every move removes at least one upset, so this always stops, and where it stops no single team can be moved to remove an upset (tests check this by brute force). Finding the absolute minimum is the NP-hard minimum feedback arc set problem and usually has many equally good answers; this deterministic search is not proven optimal.
-2. **Accepted upsets.** The games still upside down in that order are accepted as upsets and published in each ranking file's `upsets` array.
-3. **Holds.** The fit is solved again with a stop on every other game: if its winner is less than ½ point above its loser, a very stiff spring pushes them apart:
-
-```
-  + 1000 × sum_kept max(0, ½ − (r[winner] − r[loser]))²
-```
-
-It is solved by Newton steps on the set of engaged stops, each an exact Cholesky solve, until that set repeats. Every kept winner finishes above its loser (a test checks every published file). With holds, the team-page identity becomes `r[i] = (sum of game values + sum of hold pushes) / (games + shrink)`, where an engaged hold pushes 1000 × (½ − gap) up on its winner and down on its loser.
-
-This costs about a point of prediction and gains nine points of agreement with results (see below).
-
 ### Every team starts level
 
 There is no preseason ranking, no carry-over from last season, and no recruiting, reputation or conference input. In week 1 every team is equal (rating 0); only this season's games move anyone. A rating of 0 is the average of all FBS and FCS teams in scope.
@@ -89,7 +73,7 @@ This costs some early-season accuracy, deliberately. In the held-out test, start
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "margin-3",
+  "algorithmVersion": "margin-2",
   "classifications": ["fbs", "fcs"],
   "winBonus": 3,
   "shrink": 0.05
@@ -138,30 +122,29 @@ Every team starts level: each unit is pulled toward average (0) with `shrink` ga
 
 The model came out of a walk-forward benchmark in [`research/`](../research/): every week, each method ranks teams using only the games played before that week and predicts that week's games, with the higher-ranked team picked to win. All settings (win bonus, carryover, prior weight) were chosen on 2014–2019, then frozen and tested once on 2021–2025 plus 2026 through week 6, which played no part in the design (6,287 games from week 4 on).
 
-| Method (held-out seasons) | Next-week winners | Winner above loser at season end |
-|---|---|---|
-| **This rating** | **69.6%** | **90.3%** |
-| Same rating without the head-to-head step | 70.5% | 80.9% |
-| Massey (least squares on margin) with home field | 70.2% | 80.4% |
-| Elo carried over from last season | 69.7% | 80.3% |
-| Massey | 69.7% | 80.2% |
-| LRMC | 69.5% | 80.7% |
-| Elo (in season) | 68.5% | 81.8% |
-| Keener | 68.2% | 77.5% |
-| Pythagorean | 68.2% | 76.2% |
-| Bradley–Terry | 67.3% | 83.2% |
-| Colley | 67.0% | 82.5% |
-| Win percentage | 66.2% | 78.9% |
-| PageRank | 64.3% | 78.2% |
+| Method (held-out seasons) | Next-week winners |
+|---|---|
+| **This rating** | **70.5%** |
+| Massey (least squares on margin) with home field | 70.2% |
+| Elo carried over from last season | 69.7% |
+| Massey | 69.7% |
+| LRMC | 69.5% |
+| Elo (in season) | 68.5% |
+| Keener | 68.2% |
+| Pythagorean | 68.2% |
+| Bradley–Terry | 67.3% |
+| Colley | 67.0% |
+| Win percentage | 66.2% |
+| PageRank | 64.3% |
 
-Without the head-to-head step, the rating (this season's games only) is level with the best known predictor, Massey with home field (+0.3 points, 95% interval −0.1 to +0.7), and ahead of plain Massey, LRMC, Elo and even Elo carried over from last season. Holding winners above losers gives up about a point of that (69.6%) for far more agreement with the season's results: 90.3% of games, against about 80% for every other method. Starting each team from 90% of last season's rating would add about 1.4 points of prediction; it was removed so the ranking judges this season only. Ideas that did not help on 2014–2019 and were dropped: treating blowout margins as censored, robust losses, recency weighting, conference layers and play-by-play (see below). Systems that use recruiting, returning players or betting markets (SP+, FPI, Sagarin, Vegas) were not tested.
+With no preseason input it is level with the best known method, Massey with home field (+0.3 points, 95% interval −0.1 to +0.7), and ahead of the rest: plain Massey (+0.9), LRMC (+1.1), in-season Elo (+2.0) and even Elo carried over from last season (+0.9). On FBS-vs-FBS games it matches CollegeFootballData's own pregame Elo (69.3% vs 69.2%), which starts each season from the last. The same model starting each team from 90% of last season's rating scored 71.9%; that start was removed so the ranking judges this season only. Ideas that did not help on 2014–2019 and were dropped: treating blowout margins as censored, robust losses, recency weighting and conference layers. A head-to-head step was also tried and removed: holding every winner above the team it beat, except the fewest upsets that cycles force, raised agreement with results from 80.9% to 90.3% of games but cut next-week picks to 69.6%, and let a single result move a team (and everyone below it) a long way. Systems that use recruiting, returning players, play-by-play or betting markets (SP+, FPI, Sagarin, Vegas) were not tested.
 
-`npm run backtest -- --history 2021-2025` runs the published pipeline itself (`computeSeason`) on those seasons, from public sportsdataverse schedules, and reports 69.7% of next-week winners and 89.8% agreement with results.
+`npm run backtest -- --history 2021-2025` runs the published pipeline itself (`computeSeason`) on those seasons, from public sportsdataverse schedules, and reports 70.6% of next-week winners.
 
 ## Determinism rules
 
 1. Teams are ordered by numeric id; games by numeric game id. This fixes the matrix and its summation order, so row order in the CSVs is irrelevant (there is a test for that).
-2. The fit is a few linear solves using only `+ − × /` and `sqrt`, which IEEE-754 defines exactly, in a fixed loop order; the upset search has no randomness and stops when a full pass moves no team.
+2. The fit is one linear solve using only `+ − × /` and `sqrt`, which IEEE-754 defines exactly, in a fixed loop order.
 3. Ratings are rounded to 1e-6 before they are ranked or written.
 4. JSON is written with a fixed key order and layout (`formatRanking` in `src/engine/season.ts`).
 5. Each ranking file embeds the SHA-256 of the exact CSV bytes it was computed from (teams, games and plays), the settings and the engine version.
@@ -178,8 +161,7 @@ Edges are not stored in the ranking files either. The site rebuilds them from `g
 - **Opp. rating**: the opponent's rating.
 - **Game says**: the game's value (above): the opponent's rating plus this team's result, adjusted for home field.
 - **Pull**: game value − this team's rating. Positive games pull the rating up, negative games pull it down; together they balance at (almost exactly) zero.
-- **Upset**: a game accepted as an upset (in the file's `upsets` list).
-- **Held**: a game whose hold is engaged, keeping this team ½ point above a team it beat (or below a team that beat it).
+- **Upset**: the winner is rated below the loser.
 
 ## Data pipeline
 
@@ -199,7 +181,6 @@ The API is only a source of raw scores and team ids. `npm run fetch` normalises 
 
 - **Early season.** With every team starting level, the first weeks rest on very few games: a single blowout can move a team a long way, and comparisons between conferences rest on a handful of non-conference games until conference play links everyone.
 - **Margins count in full.** Running up the score raises a rating; a 50-point win says more than a 1-point win. Capping or censoring margins was tested and made predictions worse.
-- **Head-to-head can outweigh margins.** A team that beat a strong team is held above it even if the rest of its results are weaker, and everyone that team is held above moves with it. Early in the season, one result can lift a team a long way (for example 3-2 Oklahoma, held above Texas).
 - **Ratings predict; they don't reward.** The goal is to rank teams by how good they are, which is not the same as a résumé. A team can be rated above a team that beat it when the rest of their results point that way; the site marks those games as upsets.
 - **Schedule size.** With about 12 games per team, ranks a few places apart are not meaningfully different. The rating shows how close teams are.
 - **Source data.** Scores come from the CollegeFootballData API; an error there is an error here until it is corrected upstream and the next update runs.

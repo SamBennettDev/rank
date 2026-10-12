@@ -45,7 +45,7 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "margin-3",
+  algorithmVersion: "margin-2",
   classifications: ["fbs", "fcs"],
   winBonus: 3,
   shrink: 0.05,
