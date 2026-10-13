@@ -126,7 +126,7 @@ describe("pipeline", () => {
     const out = await computeSeason(input);
     const m = JSON.parse(out.files[0]!.json).manifest;
     expect(m).toMatchObject({
-      engine: "rank-engine-12",
+      engine: "rank-engine-13",
       ...DEFAULT_SETTINGS,
       classifications: ["fbs"],
     });

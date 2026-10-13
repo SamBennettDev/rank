@@ -54,6 +54,11 @@ export function listSnapshots(games: readonly Game[]): SnapshotSpec[] {
       a.throughWeek - b.throughWeek ||
       a.id.localeCompare(b.id),
   );
+  // A rescheduled game or its six-hour result lag can cross the last nominal
+  // week boundary. The current snapshot must still include every known result.
+  const current = specs.at(-1);
+  if (current && Date.parse(current.asOf!) < latest)
+    current.asOf = new Date(latest).toISOString();
   return specs;
 }
 

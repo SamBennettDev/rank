@@ -3,7 +3,7 @@
   "season": "2026",
   "snapshot": {"id":"week-05","label":"Week 5","throughWeek":5,"includePostseason":true,"asOf":"2026-10-05T12:00:00.000Z"},
   "manifest": {
-    "engine": "rank-engine-12",
+    "engine": "rank-engine-13",
     "standingMethod": "frozen-win-quality-v1",
     "lossPenalty": 1,
     "algorithmVersion": "earned-standing-1",

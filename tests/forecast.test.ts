@@ -76,6 +76,17 @@ describe("date-based forecasts", () => {
       /start_date/,
     );
   });
+  it("includes the latest result when a rescheduled game's availability crosses the final weekly cutoff", () => {
+    const delayed = [
+      games[0]!,
+      game(6, "2023-11-20T10:00:00Z", "regular", 2, 3, 3, 12),
+    ];
+    const current = listSnapshots(delayed).at(-1)!;
+    expect(current.asOf).toBe("2023-11-20T16:00:00.000Z");
+    expect(
+      buildEdges(delayed, teams, current).edges.map((e) => e.gameId),
+    ).toEqual([1, 6]);
+  });
   it("includes early playoff scores in the next dated regular-season snapshot", () => {
     const snapshots = listSnapshots(games),
       late = snapshots.find((s) => s.id === "week-15")!;
