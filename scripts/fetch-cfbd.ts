@@ -56,6 +56,8 @@ const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
   ...DEFAULT_SETTINGS,
+  classifications: ["fbs"],
+  opponentClassifications: ["fbs", "fcs"],
 };
 mkdirSync(dir, { recursive: true });
 if (existsSync(configPath))
@@ -63,6 +65,12 @@ if (existsSync(configPath))
 else writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n");
 
 const rawTeams = await get("/teams", { year });
+const modelClassifications = [
+  ...new Set([
+    ...config.classifications,
+    ...(config.opponentClassifications ?? []),
+  ]),
+];
 const teams: Team[] = rawTeams
   .map((r) => ({
     id: Number(r.id),
@@ -72,14 +80,14 @@ const teams: Team[] = rawTeams
     classification: str(r.classification).toLowerCase(),
     color: str(r.color),
   }))
-  .filter((t) => config.classifications.includes(t.classification));
+  .filter((t) => modelClassifications.includes(t.classification));
 if (teams.length === 0)
   throw new Error(
     "no teams matched config.classifications; did the API response shape change?",
   );
 
 const byId = new Map<number, Game>();
-for (const classification of config.classifications) {
+for (const classification of modelClassifications) {
   for (const seasonType of ["regular", "postseason"] as const) {
     for (const r of await get("/games", { year, seasonType, classification })) {
       const id = Number(r.id);

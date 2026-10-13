@@ -33,10 +33,13 @@ export function graphView(
     },
   );
   const P = (id: number) => L.pos.get(id)!;
+  const edges = ctx.edges.filter(
+    (e) => L.pos.has(e.winner) && L.pos.has(e.loser),
+  );
   const upsetSet = new Map(upsets(ctx).map((u) => [u.edge.gameId, u.gap]));
   const isUpset = (e: Edge) => upsetSet.has(e.gameId);
   const adj = new Map<number, Edge[]>();
-  for (const e of ctx.edges)
+  for (const e of edges)
     for (const id of [e.winner, e.loser])
       (adj.get(id) ?? adj.set(id, []).get(id)!).push(e);
 
@@ -67,10 +70,8 @@ export function graphView(
           rx: 10,
         }),
       );
-    const fcs =
-      nodes.find((t) => t.conference === lane.name)?.classification === "fcs";
     const label = svg("text", {
-      class: `lane-label${fcs ? " fcs" : ""}`,
+      class: "lane-label",
       transform: `translate(${lane.x - 6},${L.top - 30}) rotate(-38)`,
     });
     label.textContent = shortConf(lane.name);
@@ -89,7 +90,7 @@ export function graphView(
   };
   for (const r of [1, 10, 50, 100, 150, 200, 250]) {
     const t = nodes.find((n) => n.rank! >= r);
-    if (t && r <= nodes.length) tick(L.y(t.height!), `Rating #${r}`);
+    if (t && r <= nodes.length) tick(L.y(t.height!), `Rank #${r}`);
   }
   const n25 = nodes.filter((t) => t.rank! <= 25).at(-1);
   const n26 = nodes.find((t) => t.rank! > 25);
@@ -150,11 +151,7 @@ export function graphView(
   let mode: EdgeMode = "none";
   const drawEdges = () => {
     const list =
-      mode === "all"
-        ? ctx.edges
-        : mode === "upsets"
-          ? ctx.edges.filter(isUpset)
-          : [];
+      mode === "all" ? edges : mode === "upsets" ? edges.filter(isUpset) : [];
     gEdges.replaceChildren(
       ...list.map((e) =>
         svg("path", { class: `e ${isUpset(e) ? "up" : "all"}`, d: curve(e) }),
@@ -210,7 +207,7 @@ export function graphView(
         h(
           "div",
           { class: "t2" },
-          `${record(t)} · height ${fmtHeight(t.height)} · ${t.conference}`,
+          `${record(t)} · score ${fmtHeight(t.height)} · ${t.conference}`,
         ),
       ),
     );
@@ -397,19 +394,10 @@ export function graphView(
             h("span", {}, "Rank"),
           ),
           h("div", {}, h("b", {}, record(t)), h("span", {}, "Record")),
-          h(
-            "div",
-            {},
-            h("b", {}, fmtHeight(t.height)),
-            h("span", {}, "Height"),
-          ),
+          h("div", {}, h("b", {}, fmtHeight(t.height)), h("span", {}, "Score")),
         ),
       ),
-      h(
-        "p",
-        { class: "hint" },
-        `${t.projection ? `Projected #${t.projection.rank} · 80% range #${t.projection.rankLow}–#${t.projection.rankHigh}` : "No forecast"}${t.provisional ? " · Limited data" : ""}`,
-      ),
+      t.provisional ? h("p", { class: "hint" }, "Limited data") : "",
       h(
         "div",
         { class: "glist" },

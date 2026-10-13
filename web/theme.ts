@@ -1,7 +1,7 @@
 import type { Ctx } from "./ctx";
 import { brandPalette } from "./team";
 
-/** The current full-field leader sets the brand, independently of table filters. */
+/** The current FBS leader sets the brand, independently of table filters. */
 export function applyLeaderTheme(ctx: Ctx) {
   const leader = ctx.ranked.find((t) => t.rank === 1);
   const accent = brandPalette(

@@ -7,7 +7,6 @@ import { graphView } from "./views/graph";
 import { listView } from "./views/list";
 import { teamView } from "./views/team";
 import { matchupsView } from "./views/matchups";
-import { projectionView } from "./views/projection";
 import { applyLeaderTheme } from "./theme";
 import type { SeasonIndexEntry } from "../src/engine/types";
 
@@ -47,7 +46,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       "Rankings",
       navIcons.list(),
       "list",
-      view === "list" || view === "team" || view === "projection",
+      view === "list" || view === "team",
     ),
     link("Graph", navIcons.graph(), "graph", view === "graph"),
     link("Matchups", navIcons.matchups(), "matchups", view === "matchups"),
@@ -158,15 +157,18 @@ async function route() {
       return;
     }
     const entry = seasons.find((x) => x.season === season)!;
+    // Existing forecast bookmarks now open the current standings.
+    if (view === "projection") {
+      location.replace(
+        href(season, snapId ?? entry.snapshots.at(-1)!.id, "list"),
+      );
+      return;
+    }
     if (!snapId || !entry.snapshots.some((x) => x.id === snapId)) {
       location.replace(href(season, entry.snapshots.at(-1)!.id, view));
       return;
     }
-    if (
-      !["list", "graph", "team", "about", "matchups", "projection"].includes(
-        view,
-      )
-    )
+    if (!["list", "graph", "team", "about", "matchups"].includes(view))
       view = "list";
     const teamId = view === "team" ? Number(parts[3]) : undefined;
 
@@ -191,9 +193,7 @@ async function route() {
             ? aboutView(ctx)
             : view === "matchups"
               ? matchupsView(ctx)
-              : view === "projection"
-                ? projectionView(ctx)
-                : listView(ctx);
+              : listView(ctx, (fn) => (cleanup = fn));
     app.replaceChildren(node);
     if (view !== "graph") window.scrollTo(0, 0);
   } catch (err) {

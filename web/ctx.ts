@@ -27,16 +27,15 @@ export interface Ctx {
   ranked: RankedTeam[];
 }
 export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
-  const { edges } = buildEdges(
-    base.games,
-    base.ranking.teams,
-    base.ranking.snapshot,
-  );
+  const allTeams = [...base.ranking.teams, ...(base.ranking.opponents ?? [])];
+  const { edges } = buildEdges(base.games, allTeams, base.ranking.snapshot);
   return {
     ...base,
     edges,
-    byId: new Map(base.ranking.teams.map((t) => [t.id, t])),
-    ranked: base.ranking.teams.filter((t) => t.rank !== null),
+    byId: new Map(allTeams.map((t) => [t.id, t])),
+    ranked: base.ranking.teams.filter(
+      (t) => t.classification === "fbs" && t.rank !== null,
+    ),
   };
 }
 export const href = (
@@ -54,6 +53,11 @@ export const fmtHeight = (v: number | null, d = 1) =>
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 export function upsets(ctx: Ctx) {
   return ctx.edges
+    .filter(
+      (e) =>
+        ctx.byId.get(e.winner)?.rank !== null &&
+        ctx.byId.get(e.loser)?.rank !== null,
+    )
     .map((edge) => ({
       edge,
       gap:
@@ -97,14 +101,14 @@ export function breakdown(ctx: Ctx, teamId: number) {
 export type Metric = "overall" | "offense" | "defense" | "special";
 export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
 export const METRIC_LABEL: Record<Metric, string> = {
-  overall: "Rating",
+  overall: "Score",
   offense: "Offense",
   defense: "Defense",
   special: "Special teams",
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Earn 0–1 point for a win based on pre-week opponent strength. Every loss subtracts exactly 1 point. Rank is total points order; the remaining schedule projects the final finish under this same rule.",
+    "Earn 0–1 point for a win based on pre-week opponent strength. Every loss subtracts exactly 1 point. FBS teams are ranked by their current total.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

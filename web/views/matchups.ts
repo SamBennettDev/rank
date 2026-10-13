@@ -1,18 +1,20 @@
 import type { MatchupPrediction } from "../../src/engine/types";
-import { type Ctx, teamHref } from "../ctx";
+import { type Ctx, fmtHeight, rankLabel, teamHref } from "../ctx";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import { logo, teamVars } from "../team";
-import { percent, provisionalFlag } from "../visuals";
+import { provisionalFlag } from "../visuals";
 
 export function matchupCard(ctx: Ctx, p: MatchupPrediction) {
   const home = ctx.byId.get(p.home)!,
     away = ctx.byId.get(p.away)!;
-  const side = (id: number, name: string, probability: number) =>
-    h(
-      "a",
+  const side = (id: number, name: string) => {
+    const team = ctx.byId.get(id)!;
+    const fbs = team.classification === "fbs";
+    return h(
+      fbs ? "a" : "div",
       {
-        href: teamHref(ctx, id),
+        ...(fbs ? { href: teamHref(ctx, id) } : {}),
         class: "matchup-side tv",
         style: teamVars(ctx.teams.get(id)?.color),
       },
@@ -21,9 +23,19 @@ export function matchupCard(ctx: Ctx, p: MatchupPrediction) {
         "div",
         {},
         h("span", { class: "school", title: name }, name),
-        h("b", { class: "win-chance" }, percent(probability)),
+        h(
+          "b",
+          { class: "matchup-score" },
+          fbs ? fmtHeight(team.height, 3) : "FCS",
+        ),
+        h(
+          "span",
+          { class: "matchup-rank" },
+          fbs ? `#${rankLabel(team.rank, team.tied)} · Score` : "Opponent",
+        ),
       ),
     );
+  };
   return h(
     "article",
     { class: "panel matchup" },
@@ -50,42 +62,19 @@ export function matchupCard(ctx: Ctx, p: MatchupPrediction) {
     h(
       "div",
       { class: "matchup-contest" },
-      side(p.away, away.school, 1 - p.homeProbability),
+      side(p.away, away.school),
       h(
         "span",
         { class: "contest-divider", "aria-hidden": "true" },
         p.neutralSite ? "vs" : "at",
       ),
-      side(p.home, home.school, p.homeProbability),
-    ),
-    h(
-      "div",
-      {
-        class: "matchup-probabilities",
-        role: "img",
-        "aria-label": `${away.school} win chance ${percent(1 - p.homeProbability)}, ${home.school} ${percent(p.homeProbability)}`,
-      },
-      h("i", {
-        class: "tv",
-        style: `${teamVars(ctx.teams.get(p.away)?.color)};width:${100 * (1 - p.homeProbability)}%`,
-      }),
-      h("i", {
-        class: "tv",
-        style: `${teamVars(ctx.teams.get(p.home)?.color)};width:${100 * p.homeProbability}%`,
-      }),
-    ),
-    h(
-      "div",
-      { class: "matchup-footer" },
-      h("span", {}, p.neutralSite ? "Win probability" : "Away"),
-      h("span", {}, p.neutralSite ? "Neutral site" : "Home"),
+      side(p.home, home.school),
     ),
   );
 }
 
 export function matchupsView(ctx: Ctx) {
-  let query = "",
-    division = "all";
+  let query = "";
   const list = h("div", { class: "matchup-list" }),
     count = h("span", { class: "count", "aria-live": "polite" });
   const draw = () => {
@@ -93,9 +82,7 @@ export function matchupsView(ctx: Ctx) {
       const home = ctx.byId.get(p.home)!,
         away = ctx.byId.get(p.away)!;
       return (
-        (division === "all" ||
-          (home.classification === division &&
-            away.classification === division)) &&
+        (home.classification === "fbs" || away.classification === "fbs") &&
         (!query ||
           home.school.toLowerCase().includes(query) ||
           away.school.toLowerCase().includes(query))
@@ -126,12 +113,12 @@ export function matchupsView(ctx: Ctx) {
         "span",
         { class: "scope-pill" },
         h("span", { class: "status-dot" }),
-        "Win probability",
+        "Current scores",
       ),
     ),
     h(
       "div",
-      { class: "toolbar forecast-tools" },
+      { class: "toolbar schedule-tools" },
       h(
         "label",
         { class: "search" },
@@ -146,25 +133,6 @@ export function matchupsView(ctx: Ctx) {
           },
         }),
         count,
-      ),
-      h(
-        "select",
-        {
-          "aria-label": "Matchup division",
-          onchange: (e: Event) => {
-            division = (e.target as HTMLSelectElement).value;
-            draw();
-          },
-        },
-        ...["all", "fbs", "fcs"].map((d) =>
-          h(
-            "option",
-            { value: d },
-            d === "all"
-              ? "All games"
-              : `${d.toUpperCase()} vs ${d.toUpperCase()}`,
-          ),
-        ),
       ),
     ),
     list,

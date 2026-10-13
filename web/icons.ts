@@ -20,7 +20,6 @@ export const searchIcon = () =>
   icon('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>');
 export const filterIcon = () => icon('<path d="M4 6h16M7 12h10M10 18h4"/>', 18);
 export const navIcons = {
-  projection: () => icon('<path d="M4 19h16M5 16l5-6 4 3 5-8M15 5h4v4"/>', 18),
   list: () =>
     icon(
       '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01" stroke-width="3"/>',

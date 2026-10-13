@@ -1,6 +1,8 @@
 # Methodology
 
-Rank publishes one **earned-standing rating**, shown as current standing vs projected final standing. All configured FBS/FCS teams start at zero. No preseason, recruiting, brand, poll or conference input is used. An internal score model estimates opponent quality and game probabilities; its strength estimates are not another published standing.
+Rank publishes one **current earned-standing score for FBS teams**. The site shows rank, team and current score, plus a carousel of the current top 10. All teams start at zero. No preseason, recruiting, brand, poll or conference input is used. An internal score model estimates opponent quality; its strength estimates are not another published standing.
+
+`config.classifications` selects the ranked field (FBS in the published 2026 season). `opponentClassifications` retains FBS/FCS model inputs so games against FCS opponents still count. Published `teams` contain only FBS teams. Supporting `opponents` retain their records and game-credit totals for receipts, with null rank and projection. FBS ranks, ties and weekly movement are calculated solely within the FBS field. The scoring reference remains the same configured opponent population, so changing the published field does not change earned credits.
 
 ## Current standing and fixed loss deductions
 
@@ -15,7 +17,7 @@ Estimate a game's opponent quality at **Monday 12:00 UTC before its calendar wee
 
 There is no averaging by games played, record overlay, or head-to-head override. More quality wins accumulate points; the fixed deduction is at least as large as any individual win credit. A team's current score is fully accounted for by its completed results, so it has no modeled current-score error bar. Opponent quality itself is estimated, and the provisional label identifies limited evidence.
 
-Order published six-decimal scores descending. Equal values receive competition ranks and a tie label; a team with no counted games is unranked. Game IDs break display-order ties, not scoring ties. Each output includes `credits`: game ID, winner/loser team IDs, awarded win value and pre-week cutoff. A loser receives −1 without a separate award row. Team pages sum these awards and deductions.
+Order published six-decimal scores descending. Equal values receive competition ranks and a tie label; a team with no counted games is unranked. Team IDs break display-order ties, not scoring ties. Each output includes `credits`: game ID, winner/loser team IDs, awarded win value and pre-week cutoff. A loser receives −1 without a separate award row. Team pages sum these awards and deductions.
 
 ## Internal prediction and opponent-quality model
 
@@ -53,16 +55,14 @@ Equal team shrink makes the common population-average offset independent of all 
 
 ## Final-standing projection
 
-The target is **Rank's own final earned-standing order over the known remaining schedule**, not an AP poll, playoff selection, or championship forecast. The table compares Current Standing and Projected Finish side by side and can sort either column. The primary projected standing is a whole-number position: order teams by ascending average simulated finish and assign competition ranks, preserving exact ties. This produces a coherent final-table estimate with a #1 team. Among complete strict orders, sorting mean finishes minimizes total expected squared rank error. The mean itself may be fractional (for example 6.4) and remains an audit statistic in expandable team details, alongside the median. The 80% finish range and top-25/first probabilities describe the simulation distribution, rather than confidence that the ordinal table position will occur. The table position can lie outside a team’s central simulated range because a single complete ordering is different from independent per-team median or modal estimates.
-
-Each projection includes `rank` for the ordinal standings estimate and `expectedRank` for the simulated mean. The main UI uses `rank`; its movement arrows compare that position with current standing.
+The simulation engine remains available in downloadable data and research tools; forecasts are no longer displayed on the site. Its target is **Rank's own final earned-standing order over the known remaining schedule**. Simulated games include supporting opponents, while final ranks and probabilities use only the eligible ranked field. `rank` is the whole-number competition rank ordered by ascending simulated mean finish; `expectedRank` is the fractional mean. Ranges and top-25/first probabilities describe that distribution. Sorting mean finishes minimizes total expected squared rank error among complete strict orders.
 
 For each of **2,048 fixed-seed stratified simulations**:
 
 1. Draw a joint team-strength and home-field profile from the current Gaussian model. Center the population's average team strength to zero. Use this same profile for every remaining game, preserving shared uncertainty between opponents and a team's successive results.
 2. For each known remaining matchup, add independent logistic game noise with scale 12 to the simulated home/away strength difference and home field. Its sign decides one winner and one loser.
 3. Add the winning team's estimated win credit and deduct exactly 1 point from the loser. Future win credits use today's opponent evidence. If a future game belongs to the already-started calendar week, keep its pre-week credit estimate. Later weeks use the current snapshot as the estimate of their eventual pre-week quality.
-4. Rank final earned scores with the same six-decimal competition-rank rule as current standings.
+4. Rank only eligible FBS teams by final earned scores with the same six-decimal competition-rank rule as current standings; supporting opponents never occupy a rank.
 
 Average the simulated scores and ranks and take empirical rank/rating percentiles. Top-25 and first-place probabilities count simulated competition ranks. With no remaining games, return the exact current scores/ranks without simulation noise. Scheduled unplayed teams can receive a broad projection while remaining unranked currently. Teams without results or a remaining known matchup have no projection.
 
@@ -92,7 +92,7 @@ Schedule data are pinned to sportsdataverse/cfbfastR-data commit `a3dd960090c1bf
 
 `research/forecast-selection.json` compares carrying current rank forward, ordering current predictive strength, ranking expected future results, independent result simulation, correlated simulation, and simulation with weekly opponent-quality refits. At weeks 4, 7 and 10 over six design seasons, 1,024-sample correlated forecasts had the lowest tested simulation RMSE: **40.83 places**, against current-rank baseline **46.20**, expected-result ordering **43.73**, independent simulation **41.61**, and weekly-refit simulation **40.89**. Nominal 80% range coverage was **78.46%**. The small gap to weekly refitting supports choosing the simpler model, rather than a claim of statistically significant superiority.
 
-`npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json` evaluates final earned-standing ranks from the nonconditional regular-season slate. It excludes postseason and source-annotated championship/playoff/bowl assignments from both future schedule and target, avoiding hindsight about selected participants. At the three cutoffs, over **3,924 team/cutoff observations**, RMSE is **40.24** vs **46.61** carrying current rank forward, median-rank MAE **30.00** vs **34.22**, nominal 80% coverage **78.16%**, and top-25 Brier score **0.04391**. Reports also break out each week and year.
+`npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json` evaluates final earned-standing ranks from the nonconditional regular-season slate. It excludes postseason and source-annotated championship/playoff/bowl assignments from both future schedule and target, avoiding hindsight about selected participants. These existing reports evaluated the combined FBS/FCS field, rather than the new FBS-only publication. At the three cutoffs, over **3,924 team/cutoff observations**, RMSE is **40.24** vs **46.61** carrying current rank forward, median-rank MAE **30.00** vs **34.22**, nominal 80% coverage **78.16%**, and top-25 Brier score **0.04391**. Reports also break out each week and year.
 
 `npm run backtest -- --history 2021-2025 --include-repo --summary --report research/development-results.json` evaluates game probabilities from week 4 onward with the production prediction functions. Monday cutoffs use only earlier available scores. It reports winner accuracy, Brier/log loss, reliability bins, per-season, true FBS-vs-FBS and provisional subsets, with per-game forecasts when `--summary` is omitted. On 2021–2025 plus 2026 through week 6: **71.16% of 6,287 winners**, Brier **0.1888**, log loss **0.5557**. These game metrics measure the internal predictor, not current-standing quality.
 
