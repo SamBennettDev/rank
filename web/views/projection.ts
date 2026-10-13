@@ -128,7 +128,7 @@ export function projectionView(
           {
             type: "button",
             class: sort === value ? "on" : "",
-            "aria-pressed": sort === value,
+            "aria-pressed": String(sort === value),
             onclick: () => {
               sort = value;
               draw();
