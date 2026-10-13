@@ -1,0 +1,484 @@
+{
+  "id": "calendar-2014-2019-v1",
+  "sourceRevision": "a3dd960090c1bfa169cebd491beabf7028b379b2",
+  "status": "training calibration; 2021–2026 are development evaluation, not untouched holdout",
+  "years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "startWeek": 2,
+  "protocol": "Monday 12:00 UTC forecast cutoff; scores eligible six hours after kickoff",
+  "selection": "minimum pooled walk-forward log loss; probability variance includes conditional rating uncertainty",
+  "inputs": [
+    {
+      "year": 2014,
+      "sha256": "5b1a1f78bc63114c1e076b10e0d9316d079091afa9ac798982048fce6ce5a128"
+    },
+    {
+      "year": 2015,
+      "sha256": "3044e8911721a711202f976133230a0c2cb557cfaf621cb1f3c21722cfd86fe9"
+    },
+    {
+      "year": 2016,
+      "sha256": "f60e57cdab028d2d35bd589c46139a6dce11ee8c52c3f4ca975c5d98522f403c"
+    },
+    {
+      "year": 2017,
+      "sha256": "c5a6f47dc1b121e366c0e9ef6cf1524e6ea54f58cf997874bf6d818e46fa3b26"
+    },
+    {
+      "year": 2018,
+      "sha256": "a4d4c2ccd06f933c1b6848b3ef4fddbc56695f6b066c9376b1249bfb9d29c00f"
+    },
+    {
+      "year": 2019,
+      "sha256": "d8665fa0aced3d02d59405c8b9ff157ba00ef128a90c1c5eab31d268d917abac"
+    }
+  ],
+  "selected": {
+    "homeFieldShrink": 0.0001,
+    "probabilityScale": 12,
+    "residualScale": 14.934045,
+    "n": 7895,
+    "logLoss": 0.5484061808824215,
+    "brier": 0.18550808890295956
+  },
+  "candidates": [
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 12,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5484061808824215,
+      "brier": 0.18550808890295956
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 12,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.5484229104248787,
+      "brier": 0.1855156220922083
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 12,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.5486065999233842,
+      "brier": 0.18560031748520117
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 12,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5492431192786287,
+      "brier": 0.1859068871319439
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 14,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5492968237754386,
+      "brier": 0.18569420751552693
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 14,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.5493149494590224,
+      "brier": 0.18570229663743276
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 14,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.5495085986927348,
+      "brier": 0.1857908040681833
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 14,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5501624327504824,
+      "brier": 0.1861026087091323
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 12,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.550714376633784,
+      "brier": 0.18664613895060572
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 10,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5508052943174627,
+      "brier": 0.18624306654222522
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 10,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.550820950183379,
+      "brier": 0.18625014381051813
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 10,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.5509965945639149,
+      "brier": 0.1863316505869712
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 10,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5516168003389852,
+      "brier": 0.18663350999651307
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 14,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.551665679236577,
+      "brier": 0.1868458848665869
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 16,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5520509043363654,
+      "brier": 0.18650567551495636
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 16,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.5520705666040394,
+      "brier": 0.1865143799348322
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 12,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.5521375386414001,
+      "brier": 0.18736714176786784
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 16,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.55227486748727,
+      "brier": 0.1866070414314384
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 16,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5529453480256964,
+      "brier": 0.18692418139166625
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 10,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.553049427227856,
+      "brier": 0.1873679191426817
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 14,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.5531284942486335,
+      "brier": 0.18756670122288588
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 10,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.5544109285807685,
+      "brier": 0.188086269094038
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 16,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.5544729350426715,
+      "brier": 0.18767020950349392
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 18,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5558170584082877,
+      "brier": 0.18772303602706172
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 18,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.555838295308404,
+      "brier": 0.18773238589165975
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 16,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.5559568901183756,
+      "brier": 0.1883880329721521
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 18,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.556053262960309,
+      "brier": 0.18782934289680192
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 18,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5567388889122015,
+      "brier": 0.18815163289398193
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 18,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.5582832901226719,
+      "brier": 0.18889893647109837
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 8,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5588483303715523,
+      "brier": 0.18825862999913914
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 8,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.5588635827045384,
+      "brier": 0.18826540855031323
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 8,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.5590354492934292,
+      "brier": 0.1883447474638158
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 8,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5596437260841208,
+      "brier": 0.1886430418420129
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 18,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.5597737528887876,
+      "brier": 0.18961126553469948
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 20,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5600874010213776,
+      "brier": 0.1891907623796225
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 20,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.5601101892093132,
+      "brier": 0.18920076635756156
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 20,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.5603354443255103,
+      "brier": 0.1893020149731415
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 20,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5610343149490924,
+      "brier": 0.18962907991469805
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 8,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.5610346614576968,
+      "brier": 0.18937262407634886
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 8,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.562311620661175,
+      "brier": 0.1900860176292188
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 20,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.5625886020449715,
+      "brier": 0.1903761332613922
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 20,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.5640744012769691,
+      "brier": 0.1910808679342927
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 6,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.5761673910008509,
+      "brier": 0.19187762980363035
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 6,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.5761836085581251,
+      "brier": 0.1918843434941776
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 6,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.5763607019356465,
+      "brier": 0.19196306878669903
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 6,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.5769683943951386,
+      "brier": 0.1922597957998882
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 6,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.5783237736406096,
+      "brier": 0.19298590181349784
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 6,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.579500272151084,
+      "brier": 0.19369355724771148
+    },
+    {
+      "homeFieldShrink": 0.0001,
+      "probabilityScale": 4,
+      "residualScale": 14.934045,
+      "n": 7895,
+      "logLoss": 0.606934855233935,
+      "brier": 0.19704094754946447
+    },
+    {
+      "homeFieldShrink": 0.05,
+      "probabilityScale": 4,
+      "residualScale": 14.932938,
+      "n": 7895,
+      "logLoss": 0.6069547299818092,
+      "brier": 0.19704790583100848
+    },
+    {
+      "homeFieldShrink": 0.5,
+      "probabilityScale": 4,
+      "residualScale": 14.925559,
+      "n": 7895,
+      "logLoss": 0.6071550334786038,
+      "brier": 0.19712810434726002
+    },
+    {
+      "homeFieldShrink": 2,
+      "probabilityScale": 4,
+      "residualScale": 14.915447,
+      "n": 7895,
+      "logLoss": 0.6077868043771955,
+      "brier": 0.19742615987547665
+    },
+    {
+      "homeFieldShrink": 10,
+      "probabilityScale": 4,
+      "residualScale": 14.903977,
+      "n": 7895,
+      "logLoss": 0.6091323536267216,
+      "brier": 0.19815182618738766
+    },
+    {
+      "homeFieldShrink": 50,
+      "probabilityScale": 4,
+      "residualScale": 14.895288,
+      "n": 7895,
+      "logLoss": 0.6102165980118387,
+      "brier": 0.19885572381852984
+    }
+  ]
+}

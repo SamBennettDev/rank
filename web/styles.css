@@ -371,7 +371,7 @@ select:hover { border-color: var(--faint); }
 .hist .pv { fill: var(--text); font: 700 13px var(--display); text-anchor: middle; }
 .games { margin-top: 16px; }
 
-.games .lhead, .games .grow2 { display: grid; grid-template-columns: 58px 40px minmax(140px, 1fr) 96px 70px 80px 80px; gap: 12px; align-items: center; padding: 0 18px; }
+.games .lhead, .games .grow2 { display: grid; grid-template-columns: 58px 40px minmax(140px, 1fr) 96px 70px 80px; gap: 12px; align-items: center; padding: 0 18px; }
 .games .grow2 { height: 60px; border-bottom: 1px solid var(--line); }
 .games .grow2:last-child { border-bottom: 0; }
 .games .grow2:hover { background: var(--surface-2); }
@@ -526,3 +526,16 @@ body[data-view="graph"] .foot { display: none; }
 @media (max-width: 720px) { .units { grid-template-columns: 1fr; gap: 8px; } .metric-tabs { margin-top: 16px; } }
 .unitsp { margin-bottom: 16px; }
 .tag-held { font: 700 10px var(--display); letter-spacing: .12em; color: var(--brand); border: 1px solid color-mix(in srgb, var(--brand) 50%, transparent); padding: 2px 6px; border-radius: 5px; cursor: help; }
+.matchup-list { display: grid; gap: 12px; }
+.projection-row { display: grid; grid-template-columns: 60px 34px minmax(160px, 1fr) 55px 65px 85px 120px 80px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.projection-row .hint { margin: 2px 0 0; font-size: 12px; }
+.forecast-head { color: var(--muted); font-size: 12px; }
+.mobile-range { display: none; }
+@media (max-width: 960px) { .projection-row { grid-template-columns: 40px 30px minmax(0, 1fr) 55px 80px 60px; gap: 8px; font-size: 13px; } .forecast-record, .forecast-range { display: none; } .mobile-range { display: inline; } }
+@media (max-width: 720px) { .projection-row { grid-template-columns: 34px 26px minmax(0, 1fr) 58px 46px; font-size: 12px; } .forecast-rating { display: none; } .forecast-team b { overflow-wrap: anywhere; } .forecast-tools { display: grid; grid-template-columns: 1fr 1fr; } .forecast-tools .search { grid-column: 1 / -1; width: 100%; } .forecast-tools select { min-width: 0; width: 100%; } }
+.matchup-teams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; }
+.matchup-side { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.matchup-side span { flex: 1; }
+.matchup-side b { color: var(--brand); font-variant-numeric: tabular-nums; }
+.who .c .tag-held { margin-left: 6px; }
+@media (max-width: 720px) { .matchup-teams { grid-template-columns: 1fr; gap: 8px; } .matchup-teams > span { display: none; } }

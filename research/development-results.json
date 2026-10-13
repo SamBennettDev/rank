@@ -1,0 +1,914 @@
+{
+  "protocol": "Monday 12:00 UTC calendar cutoffs; only scores from kickoffs at least six hours earlier; predictions use strength, home field and conditional uncertainty",
+  "status": "development evaluation; these seasons have been inspected and are not an untouched holdout",
+  "sourceRevision": "a3dd960090c1bfa169cebd491beabf7028b379b2",
+  "calibrationId": "calendar-2014-2019-v1",
+  "seasons": [
+    {
+      "season": "2021",
+      "inputSha256": "91616be40e7f4d611a6e714ee7284cdd7372249888287b05b790019e9397d5fd",
+      "config": {
+        "label": "Backtest",
+        "demo": false,
+        "algorithmVersion": "earned-standing-1",
+        "classifications": [
+          "fbs",
+          "fcs"
+        ],
+        "winBonus": 3,
+        "shrink": 0.05,
+        "projectionSamples": 2048,
+        "projectionSeed": 20261013,
+        "homeFieldShrink": 0.0001,
+        "probabilityScale": 12,
+        "residualScale": 14.934045,
+        "calibrationId": "calendar-2014-2019-v1"
+      },
+      "metrics": {
+        "n": 1128,
+        "accuracy": 0.699468085106383,
+        "brier": 0.19365332633533425,
+        "logLoss": 0.56784346398643,
+        "calibration": [
+          {
+            "from": 0,
+            "to": 0.1,
+            "n": 42,
+            "meanProbability": 0.0710529761904762,
+            "observedWinRate": 0.09523809523809523
+          },
+          {
+            "from": 0.1,
+            "to": 0.2,
+            "n": 108,
+            "meanProbability": 0.1497482777777778,
+            "observedWinRate": 0.2037037037037037
+          },
+          {
+            "from": 0.2,
+            "to": 0.3,
+            "n": 103,
+            "meanProbability": 0.25328919417475737,
+            "observedWinRate": 0.3106796116504854
+          },
+          {
+            "from": 0.3,
+            "to": 0.4,
+            "n": 101,
+            "meanProbability": 0.35302695049504945,
+            "observedWinRate": 0.504950495049505
+          },
+          {
+            "from": 0.4,
+            "to": 0.5,
+            "n": 123,
+            "meanProbability": 0.4486750325203254,
+            "observedWinRate": 0.45528455284552843
+          },
+          {
+            "from": 0.5,
+            "to": 0.6,
+            "n": 137,
+            "meanProbability": 0.5456697226277369,
+            "observedWinRate": 0.5766423357664233
+          },
+          {
+            "from": 0.6,
+            "to": 0.7,
+            "n": 136,
+            "meanProbability": 0.6529639117647059,
+            "observedWinRate": 0.6764705882352942
+          },
+          {
+            "from": 0.7,
+            "to": 0.8,
+            "n": 148,
+            "meanProbability": 0.7514512297297299,
+            "observedWinRate": 0.7297297297297297
+          },
+          {
+            "from": 0.8,
+            "to": 0.9,
+            "n": 129,
+            "meanProbability": 0.8526553565891474,
+            "observedWinRate": 0.8062015503875969
+          },
+          {
+            "from": 0.9,
+            "to": 1,
+            "n": 101,
+            "meanProbability": 0.9434066237623762,
+            "observedWinRate": 0.9306930693069307
+          }
+        ]
+      }
+    },
+    {
+      "season": "2022",
+      "inputSha256": "bfee92544d7269f764dcb5726ce5c037837cb100a8c6326e0e4c7103a2e6656d",
+      "config": {
+        "label": "Backtest",
+        "demo": false,
+        "algorithmVersion": "earned-standing-1",
+        "classifications": [
+          "fbs",
+          "fcs"
+        ],
+        "winBonus": 3,
+        "shrink": 0.05,
+        "projectionSamples": 2048,
+        "projectionSeed": 20261013,
+        "homeFieldShrink": 0.0001,
+        "probabilityScale": 12,
+        "residualScale": 14.934045,
+        "calibrationId": "calendar-2014-2019-v1"
+      },
+      "metrics": {
+        "n": 1130,
+        "accuracy": 0.7,
+        "brier": 0.18944113133492388,
+        "logLoss": 0.5565716387679475,
+        "calibration": [
+          {
+            "from": 0,
+            "to": 0.1,
+            "n": 32,
+            "meanProbability": 0.068645625,
+            "observedWinRate": 0.0625
+          },
+          {
+            "from": 0.1,
+            "to": 0.2,
+            "n": 88,
+            "meanProbability": 0.15006212500000005,
+            "observedWinRate": 0.2159090909090909
+          },
+          {
+            "from": 0.2,
+            "to": 0.3,
+            "n": 105,
+            "meanProbability": 0.24973817142857144,
+            "observedWinRate": 0.29523809523809524
+          },
+          {
+            "from": 0.3,
+            "to": 0.4,
+            "n": 117,
+            "meanProbability": 0.35191517094017083,
+            "observedWinRate": 0.37606837606837606
+          },
+          {
+            "from": 0.4,
+            "to": 0.5,
+            "n": 119,
+            "meanProbability": 0.4519770840336136,
+            "observedWinRate": 0.48739495798319327
+          },
+          {
+            "from": 0.5,
+            "to": 0.6,
+            "n": 138,
+            "meanProbability": 0.5499094202898553,
+            "observedWinRate": 0.5144927536231884
+          },
+          {
+            "from": 0.6,
+            "to": 0.7,
+            "n": 138,
+            "meanProbability": 0.6496914782608694,
+            "observedWinRate": 0.6014492753623188
+          },
+          {
+            "from": 0.7,
+            "to": 0.8,
+            "n": 139,
+            "meanProbability": 0.7502786834532374,
+            "observedWinRate": 0.7266187050359713
+          },
+          {
+            "from": 0.8,
+            "to": 0.9,
+            "n": 169,
+            "meanProbability": 0.8492037100591715,
+            "observedWinRate": 0.8757396449704142
+          },
+          {
+            "from": 0.9,
+            "to": 1,
+            "n": 85,
+            "meanProbability": 0.9415474705882355,
+            "observedWinRate": 0.9529411764705882
+          }
+        ]
+      }
+    },
+    {
+      "season": "2023",
+      "inputSha256": "7ffc245da1242fc44c021dae724029074aece78544ba498937cc7703417f0dff",
+      "config": {
+        "label": "Backtest",
+        "demo": false,
+        "algorithmVersion": "earned-standing-1",
+        "classifications": [
+          "fbs",
+          "fcs"
+        ],
+        "winBonus": 3,
+        "shrink": 0.05,
+        "projectionSamples": 2048,
+        "projectionSeed": 20261013,
+        "homeFieldShrink": 0.0001,
+        "probabilityScale": 12,
+        "residualScale": 14.934045,
+        "calibrationId": "calendar-2014-2019-v1"
+      },
+      "metrics": {
+        "n": 1179,
+        "accuracy": 0.7116200169635284,
+        "brier": 0.19120195047982685,
+        "logLoss": 0.5602818668886794,
+        "calibration": [
+          {
+            "from": 0,
+            "to": 0.1,
+            "n": 36,
+            "meanProbability": 0.06581955555555555,
+            "observedWinRate": 0.05555555555555555
+          },
+          {
+            "from": 0.1,
+            "to": 0.2,
+            "n": 81,
+            "meanProbability": 0.15277343209876543,
+            "observedWinRate": 0.14814814814814814
+          },
+          {
+            "from": 0.2,
+            "to": 0.3,
+            "n": 101,
+            "meanProbability": 0.25004455445544554,
+            "observedWinRate": 0.25742574257425743
+          },
+          {
+            "from": 0.3,
+            "to": 0.4,
+            "n": 122,
+            "meanProbability": 0.34861750819672116,
+            "observedWinRate": 0.4016393442622951
+          },
+          {
+            "from": 0.4,
+            "to": 0.5,
+            "n": 136,
+            "meanProbability": 0.45183786029411754,
+            "observedWinRate": 0.4485294117647059
+          },
+          {
+            "from": 0.5,
+            "to": 0.6,
+            "n": 169,
+            "meanProbability": 0.5483883491124263,
+            "observedWinRate": 0.6331360946745562
+          },
+          {
+            "from": 0.6,
+            "to": 0.7,
+            "n": 157,
+            "meanProbability": 0.6522596687898087,
+            "observedWinRate": 0.6496815286624203
+          },
+          {
+            "from": 0.7,
+            "to": 0.8,
+            "n": 137,
+            "meanProbability": 0.7492149270072993,
+            "observedWinRate": 0.6788321167883211
+          },
+          {
+            "from": 0.8,
+            "to": 0.9,
+            "n": 159,
+            "meanProbability": 0.8479144025157229,
+            "observedWinRate": 0.8364779874213837
+          },
+          {
+            "from": 0.9,
+            "to": 1,
+            "n": 81,
+            "meanProbability": 0.9353045308641973,
+            "observedWinRate": 0.9629629629629629
+          }
+        ]
+      }
+    },
+    {
+      "season": "2024",
+      "inputSha256": "3e4f3cab542657015ff73d1b527c41df58e6a17acf5fbe7d6fb518a1aabcac61",
+      "config": {
+        "label": "Backtest",
+        "demo": false,
+        "algorithmVersion": "earned-standing-1",
+        "classifications": [
+          "fbs",
+          "fcs"
+        ],
+        "winBonus": 3,
+        "shrink": 0.05,
+        "projectionSamples": 2048,
+        "projectionSeed": 20261013,
+        "homeFieldShrink": 0.0001,
+        "probabilityScale": 12,
+        "residualScale": 14.934045,
+        "calibrationId": "calendar-2014-2019-v1"
+      },
+      "metrics": {
+        "n": 1252,
+        "accuracy": 0.7116613418530351,
+        "brier": 0.1901202292381949,
+        "logLoss": 0.5596120913919311,
+        "calibration": [
+          {
+            "from": 0,
+            "to": 0.1,
+            "n": 30,
+            "meanProbability": 0.07144773333333333,
+            "observedWinRate": 0.2
+          },
+          {
+            "from": 0.1,
+            "to": 0.2,
+            "n": 81,
+            "meanProbability": 0.15428616049382718,
+            "observedWinRate": 0.20987654320987653
+          },
+          {
+            "from": 0.2,
+            "to": 0.3,
+            "n": 117,
+            "meanProbability": 0.25669609401709403,
+            "observedWinRate": 0.358974358974359
+          },
+          {
+            "from": 0.3,
+            "to": 0.4,
+            "n": 124,
+            "meanProbability": 0.3541739354838708,
+            "observedWinRate": 0.3629032258064516
+          },
+          {
+            "from": 0.4,
+            "to": 0.5,
+            "n": 150,
+            "meanProbability": 0.4532759066666666,
+            "observedWinRate": 0.44666666666666666
+          },
+          {
+            "from": 0.5,
+            "to": 0.6,
+            "n": 157,
+            "meanProbability": 0.5483401082802546,
+            "observedWinRate": 0.6050955414012739
+          },
+          {
+            "from": 0.6,
+            "to": 0.7,
+            "n": 189,
+            "meanProbability": 0.6465701269841269,
+            "observedWinRate": 0.6243386243386243
+          },
+          {
+            "from": 0.7,
+            "to": 0.8,
+            "n": 133,
+            "meanProbability": 0.7509093007518797,
+            "observedWinRate": 0.8120300751879699
+          },
+          {
+            "from": 0.8,
+            "to": 0.9,
+            "n": 172,
+            "meanProbability": 0.8477963546511627,
+            "observedWinRate": 0.877906976744186
+          },
+          {
+            "from": 0.9,
+            "to": 1,
+            "n": 99,
+            "meanProbability": 0.9426649797979799,
+            "observedWinRate": 0.9494949494949495
+          }
+        ]
+      }
+    },
+    {
+      "season": "2025",
+      "inputSha256": "bfecf10bc5a8ffd2e3b6a76b5f0b03b406e17c1a0e03b2000bdf7e2263712db4",
+      "config": {
+        "label": "Backtest",
+        "demo": false,
+        "algorithmVersion": "earned-standing-1",
+        "classifications": [
+          "fbs",
+          "fcs"
+        ],
+        "winBonus": 3,
+        "shrink": 0.05,
+        "projectionSamples": 2048,
+        "projectionSeed": 20261013,
+        "homeFieldShrink": 0.0001,
+        "probabilityScale": 12,
+        "residualScale": 14.934045,
+        "calibrationId": "calendar-2014-2019-v1"
+      },
+      "metrics": {
+        "n": 1260,
+        "accuracy": 0.7373015873015873,
+        "brier": 0.17838336961911588,
+        "logLoss": 0.5301899434863457,
+        "calibration": [
+          {
+            "from": 0,
+            "to": 0.1,
+            "n": 41,
+            "meanProbability": 0.07146043902439025,
+            "observedWinRate": 0.0975609756097561
+          },
+          {
+            "from": 0.1,
+            "to": 0.2,
+            "n": 74,
+            "meanProbability": 0.15589313513513509,
+            "observedWinRate": 0.20270270270270271
+          },
+          {
+            "from": 0.2,
+            "to": 0.3,
+            "n": 115,
+            "meanProbability": 0.2527988086956522,
+            "observedWinRate": 0.26956521739130435
+          },
+          {
+            "from": 0.3,
+            "to": 0.4,
+            "n": 143,
+            "meanProbability": 0.3540546293706293,
+            "observedWinRate": 0.34965034965034963
+          },
+          {
+            "from": 0.4,
+            "to": 0.5,
+            "n": 128,
+            "meanProbability": 0.4501808359374999,
+            "observedWinRate": 0.390625
+          },
+          {
+            "from": 0.5,
+            "to": 0.6,
+            "n": 156,
+            "meanProbability": 0.5513571730769231,
+            "observedWinRate": 0.6089743589743589
+          },
+          {
+            "from": 0.6,
+            "to": 0.7,
+            "n": 145,
+            "meanProbability": 0.64740464137931,
+            "observedWinRate": 0.5724137931034483
+          },
+          {
+            "from": 0.7,
+            "to": 0.8,
+            "n": 170,
+            "meanProbability": 0.7510839000000001,
+            "observedWinRate": 0.7941176470588235
+          },
+          {
+            "from": 0.8,
+            "to": 0.9,
+            "n": 177,
+            "meanProbability": 0.847252231638418,
+            "observedWinRate": 0.8983050847457628
+          },
+          {
+            "from": 0.9,
+            "to": 1,
+            "n": 111,
+            "meanProbability": 0.9412461261261258,
+            "observedWinRate": 0.954954954954955
+          }
+        ]
+      }
+    },
+    {
+      "season": "2026",
+      "inputSha256": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c",
+      "config": {
+        "label": "2026 season",
+        "demo": false,
+        "algorithmVersion": "earned-standing-1",
+        "classifications": [
+          "fbs",
+          "fcs"
+        ],
+        "winBonus": 3,
+        "shrink": 0.05,
+        "projectionSamples": 2048,
+        "projectionSeed": 20261013,
+        "homeFieldShrink": 0.0001,
+        "probabilityScale": 12,
+        "residualScale": 14.934045,
+        "calibrationId": "calendar-2014-2019-v1"
+      },
+      "metrics": {
+        "n": 338,
+        "accuracy": 0.6952662721893491,
+        "brier": 0.1951750006273756,
+        "logLoss": 0.5766975115481269,
+        "calibration": [
+          {
+            "from": 0,
+            "to": 0.1,
+            "n": 8,
+            "meanProbability": 0.066151875,
+            "observedWinRate": 0.375
+          },
+          {
+            "from": 0.1,
+            "to": 0.2,
+            "n": 22,
+            "meanProbability": 0.14096731818181818,
+            "observedWinRate": 0.2727272727272727
+          },
+          {
+            "from": 0.2,
+            "to": 0.3,
+            "n": 29,
+            "meanProbability": 0.25111810344827584,
+            "observedWinRate": 0.13793103448275862
+          },
+          {
+            "from": 0.3,
+            "to": 0.4,
+            "n": 33,
+            "meanProbability": 0.3490807272727273,
+            "observedWinRate": 0.2727272727272727
+          },
+          {
+            "from": 0.4,
+            "to": 0.5,
+            "n": 41,
+            "meanProbability": 0.4497053170731708,
+            "observedWinRate": 0.5853658536585366
+          },
+          {
+            "from": 0.5,
+            "to": 0.6,
+            "n": 33,
+            "meanProbability": 0.5506083030303031,
+            "observedWinRate": 0.5757575757575758
+          },
+          {
+            "from": 0.6,
+            "to": 0.7,
+            "n": 48,
+            "meanProbability": 0.6421597291666669,
+            "observedWinRate": 0.6458333333333334
+          },
+          {
+            "from": 0.7,
+            "to": 0.8,
+            "n": 50,
+            "meanProbability": 0.7488632600000001,
+            "observedWinRate": 0.64
+          },
+          {
+            "from": 0.8,
+            "to": 0.9,
+            "n": 45,
+            "meanProbability": 0.8411005777777779,
+            "observedWinRate": 0.8444444444444444
+          },
+          {
+            "from": 0.9,
+            "to": 1,
+            "n": 29,
+            "meanProbability": 0.9510139999999999,
+            "observedWinRate": 0.9655172413793104
+          }
+        ]
+      }
+    }
+  ],
+  "all": {
+    "n": 6287,
+    "accuracy": 0.7116271671703516,
+    "brier": 0.18875445412260253,
+    "logLoss": 0.5556900153276592,
+    "calibration": [
+      {
+        "from": 0,
+        "to": 0.1,
+        "n": 189,
+        "meanProbability": 0.06959213756613762,
+        "observedWinRate": 0.1111111111111111
+      },
+      {
+        "from": 0.1,
+        "to": 0.2,
+        "n": 454,
+        "meanProbability": 0.1517345396475771,
+        "observedWinRate": 0.20044052863436124
+      },
+      {
+        "from": 0.2,
+        "to": 0.3,
+        "n": 570,
+        "meanProbability": 0.252550045614035,
+        "observedWinRate": 0.2912280701754386
+      },
+      {
+        "from": 0.3,
+        "to": 0.4,
+        "n": 640,
+        "meanProbability": 0.3522315265624998,
+        "observedWinRate": 0.3875
+      },
+      {
+        "from": 0.4,
+        "to": 0.5,
+        "n": 697,
+        "meanProbability": 0.45118321664275424,
+        "observedWinRate": 0.4533715925394548
+      },
+      {
+        "from": 0.5,
+        "to": 0.6,
+        "n": 790,
+        "meanProbability": 0.5488519911392399,
+        "observedWinRate": 0.589873417721519
+      },
+      {
+        "from": 0.6,
+        "to": 0.7,
+        "n": 813,
+        "meanProbability": 0.6491566765067645,
+        "observedWinRate": 0.6260762607626076
+      },
+      {
+        "from": 0.7,
+        "to": 0.8,
+        "n": 777,
+        "meanProbability": 0.7505074993564989,
+        "observedWinRate": 0.7425997425997426
+      },
+      {
+        "from": 0.8,
+        "to": 0.9,
+        "n": 851,
+        "meanProbability": 0.8483672173913044,
+        "observedWinRate": 0.8613396004700352
+      },
+      {
+        "from": 0.9,
+        "to": 1,
+        "n": 506,
+        "meanProbability": 0.9416142885375481,
+        "observedWinRate": 0.950592885375494
+      }
+    ]
+  },
+  "fbs": {
+    "n": 3301,
+    "accuracy": 0.695849742502272,
+    "brier": 0.1953958826928659,
+    "logLoss": 0.5706738057344706,
+    "calibration": [
+      {
+        "from": 0,
+        "to": 0.1,
+        "n": 82,
+        "meanProbability": 0.07068848780487805,
+        "observedWinRate": 0.10975609756097561
+      },
+      {
+        "from": 0.1,
+        "to": 0.2,
+        "n": 204,
+        "meanProbability": 0.15201904411764708,
+        "observedWinRate": 0.22058823529411764
+      },
+      {
+        "from": 0.2,
+        "to": 0.3,
+        "n": 311,
+        "meanProbability": 0.253340118971061,
+        "observedWinRate": 0.2958199356913183
+      },
+      {
+        "from": 0.3,
+        "to": 0.4,
+        "n": 359,
+        "meanProbability": 0.3516208133704736,
+        "observedWinRate": 0.38440111420612816
+      },
+      {
+        "from": 0.4,
+        "to": 0.5,
+        "n": 385,
+        "meanProbability": 0.452123701298701,
+        "observedWinRate": 0.4727272727272727
+      },
+      {
+        "from": 0.5,
+        "to": 0.6,
+        "n": 458,
+        "meanProbability": 0.5483801986899561,
+        "observedWinRate": 0.5829694323144105
+      },
+      {
+        "from": 0.6,
+        "to": 0.7,
+        "n": 446,
+        "meanProbability": 0.6477545403587444,
+        "observedWinRate": 0.6210762331838565
+      },
+      {
+        "from": 0.7,
+        "to": 0.8,
+        "n": 402,
+        "meanProbability": 0.749044121890548,
+        "observedWinRate": 0.736318407960199
+      },
+      {
+        "from": 0.8,
+        "to": 0.9,
+        "n": 425,
+        "meanProbability": 0.848294889411765,
+        "observedWinRate": 0.8541176470588235
+      },
+      {
+        "from": 0.9,
+        "to": 1,
+        "n": 229,
+        "meanProbability": 0.9398557729257645,
+        "observedWinRate": 0.9563318777292577
+      }
+    ]
+  },
+  "provisional": {
+    "n": 490,
+    "accuracy": 0.6877551020408164,
+    "brier": 0.20718217171907352,
+    "logLoss": 0.6033294069808306,
+    "calibration": [
+      {
+        "from": 0,
+        "to": 0.1,
+        "n": 11,
+        "meanProbability": 0.056716454545454535,
+        "observedWinRate": 0.2727272727272727
+      },
+      {
+        "from": 0.1,
+        "to": 0.2,
+        "n": 42,
+        "meanProbability": 0.1536947142857143,
+        "observedWinRate": 0.35714285714285715
+      },
+      {
+        "from": 0.2,
+        "to": 0.3,
+        "n": 33,
+        "meanProbability": 0.2421514545454545,
+        "observedWinRate": 0.3939393939393939
+      },
+      {
+        "from": 0.3,
+        "to": 0.4,
+        "n": 50,
+        "meanProbability": 0.35150898000000014,
+        "observedWinRate": 0.46
+      },
+      {
+        "from": 0.4,
+        "to": 0.5,
+        "n": 42,
+        "meanProbability": 0.4458150952380952,
+        "observedWinRate": 0.5
+      },
+      {
+        "from": 0.5,
+        "to": 0.6,
+        "n": 58,
+        "meanProbability": 0.5489547241379311,
+        "observedWinRate": 0.6551724137931034
+      },
+      {
+        "from": 0.6,
+        "to": 0.7,
+        "n": 55,
+        "meanProbability": 0.6484189636363635,
+        "observedWinRate": 0.6363636363636364
+      },
+      {
+        "from": 0.7,
+        "to": 0.8,
+        "n": 60,
+        "meanProbability": 0.7512514333333336,
+        "observedWinRate": 0.65
+      },
+      {
+        "from": 0.8,
+        "to": 0.9,
+        "n": 92,
+        "meanProbability": 0.8568743043478256,
+        "observedWinRate": 0.8369565217391305
+      },
+      {
+        "from": 0.9,
+        "to": 1,
+        "n": 47,
+        "meanProbability": 0.9490508723404253,
+        "observedWinRate": 0.9574468085106383
+      }
+    ]
+  },
+  "established": {
+    "n": 5797,
+    "accuracy": 0.7136449887873038,
+    "brier": 0.1871968240342339,
+    "logLoss": 0.5516632252793484,
+    "calibration": [
+      {
+        "from": 0,
+        "to": 0.1,
+        "n": 178,
+        "meanProbability": 0.07038782584269664,
+        "observedWinRate": 0.10112359550561797
+      },
+      {
+        "from": 0.1,
+        "to": 0.2,
+        "n": 412,
+        "meanProbability": 0.15153471601941743,
+        "observedWinRate": 0.18446601941747573
+      },
+      {
+        "from": 0.2,
+        "to": 0.3,
+        "n": 537,
+        "meanProbability": 0.25318906517690865,
+        "observedWinRate": 0.2849162011173184
+      },
+      {
+        "from": 0.3,
+        "to": 0.4,
+        "n": 590,
+        "meanProbability": 0.3522927593220338,
+        "observedWinRate": 0.3813559322033898
+      },
+      {
+        "from": 0.4,
+        "to": 0.5,
+        "n": 655,
+        "meanProbability": 0.45152743206106843,
+        "observedWinRate": 0.45038167938931295
+      },
+      {
+        "from": 0.5,
+        "to": 0.6,
+        "n": 732,
+        "meanProbability": 0.5488438510928956,
+        "observedWinRate": 0.5846994535519126
+      },
+      {
+        "from": 0.6,
+        "to": 0.7,
+        "n": 758,
+        "meanProbability": 0.6492102044854876,
+        "observedWinRate": 0.6253298153034301
+      },
+      {
+        "from": 0.7,
+        "to": 0.8,
+        "n": 717,
+        "meanProbability": 0.7504452454672241,
+        "observedWinRate": 0.7503486750348675
+      },
+      {
+        "from": 0.8,
+        "to": 0.9,
+        "n": 759,
+        "meanProbability": 0.8473360553359688,
+        "observedWinRate": 0.8642951251646904
+      },
+      {
+        "from": 0.9,
+        "to": 1,
+        "n": 459,
+        "meanProbability": 0.9408528082788664,
+        "observedWinRate": 0.9498910675381264
+      }
+    ]
+  }
+}

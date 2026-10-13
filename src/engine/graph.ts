@@ -1,28 +1,69 @@
 import type { Edge, Game, GameCounts, SnapshotSpec } from "./types";
+import { calendarWeekEnd, kickoff, RESULT_LAG_MS } from "./chronology";
 
 const pad2 = (n: number) => String(n).padStart(2, "0");
 
-/** One snapshot per regular-season week that has a completed game, plus "postseason". */
+/** Calendar cutoffs include overlapping playoffs; postseason rounds get separate snapshots. */
 export function listSnapshots(games: readonly Game[]): SnapshotSpec[] {
-  const weeks = new Set<number>();
-  let postseason = false;
-  let lastWeek = 0;
-  for (const g of games) {
-    if (!g.completed) continue;
-    if (g.seasonType === "regular") {
-      weeks.add(g.week);
-      lastWeek = Math.max(lastWeek, g.week);
-    } else postseason = true;
-  }
-  const specs: SnapshotSpec[] = [...weeks]
-    .sort((a, b) => a - b)
-    .map((w) => ({ id: `week-${pad2(w)}`, label: `Week ${w}`, throughWeek: w, includePostseason: false }));
-  if (postseason) specs.push({ id: "postseason", label: "Postseason", throughWeek: lastWeek, includePostseason: true });
+  const complete = games.filter(
+    (g) => g.completed && g.homePoints !== null && g.awayPoints !== null,
+  );
+  if (!complete.length) return [];
+  const latest = Math.max(...complete.map((g) => kickoff(g) + RESULT_LAG_MS));
+  const regular = new Map<number, number>();
+  for (const g of complete)
+    if (g.seasonType === "regular")
+      regular.set(
+        g.week,
+        Math.min(regular.get(g.week) ?? Infinity, calendarWeekEnd(kickoff(g))),
+      );
+  const specs: SnapshotSpec[] = [...regular]
+    .sort((a, b) => a[0] - b[0])
+    .map(([w, end]) => ({
+      id: `week-${pad2(w)}`,
+      label: `Week ${w}`,
+      throughWeek: w,
+      includePostseason: true,
+      asOf: new Date(Math.min(end, latest)).toISOString(),
+    }));
+  const lastRegular = Math.max(-Infinity, ...regular.values()),
+    lastWeek = Math.max(0, ...regular.keys());
+  const postEnds = [
+    ...new Set(
+      complete
+        .filter((g) => g.seasonType === "postseason")
+        .map((g) => calendarWeekEnd(kickoff(g))),
+    ),
+  ]
+    .filter((end) => end > lastRegular)
+    .sort((a, b) => a - b);
+  postEnds.forEach((end, i) => {
+    const asOf = new Date(Math.min(end, latest)).toISOString(),
+      last = i === postEnds.length - 1;
+    specs.push({
+      id: last ? "postseason" : `postseason-${asOf.slice(0, 10)}`,
+      label: last ? "Postseason" : `Postseason · ${asOf.slice(0, 10)}`,
+      throughWeek: lastWeek,
+      includePostseason: true,
+      asOf,
+    });
+  });
+  specs.sort(
+    (a, b) =>
+      Date.parse(a.asOf!) - Date.parse(b.asOf!) ||
+      a.throughWeek - b.throughWeek ||
+      a.id.localeCompare(b.id),
+  );
   return specs;
 }
 
 function inWindow(g: Game, snap: SnapshotSpec): boolean {
-  return g.seasonType === "regular" ? g.week <= snap.throughWeek : snap.includePostseason;
+  if (snap.asOf && !g.completed && !Number.isFinite(Date.parse(g.startDate)))
+    return false;
+  if (snap.asOf) return kickoff(g) + RESULT_LAG_MS <= Date.parse(snap.asOf);
+  return g.seasonType === "regular"
+    ? g.week <= snap.throughWeek
+    : snap.includePostseason;
 }
 
 /**
@@ -35,7 +76,13 @@ export function buildEdges(
   snap: SnapshotSpec,
 ): { edges: Edge[]; counts: GameCounts } {
   const known = new Set(teams.map((t) => t.id));
-  const counts: GameCounts = { inWindow: 0, included: 0, outOfScope: 0, incomplete: 0, tied: 0 };
+  const counts: GameCounts = {
+    inWindow: 0,
+    included: 0,
+    outOfScope: 0,
+    incomplete: 0,
+    tied: 0,
+  };
   const edges: Edge[] = [];
   for (const g of [...games].sort((a, b) => a.id - b.id)) {
     if (!inWindow(g, snap)) continue;

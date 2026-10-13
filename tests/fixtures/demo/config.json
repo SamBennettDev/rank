@@ -1,12 +1,16 @@
 {
   "label": "Demo season (fictional data)",
   "demo": true,
-  "algorithmVersion": "margin-6",
+  "algorithmVersion": "earned-standing-1",
   "classifications": [
     "fbs"
   ],
   "winBonus": 3,
   "shrink": 0.05,
-  "headToHeadWindow": 3,
-  "recordWeight": 24
+  "projectionSamples": 2048,
+  "projectionSeed": 20261013,
+  "homeFieldShrink": 0.0001,
+  "probabilityScale": 12,
+  "residualScale": 14.934045,
+  "calibrationId": "calendar-2014-2019-v1"
 }
