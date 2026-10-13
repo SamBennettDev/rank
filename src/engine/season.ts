@@ -1,7 +1,7 @@
 import { parseConfig, parseGames, parsePlays, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
-import { predictMatchup, rateTeams, round6 } from "./model";
+import { predictMatchup, rateTeams, rankValues, round6 } from "./model";
 import { kickoff, RESULT_LAG_MS } from "./chronology";
 import type { RatedGame } from "./rating";
 import type {
@@ -16,7 +16,7 @@ import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-14";
+export const ENGINE_VERSION = "rank-engine-15";
 
 export interface SeasonFiles {
   season: string;
@@ -64,8 +64,14 @@ export async function computeSeason(
   onProgress?: (done: number, total: number) => void | Promise<void>,
 ): Promise<SeasonOutput> {
   const config = parseConfig(input.configJson);
+  const modelClassifications = [
+    ...new Set([
+      ...config.classifications,
+      ...(config.opponentClassifications ?? []),
+    ]),
+  ];
   const teams = parseTeams(input.teamsCsv)
-    .filter((t) => config.classifications.includes(t.classification))
+    .filter((t) => modelClassifications.includes(t.classification))
     .sort((a, b) => a.id - b.id);
   if (!teams.length) throw new Error("no teams match config.classifications");
   const games = parseGames(input.gamesCsv);
@@ -77,6 +83,12 @@ export async function computeSeason(
     input.playsCsv === undefined ? null : parsePlays(input.playsCsv);
 
   const index = new Map(teams.map((t, i) => [t.id, i]));
+  const eligible = new Set(
+    teams.flatMap((t, i) =>
+      config.classifications.includes(t.classification) ? [i] : [],
+    ),
+  );
+  if (!eligible.size) throw new Error("no teams match config.classifications");
   const files: SeasonOutput["files"] = [];
   const snapshots = listSnapshots(games);
   const allIds = new Set(
@@ -138,6 +150,8 @@ export async function computeSeason(
       knownDated,
       indexedGames(teams, futureGames),
       config,
+      PROJECTION_MODE,
+      eligible,
     );
     const projection = {
       method: `${PROJECTION_MODE}-results-v1` as const,
@@ -154,22 +168,28 @@ export async function computeSeason(
       ).length,
       teams: projected.teams,
     };
-    const predictions = futureGames.flatMap((g) => {
-      const h = index.get(g.homeId)!,
-        a = index.get(g.awayId)!;
-      return model.heights[h] === null || model.heights[a] === null
-        ? []
-        : [
-            {
-              gameId: g.id,
-              home: g.homeId,
-              away: g.awayId,
-              startDate: g.startDate,
-              neutralSite: g.neutralSite,
-              ...predictMatchup(model, h, a, g.neutralSite, config),
-            },
-          ];
-    });
+    const predictions = futureGames
+      .filter(
+        (g) =>
+          eligible.has(index.get(g.homeId)!) ||
+          eligible.has(index.get(g.awayId)!),
+      )
+      .flatMap((g) => {
+        const h = index.get(g.homeId)!,
+          a = index.get(g.awayId)!;
+        return model.heights[h] === null || model.heights[a] === null
+          ? []
+          : [
+              {
+                gameId: g.id,
+                home: g.homeId,
+                away: g.awayId,
+                startDate: g.startDate,
+                neutralSite: g.neutralSite,
+                ...predictMatchup(model, h, a, g.neutralSite, config),
+              },
+            ];
+      });
     const units = plays
       ? fitUnits(teams.length, index, edges, plays, config.shrink)
       : null;
@@ -179,9 +199,12 @@ export async function computeSeason(
       played.map((t) => [t.id, standing.heights[index.get(t.id)!]!]),
     );
 
-    const ranked: RankedTeam[] = teams.map((t, i) => {
+    const standingRanks = rankValues(
+      standing.heights.map((v, i) => (eligible.has(i) ? v : null)),
+    );
+    const allTeams: RankedTeam[] = teams.map((t, i) => {
       const height = heights.get(t.id) ?? null;
-      const rank = standing.ranks[i] ?? null;
+      const rank = standingRanks[i] ?? null;
       const prev = previous.get(t.id);
       return {
         id: t.id,
@@ -191,8 +214,9 @@ export async function computeSeason(
         classification: t.classification,
         rank,
         tied:
-          height !== null &&
-          standing.heights.filter((v) => v === height).length > 1,
+          rank !== null &&
+          standing.heights.filter((v, j) => eligible.has(j) && v === height)
+            .length > 1,
         height,
         projection: projected.projections[i]!,
         component: height === null ? null : teams[model.components[i]!]!.id,
@@ -206,6 +230,12 @@ export async function computeSeason(
         change: rank !== null && prev !== undefined ? prev - rank : null,
       };
     });
+    const ranked = allTeams.filter((t) =>
+      config.classifications.includes(t.classification),
+    );
+    const opponents = allTeams.filter(
+      (t) => !config.classifications.includes(t.classification),
+    );
     ranked.sort(
       (a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id,
     );
@@ -230,6 +260,9 @@ export async function computeSeason(
       homeFieldError: round6(model.uncertainty.homeFieldError),
       connectedComponents: model.sizes.size,
       classifications: config.classifications,
+      ...(config.opponentClassifications
+        ? { opponentClassifications: modelClassifications }
+        : {}),
       teamsSha256,
       gamesSha256,
       playsSha256,
@@ -251,6 +284,7 @@ export async function computeSeason(
           loser: teams[c.loser]!.id,
         })),
         teams: ranked,
+        ...(opponents.length ? { opponents } : {}),
       }),
     });
     await onProgress?.(files.length, snapshots.length);
@@ -298,7 +332,18 @@ export function formatRanking(r: Ranking): string {
       (t, i) => `    ${JSON.stringify(t)}${i < r.teams.length - 1 ? "," : ""}`,
     ),
     "  ]",
-    "}",
   ];
+  if (r.opponents?.length) {
+    lines[lines.length - 1] = "  ],";
+    lines.push(
+      '  "opponents": [',
+      ...r.opponents.map(
+        (t, i) =>
+          `    ${JSON.stringify(t)}${i < r.opponents!.length - 1 ? "," : ""}`,
+      ),
+      "  ]",
+    );
+  }
+  lines.push("}");
   return lines.join("\n") + "\n";
 }

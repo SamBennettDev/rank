@@ -17,12 +17,11 @@ import { arrowLeft } from "../icons";
 import { logo, shortConf, svgLogo, teamVars } from "../team";
 import { loadRanking } from "../store";
 import { matchupCard } from "./matchups";
-import { projectionPanel } from "./projection";
 
 export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   const team = ctx.byId.get(teamId);
   const tl = ctx.teams.get(teamId);
-  if (!team)
+  if (!team || team.classification !== "fbs")
     return h(
       "div",
       { class: "empty" },
@@ -82,7 +81,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         { class: "tstats" },
         stat("Current rank", rankLabel(team.rank, team.tied)),
         stat("Record", record(team)),
-        stat("Rating", fmtHeight(team.height, 2)),
+        stat("Score", fmtHeight(team.height, 2)),
         stat(
           "This week",
           team.change === null
@@ -107,7 +106,6 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "tbody" },
-        projectionPanel(ctx, teamId),
         h(
           "div",
           { class: "panel" },
@@ -142,7 +140,6 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
     h(
       "div",
       { class: "tbody" },
-      projectionPanel(ctx, teamId),
       nextGames.length
         ? h(
             "section",
@@ -236,7 +233,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   return h(
     "div",
     { class: "panel why" },
-    h("h2", {}, "Rating breakdown"),
+    h("h2", {}, "Score breakdown"),
     h(
       "div",
       { class: "credit-equation" },
@@ -258,7 +255,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
         "div",
         {},
         h("b", {}, fmtHeight(b.average, 3)),
-        h("small", {}, "Rating"),
+        h("small", {}, "Score"),
       ),
     ),
     breakdownChart(ctx, b.fromGames, lines),
@@ -294,7 +291,7 @@ function breakdownChart(
   const root = svg("svg", {
     viewBox: `0 0 ${W} ${H}`,
     role: "img",
-    "aria-label": "How this team's rating is built from its games",
+    "aria-label": "How this team's score is built from its games",
   });
   const step =
     [0.25, 0.5, 1, 2, 5, 10, 20, 25, 50].find((st) => span / st <= 6) ?? 100;
@@ -525,8 +522,11 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       (l.won && me.height! < o.height!) || (!l.won && o.height! < me.height!);
     const pull = l.value;
     return h(
-      "a",
-      { class: "grow2", href: teamHref(ctx, o.id) },
+      o.classification === "fbs" ? "a" : "div",
+      {
+        class: "grow2",
+        ...(o.classification === "fbs" ? { href: teamHref(ctx, o.id) } : {}),
+      },
       h(
         "span",
         { class: "wk" },
@@ -544,7 +544,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         h(
           "span",
           { class: "c" },
-          `#${rankLabel(o.rank, o.tied)} · ${shortConf(o.conference)}`,
+          `${o.classification === "fbs" ? `#${rankLabel(o.rank, o.tied)}` : "FCS"} · ${shortConf(o.conference)}`,
           upset ? " " : "",
           upset ? h("span", { class: "tag-up" }, "UPSET") : "",
         ),
@@ -555,7 +555,6 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         h("i", {}, l.won ? "W" : "L"),
         `${l.won ? e.winnerPoints : e.loserPoints}–${l.won ? e.loserPoints : e.winnerPoints}`,
       ),
-      h("span", { class: "r hide-sm" }, fmtHeight(o.height)),
       h(
         "span",
         {
@@ -576,7 +575,6 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h("div"),
       h("div", {}, "Opponent"),
       h("div", {}, "Result"),
-      h("div", { class: "r hide-sm" }, "Opp. rating"),
       h("div", { class: "r" }, "Points"),
     ),
     ...rows,

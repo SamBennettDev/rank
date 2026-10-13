@@ -68,20 +68,25 @@ export function projectSeason(
   remaining: readonly DatedGame[],
   config: SeasonConfig,
   mode: ProjectionMode = PROJECTION_MODE,
+  eligible?: ReadonlySet<number>,
 ) {
   const n = model.fit.ratings.length,
     N = n + 1;
   const future = [...remaining].sort((a, b) => a.time - b.time || a.id - b.id);
   const active = Array.from({ length: n }, (_, i) => i).filter(
     (i) =>
-      standing.heights[i] !== null ||
-      future.some((g) => g.home === i || g.away === i),
+      (!eligible || eligible.has(i)) &&
+      (standing.heights[i] !== null ||
+        future.some((g) => g.home === i || g.away === i)),
   );
   const projections: (TeamProjection | null)[] = Array(n).fill(null);
   if (!future.length) {
+    const finalRanks = rankValues(
+      standing.heights.map((v, i) => (!eligible || eligible.has(i) ? v : null)),
+    );
     for (const i of active) {
       const value = standing.heights[i]!,
-        rank = standing.ranks[i]!;
+        rank = finalRanks[i]!;
       projections[i] = {
         rank,
         expectedRating: value,

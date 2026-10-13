@@ -3,9 +3,9 @@
   "demo": false,
   "algorithmVersion": "earned-standing-1",
   "classifications": [
-    "fbs",
-    "fcs"
+    "fbs"
   ],
+  "opponentClassifications": ["fbs", "fcs"],
   "winBonus": 3,
   "shrink": 0.05,
   "projectionSamples": 2048,

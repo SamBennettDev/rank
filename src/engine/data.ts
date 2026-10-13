@@ -140,6 +140,17 @@ export function parseConfig(json: string): SeasonConfig {
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
   }
+  if (
+    c.opponentClassifications !== undefined &&
+    (!Array.isArray(c.opponentClassifications) ||
+      c.opponentClassifications.length === 0 ||
+      c.opponentClassifications.some(
+        (value) => typeof value !== "string" || !value,
+      ))
+  )
+    throw new Error(
+      "config.opponentClassifications must be a non-empty array of strings",
+    );
   num("winBonus", (v) => v >= 0, "a number >= 0");
   num("shrink", (v) => v > 0, "a positive number");
   num(

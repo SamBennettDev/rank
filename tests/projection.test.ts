@@ -140,4 +140,27 @@ describe("final earned-standing projections", () => {
     for (const x of [1e-12, 0.001, 0.25, 1, 2, 123.4, 1e12])
       expect(logFixed(x)).toBeCloseTo(Math.log(x), 12);
   });
+  it("simulates games against supporting opponents but ranks only the eligible field", () => {
+    const known = [game(1, 0, 1, 30), game(2, 0, 2, 30)];
+    const model = rateTeams(3, known, config),
+      standing = scoreStandings(3, known, config);
+    const p = projectSeason(
+      model,
+      standing,
+      known,
+      [game(3, 0, 1, 0, date + 7 * 86400000)],
+      config,
+      "correlated",
+      new Set([1, 2]),
+    );
+    expect(p.teams).toBe(2);
+    expect(p.projections[0]).toBeNull();
+    expect(p.projections[1]!.expectedRating).not.toBe(standing.heights[1]);
+    expect(
+      Math.min(...p.projections.filter((p) => p !== null).map((p) => p.rank)),
+    ).toBe(1);
+    expect(
+      p.projections.filter((p) => p !== null).every((p) => p.rankHigh <= 2),
+    ).toBe(true);
+  });
 });

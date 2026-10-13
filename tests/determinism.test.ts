@@ -10,7 +10,7 @@ import {
   playsToCsv,
   teamsToCsv,
 } from "../src/engine/data";
-import { computeSeason } from "../src/engine/season";
+import { computeSeason, ENGINE_VERSION } from "../src/engine/season";
 import { DEFAULT_SETTINGS } from "../src/engine/defaults";
 
 const dir = join(import.meta.dirname, "fixtures/demo");
@@ -126,7 +126,7 @@ describe("pipeline", () => {
     const out = await computeSeason(input);
     const m = JSON.parse(out.files[0]!.json).manifest;
     expect(m).toMatchObject({
-      engine: "rank-engine-14",
+      engine: ENGINE_VERSION,
       ...DEFAULT_SETTINGS,
       classifications: ["fbs"],
     });
@@ -200,6 +200,12 @@ describe("pipeline", () => {
     await expect(bad({ classifications: [] })).rejects.toThrow(
       /classifications/,
     );
+    await expect(bad({ opponentClassifications: "fcs" })).rejects.toThrow(
+      /opponentClassifications/,
+    );
+    await expect(bad({ opponentClassifications: [] })).rejects.toThrow(
+      /opponentClassifications/,
+    );
     await expect(bad({ winBonus: -1 })).rejects.toThrow(/winBonus/);
     await expect(bad({ shrink: 0 })).rejects.toThrow(/shrink/);
     await expect(bad({ probabilityScale: 0 })).rejects.toThrow(
@@ -209,6 +215,97 @@ describe("pipeline", () => {
       /homeFieldShrink/,
     );
     await expect(bad({ residualScale: null })).rejects.toThrow(/residualScale/);
+  });
+});
+
+describe("FBS publication scope", () => {
+  it("ranks only FBS teams while preserving credits, records and deductions against FCS opponents", async () => {
+    const [opponent, first, second] = parseTeams(input.teamsCsv);
+    const teamsCsv = teamsToCsv([
+      { ...opponent!, classification: "fcs" },
+      first!,
+      second!,
+    ]);
+    const base = parseGames(input.gamesCsv)[0]!;
+    const game = (id: number, homeId: number, awayId: number) => ({
+      ...base,
+      id,
+      week: 1,
+      homeId,
+      awayId,
+      homePoints: 14,
+      awayPoints: 0,
+      neutralSite: true,
+      completed: true,
+    });
+    const gamesCsv = gamesToCsv([
+      game(1, opponent!.id, first!.id),
+      game(2, opponent!.id, second!.id),
+      game(3, second!.id, first!.id),
+    ]);
+    const cfg = JSON.parse(input.configJson);
+    const compute = async (
+      classifications: string[],
+      opponentClassifications?: string[],
+    ) =>
+      JSON.parse(
+        (
+          await computeSeason({
+            ...input,
+            teamsCsv,
+            gamesCsv,
+            configJson: JSON.stringify({
+              ...cfg,
+              classifications,
+              opponentClassifications,
+            }),
+          })
+        ).files[0]!.json,
+      );
+    const full = await compute(["fbs", "fcs"]);
+    const fbs = await compute(["fbs"], ["fbs", "fcs"]);
+    expect(fbs.teams.map((t: { id: number }) => t.id)).toEqual([
+      second!.id,
+      first!.id,
+    ]);
+    expect(
+      fbs.teams.map((t: { rank: number; tied: boolean }) => [t.rank, t.tied]),
+    ).toEqual([
+      [1, false],
+      [2, false],
+    ]);
+    expect(fbs.teams[0]).toMatchObject({
+      height: -0.5,
+      wins: 1,
+      losses: 1,
+      projection: { rank: 1, expectedRank: 1 },
+    });
+    expect(fbs.teams[1]).toMatchObject({
+      height: -2,
+      wins: 0,
+      losses: 2,
+      projection: { rank: 2, expectedRank: 2 },
+    });
+    expect(fbs.opponents[0]).toMatchObject({
+      id: opponent!.id,
+      rank: null,
+      tied: false,
+      projection: null,
+    });
+    expect(fbs.manifest).toMatchObject({
+      classifications: ["fbs"],
+      opponentClassifications: ["fbs", "fcs"],
+      counts: { included: 3 },
+    });
+    expect(fbs.credits).toEqual(full.credits);
+    for (const t of fbs.teams) {
+      const previous = full.teams.find((p: { id: number }) => p.id === t.id);
+      expect([t.height, t.wins, t.losses]).toEqual([
+        previous.height,
+        previous.wins,
+        previous.losses,
+      ]);
+    }
   });
 });
 

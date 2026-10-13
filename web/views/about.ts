@@ -1,7 +1,6 @@
 import { computeSeason } from "../../src/engine/season";
 import type { Ctx } from "../ctx";
 import { h, type Child } from "../dom";
-import { navIcons, pillarIcons } from "../icons";
 import { fetchText, rankingPath, seasonFiles } from "../store";
 
 export function aboutView(ctx: Ctx): HTMLElement {
@@ -81,20 +80,12 @@ export function aboutView(ctx: Ctx): HTMLElement {
     ],
     ["Probability scale", String(m.probabilityScale)],
     ["Residual scale", String(m.residualScale)],
-    ["Simulations", String(ctx.ranking.projection.samples)],
+    ["Ranked field", "FBS"],
     ["Connected groups", String(m.connectedComponents)],
     ["Games counted", String(m.counts.included)],
     ["Out of scope", String(m.counts.outOfScope)],
     ["Incomplete", String(m.counts.incomplete)],
   ];
-  const step = (icon: Node, value: string, label: string) =>
-    h(
-      "div",
-      { class: "forecast-step" },
-      h("div", { class: "step-icon" }, icon),
-      h("b", {}, value),
-      h("span", {}, label),
-    );
   return h(
     "div",
     { class: "method method-page" },
@@ -133,7 +124,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "div",
         { class: "recipe-block" },
-        h("b", {}, "Rating"),
+        h("b", {}, "Score"),
         h("span", {}, "Earned points"),
       ),
     ),
@@ -141,33 +132,6 @@ export function aboutView(ctx: Ctx): HTMLElement {
       "p",
       { class: "method-caption" },
       "Stronger opponents earn more win credit. Every loss costs exactly 1 point.",
-    ),
-    h(
-      "section",
-      { class: "panel" },
-      h("div", { class: "section-heading" }, h("h2", {}, "Project the finish")),
-      h(
-        "div",
-        { class: "forecast-steps" },
-        step(
-          navIcons.matchups(),
-          String(ctx.ranking.projection.remainingGames),
-          "Games left",
-        ),
-        h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "→"),
-        step(
-          pillarIcons.deterministic(),
-          ctx.ranking.projection.samples.toLocaleString(),
-          "Scenarios",
-        ),
-        h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "→"),
-        step(navIcons.list(), "#1, #2…", "Projected ranks"),
-      ),
-      h(
-        "p",
-        { class: "method-caption" },
-        "Known schedule only. Unassigned postseason matchups are excluded.",
-      ),
     ),
     details(
       "Scoring & scope",
@@ -179,25 +143,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "p",
         {},
-        "Only completed, untied games between configured FBS/FCS teams count. Every team starts at zero. No preseason, poll or conference bonuses. Limited opponent evidence is marked with an amber dot.",
-      ),
-    ),
-    details(
-      "Reading the forecast",
-      h(
-        "p",
-        {},
-        "Projected standings are whole-number ranks ordered by average simulated finish. An average like 6.4 is a simulation statistic, not a standings position; it remains in team forecast details.",
-      ),
-      h(
-        "p",
-        {},
-        "Range bars contain 80% of simulated finishes. Top 25 and No. 1 are probabilities within the full FBS/FCS field. Exact ties share a rank. Future win credits use current evidence; strengths, venues and remaining opponents drive the simulations.",
-      ),
-      h(
-        "p",
-        {},
-        "Injuries, roster changes and unassigned postseason matchups are not modeled. The predicted order is an estimate; its ranges can span several positions.",
+        "Only FBS teams are ranked. Results against FCS opponents still count toward their scores. Every team starts at zero. No preseason, poll or conference bonuses. An amber dot marks limited opponent evidence.",
       ),
     ),
     details(

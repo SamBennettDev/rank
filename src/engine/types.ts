@@ -32,8 +32,10 @@ export interface SeasonConfig {
   demo: boolean;
   /** Identifier of the rating math. Bump it when the math or a setting changes. */
   algorithmVersion: string;
-  /** Classifications in scope, matched against teams.csv. */
+  /** Classifications included in the published standings. */
   classifications: string[];
+  /** Divisions retained as model inputs; only classifications are ranked. */
+  opponentClassifications?: string[];
   /** Points added to the winner's margin for winning at all. */
   winBonus: number;
   /** Games' worth of pull toward an average rating, the same for every team. */
@@ -142,6 +144,7 @@ export interface Manifest {
   homeFieldError: number;
   connectedComponents: number;
   classifications: string[];
+  opponentClassifications?: string[];
   teamsSha256: string;
   gamesSha256: string;
   /** SHA-256 of plays.csv, or null when the season has no play-by-play summary. */
@@ -160,6 +163,8 @@ export interface Ranking {
   predictions: MatchupPrediction[];
   credits: StandingCredit[];
   teams: RankedTeam[];
+  /** Supporting opponents outside the published field, with no standing. */
+  opponents?: RankedTeam[];
 }
 
 export interface TeamProjection {
