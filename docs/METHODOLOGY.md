@@ -1,57 +1,66 @@
 # Methodology
 
-Rank publishes one **current earned-standing score for FBS teams**. The site shows rank, team and current score, plus a carousel of the current top 10. All teams start at zero. No preseason, recruiting, brand, poll or conference input is used. An internal score model estimates opponent quality; its strength estimates are not another published standing.
+Rank publishes one **current earned-standing score for FBS and FCS teams**. The site shows rank, team and score, with the current top 10 in a carousel. All scores start at zero. The opponent-strength model uses a pooled historical division assumption, then current-season results; it does not award points for team reputation, polls, recruiting or conference membership.
 
-`config.classifications` selects the ranked field (FBS in the published 2026 season). `opponentClassifications` retains FBS/FCS model inputs so games against FCS opponents still count. Published `teams` contain only FBS teams. Supporting `opponents` retain their records and game-credit totals for receipts, with null rank and projection. FBS ranks, ties and weekly movement are calculated solely within the FBS field. The scoring reference remains the same configured opponent population, so changing the published field does not change earned credits.
-
-## Current standing and fixed loss deductions
+## Current score and fixed loss deductions
 
 ```text
-standing[i] = sum(win credits earned by i) − number of losses by i
-win credit = P(opponent beats an average team at the winner's venue)
+score[i] = sum(frozen win credits earned by i) − number of losses by i
+win credit = 2 × P(opponent beats an average FBS team at the winner's venue)
 ```
 
-Each win earns 0–1 point. Every loss deducts exactly **1 point**, regardless of opponent, venue, score margin or expected result. Wins against stronger opponents earn more credit. Early or uncertain opponent estimates move toward 0.5 credit. Win credits are rounded to six decimals before being awarded.
+A modeled win earns 0–2 points. An average-quality neutral-site win earns 1, balancing the fixed **1-point deduction for every loss**. The v1 range of 0–1 made an ordinary win worth half a loss; this accidentally favored weak unbeaten schedules. V2 fixes that scale without weakening or varying the loss deduction.
 
-Estimate a game's opponent quality at **Monday 12:00 UTC before its calendar week**, using only scores available at that cutoff. Freeze that credit after the game. Adding a later loss therefore reduces the losing team's rating by exactly one point: it cannot revalue previous wins or receive credit for outperforming expectations in defeat. Source corrections and changes to settings can still change a recomputed historical award; the committed inputs and hashes identify its basis.
+Credits freeze at **Monday 12:00 UTC before the game’s calendar week**, using scores assumed available six hours after kickoff. Opponent strength, venue and uncertainty determine the award, not the winning team’s name or the margin of that win. Round opponent probability to six decimals before multiplying by 2. Adding a later loss reduces the losing team’s score exactly 1; past credits cannot improve and undo that deduction. Input corrections and algorithm changes can alter a recomputed award, with hashes and settings identifying its basis.
 
-There is no averaging by games played, record overlay, or head-to-head override. More quality wins accumulate points; the fixed deduction is at least as large as any individual win credit. A team's current score is fully accounted for by its completed results, so it has no modeled current-score error bar. Opponent quality itself is estimated, and the provisional label identifies limited evidence.
+Every resolved result against an opponent outside the strength-model field stays in the record and ledger: an unsupported win earns **0** quality points and a loss deducts **1**. These results are excluded from the strength fit because their opponents have no calibrated strength data. Supporting opponent metadata appears in `opponents` and cannot occupy a rank. `counts.modeled` and `counts.unmodeled` distinguish the two input groups.
 
-Order published six-decimal scores descending. Equal values receive competition ranks and a tie label; a team with no counted games is unranked. Team IDs break display-order ties, not scoring ties. Each output includes `credits`: game ID, winner/loser team IDs, awarded win value and pre-week cutoff. A loser receives −1 without a separate award row. Team pages sum these awards and deductions.
+Published six-decimal scores sort descending, with competition ranks for exact ties. A team with any counted result is ranked, including a zero-credit win; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks. There is no division rank ceiling, record overlay or head-to-head override.
 
-## Internal prediction and opponent-quality model
+## Opponent-strength model and FBS reference
 
-For each completed, untied game, from the home team's side:
+From the home side of a modeled game:
 
 ```text
-y = home points − away points + winBonus × sign(home points − away points)
-x = 1 for a home venue, 0 for a neutral site
+y = home points − away points + 3 × sign(home points − away points)
+x = 1 for a home venue, 0 for neutral
 minimize Σ_games (y − (r[home] − r[away] + H × x))²
-         + shrink × Σ_teams r[i]² + homeFieldShrink × H²
+         + shrink × Σ_teams (r[i] − prior[i])²
+         + homeFieldShrink × (H − homeFieldPrior)²
 ```
 
-The fixed settings are `winBonus = 3`, `shrink = 0.05`, `homeFieldShrink = 0.0001`, `probabilityScale = 12`, and `residualScale = 14.934045`. These are score-model quantities, not earned-standing points. Raw margins inform future estimates of opponent strength; running up a score does not directly add current-standing credit. Cholesky solves the positive-definite system in canonical game/team order.
+For v2, the frozen 2014–2019 settings are:
 
-Let `A` be its penalized information matrix and `σ = residualScale`. Conditional Gaussian uncertainty is `Σ = σ² A⁻¹`. The matchup contrast is `c = (+1 home team, −1 away team, x home-field coefficient)`:
+| Setting | Value |
+|---|---:|
+| Mean FBS–FCS strength gap | 31.644079 |
+| Team shrink | 1 |
+| Home-field prior | 2.668394 |
+| Home-field shrink | 64 |
+| Probability scale | 12 |
+| Residual scale | 14.934045 |
+| Win scale | 2 |
+
+The division gap is the mean difference between end-of-season FBS/FCS fitted strengths on design seasons; the home-field prior is the mean fitted home effect. Priors are centered to a common zero offset. There are no individual team or conference priors. Ridge strength was selected from a fixed grid by minimum pooled pre-week game log loss on **2014–2019**, with the design-window priors fixed. That is training calibration, not out-of-sample validation. The balanced win scale is a scoring policy: it is not selected to move particular current teams or maximize an agreement statistic by diminishing losses.
+
+Current results update every team away from its division starting estimate. A strong FCS team can become a stronger opponent than an ordinary FBS team and earn more credit. The prior is not a permanent division deduction or a ranking cap. Sparse estimates no longer imply every unknown FCS opponent has a 50% chance against average FBS opposition.
+
+Let `A` be the penalized information matrix, `σ = residualScale`, and `Σ = σ² A⁻¹`. Let `w` average all FBS strengths in the configured model inputs, and `site` be +1 for a win at home, −1 away, or 0 neutral:
 
 ```text
-edge = r[home] − r[away] + H × x
-variance = cᵀ Σ c
-effective scale = sqrt(probabilityScale² + 3 × variance / π²)
-P(home wins) = logistic(edge / effective scale)
+FBS benchmark = wᵀ r
+credit edge = r[opponent] − FBS benchmark − site × H
+c = opponent coefficient − w − site × home-field coefficient
+credit variance = cᵀ Σ c
+P = logistic(credit edge / sqrt(probabilityScale² + 3 × credit variance / π²))
+win credit = 2 × round6(P)
 ```
 
-This logistic variance matching is an approximation to posterior prediction. It accounts for team/home-field covariance and brings uncertain probabilities toward 50%.
+The contrast includes covariance between the opponent, FBS benchmark and home field. Treating the benchmark as a fixed zero or as the average of all FBS/FCS teams is incorrect. A common shift in every modeled strength leaves credits unchanged. The logistic variance approximation remains deterministic through fixed arithmetic and Cholesky factors shared by Node and the browser.
 
-For a win credit, replace the winning team with an average team of strength zero. With `site = +1` at home, `−1` away, and `0` neutral:
+For game probabilities, use the home-minus-away contrast plus home field with the same covariance. Each credit records the estimated probability, opponent and reference strengths, venue adjustment, standard error, opponent evidence count and award cutoff. Every loss is still a fixed deduction independent of those quantities.
 
-```text
-credit edge = r[opponent] − site × H
-credit variance = Var(r[opponent] − site × H | population average = 0)
-win credit = logistic(credit edge / sqrt(probabilityScale² + 3 × credit variance / π²))
-```
-
-Equal team shrink makes the common population-average offset independent of all contrasts. Conditioning it to zero subtracts `σ² / (n × shrink)` from the reference variance. The inverse Cholesky factor computes all variances without another fit. The manifest records fitted home field and its model standard error.
+V1 remains reproducible for archived configurations without `winQuality`: it uses a pooled zero reference, weak equal priors and 0–1 win credits. New real-season configurations use `earned-standing-2` and the frozen settings above.
 
 ## Final-standing projection
 
@@ -61,8 +70,8 @@ For each of **2,048 fixed-seed stratified simulations**:
 
 1. Draw a joint team-strength and home-field profile from the current Gaussian model. Center the population's average team strength to zero. Use this same profile for every remaining game, preserving shared uncertainty between opponents and a team's successive results.
 2. For each known remaining matchup, add independent logistic game noise with scale 12 to the simulated home/away strength difference and home field. Its sign decides one winner and one loser.
-3. Add the winning team's estimated win credit and deduct exactly 1 point from the loser. Future win credits use today's opponent evidence. If a future game belongs to the already-started calendar week, keep its pre-week credit estimate. Later weeks use the current snapshot as the estimate of their eventual pre-week quality.
-4. Rank only eligible FBS teams by final earned scores with the same six-decimal competition-rank rule as current standings; supporting opponents never occupy a rank.
+3. Add the winning team's estimated win credit and deduct exactly 1 point from the loser. Future win credits use today's calibrated opponent evidence and the same v2 FBS reference and balanced scale. If a future game belongs to the already-started calendar week, keep its pre-week credit estimate. Later weeks use the current snapshot as the estimate of their eventual pre-week quality.
+4. Rank only eligible FBS/FCS teams by final earned scores with the same six-decimal competition-rank rule as current standings; supporting opponents never occupy a rank.
 
 Average the simulated scores and ranks and take empirical rank/rating percentiles. Top-25 and first-place probabilities count simulated competition ranks. With no remaining games, return the exact current scores/ranks without simulation noise. Scheduled unplayed teams can receive a broad projection while remaining unranked currently. Teams without results or a remaining known matchup have no projection.
 
@@ -78,11 +87,11 @@ The source supplies kickoffs and final scores, without historical result-availab
 
 A `week-NN` snapshot retains its source regular-season week label. Its cutoff is the end of the calendar week containing that week's first completed regular-season game, capped at the latest known kickoff plus six hours. Snapshot `asOf` determines inclusion; `throughWeek` is a display label. Regular-season and postseason results share this date ordering, preventing early FCS playoffs from using later regular-season scores. Separate later postseason calendar snapshots are emitted, with `postseason` naming the latest one. The current snapshot extends through the latest known result if a rescheduled game or its result lag crosses the last nominal weekly boundary.
 
-Only completed, scored, untied games between configured teams count. Duplicate or invalid IDs, invalid scores and undated completed games fail validation. Out-of-scope, incomplete and tied games are counted separately. Dated future matchups after a snapshot cutoff may be projected regardless of whether the archival CSV now contains their later result; future outcome fields are never read. Matchup cards require both teams to have played; season simulations also admit scheduled unplayed teams.
+Completed, scored, untied results involving a configured team count, including resolved unmodeled opponents. Only games between model teams affect strength estimates. Duplicate or invalid IDs, invalid scores and undated completed games fail validation. Out-of-scope, incomplete and tied games are counted separately. Dated future matchups after a snapshot cutoff may be projected regardless of whether the archival CSV now contains their later result; future outcome fields are never read. Matchup cards require both teams to have played; season simulations also admit scheduled unplayed teams.
 
-Teams with fewer than three counted games, or a played-team graph with multiple connected components, are `provisional`. Output records component ID and size. Cross-group strength comparisons rely on the common zero prior, so early win quality and projections can change substantially as evidence accumulates.
+Teams with fewer than three strength-model games, or a played-team graph with multiple connected components, are `provisional`. Output records component ID and size. Cross-group strength comparisons rely on the common zero prior, so early win quality and projections can change substantially as evidence accumulates.
 
-## Selection and evaluation
+## Archived v1 selection and evaluation
 
 Schedule data are pinned to sportsdataverse/cfbfastR-data commit `a3dd960090c1bfa169cebd491beabf7028b379b2`. Reports include input hashes. Design/calibration uses **2014–2019**; later seasons were previously inspected and are **development evaluation**, not untouched holdouts.
 
@@ -109,3 +118,9 @@ Teams and games use numeric ID order for summation. Cholesky, variances, seed ar
 Schema 2 includes engine/algorithm versions, the fixed-loss rule, prediction settings, hashes, counts, diagnostics, credits, current standing and forecasts. Node verification and browser Recompute call the same `computeSeason` pipeline. There is no runtime randomness or wall-clock input.
 
 Mathematical or setting changes bump `algorithmVersion`; output-byte/schema changes bump `ENGINE_VERSION`. Regenerate every ranking and update this specification together. CI checks type safety, tests, byte reproduction and the production build.
+
+## V2 evidence and current audit
+
+`research/win_quality.py` reproduces the 2014–2019 design study and `win-quality-calibration.json`, with pinned input hashes and all candidates. `research/win_quality_development.py` freezes those settings on already-inspected 2021–2025 inputs. Across 7,703 pre-week game predictions, log loss changes from **0.56986 to 0.53778** and Brier score from **0.19441 to 0.18176**. Descriptive final-standing FBS game-result agreement changes from **79.09% to 79.76%**, cross-division agreement from **75.08% to 79.73%**, and FCS-only agreement from **81.05% to 80.72%**. These are development comparisons over known FBS/FCS games, not an untouched holdout, an AP-poll test or a guarantee about individual ranks. Lower-division record fixes are covered separately by production tests.
+
+`npm run audit-win-quality -- 2026` writes a same-input current diagnostic, including James Madison and leading FCS teams, every restored lower-division loss, and score-to-ledger equality for all teams. Current examples never select model settings. Downloadable v2 final-standing projections have not had their season-end accuracy re-evaluated; historical forecast-accuracy reports describe v1.

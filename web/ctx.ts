@@ -33,9 +33,7 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
     ...base,
     edges,
     byId: new Map(allTeams.map((t) => [t.id, t])),
-    ranked: base.ranking.teams.filter(
-      (t) => t.classification === "fbs" && t.rank !== null,
-    ),
+    ranked: base.ranking.teams.filter((t) => t.rank !== null),
   };
 }
 export const href = (
@@ -108,7 +106,7 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Earn 0–1 point for a win based on pre-week opponent strength. Every loss subtracts exactly 1 point. FBS teams are ranked by their current total.",
+    "Win points reflect the opponent’s pre-week chance against an average FBS team. An average-quality win earns 1 point; every loss subtracts exactly 1 point.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

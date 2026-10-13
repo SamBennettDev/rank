@@ -1,20 +1,18 @@
 # Rank
 
-Open, deterministic college football rankings for **every FBS team**. Live at **https://rank.sam-bennett.dev**.
+Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-**One current score.** Wins earn 0–1 point based on opponent quality before that week. **Every loss deducts exactly 1 point.** The standings show FBS rank, team and score, with a carousel of the current top 10. Results against FCS opponents still count; those opponents are retained for scoring and game receipts.
+**One current score.** A win earns **2 × the opponent’s pre-week probability of beating an average FBS team at that venue**. An average-quality neutral-site win earns 1 point; every loss deducts exactly 1. The standings show rank, team and score, with a carousel of the current top 10.
 
-- **Losses always cost points.** Earned win credits stay fixed; neither a close loss nor later opponent results can undo the deduction.
-- **Better opponents earn more credit.** A win earns the estimated probability that its opponent would beat an average team at that venue. Uncertain opponent estimates move toward 50%.
-- **Every team starts level.** No preseason, recruiting, polls, brand or conference bonus, record overlay, or head-to-head override.
-- **FBS standings.** FBS teams compete for ranks within their own field. Conference filters keep those ranks; FCS teams are supporting opponents, never ranked.
-- **One published standing.** An internal score model estimates opponent quality and game probabilities. It determines win credits without becoming a second standings table.
-- **The leader sets the accent.** Rank follows the current #1 FBS team’s color for each snapshot, with readable light/dark variants. Exact first-place ties use the first team in the existing display order.
-- **Audit every point.** Team pages show each earned credit or deduction; outputs include award cutoffs, settings, CSV hashes and model diagnostics.
-- **Reproduce in Node and your browser.** Both run the same engine; the Recompute button checks every published snapshot byte for byte.
-- **Unit ratings explain performance.** Public play-by-play supplies offense, defense and special teams statistics without changing the overall standing.
+- **A consistent benchmark.** Opponent strength is measured relative to the average FBS team, including the benchmark’s uncertainty and covariance. It does not use the weaker pooled FBS/FCS average.
+- **Stable early estimates.** A division gap measured on 2014–2019 results and calibrated regularization stabilize sparse schedules. Current games can establish that an FCS opponent is strong; no division has a rank ceiling or fixed credit cap.
+- **Losses always cost one.** Win credits stay frozen before each calendar week. Later losses cannot revalue earlier wins and offset their own deductions.
+- **Lower-division results count.** Unmodeled opponent wins earn zero quality points. Losses still deduct 1, and all resolved results remain in records and receipts.
+- **Every score starts at zero.** Historical division assumptions inform opponent strength, not starting points. No team reputation, recruiting, poll, conference bonus or head-to-head override.
+- **Both divisions, one standing.** Division and conference filters preserve the full-field ranks. The current #1 sets Rank’s accent color.
+- **Reproduce every point.** The Node scripts and browser share one engine. Credits include the prior cutoff, estimated probability, reference strength, venue adjustment and uncertainty.
 
-The fixed-loss rule and internal prediction settings were selected on **2014–2019**. The repository retains the simulation engine and historical forecast reports for audit and research. Those reports evaluated a combined FBS/FCS field and do not measure the new FBS-only standing. See [research](research/) and [methodology](docs/METHODOLOGY.md).
+Version 2 fixes a pooled-reference error, equal-strength assumptions for sparse lower-division opponents, an imbalance between average win credit and fixed loss deductions, and dropped lower-division losses. `research/win-quality-calibration.json` records the **2014–2019** design study; `win-quality-development.json` compares already-inspected **2021–2025**; `win-quality-audit.json` traces the current teams on identical inputs. They are development findings, not an untouched holdout or proof of universal superiority. The simulation engine and older reports remain available for audit and research; the site displays current scores. See [methodology](docs/METHODOLOGY.md).
 
 ## Run
 
@@ -27,12 +25,13 @@ npm run typecheck
 npm test
 npm run compute
 npm run verify
+npm run audit-win-quality -- 2026
 npm run build
 npm run backtest -- --history 2021-2025
 npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json
 ```
 
-`npm run calibrate` reproduces the internal prediction calibration from pinned 2014–2019 schedules. It writes defaults and a training report; update versioned season configurations deliberately if settings change. `npm run backtest -- --history 2021-2025 --include-repo --summary --report research/development-results.json` reproduces game-prediction results; omit `--summary` for per-game forecasts.
+`npm run calibrate` reproduces the archived v1 prediction calibration from pinned 2014–2019 schedules. It writes defaults and a training report; update versioned season configurations deliberately if settings change. `npm run backtest -- --history 2021-2025 --include-repo --summary --report research/development-results.json` reproduces game-prediction results; omit `--summary` for per-game forecasts.
 
 ## Data and audit
 
@@ -45,7 +44,7 @@ data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections an
 data/index.json                      available seasons and snapshots
 ```
 
-Schema 2 records current scores and ranks in `teams`. Non-ranked supporting teams appear in `opponents`. `config.classifications` selects the published field; `opponentClassifications` keeps additional teams and games available to the scoring model. The current 2026 configuration publishes FBS only while preserving FBS/FCS input coverage. The engine also retains FBS-scoped simulation and matchup estimates in the downloadable JSON; the site displays current scores. Graph height represents earned points. All snapshots use real calendar cutoffs.
+Schema 2 publishes FBS/FCS standings in `teams`. Unranked supporting metadata appears in `opponents`, including teams outside the modeled field needed for complete result receipts. `config.classifications` selects the ranked field; `opponentClassifications` can retain additional model inputs. `config.winQuality` fixes the v2 benchmark, priors, regularization and balanced win scale. Unsupported opponents contribute zero win quality and fixed loss deductions, without affecting the strength fit. Downloadable projections cover the known modeled schedule; the site displays current scores. All snapshots use calendar cutoffs.
 
 ## Update results
 

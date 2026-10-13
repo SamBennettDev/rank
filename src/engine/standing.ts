@@ -3,6 +3,11 @@ import { rankValues, round6 } from "./model";
 import { winProbability } from "./probability";
 import { fitRatings, ratingUncertainty, type RatedGame } from "./rating";
 import type { Game, SeasonConfig, StandingCredit, Team } from "./types";
+import {
+  fitWinQuality,
+  referenceStrength,
+  type WinQualityContext,
+} from "./win-quality";
 
 export interface DatedGame extends RatedGame {
   id: number;
@@ -32,18 +37,27 @@ export function winCredit(
   fit: ReturnType<typeof fitRatings>,
   uncertainty: ReturnType<typeof ratingUncertainty>,
   config: SeasonConfig,
+  context?: WinQualityContext,
 ) {
-  return winProbability(
-    fit.ratings[opponent]! - site * fit.homeField,
+  if (config.winQuality && !context)
+    throw new Error("win-quality context is required");
+  const probability = winProbability(
+    fit.ratings[opponent]! -
+      referenceStrength(fit, context) -
+      site * fit.homeField,
     config.probabilityScale,
     uncertainty.referenceVariance(opponent, site),
   );
+  return config.winQuality
+    ? round6(probability) * config.winQuality.winScale
+    : probability;
 }
 /** Immutable weekly win credits; each loss always subtracts exactly one point. */
 export function scoreStandings(
   n: number,
   games: readonly DatedGame[],
   config: SeasonConfig,
+  context?: WinQualityContext,
 ) {
   const credits: StandingCredit[] = [];
   const ordered = [...games].sort((a, b) => a.id - b.id);
@@ -52,8 +66,7 @@ export function scoreStandings(
   ].sort((a, b) => a - b);
   for (const cutoff of cutoffs) {
     const earlier = ordered.filter((g) => g.time + RESULT_LAG_MS <= cutoff);
-    const fit = fitRatings(n, earlier, config),
-      uncertainty = ratingUncertainty(fit, config.residualScale);
+    const { fit, uncertainty } = fitWinQuality(n, earlier, config, context);
     for (const g of ordered.filter(
       (g) => calendarWeekStart(g.time) === cutoff,
     )) {
@@ -61,13 +74,31 @@ export function scoreStandings(
       const winner = g.margin > 0 ? g.home : g.away,
         loser = g.margin > 0 ? g.away : g.home;
       const site = g.neutral ? 0 : winner === g.home ? 1 : -1;
-      const value = round6(winCredit(loser, site, fit, uncertainty, config));
+      const value = round6(
+        winCredit(loser, site, fit, uncertainty, config, context),
+      );
       credits.push({
         gameId: g.id,
         winner,
         loser,
         value,
         cutoff: new Date(cutoff).toISOString(),
+        ...(config.winQuality
+          ? {
+              quality: {
+                probability: round6(value / config.winQuality.winScale),
+                opponentStrength: round6(fit.ratings[loser]!),
+                referenceStrength: round6(referenceStrength(fit, context)),
+                venueAdjustment: round6(-site * fit.homeField),
+                standardError: round6(
+                  Math.sqrt(uncertainty.referenceVariance(loser, site)),
+                ),
+                opponentGames: earlier.filter(
+                  (g) => g.home === loser || g.away === loser,
+                ).length,
+              },
+            }
+          : {}),
       });
     }
   }

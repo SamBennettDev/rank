@@ -543,7 +543,7 @@ body[data-view="graph"] .foot { display: none; }
 .stat-label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .leader-rank { display: block; font: 800 42px/1 var(--display); margin: 3px 0; }
 .provisional-dot { display: inline-block; flex: none; width: 6px; height: 6px; margin-left: 6px; border-radius: 50%; background: var(--caution); }
-.current-position { font: 700 26px/1 var(--display); font-variant-numeric: tabular-nums; }
+.current-position { font: 700 26px/1 var(--display); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .row-identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .team-meta { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); margin-top: 3px; min-width: 0; }
 .team-meta > span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -686,7 +686,7 @@ body[data-view="graph"] .foot { display: none; }
 .carousel-step:not(:disabled):hover { background: var(--surface-2); }
 .carousel-progress { position: relative; height: 3px; background: var(--surface-3); border-radius: 6px; margin: 0 2px 22px; overflow: hidden; }
 .carousel-progress i { position: absolute; top: 0; bottom: 0; background: var(--brand); border-radius: inherit; }
-.current-tools { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 12px; margin-bottom: 12px; }
+.current-tools { display: grid; grid-template-columns: minmax(0, 1fr) 120px 200px; gap: 12px; margin-bottom: 12px; }
 .current-tools .search { min-width: 0; max-width: none; width: 100%; }
 .current-tools select { min-width: 0; width: 100%; }
 .standings-board { padding: 0; overflow: hidden; }
@@ -714,8 +714,10 @@ a.standing-row:hover { background: var(--surface-2); }
   .leader-score b { font-size: 28px; }
   .carousel-step { width: 40px; height: 40px; }
   .carousel-progress { margin-bottom: 18px; }
-  .current-tools { grid-template-columns: 1fr; gap: 10px; }
-  .standing-row { grid-template-columns: 36px minmax(0, 1fr) 64px; gap: 10px; padding: 14px 12px; }
+  .current-tools { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .current-tools .search { grid-column: 1 / -1; }
+  .standing-row { grid-template-columns: 40px minmax(0, 1fr) 64px; gap: 8px; padding: 14px 12px; }
+  .standing-row .current-position.tied { font-size: 18px; }
   .standing-head { padding-block: 10px; }
   .standing-team > b { font-size: 13px; }
   .standing-score { font-size: 22px; }

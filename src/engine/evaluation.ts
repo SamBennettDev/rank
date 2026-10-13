@@ -2,6 +2,7 @@ import { forecastBatches } from "./chronology";
 import { predictMatchup, rateTeams } from "./model";
 import type { RatedGame } from "./rating";
 import type { Game, SeasonConfig, Team } from "./types";
+import { makeWinQualityContext } from "./win-quality";
 
 export function ratedGames(
   teams: readonly Team[],
@@ -45,10 +46,11 @@ export function evaluateSeason(
 ): ForecastOutcome[] {
   const index = new Map(teams.map((t, i) => [t.id, i])),
     out: ForecastOutcome[] = [];
+  const quality = makeWinQualityContext(teams, config);
   for (const batch of forecastBatches(games)) {
     const train = ratedGames(teams, batch.train);
     if (!train.length) continue;
-    const model = rateTeams(teams.length, train, config);
+    const model = rateTeams(teams.length, train, config, quality);
     for (const g of [...batch.test].sort((a, b) => a.id - b.id)) {
       const h = index.get(g.homeId),
         a = index.get(g.awayId);

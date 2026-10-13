@@ -51,7 +51,12 @@ if (hi < 0 || args.includes("--include-repo"))
     runs.push({
       season,
       teams: parseTeams(readFileSync(join(root, "teams.csv"), "utf8"))
-        .filter((t) => cfg.classifications.includes(t.classification))
+        .filter((t) =>
+          [
+            ...cfg.classifications,
+            ...(cfg.opponentClassifications ?? []),
+          ].includes(t.classification),
+        )
         .sort((a, b) => a.id - b.id),
       games: parseGames(raw),
       config: cfg,
@@ -80,7 +85,7 @@ const report = {
   status:
     "development evaluation; these seasons have been inspected and are not an untouched holdout",
   sourceRevision: HISTORY_REVISION,
-  calibrationId: DEFAULT_SETTINGS.calibrationId,
+  calibrationIds: [...new Set(runs.map((r) => r.config.calibrationId))],
   seasons,
   all: forecastMetrics(outcomes),
   fbs: forecastMetrics(outcomes.filter((o) => o.fbs)),

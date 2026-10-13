@@ -1,0 +1,343 @@
+{
+  "status": "development comparison, not an untouched holdout",
+  "sourceRevision": "a3dd960090c1bfa169cebd491beabf7028b379b2",
+  "scope": "Known FBS/FCS games only. No future scores enter pre-week fits; frozen 2014-2019 division priors are available throughout these later seasons. Lower-division record fixes are tested separately.",
+  "settings": {
+    "reference": "fbs",
+    "divisionGap": 31.644079,
+    "homeField": 2.668394,
+    "shrink": 1.0,
+    "homeFieldShrink": 64.0,
+    "winScale": 2,
+    "calibrationId": "win-quality-fbs-reference-2014-2019-v2"
+  },
+  "inputs": [
+    {
+      "year": 2021,
+      "sha256": "91616be40e7f4d611a6e714ee7284cdd7372249888287b05b790019e9397d5fd"
+    },
+    {
+      "year": 2022,
+      "sha256": "bfee92544d7269f764dcb5726ce5c037837cb100a8c6326e0e4c7103a2e6656d"
+    },
+    {
+      "year": 2023,
+      "sha256": "7ffc245da1242fc44c021dae724029074aece78544ba498937cc7703417f0dff"
+    },
+    {
+      "year": 2024,
+      "sha256": "3e4f3cab542657015ff73d1b527c41df58e6a17acf5fbe7d6fb518a1aabcac61"
+    },
+    {
+      "year": 2025,
+      "sha256": "bfecf10bc5a8ffd2e3b6a76b5f0b03b406e17c1a0e03b2000bdf7e2263712db4"
+    }
+  ],
+  "metrics": {
+    "v1": {
+      "observations": 7703,
+      "logLossSum": 4389.612297532194,
+      "brierSum": 1497.522436430394,
+      "agreement": {
+        "all": {
+          "correct": 6169.0,
+          "games": 7749,
+          "rate": 0.7961027229319912
+        },
+        "fbs": {
+          "correct": 3056.0,
+          "games": 3864,
+          "rate": 0.7908902691511387
+        },
+        "cross": {
+          "correct": 452.0,
+          "games": 602,
+          "rate": 0.7508305647840532
+        },
+        "fcs": {
+          "correct": 2661.0,
+          "games": 3283,
+          "rate": 0.8105391410295462
+        }
+      },
+      "logLoss": 0.5698574967586907,
+      "brier": 0.19440769004678618
+    },
+    "v2": {
+      "observations": 7703,
+      "logLossSum": 4142.553969940401,
+      "brierSum": 1400.0663025613128,
+      "agreement": {
+        "all": {
+          "correct": 6212.0,
+          "games": 7749,
+          "rate": 0.80165182604207
+        },
+        "fbs": {
+          "correct": 3082.0,
+          "games": 3864,
+          "rate": 0.7976190476190477
+        },
+        "cross": {
+          "correct": 480.0,
+          "games": 602,
+          "rate": 0.7973421926910299
+        },
+        "fcs": {
+          "correct": 2650.0,
+          "games": 3283,
+          "rate": 0.8071885470606153
+        }
+      },
+      "logLoss": 0.5377844956433079,
+      "brier": 0.18175597852282394
+    }
+  },
+  "perYear": [
+    {
+      "year": 2021,
+      "v1": {
+        "observations": 1471,
+        "logLossSum": 858.3385976461655,
+        "brierSum": 293.29182442541537,
+        "agreement": {
+          "all": {
+            "correct": 1168.0,
+            "games": 1478
+          },
+          "fbs": {
+            "correct": 581.0,
+            "games": 732
+          },
+          "cross": {
+            "correct": 88.0,
+            "games": 117
+          },
+          "fcs": {
+            "correct": 499.0,
+            "games": 629
+          }
+        }
+      },
+      "v2": {
+        "observations": 1471,
+        "logLossSum": 807.316691367013,
+        "brierSum": 273.5237615252943,
+        "agreement": {
+          "all": {
+            "correct": 1179.0,
+            "games": 1478
+          },
+          "fbs": {
+            "correct": 589.0,
+            "games": 732
+          },
+          "cross": {
+            "correct": 92.0,
+            "games": 117
+          },
+          "fcs": {
+            "correct": 498.0,
+            "games": 629
+          }
+        }
+      }
+    },
+    {
+      "year": 2022,
+      "v1": {
+        "observations": 1480,
+        "logLossSum": 839.8079881222828,
+        "brierSum": 286.40271842718363,
+        "agreement": {
+          "all": {
+            "correct": 1180.0,
+            "games": 1494
+          },
+          "fbs": {
+            "correct": 562.0,
+            "games": 734
+          },
+          "cross": {
+            "correct": 92.0,
+            "games": 120
+          },
+          "fcs": {
+            "correct": 526.0,
+            "games": 640
+          }
+        }
+      },
+      "v2": {
+        "observations": 1480,
+        "logLossSum": 797.8043498652916,
+        "brierSum": 270.3784248188261,
+        "agreement": {
+          "all": {
+            "correct": 1184.0,
+            "games": 1494
+          },
+          "fbs": {
+            "correct": 563.0,
+            "games": 734
+          },
+          "cross": {
+            "correct": 99.0,
+            "games": 120
+          },
+          "fcs": {
+            "correct": 522.0,
+            "games": 640
+          }
+        }
+      }
+    },
+    {
+      "year": 2023,
+      "v1": {
+        "observations": 1534,
+        "logLossSum": 878.0233237951301,
+        "brierSum": 299.8663224795565,
+        "agreement": {
+          "all": {
+            "correct": 1232.0,
+            "games": 1544
+          },
+          "fbs": {
+            "correct": 632.0,
+            "games": 792
+          },
+          "cross": {
+            "correct": 84.0,
+            "games": 118
+          },
+          "fcs": {
+            "correct": 516.0,
+            "games": 634
+          }
+        }
+      },
+      "v2": {
+        "observations": 1534,
+        "logLossSum": 830.9928720767615,
+        "brierSum": 281.31779868962326,
+        "agreement": {
+          "all": {
+            "correct": 1247.0,
+            "games": 1544
+          },
+          "fbs": {
+            "correct": 637.0,
+            "games": 792
+          },
+          "cross": {
+            "correct": 91.0,
+            "games": 118
+          },
+          "fcs": {
+            "correct": 519.0,
+            "games": 634
+          }
+        }
+      }
+    },
+    {
+      "year": 2024,
+      "v1": {
+        "observations": 1601,
+        "logLossSum": 929.0966562549808,
+        "brierSum": 318.7508707435231,
+        "agreement": {
+          "all": {
+            "correct": 1277.0,
+            "games": 1608
+          },
+          "fbs": {
+            "correct": 632.0,
+            "games": 798
+          },
+          "cross": {
+            "correct": 90.0,
+            "games": 121
+          },
+          "fcs": {
+            "correct": 555.0,
+            "games": 689
+          }
+        }
+      },
+      "v2": {
+        "observations": 1601,
+        "logLossSum": 867.241702450024,
+        "brierSum": 293.3301696250738,
+        "agreement": {
+          "all": {
+            "correct": 1285.0,
+            "games": 1608
+          },
+          "fbs": {
+            "correct": 639.0,
+            "games": 798
+          },
+          "cross": {
+            "correct": 98.0,
+            "games": 121
+          },
+          "fcs": {
+            "correct": 548.0,
+            "games": 689
+          }
+        }
+      }
+    },
+    {
+      "year": 2025,
+      "v1": {
+        "observations": 1617,
+        "logLossSum": 884.3457317136354,
+        "brierSum": 299.2107003547156,
+        "agreement": {
+          "all": {
+            "correct": 1312.0,
+            "games": 1625
+          },
+          "fbs": {
+            "correct": 649.0,
+            "games": 808
+          },
+          "cross": {
+            "correct": 98.0,
+            "games": 126
+          },
+          "fcs": {
+            "correct": 565.0,
+            "games": 691
+          }
+        }
+      },
+      "v2": {
+        "observations": 1617,
+        "logLossSum": 839.1983541813108,
+        "brierSum": 281.51614790249545,
+        "agreement": {
+          "all": {
+            "correct": 1317.0,
+            "games": 1625
+          },
+          "fbs": {
+            "correct": 654.0,
+            "games": 808
+          },
+          "cross": {
+            "correct": 100.0,
+            "games": 126
+          },
+          "fcs": {
+            "correct": 563.0,
+            "games": 691
+          }
+        }
+      }
+    }
+  ]
+}

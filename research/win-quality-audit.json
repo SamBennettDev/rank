@@ -1,0 +1,413 @@
+{
+  "status": "current-input diagnostic, not a selection or accuracy test",
+  "season": "2026",
+  "snapshot": "week-06",
+  "engine": "rank-engine-16",
+  "inputs": {
+    "teams": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
+    "games": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c"
+  },
+  "settings": {
+    "reference": "fbs",
+    "divisionGap": 31.644079,
+    "shrink": 1,
+    "homeField": 2.668394,
+    "homeFieldShrink": 64,
+    "winScale": 2,
+    "calibrationId": "win-quality-fbs-reference-2014-2019-v2"
+  },
+  "examples": [
+    {
+      "school": "James Madison",
+      "classification": "fbs",
+      "before": {
+        "rank": 4,
+        "score": 3.427577
+      },
+      "after": {
+        "rank": 10,
+        "score": 4.283868
+      },
+      "record": {
+        "wins": 6,
+        "losses": 0
+      },
+      "wins": [
+        {
+          "gameId": 401860887,
+          "opponent": "San Diego State",
+          "cutoff": "2026-09-14T12:00:00.000Z",
+          "oldPoints": 0.801434,
+          "newPoints": 1.086354,
+          "oldProbability": 0.801434,
+          "newProbability": 0.543177,
+          "opponentGames": 2,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867929,
+          "opponent": "Wagner",
+          "cutoff": "2026-09-07T12:00:00.000Z",
+          "oldPoints": 0.274886,
+          "newPoints": 0.060732,
+          "oldProbability": 0.274886,
+          "newProbability": 0.030366,
+          "opponentGames": 1,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869949,
+          "opponent": "Georgia Southern",
+          "cutoff": "2026-10-05T12:00:00.000Z",
+          "oldPoints": 0.77265,
+          "newPoints": 1.015548,
+          "oldProbability": 0.77265,
+          "newProbability": 0.507774,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869960,
+          "opponent": "Liberty",
+          "cutoff": "2026-08-31T12:00:00.000Z",
+          "oldPoints": 0.461222,
+          "newPoints": 0.884804,
+          "oldProbability": 0.461222,
+          "newProbability": 0.442402,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869961,
+          "opponent": "Old Dominion",
+          "cutoff": "2026-09-21T12:00:00.000Z",
+          "oldPoints": 0.698634,
+          "newPoints": 0.846878,
+          "oldProbability": 0.698634,
+          "newProbability": 0.423439,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869962,
+          "opponent": "Marshall",
+          "cutoff": "2026-09-28T12:00:00.000Z",
+          "oldPoints": 0.418751,
+          "newPoints": 0.389552,
+          "oldProbability": 0.418751,
+          "newProbability": 0.194776,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "school": "Tarleton State",
+      "classification": "fcs",
+      "before": {
+        "rank": 12,
+        "score": 2.685651
+      },
+      "after": {
+        "rank": 27,
+        "score": 2.276202
+      },
+      "record": {
+        "wins": 6,
+        "losses": 0
+      },
+      "wins": [
+        {
+          "gameId": 401866410,
+          "opponent": "Bowling Green",
+          "cutoff": "2026-08-31T12:00:00.000Z",
+          "oldPoints": 0.538778,
+          "newPoints": 1.115196,
+          "oldProbability": 0.538778,
+          "newProbability": 0.557598,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867688,
+          "opponent": "Chicago State",
+          "cutoff": "2026-09-28T12:00:00.000Z",
+          "oldPoints": 0.020927,
+          "newPoints": 0.018168,
+          "oldProbability": 0.020927,
+          "newProbability": 0.009084,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868065,
+          "opponent": "Austin Peay",
+          "cutoff": "2026-10-05T12:00:00.000Z",
+          "oldPoints": 0.681577,
+          "newPoints": 0.656414,
+          "oldProbability": 0.681577,
+          "newProbability": 0.328207,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868235,
+          "opponent": "Prairie View A&M",
+          "cutoff": "2026-08-24T12:00:00.000Z",
+          "oldPoints": 0.5,
+          "newPoints": 0.174264,
+          "oldProbability": 0.5,
+          "newProbability": 0.087132,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868236,
+          "opponent": "McNeese",
+          "cutoff": "2026-09-07T12:00:00.000Z",
+          "oldPoints": 0.675344,
+          "newPoints": 0.228676,
+          "oldProbability": 0.675344,
+          "newProbability": 0.114338,
+          "opponentGames": 1,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868237,
+          "opponent": "Merrimack",
+          "cutoff": "2026-09-14T12:00:00.000Z",
+          "oldPoints": 0.269025,
+          "newPoints": 0.083484,
+          "oldProbability": 0.269025,
+          "newProbability": 0.041742,
+          "opponentGames": 3,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "school": "Lehigh",
+      "classification": "fcs",
+      "before": {
+        "rank": 14,
+        "score": 2.600073
+      },
+      "after": {
+        "rank": 42,
+        "score": 1.244774
+      },
+      "record": {
+        "wins": 6,
+        "losses": 0
+      },
+      "wins": [
+        {
+          "gameId": 401867834,
+          "opponent": "Dartmouth",
+          "cutoff": "2026-09-14T12:00:00.000Z",
+          "oldPoints": 0.460774,
+          "newPoints": 0.129534,
+          "oldProbability": 0.460774,
+          "newProbability": 0.064767,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868010,
+          "opponent": "Fordham",
+          "cutoff": "2026-09-28T12:00:00.000Z",
+          "oldPoints": 0.160899,
+          "newPoints": 0.092718,
+          "oldProbability": 0.160899,
+          "newProbability": 0.046359,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868017,
+          "opponent": "Georgetown",
+          "cutoff": "2026-08-31T12:00:00.000Z",
+          "oldPoints": 0.538778,
+          "newPoints": 0.252024,
+          "oldProbability": 0.538778,
+          "newProbability": 0.126012,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868022,
+          "opponent": "Holy Cross",
+          "cutoff": "2026-08-24T12:00:00.000Z",
+          "oldPoints": 0.5,
+          "newPoints": 0.241832,
+          "oldProbability": 0.5,
+          "newProbability": 0.120916,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868033,
+          "opponent": "William & Mary",
+          "cutoff": "2026-09-07T12:00:00.000Z",
+          "oldPoints": 0.470411,
+          "newPoints": 0.160182,
+          "oldProbability": 0.470411,
+          "newProbability": 0.080091,
+          "opponentGames": 2,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868034,
+          "opponent": "Pennsylvania",
+          "cutoff": "2026-09-21T12:00:00.000Z",
+          "oldPoints": 0.469211,
+          "newPoints": 0.368484,
+          "oldProbability": 0.469211,
+          "newProbability": 0.184242,
+          "opponentGames": 1,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "school": "Stephen F. Austin",
+      "classification": "fcs",
+      "before": {
+        "rank": 20,
+        "score": 2.140685
+      },
+      "after": {
+        "rank": 45,
+        "score": 1.060156
+      },
+      "record": {
+        "wins": 6,
+        "losses": 0
+      },
+      "wins": [
+        {
+          "gameId": 401868050,
+          "opponent": "Abilene Christian",
+          "cutoff": "2026-09-07T12:00:00.000Z",
+          "oldPoints": 0.527812,
+          "newPoints": 0.280744,
+          "oldProbability": 0.527812,
+          "newProbability": 0.140372,
+          "opponentGames": 2,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868305,
+          "opponent": "McNeese",
+          "cutoff": "2026-08-24T12:00:00.000Z",
+          "oldPoints": 0.5,
+          "newPoints": 0.241832,
+          "oldProbability": 0.5,
+          "newProbability": 0.120916,
+          "opponentGames": 0,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868306,
+          "opponent": "East Texas A&M",
+          "cutoff": "2026-08-31T12:00:00.000Z",
+          "oldPoints": 0.427538,
+          "newPoints": 0.12311,
+          "oldProbability": 0.427538,
+          "newProbability": 0.061555,
+          "opponentGames": 1,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868307,
+          "opponent": "Prairie View A&M",
+          "cutoff": "2026-09-14T12:00:00.000Z",
+          "oldPoints": 0.54592,
+          "newPoints": 0.345348,
+          "oldProbability": 0.54592,
+          "newProbability": 0.172674,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868308,
+          "opponent": "Northeastern State",
+          "cutoff": "2026-09-21T12:00:00.000Z",
+          "oldPoints": null,
+          "newPoints": 0,
+          "oldProbability": null,
+          "newProbability": null,
+          "opponentGames": null,
+          "unmodeled": true
+        },
+        {
+          "gameId": 401868309,
+          "opponent": "Incarnate Word",
+          "cutoff": "2026-09-28T12:00:00.000Z",
+          "oldPoints": 0.139415,
+          "newPoints": 0.069122,
+          "oldProbability": 0.139415,
+          "newProbability": 0.034561,
+          "opponentGames": 3,
+          "unmodeled": false
+        }
+      ]
+    }
+  ],
+  "restoredLosses": [
+    {
+      "gameId": 401868254,
+      "team": "Drake",
+      "opponent": "South Dakota Mines",
+      "deduction": -1
+    },
+    {
+      "gameId": 401868964,
+      "team": "Mississippi Valley State",
+      "opponent": "Delta State",
+      "deduction": -1
+    },
+    {
+      "gameId": 401869128,
+      "team": "Northwestern State",
+      "opponent": "Louisiana Christian",
+      "deduction": -1
+    },
+    {
+      "gameId": 401869156,
+      "team": "Chicago State",
+      "opponent": "Roosevelt",
+      "deduction": -1
+    },
+    {
+      "gameId": 401896383,
+      "team": "Morehead State",
+      "opponent": "Ohio Dominican",
+      "deduction": -1
+    },
+    {
+      "gameId": 401896384,
+      "team": "Davidson",
+      "opponent": "Concord",
+      "deduction": -1
+    }
+  ],
+  "fcsTop25": {
+    "before": [
+      {
+        "school": "Tarleton State",
+        "rank": 12
+      },
+      {
+        "school": "Lehigh",
+        "rank": 14
+      },
+      {
+        "school": "Stephen F. Austin",
+        "rank": 20
+      }
+    ],
+    "after": []
+  },
+  "allScoresAccountedFor": true
+}

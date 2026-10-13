@@ -10,6 +10,8 @@ export interface FitOptions {
   winBonus: number;
   shrink: number;
   homeFieldShrink?: number;
+  priorMeans?: readonly number[];
+  homeFieldPrior?: number;
 }
 export const HOME_FIELD_RIDGE = 1e-4;
 
@@ -17,10 +19,23 @@ export const HOME_FIELD_RIDGE = 1e-4;
 export function fitRatings(
   n: number,
   games: readonly RatedGame[],
-  { winBonus, shrink, homeFieldShrink = HOME_FIELD_RIDGE }: FitOptions,
+  {
+    winBonus,
+    shrink,
+    homeFieldShrink = HOME_FIELD_RIDGE,
+    priorMeans,
+    homeFieldPrior = 0,
+  }: FitOptions,
 ) {
   if (!(shrink > 0) || !(homeFieldShrink > 0))
     throw new Error("shrink and homeFieldShrink must be > 0");
+  if (
+    (priorMeans &&
+      (priorMeans.length !== n ||
+        priorMeans.some((v) => !Number.isFinite(v)))) ||
+    !Number.isFinite(homeFieldPrior)
+  )
+    throw new Error("invalid rating priors");
   const N = n + 1,
     matrix = new Float64Array(N * N),
     rhs = new Float64Array(N);
@@ -42,8 +57,12 @@ export function fitRatings(
     rhs[a]! -= y;
     rhs[n]! += x * y;
   }
-  for (let i = 0; i < n; i++) matrix[i * N + i]! += shrink;
+  for (let i = 0; i < n; i++) {
+    matrix[i * N + i]! += shrink;
+    if (priorMeans) rhs[i]! += shrink * priorMeans[i]!;
+  }
   matrix[n * N + n]! += homeFieldShrink;
+  rhs[n]! += homeFieldShrink * homeFieldPrior;
   const factor = choleskyFactor(matrix, N),
     answer = solveFactor(factor, rhs, N);
   return {
@@ -69,6 +88,7 @@ export const gameValue = (
 export function ratingUncertainty(
   fit: ReturnType<typeof fitRatings>,
   residualScale: number,
+  referenceIndices?: readonly number[],
 ) {
   const n = fit.ratings.length,
     N = n + 1,
@@ -91,14 +111,37 @@ export function ratingUncertainty(
     }
     return variance * residualScale * residualScale;
   };
+  if (
+    referenceIndices &&
+    (!referenceIndices.length ||
+      referenceIndices.some((i) => !Number.isInteger(i) || i < 0 || i >= n))
+  )
+    throw new Error("invalid rating reference");
+  // L^-1 times the average-FBS coefficient vector. Its covariance with the
+  // opponent and home field is essential; treating the benchmark as fixed is wrong.
+  const reference = referenceIndices
+    ? Array.from(
+        { length: N },
+        (_, row) =>
+          referenceIndices.reduce((sum, i) => sum + inverse[row * N + i]!, 0) /
+          referenceIndices.length,
+      )
+    : null;
   const referenceVariance = (opponent: number, site: number) => {
     let variance = 0;
     for (let row = 0; row < N; row++) {
-      const v = inverse[row * N + opponent]! - site * inverse[row * N + n]!;
+      const v =
+        inverse[row * N + opponent]! -
+        site * inverse[row * N + n]! -
+        (reference?.[row] ?? 0);
       variance += v * v;
     }
-    // Condition the reference population's average strength to zero.
-    return Math.max(0, variance - 1 / (n * fit.shrink)) * residualScale ** 2;
+    // Archived v1 conditions the pooled population average to zero. In v2 the
+    // explicit FBS contrast already removes the common offset.
+    return (
+      Math.max(0, variance - (reference ? 0 : 1 / (n * fit.shrink))) *
+      residualScale ** 2
+    );
   };
   return {
     inverse,

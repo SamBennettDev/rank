@@ -46,6 +46,19 @@ export interface SeasonConfig {
   probabilityScale: number;
   residualScale: number;
   calibrationId: string;
+  /** Optional v2 win-credit model; omitted only for archived v1 calculations. */
+  winQuality?: WinQualitySettings;
+}
+
+export interface WinQualitySettings {
+  reference: "fbs";
+  divisionGap: number;
+  shrink: number;
+  homeField: number;
+  homeFieldShrink: number;
+  /** Two makes an average-quality neutral-site win offset one fixed loss. */
+  winScale: 2;
+  calibrationId: string;
 }
 
 /** One team's play-by-play summary for one game (see scripts/fetch-plays.ts). */
@@ -99,6 +112,9 @@ export interface GameCounts {
   incomplete: number;
   /** Rows with equal scores. */
   tied: number;
+  /** v2 separates strength-model games from scored lower-division results. */
+  modeled?: number;
+  unmodeled?: number;
 }
 
 export interface RankedTeam {
@@ -128,7 +144,7 @@ export interface RankedTeam {
 
 export interface Manifest {
   engine: string;
-  standingMethod: "frozen-win-quality-v1";
+  standingMethod: "frozen-win-quality-v1" | "frozen-fbs-quality-v2";
   lossPenalty: 1;
   algorithmVersion: string;
   winBonus: number;
@@ -139,6 +155,7 @@ export interface Manifest {
   probabilityScale: number;
   residualScale: number;
   calibrationId: string;
+  winQuality?: WinQualitySettings;
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
   homeFieldError: number;
@@ -201,6 +218,17 @@ export interface StandingCredit {
   loser: number;
   value: number;
   cutoff: string;
+  /** No estimated opponent quality: zero win credit, but losses still cost one. */
+  unmodeled?: true;
+  /** Audit values for v2 awards, all measured before the calendar week. */
+  quality?: {
+    probability: number;
+    opponentStrength: number;
+    referenceStrength: number;
+    venueAdjustment: number;
+    standardError: number;
+    opponentGames: number;
+  };
 }
 
 export interface MatchupPrediction {
