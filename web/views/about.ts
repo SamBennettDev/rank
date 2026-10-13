@@ -80,9 +80,13 @@ export function aboutView(ctx: Ctx): HTMLElement {
     ],
     ["Probability scale", String(m.probabilityScale)],
     ["Residual scale", String(m.residualScale)],
-    ["Ranked field", "FBS"],
+    ["Ranked field", m.classifications.map((c) => c.toUpperCase()).join(" + ")],
+    ["Win benchmark", m.winQuality ? "Average FBS" : "Pooled average"],
+    ["Maximum win credit", String(m.winQuality?.winScale ?? 1)],
     ["Connected groups", String(m.connectedComponents)],
     ["Games counted", String(m.counts.included)],
+    ["Strength-model games", String(m.counts.modeled ?? m.counts.included)],
+    ["Unmodeled opponents", String(m.counts.unmodeled ?? 0)],
     ["Out of scope", String(m.counts.outOfScope)],
     ["Incomplete", String(m.counts.incomplete)],
   ];
@@ -110,7 +114,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "div",
         { class: "recipe-block win" },
-        h("b", {}, "0–1"),
+        h("b", {}, m.winQuality ? "0–2" : "0–1"),
         h("span", {}, "Each win"),
       ),
       h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "−"),
@@ -131,19 +135,28 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h(
       "p",
       { class: "method-caption" },
-      "Stronger opponents earn more win credit. Every loss costs exactly 1 point.",
+      m.winQuality
+        ? "Average-quality win: +1. Every loss: −1."
+        : "Stronger opponents earn more win credit. Every loss costs exactly 1 point.",
     ),
     details(
       "Scoring & scope",
       h(
         "p",
         {},
-        "Win quality estimates how likely the opponent is to beat an average team at that venue. Credits are fixed before the game's calendar week; later results cannot revalue past wins.",
+        m.winQuality
+          ? "Win points = 2 × the opponent’s chance of beating an average FBS team at that venue. Weak opponents earn less; strong opponents earn more. Credits freeze before the game's calendar week."
+          : "Win quality estimates how likely the opponent is to beat an average team at that venue. Credits are fixed before the game's calendar week; later results cannot revalue past wins.",
       ),
       h(
         "p",
         {},
-        "Only FBS teams are ranked. Results against FCS opponents still count toward their scores. Every team starts at zero. No preseason, poll or conference bonuses. An amber dot marks limited opponent evidence.",
+        "FBS and FCS share one standing. All scores start at zero. Division-level strength estimates come from 2014–2019 results and update with current-season games. No team, poll or conference bonus; strong FCS teams can earn full credit. An amber dot marks limited evidence.",
+      ),
+      h(
+        "p",
+        {},
+        "Wins over unmodeled opponents earn zero quality points. Losses still cost exactly 1 point, and those results stay in records and game receipts.",
       ),
     ),
     details(

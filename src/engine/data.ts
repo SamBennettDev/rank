@@ -168,6 +168,28 @@ export function parseConfig(json: string): SeasonConfig {
   num("residualScale", (v) => v > 0, "a positive number");
   if (typeof c.calibrationId !== "string" || !c.calibrationId)
     throw new Error("config.calibrationId must be set");
+  if (c.winQuality !== undefined) {
+    const q = c.winQuality;
+    if (
+      !q ||
+      q.reference !== "fbs" ||
+      q.winScale !== 2 ||
+      typeof q.calibrationId !== "string" ||
+      !q.calibrationId ||
+      !Number.isFinite(q.divisionGap) ||
+      q.divisionGap < 0 ||
+      !Number.isFinite(q.shrink) ||
+      q.shrink <= 0 ||
+      !Number.isFinite(q.homeField) ||
+      !Number.isFinite(q.homeFieldShrink) ||
+      q.homeFieldShrink <= 0
+    )
+      throw new Error(
+        "config.winQuality must specify a valid calibrated FBS reference and balanced win scale",
+      );
+  }
+  if (c.algorithmVersion === "earned-standing-2" && !c.winQuality)
+    throw new Error("config.winQuality is required for earned-standing-2");
   return c;
 }
 

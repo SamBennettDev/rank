@@ -126,7 +126,7 @@ function leadersCarousel(ctx: Ctx, onCleanup: (fn: () => void) => void) {
       class: "leaders-section",
       role: "region",
       "aria-roledescription": "carousel",
-      "aria-label": "Top FBS teams",
+      "aria-label": "Top teams",
     },
     h(
       "div",
@@ -147,13 +147,15 @@ function leadersCarousel(ctx: Ctx, onCleanup: (fn: () => void) => void) {
 
 export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
   let query = "",
+    division = "all",
     conference = "";
-  const field = ctx.ranking.teams.filter((t) => t.classification === "fbs");
+  const field = ctx.ranking.teams;
   const body = h("div"),
     count = h("span", { class: "count", "aria-live": "polite" });
   const draw = () => {
     const teams = field.filter(
       (t) =>
+        (division === "all" || t.classification === division) &&
         (!conference || t.conference === conference) &&
         (!query ||
           t.school.toLowerCase().includes(query) ||
@@ -169,7 +171,11 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
             title: t.school,
             "aria-label": `${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Current score ${fmtHeight(t.height, 3)}.`,
           },
-          h("b", { class: "current-position" }, rankLabel(t.rank, t.tied)),
+          h(
+            "b",
+            { class: `current-position${t.tied ? " tied" : ""}` },
+            rankLabel(t.rank, t.tied),
+          ),
           h(
             "div",
             { class: "row-identity" },
@@ -213,7 +219,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
           { class: "eyebrow" },
           `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
         ),
-        h("h1", {}, "FBS Rankings"),
+        h("h1", {}, "Rankings"),
       ),
     ),
     leadersCarousel(ctx, onCleanup),
@@ -240,6 +246,19 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
       h(
         "select",
         {
+          "aria-label": "Standings division",
+          onchange: (event: Event) => {
+            division = (event.target as HTMLSelectElement).value;
+            draw();
+          },
+        },
+        h("option", { value: "all" }, "All teams"),
+        h("option", { value: "fbs" }, "FBS"),
+        h("option", { value: "fcs" }, "FCS"),
+      ),
+      h(
+        "select",
+        {
           "aria-label": "Standings conference",
           onchange: (event: Event) => {
             conference = (event.target as HTMLSelectElement).value;
@@ -260,7 +279,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
     ),
     h(
       "section",
-      { class: "panel standings-board", "aria-label": "Current FBS standings" },
+      { class: "panel standings-board", "aria-label": "Current standings" },
       h(
         "div",
         { class: "standing-row standing-head", "aria-hidden": "true" },

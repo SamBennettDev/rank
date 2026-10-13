@@ -21,7 +21,7 @@ import { matchupCard } from "./matchups";
 export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   const team = ctx.byId.get(teamId);
   const tl = ctx.teams.get(teamId);
-  if (!team || team.classification !== "fbs")
+  if (!team || !ctx.ranking.teams.some((t) => t.id === team.id))
     return h(
       "div",
       { class: "empty" },
@@ -266,7 +266,9 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        "Wins earn 0–1 point based on pre-week opponent quality. Credits stay fixed. Every loss deducts exactly 1 point.",
+        ctx.ranking.manifest.winQuality
+          ? "A win earns twice the opponent’s pre-week chance of beating an average FBS team. Average-quality win: +1. Every loss: −1. Credits stay fixed. Division-level starting estimates come from 2014–2019 results, then current games update them."
+          : "Wins earn 0–1 point based on pre-week opponent quality. Credits stay fixed. Every loss deducts exactly 1 point.",
       ),
     ),
   );
@@ -519,13 +521,16 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     const l = byGame.get(e.gameId)!;
     const o = l.opponent;
     const upset =
-      (l.won && me.height! < o.height!) || (!l.won && o.height! < me.height!);
+      o.height !== null &&
+      ((l.won && me.height! < o.height) || (!l.won && o.height < me.height!));
     const pull = l.value;
+    const published = ctx.ranking.teams.some((t) => t.id === o.id);
+    const credit = ctx.ranking.credits.find((c) => c.gameId === e.gameId);
     return h(
-      o.classification === "fbs" ? "a" : "div",
+      published ? "a" : "div",
       {
         class: "grow2",
-        ...(o.classification === "fbs" ? { href: teamHref(ctx, o.id) } : {}),
+        ...(published ? { href: teamHref(ctx, o.id) } : {}),
       },
       h(
         "span",
@@ -544,7 +549,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         h(
           "span",
           { class: "c" },
-          `${o.classification === "fbs" ? `#${rankLabel(o.rank, o.tied)}` : "FCS"} · ${shortConf(o.conference)}`,
+          `${published ? `#${rankLabel(o.rank, o.tied)}` : o.classification.toUpperCase()} · ${shortConf(o.conference)}`,
           upset ? " " : "",
           upset ? h("span", { class: "tag-up" }, "UPSET") : "",
         ),
@@ -559,7 +564,12 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         "span",
         {
           class: `r ${pull >= 0 ? "pos" : "neg"}`,
-          title: "Points this result adds to or subtracts from the standing",
+          title:
+            l.won && credit?.unmodeled
+              ? "Unmodeled opponent: no quality points awarded. Losses against these opponents still cost exactly 1 point."
+              : l.won && credit?.quality
+                ? `2 × ${(credit.quality.probability * 100).toFixed(1)}% pre-week opponent chance against an average FBS team. Opponent evidence: ${credit.quality.opponentGames} games.`
+                : "Points this result adds to or subtracts from the standing",
         },
         fmtHeight(pull, 3),
       ),

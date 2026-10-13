@@ -1,6 +1,7 @@
 import { winProbability } from "./probability";
-import { fitRatings, ratingUncertainty, type RatedGame } from "./rating";
+import type { RatedGame } from "./rating";
 import type { SeasonConfig } from "./types";
+import { fitWinQuality, type WinQualityContext } from "./win-quality";
 
 export const round6 = (v: number) => Math.round(v * 1e6) / 1e6;
 export function rankValues(values: readonly (number | null)[]) {
@@ -14,9 +15,9 @@ export function rateTeams(
   n: number,
   games: readonly RatedGame[],
   config: SeasonConfig,
+  quality?: WinQualityContext,
 ) {
-  const fit = fitRatings(n, games, config),
-    uncertainty = ratingUncertainty(fit, config.residualScale);
+  const { fit, uncertainty } = fitWinQuality(n, games, config, quality);
   const wins = new Float64Array(n),
     losses = new Float64Array(n);
   const parent = Array.from({ length: n }, (_, i) => i);

@@ -1,0 +1,411 @@
+{
+  "id": "win-quality-fbs-reference-2014-2019-v2",
+  "status": "training design: pooled priors are estimated from the full design window, then fixed across pre-week fits; later/current seasons are development only",
+  "sourceRevision": "a3dd960090c1bfa169cebd491beabf7028b379b2",
+  "years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "inputs": [
+    {
+      "year": 2014,
+      "sha256": "5b1a1f78bc63114c1e076b10e0d9316d079091afa9ac798982048fce6ce5a128"
+    },
+    {
+      "year": 2015,
+      "sha256": "3044e8911721a711202f976133230a0c2cb557cfaf621cb1f3c21722cfd86fe9"
+    },
+    {
+      "year": 2016,
+      "sha256": "f60e57cdab028d2d35bd589c46139a6dce11ee8c52c3f4ca975c5d98522f403c"
+    },
+    {
+      "year": 2017,
+      "sha256": "c5a6f47dc1b121e366c0e9ef6cf1524e6ea54f58cf997874bf6d818e46fa3b26"
+    },
+    {
+      "year": 2018,
+      "sha256": "a4d4c2ccd06f933c1b6848b3ef4fddbc56695f6b066c9376b1249bfb9d29c00f"
+    },
+    {
+      "year": 2019,
+      "sha256": "d8665fa0aced3d02d59405c8b9ff157ba00ef128a90c1c5eab31d268d917abac"
+    }
+  ],
+  "priors": {
+    "divisionGap": 31.644079,
+    "homeField": 2.668394,
+    "perYear": [
+      {
+        "year": 2014,
+        "gap": 32.25821233305784,
+        "home": 2.6786515970445004,
+        "spread": 16.422399995166
+      },
+      {
+        "year": 2015,
+        "gap": 31.91814611632334,
+        "home": 2.962468784017177,
+        "spread": 16.408953824234782
+      },
+      {
+        "year": 2016,
+        "gap": 31.48040970156425,
+        "home": 2.1608663165803064,
+        "spread": 15.914001720531944
+      },
+      {
+        "year": 2017,
+        "gap": 30.613116631475428,
+        "home": 2.669522745048365,
+        "spread": 16.534140436376074
+      },
+      {
+        "year": 2018,
+        "gap": 31.484998977397943,
+        "home": 2.683419398878864,
+        "spread": 15.454690005223151
+      },
+      {
+        "year": 2019,
+        "gap": 32.109588041701045,
+        "home": 2.855435360896429,
+        "spread": 15.384006866143935
+      }
+    ]
+  },
+  "selection": "Minimum pooled pre-week game log loss on design seasons for quality regularization. A policy scale of 2 balances an average-quality neutral-site win (+1) with the fixed loss deduction (-1); scale sensitivity is not used for selection. No team or conference settings.",
+  "probabilityScale": 12.0,
+  "residualScale": 14.934045,
+  "policy": {
+    "lossPenalty": 1,
+    "averageFbsNeutralWin": 1,
+    "maximumWin": 2,
+    "noDivisionRankCap": true
+  },
+  "selected": {
+    "reference": "fbs",
+    "divisionGap": 31.644079,
+    "homeField": 2.668394,
+    "shrink": 1.0,
+    "homeFieldShrink": 64.0,
+    "winScale": 2.0,
+    "calibrationId": "win-quality-fbs-reference-2014-2019-v2"
+  },
+  "strengthCandidates": [
+    {
+      "shrink": 0.25,
+      "homeFieldShrink": 1.0,
+      "logLoss": 0.5364506031386346,
+      "brier": 0.18074528333684517,
+      "n": 8749
+    },
+    {
+      "shrink": 0.25,
+      "homeFieldShrink": 4.0,
+      "logLoss": 0.5361832854881456,
+      "brier": 0.18062673888611816,
+      "n": 8749
+    },
+    {
+      "shrink": 0.25,
+      "homeFieldShrink": 16.0,
+      "logLoss": 0.5362836641841328,
+      "brier": 0.18066545638673542,
+      "n": 8749
+    },
+    {
+      "shrink": 0.25,
+      "homeFieldShrink": 64.0,
+      "logLoss": 0.5364761942027111,
+      "brier": 0.1807541113521807,
+      "n": 8749
+    },
+    {
+      "shrink": 0.5,
+      "homeFieldShrink": 1.0,
+      "logLoss": 0.5333027976631114,
+      "brier": 0.17968777397727306,
+      "n": 8749
+    },
+    {
+      "shrink": 0.5,
+      "homeFieldShrink": 4.0,
+      "logLoss": 0.5327916490039485,
+      "brier": 0.17946494684987208,
+      "n": 8749
+    },
+    {
+      "shrink": 0.5,
+      "homeFieldShrink": 16.0,
+      "logLoss": 0.5327044746033287,
+      "brier": 0.17941819641283233,
+      "n": 8749
+    },
+    {
+      "shrink": 0.5,
+      "homeFieldShrink": 64.0,
+      "logLoss": 0.5328071290338924,
+      "brier": 0.179456397051889,
+      "n": 8749
+    },
+    {
+      "shrink": 1.0,
+      "homeFieldShrink": 1.0,
+      "logLoss": 0.533455906876246,
+      "brier": 0.17982611025846917,
+      "n": 8749
+    },
+    {
+      "shrink": 1.0,
+      "homeFieldShrink": 4.0,
+      "logLoss": 0.5327079099121909,
+      "brier": 0.17948972401858254,
+      "n": 8749
+    },
+    {
+      "shrink": 1.0,
+      "homeFieldShrink": 16.0,
+      "logLoss": 0.5324077646344684,
+      "brier": 0.17934022326921195,
+      "n": 8749
+    },
+    {
+      "shrink": 1.0,
+      "homeFieldShrink": 64.0,
+      "logLoss": 0.5323056137572085,
+      "brier": 0.17927158251267628,
+      "n": 8749
+    },
+    {
+      "shrink": 2.0,
+      "homeFieldShrink": 1.0,
+      "logLoss": 0.53855938976363,
+      "brier": 0.18177753664447754,
+      "n": 8749
+    },
+    {
+      "shrink": 2.0,
+      "homeFieldShrink": 4.0,
+      "logLoss": 0.5375882701877006,
+      "brier": 0.18132678945726682,
+      "n": 8749
+    },
+    {
+      "shrink": 2.0,
+      "homeFieldShrink": 16.0,
+      "logLoss": 0.5370943860499455,
+      "brier": 0.18107353006040375,
+      "n": 8749
+    },
+    {
+      "shrink": 2.0,
+      "homeFieldShrink": 64.0,
+      "logLoss": 0.5367561487498097,
+      "brier": 0.18087594199866996,
+      "n": 8749
+    },
+    {
+      "shrink": 4.0,
+      "homeFieldShrink": 1.0,
+      "logLoss": 0.5503012312125618,
+      "brier": 0.1863172122761393,
+      "n": 8749
+    },
+    {
+      "shrink": 4.0,
+      "homeFieldShrink": 4.0,
+      "logLoss": 0.5491436775840752,
+      "brier": 0.18577397483758595,
+      "n": 8749
+    },
+    {
+      "shrink": 4.0,
+      "homeFieldShrink": 16.0,
+      "logLoss": 0.5484919841559611,
+      "brier": 0.18543225207268982,
+      "n": 8749
+    },
+    {
+      "shrink": 4.0,
+      "homeFieldShrink": 64.0,
+      "logLoss": 0.5479606385919427,
+      "brier": 0.18512432107205046,
+      "n": 8749
+    }
+  ],
+  "winScaleCandidates": [
+    {
+      "winScale": 0.5,
+      "agreement": {
+        "all": {
+          "rate": 0.7946408209806157,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8053583695901076,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.6784615384615384,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8022915001332267,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 1.0,
+      "agreement": {
+        "all": {
+          "rate": 0.8004561003420753,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8076482711243417,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.7353846153846154,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8033573141486811,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 1.5,
+      "agreement": {
+        "all": {
+          "rate": 0.8044469783352337,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8101671628119991,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.7661538461538462,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8044231281641353,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 2.0,
+      "agreement": {
+        "all": {
+          "rate": 0.8075256556442417,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8117700938859629,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.7907692307692308,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8054889421795897,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 3.0,
+      "agreement": {
+        "all": {
+          "rate": 0.8126567844925884,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8147469658804671,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.823076923076923,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.808419930722089,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 4.0,
+      "agreement": {
+        "all": {
+          "rate": 0.8150513112884835,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8170368674147012,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.8338461538461538,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8094857447375433,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 6.0,
+      "agreement": {
+        "all": {
+          "rate": 0.8174458380843785,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8172658575681245,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.8615384615384616,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8100186517452704,
+          "games": 3753
+        }
+      }
+    },
+    {
+      "winScale": 8.0,
+      "agreement": {
+        "all": {
+          "rate": 0.8187001140250855,
+          "games": 8770
+        },
+        "fbs": {
+          "rate": 0.8179528280283948,
+          "games": 4367
+        },
+        "cross": {
+          "rate": 0.8707692307692307,
+          "games": 650
+        },
+        "fcs": {
+          "rate": 0.8105515587529976,
+          "games": 3753
+        }
+      }
+    }
+  ]
+}

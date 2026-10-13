@@ -1,10 +1,10 @@
 import { solveFactor } from "./linalg";
 import { calendarWeekStart, RESULT_LAG_MS } from "./chronology";
 import { normalQuantile, winProbability } from "./probability";
-import { fitRatings, ratingUncertainty } from "./rating";
 import { type rateTeams, round6, rankValues } from "./model";
 import { type DatedGame, type scoreStandings, winCredit } from "./standing";
 import type { SeasonConfig, TeamProjection } from "./types";
+import { fitWinQuality, type WinQualityContext } from "./win-quality";
 
 export type ProjectionMode = "independent" | "correlated" | "adaptive";
 export const PROJECTION_MODE: ProjectionMode = "correlated";
@@ -69,6 +69,7 @@ export function projectSeason(
   config: SeasonConfig,
   mode: ProjectionMode = PROJECTION_MODE,
   eligible?: ReadonlySet<number>,
+  quality?: WinQualityContext,
 ) {
   const n = model.fit.ratings.length,
     N = n + 1;
@@ -117,21 +118,19 @@ export function projectSeason(
     { fit: typeof model.fit; uncertainty: typeof model.uncertainty }
   >();
   const latestResult = Math.max(...known.map((g) => g.time + RESULT_LAG_MS));
+  const currentQuality = model;
   const fixedCredits = future.map((g) => {
     const cutoff = calendarWeekStart(g.time);
     let creditModel = creditModels.get(cutoff);
     if (!creditModel) {
-      if (cutoff >= latestResult) creditModel = model;
+      if (cutoff >= latestResult) creditModel = currentQuality;
       else {
-        const fit = fitRatings(
+        creditModel = fitWinQuality(
           n,
           known.filter((k) => k.time + RESULT_LAG_MS <= cutoff),
           config,
+          quality,
         );
-        creditModel = {
-          fit,
-          uncertainty: ratingUncertainty(fit, config.residualScale),
-        };
       }
       creditModels.set(cutoff, creditModel);
     }
@@ -142,6 +141,7 @@ export function projectSeason(
         creditModel.fit,
         creditModel.uncertainty,
         config,
+        quality,
       ),
       winCredit(
         g.home,
@@ -149,6 +149,7 @@ export function projectSeason(
         creditModel.fit,
         creditModel.uncertainty,
         config,
+        quality,
       ),
     ];
   });
@@ -171,15 +172,15 @@ export function projectSeason(
       const past = future
         .map((g, i) => ({ g, i }))
         .filter(({ g }) => g.time + RESULT_LAG_MS <= cutoff);
-      const fit = fitRatings(
+      const { fit, uncertainty } = fitWinQuality(
         n,
         [
           ...known.filter((g) => g.time + RESULT_LAG_MS <= cutoff),
           ...past.map(({ g }) => ({ ...g, margin: 0 })),
         ].sort((a, b) => a.id - b.id),
         config,
+        quality,
       );
-      const uncertainty = ratingUncertainty(fit, config.residualScale);
       const games = future
         .map((g, i) => ({ g, i }))
         .filter(({ g }) => calendarWeekStart(g.time) === cutoff);
@@ -244,6 +245,7 @@ export function projectSeason(
               fit,
               week.uncertainty,
               config,
+              quality,
             ),
           );
           scores[loser]!--;

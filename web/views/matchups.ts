@@ -10,11 +10,11 @@ export function matchupCard(ctx: Ctx, p: MatchupPrediction) {
     away = ctx.byId.get(p.away)!;
   const side = (id: number, name: string) => {
     const team = ctx.byId.get(id)!;
-    const fbs = team.classification === "fbs";
+    const published = ctx.ranking.teams.some((t) => t.id === id);
     return h(
-      fbs ? "a" : "div",
+      published ? "a" : "div",
       {
-        ...(fbs ? { href: teamHref(ctx, id) } : {}),
+        ...(published ? { href: teamHref(ctx, id) } : {}),
         class: "matchup-side tv",
         style: teamVars(ctx.teams.get(id)?.color),
       },
@@ -26,12 +26,16 @@ export function matchupCard(ctx: Ctx, p: MatchupPrediction) {
         h(
           "b",
           { class: "matchup-score" },
-          fbs ? fmtHeight(team.height, 3) : "FCS",
+          published
+            ? fmtHeight(team.height, 3)
+            : team.classification.toUpperCase(),
         ),
         h(
           "span",
           { class: "matchup-rank" },
-          fbs ? `#${rankLabel(team.rank, team.tied)} · Score` : "Opponent",
+          published
+            ? `#${rankLabel(team.rank, team.tied)} · Score`
+            : "Opponent",
         ),
       ),
     );
@@ -82,10 +86,9 @@ export function matchupsView(ctx: Ctx) {
       const home = ctx.byId.get(p.home)!,
         away = ctx.byId.get(p.away)!;
       return (
-        (home.classification === "fbs" || away.classification === "fbs") &&
-        (!query ||
-          home.school.toLowerCase().includes(query) ||
-          away.school.toLowerCase().includes(query))
+        !query ||
+        home.school.toLowerCase().includes(query) ||
+        away.school.toLowerCase().includes(query)
       );
     });
     list.replaceChildren(...predictions.map((p) => matchupCard(ctx, p)));

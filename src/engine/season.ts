@@ -2,7 +2,7 @@ import { parseConfig, parseGames, parsePlays, parseTeams } from "./data";
 import { buildEdges, listSnapshots } from "./graph";
 import { sha256Hex } from "./hash";
 import { predictMatchup, rateTeams, rankValues, round6 } from "./model";
-import { kickoff, RESULT_LAG_MS } from "./chronology";
+import { calendarWeekStart, kickoff, RESULT_LAG_MS } from "./chronology";
 import type { RatedGame } from "./rating";
 import type {
   Edge,
@@ -10,13 +10,15 @@ import type {
   RankedTeam,
   Ranking,
   SeasonIndexEntry,
+  Team,
 } from "./types";
 import { fitUnits } from "./units";
 import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
+import { makeWinQualityContext } from "./win-quality";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-15";
+export const ENGINE_VERSION = "rank-engine-16";
 
 export interface SeasonFiles {
   season: string;
@@ -89,6 +91,36 @@ export async function computeSeason(
     ),
   );
   if (!eligible.size) throw new Error("no teams match config.classifications");
+  const quality = makeWinQualityContext(teams, config);
+  // Keep lower-division results without inventing ratings for opponents absent
+  // from the model. Their wins earn no quality credit; every loss still counts.
+  const otherTeams = new Map<number, Team>();
+  if (quality)
+    for (const g of [...games].sort((a, b) => a.id - b.id)) {
+      if (!index.has(g.homeId) && !index.has(g.awayId)) continue;
+      for (const [id, school] of [
+        [g.homeId, g.homeTeam],
+        [g.awayId, g.awayTeam],
+      ] as const)
+        if (id > 0 && !index.has(id) && !otherTeams.has(id))
+          otherTeams.set(id, {
+            id,
+            school,
+            abbreviation: school
+              .split(/\s+/)
+              .map((word) => word[0] ?? "")
+              .join("")
+              .slice(0, 4),
+            conference: "Other",
+            classification: "other",
+            color: "",
+          });
+    }
+  const resultTeams = [
+    ...teams,
+    ...[...otherTeams.values()].sort((a, b) => a.id - b.id),
+  ];
+  const resultIndex = new Map(resultTeams.map((t, i) => [t.id, i]));
   const files: SeasonOutput["files"] = [];
   const snapshots = listSnapshots(games);
   const allIds = new Set(
@@ -103,30 +135,63 @@ export async function computeSeason(
       games.filter((g) => allIds.has(g.id)),
     ),
     config,
+    quality,
   );
   let previous = new Map<number, number>();
 
   for (const snap of snapshots) {
-    const { edges, counts } = buildEdges(games, teams, snap);
+    const { edges, counts: modelCounts } = buildEdges(games, teams, snap);
+    const result = quality
+      ? buildEdges(games, resultTeams, snap)
+      : { edges, counts: modelCounts };
+    const resultEdges = result.edges.filter(
+      (e) => index.has(e.winner) || index.has(e.loser),
+    );
+    const externalEdges = resultEdges.filter(
+      (e) => !index.has(e.winner) || !index.has(e.loser),
+    );
+    const counts = quality
+      ? {
+          ...result.counts,
+          included: resultEdges.length,
+          outOfScope:
+            result.counts.outOfScope + result.edges.length - resultEdges.length,
+          modeled: edges.length,
+          unmodeled: externalEdges.length,
+        }
+      : modelCounts;
     const wins = new Map<number, number>();
     const losses = new Map<number, number>();
-    for (const e of edges) {
+    for (const e of resultEdges) {
       wins.set(e.winner, (wins.get(e.winner) ?? 0) + 1);
       losses.set(e.loser, (losses.get(e.loser) ?? 0) + 1);
     }
     const played = teams.filter((t) => wins.has(t.id) || losses.has(t.id));
 
     const known = rated(edges, index);
-    const model = rateTeams(teams.length, known, config);
+    const model = rateTeams(teams.length, known, config, quality);
     const { homeField } = model.fit;
     const included = new Set(edges.map((e) => e.gameId));
     const knownDated = indexedGames(
       teams,
       games.filter((g) => included.has(g.id)),
     );
+    const byGame = new Map(games.map((g) => [g.id, g]));
     const standing = aggregateCredits(
-      teams.length,
-      allStanding.credits.filter((c) => included.has(c.gameId)),
+      resultTeams.length,
+      [
+        ...allStanding.credits.filter((c) => included.has(c.gameId)),
+        ...externalEdges.map((e) => ({
+          gameId: e.gameId,
+          winner: resultIndex.get(e.winner)!,
+          loser: resultIndex.get(e.loser)!,
+          value: 0,
+          unmodeled: true as const,
+          cutoff: new Date(
+            calendarWeekStart(kickoff(byGame.get(e.gameId)!)),
+          ).toISOString(),
+        })),
+      ].sort((a, b) => a.gameId - b.gameId),
     );
     const lastTime = Math.max(
       ...games.filter((g) => included.has(g.id)).map(kickoff),
@@ -152,6 +217,7 @@ export async function computeSeason(
       config,
       PROJECTION_MODE,
       eligible,
+      quality,
     );
     const projection = {
       method: `${PROJECTION_MODE}-results-v1` as const,
@@ -236,6 +302,23 @@ export async function computeSeason(
     const opponents = allTeams.filter(
       (t) => !config.classifications.includes(t.classification),
     );
+    for (const t of resultTeams.slice(teams.length))
+      opponents.push({
+        ...t,
+        rank: null,
+        tied: false,
+        height: null,
+        projection: null,
+        component: null,
+        componentSize: 0,
+        provisional: true,
+        offense: null,
+        defense: null,
+        special: null,
+        wins: wins.get(t.id) ?? 0,
+        losses: losses.get(t.id) ?? 0,
+        change: null,
+      });
     ranked.sort(
       (a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id,
     );
@@ -245,7 +328,9 @@ export async function computeSeason(
 
     const manifest: Manifest = {
       engine: ENGINE_VERSION,
-      standingMethod: "frozen-win-quality-v1",
+      standingMethod: config.winQuality
+        ? "frozen-fbs-quality-v2"
+        : "frozen-win-quality-v1",
       lossPenalty: 1,
       algorithmVersion: config.algorithmVersion,
       winBonus: config.winBonus,
@@ -256,6 +341,7 @@ export async function computeSeason(
       probabilityScale: config.probabilityScale,
       residualScale: config.residualScale,
       calibrationId: config.calibrationId,
+      ...(config.winQuality ? { winQuality: config.winQuality } : {}),
       homeField: round6(homeField),
       homeFieldError: round6(model.uncertainty.homeFieldError),
       connectedComponents: model.sizes.size,
@@ -280,8 +366,8 @@ export async function computeSeason(
         predictions,
         credits: standing.credits.map((c) => ({
           ...c,
-          winner: teams[c.winner]!.id,
-          loser: teams[c.loser]!.id,
+          winner: resultTeams[c.winner]!.id,
+          loser: resultTeams[c.loser]!.id,
         })),
         teams: ranked,
         ...(opponents.length ? { opponents } : {}),
