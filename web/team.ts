@@ -12,7 +12,8 @@ const LOGO_BASE = "https://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa";
 export const logoUrl = (id: number, px: number, dark = false) =>
   `${LOGO_BASE}/${dark ? "500-dark" : "500"}/${id}.png&w=${px}&h=${px}&scale=crop&cquality=80`;
 
-export const prefersDark = () => window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+export const prefersDark = () =>
+  window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
 
 // ---- colour maths -------------------------------------------------------
 
@@ -24,8 +25,14 @@ function parseHex(hex: string | undefined): RGB | null {
   const n = parseInt(m[1]!, 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
-const toHex = ([r, g, b]: RGB) => "#" + [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("");
-const mix = (a: RGB, b: RGB, t: number): RGB => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+const toHex = ([r, g, b]: RGB) =>
+  "#" +
+  [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("");
+const mix = (a: RGB, b: RGB, t: number): RGB => [
+  a[0] + (b[0] - a[0]) * t,
+  a[1] + (b[1] - a[1]) * t,
+  a[2] + (b[2] - a[2]) * t,
+];
 
 function luminance([r, g, b]: RGB): number {
   const f = (v: number) => {
@@ -83,6 +90,19 @@ export function palette(color: string | undefined): Palette {
   return p;
 }
 
+/** Brand text needs stronger contrast than decorative team accents. */
+export function brandPalette(color: string | undefined) {
+  const c = parseHex(color) ?? FALLBACK;
+  const light = readableOn(c, LIGHT_BG, 4.5);
+  const dark = readableOn(c, DARK_BG, 4.5);
+  const ink = (hex: string) =>
+    contrast(parseHex(hex)!, [255, 255, 255]) >=
+    contrast(parseHex(hex)!, [0, 0, 0])
+      ? "#ffffff"
+      : "#000000";
+  return { light, dark, lightInk: ink(light), darkInk: ink(dark) };
+}
+
 /** Inline CSS custom properties consumed by styles.css (--tc, --tc-deep, --tc-ink, --ta-d, --ta-l). */
 export function teamVars(color: string | undefined): string {
   const p = palette(color);
@@ -95,7 +115,11 @@ export function teamVars(color: string | undefined): string {
  * A team logo that degrades gracefully: dark-mode variant -> standard logo ->
  * monogram in team colours. `size` is the rendered CSS size in px.
  */
-export function logo(team: TeamLook | undefined, size: number, opts: { lazy?: boolean; className?: string } = {}): HTMLElement {
+export function logo(
+  team: TeamLook | undefined,
+  size: number,
+  opts: { lazy?: boolean; className?: string } = {},
+): HTMLElement {
   const wrap = document.createElement("span");
   wrap.className = `logo ${opts.className ?? ""}`.trim();
   wrap.style.cssText = `width:${size}px;height:${size}px;${teamVars(team?.color)}`;
@@ -113,7 +137,9 @@ export function logo(team: TeamLook | undefined, size: number, opts: { lazy?: bo
   img.decoding = "async";
   if (opts.lazy) img.loading = "lazy";
   const px = Math.min(500, Math.ceil(size * 2));
-  const sources = prefersDark() ? [logoUrl(team.id, px, true), logoUrl(team.id, px)] : [logoUrl(team.id, px)];
+  const sources = prefersDark()
+    ? [logoUrl(team.id, px, true), logoUrl(team.id, px)]
+    : [logoUrl(team.id, px)];
   let i = 0;
   img.addEventListener("load", () => wrap.classList.add("loaded"));
   img.addEventListener("error", () => {
@@ -130,8 +156,15 @@ export function logo(team: TeamLook | undefined, size: number, opts: { lazy?: bo
 }
 
 /** Same fallback chain for an SVG <image>; the caller draws the monogram underneath. */
-export function svgLogo(image: SVGImageElement, id: number, px: number, onFail: () => void): void {
-  const sources = prefersDark() ? [logoUrl(id, px, true), logoUrl(id, px)] : [logoUrl(id, px)];
+export function svgLogo(
+  image: SVGImageElement,
+  id: number,
+  px: number,
+  onFail: () => void,
+): void {
+  const sources = prefersDark()
+    ? [logoUrl(id, px, true), logoUrl(id, px)]
+    : [logoUrl(id, px)];
   let i = 0;
   image.addEventListener("error", () => {
     i++;
@@ -141,14 +174,23 @@ export function svgLogo(image: SVGImageElement, id: number, px: number, onFail: 
       onFail();
     }
   });
-  image.addEventListener("load", () => image.parentElement?.classList.add("loaded"));
+  image.addEventListener("load", () =>
+    image.parentElement?.classList.add("loaded"),
+  );
   image.setAttribute("href", sources[0]!);
 }
 
 /** Short conference labels for tight spaces (graph lane headers, chips). */
 const SHORT: Record<string, string> = {
-  "American Athletic": "American", "Big Ten": "Big Ten", "Mid-American": "MAC", "Mountain West": "Mountain West",
-  "Conference USA": "C-USA", "FBS Independents": "FBS Ind.", "FCS Independents": "FCS Ind.", "Coastal Athletic": "CAA",
-  Southern: "SoCon", "Sun Belt": "Sun Belt",
+  "American Athletic": "American",
+  "Big Ten": "Big Ten",
+  "Mid-American": "MAC",
+  "Mountain West": "Mountain West",
+  "Conference USA": "C-USA",
+  "FBS Independents": "FBS Ind.",
+  "FCS Independents": "FCS Ind.",
+  "Coastal Athletic": "CAA",
+  Southern: "SoCon",
+  "Sun Belt": "Sun Belt",
 };
 export const shortConf = (c: string) => SHORT[c] ?? c;

@@ -14,7 +14,7 @@ import {
 } from "../ctx";
 import { h, svg } from "../dom";
 import { arrowLeft } from "../icons";
-import { logo, svgLogo, teamVars } from "../team";
+import { logo, shortConf, svgLogo, teamVars } from "../team";
 import { loadRanking } from "../store";
 import { matchupCard } from "./matchups";
 import { projectionPanel } from "./projection";
@@ -65,30 +65,24 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "tid" },
-        logo(tl, 128),
+        logo(tl, 96),
         h(
           "div",
           {},
-          h("h1", {}, team.school),
+          h("h1", { title: team.school }, team.school),
           h(
             "div",
-            { class: "sub" },
-            h("span", { class: "chip" }, h("b", {}, team.conference)),
-            h("span", { class: "chip" }, team.classification.toUpperCase()),
-            h(
-              "span",
-              { class: "chip" },
-              `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
-            ),
+            { class: "team-hero-meta" },
+            `${shortConf(team.conference)} · ${team.classification.toUpperCase()} · ${ctx.entry.season}`,
           ),
         ),
       ),
       h(
         "div",
         { class: "tstats" },
-        stat("Rank", rankLabel(team.rank, team.tied)),
+        stat("Current rank", rankLabel(team.rank, team.tied)),
         stat("Record", record(team)),
-        stat("Rating", fmtHeight(team.height, 3)),
+        stat("Rating", fmtHeight(team.height, 2)),
         stat(
           "This week",
           team.change === null
@@ -117,11 +111,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         h(
           "div",
           { class: "panel" },
-          h(
-            "p",
-            { class: "hint" },
-            "No counted games yet, so this team is unranked. It will appear once it plays an FBS or FCS opponent.",
-          ),
+          h("p", { class: "hint" }, "Awaiting the first counted result."),
         ),
       ),
     );
@@ -130,11 +120,11 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   const history = h(
     "div",
     { class: "panel tv", style: teamVars(tl?.color) },
-    h("h2", {}, "Rank by week"),
     h(
-      "p",
-      { class: "hint" },
-      "Recomputed from scratch each week using only games played so far.",
+      "div",
+      { class: "section-heading" },
+      h("h2", {}, "Rank by week"),
+      h("span", { class: "scope-label" }, ctx.ranking.snapshot.label),
     ),
     h("div", { class: "loading" }, h("span"), h("span"), h("span")),
   );
@@ -142,6 +132,9 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
     history.lastElementChild!.replaceWith(historyChart(pts, ctx.snapId)),
   );
 
+  const nextGames = ctx.ranking.predictions
+    .filter((p) => p.home === teamId || p.away === teamId)
+    .slice(0, 2);
   return h(
     "div",
     {},
@@ -149,13 +142,21 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
     h(
       "div",
       { class: "tbody" },
-      unitsPanel(ctx, teamId),
       projectionPanel(ctx, teamId),
-      ...ctx.ranking.predictions
-        .filter((p) => p.home === teamId || p.away === teamId)
-        .slice(0, 2)
-        .map((p) => matchupCard(ctx, p)),
+      nextGames.length
+        ? h(
+            "section",
+            { class: "next-games" },
+            h("div", { class: "section-heading" }, h("h2", {}, "Up next")),
+            h(
+              "div",
+              { class: "matchup-list" },
+              ...nextGames.map((p) => matchupCard(ctx, p)),
+            ),
+          )
+        : "",
       h("div", { class: "tgrid" }, whyPanel(ctx, teamId), history),
+      unitsPanel(ctx, teamId),
       gameLog(ctx, teamId, games),
     ),
   );
@@ -170,18 +171,16 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
       ? h(
           "div",
           { class: "panel unitsp" },
-          h("h2", {}, "Offense · Defense · Special teams"),
-          h(
-            "p",
-            { class: "hint" },
-            "No play-by-play for this team’s games yet (the public play-by-play covers games with an FBS team), so it has no unit ratings.",
-          ),
+          h("h2", {}, "Performance"),
+          h("p", { class: "hint" }, "Play-by-play unavailable."),
         )
       : "";
   }
   const card = (m: "offense" | "defense" | "special") => {
     const b = board(ctx, m);
     const e = b.find((x) => x.team.id === teamId)!;
+    const bound = Math.max(1, ...b.map((x) => Math.abs(x.value)));
+    const width = (Math.abs(e.value) / bound) * 50;
     return h(
       "div",
       { class: "unit", title: METRIC_HINT[m] },
@@ -192,23 +191,25 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
         `#${rankLabel(e.rank, e.tied)}`,
         h("small", {}, `of ${b.length}`),
       ),
+      h("div", { class: "v" }, h("b", {}, fmtHeight(e.value)), " vs avg"),
       h(
         "div",
-        { class: "v" },
-        h("b", {}, fmtHeight(e.value)),
-        " points per game vs average",
+        { class: "unit-meter", "aria-hidden": "true" },
+        h("i", {
+          class: e.value < 0 ? "negative" : "",
+          style: `left:${e.value < 0 ? 50 - width : 50}%;width:${width}%`,
+        }),
       ),
     );
   };
-  const total = me.offense + me.defense! + me.special!;
   return h(
     "div",
     { class: "panel unitsp" },
-    h("h2", {}, "Offense · Defense · Special teams"),
+    h("h2", {}, "Performance"),
     h(
       "p",
       { class: "hint" },
-      `Opponent-adjusted play-by-play, with garbage time removed. Together these units come to ${fmtHeight(total)} points per game above average. The overall standing (${fmtHeight(me.height)} earned points) sums win credits and fixed loss deductions.`,
+      "Opponent-adjusted play-by-play · points per game",
     ),
     h(
       "div",
@@ -229,24 +230,47 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
     (l.edge.seasonType === "postseason" ? 99 : l.edge.week) * 1e9 +
     l.edge.gameId;
   const lines = [...b.lines].sort((x, y) => order(x) - order(y));
+  const earned = lines
+    .filter((l) => l.won)
+    .reduce((sum, l) => sum + l.value, 0);
   return h(
     "div",
     { class: "panel why" },
-    h("h2", {}, "Why it’s here"),
+    h("h2", {}, "Rating breakdown"),
     h(
-      "p",
-      { class: "hint" },
-      "Each win earns 0–1 point based on how hard its opponent would be for an average team at that venue. Credits are fixed before the calendar week. Every loss deducts exactly 1 point. Add the game credits to get the current rating.",
+      "div",
+      { class: "credit-equation" },
+      h(
+        "div",
+        { class: "earned" },
+        h("b", {}, fmtHeight(earned, 3)),
+        h("small", {}, "Win credits"),
+      ),
+      h("span", { "aria-hidden": "true" }, "−"),
+      h(
+        "div",
+        { class: "deducted" },
+        h("b", {}, me.losses),
+        h("small", {}, "Losses × 1"),
+      ),
+      h("span", { "aria-hidden": "true" }, "="),
+      h(
+        "div",
+        {},
+        h("b", {}, fmtHeight(b.average, 3)),
+        h("small", {}, "Rating"),
+      ),
     ),
     breakdownChart(ctx, b.fromGames, lines),
     h(
-      "p",
-      { class: "sum" },
-      `${lines.length} games: win credits minus ${me.losses} loss deductions = `,
-      h("b", {}, fmtHeight(b.average)),
-      Math.abs(b.average - me.height!) > 0.05
-        ? ` (published ${fmtHeight(me.height)})`
-        : "",
+      "details",
+      { class: "quiet-details" },
+      h("summary", {}, "Scoring details"),
+      h(
+        "p",
+        {},
+        "Wins earn 0–1 point based on pre-week opponent quality. Credits stay fixed. Every loss deducts exactly 1 point.",
+      ),
     ),
   );
 }
@@ -520,7 +544,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         h(
           "span",
           { class: "c" },
-          `#${rankLabel(o.rank, o.tied)} · ${record(o)} · ${o.conference}`,
+          `#${rankLabel(o.rank, o.tied)} · ${shortConf(o.conference)}`,
           upset ? " " : "",
           upset ? h("span", { class: "tag-up" }, "UPSET") : "",
         ),

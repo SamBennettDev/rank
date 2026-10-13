@@ -275,22 +275,18 @@ export function graphView(
         "div",
         { class: "sec" },
         h("h3", {}, "How to read it"),
-        h(
-          "p",
-          {},
-          "Height shows earned standing points: win quality minus one point per loss. Rank is rating order. Team pages show projected final rank. Columns group conferences; sideways position carries no rank.",
-        ),
+        h("p", {}, "Higher = more earned points. Columns = conferences."),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(
               "p",
               { class: "hint" },
-              `Provisional opponent comparisons: ${ctx.ranking.manifest.connectedComponents} disconnected schedule groups.`,
+              `${ctx.ranking.manifest.connectedComponents} disconnected groups · limited evidence`,
             )
           : "",
         h(
           "p",
           {},
-          "Hover or tap a team to see its games: green lines go to teams it beat, red to teams it lost to. Scroll to pan, pinch or ⌘-scroll to zoom.",
+          "Tap a team. Green = wins; red = losses. Scroll to pan; pinch to zoom.",
         ),
       ),
       h(
@@ -298,12 +294,8 @@ export function graphView(
         { class: "sec" },
         h("h3", {}, "Biggest upsets"),
         ups.length === 0
-          ? h("p", {}, "None. Every winner is rated above every team it beat.")
-          : h(
-              "p",
-              { class: "muted" },
-              "Games where the winner is still rated below the loser.",
-            ),
+          ? h("p", {}, "No wins over higher-ranked teams.")
+          : h("p", { class: "muted" }, "Wins over higher-ranked teams."),
         ...ups.map((u, i) => {
           const w = ctx.byId.get(u.edge.winner)!;
           const l = ctx.byId.get(u.edge.loser)!;
@@ -416,7 +408,7 @@ export function graphView(
       h(
         "p",
         { class: "hint" },
-        `Each loss costs exactly 1 point.${t.projection ? ` Projected average finish #${t.projection.expectedRank.toFixed(1)}; 80% range #${t.projection.rankLow}–#${t.projection.rankHigh}.` : ""}${t.provisional ? " Provisional opponent evidence." : ""}`,
+        `${t.projection ? `Projected #${t.projection.rank} · 80% range #${t.projection.rankLow}–#${t.projection.rankHigh}` : "No forecast"}${t.provisional ? " · Limited data" : ""}`,
       ),
       h(
         "div",

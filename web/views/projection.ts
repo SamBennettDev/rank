@@ -1,42 +1,159 @@
-import { type Ctx, fmtHeight, rankLabel, record, teamHref } from "../ctx";
+import { type Ctx, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
 import { h } from "../dom";
-import { logo } from "../team";
+import { searchIcon } from "../icons";
+import { logo, shortConf, teamVars } from "../team";
+import {
+  chanceMeter,
+  movement,
+  probabilityRing,
+  provisionalFlag,
+  rankRange,
+} from "../visuals";
+import type { RankedTeam } from "../../src/engine/types";
+
+const forecastTied = (ctx: Ctx, t: RankedTeam) =>
+  !!t.projection &&
+  ctx.ranking.teams.filter(
+    (other) => other.projection?.rank === t.projection!.rank,
+  ).length > 1;
+const finishLabel = (ctx: Ctx, t: RankedTeam) =>
+  t.projection ? rankLabel(t.projection.rank, forecastTied(ctx, t)) : "—";
 
 export function projectionPanel(ctx: Ctx, teamId: number) {
   const t = ctx.byId.get(teamId)!,
     p = t.projection;
+  if (!p)
+    return h(
+      "section",
+      { class: "panel season-outlook" },
+      h("h2", {}, "Season outlook"),
+      h("p", { class: "hint" }, "Awaiting a result or scheduled matchup."),
+    );
   return h(
-    "div",
-    { class: "panel" },
-    h("h2", {}, "Current standing vs projected finish"),
-    p
-      ? h(
+    "section",
+    { class: "panel season-outlook" },
+    h(
+      "div",
+      { class: "section-heading" },
+      h("h2", {}, "Season outlook"),
+      t.provisional
+        ? h("span", { class: "scope-label" }, provisionalFlag(), "Limited data")
+        : h("span", { class: "scope-label" }, "Known schedule"),
+    ),
+    h(
+      "div",
+      { class: "outlook-layout" },
+      h(
+        "div",
+        {},
+        h(
           "div",
-          {},
+          { class: "rank-journey" },
           h(
-            "p",
+            "div",
             {},
-            `Current #${rankLabel(t.rank, t.tied)} → projected average #${p.expectedRank.toFixed(1)}; median #${p.medianRank}. 80% model range: #${p.rankLow}–#${p.rankHigh}.`,
+            h("span", { class: "stat-label" }, "Current"),
+            h("b", {}, t.rank === null ? "—" : `#${rankLabel(t.rank, t.tied)}`),
           ),
+          h("span", { class: "journey-arrow", "aria-hidden": "true" }, "→"),
           h(
-            "p",
+            "div",
             {},
-            `Top 25: ${(100 * p.top25Probability).toFixed(1)}%. Finish first: ${(100 * p.firstProbability).toFixed(1)}%. Expected final rating: ${fmtHeight(p.expectedRating)} points.`,
+            h("span", { class: "stat-label" }, "Projected"),
+            h("b", { class: "projected-position" }, `#${finishLabel(ctx, t)}`),
+            movement(t.rank, p.rank),
           ),
-          h(
-            "p",
-            { class: "hint" },
-            `Simulates ${ctx.ranking.projection.remainingGames} known remaining games across the season. Future wins use estimated opponent quality; every simulated loss costs 1 point. Unassigned postseason matchups are excluded until known.`,
-          ),
-        )
-      : h("p", {}, "No counted results or scheduled games to project yet."),
-    t.height === null
-      ? ""
-      : h(
-          "p",
-          { class: "hint" },
-          `Current rating ${fmtHeight(t.height)} earned points. Each loss deducts exactly 1 point.${t.provisional ? " Provisional: limited or disconnected opponent evidence." : ""}`,
         ),
+        rankRange(t.rank, p, ctx.ranking.projection.teams, true),
+        h(
+          "div",
+          { class: "range-key" },
+          h("span", {}, h("i", { class: "key-current" }), "Current"),
+          h("span", {}, h("i", { class: "key-projected" }), "Projected"),
+          h(
+            "span",
+            {},
+            h("i", { class: "key-range" }),
+            `80% range: #${p.rankLow}–#${p.rankHigh}`,
+          ),
+        ),
+      ),
+      h(
+        "div",
+        { class: "outlook-chances" },
+        probabilityRing(p.top25Probability, "Top 25"),
+        probabilityRing(p.firstProbability, "No. 1"),
+      ),
+    ),
+    h(
+      "details",
+      { class: "quiet-details" },
+      h("summary", {}, "Forecast details"),
+      h(
+        "p",
+        {},
+        "Projected ranks order teams by average simulated finish. Ranges show 80% of simulated results. Unassigned postseason matchups are excluded.",
+      ),
+      h(
+        "div",
+        { class: "detail-stats" },
+        h("span", {}, "Average finish ", h("b", {}, p.expectedRank.toFixed(1))),
+        h("span", {}, "Median finish ", h("b", {}, `#${p.medianRank}`)),
+        h(
+          "span",
+          {},
+          "Projected rating ",
+          h("b", {}, fmtHeight(p.expectedRating, 3)),
+        ),
+      ),
+    ),
+  );
+}
+
+function leaderCard(ctx: Ctx, t: RankedTeam) {
+  const p = t.projection!;
+  return h(
+    "a",
+    {
+      class: "leader-card tv",
+      href: teamHref(ctx, t.id),
+      style: teamVars(ctx.teams.get(t.id)?.color),
+    },
+    h(
+      "div",
+      { class: "leader-identity" },
+      logo(ctx.teams.get(t.id), 42),
+      h(
+        "div",
+        {},
+        h(
+          "b",
+          {},
+          h("span", { class: "school-label" }, t.school),
+          t.provisional ? provisionalFlag() : "",
+        ),
+        h("span", {}, `${record(t)} · ${shortConf(t.conference)}`),
+      ),
+    ),
+    h(
+      "div",
+      { class: "leader-outlook" },
+      h(
+        "div",
+        {},
+        h("span", { class: "stat-label" }, "Projected"),
+        h("b", { class: "leader-rank" }, `#${finishLabel(ctx, t)}`),
+        h(
+          "div",
+          { class: "leader-current" },
+          t.rank === null
+            ? "Unranked now"
+            : `#${rankLabel(t.rank, t.tied)} now`,
+          movement(t.rank, p.rank),
+        ),
+      ),
+      probabilityRing(p.top25Probability, "Top 25"),
+    ),
   );
 }
 
@@ -49,7 +166,8 @@ export function projectionView(
     conference = "",
     sort = initialSort;
   const body = h("div"),
-    count = h("span", { class: "count" }),
+    count = h("span", { class: "count", "aria-live": "polite" }),
+    leaders = h("section", { class: "leaders-section" }),
     sortButtons = h("div", {
       class: "seg",
       role: "group",
@@ -69,65 +187,114 @@ export function projectionView(
       .sort((a, b) =>
         sort === "current"
           ? (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id
-          : (a.projection?.expectedRank ?? Infinity) -
-              (b.projection?.expectedRank ?? Infinity) || a.id - b.id,
+          : (a.projection?.rank ?? Infinity) -
+              (b.projection?.rank ?? Infinity) || a.id - b.id,
       );
+    const frontRunners = teams
+      .filter((t) => t.projection)
+      .sort((a, b) => a.projection!.rank - b.projection!.rank || a.id - b.id)
+      .slice(0, 3);
+    leaders.hidden = !!query || !frontRunners.length;
+    leaders.replaceChildren(
+      h(
+        "div",
+        { class: "section-heading" },
+        h("h2", {}, "Projected leaders"),
+        h(
+          "span",
+          { class: "scope-label" },
+          `${ctx.ranking.projection.remainingGames} games left`,
+        ),
+      ),
+      h(
+        "div",
+        { class: "leader-grid" },
+        ...frontRunners.map((t) => leaderCard(ctx, t)),
+      ),
+    );
     body.replaceChildren(
       ...teams.map((t) => {
         const p = t.projection;
         return h(
           "a",
-          { class: "projection-row", href: teamHref(ctx, t.id) },
-          h("b", {}, rankLabel(t.rank, t.tied)),
-          logo(ctx.teams.get(t.id), 34),
+          {
+            class: "projection-row",
+            href: teamHref(ctx, t.id),
+            title: t.school,
+            "aria-label": `${t.school}. Current rank ${rankLabel(t.rank, t.tied)}. Projected rank ${finishLabel(ctx, t)}.${p ? ` 80% finish range ${p.rankLow} to ${p.rankHigh}. Top 25 chance ${(100 * p.top25Probability).toFixed(1)}%.` : ""}`,
+          },
+          h("b", { class: "current-position" }, rankLabel(t.rank, t.tied)),
           h(
             "div",
-            { class: "forecast-team" },
-            h("b", {}, t.school),
+            { class: "row-identity" },
+            logo(ctx.teams.get(t.id), 36, { lazy: true }),
             h(
               "div",
-              { class: "hint" },
-              `${t.classification.toUpperCase()} · ${t.conference}${t.provisional ? " · Provisional" : ""}`,
-              p
-                ? h(
-                    "span",
-                    { class: "mobile-range" },
-                    ` · 80% range #${p.rankLow}–#${p.rankHigh}`,
-                  )
-                : "",
+              { class: "forecast-team" },
+              h(
+                "b",
+                {},
+                h("span", { class: "school-label" }, t.school),
+                t.provisional ? provisionalFlag() : "",
+              ),
+              h(
+                "div",
+                { class: "team-meta" },
+                h("span", { class: "record-mini" }, record(t)),
+                h("span", {}, shortConf(t.conference)),
+              ),
             ),
           ),
-          h("span", { class: "forecast-record" }, record(t)),
           h("span", { class: "forecast-rating" }, fmtHeight(t.height, 3)),
           h(
-            "b",
-            { class: "forecast-finish" },
-            p ? `#${p.expectedRank.toFixed(1)}` : "—",
+            "div",
+            { class: "forecast-cell" },
+            h(
+              "div",
+              { class: "forecast-number" },
+              h(
+                "b",
+                { class: "forecast-finish" },
+                p ? `#${finishLabel(ctx, t)}` : "—",
+              ),
+              movement(t.rank, p?.rank ?? null),
+            ),
+            p
+              ? h(
+                  "div",
+                  { class: "row-range" },
+                  rankRange(t.rank, p, ctx.ranking.projection.teams),
+                  h(
+                    "span",
+                    {
+                      class: "range-caption",
+                      title: "80% simulated finish range",
+                    },
+                    `#${p.rankLow}–#${p.rankHigh}`,
+                  ),
+                )
+              : "",
           ),
-          h(
-            "span",
-            { class: "forecast-range" },
-            p ? `#${p.rankLow}–#${p.rankHigh}` : "—",
-          ),
-          h("b", {}, p ? `${(100 * p.top25Probability).toFixed(1)}%` : "—"),
+          p ? chanceMeter(p.top25Probability) : h("span", {}, "—"),
         );
       }),
     );
     if (!teams.length)
-      body.append(h("p", { class: "empty" }, "No teams match."));
+      body.append(h("div", { class: "empty" }, "No teams found."));
     count.textContent = `${teams.length} teams`;
     sortButtons.replaceChildren(
       ...(
         [
-          ["Current standing", "current"],
-          ["Projected finish", "projected"],
+          ["Current", "Current standing", "current"],
+          ["Projected", "Projected finish", "projected"],
         ] as const
-      ).map(([label, value]) =>
+      ).map(([label, accessible, value]) =>
         h(
           "button",
           {
             type: "button",
             class: sort === value ? "on" : "",
+            "aria-label": accessible,
             "aria-pressed": String(sort === value),
             onclick: () => {
               sort = value;
@@ -141,30 +308,39 @@ export function projectionView(
   };
   const root = h(
     "div",
-    {},
+    { class: "standings-page" },
     h(
       "section",
-      { class: "hero" },
-      h("div", { class: "eyebrow" }, "One rating · two points in time"),
-      h("h1", {}, "Current vs projected"),
+      { class: "page-heading" },
       h(
-        "p",
-        { class: "hint" },
-        `Wins earn 0–1 point based on opponent quality; every loss costs exactly 1 point. Projected finish simulates ${ctx.ranking.projection.remainingGames} known remaining matchups${ctx.ranking.projection.horizon ? `, through ${ctx.ranking.projection.horizon.slice(0, 10)}` : ""} under the same ranking rule. Average finish can be fractional; ranges contain 80% of the model simulations.`,
+        "div",
+        {},
+        h(
+          "div",
+          { class: "eyebrow" },
+          `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
+        ),
+        h("h1", {}, "Current vs projected"),
       ),
       h(
-        "p",
-        { class: "hint" },
-        "Unassigned postseason matchups and future roster changes are not modeled. Ranks and top-25 probabilities refer to the full FBS/FCS field.",
+        "a",
+        {
+          class: "scope-pill",
+          href: href(ctx.entry.season, ctx.snapId, "about"),
+        },
+        h("span", { class: "status-dot" }),
+        "Known schedule",
       ),
     ),
-    sortButtons,
+    leaders,
     h(
       "div",
-      { class: "toolbar forecast-tools" },
+      { class: "toolbar forecast-tools standings-tools" },
+      sortButtons,
       h(
         "label",
         { class: "search" },
+        searchIcon(),
         h("input", {
           type: "search",
           placeholder: "Find a team",
@@ -210,17 +386,25 @@ export function projectionView(
     ),
     h(
       "div",
-      { class: "panel projection-board" },
+      { class: "board-key" },
+      h("span", {}, h("i", { class: "key-range" }), "80% range"),
+      h("span", {}, provisionalFlag(), "Limited data"),
+      h("span", {}, "FBS + FCS"),
+      h("a", { href: href(ctx.entry.season, ctx.snapId, "about") }, "Method"),
+    ),
+    h(
+      "section",
+      {
+        class: "panel projection-board",
+        "aria-label": "Current and projected standings",
+      },
       h(
         "div",
-        { class: "projection-row forecast-head" },
+        { class: "projection-row forecast-head", "aria-hidden": "true" },
         h("span", {}, "Current"),
-        h("span"),
         h("span", {}, "Team"),
-        h("span", { class: "forecast-record" }, "W–L"),
         h("span", { class: "forecast-rating" }, "Rating"),
         h("span", {}, "Projected"),
-        h("span", { class: "forecast-range" }, "80% rank range"),
         h("span", {}, "Top 25"),
       ),
       body,

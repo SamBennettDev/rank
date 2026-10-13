@@ -16,7 +16,7 @@ import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-13";
+export const ENGINE_VERSION = "rank-engine-14";
 
 export interface SeasonFiles {
   season: string;

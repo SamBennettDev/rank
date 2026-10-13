@@ -73,6 +73,7 @@ describe("final earned-standing projections", () => {
   it("returns exact standing scores and ranks when the schedule is finished", () => {
     expect(forecast(2, known, []).projections[0]).toMatchObject({
       expectedRating: 0.5,
+      rank: 1,
       expectedRank: 1,
       medianRank: 1,
       rankLow: 1,
@@ -98,6 +99,22 @@ describe("final earned-standing projections", () => {
       b.projections[0]!.expectedRating,
     );
     expect(a.projections[2]).toEqual(a.projections[4]);
+  });
+  it("publishes a whole-number projected leaderboard even when all average finishes exceed one", () => {
+    const p = forecast(
+      6,
+      [game(1, 0, 1, 1), game(2, 2, 3, 1), game(3, 4, 5, 1)],
+      [game(4, 0, 1, 0, date + 7 * 86400000)],
+    ).projections.filter((p) => p !== null);
+    expect(Math.min(...p.map((p) => p.expectedRank))).toBeGreaterThan(1);
+    expect(Math.min(...p.map((p) => p.rank))).toBe(1);
+    expect(
+      p.every((p) => Number.isInteger(p.rank) && p.rank >= 1 && p.rank <= 6),
+    ).toBe(true);
+    const ordered = [...p].sort((a, b) => a.rank - b.rank);
+    expect(ordered.map((p) => p.expectedRank)).toEqual(
+      [...p].map((p) => p.expectedRank).sort((a, b) => a - b),
+    );
   });
   it("keeps the pre-week win credit for future games in a partially completed week", () => {
     const p = forecast(2, known, [game(2, 0, 1, 0, date + 86400000)])

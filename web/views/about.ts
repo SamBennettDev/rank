@@ -1,13 +1,18 @@
 import { computeSeason } from "../../src/engine/season";
 import type { Ctx } from "../ctx";
-import { h } from "../dom";
+import { h, type Child } from "../dom";
+import { navIcons, pillarIcons } from "../icons";
 import { fetchText, rankingPath, seasonFiles } from "../store";
 
 export function aboutView(ctx: Ctx): HTMLElement {
   const m = ctx.ranking.manifest,
     season = ctx.entry.season,
     files = seasonFiles(season),
-    result = h("div");
+    result = h("div", {
+      class: "result",
+      role: "status",
+      "aria-live": "polite",
+    });
   const button = h(
     "button",
     {
@@ -15,7 +20,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       onclick: async () => {
         button.disabled = true;
         result.className = "result run";
-        result.textContent = "Downloading raw data and recomputing…";
+        result.textContent = "Downloading data…";
         try {
           const out = await computeSeason(
             {
@@ -38,7 +43,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
               bad.push(f.id);
           result.className = bad.length ? "result bad" : "result ok";
           result.textContent = bad.length
-            ? `Mismatch in ${bad.join(", ")}. Please open an issue.`
+            ? `Mismatch: ${bad.join(", ")}.`
             : `Exact match. Your browser rebuilt all ${out.files.length} rankings byte for byte.`;
         } catch (err) {
           result.className = "result bad";
@@ -49,149 +54,245 @@ export function aboutView(ctx: Ctx): HTMLElement {
     },
     "Recompute in my browser",
   );
+  const details = (label: string, ...children: Child[]) =>
+    h(
+      "details",
+      { class: "method-accordion" },
+      h("summary", {}, label),
+      ...children,
+    );
+  const file = (path: string) =>
+    h(
+      "a",
+      { href: `./data/${path}`, target: "_blank", rel: "noopener" },
+      path.split("/").at(-1)!,
+    );
   const rows: [string, string][] = [
     ["Engine", m.engine],
     ["Algorithm", m.algorithmVersion],
     ["Calibration", m.calibrationId],
-    ["Loss deduction", `${m.lossPenalty} earned point`],
-    ["Prediction win premium", `${m.winBonus} score points`],
+    ["Loss deduction", String(m.lossPenalty)],
+    ["Prediction win premium", String(m.winBonus)],
     ["Team shrink", String(m.shrink)],
     ["Home-field shrink", String(m.homeFieldShrink)],
     [
       "Home field",
-      `${m.homeField.toFixed(2)} points; model SE ${m.homeFieldError.toFixed(2)}`,
+      `${m.homeField.toFixed(2)}; SE ${m.homeFieldError.toFixed(2)}`,
     ],
     ["Probability scale", String(m.probabilityScale)],
     ["Residual scale", String(m.residualScale)],
-    ["Season projection", `${m.projectionSamples} fixed-seed samples`],
+    ["Simulations", String(ctx.ranking.projection.samples)],
     ["Connected groups", String(m.connectedComponents)],
     ["Games counted", String(m.counts.included)],
     ["Out of scope", String(m.counts.outOfScope)],
     ["Incomplete", String(m.counts.incomplete)],
   ];
-  const file = (path: string) =>
-    h("a", { href: `./data/${path}`, target: "_blank", rel: "noopener" }, path);
-  return h(
-    "div",
-    { class: "method" },
-    h(
-      "section",
-      { class: "hero" },
-      h("div", { class: "eyebrow" }, "Methodology"),
-      h("h1", {}, "Computed,", h("br"), h("em", {}, "not voted.")),
-    ),
-    h("h2", {}, "Current standing"),
-    h(
-      "p",
-      {},
-      "A win earns 0–1 point: how likely its opponent would be to beat an average team at that venue. Opponent quality is estimated before the calendar week and that credit stays fixed. Every loss subtracts exactly 1 point, whatever the opponent or margin. The single rating is total earned points; rank is its descending order. No preseason, recruiting, brand, poll or conference bonuses.",
-    ),
-    h("h2", {}, "One rating, projected forward"),
-    h(
-      "p",
-      {},
-      "The season forecast simulates each known remaining matchup, then adds estimated win credits and deducts 1 point for every simulated loss. Average final rank, median, an 80% model range, and top-25 probability describe the resulting distribution. Final rank means the order of this same earned-standing rating.",
-    ),
-    h("h2", {}, "Remaining schedule and uncertainty"),
-    h(
-      "p",
-      {},
-      `The projection uses ${m.projectionSamples} seeded stratified simulations. Each simulation draws one uncertain team-strength profile, shared across the remaining games, and a result for each game. Future win credits use today’s opponent evidence; the current calendar week keeps its pre-week credits. Repeating the same inputs produces identical results. Unassigned postseason matchups and future roster changes are excluded.`,
-    ),
-    h("h2", {}, "Uncertainty"),
-    h(
-      "p",
-      {},
-      "Current earned points are fixed. Projected ranges account for future results and uncertainty in opponent strength and home field, calibrated on 2014–2019. Coverage is conditional on the model. Teams with fewer than three games or a disconnected schedule graph are marked provisional.",
-    ),
-    h("h2", {}, "Matchup probabilities"),
-    h(
-      "p",
-      {},
-      "An internal opponent-adjusted score model predicts game outcomes; its strength estimates are not another published standing. Margin plus a 3-point win premium, equal shrink toward zero and fitted home field determine the expected edge. A calibrated logistic scale converts it to win probability, with uncertainty bringing it toward 50%. Later scores never enter an earlier forecast.",
-    ),
-    h("h2", {}, "Evaluation"),
-    h(
-      "p",
-      {},
-      "The date-based walk-forward benchmark forecasts at Monday noon UTC, using only games whose kickoffs were at least six hours earlier. Earlier playoff rounds count; later regular-season games cannot leak into playoff predictions. It reports accuracy, Brier score, log loss, reliability bins, season results and FBS-only results. The fixed-loss standing rule and projection methods were selected on 2014–2019. Correlated simulations had the lowest final-rank RMSE of the tested simulations and covered 78.5% of ranks in their 80% ranges. Historical 2021–2026 results are development evidence, since they have already been inspected. Future untouched results are needed to confirm improvements.",
-    ),
-    h(
-      "p",
-      {},
-      h(
-        "a",
-        {
-          href: "https://github.com/SamBennettDev/rank/tree/main/research",
-          target: "_blank",
-          rel: "noopener",
-        },
-        "Calibration and evaluation reports ↗",
-      ),
-    ),
-    h("h2", {}, "Unit ratings and scope"),
-    h(
-      "p",
-      {},
-      "Offense, defense and special teams come from opponent-adjusted public play-by-play, with garbage time removed. They explain performance and leave overall standing unchanged. Only completed, untied games between configured FBS/FCS teams count; teams without counted games are unranked.",
-    ),
-    h("h2", {}, "Check it yourself"),
+  const step = (icon: Node, value: string, label: string) =>
     h(
       "div",
-      { class: "verify" },
+      { class: "forecast-step" },
+      h("div", { class: "step-icon" }, icon),
+      h("b", {}, value),
+      h("span", {}, label),
+    );
+  return h(
+    "div",
+    { class: "method method-page" },
+    h(
+      "section",
+      { class: "page-heading" },
+      h(
+        "div",
+        {},
+        h("div", { class: "eyebrow" }, "The method"),
+        h("h1", {}, "How Rank works"),
+      ),
+    ),
+    h(
+      "div",
+      { class: "section-heading" },
+      h("h2", {}, "Add wins. Subtract losses."),
+    ),
+    h(
+      "div",
+      { class: "rating-recipe" },
+      h(
+        "div",
+        { class: "recipe-block win" },
+        h("b", {}, "0–1"),
+        h("span", {}, "Each win"),
+      ),
+      h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "−"),
+      h(
+        "div",
+        { class: "recipe-block loss" },
+        h("b", {}, "1"),
+        h("span", {}, "Each loss"),
+      ),
+      h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "="),
+      h(
+        "div",
+        { class: "recipe-block" },
+        h("b", {}, "Rating"),
+        h("span", {}, "Earned points"),
+      ),
+    ),
+    h(
+      "p",
+      { class: "method-caption" },
+      "Stronger opponents earn more win credit. Every loss costs exactly 1 point.",
+    ),
+    h(
+      "section",
+      { class: "panel" },
+      h("div", { class: "section-heading" }, h("h2", {}, "Project the finish")),
+      h(
+        "div",
+        { class: "forecast-steps" },
+        step(
+          navIcons.matchups(),
+          String(ctx.ranking.projection.remainingGames),
+          "Games left",
+        ),
+        h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "→"),
+        step(
+          pillarIcons.deterministic(),
+          ctx.ranking.projection.samples.toLocaleString(),
+          "Scenarios",
+        ),
+        h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "→"),
+        step(navIcons.list(), "#1, #2…", "Projected ranks"),
+      ),
+      h(
+        "p",
+        { class: "method-caption" },
+        "Known schedule only. Unassigned postseason matchups are excluded.",
+      ),
+    ),
+    details(
+      "Scoring & scope",
       h(
         "p",
         {},
-        "The published CSVs, settings and engine reproduce every snapshot. Input hashes below record the exact bytes.",
+        "Win quality estimates how likely the opponent is to beat an average team at that venue. Credits are fixed before the game's calendar week; later results cannot revalue past wins.",
+      ),
+      h(
+        "p",
+        {},
+        "Only completed, untied games between configured FBS/FCS teams count. Every team starts at zero. No preseason, poll or conference bonuses. Limited opponent evidence is marked with an amber dot.",
+      ),
+    ),
+    details(
+      "Reading the forecast",
+      h(
+        "p",
+        {},
+        "Projected standings are whole-number ranks ordered by average simulated finish. An average like 6.4 is a simulation statistic, not a standings position; it remains in team forecast details.",
+      ),
+      h(
+        "p",
+        {},
+        "Range bars contain 80% of simulated finishes. Top 25 and No. 1 are probabilities within the full FBS/FCS field. Exact ties share a rank. Future win credits use current evidence; strengths, venues and remaining opponents drive the simulations.",
+      ),
+      h(
+        "p",
+        {},
+        "Injuries, roster changes and unassigned postseason matchups are not modeled. The predicted order is an estimate; its ranges can span several positions.",
+      ),
+    ),
+    details(
+      "Data & receipts",
+      h(
+        "p",
+        {},
+        `${ctx.ranking.snapshot.label} · ${m.counts.included} counted games. Scores are assumed available six hours after kickoff.`,
+      ),
+      h(
+        "table",
+        { class: "mf" },
+        h(
+          "tbody",
+          {},
+          ...rows.map(([key, value]) =>
+            h("tr", {}, h("th", {}, key), h("td", {}, value)),
+          ),
+          ...(
+            [
+              ["teams.csv", m.teamsSha256],
+              ["games.csv", m.gamesSha256],
+              ["plays.csv", m.playsSha256],
+            ] as const
+          )
+            .filter(([, hash]) => hash)
+            .map(([name, hash]) =>
+              h(
+                "tr",
+                {},
+                h("th", {}, `${name} SHA-256`),
+                h("td", {}, h("code", {}, hash)),
+              ),
+            ),
+        ),
+      ),
+      h(
+        "div",
+        { class: "files" },
+        file(files.teamsCsv),
+        file(files.gamesCsv),
+        file(files.configJson),
+        m.playsSha256 ? file(files.playsCsv) : "",
+        file(rankingPath(season, ctx.snapId)),
+      ),
+    ),
+    details(
+      "Research & full methodology",
+      h(
+        "p",
+        {},
+        "Design and calibration: 2014–2019. Later seasons are development evaluation, not an untouched holdout.",
+      ),
+      h(
+        "div",
+        { class: "files" },
+        h(
+          "a",
+          {
+            href: "https://github.com/SamBennettDev/rank/tree/main/research",
+            target: "_blank",
+            rel: "noopener",
+          },
+          "Research ↗",
+        ),
+        h(
+          "a",
+          {
+            href: "https://github.com/SamBennettDev/rank/blob/main/docs/METHODOLOGY.md",
+            target: "_blank",
+            rel: "noopener",
+          },
+          "Methodology ↗",
+        ),
+      ),
+    ),
+    h(
+      "section",
+      { class: "panel method-verification" },
+      h(
+        "div",
+        {},
+        h(
+          "div",
+          { class: "section-heading" },
+          h("h2", {}, "Check the numbers"),
+        ),
+        h(
+          "p",
+          { class: "hint" },
+          "Rebuild the published rankings on your device.",
+        ),
       ),
       button,
       result,
-    ),
-    h("h2", {}, `Receipt: ${ctx.ranking.snapshot.label}`),
-    h(
-      "table",
-      { class: "mf" },
-      h(
-        "tbody",
-        {},
-        ...rows.map(([key, value]) =>
-          h("tr", {}, h("th", {}, key), h("td", {}, value)),
-        ),
-        ...(
-          [
-            ["teams.csv", m.teamsSha256],
-            ["games.csv", m.gamesSha256],
-            ["plays.csv", m.playsSha256],
-          ] as const
-        )
-          .filter(([, hash]) => hash)
-          .map(([name, hash]) =>
-            h(
-              "tr",
-              {},
-              h("th", {}, `${name} SHA-256`),
-              h("td", {}, h("code", {}, hash)),
-            ),
-          ),
-      ),
-    ),
-    h(
-      "div",
-      { class: "files" },
-      file(files.teamsCsv),
-      file(files.gamesCsv),
-      file(files.configJson),
-      m.playsSha256 ? file(files.playsCsv) : "",
-      file(rankingPath(season, ctx.snapId)),
-      h(
-        "a",
-        {
-          href: "https://github.com/SamBennettDev/rank/blob/main/docs/METHODOLOGY.md",
-          target: "_blank",
-          rel: "noopener",
-        },
-        "METHODOLOGY.md ↗",
-      ),
     ),
   );
 }

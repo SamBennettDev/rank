@@ -2,13 +2,14 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-**One rating: current standing vs projected finish.** Wins earn 0–1 point based on opponent quality before that week. **Every loss deducts exactly 1 point.** The current standing orders those earned points. The remaining schedule produces projected final rank, an 80% model range, and top-25 probability alongside it.
+**One rating: current standing vs projected finish.** Wins earn 0–1 point based on opponent quality before that week. **Every loss deducts exactly 1 point.** The current standing orders those earned points. The remaining schedule produces whole-number projected final rank, an 80% model range, and top-25 probability alongside it.
 
 - **Losses always cost points.** Earned win credits stay fixed; neither a close loss nor later opponent results can undo the deduction.
 - **Better opponents earn more credit.** A win earns the estimated probability that its opponent would beat an average team at that venue. Uncertain opponent estimates move toward 50%.
 - **Every team starts level.** No preseason, recruiting, polls, brand or conference bonus, record overlay, or head-to-head override.
 - **Project who plays whom.** Each seeded simulation draws uncertain team strengths shared across the remaining schedule, simulates each game, and adds win credits or fixed loss deductions.
 - **One published standing.** An internal score model estimates opponent quality and game probabilities. It supplies the forecast, without becoming a second standings table.
+- **The leader sets the accent.** Rank follows the current #1 team’s color for each snapshot, with readable light/dark variants. Exact first-place ties use the first team in the existing display order.
 - **Audit every point.** Team pages show each earned credit or deduction; outputs include award cutoffs, settings, CSV hashes and model diagnostics.
 - **Reproduce in Node and your browser.** Both run the same engine; the Recompute button checks every published snapshot byte for byte.
 - **Unit ratings explain performance.** Public play-by-play supplies offense, defense and special teams statistics without changing the overall standing.
@@ -44,7 +45,7 @@ data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections an
 data/index.json                      available seasons and snapshots
 ```
 
-Schema 2 records earned points and current rank, immutable weekly credits, connected groups, final-rank projections and matchup predictions. Graph height represents earned points. The projection horizon and remaining-game count make forecast scope visible. Overlapping regular-season and playoff games use real calendar cutoffs, with separate later postseason snapshots.
+Schema 2 records earned points and current rank, immutable weekly credits, connected groups, final-rank projections and matchup predictions. Graph height represents earned points. Projected standings order the simulated average finishes into #1, #2, #3; the fractional averages remain available in forecast details. The projection horizon and remaining-game count make forecast scope visible. Overlapping regular-season and playoff games use real calendar cutoffs, with separate later postseason snapshots.
 
 ## Update results
 

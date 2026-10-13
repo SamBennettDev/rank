@@ -53,7 +53,9 @@ Equal team shrink makes the common population-average offset independent of all 
 
 ## Final-standing projection
 
-The target is **Rank's own final earned-standing order over the known remaining schedule**, not an AP poll, playoff selection, or championship forecast. The table compares Current Standing and Projected Finish side by side and can sort either column. Projected average rank is fractional; the team page also reports median rank, 10th/90th percentile rank and rating ranges, top-25 probability, and probability of sharing first place.
+The target is **Rank's own final earned-standing order over the known remaining schedule**, not an AP poll, playoff selection, or championship forecast. The table compares Current Standing and Projected Finish side by side and can sort either column. The primary projected standing is a whole-number position: order teams by ascending average simulated finish and assign competition ranks, preserving exact ties. This produces a coherent final-table estimate with a #1 team. Among complete strict orders, sorting mean finishes minimizes total expected squared rank error. The mean itself may be fractional (for example 6.4) and remains an audit statistic in expandable team details, alongside the median. The 80% finish range and top-25/first probabilities describe the simulation distribution, rather than confidence that the ordinal table position will occur. The table position can lie outside a team’s central simulated range because a single complete ordering is different from independent per-team median or modal estimates.
+
+Each projection includes `rank` for the ordinal standings estimate and `expectedRank` for the simulated mean. The main UI uses `rank`; its movement arrows compare that position with current standing.
 
 For each of **2,048 fixed-seed stratified simulations**:
 

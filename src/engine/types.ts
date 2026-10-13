@@ -163,7 +163,10 @@ export interface Ranking {
 }
 
 export interface TeamProjection {
+  /** Whole-number projected standing, ordered by ascending simulated mean finish. */
+  rank: number;
   expectedRating: number;
+  /** Mean finish across simulations; retained for audit, not the displayed standing. */
   expectedRank: number;
   medianRank: number;
   rankLow: number;

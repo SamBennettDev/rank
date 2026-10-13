@@ -46,7 +46,7 @@ Quality is the pre-week probability an opponent beats an average team at the ven
 | **Correlated game simulations** | **40.83** | **78.46%** |
 | Correlated simulations with weekly quality refits | 40.89 | 78.07% |
 
-The selected model shares each sampled team-strength profile across games. This preserves uncertainty across a team's future season and its opponents, and each game has a single complementary winner/loser outcome. Rank is nonlinear: ranking expected earned points differs from expected final rank.
+The selected model shares each sampled team-strength profile across games. This preserves uncertainty across a team's future season and its opponents, and each game has a single complementary winner/loser outcome. Rank is nonlinear: ranking expected earned points differs from expected final rank. The UI now presents a whole-number projected standings table ordered by mean simulated finish; those positions are stored as `projection.rank`. The fractional `expectedRank` remains available for audit. RMSE values in the existing reports measure the mean-finish forecast, rather than silently relabeling those metrics as ordinal-table performance.
 
 Future win credits are estimates from current evidence; the already-started calendar week retains its pre-week quality estimate. The weekly-refit candidate instead generates continuous augmented margins and updates opponent quality in each future week. Its small RMSE disadvantage is not proof of a significant difference, but offers no measured reason to take on the added computation and approximation. The primary selection criterion was final-rank RMSE; median-rank MAE and top-25 Brier are also reported. Selection used 1,024 seeded stratified samples; production uses 2,048.
 

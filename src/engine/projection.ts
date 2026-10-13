@@ -83,6 +83,7 @@ export function projectSeason(
       const value = standing.heights[i]!,
         rank = standing.ranks[i]!;
       projections[i] = {
+        rank,
         expectedRating: value,
         expectedRank: rank,
         medianRank: rank,
@@ -277,6 +278,7 @@ export function projectSeason(
     v.sort();
     r.sort();
     projections[i] = {
+      rank: 0,
       expectedRating: round6(expectedRating / S),
       expectedRank: round6(expectedRank / S),
       medianRank: quantile(r, 0.5),
@@ -287,6 +289,15 @@ export function projectSeason(
       top25Probability: round6(top / S),
       firstProbability: round6(first / S),
     };
+  });
+  // A projected standings table needs ordinal positions, rather than fractional
+  // simulation means. Sorting those means minimizes total expected squared
+  // rank error among complete orders; exact forecast ties share a rank.
+  const projectedRanks = rankValues(
+    projections.map((p) => (p ? -p.expectedRank : null)),
+  );
+  projections.forEach((p, i) => {
+    if (p) p.rank = projectedRanks[i]!;
   });
   return { projections, teams: active.length };
 }

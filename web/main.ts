@@ -8,6 +8,7 @@ import { listView } from "./views/list";
 import { teamView } from "./views/team";
 import { matchupsView } from "./views/matchups";
 import { projectionView } from "./views/projection";
+import { applyLeaderTheme } from "./theme";
 import type { SeasonIndexEntry } from "../src/engine/types";
 
 const app = document.getElementById("app")!;
@@ -175,6 +176,7 @@ async function route() {
       loadTeams(season),
     ]);
     const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
+    applyLeaderTheme(ctx);
     renderChrome(ctx, view, teamId);
 
     cleanup?.();
