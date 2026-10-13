@@ -1,114 +1,88 @@
 # Ranking research
 
-Walk-forward benchmark of college football rating algorithms. For every week of every season, each
-model is fit on the games played before that week and predicts that week's games between teams that
-have already played (higher rating = predicted winner; ties count half). Nothing from later weeks is used.
+The selected current-standing rule is **sum of frozen win-quality credits minus one point per loss**. The selected final-standing predictor is **correlated game-result simulation over the known schedule**. These choices satisfy the fixed-loss policy and performed best on the specified design objectives among the tested candidates. They are not claims of a universally best ranking.
 
-- **Tuning seasons:** 2014–2019 (`run_baselines.py`, results in `training-results.txt`).
-- **Held-out test:** 2021–2025 plus 2026 through week 6, run once after the models were frozen
-  (`holdout.py`, then `analyze.py`; results in `holdout-results.txt`).
-- **Data:** public season-complete schedules from sportsdataverse/cfbfastR-data (downloaded to
-  `/tmp/rank-backtest`; the 2026 games come from this repo). FBS and FCS games only. CFBD's own pregame Elo,
-  included in those files, is used as an outside benchmark on the games it covers.
+## Reproduce
 
-## Models
-
-`models.py` holds the known algorithms: win %, Pythagorean, Colley, Massey (raw, capped, with home field),
-Bradley–Terry, Elo (in-season, multi-pass, and with season-to-season carryover), Keener, LRMC, PageRank, and
-ports of this repo's spring engines. Each got its main setting tuned on 2014–2019.
-
-`layered.py` and `prior.py` are the new models:
-
-- **Pure** (`layered.fit`): least squares on margin + a 3-point win bonus, home field fitted each week, and
-  ratings built as division + conference + team effects, each shrunk separately. Uses only this season.
-- **Last-season prior** (`prior.fit`): least squares on margin + 3-point win bonus with home field fitted, plus
-  a ridge pulling each team toward 0.9 × its final rating from last season, worth about two games of evidence
-  (λ = 2). Teams new to the data start at their division's average. This season's games outweigh the prior as
-  they accumulate. It is one linear solve per week.
-
-Also tried and dropped (no gain on 2014–2019): treating blowout margins as censored, robust (pseudo-Huber)
-loss, recency weighting, two-season priors, conference-anchored priors.
-
-```
-pip install numpy scipy
-python3 run_baselines.py      # tuning seasons
-python3 holdout.py && python3 analyze.py
+```sh
+npm ci
+npm run calibrate
+# Python design comparison requires numpy and scipy; calibration downloads its source years.
+OPENBLAS_NUM_THREADS=1 python3 research/current_standings.py
+npm run project-backtest -- --history 2014-2019 --samples 1024 --report research/forecast-selection.json
+npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json
+npm run backtest -- --history 2021-2025 --include-repo --summary --report research/development-results.json
 ```
 
-## Play-by-play (offense, defense, special teams)
+Calibration writes defaults and `calibration.json`. Update season configurations and versions deliberately if settings change. Schedule data are pinned to cfbfastR-data commit `a3dd960090c1bfa169cebd491beabf7028b379b2`, cached under `/tmp/rank-backtest` with the revision in the filename. Reports include hashes and settings. Design years are **2014–2019**; **2021–2026 are development evaluation**, because these seasons have already been inspected.
 
-`pbp_agg.py` condenses the public cfbfastR play-by-play release (downloaded to `/tmp/rank-pbp/pbp_<year>.parquet`;
-needs `pyarrow pandas`) into one row per team per game: snaps and EPA (with and without garbage time), successes,
-turnover-free EPA, and net special-teams EPA. `units.py` fits opponent-adjusted offense/defense/special-teams
-ratings; `epa_result.py` folds EPA or success-rate margins into each game's result in the score model.
+## Current standings: respect the loss policy
 
-Tested on 2015–2019 (`tune_units.py`, `tune_epa.py`), next-week winners from week 4:
+`standing-selection.json` compares season-end winner-above-loser agreement on 8,770 completed design games. This is a descriptive consistency measure, not future-game prediction or proof of fairness. Candidates include win percentage, Colley, Bradley–Terry, win-only Elo, raw wins minus losses, and earned-credit formulas varying base win credit, opponent-quality weight and loss deduction.
 
-| Model | All games | FBS vs FBS |
-|---|---|---|
-| Score rating (published model) | 73.07% | 72.92% |
-| + success-rate margin mixed in (25%) | 72.93% | 72.92% |
-| + turnover-free EPA margin mixed in (50%) | 73.02% | 72.85% |
-| Blend with unit overall (30–50%) | 72.6% | 72.1–72.6% |
-| Unit overall alone | 68.60% | 71.04% |
+| Method | Result agreement | Every loss a fixed deduction? |
+|---|---:|---|
+| Bradley–Terry, prior 2 | 83.17% | No |
+| Colley | 82.84% | No |
+| **Frozen win quality − losses** | **80.27%** | **Yes: −1** |
+| Win-only Elo, K=40 | 79.97% | No |
+| Raw wins − losses | 79.33% | Yes: −1 |
+| Win percentage | 79.30% | No |
 
-None beat final scores, so play-by-play feeds only the separate unit rankings. Per game, EPA margin and points margin
-correlate at 0.93 (2015–2019).
+Require the fixed loss deduction to be at least the maximum win credit. Among that tested grid, the selected policy awards 0–1 point per win and deducts 1 per loss. A fixture in the report demonstrates Colley *increasing* a losing team's rating by 0.025 after a loss. Elo's deduction varies with expectation. Fitting a schedule-adjusted rating then adding a loss bonus cannot guarantee the requested fixed change; freezing earned credits can.
 
-## Published model: no preseason input
+Quality is the pre-week probability an opponent beats an average team at the venue, estimated from earlier scores. This establishes a transparent earned-results ranking, while score margins still inform later opponent quality and forecasts. All scores are rounded and ranked with the production convention.
 
-The site no longer uses the last-season prior. The published model is `prior.fit` with `rho=0` (every team starts
-at 0) and `lam_p=0.05` (chosen on 2014–2019 among 0.005–2): margin + 3-point win bonus, home field fitted, a
-0.05-game pull toward 0 for every team. Held-out 2021–2026: 70.53% of next-week winners (vs 71.88% with the
-last-season prior), level with Massey + home field (70.24%, +0.29, 95% CI −0.11 to +0.67) and ahead of Elo with
-carryover (69.68%), Massey (69.65%), LRMC (69.46%) and in-season Elo (68.52%). FBS-vs-FBS: 69.30% vs CFBD Elo 69.16%.
+## Final standings: simulate results together
 
-## Head-to-head step (tried, not published)
+`forecast-selection.json` uses the TypeScript production functions at weeks 4, 7 and 10 over six design seasons, totaling 4,569 team/cutoff observations. The target is final earned-standing rank over the nonconditional regular-season slate. Conditional bowl, playoff and championship assignments are excluded from both schedule and target to avoid hindsight about selected participants.
 
-`h2h.py` adds a fewest-upsets step to the rating: from the rating order, a one-team-at-a-time search finds the
-fewest upsets; those games are accepted, and every other winner is held at least ½ point above its loser.
-`run_h2h.py`: on 2021–26 it raises "winner above loser at season end" from 80.9% to 90.3% but lowers next-week
-picks from 70.53% to 69.59% (2014–19: 81.3% → 90.5%, 71.91% → 70.52%). It was published briefly and removed:
-head-to-head holds let one result move a team, and everyone held below it, a long way.
+| Predictor | Final-rank RMSE | Nominal 80% range coverage |
+|---|---:|---:|
+| Carry current standing forward | 46.20 | — |
+| Current predictive-strength order | 58.85 | — |
+| Rank expected future results | 43.73 | — |
+| Independent game simulations | 41.61 | 71.61% |
+| **Correlated game simulations** | **40.83** | **78.46%** |
+| Correlated simulations with weekly quality refits | 40.89 | 78.07% |
 
-## Head-to-head tiebreaker (published)
+The selected model shares each sampled team-strength profile across games. This preserves uncertainty across a team's future season and its opponents, and each game has a single complementary winner/loser outcome. Rank is nonlinear: ranking expected earned points differs from expected final rank. The UI now presents a whole-number projected standings table ordered by mean simulated finish; those positions are stored as `projection.rank`. The fractional `expectedRank` remains available for audit. RMSE values in the existing reports measure the mean-finish forecast, rather than silently relabeling those metrics as ordinal-table performance.
 
-`close_h2h.py`: if a team is rated below a team it beat by less than `window` points, hold it ½ point above and
-refit the whole ladder; repeat until no new close upset appears (holds that would contradict earlier ones in a
-cycle are skipped, closest first). `run_close.py`:
+Future win credits are estimates from current evidence; the already-started calendar week retains its pre-week quality estimate. The weekly-refit candidate instead generates continuous augmented margins and updates opponent quality in each future week. Its small RMSE disadvantage is not proof of a significant difference, but offers no measured reason to take on the added computation and approximation. The primary selection criterion was final-rank RMSE; median-rank MAE and top-25 Brier are also reported. Selection used 1,024 seeded stratified samples; production uses 2,048.
 
-| Window | 2014–19 picks | 2014–19 agreement | 2021–26 picks | 2021–26 agreement |
-|---|---|---|---|---|
-| 0 (off) | 71.91% | 81.3% | 70.53% | 80.9% |
-| 1 | 71.83% | 83.5% | 70.53% | 83.3% |
-| **3 (published)** | 71.47% | 86.9% | 70.32% | 86.5% |
-| 5 | 71.33% | 87.6% | 70.11% | 87.3% |
-| 7 | 70.06% | 85.6% | 68.32% | 84.5% |
-| 10 | 68.44% | 79.9% | 66.58% | 79.4% |
-| 14 | 65.41% | 73.3% | 64.72% | 73.0% |
+## Later-season development evaluation
 
-## Record bonus (published, weight 24)
+`projection-results.json` evaluates the frozen correlated method at those cutoffs over 2021–2025, with 2,048 samples and 3,924 team/cutoff observations:
 
-Raising the win bonus does not make losses count more against good schedules (`run_bonus.py`: bonus 3→28 cost
-up to 1 point of picks and pushed unbeaten Utah *down*, because it also inflates the teams that beat 3-2 Oregon).
-A per-team record term does: `close_rec.py` ranks by rating + k × (wins − losses) / games, with the field-goal
-tiebreaker applied to that combined score (`run_record2.py`):
+| Measure | Current-standing baseline | Projection |
+|---|---:|---:|
+| Final-rank RMSE | 46.61 | 40.24 |
+| Final-rank MAE / projected-median MAE | 34.22 | 30.00 |
+| Nominal 80% rank-range coverage | — | 78.16% |
+| Top-25 Brier | — | 0.04391 |
 
-| k | 2014–19 picks | 2014–19 agreement | 2021–26 picks | 2021–26 agreement |
-|---|---|---|---|---|
-| 0 | 71.47% | 86.9% | 70.32% | 86.5% |
-| 4 | 71.61% | 86.7% | 70.46% | 86.4% |
-| 6 | 71.34% | 86.5% | 70.26% | 86.5% |
-| 8 | 71.44% | 86.4% | 69.91% | 86.6% |
-| 10 | 71.52% | 86.3% | 70.19% | 86.3% |
-| 14 | 71.28% | 86.2% | 70.51% | 86.0% |
-| 18 | 71.08% | 85.8% | 70.69% | 85.8% |
-| 22 | 70.71% | 85.6% | 70.46% | 85.3% |
-| **24 (published)** | 70.53% | 85.5% | 70.27% | 85.2% |
-| 26 | 70.40% | 85.2% | 70.05% | 85.0% |
-| 30 | 70.10% | 84.9% | 69.91% | 84.8% |
+Reports include year/week details, cutoffs and hashes. Schedule announcement history and revisions are unavailable; evaluation assumes the eventual nonconditional slate was known. It does not validate a full postseason or live immutable feed. Injuries and roster changes are omitted. Repeated tuning on these years must be disclosed; freeze this choice for prospective testing on new results.
 
-Where 3-2 Oregon lands in 2026 week 6: #16 at k = 6, #21 at 14, #24 at 18–22, #29 at 24, #30 at 26–30.
-Held-out picks are flat up to about 24 and fall after; agreement drifts down slowly as k grows. 24 is the
-smallest weight that takes a 2-loss team with a thin résumé out of the top 25 (the only 2-loss team left
-in it is LSU, #18: both losses were close, to top-25 Kentucky and Ole Miss, and it won its other four by 29–49).
+## Internal game-prediction calibration
+
+`calibration.json` records 54 candidates and 7,895 walk-forward forecasts from source week 2 in 2014–2019. The minimum log loss selected home-field shrink **0.0001**, logistic scale **12**, residual scale **14.934045**. It retains the prior score-model design of margin plus a 3-point win premium and equal team shrink 0.05. Stronger home-field shrink did not improve the objective.
+
+Forecast at Monday noon UTC using only scores assumed available six hours after kickoff. Regular season and postseason share this calendar. Earlier playoff rounds count; later regular-season scores cannot leak into them. Game forecasts use internal strength plus venue, with conditional uncertainty widening probabilities. This internal model supplies quality and forecasts; it is not the published earned-standing score.
+
+`development-results.json` records 2021–2025 plus local 2026 through week 6:
+
+| Subset | Games | Winner accuracy | Brier | Log loss |
+|---|---:|---:|---:|---:|
+| All FBS/FCS games | 6,287 | 71.16% | 0.1888 | 0.5557 |
+| FBS vs FBS | 3,301 | 69.58% | 0.1954 | 0.5707 |
+
+These measure game probabilities, not standing quality. No untouched holdout or significant future improvement is claimed.
+
+## Sources and archived work
+
+- [Colley's bias-free ranking method](https://www.colleyrankings.com/matrate.pdf): schedule-adjusted results ranking.
+- [Bradley and Terry, 1952](https://doi.org/10.1093/biomet/39.3-4.324): paired-comparison strength model.
+- [Massey's rating thesis](https://masseyratings.com/theory/massey97.pdf): least-squares opponent-adjusted score ratings.
+- [Pinned schedule source](https://github.com/sportsdataverse/cfbfastR-data/tree/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv).
+
+Earlier Python experiments cover Massey, Elo, LRMC, Colley, Bradley–Terry, Keener, PageRank, priors, robust margins, recency, play-by-play and record/H2H overlays. `training-results.txt` and `holdout-results.txt` are archived experiments. Their old benchmark placed all postseason after regular season, leaking 22 later regular-season results into early 2023–2025 playoff forecasts; it also predicted from rank without venue and used an Elo-availability mask in an FBS comparison. Several purported holdout settings were subsequently tuned on inspected years. Those numbers cannot establish gains under the current date-based production protocol.

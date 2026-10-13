@@ -19,6 +19,8 @@
     "compute": "tsx scripts/compute.ts",
     "verify": "tsx scripts/verify.ts",
     "backtest": "tsx scripts/backtest.ts",
+    "calibrate": "tsx scripts/calibrate.ts",
+    "project-backtest": "tsx scripts/project-backtest.ts",
     "fetch-plays": "tsx scripts/fetch-plays.ts"
   },
   "dependencies": {

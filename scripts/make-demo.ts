@@ -7,6 +7,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { gamesToCsv, teamsToCsv } from "../src/engine/data";
 import type { Game, Team } from "../src/engine/types";
+import { DEFAULT_SETTINGS } from "../src/engine/defaults";
 
 function mulberry32(seed: number) {
   return () => {
@@ -61,7 +62,9 @@ for (let week = 1; week <= 12; week++) {
       season: "demo",
       week,
       seasonType: "regular",
-      startDate: `2026-${week < 5 ? "09" : week < 10 ? "10" : "11"}-${String(1 + ((week * 7 + p) % 28)).padStart(2, "0")}T19:00:00.000Z`,
+      startDate: new Date(
+        Date.UTC(2026, 8, 5 + (week - 1) * 7, 19),
+      ).toISOString(),
       neutralSite: false,
       completed: true,
       homeId: home,
@@ -84,12 +87,8 @@ writeFileSync(
     {
       label: "Demo season (fictional data)",
       demo: true,
-      algorithmVersion: "margin-6",
+      ...DEFAULT_SETTINGS,
       classifications: ["fbs"],
-      winBonus: 3,
-      shrink: 0.05,
-      headToHeadWindow: 3,
-      recordWeight: 24,
     },
     null,
     2,

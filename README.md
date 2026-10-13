@@ -1,81 +1,81 @@
 # Rank
 
-Open, deterministic college football rankings for **every FBS and FCS team**, worst to best. Live at **https://rank.sam-bennett.dev**.
+Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-The AP Poll is a vote. This is a calculation. Every team gets a **rating**: how many points better it is than an average FBS or FCS team, worked out from every final score this season, who each game was against and where it was played. Rank is the rating; the graph view plots it as each team's height.
+**One rating: current standing vs projected finish.** Wins earn 0–1 point based on opponent quality before that week. **Every loss deducts exactly 1 point.** The current standing orders those earned points. The remaining schedule produces whole-number projected final rank, an 80% model range, and top-25 probability alongside it.
 
-- **Every game counts.** A game says a team is worth its opponent's rating plus its margin, with 3 extra points for winning (3 fewer for losing), adjusted for home field. A team's rating is the average of what its games say, with all teams solved together in one exact linear system.
-- **Every team starts level.** No preseason ranking, no carry-over from last season, no recruiting or reputation: only this season's games count.
-- **Every loss costs something.** A record bonus of 24 × (wins − losses) ÷ games is added to the rating, so an unbeaten team gets +24, a .500 team 0 and a winless team −24.
-- **Head-to-head breaks close calls.** If two teams are rated within a field goal and the lower one beat the higher one, the winner is moved just in front and the whole ladder adjusts. Teams further apart keep their places.
-- **Measured, not assumed.** On seasons held out while it was designed (2021–2025 plus 2026 so far), it picked 70.3% of the next week's winners using this season's games only, level with the best known predictor (Massey with home field, 70.2%), and its final rankings have the winner above the loser in 85.2% of games (about 80% for Massey, Elo, LRMC). See [`research/`](research/).
+- **Losses always cost points.** Earned win credits stay fixed; neither a close loss nor later opponent results can undo the deduction.
+- **Better opponents earn more credit.** A win earns the estimated probability that its opponent would beat an average team at that venue. Uncertain opponent estimates move toward 50%.
+- **Every team starts level.** No preseason, recruiting, polls, brand or conference bonus, record overlay, or head-to-head override.
+- **Project who plays whom.** Each seeded simulation draws uncertain team strengths shared across the remaining schedule, simulates each game, and adds win credits or fixed loss deductions.
+- **One published standing.** An internal score model estimates opponent quality and game probabilities. It supplies the forecast, without becoming a second standings table.
+- **The leader sets the accent.** Rank follows the current #1 team’s color for each snapshot, with readable light/dark variants. Exact first-place ties use the first team in the existing display order.
+- **Audit every point.** Team pages show each earned credit or deduction; outputs include award cutoffs, settings, CSV hashes and model diagnostics.
+- **Reproduce in Node and your browser.** Both run the same engine; the Recompute button checks every published snapshot byte for byte.
+- **Unit ratings explain performance.** Public play-by-play supplies offense, defense and special teams statistics without changing the overall standing.
 
-- **Offense, defense and special teams.** Separate rankings from public play-by-play (expected points per snap, garbage time removed, adjusted for opponents and home field). They explain how teams win; they don't change the overall rank, because in testing they predicted no better than final scores.
+The fixed-loss rule and forecast method were selected on **2014–2019**. Of the tested methods, correlated season simulations had the lowest final-rank RMSE. On already-inspected **2021–2025**, they reduced final-rank RMSE from **46.61 to 40.24 places** versus carrying current standings forward; their nominal 80% ranges covered **78.16%** of final ranks. These are development results, not an untouched holdout or proof of universal superiority. Forecasts target Rank’s own final standing over the known schedule, with unassigned postseason matchups excluded. See [research](research/) and [methodology](docs/METHODOLOGY.md).
 
-No polls, no votes, no brand, no conference bonus. See the [methodology](docs/METHODOLOGY.md).
-
-| | |
-|---|---|
-| **Deterministic** | Same data in, byte-identical rankings out. One exact linear solve, no randomness. |
-| **Auditable** | Raw data, code and output are all here. `npm run verify` and the site's *Recompute* button regenerate every ranking and compare it with what is published. |
-| **Transparent** | One formula, one config file per season, and a page per team that rebuilds its rating game by game. |
-| **Unbiased** | The only inputs are this season's final scores, opponents and home/neutral site. Every team starts level. |
-
-## Where the data lives
-
-Plain files in this repository; git history is the audit log.
-
-```
-data/seasons/<year>/teams.csv      teams in scope
-data/seasons/<year>/games.csv      every game fetched (scores, week, ids)
-data/seasons/<year>/plays.csv      per team per game: snaps, expected points, successes, special-teams EPA (from play-by-play)
-data/seasons/<year>/config.json    algorithm version, win bonus, shrink, head-to-head window, record weight, divisions
-data/rankings/<year>/<snapshot>.json   published output (ratings, unit ratings, ranks, manifest with SHA-256 of the inputs)
-data/index.json                    seasons and snapshots available to the site
-```
-
-## Run it
+## Run
 
 Requires Node 22+.
 
 ```sh
 npm ci
-npm run dev        # site at http://localhost:5173
-npm test           # unit + determinism tests
-npm run compute    # CSVs -> rankings
-npm run verify     # fail if any published ranking differs from a fresh computation
-npm run backtest -- --history 2015-2025   # measure the ranking on past seasons
-npm run build      # static site in dist/
+npm run dev
+npm run typecheck
+npm test
+npm run compute
+npm run verify
+npm run build
+npm run backtest -- --history 2021-2025
+npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json
 ```
 
-`tests/fixtures/demo` is a small **fictional** season (generated by `npm run demo`) used by the determinism tests.
+`npm run calibrate` reproduces the internal prediction calibration from pinned 2014–2019 schedules. It writes defaults and a training report; update versioned season configurations deliberately if settings change. `npm run backtest -- --history 2021-2025 --include-repo --summary --report research/development-results.json` reproduces game-prediction results; omit `--summary` for per-game forecasts.
 
-## Updating with real results
+## Data and audit
 
-1. Get a free API key at <https://collegefootballdata.com/key>.
-2. `CFBD_API_KEY=... npm run fetch -- 2026 && npm run fetch-plays -- 2026 && npm run compute`
-3. Commit the changed files under `data/`.
+```text
+data/seasons/<year>/teams.csv         configured teams
+data/seasons/<year>/games.csv         scores, sites, kickoffs and schedule
+data/seasons/<year>/plays.csv         condensed public play-by-play
+data/seasons/<year>/config.json       prediction settings and calibration ID
+data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections and game forecasts
+data/index.json                      available seasons and snapshots
+```
 
+Schema 2 records earned points and current rank, immutable weekly credits, connected groups, final-rank projections and matchup predictions. Graph height represents earned points. Projected standings order the simulated average finishes into #1, #2, #3; the fractional averages remain available in forecast details. The projection horizon and remaining-game count make forecast scope visible. Overlapping regular-season and playoff games use real calendar cutoffs, with separate later postseason snapshots.
 
-In GitHub, the **Update data** workflow does this weekly (and daily in bowl season) using a `CFBD_API_KEY` repository secret, commits the diff as `rank-bot`, and redeploys.
+## Update results
 
-## Deploying (GitHub Pages)
+Get a free key at <https://collegefootballdata.com/key>, then:
 
-1. Settings > Pages > Source: **GitHub Actions**; custom domain `rank.sam-bennett.dev`.
-2. DNS: `CNAME` record `rank` -> `sambennettdev.github.io`.
-3. Add the `CFBD_API_KEY` secret, then run **Update data** once from the Actions tab.
+```sh
+CFBD_API_KEY=... npm run fetch -- 2026
+npm run fetch-plays -- 2026
+npm run compute
+npm run verify
+```
+
+Commit the changed data. GitHub’s **Update data** workflow uses the `CFBD_API_KEY` repository secret to refresh and publish automatically.
+
+## Deploy
+
+GitHub Settings → Pages → Source: **GitHub Actions**, with custom domain `rank.sam-bennett.dev`. The DNS CNAME for `rank` points to `sambennettdev.github.io`. Add the API secret and run **Update data** once.
 
 ## Layout
 
+```text
+src/engine/  earned standings, prediction model, season simulation, chronology and pipeline
+scripts/     fetching, calibration, computation, verification and backtesting
+web/         static TypeScript site, sharing the same engine
+tests/       math, fixed loss deductions, forecasts, chronology and determinism
+research/    pinned design comparisons, development reports and archived experiments
+docs/        full methodology
 ```
-src/engine/   the whole algorithm: csv, graph, Cholesky, rating fit, unit ratings, season pipeline
-scripts/      fetch (API -> CSV), fetch-plays (play-by-play -> plays.csv), compute, verify, backtest, make-demo
-web/          the static site (vanilla TypeScript + d3-zoom); imports the same engine.
-              Team logos load from ESPN's logo CDN by team id (CFBD ids are ESPN ids).
-tests/        linear algebra, rating, determinism
-research/     benchmark of known rating algorithms vs this one (Python)
-docs/         METHODOLOGY.md
-```
+
+`tests/fixtures/demo` is fictional, generated by `npm run demo`. Logos load from ESPN’s CDN by team ID.
 
 ## License
 

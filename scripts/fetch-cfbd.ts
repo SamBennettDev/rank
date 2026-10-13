@@ -10,6 +10,7 @@ import { join } from "node:path";
 import { gamesToCsv, teamsToCsv } from "../src/engine/data";
 import type { Game, SeasonConfig, Team } from "../src/engine/types";
 import { DATA_DIR } from "./lib";
+import { DEFAULT_SETTINGS } from "../src/engine/defaults";
 
 const API = "https://api.collegefootballdata.com";
 const year = process.argv[2];
@@ -19,24 +20,33 @@ if (!year || !/^\d{4}$/.test(year)) {
   process.exit(2);
 }
 if (!key) {
-  console.error("CFBD_API_KEY is not set (get a free key at https://collegefootballdata.com/key)");
+  console.error(
+    "CFBD_API_KEY is not set (get a free key at https://collegefootballdata.com/key)",
+  );
   process.exit(2);
 }
 
 type Raw = Record<string, unknown>;
 
-async function get(path: string, params: Record<string, string>): Promise<Raw[]> {
+async function get(
+  path: string,
+  params: Record<string, string>,
+): Promise<Raw[]> {
   const url = `${API}${path}?${new URLSearchParams(params)}`;
   for (let attempt = 1; ; attempt++) {
-    const res = await fetch(url, { headers: { Authorization: `Bearer ${key}`, Accept: "application/json" } });
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${key}`, Accept: "application/json" },
+    });
     if (res.ok) return (await res.json()) as Raw[];
-    if (attempt >= 3 || res.status < 500) throw new Error(`${res.status} ${res.statusText} for ${path}`);
+    if (attempt >= 3 || res.status < 500)
+      throw new Error(`${res.status} ${res.statusText} for ${path}`);
     await new Promise((r) => setTimeout(r, 2000 * attempt));
   }
 }
 
 /** The API has used both camelCase and snake_case field names across versions. */
-const pick = (r: Raw, ...names: string[]): unknown => names.map((n) => r[n]).find((v) => v !== undefined && v !== null);
+const pick = (r: Raw, ...names: string[]): unknown =>
+  names.map((n) => r[n]).find((v) => v !== undefined && v !== null);
 const str = (v: unknown) => (v === undefined ? "" : String(v));
 const num = (v: unknown) => (v === undefined ? null : Number(v));
 
@@ -45,15 +55,11 @@ const configPath = join(dir, "config.json");
 const config: SeasonConfig = {
   label: `${year} season`,
   demo: false,
-  algorithmVersion: "margin-6",
-  classifications: ["fbs", "fcs"],
-  winBonus: 3,
-  shrink: 0.05,
-  headToHeadWindow: 3,
-  recordWeight: 24,
+  ...DEFAULT_SETTINGS,
 };
 mkdirSync(dir, { recursive: true });
-if (existsSync(configPath)) Object.assign(config, JSON.parse(readFileSync(configPath, "utf8")));
+if (existsSync(configPath))
+  Object.assign(config, JSON.parse(readFileSync(configPath, "utf8")));
 else writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n");
 
 const rawTeams = await get("/teams", { year });
@@ -67,7 +73,10 @@ const teams: Team[] = rawTeams
     color: str(r.color),
   }))
   .filter((t) => config.classifications.includes(t.classification));
-if (teams.length === 0) throw new Error("no teams matched config.classifications; did the API response shape change?");
+if (teams.length === 0)
+  throw new Error(
+    "no teams matched config.classifications; did the API response shape change?",
+  );
 
 const byId = new Map<number, Game>();
 for (const classification of config.classifications) {

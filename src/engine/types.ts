@@ -8,6 +8,8 @@ export interface Team {
 }
 
 export interface Game {
+  /** Historical evaluation only: a postseason/conditional championship matchup. */
+  conditionalMatchup?: boolean;
   id: number;
   season: string;
   week: number;
@@ -36,10 +38,12 @@ export interface SeasonConfig {
   winBonus: number;
   /** Games' worth of pull toward an average rating, the same for every team. */
   shrink: number;
-  /** Head-to-head breaks ties between teams rated within this many points (0 turns it off). */
-  headToHeadWindow: number;
-  /** Record bonus: this many points × (wins − losses) / games, added to the rating (0 turns it off). */
-  recordWeight: number;
+  projectionSamples: number;
+  projectionSeed: number;
+  homeFieldShrink: number;
+  probabilityScale: number;
+  residualScale: number;
+  calibrationId: string;
 }
 
 /** One team's play-by-play summary for one game (see scripts/fetch-plays.ts). */
@@ -74,14 +78,16 @@ export interface SnapshotSpec {
   /** "week-05" or "postseason". */
   id: string;
   label: string;
-  /** Regular-season games with week <= throughWeek count. */
+  /** Display week; dated snapshots use asOf for game inclusion. */
   throughWeek: number;
-  /** Postseason games count only in the postseason snapshot. */
+  /** Legacy undated window flag; dated snapshots include both season types. */
   includePostseason: boolean;
+  /** Calendar cutoff, limited to the latest known score-availability time. */
+  asOf?: string;
 }
 
 export interface GameCounts {
-  /** Rows in games.csv that fall inside the snapshot's week window. */
+  /** Rows in games.csv whose assumed score availability falls within the cutoff. */
   inWindow: number;
   /** Rows that became edges. */
   included: number;
@@ -102,10 +108,12 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Rating in points (the graph's y-coordinate): rating from games + record bonus, rounded to 1e-6; null with no counted games. */
+  /** Earned win-quality credits minus one point for every loss. */
   height: number | null;
-  /** The record bonus included in `height`: recordWeight × (wins − losses) / games, rounded to 1e-6. */
-  recordBonus: number;
+  projection: TeamProjection | null;
+  component: number | null;
+  componentSize: number;
+  provisional: boolean;
   /** Offense, defense and special teams from play-by-play, in points per game better than average; null without play-by-play. */
   offense: number | null;
   defense: number | null;
@@ -118,13 +126,21 @@ export interface RankedTeam {
 
 export interface Manifest {
   engine: string;
+  standingMethod: "frozen-win-quality-v1";
+  lossPenalty: 1;
   algorithmVersion: string;
   winBonus: number;
   shrink: number;
-  headToHeadWindow: number;
-  recordWeight: number;
+  projectionSamples: number;
+  projectionSeed: number;
+  homeFieldShrink: number;
+  probabilityScale: number;
+  residualScale: number;
+  calibrationId: string;
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
+  homeFieldError: number;
+  connectedComponents: number;
   classifications: string[];
   teamsSha256: string;
   gamesSha256: string;
@@ -136,13 +152,61 @@ export interface Manifest {
 }
 
 export interface Ranking {
-  schema: 1;
+  schema: 2;
   season: string;
   snapshot: SnapshotSpec;
   manifest: Manifest;
-  /** Game ids where head-to-head broke a close call: the winner is held at least ½ point above the loser. Ascending. */
-  held: number[];
+  projection: ProjectionManifest;
+  predictions: MatchupPrediction[];
+  credits: StandingCredit[];
   teams: RankedTeam[];
+}
+
+export interface TeamProjection {
+  /** Whole-number projected standing, ordered by ascending simulated mean finish. */
+  rank: number;
+  expectedRating: number;
+  /** Mean finish across simulations; retained for audit, not the displayed standing. */
+  expectedRank: number;
+  medianRank: number;
+  rankLow: number;
+  rankHigh: number;
+  ratingLow: number;
+  ratingHigh: number;
+  top25Probability: number;
+  firstProbability: number;
+}
+
+export interface ProjectionManifest {
+  method:
+    | "independent-results-v1"
+    | "correlated-results-v1"
+    | "adaptive-results-v1";
+  samples: number;
+  seed: number;
+  remainingGames: number;
+  horizon: string | null;
+  unknownMatchups: number;
+  teams: number;
+}
+
+export interface StandingCredit {
+  gameId: number;
+  winner: number;
+  loser: number;
+  value: number;
+  cutoff: string;
+}
+
+export interface MatchupPrediction {
+  gameId: number;
+  home: number;
+  away: number;
+  startDate: string;
+  neutralSite: boolean;
+  homeProbability: number;
+  strengthEdge: number;
+  provisional: boolean;
 }
 
 export interface SeasonIndexEntry {

@@ -5,20 +5,39 @@
  */
 
 /** Solves M x = b. `m` is an n*n row-major matrix; only its lower triangle is read. */
-export function choleskySolve(m: Float64Array, b: Float64Array, n: number): Float64Array {
+export function choleskySolve(
+  m: Float64Array,
+  b: Float64Array,
+  n: number,
+): Float64Array {
+  return solveFactor(choleskyFactor(m, n), b, n);
+}
+
+export function choleskyFactor(m: Float64Array, n: number): Float64Array {
   const l = new Float64Array(n * n);
   for (let i = 0; i < n; i++) {
     for (let j = 0; j <= i; j++) {
       let sum = m[i * n + j]!;
       for (let k = 0; k < j; k++) sum -= l[i * n + k]! * l[j * n + k]!;
       if (i === j) {
-        if (!(sum > 0)) throw new Error(`matrix is not positive definite (pivot ${i} = ${sum})`);
+        if (!(sum > 0))
+          throw new Error(
+            `matrix is not positive definite (pivot ${i} = ${sum})`,
+          );
         l[i * n + i] = Math.sqrt(sum);
       } else {
         l[i * n + j] = sum / l[j * n + j]!;
       }
     }
   }
+  return l;
+}
+
+export function solveFactor(
+  l: Float64Array,
+  b: Float64Array,
+  n: number,
+): Float64Array {
   // Forward substitution: L y = b
   const y = new Float64Array(n);
   for (let i = 0; i < n; i++) {
@@ -34,4 +53,16 @@ export function choleskySolve(m: Float64Array, b: Float64Array, n: number): Floa
     x[i] = sum / l[i * n + i]!;
   }
   return x;
+}
+
+export function inverseFactor(l: Float64Array, n: number): Float64Array {
+  const out = new Float64Array(n * n);
+  for (let col = 0; col < n; col++)
+    for (let row = col; row < n; row++) {
+      let sum = row === col ? 1 : 0;
+      for (let k = col; k < row; k++)
+        sum -= l[row * n + k]! * out[k * n + col]!;
+      out[row * n + col] = sum / l[row * n + row]!;
+    }
+  return out;
 }

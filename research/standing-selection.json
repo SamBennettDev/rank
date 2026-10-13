@@ -1,0 +1,902 @@
+{
+  "status": "training design only; winner-above-loser agreement is descriptive, not a claim of predictive accuracy",
+  "years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "sourceRevision": "a3dd960090c1bfa169cebd491beabf7028b379b2",
+  "inputs": [
+    {
+      "year": 2014,
+      "sha256": "5b1a1f78bc63114c1e076b10e0d9316d079091afa9ac798982048fce6ce5a128"
+    },
+    {
+      "year": 2015,
+      "sha256": "3044e8911721a711202f976133230a0c2cb557cfaf621cb1f3c21722cfd86fe9"
+    },
+    {
+      "year": 2016,
+      "sha256": "f60e57cdab028d2d35bd589c46139a6dce11ee8c52c3f4ca975c5d98522f403c"
+    },
+    {
+      "year": 2017,
+      "sha256": "c5a6f47dc1b121e366c0e9ef6cf1524e6ea54f58cf997874bf6d818e46fa3b26"
+    },
+    {
+      "year": 2018,
+      "sha256": "a4d4c2ccd06f933c1b6848b3ef4fddbc56695f6b066c9376b1249bfb9d29c00f"
+    },
+    {
+      "year": 2019,
+      "sha256": "d8665fa0aced3d02d59405c8b9ff157ba00ef128a90c1c5eab31d268d917abac"
+    }
+  ],
+  "qualityModel": {
+    "winBonus": 3,
+    "shrink": 0.05,
+    "homeFieldShrink": 0.0001,
+    "residualScale": 14.934045,
+    "probabilityScale": 12.0,
+    "creditDigits": 6
+  },
+  "criterion": "maximize season-end game-result agreement among methods with a fixed loss deduction at least as large as the maximum win credit; win quality is frozen before each calendar week",
+  "selected": {
+    "method": "earned b=0 q=1 loss=1",
+    "agreement": 0.8027366020524516,
+    "games": 8770,
+    "fixedLossDeduction": true
+  },
+  "methods": [
+    {
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.8316989737742303,
+      "games": 8770,
+      "fixedLossDeduction": false
+    },
+    {
+      "method": "Colley",
+      "agreement": 0.8283922462941847,
+      "games": 8770,
+      "fixedLossDeduction": false
+    },
+    {
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.8027366020524516,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.8027366020524516,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "Elo wins only",
+      "agreement": 0.7996579247434435,
+      "games": 8770,
+      "fixedLossDeduction": false
+    },
+    {
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.7994298745724059,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.7993158494868872,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.7993158494868872,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.798175598631699,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.7974914481185861,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.7972633979475484,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.7972633979475484,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.7970353477765109,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.7962371721778791,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.7955530216647663,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.7953249714937286,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.7948688711516534,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.7942987457240593,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "Raw wins minus losses",
+      "agreement": 0.79327251995439,
+      "games": 8770,
+      "fixedLossDeduction": true
+    },
+    {
+      "method": "Win percentage",
+      "agreement": 0.7930444697833523,
+      "games": 8770,
+      "fixedLossDeduction": false
+    }
+  ],
+  "lossCounterexample": {
+    "Colley": 0.024999999999999994,
+    "Bradley\u2013Terry": -0.013733678710853514,
+    "Elo wins only": -9.055371558972183
+  },
+  "perYear": [
+    {
+      "year": 2014,
+      "method": "Win percentage",
+      "agreement": 0.7897610921501707,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "Colley",
+      "agreement": 0.8313993174061434,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.837542662116041,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "Elo wins only",
+      "agreement": 0.8020477815699659,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "Raw wins minus losses",
+      "agreement": 0.7911262798634813,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.8075085324232082,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.8027303754266212,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.8027303754266212,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.8075085324232082,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.8027303754266212,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.8027303754266212,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.8,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.7993174061433447,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.7979522184300342,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.8,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.7986348122866894,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.7979522184300342,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.8013651877133106,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.7986348122866894,
+      "games": 1465
+    },
+    {
+      "year": 2014,
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.7986348122866894,
+      "games": 1465
+    },
+    {
+      "year": 2015,
+      "method": "Win percentage",
+      "agreement": 0.8144150417827298,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "Colley",
+      "agreement": 0.8537604456824512,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.8551532033426184,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "Elo wins only",
+      "agreement": 0.8217270194986073,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "Raw wins minus losses",
+      "agreement": 0.8133704735376045,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.8189415041782729,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.8175487465181058,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.8175487465181058,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.8189415041782729,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.8175487465181058,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.8175487465181058,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.8161559888579387,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.8154596100278552,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.814066852367688,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.8182451253481894,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.8161559888579387,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.8154596100278552,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.8189415041782729,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.8175487465181058,
+      "games": 1436
+    },
+    {
+      "year": 2015,
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.8154596100278552,
+      "games": 1436
+    },
+    {
+      "year": 2016,
+      "method": "Win percentage",
+      "agreement": 0.7828038674033149,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "Colley",
+      "agreement": 0.8073204419889503,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.8073204419889503,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "Elo wins only",
+      "agreement": 0.7817679558011049,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "Raw wins minus losses",
+      "agreement": 0.7841850828729282,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.7976519337016574,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.7914364640883977,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.789364640883978,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.7976519337016574,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.7914364640883977,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.789364640883978,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.7900552486187845,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.7866022099447514,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.7845303867403315,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.7900552486187845,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.787292817679558,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.7852209944751382,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.7921270718232044,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.789364640883978,
+      "games": 1448
+    },
+    {
+      "year": 2016,
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.7886740331491713,
+      "games": 1448
+    },
+    {
+      "year": 2017,
+      "method": "Win percentage",
+      "agreement": 0.8029472241261137,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "Colley",
+      "agreement": 0.8389307745030843,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.8423577793008911,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "Elo wins only",
+      "agreement": 0.8080877313228239,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "Raw wins minus losses",
+      "agreement": 0.8008910212474297,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.8067169294037012,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.8046607265250172,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.8012337217272104,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.8067169294037012,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.8046607265250172,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.8012337217272104,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.8019191226867718,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.7998629198080878,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.7991775188485264,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.8032899246058944,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.8019191226867718,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.7998629198080878,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.8046607265250172,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.8026045236463331,
+      "games": 1459
+    },
+    {
+      "year": 2017,
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.7998629198080878,
+      "games": 1459
+    },
+    {
+      "year": 2018,
+      "method": "Win percentage",
+      "agreement": 0.7820247933884298,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "Colley",
+      "agreement": 0.8168044077134986,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.8202479338842975,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "Elo wins only",
+      "agreement": 0.7920110192837465,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "Raw wins minus losses",
+      "agreement": 0.7830578512396694,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.7885674931129476,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.7871900826446281,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.7830578512396694,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.7885674931129476,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.7871900826446281,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.7830578512396694,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.7871900826446281,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.7830578512396694,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.7823691460055097,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.7871900826446281,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.7844352617079889,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.7823691460055097,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.7865013774104683,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.7830578512396694,
+      "games": 1452
+    },
+    {
+      "year": 2018,
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.7803030303030303,
+      "games": 1452
+    },
+    {
+      "year": 2019,
+      "method": "Win percentage",
+      "agreement": 0.7867549668874172,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "Colley",
+      "agreement": 0.8225165562913908,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "Bradley\u2013Terry",
+      "agreement": 0.8278145695364238,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "Elo wins only",
+      "agreement": 0.7927152317880795,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "Raw wins minus losses",
+      "agreement": 0.7874172185430464,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=0 q=1 loss=1",
+      "agreement": 0.7973509933774835,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=0 q=1 loss=1.5",
+      "agreement": 0.7927152317880795,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=0 q=1 loss=2",
+      "agreement": 0.7900662251655629,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=0 q=2 loss=2",
+      "agreement": 0.7973509933774835,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=0 q=2 loss=3",
+      "agreement": 0.7927152317880795,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=0 q=2 loss=4",
+      "agreement": 0.7900662251655629,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=0.5 loss=1.5",
+      "agreement": 0.7900662251655629,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=0.5 loss=2.25",
+      "agreement": 0.7894039735099337,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=0.5 loss=3",
+      "agreement": 0.7880794701986755,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=1 loss=2",
+      "agreement": 0.7907284768211921,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=1 loss=3",
+      "agreement": 0.7894039735099337,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=1 loss=4",
+      "agreement": 0.7887417218543047,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=2 loss=3",
+      "agreement": 0.7933774834437086,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=2 loss=4.5",
+      "agreement": 0.7913907284768212,
+      "games": 1510
+    },
+    {
+      "year": 2019,
+      "method": "earned b=1 q=2 loss=6",
+      "agreement": 0.7894039735099337,
+      "games": 1510
+    }
+  ]
+}

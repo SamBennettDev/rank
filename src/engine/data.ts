@@ -1,14 +1,32 @@
 import { parseCsvObjects, toCsv } from "./csv";
 import type { Game, SeasonConfig, Team, TeamGamePlays } from "./types";
 
-export const TEAM_COLUMNS = ["id", "school", "abbreviation", "conference", "classification", "color"];
+export const TEAM_COLUMNS = [
+  "id",
+  "school",
+  "abbreviation",
+  "conference",
+  "classification",
+  "color",
+];
 export const GAME_COLUMNS = [
-  "id", "season", "week", "season_type", "start_date", "neutral_site", "completed",
-  "home_id", "home_team", "home_points", "away_id", "away_team", "away_points",
+  "id",
+  "season",
+  "week",
+  "season_type",
+  "start_date",
+  "neutral_site",
+  "completed",
+  "home_id",
+  "home_team",
+  "home_points",
+  "away_id",
+  "away_team",
+  "away_points",
 ];
 
 export function parseTeams(csv: string): Team[] {
-  return parseCsvObjects(csv).map((r) => ({
+  const teams = parseCsvObjects(csv).map((r) => ({
     id: Number(r.id),
     school: r.school!,
     abbreviation: r.abbreviation!,
@@ -16,12 +34,20 @@ export function parseTeams(csv: string): Team[] {
     classification: r.classification!,
     color: r.color!,
   }));
+  const seen = new Set<number>();
+  for (const t of teams) {
+    if (!Number.isSafeInteger(t.id) || t.id <= 0 || seen.has(t.id))
+      throw new Error(`invalid or duplicate team id ${t.id}`);
+    seen.add(t.id);
+  }
+  return teams;
 }
 
-const points = (v: string | undefined) => (v === undefined || v === "" ? null : Number(v));
+const points = (v: string | undefined) =>
+  v === undefined || v === "" ? null : Number(v);
 
 export function parseGames(csv: string): Game[] {
-  return parseCsvObjects(csv).map((r) => ({
+  const games: Game[] = parseCsvObjects(csv).map((r) => ({
     id: Number(r.id),
     season: r.season!,
     week: Number(r.week),
@@ -36,37 +62,113 @@ export function parseGames(csv: string): Game[] {
     awayTeam: r.away_team!,
     awayPoints: points(r.away_points),
   }));
+  const seen = new Set<number>();
+  for (const g of games) {
+    if (g.homeId !== 0 && g.homeId === g.awayId)
+      throw new Error(`game ${g.id} has identical opponents`);
+    if (!Number.isSafeInteger(g.id) || g.id <= 0 || seen.has(g.id))
+      throw new Error(`invalid or duplicate game id ${g.id}`);
+    if (
+      ![g.homeId, g.awayId, g.week].every(
+        (v) => Number.isSafeInteger(v) && v >= 0,
+      )
+    )
+      throw new Error(`invalid team or week in game ${g.id}`);
+    for (const p of [g.homePoints, g.awayPoints])
+      if (p !== null && (!Number.isSafeInteger(p) || p < 0))
+        throw new Error(`invalid score in game ${g.id}`);
+    seen.add(g.id);
+  }
+  return games;
 }
 
 export function teamsToCsv(teams: Team[]): string {
-  return toCsv(TEAM_COLUMNS, [...teams].sort((a, b) => a.id - b.id)
-    .map((t) => [t.id, t.school, t.abbreviation, t.conference, t.classification, t.color]));
+  return toCsv(
+    TEAM_COLUMNS,
+    [...teams]
+      .sort((a, b) => a.id - b.id)
+      .map((t) => [
+        t.id,
+        t.school,
+        t.abbreviation,
+        t.conference,
+        t.classification,
+        t.color,
+      ]),
+  );
 }
 
 export function gamesToCsv(games: Game[]): string {
-  return toCsv(GAME_COLUMNS, [...games].sort((a, b) => a.id - b.id).map((g) => [
-    g.id, g.season, g.week, g.seasonType, g.startDate, g.neutralSite, g.completed,
-    g.homeId, g.homeTeam, g.homePoints, g.awayId, g.awayTeam, g.awayPoints,
-  ]));
+  return toCsv(
+    GAME_COLUMNS,
+    [...games]
+      .sort((a, b) => a.id - b.id)
+      .map((g) => [
+        g.id,
+        g.season,
+        g.week,
+        g.seasonType,
+        g.startDate,
+        g.neutralSite,
+        g.completed,
+        g.homeId,
+        g.homeTeam,
+        g.homePoints,
+        g.awayId,
+        g.awayTeam,
+        g.awayPoints,
+      ]),
+  );
 }
 
 export function parseConfig(json: string): SeasonConfig {
   const c = JSON.parse(json) as SeasonConfig;
-  const num = (k: keyof SeasonConfig, ok: (v: number) => boolean, what: string) => {
-    if (typeof c[k] !== "number" || !ok(c[k] as number)) throw new Error(`config.${k} must be ${what}`);
+  const num = (
+    k: keyof SeasonConfig,
+    ok: (v: number) => boolean,
+    what: string,
+  ) => {
+    if (
+      typeof c[k] !== "number" ||
+      !Number.isFinite(c[k]) ||
+      !ok(c[k] as number)
+    )
+      throw new Error(`config.${k} must be ${what}`);
   };
-  if (typeof c.algorithmVersion !== "string" || c.algorithmVersion === "") throw new Error("config.algorithmVersion must be set");
+  if (typeof c.algorithmVersion !== "string" || c.algorithmVersion === "")
+    throw new Error("config.algorithmVersion must be set");
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
   }
   num("winBonus", (v) => v >= 0, "a number >= 0");
   num("shrink", (v) => v > 0, "a positive number");
-  num("headToHeadWindow", (v) => v >= 0, "a number >= 0");
-  num("recordWeight", (v) => v >= 0, "a number >= 0");
+  num(
+    "projectionSamples",
+    (v) => Number.isInteger(v) && v >= 128 && v <= 8192,
+    "an integer from 128 to 8192",
+  );
+  num(
+    "projectionSeed",
+    (v) => Number.isInteger(v) && v >= 0 && v <= 4294967295,
+    "an unsigned 32-bit integer",
+  );
+  num("homeFieldShrink", (v) => v > 0, "a positive number");
+  num("probabilityScale", (v) => v > 0, "a positive number");
+  num("residualScale", (v) => v > 0, "a positive number");
+  if (typeof c.calibrationId !== "string" || !c.calibrationId)
+    throw new Error("config.calibrationId must be set");
   return c;
 }
 
-export const PLAY_COLUMNS = ["game_id", "team_id", "opponent_id", "snaps", "epa", "success", "special_epa"];
+export const PLAY_COLUMNS = [
+  "game_id",
+  "team_id",
+  "opponent_id",
+  "snaps",
+  "epa",
+  "success",
+  "special_epa",
+];
 
 export function parsePlays(csv: string): TeamGamePlays[] {
   return parseCsvObjects(csv).map((r) => ({
@@ -84,6 +186,18 @@ const fixed6 = (v: number) => (Math.abs(v) < 5e-7 ? 0 : v).toFixed(6);
 
 /** EPA columns keep 6 decimals; rows sorted by game then team. */
 export function playsToCsv(rows: TeamGamePlays[]): string {
-  return toCsv(PLAY_COLUMNS, [...rows].sort((a, b) => a.gameId - b.gameId || a.teamId - b.teamId)
-    .map((r) => [r.gameId, r.teamId, r.opponentId, r.snaps, fixed6(r.epa), r.success, fixed6(r.specialEpa)]));
+  return toCsv(
+    PLAY_COLUMNS,
+    [...rows]
+      .sort((a, b) => a.gameId - b.gameId || a.teamId - b.teamId)
+      .map((r) => [
+        r.gameId,
+        r.teamId,
+        r.opponentId,
+        r.snaps,
+        fixed6(r.epa),
+        r.success,
+        fixed6(r.specialEpa),
+      ]),
+  );
 }
