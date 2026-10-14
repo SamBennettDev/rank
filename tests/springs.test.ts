@@ -92,6 +92,52 @@ const input = {
   gamesCsv: read("games.csv"),
   configJson: read("config.json"),
 };
+describe("seven-point two-sided springs", () => {
+  const options = { restGap: 7, oneSided: false };
+  it("gives a lone game a seven-point winner-loser gap", () => {
+    const r = fitSprings([1, 2], edges([1, 2]), options);
+    expect([...r.heights.values()]).toEqual([3.5, -3.5]);
+    expect(r.energy).toBe(0);
+  });
+  it("pulls a stretched direct win against a conflicting chain", () => {
+    const r = fitSprings([1, 2, 3], edges([1, 2], [2, 3], [1, 3]), options);
+    expect(r.heights.get(1)).toBeCloseTo(14 / 3, 8);
+    expect(r.heights.get(2)).toBeCloseTo(0, 8);
+    expect(r.heights.get(3)).toBeCloseTo(-14 / 3, 8);
+    expect(r.springs[2]!.force).toBeCloseTo(-7 / 3, 8);
+    expect(r.springs[2]!.extension).toBeCloseTo(7 / 3, 8);
+    expect(r.energy).toBeCloseTo(49 / 6, 8);
+  });
+  it("balances repeated and circular results", () => {
+    const r = fitSprings([1, 2], edges([1, 2], [1, 2], [2, 1]), options);
+    expect(r.heights.get(1)).toBeCloseTo(7 / 6, 8);
+    expect(r.heights.get(2)).toBeCloseTo(-7 / 6, 8);
+    const c = fitSprings([1, 2, 3], edges([1, 2], [2, 3], [3, 1]), options);
+    expect([...c.heights.values()]).toEqual([0, 0, 0]);
+    expect(c.energy).toBe(73.5);
+  });
+  it("uses seven as a scale and satisfies the graph Laplacian normal equations", () => {
+    const e = edges([1, 2], [2, 3], [3, 1], [1, 4], [4, 2]);
+    const a = fitSprings([1, 2, 3, 4], e, { restGap: 1, oneSided: false });
+    const b = fitSprings([4, 2, 1, 3], [...e].reverse(), options);
+    for (const id of [1, 2, 3, 4]) {
+      expect(b.heights.get(id)).toBeCloseTo(7 * a.heights.get(id)!, 8);
+      const adjacent = e.filter((g) => g.winner === id || g.loser === id);
+      const lhs =
+        adjacent.length * b.heights.get(id)! -
+        adjacent.reduce(
+          (s, g) => s + b.heights.get(g.winner === id ? g.loser : g.winner)!,
+          0,
+        );
+      expect(lhs).toBeCloseTo(
+        7 *
+          (e.filter((g) => g.winner === id).length -
+            e.filter((g) => g.loser === id).length),
+        8,
+      );
+    }
+  });
+});
 describe("spring season publication", () => {
   it("uses no neural export, play data, score margin, venue or division weights", async () => {
     const games = parseGames(input.gamesCsv).slice(0, 30);
@@ -184,9 +230,11 @@ describe("spring season publication", () => {
         all.find((t) => t.id === s.winner)!.height! -
         all.find((t) => t.id === s.loser)!.height!;
       expect(s.gap).toBeCloseTo(gap, 5);
-      expect(s.compression).toBeCloseTo(Math.max(0, 1 - gap), 5);
-      forces.set(s.winner, forces.get(s.winner)! + s.compression);
-      forces.set(s.loser, forces.get(s.loser)! - s.compression);
+      expect(s.compression).toBeCloseTo(Math.max(0, 7 - gap), 5);
+      expect(s.extension).toBeCloseTo(Math.max(0, gap - 7), 5);
+      expect(s.force).toBeCloseTo(7 - gap, 5);
+      forces.set(s.winner, forces.get(s.winner)! + s.force);
+      forces.set(s.loser, forces.get(s.loser)! - s.force);
     }
     expect(Math.max(...[...forces.values()].map(Math.abs))).toBeLessThan(1e-5);
   });

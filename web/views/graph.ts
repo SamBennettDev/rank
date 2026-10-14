@@ -24,6 +24,8 @@ export function graphView(
   onCleanup: (fn: () => void) => void,
 ): HTMLElement {
   const springMode = !!ctx.ranking.manifest.springs;
+  const twoSided = ctx.ranking.manifest.springs?.direction === "two-sided";
+  const restGap = ctx.ranking.manifest.springs?.restGap ?? 1;
   const springByGame = new Map(ctx.ranking.springs?.map((e) => [e.gameId, e]));
   const nodes = [
     ...ctx.ranked,
@@ -45,9 +47,9 @@ export function graphView(
   );
   const upsetSet = new Map(upsets(ctx).map((u) => [u.edge.gameId, u.gap]));
   const isUpset = (e: Edge) => upsetSet.has(e.gameId);
-  const isCompressed = (e: Edge) =>
-    (springByGame.get(e.gameId)?.compression ?? 0) > 1e-6;
-  const highlight = springMode ? isCompressed : isUpset;
+  const isStrained = (e: Edge) =>
+    Math.abs(springByGame.get(e.gameId)?.force ?? 0) > 1e-6;
+  const highlight = springMode ? isStrained : isUpset;
   const adj = new Map<number, Edge[]>();
   for (const e of edges)
     for (const id of [e.winner, e.loser])
@@ -204,7 +206,7 @@ export function graphView(
       style: springMode ? "pointer-events:stroke" : "",
     });
     const title = svg("title");
-    title.textContent = `${ctx.byId.get(e.winner)!.school} beat ${ctx.byId.get(e.loser)!.school}${springMode ? ` · gap ${springByGame.get(e.gameId)!.gap.toFixed(3)} · force ${springByGame.get(e.gameId)!.compression.toFixed(3)}` : ""}`;
+    title.textContent = `${ctx.byId.get(e.winner)!.school} beat ${ctx.byId.get(e.loser)!.school}${springMode ? ` · gap ${springByGame.get(e.gameId)!.gap.toFixed(3)} · signed force on winner ${springByGame.get(e.gameId)!.force.toFixed(3)}` : ""}`;
     path.appendChild(title);
     return path;
   };
@@ -323,10 +325,10 @@ export function graphView(
     const ups = (
       springMode
         ? edges
-            .filter(isCompressed)
+            .filter(isStrained)
             .map((edge) => ({
               edge,
-              gap: springByGame.get(edge.gameId)!.compression,
+              gap: Math.abs(springByGame.get(edge.gameId)!.force),
             }))
             .sort((a, b) => b.gap - a.gap || a.edge.gameId - b.edge.gameId)
         : upsets(ctx)
@@ -340,14 +342,14 @@ export function graphView(
           "p",
           {},
           springMode
-            ? "Each arrow is one game, pointing from loser to winner. A compressed spring pushes the winner up and loser down until the winner is one unit higher."
+            ? `Each arrow is one game, pointing from loser to winner. Every spring prefers a ${restGap}-point gap: it pushes a closer pair apart${twoSided ? " and pulls a wider pair together" : ""}.`
             : "Higher = more earned points. Columns = conferences.",
         ),
         springMode
           ? h(
               "p",
               {},
-              "Height is the settled spring position. Columns only organize the display. Circular results can keep springs compressed; equal heights share a rank. Supporting opponents have no published rank.",
+              "Height is the settled spring position. Columns only organize the display. Conflicting game results create residual spring forces; equal heights share a rank. Supporting opponents have no published rank.",
             )
           : "",
         springMode
@@ -373,7 +375,7 @@ export function graphView(
       h(
         "div",
         { class: "sec" },
-        h("h3", {}, springMode ? "Most compressed springs" : "Biggest upsets"),
+        h("h3", {}, springMode ? "Largest spring forces" : "Biggest upsets"),
         ups.length === 0
           ? h("p", {}, "No wins over higher-ranked teams.")
           : h(
@@ -563,7 +565,7 @@ export function graphView(
       ...(
         [
           ["No lines", "none"],
-          [springMode ? "Compressed" : "Upsets", "upsets"],
+          [springMode ? "Strained" : "Upsets", "upsets"],
           ["All games", "all"],
         ] as [string, EdgeMode][]
       ).map(([label, m]) =>
@@ -647,7 +649,9 @@ export function graphView(
       "span",
       {},
       h("i", { class: "lu" }),
-      springMode ? "Compressed (gap < 1)" : "Upset (winner rated lower)",
+      springMode
+        ? `Strained (gap ${twoSided ? "≠" : "<"} ${restGap})`
+        : "Upset (winner rated lower)",
     ),
   );
   canvas.appendChild(legend);

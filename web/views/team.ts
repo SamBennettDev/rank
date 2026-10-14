@@ -229,16 +229,20 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
     return h(
       "div",
       { class: "panel why" },
-      h("h2", {}, "One-sided game springs"),
+      h(
+        "h2",
+        {},
+        `${ctx.ranking.manifest.springs.restGap}-point ${ctx.ranking.manifest.springs.direction === "two-sided" ? "two-way" : "one-sided"} game springs`,
+      ),
       h(
         "p",
         {},
-        `Graph height: ${fmtTeamScore(ctx, me)}. Each win pushes this team upward; each loss pushes it downward until the winner is one unit above the loser.`,
+        `Graph height: ${fmtTeamScore(ctx, me)}. Every game prefers its winner ${ctx.ranking.manifest.springs.restGap} points above its loser. Compressed springs push them apart; ${ctx.ranking.manifest.springs.direction === "two-sided" ? "stretched springs pull them together." : "separated springs stop pushing."}`,
       ),
       h(
         "p",
         { class: "hint" },
-        "Springs stop pushing once separated. At equilibrium the remaining upward and downward forces balance. Circular results can leave winners tied with or below their losers.",
+        "At equilibrium, upward and downward forces balance. A game’s signed force shows its remaining pull on this team. Conflicting results can leave winners tied with or below their losers.",
       ),
       h(
         "div",
@@ -250,7 +254,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
             "b",
             {},
             lines
-              .filter((l) => l.won)
+              .filter((l) => l.value > 0)
               .reduce((s, l) => s + l.value, 0)
               .toFixed(3),
           ),
@@ -263,7 +267,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
             "b",
             {},
             (-lines
-              .filter((l) => !l.won)
+              .filter((l) => l.value < 0)
               .reduce((s, l) => s + l.value, 0)).toFixed(3),
           ),
           h("small", {}, "Downward force"),

@@ -232,7 +232,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
           ? h(
               "p",
               { class: "hint" },
-              "Game graph · equal one-sided springs push each winner above its loser. Equal heights share a rank.",
+              `Game graph · equal ${ctx.ranking.manifest.springs.restGap}-point ${ctx.ranking.manifest.springs.direction === "two-sided" ? "two-way" : "one-sided"} springs. Equal heights share a rank.`,
             )
           : ctx.ranking.manifest.neural
             ? h(

@@ -151,8 +151,16 @@ export function parseConfig(json: string): SeasonConfig {
     throw new Error(
       "config.opponentClassifications must be a non-empty array of strings",
     );
-  if (c.method !== undefined && c.method !== "one-sided-springs-v1")
-    throw new Error("config.method must select one-sided-springs-v1");
+  if (
+    c.method !== undefined &&
+    !["one-sided-springs-v1", "two-sided-springs-v1"].includes(c.method)
+  )
+    throw new Error("config.method must select a supported spring method");
+  if (
+    c.springGap !== undefined &&
+    (!Number.isFinite(c.springGap) || c.springGap <= 0)
+  )
+    throw new Error("config.springGap must be positive");
   if (c.method && (c.neural || c.winQuality))
     throw new Error(
       "spring rankings cannot include neural or win-quality settings",

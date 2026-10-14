@@ -589,6 +589,7 @@ body[data-view="graph"] .foot { display: none; }
 /* Method, with the details kept one click away */
 .method-page { max-width: 960px; }
 .method-page .page-heading { padding-bottom: 26px; }
+.method-page .page-heading h1 { white-space: normal; overflow-wrap: anywhere; }
 .method-page p { font-size: 13px; }
 .rating-recipe { display: grid; grid-template-columns: 1fr 28px 1fr 28px 1fr; align-items: center; gap: 10px; margin: 12px 0 28px; }
 .recipe-block { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 128px; padding: 18px 8px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); }

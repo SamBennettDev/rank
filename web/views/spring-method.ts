@@ -51,9 +51,12 @@ export function springMethodView(ctx: Ctx): HTMLElement {
     "Recompute in my browser",
   );
   const rows = [
+    ["Spring rest gap", String(s.restGap)],
+    ["Spring direction", s.direction],
     ["Counted game springs", String(m.counts.included)],
     ["Connected groups", String(m.connectedComponents)],
     ["Compressed springs", String(s.compressedGames)],
+    ["Stretched springs", String(s.stretchedGames)],
     ["Winners below their losers", String(s.reversedGames)],
     ["Winners level with their losers", String(s.tiedGames)],
     ["Settled energy", s.energy.toFixed(6)],
@@ -75,14 +78,18 @@ export function springMethodView(ctx: Ctx): HTMLElement {
         "div",
         {},
         h("div", { class: "eyebrow" }, "The method"),
-        h("h1", {}, "A graph of one-sided springs"),
+        h(
+          "h1",
+          {},
+          `A graph of ${s.restGap}-point ${s.direction === "two-sided" ? "two-way" : "one-sided"} springs`,
+        ),
       ),
     ),
-    h("h2", {}, "Every game pushes its winner above its loser."),
+    h("h2", {}, `Every game prefers a ${s.restGap}-point winner–loser gap.`),
     h(
       "p",
       {},
-      "Each team is a node. Each completed, non-tied game is an equal spring pointing from the loser to the winner. Every node starts at zero. A spring pushes the winner upward and the loser downward until the winner is one unit higher; after that, it stops pushing.",
+      `Each team is a node. Each completed, non-tied game is an equal spring pointing from the loser to the winner. Every node starts at zero. A spring pushes a pair apart when the winner is less than ${s.restGap} points above the loser${s.direction === "two-sided" ? ` and pulls them together when the gap exceeds ${s.restGap}` : ""}.`,
     ),
     h(
       "p",
@@ -93,12 +100,17 @@ export function springMethodView(ctx: Ctx): HTMLElement {
     h(
       "p",
       {},
-      "If A beats B, B beats C, and C beats A, it is impossible to put every winner above its loser. The graph finds the lowest total squared compression. A symmetric three-team cycle settles at a tie; other cycles can leave a winner below a loser. Highlighted edges show compressed springs.",
+      "If A beats B, B beats C, and C beats A, it is impossible to put every winner above its loser. The graph minimizes the total squared gap error. A symmetric three-team cycle settles at a tie; other conflicts can leave a winner below a loser. Highlighted edges show springs with remaining force.",
     ),
     h(
       "p",
       {},
-      "Unbeaten teams can tie, and repeated wins do not keep pushing once their springs are separated. A long chain of results can create a large height difference. Height measures the game graph, not a calibrated chance of winning a future game.",
+      "Every meeting counts separately. Two-way springs keep both overly small and overly large gaps in check. A common positive rest gap sets the scale: seven gives seven times the heights of an otherwise identical one-point, two-way model, with the same unrounded ordering. Height is not a calibrated win probability or predicted scoring margin.",
+    ),
+    h(
+      "p",
+      {},
+      "Head-to-head order is a preference, not a hard constraint. Even an undefeated winner can rank below a team it beat: wins against much lower teams pull its height downward when those gaps exceed seven. This follows from fitting every game to the same exact gap.",
     ),
     h("h2", {}, "Only this season’s results."),
     h(
@@ -109,7 +121,7 @@ export function springMethodView(ctx: Ctx): HTMLElement {
     h(
       "p",
       {},
-      "Disconnected groups are each centered at zero. Games cannot establish their relative position; those ranks are provisional. The same zero-start relaxation is used for every snapshot because slack springs can admit several equally valid equilibria.",
+      "Disconnected groups are each centered at zero. Games cannot establish their relative position; those ranks are provisional. With two-way springs the centered equilibrium within each connected group is unique.",
     ),
     h(
       "details",
@@ -118,7 +130,7 @@ export function springMethodView(ctx: Ctx): HTMLElement {
       h(
         "p",
         {},
-        "For a game with winner w and loser l: compression = max(0, 1 − height[w] + height[l]). Minimize energy = ½ × sum(compression²). Each simultaneous step moves every team along its net force, with step size 1 / (2 × the largest game count in its connected group).",
+        `For a game with winner w and loser l: force on winner = ${s.restGap} − height[w] + height[l]. The loser receives the opposite force. Minimize energy = ½ × sum(force²). Each simultaneous step moves every team along its net force, with step size 1 / (2 × the largest game count in its connected group).`,
       ),
       h(
         "p",

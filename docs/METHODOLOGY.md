@@ -1,62 +1,64 @@
-# Raw one-sided game-spring ranking
+# Seven-point, two-way game-spring ranking
 
-The active method is `one-sided-springs-v1`. It uses only the current season's completed, non-tied results. It is a graph of result constraints, with no trained or calibrated parameters.
+The active method is `two-sided-springs-v1`, with `springGap: 7`. Only this season's completed, non-tied results enter the graph. Every game has equal weight; scores identify the winner but do not set its spring length.
 
-## Nodes, edges and forces
+## Force and equilibrium
 
-A team has one node identified by its unique numeric ID. Names, conferences and logos label the display and never affect forces. Every counted game contributes its own directed edge from loser to winner; repeated meetings are separate, equally weighted edges. Actual outside opponents are ordinary supporting nodes with the same zero start.
-
-Let `h[w]` and `h[l]` be the winner's and loser's heights. Define:
+Each team is a node. Each game is a spring whose desired height difference is winner minus loser = seven:
 
 ```text
-gap         = h[w] - h[l]
-compression = max(0, 1 - gap)
-energy      = ½ × sum over games of compression²
+gap             = height[winner] - height[loser]
+force on winner = 7 - gap
+force on loser  = -force on winner
+energy          = ½ × sum over games of (7 - gap)²
 ```
 
-The unit gap sets the measurement scale and prevents the trivial all-zero solution for a lone game. A compressed spring pushes its winner up by its compression and pushes its loser down by the same amount. Once the gap is at least one, the spring is slack and exerts no force. It never pulls an already-separated pair back together.
+A gap below seven pushes the winner upward and the loser downward. A gap above seven pulls the winner downward and loser upward. A gap of seven exerts no force. Both directions matter: unlike a one-sided spring, an already separated game can still pull its teams back together.
 
-All teams start at zero for every snapshot. No neural network, scoreboard margin, home advantage, prior-season evidence, division prior, separate win reward or separate loss deduction enters the calculation. Scores determine only who won. A loss participates fully through its spring; once that game's winner is sufficiently far above its loser, the game adds no further pressure.
+All teams start at zero. Simultaneous gradient relaxation uses component-local step `1 / (2 × maximum game count)`, counting repeated meetings separately. This step cannot increase the convex quadratic energy. Stop when every net force is at most `1e-10`, and throw if 2,000,000 iterations cannot reach equilibrium. Each connected component is centered at mean zero.
 
-## Settling and normalization
+This is graph least squares with a fixed binary result target. Its normal equations are:
 
-The implementation uses simultaneous gradient relaxation. In each connected group, every node moves along its total force with step size `1 / (2 × maximum node degree)`, counting repeated games in the degree. This is a conservative inverse Lipschitz bound for the convex squared-hinge energy, so a relaxation cannot increase energy. Component-local steps ensure an unrelated disconnected group does not alter another group's relaxation path.
+```text
+degree[i] × height[i] - sum(height[opponent] for each game)
+    = 7 × (wins[i] - losses[i])
 
-Stop only when the largest absolute net force is at most `1e-10`. The limit is 2,000,000 iterations; nonconvergence throws an error rather than publishing an unconverged standing. This is a numerical tolerance, not a learned sports setting. Because the objective is convex, a zero net force certifies a global minimum; the implementation stops within the published force tolerance.
+height[i] = average opponent height + 7 × (wins[i] - losses[i]) / games[i]
+```
 
-Equal and opposite forces conserve each component's mean. At the end, remove floating-point drift by centering each connected component at zero. Translation changes neither gaps nor energy. Do not normalize each team or scale gaps after fitting.
+The graph Laplacian has only translation freedom within a connected component. Centering removes that freedom, so the two-way equilibrium is unique per connected component. Numeric IDs fix serialization order and label nodes; they do not add strength.
 
-The energy can have multiple minimizers when springs are slack. Mean centering removes translation, but does not always remove this remaining freedom. The documented equal-zero initialization and fixed, simultaneous relaxation select a reproducible equilibrium. This is not a claim of a unique mathematical minimizer or a minimum-span layout. Numeric IDs fix stable iteration/serialization order; they do not add strength. Tests verify relabeling invariance within numerical tolerance.
+## What seven changes
 
-## Chains, cycles and ties
+A common positive rest gap sets scale. Replacing one with seven multiplies all unrounded heights and residual forces by seven and energy by 49; the ordering is the same. The change from the previous ranking comes from allowing two-way attraction, rather than the number seven alone. Tests verify this scaling and the normal equations.
 
-- One game, A beating B: heights `(+0.5, −0.5)`.
-- A beats B and B beats C: heights `(1, 0, −1)`.
-- Add A beating C: its two-unit gap is already separated, so that extra spring can become slack.
-- A beats B, B beats C, C beats A: heights `(0, 0, 0)`, energy `1.5`. All three springs are compressed, but their forces balance.
-- A beats B twice and B beats A once: the optimum gap is `1/3`, with heights `(+1/6, −1/6)` and energy `4/3`.
+The units are graph-height points, not calibrated scoring margins or win probabilities. Score margin, home advantage, division strength, polls, previous-season data, neural weights and separate loss deductions are unused.
 
-An acyclic results graph can satisfy all its spring constraints. A directed cycle cannot: summing its desired positive gaps around the cycle would require zero to be positive. Cycles therefore require a compromise and can leave winners tied with or below losers. Squared compression minimizes the severity of shortfalls; it does **not** promise the smallest number of reversed games.
+## Head-to-head tradeoff
 
-Long chains can create large height differences. Teams with different records can tie, or an unbeaten team can sit below a team with losses because its opponents anchor a different part of the graph. An additional win gives no ongoing force after that spring becomes slack. Those behaviors follow directly from the requested raw graph objective.
+The fit minimizes total squared gap error across **all** games. It does not enforce that every winner must rank above its loser. Cycles force compromises, but even without a cycle a team can be pulled below a team it beat when other games favor that arrangement. Even an undefeated team can rank below a team with losses. Wins against weak opponents can pull an already high team downward because every game asks for exactly seven points of separation.
 
-Heights are published to six decimals, and descending published heights determine competition ranks: `1, 1, 3, ...`. Equal heights share a rank. Team IDs order tied rows only. Graph vertical positions use these actual heights, rather than an ordinal rank coordinate. Horizontal conference lanes and overlap avoidance are cosmetic.
+In the 2026 Week 6 results, Georgia beat Alabama and the game is included. Its spring pushes Georgia up and Alabama down by 8.256014 units. Georgia's wins against Tennessee State and Western Kentucky pull Georgia down by 8.578995 and 4.909124 units because their fitted gaps exceed seven. Alabama's other opponents, including Kentucky and Mississippi State, establish a higher opponent average. The resulting equilibrium places Alabama #2 at 12.637356 and Georgia #8 at 11.381342.
 
-## Data scope and chronology
+A rule that always keeps a winner above its loser outside contradictory cycles would be a different, constrained ranking. This version reports the pure two-way spring result without inserting a special Georgia/Alabama override.
 
-The graph includes the games supplied in `games.csv`, with actual outside opponents added as nodes. Only teams in `teams.csv` whose classifications match the configuration receive ranks. Supporting nodes have heights and records but no published rank. No division or conference receives a bonus. The pipeline does not invent missing opponent schedules.
+Examples:
 
-Every snapshot is rebuilt independently from completed results available by its calendar cutoff. A result is assumed available six hours after kickoff, matching the repository's established chronology. Future results, conditional matchups and incomplete scores contribute no spring to an earlier snapshot. A tied score has no winner and contributes no edge; the manifest counts it separately. Unplayed teams remain unranked.
+- A beats B: heights `(+3.5, -3.5)`.
+- A beats B and B beats C: `(7, 0, -7)`.
+- Add A beating C: the three exact seven-point targets conflict. Heights become `(14/3, 0, -14/3)`. The direct A–C spring is stretched and pulls A downward.
+- A beats B, B beats C, C beats A: all heights zero, energy `73.5`.
+- A beats B twice, B beats A once: heights `(+7/6, -7/6)`.
 
-Every connected component is centered separately. There is no result evidence to establish the relative level of disconnected components. Combined ranks remain provisional in that situation; no artificial cross-component games or preseason strength estimates are inserted.
+## Scope, chronology and publication
 
-## Publication and verification
+Use completed non-tied games supplied in `games.csv`, with a six-hour result-availability lag after kickoff and independent calendar-cutoff snapshots. Actual outside opponents join as equal nodes. Only teams in configured publication classifications receive ranks. Supporting nodes retain their heights and records. Ties create no winner edge; unplayed teams stay unranked. Missing opponent schedules are not inferred.
 
-`manifest.springs` records rest gap, equal-zero initialization, component normalization, solver, stopping tolerance, iteration count, net-force residual, energy and conflict counts. `springs[]` has one entry per counted game, storing endpoints, gap, compression and energy. `teams[]` stores actual heights, ranks and reconciled win/loss records. Supporting nodes appear under `opponents[]`.
+Disconnected components are each centered at zero, but games cannot establish their relative level. Combined ranks remain provisional in that situation. Publish heights to six decimals, sort descending and preserve equal heights as competition ranks (`1, 1, 3, ...`). Conference lanes affect only the horizontal display.
 
-Predictions and credits are empty; projections use `method: none`. Legacy manifest numeric fields are zero/inactive, retained for schema compatibility. Scores, plays and saved neural exports do not enter the spring fit. The minimal active configuration selects the method and publication classifications.
+`manifest.springs` records direction, rest gap, solver, convergence, energy, compression/extension counts and head-to-head reversals. Each entry in `springs[]` records one game's endpoints, gap, compression, extension, **signed force on the winner**, and energy. The loser receives the opposite force. Team pages use those signed forces, including downward pulls from stretched wins. Predictions, point credits and projections remain inactive.
 
-Run:
+## Verification
 
 ```sh
 npm run typecheck
@@ -67,6 +69,6 @@ npm run audit-springs -- 2026
 npm run build
 ```
 
-Tests cover hand-solvable examples, slack edges, repeated games, normalization, relabeling, duplicated/corrupt input, score/venue independence, future-result isolation and publication reconciliation. The audit independently reconstructs forces and energy from the rounded public heights and checks every record, rank and edge. Rounding creates a small force residual; full-precision convergence is recorded separately. Byte verification reproduces every serialized ranking from raw source bytes. The Method page runs the same reconstruction engine in the browser.
+Tests cover hand-solved push and pull examples, cycles, repeated meetings, seven-to-one scaling, Laplacian normal equations, normalization, identifiers, causal cutoffs and record/rank reconciliation. The audit reconstructs signed forces and energy from rounded heights. Exact byte verification and the browser recompute bind all six snapshots to their raw source files.
 
-[Current Week 6 report](../research/springs/2026/REPORT.md) and [audit](../research/springs/2026/audit.json). Historical neural experiments are retained in [NEURAL_V2.md](./NEURAL_V2.md), [NEURAL_V1.md](./NEURAL_V1.md) and [research](../research/season_only/README.md). Those studies evaluate different predictive models and do not establish the prediction accuracy of this results graph.
+[Current Week 6 report](../research/springs/2026/REPORT.md), [full rankings](../research/springs/2026/week-06-rankings.csv), [audit](../research/springs/2026/audit.json). The previous [one-sided method](./ONE_SIDED_SPRINGS.md) and [Week 6 output](../research/springs/2026/one-sided-v1/week-06.json) remain archived. Neural studies remain under [research](../research/season_only/README.md); their historical accuracy figures do not evaluate this graph method.

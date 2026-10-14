@@ -27,7 +27,8 @@ export interface Game {
 
 export interface SeasonConfig {
   /** Raw results graph; legacy numeric settings below are ignored in this mode. */
-  method?: "one-sided-springs-v1";
+  method?: "one-sided-springs-v1" | "two-sided-springs-v1";
+  springGap?: number;
   /** Display name, e.g. "2026 season". */
   label: string;
   /** True for the fictional fixture season. */
@@ -166,9 +167,11 @@ export interface Manifest {
     | "frozen-fbs-quality-v2"
     | "season-only-neural-v1"
     | "season-only-neural-v2"
-    | "one-sided-springs-v1";
+    | "one-sided-springs-v1"
+    | "two-sided-springs-v1";
   springs?: {
-    restGap: 1;
+    restGap: number;
+    direction: "one-sided" | "two-sided";
     initialization: "zero";
     normalization: "component-mean-zero";
     solver: "simultaneous-relaxation-v1";
@@ -177,6 +180,7 @@ export interface Manifest {
     maxNetForce: number;
     energy: number;
     compressedGames: number;
+    stretchedGames: number;
     reversedGames: number;
     tiedGames: number;
   };
@@ -241,6 +245,9 @@ export interface Ranking {
     loser: number;
     gap: number;
     compression: number;
+    extension: number;
+    /** Signed force on the winner; the loser receives the opposite force. */
+    force: number;
     energy: number;
   }[];
   teams: RankedTeam[];

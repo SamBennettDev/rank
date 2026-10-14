@@ -1,4 +1,4 @@
-/** Equal, one-sided, unit-length springs. Only winner/loser endpoints enter the fit. */
+/** Equal game springs. Only winner/loser endpoints enter the fit. */
 export interface SpringGame {
   gameId: number;
   winner: number;
@@ -9,24 +9,29 @@ export const SPRING_TOLERANCE = 1e-10;
 export const SPRING_MAX_ITERATIONS = 2000000;
 
 /**
- * Minimize E = 1/2 sum max(0, 1 - h[w] + h[l])^2.
+ * Two-sided: minimize E = 1/2 sum (restGap - h[w] + h[l])^2.
+ * The archived one-sided option clips negative forces to zero.
  *
  * Start every node at zero. On each simultaneous relaxation, a compressed
- * spring pushes its winner up and loser down by equal amounts. A spring with
- * a gap >= 1 exerts no force. The component-local step 1/(2*maxDegree) is a
+ * spring pushes its winner up and loser down by equal amounts. A stretched
+ * two-sided spring pulls them together. The step 1/(2*maxDegree) is a
  * conservative inverse Lipschitz bound, so energy cannot increase. No tether,
  * margin, division prior, historical data, or extra loss term enters this fit.
  *
  * Absolute height is unidentifiable. Center each connected component at zero.
- * Slack springs can also leave several equilibria; this fixed zero-start
- * relaxation defines the reproducible solution, rather than claiming that the
- * energy always has a unique minimizer. Stop on net force, NOT movement or
+ * The two-sided equilibrium is unique after component centering. Archived
+ * one-sided springs can leave several equilibria. Stop on net force, NOT movement or
  * energy change, and fail explicitly if the equilibrium has not converged.
  */
 export function fitSprings(
   teamIds: readonly number[],
   games: readonly SpringGame[],
+  options: { restGap?: number; oneSided?: boolean } = {},
 ) {
+  const restGap = options.restGap ?? 1,
+    oneSided = options.oneSided ?? true;
+  if (!Number.isFinite(restGap) || restGap <= 0)
+    throw new Error("invalid spring rest gap");
   if (new Set(teamIds).size !== teamIds.length)
     throw new Error("duplicate spring node");
   const ids = [...teamIds].sort((a, b) => a - b);
@@ -77,9 +82,10 @@ export function fitSprings(
   while (iterations <= SPRING_MAX_ITERATIONS) {
     force.fill(0);
     for (const [w, l] of pairs) {
-      const compression = Math.max(0, 1 - heights[w]! + heights[l]!);
-      force[w]! += compression;
-      force[l]! -= compression;
+      const displacement = restGap - heights[w]! + heights[l]!;
+      const springForce = oneSided ? Math.max(0, displacement) : displacement;
+      force[w]! += springForce;
+      force[l]! -= springForce;
     }
     maxNetForce = force.reduce((m, f) => Math.max(m, Math.abs(f)), 0);
     if (maxNetForce <= SPRING_TOLERANCE) break;
@@ -97,14 +103,18 @@ export function fitSprings(
   const springs = edges.map((e, i) => {
     const [w, l] = pairs[i]!,
       gap = heights[w]! - heights[l]!;
-    const compression = Math.max(0, 1 - gap);
+    const compression = Math.max(0, restGap - gap);
+    const extension = Math.max(0, gap - restGap);
+    const springForce = oneSided ? compression : restGap - gap;
     return {
       gameId: e.gameId,
       winner: e.winner,
       loser: e.loser,
       gap,
       compression,
-      energy: 0.5 * compression ** 2,
+      extension,
+      force: springForce,
+      energy: 0.5 * springForce ** 2,
     };
   });
   return {

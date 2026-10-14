@@ -1,40 +1,42 @@
-# 2026 raw one-sided spring graph
+# 2026 7-point two-sided spring graph
 
 Through Week 6, cutoff 2026-10-11T08:30:00.000Z. 812 completed non-tied games connect 266 published FBS/FCS teams and 52 supporting opponents.
 
-Every game has equal weight and a desired winner–loser gap of one unit. Minimize half the sum of squared positive shortfalls. All nodes start at zero; simultaneous spring forces settle the graph. Every connected group is then centered at zero. Score margin, site, historical seasons, neural weights and division priors are unused.
+Every game has equal weight and a desired winner–loser gap of 7 points. Minimize half the sum of squared gap errors. Compressed springs push teams apart; stretched two-sided springs pull them together. All nodes start at zero; simultaneous spring forces settle the graph. Every connected group is centered at zero. Score margin, site, historical seasons, neural weights and division priors are unused.
 
-215 springs remain compressed: 42 winners are below their losers and 14 are level (1e-6 display tolerance). Cycles cannot all be satisfied. Equal published heights share a competition rank.
+622 springs are compressed and 148 are stretched. 83 winners are below their losers and 0 are level (1e-6 display tolerance). Conflicting paths and cycles require compromises. Equal published heights share a competition rank.
 
-This is a results-constraint ranking. It does not supply calibrated probabilities or establish an accuracy advantage over a neural model or betting market. Slack springs can admit multiple equilibria; the documented zero-start relaxation fixes a reproducible solution. Disconnected groups cannot be compared from games alone. Long chains can create large heights, and no extra win reward applies once a spring is slack.
+This is a results-constraint ranking, with no calibrated win probabilities or claimed betting-market advantage. Two-sided springs have a unique centered equilibrium per connected component. A common positive rest gap sets the height scale; changing it from one to seven multiplies heights by seven without changing the unrounded ordering. The new order comes from allowing stretched springs to pull teams together. Disconnected groups cannot be compared from games alone.
+
+Head-to-head order is not guaranteed, even outside cycles: an exact-gap spring can pull a winner down after a win against a much lower team. See the [head-to-head explanation](../../../docs/METHODOLOGY.md#head-to-head-tradeoff), including the Georgia–Alabama result. The normal equation is height = average opponent height + rest gap × (wins − losses) / games.
 
 | Rank | Team | Record | Height |
 | --- | --- | --- | --- |
-| T-1 | Georgia | 6–0 | 18.420045 |
-| T-1 | Miami | 5–0 | 18.420045 |
-| T-3 | UCLA | 5–0 | 17.420045 |
-| T-3 | Notre Dame | 6–0 | 17.420045 |
-| T-3 | Wake Forest | 5–1 | 17.420045 |
-| T-3 | Alabama | 5–1 | 17.420045 |
-| T-7 | Mississippi State | 4–1 | 16.420045 |
-| T-7 | Purdue | 3–3 | 16.420045 |
-| T-9 | Kentucky | 5–1 | 15.420045 |
-| T-9 | Minnesota | 4–2 | 15.420045 |
-| T-11 | Michigan | 3–2 | 14.420045 |
-| T-11 | Missouri | 5–1 | 14.420045 |
-| T-11 | Ohio State | 5–1 | 14.420045 |
-| T-11 | Oklahoma | 3–2 | 14.420045 |
-| T-11 | Texas | 4–1 | 14.420045 |
-| T-11 | Iowa | 5–1 | 14.420045 |
-| T-11 | South Carolina | 3–3 | 14.420045 |
-| T-18 | Florida | 4–2 | 13.420045 |
-| T-18 | Tennessee | 5–1 | 13.420045 |
-| T-20 | Auburn | 3–2 | 12.420045 |
-| T-20 | Indiana | 6–0 | 12.420045 |
-| T-22 | Northwestern | 4–1 | 11.420045 |
-| T-22 | Baylor | 4–1 | 11.420045 |
-| T-22 | Texas Tech | 5–0 | 11.420045 |
-| 25 | Ole Miss | 4–1 | 11.023719 |
+| 1 | Notre Dame | 6–0 | 13.147545 |
+| 2 | Alabama | 5–1 | 12.637356 |
+| 3 | UCLA | 5–0 | 12.614239 |
+| 4 | Texas | 4–1 | 12.318194 |
+| 5 | Miami | 5–0 | 12.044612 |
+| 6 | Kentucky | 5–1 | 11.864540 |
+| 7 | Texas Tech | 5–0 | 11.619805 |
+| 8 | Georgia | 6–0 | 11.381342 |
+| 9 | Mississippi State | 4–1 | 10.870361 |
+| 10 | Indiana | 6–0 | 10.718637 |
+| 11 | Wake Forest | 5–1 | 10.558406 |
+| 12 | Boise State | 5–1 | 10.355211 |
+| 13 | BYU | 5–0 | 10.266881 |
+| 14 | Ohio State | 5–1 | 10.161231 |
+| 15 | Missouri | 5–1 | 9.701552 |
+| 16 | USC | 6–1 | 9.686454 |
+| 17 | Iowa | 5–1 | 9.635084 |
+| 18 | Nebraska | 5–1 | 9.594625 |
+| 19 | Northwestern | 4–1 | 9.553672 |
+| 20 | Ole Miss | 4–1 | 9.509485 |
+| 21 | Utah | 5–0 | 9.482154 |
+| 22 | Oregon | 3–2 | 9.361795 |
+| 23 | Florida | 4–2 | 9.320012 |
+| 24 | Houston | 5–1 | 9.202525 |
+| 25 | UTSA | 5–1 | 9.095118 |
 
 Full field: [CSV](./week-06-rankings.csv). [Every snapshot audit](./audit.json). [Math, normalization and limits](../../../docs/METHODOLOGY.md).
 

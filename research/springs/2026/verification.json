@@ -1,10 +1,11 @@
 {
-  "method": "one-sided-springs-v1",
-  "engine": "rank-engine-20",
-  "verifiedAt": "2026-10-14T17:08:10.733621+00:00",
+  "method": "two-sided-springs-v1",
+  "restGap": 7,
+  "engine": "rank-engine-21",
+  "verifiedAt": "2026-10-14T17:23:35.960625+00:00",
   "typecheck": "passed",
   "tests": {
-    "passed": 84,
+    "passed": 88,
     "files": 9
   },
   "byteReproduction": {
@@ -18,7 +19,7 @@
     "errors": [],
     "nodes": 318,
     "gameEdges": 812,
-    "compressedEdges": 215,
+    "strainedEdges": 770,
     "recompute": "Exact match. Your browser rebuilt all 6 rankings byte for byte.",
     "mobile_graph": {
       "overflow": false

@@ -104,7 +104,7 @@ export function breakdown(ctx: Ctx, teamId: number) {
         value: ctx.ranking.manifest.springs
           ? (won ? 1 : -1) *
             ctx.ranking.springs!.find((e) => e.gameId === edge.gameId)!
-              .compression
+              .force
           : won
             ? credits.get(edge.gameId)!.value
             : -1,

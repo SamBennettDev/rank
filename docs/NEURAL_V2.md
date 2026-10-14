@@ -1,6 +1,6 @@
 # Archived neural methodology
 
-This describes the previous neural ranking. The active method is now the [raw one-sided game-spring graph](./METHODOLOGY.md). The final neural configuration and Week 6 output are preserved in [production-2026](../research/season_only/robust/production-2026/).
+This describes the previous neural ranking. The active method is now the [raw two-way game-spring graph](./METHODOLOGY.md). The final neural configuration and Week 6 output are preserved in [production-2026](../research/season_only/robust/production-2026/).
 
 Rank publishes a **neural ranking of who is more likely to beat whom**, with game forecasts from the same model. The active method is `season-only-neural-2` / `season-only-neural-v2`. The [previous neural method](NEURAL_V1.md) and earned-credit method below remain archived for comparison and projections.
 

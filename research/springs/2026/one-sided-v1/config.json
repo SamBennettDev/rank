@@ -1,0 +1,7 @@
+{
+  "label": "2026 season",
+  "demo": false,
+  "algorithmVersion": "one-sided-springs-1",
+  "method": "one-sided-springs-v1",
+  "classifications": ["fbs", "fcs"]
+}
