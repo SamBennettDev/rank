@@ -37,18 +37,34 @@ for (const snapshot of entry.snapshots) {
   const force = new Map(all.map((t) => [t.id, 0])),
     groups = new Map<number, number[]>();
   let energy = 0;
-  for (const e of edges) {
+  for (let i = 0; i < edges.length; i++) {
+    const e = edges[i]!,
+      saved = r.springs[i]!;
     const displacement =
       r.manifest.springs.restGap -
       byId.get(e.winner)!.height! +
       byId.get(e.loser)!.height!;
+    const k = saved.pullStiffness;
     const springForce =
-      r.manifest.springs.direction === "one-sided"
-        ? Math.max(0, displacement)
-        : displacement;
+      Math.max(0, displacement) - k * Math.max(0, -displacement);
+    if (
+      saved.support &&
+      Math.abs(
+        k -
+          2 **
+            (-Math.max(
+              0,
+              saved.support.bestWinStrength - saved.support.opponentStrength,
+            ) /
+              r.manifest.springs.restGap),
+      ) > 1e-12
+    )
+      throw new Error("spring stiffness audit failed");
     force.set(e.winner, force.get(e.winner)! + springForce);
     force.set(e.loser, force.get(e.loser)! - springForce);
-    energy += 0.5 * springForce ** 2;
+    energy +=
+      0.5 *
+      (Math.max(0, displacement) ** 2 + k * Math.max(0, -displacement) ** 2);
   }
   for (const t of all) {
     if (
@@ -82,7 +98,8 @@ for (const snapshot of entry.snapshots) {
     maxNetForceFromRoundedHeights > 2e-5 ||
     largestAbsoluteComponentMean > 1e-6 ||
     Math.abs(energy - r.manifest.springs.energy) > 1e-7 ||
-    r.manifest.springs.maxNetForce > SPRING_TOLERANCE
+    r.manifest.springs.maxNetForce > SPRING_TOLERANCE ||
+    (r.manifest.springs.reference?.maxNetForce ?? 0) > SPRING_TOLERANCE
   )
     throw new Error("spring equilibrium audit failed");
   audits.push({
@@ -133,17 +150,17 @@ writeFileSync(
 writeFileSync(
   resolve(directory, "REPORT.md"),
   [
-    `# ${year} ${latest.manifest.springs!.restGap}-point ${latest.manifest.springs!.direction} spring graph`,
+    `# ${year} ${latest.manifest.springs!.restGap}-point spring graph${latest.manifest.springs!.pullPolicy ? " with strong-win support" : ""}`,
     "",
     `Through ${latest.snapshot.label}, cutoff ${latest.snapshot.asOf}. ${latest.manifest.counts.included} completed non-tied games connect ${latest.teams.length} published FBS/FCS teams and ${latest.opponents?.length ?? 0} supporting opponents.`,
     "",
-    `Every game has equal weight and a desired winner–loser gap of ${latest.manifest.springs!.restGap} points. Minimize half the sum of squared gap errors. Compressed springs push teams apart; stretched two-sided springs pull them together. All nodes start at zero; simultaneous spring forces settle the graph. Every connected group is centered at zero. Score margin, site, historical seasons, neural weights and division priors are unused.`,
+    `Every game has a desired winner–loser gap of ${latest.manifest.springs!.restGap} points. Compressed springs keep full stiffness. Stretched springs pull teams together with strength-based stiffness: stronger wins support a team against downward pulls from wins over weaker opponents. Weights come from an equal-spring current-season reference graph, are frozen before the final fit, and use no team identity, score margin, venue, division prior, historical season or neural estimate.`,
     "",
     `${latest.manifest.springs!.compressedGames} springs are compressed and ${latest.manifest.springs!.stretchedGames} are stretched. ${latest.manifest.springs!.reversedGames} winners are below their losers and ${latest.manifest.springs!.tiedGames} are level (1e-6 display tolerance). Conflicting paths and cycles require compromises. Equal published heights share a competition rank.`,
     "",
-    "This is a results-constraint ranking, with no calibrated win probabilities or claimed betting-market advantage. Two-sided springs have a unique centered equilibrium per connected component. A common positive rest gap sets the height scale; changing it from one to seven multiplies heights by seven without changing the unrounded ordering. The new order comes from allowing stretched springs to pull teams together. Disconnected groups cannot be compared from games alone.",
+    "For each winner, let d be the reference-strength difference between its strongest beaten opponent and this beaten opponent. Pull stiffness k = 2^(−max(0,d)/7). The strongest win has k = 1; each seven-point difference halves a weaker win's downward pull. Minimize ½ × sum(compression² + k × extension²). The loser receives the opposite force, and all compression keeps stiffness one. Frozen positive weights keep the objective convex and each centered component's equilibrium unique.",
     "",
-    "Head-to-head order is not guaranteed, even outside cycles: an exact-gap spring can pull a winner down after a win against a much lower team. See the [head-to-head explanation](../../../docs/METHODOLOGY.md#head-to-head-tradeoff), including the Georgia–Alabama result. The normal equation is height = average opponent height + rest gap × (wins − losses) / games.",
+    "This implements the requested ranking policy rather than proving predictive superiority. Head-to-head order is still not guaranteed. See the [five-policy comparison](./STIFFNESS_COMPARISON.md), [full comparison data](./stiffness-comparison.json), and [methodology](../../../docs/METHODOLOGY.md). The comparison includes the Georgia–Alabama example and a sensitivity variant that reverses their order.",
     "",
     "| Rank | Team | Record | Height |",
     "| --- | --- | --- | --- |",

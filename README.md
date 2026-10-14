@@ -1,14 +1,14 @@
 # Rank
 
-College football rankings from a **raw graph of current-season results**. Each team is a node; each completed, non-tied game is an equal seven-point, two-way spring. Website: https://rank.sam-bennett.dev.
+College football rankings from a **raw graph of current-season results**. Each team is a node; each completed, non-tied game is a seven-point, two-way spring with support from stronger wins. Website: https://rank.sam-bennett.dev.
 
-Every spring wants its winner exactly seven points above its loser. It pushes a closer pair apart and pulls an overly wide pair together. All nodes start at zero. Simultaneous relaxation settles the forces, each connected group is centered at zero, and heights determine the standing. Equal published heights share a rank.
+Every spring wants its winner exactly seven points above its loser. It pushes a closer pair apart and pulls an overly wide pair together. Strong wins protect against excessive downward pull from weaker wins: stiffness halves for every seven reference points by which a beaten opponent is weaker than the team’s strongest beaten opponent. An initial equal-spring fit establishes those current-season reference strengths; the final fit freezes the weights. Compression keeps full stiffness. All nodes start at zero. Simultaneous relaxation settles the forces, each connected group is centered at zero, and heights determine the standing. Equal published heights share a rank.
 
-Circular results cannot all be ordered perfectly. They settle into the lowest total squared gap error, which can leave a winner below its loser. The graph shows every game, with arrows from loser to winner and strained springs highlighted. Supporting opponents participate equally; only configured FBS/FCS teams receive published ranks. Disconnected groups cannot be compared from their games and remain provisional.
+Circular results cannot all be ordered perfectly. They settle into the lowest total weighted spring energy, which can leave a winner below its loser. The graph shows every game, with arrows from loser to winner and strained springs highlighted. Supporting opponents participate equally; only configured FBS/FCS teams receive published ranks. Disconnected groups cannot be compared from their games and remain provisional.
 
 Only winners and losers affect the calculation. Seven sets the scale; multiplying the common rest gap by seven multiplies all heights by seven without changing the unrounded order. Allowing stretched springs to pull teams together produces the change from the previous one-sided model. Score margin, venue, polls, previous seasons, division strength and neural estimates are unused. There is no extra loss deduction or win credit: each result acts through its spring. This method is a results graph, with no calibrated matchup probabilities or claimed betting-market advantage.
 
-See the [methodology](docs/METHODOLOGY.md), [Week 6 report and full rankings](research/springs/2026/REPORT.md), and [six-snapshot equilibrium audit](research/springs/2026/audit.json). The previous [neural research](research/season_only/robust/REPORT.md) and [neural methodology](docs/NEURAL_V2.md) remain archived; they do not drive the active ranking.
+See the [methodology](docs/METHODOLOGY.md), [Week 6 report and full rankings](research/springs/2026/REPORT.md), [five-policy comparison](research/springs/2026/STIFFNESS_COMPARISON.md), and [six-snapshot equilibrium audit](research/springs/2026/audit.json). The previous [neural research](research/season_only/robust/REPORT.md) and [neural methodology](docs/NEURAL_V2.md) remain archived; they do not drive the active ranking.
 
 ## Run and verify
 
@@ -22,6 +22,7 @@ npm test
 npm run compute
 npm run verify
 npm run audit-springs -- 2026
+npm run compare-springs -- 2026
 npm run build
 ```
 
@@ -40,7 +41,7 @@ research/springs/<year>/              generated report, CSV and equilibrium audi
 
 A snapshot counts completed non-tied games whose assumed score availability (kickoff + six hours) is before its cutoff. All actual opponents in the supplied game file join the graph, including opponents outside the published field. Their nodes start at zero, with no division bonus. The supplied schedule determines the available evidence; no unprovided games are inferred. Tied games have no winner edge and are reported separately. Unplayed teams stay unranked.
 
-`manifest.springs` records normalization, convergence, energy and conflicts. `springs[]` records each game's endpoints, height gap, compression, extension, signed force and energy. `height` is an actual graph position. Legacy schema fields for predictions, credits and projections are empty/inactive. Historical play summaries and saved neural bundles remain available for archived research but are not read by the spring pipeline.
+`manifest.springs` records pull policy, stiffness range, reference/final convergence, energy and conflicts. `springs[]` records each game's endpoints, height gap, compression, extension, pull stiffness, reference support, signed force and energy. `height` is an actual graph position. Legacy schema fields for predictions, credits and projections are empty/inactive. Historical play summaries and saved neural bundles remain available for archived research but are not read by the spring pipeline.
 
 ## Update results
 
@@ -53,7 +54,7 @@ npm run verify
 npm run audit-springs -- 2026
 ```
 
-Commit the changed data. The **Update data** GitHub workflow fetches results and rebuilds the graph; no Python training, play data or model export is required. New seasons default to seven-point, two-way springs. Deployment uses the existing GitHub Pages workflow and domain configuration.
+Commit the changed data. The **Update data** GitHub workflow fetches results and rebuilds the graph; no Python training, play data or model export is required. New seasons default to seven-point springs with strong-win support. Deployment uses the existing GitHub Pages workflow and domain configuration.
 
 ## Layout
 

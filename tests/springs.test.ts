@@ -1,6 +1,10 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { fitSprings, SPRING_TOLERANCE } from "../src/engine/springs";
+import {
+  fitSprings,
+  fitSupportedSprings,
+  SPRING_TOLERANCE,
+} from "../src/engine/springs";
 import { computeSeason } from "../src/engine/season";
 import { gamesToCsv, parseGames, parseTeams } from "../src/engine/data";
 import { buildEdges } from "../src/engine/graph";
@@ -232,10 +236,87 @@ describe("spring season publication", () => {
       expect(s.gap).toBeCloseTo(gap, 5);
       expect(s.compression).toBeCloseTo(Math.max(0, 7 - gap), 5);
       expect(s.extension).toBeCloseTo(Math.max(0, gap - 7), 5);
-      expect(s.force).toBeCloseTo(7 - gap, 5);
+      expect(s.force).toBeCloseTo(
+        Math.max(0, 7 - gap) - s.pullStiffness * Math.max(0, gap - 7),
+        5,
+      );
       forces.set(s.winner, forces.get(s.winner)! + s.force);
       forces.set(s.loser, forces.get(s.loser)! - s.force);
     }
     expect(Math.max(...[...forces.values()].map(Math.abs))).toBeLessThan(1e-5);
+  });
+});
+
+describe("strong-win support for soft stretched springs", () => {
+  it("softens extension without weakening compression and integrates the correct energy", () => {
+    const e = edges([1, 2], [2, 3], [1, 3]).map((g) => ({
+      ...g,
+      pullStiffness: g.gameId === 3 ? 0.25 : 1,
+    }));
+    const r = fitSprings([1, 2, 3], e, { restGap: 7, oneSided: false });
+    expect(r.heights.get(1)).toBeCloseTo(35 / 6, 8);
+    expect(r.springs[0]!.force).toBeCloseTo(r.springs[0]!.compression, 8);
+    expect(r.springs[2]!.force).toBeCloseTo(-0.25 * r.springs[2]!.extension, 8);
+    expect(r.energy).toBeCloseTo(49 / 12, 8);
+    expect(() =>
+      fitSprings([1, 2], [{ ...e[0]!, pullStiffness: -1 }], {
+        oneSided: false,
+      }),
+    ).toThrow(/stiffness/);
+    expect(() =>
+      fitSprings([1, 2], [{ ...e[0]!, pullStiffness: 2 }], { oneSided: false }),
+    ).toThrow(/stiffness/);
+  });
+  it("freezes weights from an equal-spring current-season reference graph", () => {
+    const e = edges([1, 2], [1, 3], [2, 4], [4, 3], [2, 3]);
+    const r = fitSupportedSprings([1, 2, 3, 4], e, 7);
+    for (const s of r.springs) {
+      const strengths = e
+        .filter((g) => g.winner === s.winner)
+        .map((g) => r.baseline.heights.get(g.loser)!);
+      const best = Math.max(...strengths),
+        opponent = r.baseline.heights.get(s.loser)!;
+      expect(s.support.bestWinStrength).toBe(best);
+      expect(s.pullStiffness).toBeCloseTo(
+        2 ** (-Math.max(0, best - opponent) / 7),
+        12,
+      );
+      if (best === opponent) expect(s.pullStiffness).toBe(1);
+      expect(s.force).toBeCloseTo(
+        s.compression - s.pullStiffness * s.extension,
+        12,
+      );
+    }
+    expect(r.springs.some((s) => s.pullStiffness < 1)).toBe(true);
+    const injected = fitSupportedSprings(
+      [1, 2, 3, 4],
+      e.map((g) => ({ ...g, pullStiffness: 0 })),
+      7,
+    );
+    expect(injected.heights).toEqual(r.heights);
+  });
+  it("is invariant to relabeling, order and the choice of height scale", () => {
+    const e = edges([1, 2], [2, 3], [3, 1], [1, 4], [4, 2]);
+    const a = fitSupportedSprings([1, 2, 3, 4], e, 1);
+    const b = fitSupportedSprings([4, 3, 2, 1], [...e].reverse(), 7);
+    for (const id of [1, 2, 3, 4])
+      expect(b.heights.get(id)).toBeCloseTo(7 * a.heights.get(id)!, 8);
+    for (let i = 0; i < a.springs.length; i++)
+      expect(b.springs[i]!.pullStiffness).toBeCloseTo(
+        a.springs[i]!.pullStiffness,
+        9,
+      );
+    const rename = (id: number) => 100 - id;
+    const c = fitSupportedSprings(
+      [1, 2, 3, 4].map(rename),
+      e.map((g) => ({
+        ...g,
+        winner: rename(g.winner),
+        loser: rename(g.loser),
+      })),
+      1,
+    );
+    for (const id of [1, 2, 3, 4])
+      expect(c.heights.get(rename(id))).toBeCloseTo(a.heights.get(id)!, 8);
   });
 });

@@ -206,7 +206,7 @@ export function graphView(
       style: springMode ? "pointer-events:stroke" : "",
     });
     const title = svg("title");
-    title.textContent = `${ctx.byId.get(e.winner)!.school} beat ${ctx.byId.get(e.loser)!.school}${springMode ? ` · gap ${springByGame.get(e.gameId)!.gap.toFixed(3)} · signed force on winner ${springByGame.get(e.gameId)!.force.toFixed(3)}` : ""}`;
+    title.textContent = `${ctx.byId.get(e.winner)!.school} beat ${ctx.byId.get(e.loser)!.school}${springMode ? ` · gap ${springByGame.get(e.gameId)!.gap.toFixed(3)} · signed force on winner ${springByGame.get(e.gameId)!.force.toFixed(3)} · pull stiffness ${(100 * springByGame.get(e.gameId)!.pullStiffness).toFixed(1)}%` : ""}`;
     path.appendChild(title);
     return path;
   };
@@ -350,6 +350,13 @@ export function graphView(
               "p",
               {},
               "Height is the settled spring position. Columns only organize the display. Conflicting game results create residual spring forces; equal heights share a rank. Supporting opponents have no published rank.",
+            )
+          : "",
+        ctx.ranking.manifest.springs?.pullPolicy
+          ? h(
+              "p",
+              {},
+              "Stronger wins support a team’s height: wins over weaker opponents have softer downward pulls. All compressed springs keep full strength. Weights come from this season’s game graph.",
             )
           : "",
         springMode

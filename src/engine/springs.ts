@@ -1,8 +1,10 @@
-/** Equal game springs. Only winner/loser endpoints enter the fit. */
+/** Game endpoints with an optional coefficient for softened stretched pulls. */
 export interface SpringGame {
   gameId: number;
   winner: number;
   loser: number;
+  /** Stiffness when a winning gap exceeds restGap; compression always has stiffness one. */
+  pullStiffness?: number;
 }
 
 export const SPRING_TOLERANCE = 1e-10;
@@ -19,7 +21,7 @@ export const SPRING_MAX_ITERATIONS = 2000000;
  * margin, division prior, historical data, or extra loss term enters this fit.
  *
  * Absolute height is unidentifiable. Center each connected component at zero.
- * The two-sided equilibrium is unique after component centering. Archived
+ * With positive pull stiffness, equilibrium is unique after component centering. Archived
  * one-sided springs can leave several equilibria. Stop on net force, NOT movement or
  * energy change, and fail explicitly if the equilibrium has not converged.
  */
@@ -37,6 +39,17 @@ export function fitSprings(
   const ids = [...teamIds].sort((a, b) => a - b);
   const index = new Map(ids.map((id, i) => [id, i]));
   const edges = [...games].sort((a, b) => a.gameId - b.gameId);
+  for (const e of edges)
+    if (
+      e.pullStiffness !== undefined &&
+      (!Number.isFinite(e.pullStiffness) ||
+        e.pullStiffness < 0 ||
+        e.pullStiffness > 1)
+    )
+      throw new Error("invalid spring pull stiffness");
+  const pullStiffness = edges.map((e) =>
+    oneSided ? 0 : (e.pullStiffness ?? 1),
+  );
   if (new Set(edges.map((e) => e.gameId)).size !== edges.length)
     throw new Error("duplicate spring game");
   const n = ids.length,
@@ -81,9 +94,11 @@ export function fitSprings(
     maxNetForce = Infinity;
   while (iterations <= SPRING_MAX_ITERATIONS) {
     force.fill(0);
-    for (const [w, l] of pairs) {
+    for (let j = 0; j < pairs.length; j++) {
+      const [w, l] = pairs[j]!;
       const displacement = restGap - heights[w]! + heights[l]!;
-      const springForce = oneSided ? Math.max(0, displacement) : displacement;
+      const springForce =
+        displacement >= 0 ? displacement : pullStiffness[j]! * displacement;
       force[w]! += springForce;
       force[l]! -= springForce;
     }
@@ -105,7 +120,7 @@ export function fitSprings(
       gap = heights[w]! - heights[l]!;
     const compression = Math.max(0, restGap - gap);
     const extension = Math.max(0, gap - restGap);
-    const springForce = oneSided ? compression : restGap - gap;
+    const springForce = compression - pullStiffness[i]! * extension;
     return {
       gameId: e.gameId,
       winner: e.winner,
@@ -114,7 +129,8 @@ export function fitSprings(
       compression,
       extension,
       force: springForce,
-      energy: 0.5 * springForce ** 2,
+      pullStiffness: pullStiffness[i]!,
+      energy: 0.5 * (compression ** 2 + pullStiffness[i]! * extension ** 2),
     };
   });
   return {
@@ -129,5 +145,65 @@ export function fitSprings(
     iterations,
     maxNetForce,
     energy: springs.reduce((s, e) => s + e.energy, 0),
+  };
+}
+
+/**
+ * Estimate strength with the plain two-way graph, then freeze spring stiffness.
+ * A win against a weaker opponent should have less power to pull its winner
+ * down when a stronger win supports that team's height. Compression always
+ * keeps full stiffness, including when a loser is incorrectly above a winner.
+ * Freezing weights keeps the final objective convex and avoids feedback loops.
+ */
+export function fitSupportedSprings(
+  teamIds: readonly number[],
+  games: readonly SpringGame[],
+  restGap = 7,
+) {
+  const raw = games.map(({ gameId, winner, loser }) => ({
+    gameId,
+    winner,
+    loser,
+  }));
+  const baseline = fitSprings(teamIds, raw, { restGap, oneSided: false });
+  const best = new Map<number, { strength: number; opponent: number }>();
+  for (const e of [...raw].sort((a, b) => a.gameId - b.gameId)) {
+    const strength = baseline.heights.get(e.loser)!;
+    if (
+      strength !== null &&
+      (!best.has(e.winner) || strength > best.get(e.winner)!.strength)
+    )
+      best.set(e.winner, { strength, opponent: e.loser });
+  }
+  const support = new Map(
+    raw.map((e) => {
+      const b = best.get(e.winner)!;
+      const opponentStrength = baseline.heights.get(e.loser)!;
+      return [
+        e.gameId,
+        {
+          opponentStrength,
+          bestWinStrength: b.strength,
+          bestWinOpponent: b.opponent,
+        },
+      ];
+    }),
+  );
+  const weighted = raw.map((e) => {
+    const s = support.get(e.gameId)!;
+    return {
+      ...e,
+      pullStiffness:
+        2 ** (-Math.max(0, s.bestWinStrength - s.opponentStrength) / restGap),
+    };
+  });
+  const fit = fitSprings(teamIds, weighted, { restGap, oneSided: false });
+  return {
+    ...fit,
+    baseline,
+    springs: fit.springs.map((e) => ({
+      ...e,
+      support: support.get(e.gameId)!,
+    })),
   };
 }

@@ -27,7 +27,8 @@ export interface Game {
 
 export interface SeasonConfig {
   /** Raw results graph; legacy numeric settings below are ignored in this mode. */
-  method?: "one-sided-springs-v1" | "two-sided-springs-v1";
+  method?:
+    "one-sided-springs-v1" | "two-sided-springs-v1" | "supported-springs-v1";
   springGap?: number;
   /** Display name, e.g. "2026 season". */
   label: string;
@@ -168,7 +169,8 @@ export interface Manifest {
     | "season-only-neural-v1"
     | "season-only-neural-v2"
     | "one-sided-springs-v1"
-    | "two-sided-springs-v1";
+    | "two-sided-springs-v1"
+    | "supported-springs-v1";
   springs?: {
     restGap: number;
     direction: "one-sided" | "two-sided";
@@ -181,6 +183,10 @@ export interface Manifest {
     energy: number;
     compressedGames: number;
     stretchedGames: number;
+    pullPolicy?: "best-win-relative-v1";
+    reference?: { iterations: number; maxNetForce: number; energy: number };
+    minPullStiffness: number;
+    maxPullStiffness: number;
     reversedGames: number;
     tiedGames: number;
   };
@@ -248,6 +254,12 @@ export interface Ranking {
     extension: number;
     /** Signed force on the winner; the loser receives the opposite force. */
     force: number;
+    pullStiffness: number;
+    support?: {
+      opponentStrength: number;
+      bestWinStrength: number;
+      bestWinOpponent: number;
+    };
     energy: number;
   }[];
   teams: RankedTeam[];

@@ -153,7 +153,11 @@ export function parseConfig(json: string): SeasonConfig {
     );
   if (
     c.method !== undefined &&
-    !["one-sided-springs-v1", "two-sided-springs-v1"].includes(c.method)
+    ![
+      "one-sided-springs-v1",
+      "two-sided-springs-v1",
+      "supported-springs-v1",
+    ].includes(c.method)
   )
     throw new Error("config.method must select a supported spring method");
   if (

@@ -20,6 +20,7 @@
     "neural:export": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python scripts/export-neural.py",
     "audit-neural": "tsx scripts/audit-neural.ts",
     "audit-springs": "tsx scripts/audit-springs.ts",
+    "compare-springs": "tsx scripts/compare-springs.ts",
     "verify": "tsx scripts/verify.ts",
     "audit-win-quality": "tsx scripts/audit-win-quality.ts",
     "backtest": "tsx scripts/backtest.ts",

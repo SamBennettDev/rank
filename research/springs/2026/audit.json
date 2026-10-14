@@ -1,5 +1,5 @@
 {
-  "method": "two-sided-springs-v1",
+  "method": "supported-springs-v1",
   "audits": [
     {
       "snapshot": {
@@ -14,6 +14,12 @@
       "games": 76,
       "restGap": 7,
       "direction": "two-sided",
+      "pullPolicy": "best-win-relative-v1",
+      "reference": {
+        "iterations": 1,
+        "maxNetForce": 0,
+        "energy": 0
+      },
       "initialization": "zero",
       "normalization": "component-mean-zero",
       "solver": "simultaneous-relaxation-v1",
@@ -23,6 +29,8 @@
       "energy": 0,
       "compressedGames": 0,
       "stretchedGames": 0,
+      "minPullStiffness": 1,
+      "maxPullStiffness": 1,
       "reversedGames": 0,
       "tiedGames": 0,
       "maxNetForceFromRoundedHeights": 0,
@@ -42,20 +50,28 @@
       "games": 339,
       "restGap": 7,
       "direction": "two-sided",
+      "pullPolicy": "best-win-relative-v1",
+      "reference": {
+        "iterations": 8994,
+        "maxNetForce": 9.987832783053818e-11,
+        "energy": 579.230292450353
+      },
       "initialization": "zero",
       "normalization": "component-mean-zero",
       "solver": "simultaneous-relaxation-v1",
-      "iterations": 8994,
+      "iterations": 9714,
       "forceTolerance": 1e-10,
-      "maxNetForce": 9.987832783053818e-11,
-      "energy": 579.230292450353,
+      "maxNetForce": 9.99946792035189e-11,
+      "energy": 474.9719120373445,
       "compressedGames": 174,
       "stretchedGames": 105,
+      "minPullStiffness": 0.3296494478710279,
+      "maxPullStiffness": 1,
       "reversedGames": 0,
       "tiedGames": 0,
-      "maxNetForceFromRoundedHeights": 0.000002000000000279556,
+      "maxNetForceFromRoundedHeights": 0.0000020000000020559128,
       "largestAbsoluteComponentMean": 3.33333333379926e-7,
-      "energyFromRoundedHeights": 579.2302924503726
+      "energyFromRoundedHeights": 474.9719120373671
     },
     {
       "snapshot": {
@@ -70,20 +86,28 @@
       "games": 467,
       "restGap": 7,
       "direction": "two-sided",
+      "pullPolicy": "best-win-relative-v1",
+      "reference": {
+        "iterations": 1237,
+        "maxNetForce": 9.960032798517204e-11,
+        "energy": 2162.8012172229464
+      },
       "initialization": "zero",
       "normalization": "component-mean-zero",
       "solver": "simultaneous-relaxation-v1",
-      "iterations": 1237,
+      "iterations": 1573,
       "forceTolerance": 1e-10,
-      "maxNetForce": 9.960032798517204e-11,
-      "energy": 2162.8012172229464,
-      "compressedGames": 291,
-      "stretchedGames": 124,
-      "reversedGames": 7,
+      "maxNetForce": 9.898748487557896e-11,
+      "energy": 1845.8527626289786,
+      "compressedGames": 276,
+      "stretchedGames": 139,
+      "minPullStiffness": 0.2718817397433609,
+      "maxPullStiffness": 1,
+      "reversedGames": 3,
       "tiedGames": 0,
-      "maxNetForceFromRoundedHeights": 0.000002999999998642977,
-      "largestAbsoluteComponentMean": 6.349206843526284e-9,
-      "energyFromRoundedHeights": 2162.801217222981
+      "maxNetForceFromRoundedHeights": 0.0000023691680133275383,
+      "largestAbsoluteComponentMean": 3.1746029218455744e-8,
+      "energyFromRoundedHeights": 1845.85276262901
     },
     {
       "snapshot": {
@@ -98,20 +122,28 @@
       "games": 590,
       "restGap": 7,
       "direction": "two-sided",
+      "pullPolicy": "best-win-relative-v1",
+      "reference": {
+        "iterations": 1115,
+        "maxNetForce": 9.969181036240116e-11,
+        "energy": 3643.4006324103952
+      },
       "initialization": "zero",
       "normalization": "component-mean-zero",
       "solver": "simultaneous-relaxation-v1",
-      "iterations": 1115,
+      "iterations": 1145,
       "forceTolerance": 1e-10,
-      "maxNetForce": 9.969181036240116e-11,
-      "energy": 3643.4006324103952,
-      "compressedGames": 396,
-      "stretchedGames": 150,
-      "reversedGames": 25,
+      "maxNetForce": 9.863754257821711e-11,
+      "energy": 3182.351666595908,
+      "compressedGames": 370,
+      "stretchedGames": 176,
+      "minPullStiffness": 0.23215268476736803,
+      "maxPullStiffness": 1,
+      "reversedGames": 19,
       "tiedGames": 0,
-      "maxNetForceFromRoundedHeights": 0.0000030000000021956907,
-      "largestAbsoluteComponentMean": 1.892744547563989e-8,
-      "energyFromRoundedHeights": 3643.4006324104416
+      "maxNetForceFromRoundedHeights": 0.0000030000000017516015,
+      "largestAbsoluteComponentMean": 3.048385238592228e-15,
+      "energyFromRoundedHeights": 3182.3516665959423
     },
     {
       "snapshot": {
@@ -126,20 +158,28 @@
       "games": 704,
       "restGap": 7,
       "direction": "two-sided",
+      "pullPolicy": "best-win-relative-v1",
+      "reference": {
+        "iterations": 868,
+        "maxNetForce": 9.889689067676954e-11,
+        "energy": 5808.542326778641
+      },
       "initialization": "zero",
       "normalization": "component-mean-zero",
       "solver": "simultaneous-relaxation-v1",
-      "iterations": 868,
+      "iterations": 988,
       "forceTolerance": 1e-10,
-      "maxNetForce": 9.889689067676954e-11,
-      "energy": 5808.542326778641,
-      "compressedGames": 510,
-      "stretchedGames": 151,
-      "reversedGames": 54,
+      "maxNetForce": 9.976375281439687e-11,
+      "energy": 5200.1256977359635,
+      "compressedGames": 474,
+      "stretchedGames": 187,
+      "minPullStiffness": 0.2243105239581158,
+      "maxPullStiffness": 1,
+      "reversedGames": 40,
       "tiedGames": 0,
-      "maxNetForceFromRoundedHeights": 0.000004000000002779558,
-      "largestAbsoluteComponentMean": 3.4700314871078585e-8,
-      "energyFromRoundedHeights": 5808.542326778705
+      "maxNetForceFromRoundedHeights": 0.000003048122343862758,
+      "largestAbsoluteComponentMean": 3.15457639960921e-9,
+      "energyFromRoundedHeights": 5200.125697735995
     },
     {
       "snapshot": {
@@ -154,20 +194,28 @@
       "games": 812,
       "restGap": 7,
       "direction": "two-sided",
+      "pullPolicy": "best-win-relative-v1",
+      "reference": {
+        "iterations": 836,
+        "maxNetForce": 9.761436103872256e-11,
+        "energy": 7789.828380017279
+      },
       "initialization": "zero",
       "normalization": "component-mean-zero",
       "solver": "simultaneous-relaxation-v1",
-      "iterations": 836,
+      "iterations": 948,
       "forceTolerance": 1e-10,
-      "maxNetForce": 9.761436103872256e-11,
-      "energy": 7789.828380017279,
-      "compressedGames": 622,
-      "stretchedGames": 148,
-      "reversedGames": 83,
+      "maxNetForce": 9.855498513450538e-11,
+      "energy": 7073.24635543297,
+      "compressedGames": 582,
+      "stretchedGames": 188,
+      "minPullStiffness": 0.1888089008665166,
+      "maxPullStiffness": 1,
+      "reversedGames": 75,
       "tiedGames": 0,
-      "maxNetForceFromRoundedHeights": 0.000004000000005000004,
-      "largestAbsoluteComponentMean": 3.1446539795623258e-9,
-      "energyFromRoundedHeights": 7789.828380017337
+      "maxNetForceFromRoundedHeights": 0.000004251453149216322,
+      "largestAbsoluteComponentMean": 1.886792457562743e-8,
+      "energyFromRoundedHeights": 7073.246355433018
     }
   ]
 }

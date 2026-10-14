@@ -366,6 +366,7 @@ select:hover { border-color: var(--faint); }
 .hist .pv { fill: var(--text); font: 700 13px var(--display); text-anchor: middle; }
 .games { margin-top: 16px; }
 .games.spring-games .lhead, .games.spring-games .grow2 { grid-template-columns: 48px 34px minmax(0, 1fr) 88px 70px; }
+.games.spring-games .r small { display: block; color: var(--muted); font-size: 10px; font-weight: 500; }
 @media (max-width: 640px) {
   .games.spring-games .lhead, .games.spring-games .grow2 { grid-template-columns: 30px 24px minmax(0, 1fr) 68px 46px; gap: 6px; padding: 0 10px; }
 }

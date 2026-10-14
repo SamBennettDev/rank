@@ -57,8 +57,8 @@ const configJson = existsSync(configPath)
       {
         label: `${year} season`,
         demo: false,
-        algorithmVersion: "two-sided-springs-1",
-        method: "two-sided-springs-v1",
+        algorithmVersion: "supported-springs-1",
+        method: "supported-springs-v1",
         springGap: 7,
         classifications: ["fbs", "fcs"],
       },

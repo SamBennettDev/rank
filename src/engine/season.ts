@@ -17,7 +17,7 @@ import { fitUnits } from "./units";
 import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
 import { makeWinQualityContext } from "./win-quality";
-import { fitSprings, SPRING_TOLERANCE } from "./springs";
+import { fitSprings, fitSupportedSprings, SPRING_TOLERANCE } from "./springs";
 import {
   consensusOrder,
   neuralPredictor,
@@ -25,7 +25,7 @@ import {
 } from "./neural";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-21";
+export const ENGINE_VERSION = "rank-engine-22";
 
 export interface SeasonFiles {
   season: string;
@@ -581,11 +581,21 @@ async function computeSpringSeason(
   let previous = new Map<number, number>();
   for (const snap of snapshots) {
     const { edges, counts } = buildEdges(games, teams, snap);
-    const fit = fitSprings(
-      teams.map((t) => t.id),
-      edges,
-      { restGap, oneSided },
-    );
+    const supported =
+      config.method === "supported-springs-v1"
+        ? fitSupportedSprings(
+            teams.map((t) => t.id),
+            edges,
+            restGap,
+          )
+        : null;
+    const fit =
+      supported ??
+      fitSprings(
+        teams.map((t) => t.id),
+        edges,
+        { restGap, oneSided },
+      );
     const wins = new Map<number, number>(),
       losses = new Map<number, number>();
     for (const e of edges) {
@@ -657,6 +667,16 @@ async function computeSpringSeason(
       springs: {
         restGap,
         direction: oneSided ? "one-sided" : "two-sided",
+        ...(supported
+          ? {
+              pullPolicy: "best-win-relative-v1" as const,
+              reference: {
+                iterations: supported.baseline.iterations,
+                maxNetForce: supported.baseline.maxNetForce,
+                energy: supported.baseline.energy,
+              },
+            }
+          : {}),
         initialization: "zero",
         normalization: "component-mean-zero",
         solver: "simultaneous-relaxation-v1",
@@ -666,6 +686,14 @@ async function computeSpringSeason(
         energy: fit.energy,
         compressedGames: fit.springs.filter((e) => e.compression > 1e-6).length,
         stretchedGames: fit.springs.filter((e) => e.extension > 1e-6).length,
+        minPullStiffness: Math.min(
+          1,
+          ...fit.springs.map((e) => e.pullStiffness),
+        ),
+        maxPullStiffness: Math.max(
+          0,
+          ...fit.springs.map((e) => e.pullStiffness),
+        ),
         reversedGames: fit.springs.filter((e) => e.gap < -1e-6).length,
         tiedGames: fit.springs.filter((e) => Math.abs(e.gap) <= 1e-6).length,
       },

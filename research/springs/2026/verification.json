@@ -1,11 +1,12 @@
 {
-  "method": "two-sided-springs-v1",
+  "method": "supported-springs-v1",
   "restGap": 7,
-  "engine": "rank-engine-21",
-  "verifiedAt": "2026-10-14T17:23:35.960625+00:00",
+  "pullPolicy": "best-win-relative-v1",
+  "engine": "rank-engine-22",
+  "verifiedAt": "2026-10-14T17:32:25.244654+00:00",
   "typecheck": "passed",
   "tests": {
-    "passed": 88,
+    "passed": 91,
     "files": 9
   },
   "byteReproduction": {
@@ -14,6 +15,7 @@
     "snapshots": 6
   },
   "springAudit": "all six snapshots passed",
+  "comparison": "five policies; selected policy reproduces the active supported fit",
   "productionBuild": "passed",
   "browser": {
     "errors": [],
@@ -21,7 +23,15 @@
     "gameEdges": 812,
     "strainedEdges": 770,
     "recompute": "Exact match. Your browser rebuilt all 6 rankings byte for byte.",
+    "georgiaSupport": {
+      "strongestWin": "Alabama",
+      "tennesseeStatePull": "19%",
+      "westernKentuckyPull": "27%"
+    },
     "mobile_graph": {
+      "overflow": false
+    },
+    "mobile_team/61": {
       "overflow": false
     },
     "mobile_team/154": {

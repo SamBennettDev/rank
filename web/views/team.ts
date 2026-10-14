@@ -226,6 +226,9 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const me = ctx.byId.get(teamId)!;
   if (ctx.ranking.manifest.springs) {
     const lines = breakdown(ctx, teamId).lines;
+    const support = ctx.ranking.springs?.find(
+      (e) => e.winner === teamId && e.support,
+    )?.support;
     return h(
       "div",
       { class: "panel why" },
@@ -244,6 +247,13 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
         { class: "hint" },
         "At equilibrium, upward and downward forces balance. A game’s signed force shows its remaining pull on this team. Conflicting results can leave winners tied with or below their losers.",
       ),
+      support
+        ? h(
+            "p",
+            {},
+            `Strongest reference win: ${ctx.byId.get(support.bestWinOpponent)?.school}. Wins against weaker opponents receive softer downward pulls. Compressed springs retain full strength; the game log shows each spring’s pull stiffness.`,
+          )
+        : "",
       h(
         "div",
         { class: "credit-equation" },
@@ -668,6 +678,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     const pull = l.value;
     const published = ctx.ranking.teams.some((t) => t.id === o.id);
     const credit = ctx.ranking.credits.find((c) => c.gameId === e.gameId);
+    const spring = ctx.ranking.springs?.find((s) => s.gameId === e.gameId);
     return h(
       published ? "a" : "div",
       {
@@ -709,7 +720,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
             {
               class: `r ${pull >= 0 ? "pos" : "neg"}`,
               title: ctx.ranking.manifest.springs
-                ? "Remaining spring force on this team, after the whole game graph has settled. This is not a fixed game credit."
+                ? `Remaining signed force on this team. Pull stiffness ${(100 * (spring?.pullStiffness ?? 1)).toFixed(1)}%; compression stiffness 100%.`
                 : l.won && credit?.unmodeled
                   ? "Unmodeled opponent: no quality points awarded. Losses against these opponents still cost exactly 1 point."
                   : l.won && credit?.quality
@@ -717,6 +728,13 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
                     : "Points this result adds to or subtracts from the standing",
             },
             fmtHeight(pull, 3),
+            ctx.ranking.manifest.springs?.pullPolicy
+              ? h(
+                  "small",
+                  {},
+                  `pull ${Math.round(100 * spring!.pullStiffness)}%`,
+                )
+              : "",
           ),
     );
   });

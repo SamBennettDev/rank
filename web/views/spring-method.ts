@@ -53,6 +53,8 @@ export function springMethodView(ctx: Ctx): HTMLElement {
   const rows = [
     ["Spring rest gap", String(s.restGap)],
     ["Spring direction", s.direction],
+    ["Pull weighting", s.pullPolicy ?? "Equal stiffness"],
+    ["Smallest pull stiffness", `${(100 * s.minPullStiffness).toFixed(1)}%`],
     ["Counted game springs", String(m.counts.included)],
     ["Connected groups", String(m.connectedComponents)],
     ["Compressed springs", String(s.compressedGames)],
@@ -86,10 +88,17 @@ export function springMethodView(ctx: Ctx): HTMLElement {
       ),
     ),
     h("h2", {}, `Every game prefers a ${s.restGap}-point winner–loser gap.`),
+    s.pullPolicy
+      ? h(
+          "p",
+          {},
+          "Strong wins support a team’s height. First fit the current-season graph with equal springs. For each winner, find the strongest opponent it has beaten. Pull stiffness halves for each seven reference-height points by which another beaten opponent is weaker. Freeze those weights, then settle the graph again. Compressed springs keep full stiffness; only stretched, downward pulls are softened.",
+        )
+      : "",
     h(
       "p",
       {},
-      `Each team is a node. Each completed, non-tied game is an equal spring pointing from the loser to the winner. Every node starts at zero. A spring pushes a pair apart when the winner is less than ${s.restGap} points above the loser${s.direction === "two-sided" ? ` and pulls them together when the gap exceeds ${s.restGap}` : ""}.`,
+      `Each team is a node. Each completed, non-tied game is a spring pointing from the loser to the winner. Every node starts at zero. A spring pushes a pair apart when the winner is less than ${s.restGap} points above the loser${s.direction === "two-sided" ? ` and pulls them together when the gap exceeds ${s.restGap}` : ""}.`,
     ),
     h(
       "p",
@@ -110,7 +119,7 @@ export function springMethodView(ctx: Ctx): HTMLElement {
     h(
       "p",
       {},
-      "Head-to-head order is a preference, not a hard constraint. Even an undefeated winner can rank below a team it beat: wins against much lower teams pull its height downward when those gaps exceed seven. This follows from fitting every game to the same exact gap.",
+      "Head-to-head order is a preference, not a hard constraint. Softening weak-opponent pulls can help preserve strong wins, but it does not guarantee every winner ranks above its loser. The chosen weighting is a transparent ranking policy, not a historically optimized prediction model.",
     ),
     h("h2", {}, "Only this season’s results."),
     h(
@@ -130,8 +139,15 @@ export function springMethodView(ctx: Ctx): HTMLElement {
       h(
         "p",
         {},
-        `For a game with winner w and loser l: force on winner = ${s.restGap} − height[w] + height[l]. The loser receives the opposite force. Minimize energy = ½ × sum(force²). Each simultaneous step moves every team along its net force, with step size 1 / (2 × the largest game count in its connected group).`,
+        `Let gap = height[w] − height[l], compression = max(0, ${s.restGap} − gap), extension = max(0, gap − ${s.restGap}). Force on winner = compression − k × extension; the loser receives the opposite force. Energy = ½ × sum(compression² + k × extension²). Each simultaneous step uses step size 1 / (2 × maximum game count).`,
       ),
+      s.pullPolicy
+        ? h(
+            "p",
+            {},
+            `Using equal-spring reference strengths, k = 2 ^ (−max(0, strongest beaten opponent − this beaten opponent) / ${s.restGap}). The strongest reference win has k = 1. A weaker opponent has a smaller positive k. Weights do not update during the final relaxation, keeping the objective convex.`,
+          )
+        : "",
       h(
         "p",
         {},
