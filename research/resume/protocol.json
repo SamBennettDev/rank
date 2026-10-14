@@ -1,0 +1,174 @@
+{
+  "status": "Design calibration; 2014-2019 already inspected in earlier research.",
+  "selection": "Minimum pooled future FBS game log loss from dated pre-week fits. Benchmark rank 25 and wins-above-benchmark are declared resume policies, not fitted labels.",
+  "selected": {
+    "method": "opponent-independent-resume-v1",
+    "ridge": 0.5,
+    "homeAdvantage": 0.3,
+    "benchmarkRank": 25,
+    "reference": "fbs",
+    "leaveTeamOut": true
+  },
+  "candidates": [
+    {
+      "ridge": 0.125,
+      "homeAdvantage": 0.0,
+      "games": 3526,
+      "accuracy": 0.680941576857629,
+      "brier": 0.21194993290519584,
+      "logLoss": 0.6277932071321688
+    },
+    {
+      "ridge": 0.125,
+      "homeAdvantage": 0.15,
+      "games": 3526,
+      "accuracy": 0.684344866704481,
+      "brier": 0.20939301034415314,
+      "logLoss": 0.6205545071106477
+    },
+    {
+      "ridge": 0.125,
+      "homeAdvantage": 0.3,
+      "games": 3526,
+      "accuracy": 0.6871809415768576,
+      "brier": 0.20843603740835145,
+      "logLoss": 0.6189042824056473
+    },
+    {
+      "ridge": 0.125,
+      "homeAdvantage": 0.45,
+      "games": 3526,
+      "accuracy": 0.689449801474759,
+      "brier": 0.20900324233704312,
+      "logLoss": 0.6227171824054671
+    },
+    {
+      "ridge": 0.25,
+      "homeAdvantage": 0.0,
+      "games": 3526,
+      "accuracy": 0.682643221781055,
+      "brier": 0.2057537488979793,
+      "logLoss": 0.599951077738926
+    },
+    {
+      "ridge": 0.25,
+      "homeAdvantage": 0.15,
+      "games": 3526,
+      "accuracy": 0.6849120816789563,
+      "brier": 0.20294757538854594,
+      "logLoss": 0.5926420981265583
+    },
+    {
+      "ridge": 0.25,
+      "homeAdvantage": 0.3,
+      "games": 3526,
+      "accuracy": 0.6871809415768576,
+      "brier": 0.20205006599919093,
+      "logLoss": 0.5908616778782585
+    },
+    {
+      "ridge": 0.25,
+      "homeAdvantage": 0.45,
+      "games": 3526,
+      "accuracy": 0.68689733408962,
+      "brier": 0.20296646798276538,
+      "logLoss": 0.5944867420402127
+    },
+    {
+      "ridge": 0.5,
+      "homeAdvantage": 0.0,
+      "games": 3526,
+      "accuracy": 0.6806579693703914,
+      "brier": 0.20280930579032855,
+      "logLoss": 0.5893687998915186
+    },
+    {
+      "ridge": 0.5,
+      "homeAdvantage": 0.15,
+      "games": 3526,
+      "accuracy": 0.6871809415768576,
+      "brier": 0.19974417605839043,
+      "logLoss": 0.5819112893293414
+    },
+    {
+      "ridge": 0.5,
+      "homeAdvantage": 0.3,
+      "games": 3526,
+      "accuracy": 0.683494044242768,
+      "brier": 0.198921402111799,
+      "logLoss": 0.5799615237851174
+    },
+    {
+      "ridge": 0.5,
+      "homeAdvantage": 0.45,
+      "games": 3526,
+      "accuracy": 0.684344866704481,
+      "brier": 0.200230291535908,
+      "logLoss": 0.5834005363834568
+    },
+    {
+      "ridge": 1.0,
+      "homeAdvantage": 0.0,
+      "games": 3526,
+      "accuracy": 0.6803743618831537,
+      "brier": 0.2041079647951893,
+      "logLoss": 0.5934023768861523
+    },
+    {
+      "ridge": 1.0,
+      "homeAdvantage": 0.15,
+      "games": 3526,
+      "accuracy": 0.686046511627907,
+      "brier": 0.20080399332699844,
+      "logLoss": 0.5858134192638323
+    },
+    {
+      "ridge": 1.0,
+      "homeAdvantage": 0.3,
+      "games": 3526,
+      "accuracy": 0.6857629041406693,
+      "brier": 0.20006531661052823,
+      "logLoss": 0.5837497287676612
+    },
+    {
+      "ridge": 1.0,
+      "homeAdvantage": 0.45,
+      "games": 3526,
+      "accuracy": 0.6840612592172434,
+      "brier": 0.20176854387123935,
+      "logLoss": 0.5870979975192363
+    }
+  ],
+  "inputs": [
+    {
+      "year": 2014,
+      "path": "research/season_only/inputs/games_2014.csv",
+      "sha256": "5b1a1f78bc63114c1e076b10e0d9316d079091afa9ac798982048fce6ce5a128"
+    },
+    {
+      "year": 2015,
+      "path": "research/season_only/inputs/games_2015.csv",
+      "sha256": "3044e8911721a711202f976133230a0c2cb557cfaf621cb1f3c21722cfd86fe9"
+    },
+    {
+      "year": 2016,
+      "path": "research/season_only/inputs/games_2016.csv",
+      "sha256": "f60e57cdab028d2d35bd589c46139a6dce11ee8c52c3f4ca975c5d98522f403c"
+    },
+    {
+      "year": 2017,
+      "path": "research/season_only/inputs/games_2017.csv",
+      "sha256": "c5a6f47dc1b121e366c0e9ef6cf1524e6ea54f58cf997874bf6d818e46fa3b26"
+    },
+    {
+      "year": 2018,
+      "path": "research/season_only/inputs/games_2018.csv",
+      "sha256": "a4d4c2ccd06f933c1b6848b3ef4fddbc56695f6b066c9376b1249bfb9d29c00f"
+    },
+    {
+      "year": 2019,
+      "path": "research/season_only/inputs/games_2019.csv",
+      "sha256": "d8665fa0aced3d02d59405c8b9ff157ba00ef128a90c1c5eab31d268d917abac"
+    }
+  ]
+}

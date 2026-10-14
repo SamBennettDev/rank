@@ -23,17 +23,29 @@ const legacy = await computeSeason({
     algorithmVersion: "earned-standing-1",
     classifications: ["fbs", "fcs"],
     winQuality: undefined,
+    resume: undefined,
     calibrationId: "calendar-2014-2019-v1",
   }),
 });
 const snapshot = legacy.files.at(-1)!;
 const before = JSON.parse(snapshot.json) as Ranking;
-const after = JSON.parse(
+const published = JSON.parse(
   readFileSync(
     join(DATA_DIR, "rankings", season, `${snapshot.id}.json`),
     "utf8",
   ),
 ) as Ranking;
+// v3 publishes the resume while retaining exactly the v2 points being audited.
+const after: Ranking = {
+  ...published,
+  teams: published.teams
+    .map((t) =>
+      published.manifest.resume
+        ? { ...t, height: t.earnedHeight ?? null, rank: t.earnedRank ?? null }
+        : t,
+    )
+    .sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id),
+};
 const receipts = new Map(before.credits.map((c) => [c.gameId, c]));
 const all = new Map(
   [...after.teams, ...(after.opponents ?? [])].map((t) => [t.id, t]),

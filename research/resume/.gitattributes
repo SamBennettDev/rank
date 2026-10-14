@@ -1,0 +1,5 @@
+REPORT.html linguist-generated=true
+REPORT.pdf binary
+*.json linguist-generated=true
+*.csv linguist-generated=true
+*.csv.gz binary

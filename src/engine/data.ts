@@ -190,6 +190,26 @@ export function parseConfig(json: string): SeasonConfig {
   }
   if (c.algorithmVersion === "earned-standing-2" && !c.winQuality)
     throw new Error("config.winQuality is required for earned-standing-2");
+  if (c.resume !== undefined) {
+    const r = c.resume;
+    if (
+      !r ||
+      r.method !== "opponent-independent-resume-v1" ||
+      r.reference !== "fbs" ||
+      r.leaveTeamOut !== true ||
+      !Number.isFinite(r.ridge) ||
+      r.ridge <= 0 ||
+      !Number.isFinite(r.homeAdvantage) ||
+      r.homeAdvantage < 0 ||
+      !Number.isInteger(r.benchmarkRank) ||
+      r.benchmarkRank < 1
+    )
+      throw new Error(
+        "config.resume must specify a valid results-only resume policy",
+      );
+  }
+  if (c.algorithmVersion === "resume-standing-3" && !c.resume)
+    throw new Error("config.resume is required for resume-standing-3");
   return c;
 }
 

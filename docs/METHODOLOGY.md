@@ -1,6 +1,43 @@
 # Methodology
 
-Rank publishes one **current earned-standing score for FBS and FCS teams**. The site shows rank, team and score, with the current top 10 in a carousel. All scores start at zero. The opponent-strength model uses a pooled historical division assumption, then current-season results; it does not award points for team reputation, polls, recruiting or conference membership.
+Rank publishes a **current-season résumé standing for FBS and FCS teams**. This section specifies `resume-standing-3` / `opponent-independent-resume-v1`. The earned-point and prediction methods below are retained for audit and are distinct from the current résumé.
+
+## Current résumé: wins above a top-25 benchmark
+
+```text
+resume[i] = actual wins[i] − Σ P(top-25 benchmark beats opponent at i's venue)
+win contribution = 1 − P
+loss contribution = −P
+```
+
+A score of +1 means one more win than the benchmark expects on that exact schedule. A difficult win earns more; a bad loss costs more. There is no margin bonus. A difficult schedule alone cannot earn positive points without winning. Every result contributes between −1 and +1.
+
+For each focal team independently, remove **every game involving that team**, then fit regularized Bradley–Terry on the other current-season modeled results:
+
+```text
+P(home wins) = logistic(r[home] − r[away] + 0.3 × nonneutral)
+minimize negative log likelihood + (0.5 / 2) × Σ r[i]²
+```
+
+All team priors equal zero. There are no team identities, conference or division strength priors, preseason ratings, previous-season team statistics, polls, margins, EPA, injuries, or betting prices in the résumé. Team IDs join games to teams; FBS membership defines the common reference field, without awarding division points. Home advantage and ridge are shared coefficients selected from 16 settings using minimum dated future-game log loss on 2014–2019. They are not team starting ratings. `research/resume/protocol.json` records all candidates and input hashes.
+
+The benchmark is the 25th-highest fitted FBS strength, excluding the focal team. In a toy field with fewer than 25 FBS reference teams, use its last reference team; with no independent reference in a one-FBS toy field, use zero. If no FBS field exists, reject the configuration. For a focal-team venue `site` (+1 home, −1 away, 0 neutral), `P = logistic(benchmark − opponentStrength + 0.3 × site)`. Round P to six decimals; sum the resulting six-decimal contributions. The top-25 reference and additive scoring rule are declared résumé policies, not labels fitted against polls or current ranks.
+
+All opponent quality is assessed **at the snapshot**, using only scores available by its cutoff. Later opponent results can revalue earlier wins. Excluding all focal-team games prevents its own result from inflating an opponent’s quality. Flipping a focal-team loss to a win on an unchanged schedule adds exactly one to its score, with identical benchmark probabilities. Changing only margins cannot affect any résumé. A road win receives more credit than the equivalent home win.
+
+Every resolved result against an opponent outside the modeled field stays in the record. Its quality cannot be established: a win earns zero and a loss costs one. Such opponents are omitted from the Bradley–Terry fit. An opponent with fewer than three independent modeled results triggers `limitedEvidence`. This is an evidence flag, not a confidence interval. Sparse and disconnected schedules remain uncertain; equal priors deliberately avoid filling those gaps with an assumed division hierarchy.
+
+The per-team `resume` object contains `score`, `expectedWins`, `scheduleDifficulty` (mean benchmark loss probability), `recordProbability`, `benchmarkStrength`, `limitedEvidence`, and `games`. The latter records each result, venue, benchmark probability, independent opponent game count and contribution. `recordProbability` is a Poisson-binomial probability of the benchmark matching or exceeding the observed win total. It assumes conditionally independent games and does not integrate rating uncertainty. It is an explanatory diagnostic, not the score or a posterior confidence level.
+
+Published `rank`, `height`, `change` and ties refer to the résumé. Competition ranks use six-decimal scores; numeric IDs only order exact ties. Filters preserve full-field ranks. Teams with results are ranked; teams without results remain null. No head-to-head override applies. `earnedHeight` / `earnedRank` retain the archived frozen-credit standing; `credits` retains its old ledger. `projection.target = frozen-earned-points` prevents legacy simulations being mislabeled as forecasts of the résumé. Matchup probabilities and unit statistics remain separate models.
+
+`rank-engine-17` retains schema 2 with explicit optional résumé fields and `manifest.resume`; its `standingMethod` names the résumé and `lossPenalty` is null because loss costs vary. Archived configurations without `resume` retain the prior formulas. Node and browser use the same matrix-free Newton/conjugate-gradient solver and fixed-arithmetic exponential. Every published snapshot is regenerated and byte-verified.
+
+`research/resume/REPORT.html` compares seven methods at Week 6 and final cutoffs over 24 seasons, 2002–2025. Completed-result agreement is descriptive consistency, not future prediction or an objective ground-truth résumé. Future-game metrics separately assess the strength component. Every historical season has already been inspected; none is a pristine holdout, and no universal superiority is claimed. The independent Python implementation reproduces the current per-team scores and diagnostic values.
+
+## Archived earned-point model and predictive machinery
+
+The remaining sections specify v2 frozen earned points and their prediction/simulation machinery. They are retained in the data and do not define the current résumé score.
 
 ## Current score and fixed loss deductions
 
@@ -60,7 +97,7 @@ The contrast includes covariance between the opponent, FBS benchmark and home fi
 
 For game probabilities, use the home-minus-away contrast plus home field with the same covariance. Each credit records the estimated probability, opponent and reference strengths, venue adjustment, standard error, opponent evidence count and award cutoff. Every loss is still a fixed deduction independent of those quantities.
 
-V1 remains reproducible for archived configurations without `winQuality`: it uses a pooled zero reference, weak equal priors and 0–1 win credits. New real-season configurations use `earned-standing-2` and the frozen settings above.
+V1 remains reproducible for archived configurations without `winQuality`: it uses a pooled zero reference, weak equal priors and 0–1 win credits. Archived v2 configurations use `earned-standing-2` and the frozen settings above; v3 keeps this model for legacy earned points and matchup predictions.
 
 ## Final-standing projection
 

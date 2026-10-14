@@ -220,6 +220,13 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
           `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
         ),
         h("h1", {}, "Rankings"),
+        ctx.ranking.manifest.resume
+          ? h(
+              "p",
+              { class: "hint" },
+              "Résumé · wins earned above a top-25 benchmark against the same schedule",
+            )
+          : "",
       ),
     ),
     leadersCarousel(ctx, onCleanup),

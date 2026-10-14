@@ -1,6 +1,8 @@
 # Ranking research
 
-The current v2 score uses **2 × pre-week opponent probability against average FBS opposition, minus 1 per loss**. It corrects the pooled benchmark, sparse division estimates and average-win/loss imbalance, while recording unsupported-opponent losses. Both FBS and FCS are ranked without a division ceiling.
+The current **résumé v3** uses actual wins minus the wins a results-based top-25 FBS benchmark expects against the same schedule. Opponent fits exclude all focal-team games and use current-season results and venues only, with equal team priors. [The résumé study](resume/README.md) includes an interactive report, PDF, 24-season comparisons, current rankings and independent Python/TypeScript checks. Neural forecasts remain in [the predictive study](season_only/README.md).
+
+The remaining material describes archived v2/v1 earned points and projections. V2 uses **2 × pre-week opponent probability against average FBS opposition, minus 1 per loss**. It remains in `earnedHeight` / `earnedRank` and is the explicit target of legacy projections.
 
 - `win-quality-calibration.json` and `win_quality.py`: frozen 2014–2019 division priors and quality-model ridge selection. The scale of 2 is a balanced scoring policy; sensitivity results do not select it.
 - `win-quality-development.json` and `win_quality_development.py`: same-input comparisons on already-inspected 2021–2025 data. Log loss 0.56986 → 0.53778, Brier 0.19441 → 0.18176; FBS/cross-division descriptive agreement improves, FCS-only agreement decreases slightly.

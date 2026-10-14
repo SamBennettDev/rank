@@ -1,0 +1,85 @@
+period,snapshot,cohort,method,games,agreement
+2002–2025,week6,fbs,Wins above top-25 benchmark,6770,0.886410635155096
+2002–2025,week6,fbs,Record difficulty (Poisson-binomial),6770,0.8940177252584933
+2002–2025,week6,fbs,Win percentage,6770,0.849778434268833
+2002–2025,week6,fbs,Net wins,6770,0.8497045790251108
+2002–2025,week6,fbs,Colley,6770,0.896602658788774
+2002–2025,week6,fbs,Results-only Bradley-Terry,6770,0.8933530280649926
+2002–2025,week6,fbs,Previous frozen-credit v2,6770,0.8661742983751847
+2002–2025,week6,all,Wins above top-25 benchmark,11576,0.8590186592950932
+2002–2025,week6,all,Record difficulty (Poisson-binomial),11576,0.8963372494816862
+2002–2025,week6,all,Win percentage,11576,0.8446354526606773
+2002–2025,week6,all,Net wins,11576,0.8316344160331721
+2002–2025,week6,all,Colley,11576,0.9008293020041465
+2002–2025,week6,all,Results-only Bradley-Terry,11576,0.8940048375950241
+2002–2025,week6,all,Previous frozen-credit v2,11576,0.8447650310988252
+2002–2025,final,fbs,Wins above top-25 benchmark,16845,0.8200059364796676
+2002–2025,final,fbs,Record difficulty (Poisson-binomial),16845,0.8215197387948946
+2002–2025,final,fbs,Win percentage,16845,0.7993173048382309
+2002–2025,final,fbs,Net wins,16845,0.7995250816265954
+2002–2025,final,fbs,Colley,16845,0.8248738498070645
+2002–2025,final,fbs,Results-only Bradley-Terry,16845,0.822439893143366
+2002–2025,final,fbs,Previous frozen-credit v2,16845,0.8123478777085188
+2002–2025,final,all,Wins above top-25 benchmark,26106,0.8041446410786792
+2002–2025,final,all,Record difficulty (Poisson-binomial),26106,0.825633953880334
+2002–2025,final,all,Win percentage,26106,0.7996820654255726
+2002–2025,final,all,Net wins,26106,0.7895119895809393
+2002–2025,final,all,Colley,26106,0.8331801118516816
+2002–2025,final,all,Results-only Bradley-Terry,26106,0.8270129472151996
+2002–2025,final,all,Previous frozen-credit v2,26106,0.8010036007048188
+2014–2019 design,week6,fbs,Wins above top-25 benchmark,1806,0.8892580287929125
+2014–2019 design,week6,fbs,Record difficulty (Poisson-binomial),1806,0.8953488372093024
+2014–2019 design,week6,fbs,Win percentage,1806,0.8504983388704319
+2014–2019 design,week6,fbs,Net wins,1806,0.8504983388704319
+2014–2019 design,week6,fbs,Colley,1806,0.897563676633444
+2014–2019 design,week6,fbs,Results-only Bradley-Terry,1806,0.8931339977851606
+2014–2019 design,week6,fbs,Previous frozen-credit v2,1806,0.8599114064230343
+2014–2019 design,week6,all,Wins above top-25 benchmark,3885,0.8702702702702703
+2014–2019 design,week6,all,Record difficulty (Poisson-binomial),3885,0.8877734877734877
+2014–2019 design,week6,all,Win percentage,3885,0.8213642213642214
+2014–2019 design,week6,all,Net wins,3885,0.8212355212355212
+2014–2019 design,week6,all,Colley,3885,0.8944658944658944
+2014–2019 design,week6,all,Results-only Bradley-Terry,3885,0.8875160875160876
+2014–2019 design,week6,all,Previous frozen-credit v2,3885,0.850965250965251
+2014–2019 design,final,fbs,Wins above top-25 benchmark,4367,0.8165788871078543
+2014–2019 design,final,fbs,Record difficulty (Poisson-binomial),4367,0.8180673231051064
+2014–2019 design,final,fbs,Win percentage,4367,0.7981451797572704
+2014–2019 design,final,fbs,Net wins,4367,0.797916189603847
+2014–2019 design,final,fbs,Colley,4367,0.8229906114037097
+2014–2019 design,final,fbs,Results-only Bradley-Terry,4367,0.8177238378749714
+2014–2019 design,final,fbs,Previous frozen-credit v2,4367,0.8117700938859629
+2014–2019 design,final,all,Wins above top-25 benchmark,8770,0.8131128848346636
+2014–2019 design,final,all,Record difficulty (Poisson-binomial),8770,0.8153933865450399
+2014–2019 design,final,all,Win percentage,8770,0.7884834663625998
+2014–2019 design,final,all,Net wins,8770,0.7885974914481186
+2014–2019 design,final,all,Colley,8770,0.8283922462941847
+2014–2019 design,final,all,Results-only Bradley-Terry,8770,0.8208665906499429
+2014–2019 design,final,all,Previous frozen-credit v2,8770,0.8069555302166477
+2021–2025 development,week6,fbs,Wins above top-25 benchmark,1553,0.8744365743721829
+2021–2025 development,week6,fbs,Record difficulty (Poisson-binomial),1553,0.8802318094011591
+2021–2025 development,week6,fbs,Win percentage,1553,0.8383773341918866
+2021–2025 development,week6,fbs,Net wins,1553,0.8383773341918866
+2021–2025 development,week6,fbs,Colley,1553,0.8783000643915003
+2021–2025 development,week6,fbs,Results-only Bradley-Terry,1553,0.8808757244043787
+2021–2025 development,week6,fbs,Previous frozen-credit v2,1553,0.8576947842884739
+2021–2025 development,week6,all,Wins above top-25 benchmark,3428,0.8640606767794633
+2021–2025 development,week6,all,Record difficulty (Poisson-binomial),3428,0.8799591598599766
+2021–2025 development,week6,all,Win percentage,3428,0.8258459743290548
+2021–2025 development,week6,all,Net wins,3428,0.8249708284714119
+2021–2025 development,week6,all,Colley,3428,0.8841890315052509
+2021–2025 development,week6,all,Results-only Bradley-Terry,3428,0.8801050175029171
+2021–2025 development,week6,all,Previous frozen-credit v2,3428,0.8541423570595099
+2021–2025 development,final,fbs,Wins above top-25 benchmark,3864,0.8064182194616977
+2021–2025 development,final,fbs,Record difficulty (Poisson-binomial),3864,0.8091356107660456
+2021–2025 development,final,fbs,Win percentage,3864,0.7846790890269151
+2021–2025 development,final,fbs,Net wins,3864,0.7855848861283644
+2021–2025 development,final,fbs,Colley,3864,0.807712215320911
+2021–2025 development,final,fbs,Results-only Bradley-Terry,3864,0.8079710144927537
+2021–2025 development,final,fbs,Previous frozen-credit v2,3864,0.7976190476190477
+2021–2025 development,final,all,Wins above top-25 benchmark,7749,0.8083623693379791
+2021–2025 development,final,all,Record difficulty (Poisson-binomial),7749,0.8154600593624984
+2021–2025 development,final,all,Win percentage,7749,0.7827461607949413
+2021–2025 development,final,all,Net wins,7749,0.7835204542521615
+2021–2025 development,final,all,Colley,7749,0.8219125048393341
+2021–2025 development,final,all,Results-only Bradley-Terry,7749,0.818815331010453
+2021–2025 development,final,all,Previous frozen-credit v2,7749,0.8007484836753129

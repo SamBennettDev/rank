@@ -1,7 +1,7 @@
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "earned-standing-2",
+  "algorithmVersion": "resume-standing-3",
   "classifications": ["fbs", "fcs"],
   "winBonus": 3,
   "shrink": 0.05,
@@ -11,6 +11,14 @@
   "probabilityScale": 12,
   "residualScale": 14.934045,
   "calibrationId": "win-quality-fbs-reference-2014-2019-v2",
+  "resume": {
+    "method": "opponent-independent-resume-v1",
+    "ridge": 0.5,
+    "homeAdvantage": 0.3,
+    "benchmarkRank": 25,
+    "reference": "fbs",
+    "leaveTeamOut": true
+  },
   "winQuality": {
     "reference": "fbs",
     "divisionGap": 31.644079,

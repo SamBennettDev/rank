@@ -9,12 +9,7 @@ import type {
 } from "../src/engine/types";
 
 export type View =
-  | "list"
-  | "graph"
-  | "team"
-  | "about"
-  | "matchups"
-  | "projection";
+  "list" | "graph" | "team" | "about" | "matchups" | "projection";
 export interface Ctx {
   seasons: SeasonIndexEntry[];
   entry: SeasonIndexEntry;
@@ -74,6 +69,9 @@ export interface GameLine {
 }
 export function breakdown(ctx: Ctx, teamId: number) {
   const credits = new Map(ctx.ranking.credits.map((c) => [c.gameId, c]));
+  const resumeGames = new Map(
+    ctx.byId.get(teamId)?.resume?.games.map((g) => [g.gameId, g]) ?? [],
+  );
   const lines: GameLine[] = ctx.edges
     .filter((e) => e.winner === teamId || e.loser === teamId)
     .map((edge) => {
@@ -90,7 +88,9 @@ export function breakdown(ctx: Ctx, teamId: number) {
         opponent,
         where,
         margin,
-        value: won ? credits.get(edge.gameId)!.value : -1,
+        value:
+          resumeGames.get(edge.gameId)?.value ??
+          (won ? credits.get(edge.gameId)!.value : -1),
       };
     });
   const fromGames = lines.reduce((sum, l) => sum + l.value, 0);
@@ -106,7 +106,7 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Win points reflect the opponent’s pre-week chance against an average FBS team. An average-quality win earns 1 point; every loss subtracts exactly 1 point.",
+    "The current standing. Résumé scores compare actual wins with a top-25 benchmark’s expected wins against the same schedule.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

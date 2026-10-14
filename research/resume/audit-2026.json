@@ -1,0 +1,1756 @@
+{
+  "season": "2026",
+  "snapshot": {
+    "id": "week-06",
+    "label": "Week 6",
+    "throughWeek": 6,
+    "includePostseason": true,
+    "asOf": "2026-10-11T08:30:00.000Z"
+  },
+  "settings": {
+    "method": "opponent-independent-resume-v1",
+    "ridge": 0.5,
+    "homeAdvantage": 0.3,
+    "benchmarkRank": 25,
+    "reference": "fbs",
+    "leaveTeamOut": true
+  },
+  "counts": {
+    "inWindow": 813,
+    "included": 812,
+    "outOfScope": 0,
+    "incomplete": 0,
+    "tied": 1,
+    "modeled": 748,
+    "unmodeled": 64
+  },
+  "teams": 266,
+  "maxLedgerDifference": 8.881784197001252e-16,
+  "maxExpectedWinDifference": 4.440892098500626e-16,
+  "inputs": {
+    "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
+    "gamesSha256": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c"
+  },
+  "top25": [
+    {
+      "id": 87,
+      "team": "Notre Dame",
+      "rank": 1,
+      "record": "6-0",
+      "score": 2.042344,
+      "previousRank": 3,
+      "expectedWins": 3.957656,
+      "recordProbability": 0.063619,
+      "games": [
+        {
+          "gameId": 401858250,
+          "opponentId": 153,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.445076,
+          "value": 0.554924,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858257,
+          "opponentId": 24,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.812246,
+          "value": 0.187754,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858438,
+          "opponentId": 275,
+          "won": true,
+          "where": 0,
+          "benchmarkWinProbability": 0.446856,
+          "value": 0.553144,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858453,
+          "opponentId": 127,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.820274,
+          "value": 0.179726,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858467,
+          "opponentId": 2509,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.533808,
+          "value": 0.466192,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401859184,
+          "opponentId": 242,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.899396,
+          "value": 0.100604,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "team": "Georgia",
+      "rank": 2,
+      "record": "6-0",
+      "score": 1.923376,
+      "previousRank": 2,
+      "expectedWins": 4.076624,
+      "recordProbability": 0.054118,
+      "games": [
+        {
+          "gameId": 401856658,
+          "opponentId": 2634,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.936735,
+          "value": 0.063265,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856673,
+          "opponentId": 98,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.898172,
+          "value": 0.101828,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856686,
+          "opponentId": 8,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.695561,
+          "value": 0.304439,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856700,
+          "opponentId": 201,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.612111,
+          "value": 0.387889,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856705,
+          "opponentId": 238,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.725926,
+          "value": 0.274074,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856712,
+          "opponentId": 333,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.208119,
+          "value": 0.791881,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 2390,
+      "team": "Miami",
+      "rank": 3,
+      "record": "5-0",
+      "score": 1.911409,
+      "previousRank": 8,
+      "expectedWins": 3.088591,
+      "recordProbability": 0.060318,
+      "games": [
+        {
+          "gameId": 401858206,
+          "opponentId": 24,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.678881,
+          "value": 0.321119,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858213,
+          "opponentId": 50,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.93346,
+          "value": 0.06654,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858226,
+          "opponentId": 154,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.280953,
+          "value": 0.719047,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858238,
+          "opponentId": 2117,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.733297,
+          "value": 0.266703,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858249,
+          "opponentId": 228,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.462,
+          "value": 0.538,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 84,
+      "team": "Indiana",
+      "rank": 4,
+      "record": "6-0",
+      "score": 1.901812,
+      "previousRank": 4,
+      "expectedWins": 4.098188,
+      "recordProbability": 0.068572,
+      "games": [
+        {
+          "gameId": 401858425,
+          "opponentId": 249,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.664624,
+          "value": 0.335376,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858439,
+          "opponentId": 47,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.891544,
+          "value": 0.108456,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858449,
+          "opponentId": 98,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.898616,
+          "value": 0.101384,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858461,
+          "opponentId": 77,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.49039,
+          "value": 0.50961,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858477,
+          "opponentId": 164,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.840608,
+          "value": 0.159392,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858481,
+          "opponentId": 158,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.312406,
+          "value": 0.687594,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 2641,
+      "team": "Texas Tech",
+      "rank": 5,
+      "record": "5-0",
+      "score": 1.820195,
+      "previousRank": 12,
+      "expectedWins": 3.179805,
+      "recordProbability": 0.081786,
+      "games": [
+        {
+          "gameId": 401856770,
+          "opponentId": 2000,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.809334,
+          "value": 0.190666,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856783,
+          "opponentId": 204,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.425557,
+          "value": 0.574443,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856805,
+          "opponentId": 2534,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.900401,
+          "value": 0.099599,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856811,
+          "opponentId": 248,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.427271,
+          "value": 0.572729,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856821,
+          "opponentId": 38,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.617242,
+          "value": 0.382758,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 333,
+      "team": "Alabama",
+      "rank": 6,
+      "record": "5-1",
+      "score": 1.75619,
+      "previousRank": 5,
+      "expectedWins": 3.24381,
+      "recordProbability": 0.118067,
+      "games": [
+        {
+          "gameId": 401856634,
+          "opponentId": 151,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.775126,
+          "value": 0.224874,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856674,
+          "opponentId": 96,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.240704,
+          "value": 0.759296,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856685,
+          "opponentId": 52,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.789813,
+          "value": 0.210187,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856696,
+          "opponentId": 2579,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.680473,
+          "value": 0.319527,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856707,
+          "opponentId": 344,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.271412,
+          "value": 0.728588,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856712,
+          "opponentId": 61,
+          "won": false,
+          "where": 1,
+          "benchmarkWinProbability": 0.486282,
+          "value": -0.486282,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "team": "UCLA",
+      "rank": 7,
+      "record": "5-0",
+      "score": 1.714608,
+      "previousRank": 1,
+      "expectedWins": 3.285392,
+      "recordProbability": 0.10562,
+      "games": [
+        {
+          "gameId": 401858210,
+          "opponentId": 25,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.636022,
+          "value": 0.363978,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858443,
+          "opponentId": 21,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.826343,
+          "value": 0.173657,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858458,
+          "opponentId": 2509,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.68852,
+          "value": 0.31148,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858462,
+          "opponentId": 120,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.740175,
+          "value": 0.259825,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858484,
+          "opponentId": 2483,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.394332,
+          "value": 0.605668,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 252,
+      "team": "BYU",
+      "rank": 8,
+      "record": "5-0",
+      "score": 1.482816,
+      "previousRank": 9,
+      "expectedWins": 3.517184,
+      "recordProbability": 0.148405,
+      "games": [
+        {
+          "gameId": 401856775,
+          "opponentId": 3101,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.967623,
+          "value": 0.032377,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856795,
+          "opponentId": 36,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.67872,
+          "value": 0.32128,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856810,
+          "opponentId": 12,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.444104,
+          "value": 0.555896,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856818,
+          "opponentId": 2628,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.704887,
+          "value": 0.295113,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856826,
+          "opponentId": 66,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.72185,
+          "value": 0.27815,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 256,
+      "team": "James Madison",
+      "rank": 9,
+      "record": "6-0",
+      "score": 1.471623,
+      "previousRank": 10,
+      "expectedWins": 4.528377,
+      "recordProbability": 0.169917,
+      "games": [
+        {
+          "gameId": 401860887,
+          "opponentId": 21,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.710391,
+          "value": 0.289609,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867929,
+          "opponentId": 2681,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.956598,
+          "value": 0.043402,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869949,
+          "opponentId": 290,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.722273,
+          "value": 0.277727,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869960,
+          "opponentId": 2335,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.549006,
+          "value": 0.450994,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869961,
+          "opponentId": 295,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.755744,
+          "value": 0.244256,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401869962,
+          "opponentId": 276,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.834365,
+          "value": 0.165635,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "team": "Kentucky",
+      "rank": 10,
+      "record": "5-1",
+      "score": 1.455681,
+      "previousRank": 6,
+      "expectedWins": 3.544319,
+      "recordProbability": 0.217466,
+      "games": [
+        {
+          "gameId": 401856659,
+          "opponentId": 2754,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.615241,
+          "value": 0.384759,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856674,
+          "opponentId": 333,
+          "won": false,
+          "where": 1,
+          "benchmarkWinProbability": 0.520636,
+          "value": -0.520636,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856694,
+          "opponentId": 245,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.585639,
+          "value": 0.414361,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856709,
+          "opponentId": 2579,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.563517,
+          "value": 0.436483,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856715,
+          "opponentId": 99,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.574443,
+          "value": 0.425557,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401864576,
+          "opponentId": 6,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.684843,
+          "value": 0.315157,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "team": "Boise State",
+      "rank": 11,
+      "record": "5-1",
+      "score": 1.386849,
+      "previousRank": 16,
+      "expectedWins": 3.613151,
+      "recordProbability": 0.224976,
+      "games": [
+        {
+          "gameId": 401858433,
+          "opponentId": 2483,
+          "won": false,
+          "where": -1,
+          "benchmarkWinProbability": 0.58392,
+          "value": -0.58392,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401860881,
+          "opponentId": 235,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.510803,
+          "value": 0.489197,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401860885,
+          "opponentId": 233,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.675655,
+          "value": 0.324345,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401860897,
+          "opponentId": 2711,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.471357,
+          "value": 0.528643,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401860898,
+          "opponentId": 328,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.862772,
+          "value": 0.137228,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401860901,
+          "opponentId": 278,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.508644,
+          "value": 0.491356,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "team": "Harvard",
+      "rank": 12,
+      "record": "4-0",
+      "score": 1.265448,
+      "previousRank": 47,
+      "expectedWins": 2.734552,
+      "recordProbability": 0.209452,
+      "games": [
+        {
+          "gameId": 401866639,
+          "opponentId": 160,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.8539,
+          "value": 0.1461,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867806,
+          "opponentId": 225,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.653477,
+          "value": 0.346523,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867829,
+          "opponentId": 172,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.579958,
+          "value": 0.420042,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867840,
+          "opponentId": 2142,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.647217,
+          "value": 0.352783,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 251,
+      "team": "Texas",
+      "rank": 13,
+      "record": "4-1",
+      "score": 1.219578,
+      "previousRank": 17,
+      "expectedWins": 2.780422,
+      "recordProbability": 0.246664,
+      "games": [
+        {
+          "gameId": 401856667,
+          "opponentId": 326,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.792378,
+          "value": 0.207622,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856682,
+          "opponentId": 194,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.448389,
+          "value": 0.551611,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856693,
+          "opponentId": 2636,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.478007,
+          "value": 0.521993,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856704,
+          "opponentId": 2633,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.343395,
+          "value": 0.656605,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856717,
+          "opponentId": 201,
+          "won": false,
+          "where": 0,
+          "benchmarkWinProbability": 0.718253,
+          "value": -0.718253,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 2627,
+      "team": "Tarleton State",
+      "rank": 14,
+      "record": "6-0",
+      "score": 1.148819,
+      "previousRank": 27,
+      "expectedWins": 4.851181,
+      "recordProbability": 0.251735,
+      "games": [
+        {
+          "gameId": 401866410,
+          "opponentId": 189,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.727267,
+          "value": 0.272733,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401867688,
+          "opponentId": 2130,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.952848,
+          "value": 0.047152,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868065,
+          "opponentId": 2046,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.541125,
+          "value": 0.458875,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868235,
+          "opponentId": 2504,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.912227,
+          "value": 0.087773,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868236,
+          "opponentId": 2377,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.81734,
+          "value": 0.18266,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868237,
+          "opponentId": 2771,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.900374,
+          "value": 0.099626,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 248,
+      "team": "Houston",
+      "rank": 15,
+      "record": "5-1",
+      "score": 1.144835,
+      "previousRank": 15,
+      "expectedWins": 3.855165,
+      "recordProbability": 0.284038,
+      "games": [
+        {
+          "gameId": 401856778,
+          "opponentId": 204,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.603335,
+          "value": 0.396665,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856787,
+          "opponentId": 2582,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.920858,
+          "value": 0.079142,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856806,
+          "opponentId": 290,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.711428,
+          "value": 0.288572,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856811,
+          "opponentId": 2641,
+          "won": false,
+          "where": -1,
+          "benchmarkWinProbability": 0.313064,
+          "value": -0.313064,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856819,
+          "opponentId": 2116,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.721711,
+          "value": 0.278289,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856825,
+          "opponentId": 2306,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.584769,
+          "value": 0.415231,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 154,
+      "team": "Wake Forest",
+      "rank": 16,
+      "record": "5-1",
+      "score": 1.115092,
+      "previousRank": 11,
+      "expectedWins": 3.884908,
+      "recordProbability": 0.297485,
+      "games": [
+        {
+          "gameId": 401858204,
+          "opponentId": 2006,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.909817,
+          "value": 0.090183,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858224,
+          "opponentId": 2509,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.501705,
+          "value": 0.498295,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858226,
+          "opponentId": 2390,
+          "won": false,
+          "where": 1,
+          "benchmarkWinProbability": 0.470722,
+          "value": -0.470722,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858243,
+          "opponentId": 97,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.590787,
+          "value": 0.409213,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858251,
+          "opponentId": 24,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.808032,
+          "value": 0.191968,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858260,
+          "opponentId": 152,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.603845,
+          "value": 0.396155,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 2329,
+      "team": "Lehigh",
+      "rank": 17,
+      "record": "6-0",
+      "score": 1.096714,
+      "previousRank": 42,
+      "expectedWins": 4.903286,
+      "recordProbability": 0.292139,
+      "games": [
+        {
+          "gameId": 401867834,
+          "opponentId": 159,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.854497,
+          "value": 0.145503,
+          "opponentGames": 3,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868010,
+          "opponentId": 2230,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.870699,
+          "value": 0.129301,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868017,
+          "opponentId": 46,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.860097,
+          "value": 0.139903,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868022,
+          "opponentId": 107,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.747264,
+          "value": 0.252736,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868033,
+          "opponentId": 2729,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.86198,
+          "value": 0.13802,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868034,
+          "opponentId": 219,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.708749,
+          "value": 0.291251,
+          "opponentGames": 3,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 344,
+      "team": "Mississippi State",
+      "rank": 18,
+      "record": "4-1",
+      "score": 1.055131,
+      "previousRank": 13,
+      "expectedWins": 2.944869,
+      "recordProbability": 0.297681,
+      "games": [
+        {
+          "gameId": 401856662,
+          "opponentId": 2433,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.948342,
+          "value": 0.051658,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856677,
+          "opponentId": 135,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.490102,
+          "value": 0.509898,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856691,
+          "opponentId": 2579,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.549341,
+          "value": 0.450659,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856703,
+          "opponentId": 142,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.449293,
+          "value": 0.550707,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856707,
+          "opponentId": 333,
+          "won": false,
+          "where": 1,
+          "benchmarkWinProbability": 0.507791,
+          "value": -0.507791,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 254,
+      "team": "Utah",
+      "rank": 19,
+      "record": "5-0",
+      "score": 1.033185,
+      "previousRank": 18,
+      "expectedWins": 3.966815,
+      "recordProbability": 0.29329,
+      "games": [
+        {
+          "gameId": 401856670,
+          "opponentId": 8,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.807095,
+          "value": 0.192905,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856768,
+          "opponentId": 70,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.907848,
+          "value": 0.092152,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856801,
+          "opponentId": 328,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.858811,
+          "value": 0.141189,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856816,
+          "opponentId": 66,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.558425,
+          "value": 0.441575,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856827,
+          "opponentId": 2305,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.834636,
+          "value": 0.165364,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "team": "Arizona",
+      "rank": 20,
+      "record": "5-1",
+      "score": 1.000724,
+      "previousRank": 26,
+      "expectedWins": 3.999276,
+      "recordProbability": 0.327171,
+      "games": [
+        {
+          "gameId": 401856773,
+          "opponentId": 2464,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.611736,
+          "value": 0.388264,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856793,
+          "opponentId": 2459,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.93783,
+          "value": 0.06217,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856804,
+          "opponentId": 265,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.880769,
+          "value": 0.119231,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856810,
+          "opponentId": 252,
+          "won": false,
+          "where": -1,
+          "benchmarkWinProbability": 0.382184,
+          "value": -0.382184,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856820,
+          "opponentId": 2132,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.539814,
+          "value": 0.460186,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856823,
+          "opponentId": 277,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.646943,
+          "value": 0.353057,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 194,
+      "team": "Ohio State",
+      "rank": 21,
+      "record": "5-1",
+      "score": 0.963535,
+      "previousRank": 21,
+      "expectedWins": 4.036465,
+      "recordProbability": 0.328518,
+      "games": [
+        {
+          "gameId": 401856682,
+          "opponentId": 251,
+          "won": false,
+          "where": -1,
+          "benchmarkWinProbability": 0.425557,
+          "value": -0.425557,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858432,
+          "opponentId": 2050,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.890836,
+          "value": 0.109164,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858454,
+          "opponentId": 2309,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.834605,
+          "value": 0.165395,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858465,
+          "opponentId": 356,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.759271,
+          "value": 0.240729,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858473,
+          "opponentId": 2294,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.293361,
+          "value": 0.706639,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858483,
+          "opponentId": 120,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.832835,
+          "value": 0.167165,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "team": "USC",
+      "rank": 22,
+      "record": "6-1",
+      "score": 0.941605,
+      "previousRank": 7,
+      "expectedWins": 5.058395,
+      "recordProbability": 0.374882,
+      "games": [
+        {
+          "gameId": 401858436,
+          "opponentId": 278,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.659318,
+          "value": 0.340682,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858445,
+          "opponentId": 309,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.66054,
+          "value": 0.33946,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858457,
+          "opponentId": 164,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.834278,
+          "value": 0.165722,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858469,
+          "opponentId": 2483,
+          "won": false,
+          "where": 1,
+          "benchmarkWinProbability": 0.727157,
+          "value": -0.727157,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858478,
+          "opponentId": 264,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.804101,
+          "value": 0.195899,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858485,
+          "opponentId": 213,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.588873,
+          "value": 0.411127,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401864494,
+          "opponentId": 23,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.784128,
+          "value": 0.215872,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 142,
+      "team": "Missouri",
+      "rank": 23,
+      "record": "5-1",
+      "score": 0.910689,
+      "previousRank": 14,
+      "expectedWins": 4.089311,
+      "recordProbability": 0.369575,
+      "games": [
+        {
+          "gameId": 401856663,
+          "opponentId": 2029,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.860496,
+          "value": 0.139504,
+          "opponentGames": 2,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856678,
+          "opponentId": 2305,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.714785,
+          "value": 0.285215,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856689,
+          "opponentId": 2653,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.789895,
+          "value": 0.210105,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856703,
+          "opponentId": 344,
+          "won": false,
+          "where": -1,
+          "benchmarkWinProbability": 0.459357,
+          "value": -0.459357,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856708,
+          "opponentId": 57,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.530941,
+          "value": 0.469059,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401856716,
+          "opponentId": 245,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.733837,
+          "value": 0.266163,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 2617,
+      "team": "Stephen F. Austin",
+      "rank": 24,
+      "record": "6-0",
+      "score": 0.896492,
+      "previousRank": 45,
+      "expectedWins": 5.103508,
+      "recordProbability": 0.364171,
+      "games": [
+        {
+          "gameId": 401868050,
+          "opponentId": 2000,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.682104,
+          "value": 0.317896,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868305,
+          "opponentId": 2377,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.810854,
+          "value": 0.189146,
+          "opponentGames": 4,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868306,
+          "opponentId": 2837,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.889856,
+          "value": 0.110144,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868307,
+          "opponentId": 2504,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.844079,
+          "value": 0.155921,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401868308,
+          "opponentId": 196,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 1,
+          "value": 0,
+          "opponentGames": 0,
+          "unmodeled": true
+        },
+        {
+          "gameId": 401868309,
+          "opponentId": 2916,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.876615,
+          "value": 0.123385,
+          "opponentGames": 4,
+          "unmodeled": false
+        }
+      ]
+    },
+    {
+      "id": 158,
+      "team": "Nebraska",
+      "rank": 25,
+      "record": "5-1",
+      "score": 0.881082,
+      "previousRank": 25,
+      "expectedWins": 4.118918,
+      "recordProbability": 0.38292,
+      "games": [
+        {
+          "gameId": 401858430,
+          "opponentId": 195,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.622079,
+          "value": 0.377921,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858441,
+          "opponentId": 189,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.829827,
+          "value": 0.170173,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858452,
+          "opponentId": 155,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.666215,
+          "value": 0.333785,
+          "opponentGames": 6,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858464,
+          "opponentId": 127,
+          "won": true,
+          "where": -1,
+          "benchmarkWinProbability": 0.689692,
+          "value": 0.310308,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858475,
+          "opponentId": 120,
+          "won": true,
+          "where": 1,
+          "benchmarkWinProbability": 0.835951,
+          "value": 0.164049,
+          "opponentGames": 5,
+          "unmodeled": false
+        },
+        {
+          "gameId": 401858481,
+          "opponentId": 84,
+          "won": false,
+          "where": 1,
+          "benchmarkWinProbability": 0.475154,
+          "value": -0.475154,
+          "opponentGames": 5,
+          "unmodeled": false
+        }
+      ]
+    }
+  ]
+}
