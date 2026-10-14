@@ -45,12 +45,12 @@ describe("saved season-only neural inference", () => {
       }
     const original = JSON.parse(
       readFileSync(
-        "research/season_only/results/rich-rolling-models/2026.json",
+        "research/season_only/robust/polished-results/annual-models/2026.json",
         "utf8",
       ),
     );
     expect(bundle.groups[0]!.components[0]!.networks).toEqual(
-      original.components[0].models,
+      original.models.map((m: object) => ({kind: "rank", ...m})),
     );
   });
 
@@ -73,8 +73,7 @@ describe("saved season-only neural inference", () => {
       for (const row of s.features)
         expect(row.every(Number.isFinite)).toBe(true);
     expect(bundle.groups.map((g) => [g.name, g.weight])).toEqual([
-      ["rich", 0.75],
-      ["graph", 0.25],
+      ["robust", 1],
     ]);
   });
   it("has complementary neutral and venue-reversed matchup probabilities", () => {
@@ -87,10 +86,10 @@ describe("saved season-only neural inference", () => {
       ).toBeCloseTo(1, 12);
   });
   it("gives equal neutral probabilities to teams with equal numeric inputs", () => {
-    const snap = bundle.snapshots[0]!;
-    const features = snap.features.map((r) => r.slice());
-    features[1] = features[0]!.slice();
-    const p = neuralPredictor(bundle, { ...snap, features }, false);
+    const snap = structuredClone(bundle.snapshots[0]!);
+    snap.features[1] = snap.features[0]!.slice();
+    for (const key of ["gamesPlayed","losses","externalLosses","recordGamesPlayed"] as const) snap[key]![1] = snap[key]![0]!;
+    const p = neuralPredictor(bundle, snap, false);
     expect(p.probability(0, 1, 0)).toBeCloseTo(0.5, 12);
     expect(p.probability(0, 10, 0)).toBeCloseTo(p.probability(1, 10, 0), 12);
   });
@@ -104,6 +103,36 @@ describe("saved season-only neural inference", () => {
     expect(renamed.probability(0, 20, 0)).toBe(
       outputs.get(snap.id)!.probability(0, 20, 0),
     );
+  });
+  it("deducts a loss monotonically after the frozen network performance estimate", () => {
+    const snap = structuredClone(bundle.snapshots[5]!);
+    const i = bundle.teamIds.indexOf(154), j = bundle.teamIds.indexOf(2483);
+    const before = neuralPredictor(bundle,snap,false);
+    const original = [-1,0,1].map(v => before.probability(i,j,v));
+    snap.losses![i]! += 1;
+    const after = neuralPredictor(bundle,snap,false);
+    const expected = bundle.groups[0]!.components[0]!.temperature * bundle.policy!.lossPenalty/(snap.gamesPlayed![i]!+bundle.policy!.lossPrior);
+    for (let k=0;k<3;k++) {
+      const p=original[k]!,q=after.probability(i,j,k-1);
+      expect(q).toBeLessThan(p);
+      expect(Math.log(p/(1-p))-Math.log(q/(1-q))).toBeCloseTo(expected,10);
+    }
+  });
+  it("counts losses to opponents outside the modeled field", () => {
+    const snap=structuredClone(bundle.snapshots[0]!);
+    const i=snap.gamesPlayed!.findIndex(n => n===0);
+    const j=snap.gamesPlayed!.findIndex((n,k) => n===0 && k!==i);
+    for(const t of [i,j]) {snap.features[t]!.fill(0);snap.losses![t]=0;snap.externalLosses![t]=0;snap.recordGamesPlayed![t]=0;}
+    snap.externalLosses![i]=1;snap.recordGamesPlayed![i]=1;
+    const p=neuralPredictor(bundle,snap,false).probability(i,j,0);
+    expect(Math.log(p/(1-p))).toBeCloseTo(-bundle.groups[0]!.components[0]!.temperature * bundle.policy!.lossPenalty/bundle.policy!.lossPrior,10);
+  });
+  it("has a consistent neutral ordering with no favorite cycles", () => {
+    const p=outputs.get("week-06")!;
+    const order=consensusOrder(p.matrix,bundle.teamIds,bundle.teamIds.map((_,i)=>i));
+    expect(order.moves).toBe(0);
+    expect(order.disagreements).toBe(0);
+    for (const r of p.rankRanges) expect(r.low).toBeLessThanOrEqual(r.high);
   });
   it("rejects malformed dimensions, nonfinite features, and future training years", () => {
     expect(() =>
@@ -139,6 +168,10 @@ describe("saved season-only neural inference", () => {
     await expect(
       computeSeason({ ...input, neuralJson: JSON.stringify(changed) }),
     ).rejects.toThrow(/cutoff/);
+    const wrongRecord=JSON.parse(raw);
+    const ix=wrongRecord.snapshots[0].gamesPlayed.findIndex((n:number)=>n>0);
+    wrongRecord.snapshots[0].losses[ix]=1-wrongRecord.snapshots[0].losses[ix];
+    await expect(computeSeason({...input,neuralJson:JSON.stringify(wrongRecord)})).rejects.toThrow(/cutoff/);
   }, 20000);
   it("publishes consensus ranks and neural probabilities from the same model", () => {
     const ranking = JSON.parse(
@@ -150,7 +183,7 @@ describe("saved season-only neural inference", () => {
       bundle.teamIds,
       bundle.teamIds.map((_, i) => i),
     );
-    expect(ranking.manifest.standingMethod).toBe("season-only-neural-v1");
+    expect(ranking.manifest.standingMethod).toBe("season-only-neural-v2");
     expect(ranking.manifest.neural.objective).toBe(order.objective);
     expect(ranking.projection.target).toBe("frozen-earned-points");
     for (const t of ranking.teams) {

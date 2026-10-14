@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import json
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -29,6 +30,12 @@ def diagnose(year=2026, snapshot_id='week-06'):
     directory = ROOT / f'data/seasons/{year}'
     bundle_path = directory / 'neural.json'
     bundle = json.loads(bundle_path.read_text())
+    if bundle['model'] == 'season-only-robust-loss-v2':
+        if year != 2026 or snapshot_id != 'week-06':
+            raise ValueError('The active v2 sensitivity audit currently covers 2026 Week 6.')
+        print('Active loss-aware model: running the current/historical sensitivity audit.', flush=True)
+        subprocess.check_call([sys.executable, str(ROOT/'research/season_only/robust/sensitivity.py')], cwd=ROOT)
+        return
     published = json.loads((ROOT / f'data/rankings/{year}/{snapshot_id}.json').read_text())
     snap = next(s for s in bundle['snapshots'] if s['id'] == snapshot_id)
     for name in ['teams', 'games', 'plays', 'rich']:

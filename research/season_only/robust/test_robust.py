@@ -6,6 +6,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from robust.features import INDICES, inputs, records
 from robust.network import RobustRanker
+from robust.bounded_network import BoundedRanker
 
 
 class RobustTests(unittest.TestCase):
@@ -53,6 +54,39 @@ class RobustTests(unittest.TestCase):
         games, losses = records(raw)
         np.testing.assert_array_equal(games, [0, 5, 6])
         np.testing.assert_array_equal(losses, [0, 2, 1])
+
+
+class BoundedTests(RobustTests):
+    def model(self):
+        rng=np.random.default_rng(7)
+        x,a=rng.normal(size=(12,50)),rng.normal(size=(12,50))
+        games=np.arange(1,13,dtype=float);losses=games//2
+        model=BoundedRanker(ridge=.003,evidence_prior=2.,residual_limit=.5,anchor_scale=10.,seed=7,scale=np.ones(50))
+        model.fit(x,a,games,games,losses,losses,np.ones(12),np.arange(12)%2,np.ones(12),maxiter=3)
+        model.loss_penalty=2.
+        return model,x,games,losses
+
+    def test_residual_is_bounded(self):
+        model,x,games,losses=self.model()
+        strength=model.strength(x,games,losses)+model.loss_penalty*losses/(games+model.loss_prior)
+        residual=strength/(games/(games+model.evidence_prior))-x[:,1]/model.anchor_scale
+        self.assertTrue(np.all(np.abs(residual)<=model.residual_limit))
+
+    def test_extra_score_margin_above_cap_cannot_change_features(self):
+        from dataclasses import replace
+        import pandas as pd
+        from data import load,week6
+        from prepare import ROOT
+        from robust.capped_features import build
+        s=load(2026);_,idx,_=week6(s)
+        rich=pd.read_csv(ROOT/'data/seasons/2026/rich.csv')
+        baseline,records=build(s,idx,rich)
+        games=s.games.copy();row=games.index[games.game_id.eq(401858455)][0]
+        self.assertEqual(games.loc[row,'margin'],84)
+        games.loc[row,'home_points']=35;games.loc[row,'margin']=35
+        changed,changed_records=build(replace(s,games=games),idx,rich)
+        np.testing.assert_allclose(baseline,changed,atol=1e-10,rtol=0)
+        for a,b in zip(records,changed_records):np.testing.assert_array_equal(a,b)
 
 
 if __name__ == '__main__': unittest.main()

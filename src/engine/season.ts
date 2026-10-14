@@ -23,7 +23,7 @@ import {
 } from "./neural";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-18";
+export const ENGINE_VERSION = "rank-engine-19";
 
 export interface SeasonFiles {
   season: string;
@@ -101,7 +101,8 @@ export async function computeSeason(
     input.richCsv === undefined ? null : await sha256Hex(input.richCsv);
   if (
     neuralBundle &&
-    (neuralBundle.year !== Number(input.season) ||
+    (neuralBundle.model !== config.neural!.model ||
+      neuralBundle.year !== Number(input.season) ||
       neuralBundle.source.teamsSha256 !== teamsSha256 ||
       neuralBundle.source.gamesSha256 !== gamesSha256 ||
       neuralBundle.source.playsSha256 !== playsSha256 ||
@@ -267,12 +268,22 @@ export async function computeSeason(
     const neuralSnapshot = neuralBundle?.snapshots.find(
       (s) => s.id === snap.id,
     );
+    const modeledGames = new Map<number,number>(), modeledLosses = new Map<number,number>();
+    if (neuralBundle?.policy) for (const edge of edges) {
+      for (const id of [edge.winner,edge.loser]) modeledGames.set(id,(modeledGames.get(id) ?? 0)+1);
+      modeledLosses.set(edge.loser,(modeledLosses.get(edge.loser) ?? 0)+1);
+    }
     if (
       neuralBundle &&
       (!neuralSnapshot ||
         neuralSnapshot.asOf !== snap.asOf ||
         neuralSnapshot.gameIds.length !== included.size ||
-        neuralSnapshot.gameIds.some((id) => !included.has(id)))
+        neuralSnapshot.gameIds.some((id) => !included.has(id)) ||
+        (neuralBundle.policy && teams.some((t,i) =>
+          neuralSnapshot.losses![i] !== (modeledLosses.get(t.id) ?? 0) ||
+          neuralSnapshot.externalLosses![i] !== (losses.get(t.id) ?? 0) - (modeledLosses.get(t.id) ?? 0) ||
+          neuralSnapshot.recordGamesPlayed![i] !== (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) ||
+          neuralSnapshot.gamesPlayed![i] !== (modeledGames.get(t.id) ?? 0))))
     )
       throw new Error(
         `neural snapshot does not match causal game cutoff: ${snap.id}`,
@@ -364,8 +375,14 @@ export async function computeSeason(
           ? {
               neural: {
                 roundRobinWinProbability: round6(neural.scores[i]!),
-                richWinProbability: round6(neural.groupScores[0]![i]!),
-                graphWinProbability: round6(neural.groupScores[1]![i]!),
+                ...(neuralBundle!.policy ? {
+                  evidenceReliability: round6(neuralSnapshot!.gamesPlayed![i]! / (neuralSnapshot!.gamesPlayed![i]! + neuralBundle!.policy.evidencePrior)),
+                  lossDeduction: round6(neuralBundle!.groups[0]!.components[0]!.temperature * neuralBundle!.policy.lossPenalty * (losses.get(t.id) ?? 0) / (neuralSnapshot!.gamesPlayed![i]! + neuralBundle!.policy.lossPrior)),
+                  ...(rank !== null ? { modelRankRange: neural.rankRanges[i]! } : {}),
+                } : {
+                  richWinProbability: round6(neural.groupScores[0]![i]!),
+                  graphWinProbability: round6(neural.groupScores[1]![i]!),
+                }),
               },
               earnedHeight: standing.heights[i]!,
               earnedRank: earnedRanks[i]!,
@@ -376,7 +393,8 @@ export async function computeSeason(
         componentSize: model.sizes.get(model.components[i]!) ?? 0,
         provisional:
           model.provisional[i]! ||
-          (neuralSnapshot ? neuralSnapshot.features[i]![22]! < 0.5 : false),
+          (neuralSnapshot ? neuralSnapshot.features[i]![neuralBundle!.policy ? 11 : 22]! < 0.5 : false) ||
+          (!!neuralBundle?.policy && (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) < 8),
         offense: unit(units?.offense[i]),
         defense: unit(units?.defense[i]),
         special: unit(units?.special[i]),
@@ -418,7 +436,7 @@ export async function computeSeason(
     const manifest: Manifest = {
       engine: ENGINE_VERSION,
       standingMethod: neuralBundle
-        ? "season-only-neural-v1"
+        ? neuralBundle.policy ? "season-only-neural-v2" : "season-only-neural-v1"
         : config.winQuality
           ? "frozen-fbs-quality-v2"
           : "frozen-win-quality-v1",
@@ -437,6 +455,7 @@ export async function computeSeason(
         ? {
             neural: {
               model: neuralBundle.model,
+              ...(neuralBundle.policy ? { policy: neuralBundle.policy } : {}),
               ordering: "weighted-pairwise-consensus" as const,
               bundleSha256: neuralSha256!,
               trainingYears: neuralBundle.trainingYears,

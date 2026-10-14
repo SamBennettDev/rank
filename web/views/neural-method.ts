@@ -112,7 +112,8 @@ export function neuralMethodView(ctx: Ctx) {
       h(
         "li",
         {},
-        `Predict every neutral-site matchup among ${n.referenceTeams} modeled FBS/FCS teams, using three rich-stat networks and three opponent-graph networks.`,
+        n.policy ? `Start with the robust schedule rating divided by ${n.policy.anchorScale}. Three neural fits add a correction bounded to ±${n.policy.residualLimit}. Shrink that performance estimate by games / (games + ${n.policy.evidencePrior}), then subtract ${n.policy.lossPenalty} × losses / (games + ${n.policy.lossPrior}). Predict every neutral-site matchup among ${n.referenceTeams} FBS/FCS teams from the resulting strength difference.`
+          : `Predict every neutral-site matchup among ${n.referenceTeams} modeled FBS/FCS teams, using three rich-stat networks and three opponent-graph networks.`,
       ),
       h(
         "li",
@@ -123,7 +124,8 @@ export function neuralMethodView(ctx: Ctx) {
     h(
       "p",
       {},
-      "Some matchup predictions form cycles. The ordering balances all pairs through deterministic improving moves. It is a locally optimized consensus; it does not guarantee an exact global optimum or that every higher-ranked team is favored in every matchup.",
+      n.policy ? "All three networks use the same team-strength architecture. Averaging their strength differences gives a consistent neutral-field order: every higher-ranked team is favored over every lower-ranked team, and tied strengths predict 50%. Venue can change the favorite in an actual game."
+        : "Some matchup predictions form cycles. The ordering balances all pairs through deterministic improving moves. It is a locally optimized consensus; it does not guarantee an exact global optimum or that every higher-ranked team is favored in every matchup.",
     ),
     h(
       "p",
@@ -137,7 +139,8 @@ export function neuralMethodView(ctx: Ctx) {
       h(
         "p",
         {},
-        "Rich-stat networks receive 64 numeric inputs. Graph networks receive 152, including opponents’ and opponents’ opponents’ current-season statistics. Their probabilities are blended 75% / 25%. Team names, IDs, conferences, divisions, recruiting, preseason ratings and live betting prices are excluded from neural features. IDs only join records.",
+        n.policy ? "Every game margin is capped at 35 before fitting all selected score-based ratings, including the robust Huber rating. Extra scoreboard margin beyond that cap supplies no additional credit. The neural correction uses 50 numeric inputs covering capped ratings, opponent-adjusted efficiency, special teams and evidence. Raw scoring averages, raw EPA averages, margin variation, Elo and record ratings are excluded. Inputs and the total neural correction are bounded. Losses enter a separate deduction after training; every loss counts, including losses to outside opponents. Team identity, conferences, divisions, recruiting, polls and live betting prices are excluded."
+          : "Rich-stat networks receive 64 numeric inputs. Graph networks receive 152, including opponents’ and opponents’ opponents’ current-season statistics. Their probabilities are blended 75% / 25%. Team names, IDs, conferences, divisions, recruiting, preseason ratings and live betting prices are excluded from neural features. IDs only join records.",
       ),
       h(
         "p",
@@ -147,7 +150,8 @@ export function neuralMethodView(ctx: Ctx) {
       h(
         "p",
         {},
-        "The saved blend picked 70.86% of winners in 3,603 dated FBS games from 2020–2025. Its published research includes matched sportsbook comparisons and the limits of that evaluation.",
+        n.policy ? "Three older validation periods selected the final capped model from 16 neural configurations and three positive post-training loss penalties, following two earlier design rounds. Probability calibration uses older validation forecasts and preserves picks and ranks. On 3,603 dated FBS games in 2020–2025, this model picked 70.16% of winners versus 70.86% for the previous blend. The stronger loss policy and score cap have a measured accuracy cost. These results do not establish a betting-market advantage. Historical seasons were already inspected."
+          : "The saved blend picked 70.86% of winners in 3,603 dated FBS games from 2020–2025. Its published research includes matched sportsbook comparisons and the limits of that evaluation.",
       ),
     ),
     h(

@@ -1,5 +1,7 @@
 # Season-only college football research
 
+The active application now uses the [robust neural model with explicit loss deductions](robust/REPORT.md). This directory’s original reports and prediction command retain the previous model for comparison.
+
 Historical supervised learning is compatible with equal preseason starts: learn shared weights from older seasons’ **pregame current-season features plus eventual winner labels**, then apply those weights to the forecast season’s statistics. No team identity, conference, division, recruiting, poll, preseason rating, or carried team strength enters a neural feature vector.
 
 Open [REPORT.html](REPORT.html) for the interactive comparison and every Week 6 ranking, [REPORT.pdf](REPORT.pdf) for the printable report, and [METHODS.html](METHODS.html) for mechanisms, formulas, and all features.

@@ -1,5 +1,7 @@
 # Why Wake Forest is #9, and why two Oregon schools appear
 
+**Archived v1 diagnosis.** The application now uses the [loss-aware capped model](../robust/REPORT.md). This baseline report was generated at commit `e0c41ce`; check out that version to reproduce it exactly. The diagnostic command routes the active v2 model to its current sensitivity audit.
+
 Audit of the neural development branch, using games through the **2026 Week 6 cutoff, October 11 at 08:30 UTC**. This report diagnoses the published model; it does not retrain it or change the rankings.
 
 ## Findings

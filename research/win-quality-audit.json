@@ -2,7 +2,7 @@
   "status": "current-input diagnostic, not a selection or accuracy test",
   "season": "2026",
   "snapshot": "week-06",
-  "engine": "rank-engine-18",
+  "engine": "rank-engine-19",
   "inputs": {
     "teams": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
     "games": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c"

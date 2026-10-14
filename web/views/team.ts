@@ -237,28 +237,36 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         { class: "hint" },
-        "The ranking orders teams using all head-to-head neural win probabilities. The average is a summary; individual matchups can favor a different team.",
+        ctx.ranking.manifest.neural!.policy
+          ? "Neural performance estimates are reduced for limited evidence and losses. The displayed average includes FCS opponents; it does not measure confidence in this rank."
+          : "The ranking orders teams using all head-to-head neural win probabilities. The average is a summary; individual matchups can favor a different team.",
       ),
       h(
         "div",
         { class: "credit-equation" },
-        h(
+        ...(ctx.ranking.manifest.neural!.policy ? [
+          h("div", {}, h("b", {}, me.wins + me.losses), h("small", {}, "Completed games")),
+          h("div", {}, h("b", {}, me.losses), h("small", {}, "Losses · explicit deduction")),
+          h("div", {}, h("b", {}, `${(100 * me.neural.evidenceReliability!).toFixed(0)}%`), h("small", {}, "Evidence retained")),
+        ] : [h(
           "div",
           {},
-          h("b", {}, `${(100 * me.neural.richWinProbability).toFixed(1)}%`),
+          h("b", {}, `${(100 * me.neural.richWinProbability!).toFixed(1)}%`),
           h("small", {}, "Rich-stat networks · 75%"),
         ),
         h(
           "div",
           {},
-          h("b", {}, `${(100 * me.neural.graphWinProbability).toFixed(1)}%`),
+          h("b", {}, `${(100 * me.neural.graphWinProbability!).toFixed(1)}%`),
           h("small", {}, "Opponent-graph networks · 25%"),
-        ),
+        )]),
       ),
       h(
         "p",
         { class: "hint" },
-        "Both groups use this season’s scores, efficiency and opponent statistics. Shared weights were trained on prior seasons. Team names, recruiting and preseason ratings are excluded.",
+        ctx.ranking.manifest.neural!.policy
+          ? `The model retains ${(100 * me.neural.evidenceReliability!).toFixed(0)}% of its unshrunk performance estimate from games against rated opponents. More games reduce that shrinkage. A bounded neural adjustment refines the robust schedule rating; losses are deducted after training. Evidence retained is a model weight, not confidence in the rank. Shared weights learn from prior seasons; team reputation is excluded.`
+          : "Both groups use this season’s scores, efficiency and opponent statistics. Shared weights were trained on prior seasons. Team names, recruiting and preseason ratings are excluded.",
       ),
       h(
         "a",

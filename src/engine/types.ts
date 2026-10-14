@@ -49,7 +49,7 @@ export interface SeasonConfig {
   /** Optional v2 win-credit model; omitted only for archived v1 calculations. */
   winQuality?: WinQualitySettings;
   /** Use frozen historical neural weights with current-season numeric features. */
-  neural?: { model: "season-only-rich-graph-v1" };
+  neural?: { model: "season-only-rich-graph-v1" | "season-only-robust-loss-v2" };
 }
 
 export interface WinQualitySettings {
@@ -133,8 +133,11 @@ export interface RankedTeam {
   /** Neural height is an ordinal graph coordinate; probabilities live here. */
   neural?: {
     roundRobinWinProbability: number;
-    richWinProbability: number;
-    graphWinProbability: number;
+    richWinProbability?: number;
+    graphWinProbability?: number;
+    evidenceReliability?: number;
+    lossDeduction?: number;
+    modelRankRange?: { low: number; high: number };
   };
   earnedHeight?: number | null;
   earnedRank?: number | null;
@@ -155,7 +158,7 @@ export interface RankedTeam {
 export interface Manifest {
   engine: string;
   standingMethod:
-    "frozen-win-quality-v1" | "frozen-fbs-quality-v2" | "season-only-neural-v1";
+    "frozen-win-quality-v1" | "frozen-fbs-quality-v2" | "season-only-neural-v1" | "season-only-neural-v2";
   lossPenalty: 1 | null;
   algorithmVersion: string;
   winBonus: number;
@@ -168,7 +171,8 @@ export interface Manifest {
   calibrationId: string;
   winQuality?: WinQualitySettings;
   neural?: {
-    model: "season-only-rich-graph-v1";
+    model: "season-only-rich-graph-v1" | "season-only-robust-loss-v2";
+    policy?: { evidencePrior: number; lossPenalty: number; lossPrior: number; inputClip: number; anchorScale: number; residualLimit: number; scoreMarginCap: number };
     ordering: "weighted-pairwise-consensus";
     bundleSha256: string;
     trainingYears: number[];

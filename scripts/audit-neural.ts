@@ -44,6 +44,10 @@ writeFileSync(
       "average_neutral_win_probability",
       "rich_probability",
       "graph_probability",
+      "evidence_reliability",
+      "loss_deduction_log_odds",
+      "model_rank_low",
+      "model_rank_high",
     ],
     ranking.teams
       .filter((t) => t.rank !== null)
@@ -54,8 +58,12 @@ writeFileSync(
         t.wins,
         t.losses,
         t.neural!.roundRobinWinProbability,
-        t.neural!.richWinProbability,
-        t.neural!.graphWinProbability,
+        t.neural!.richWinProbability ?? null,
+        t.neural!.graphWinProbability ?? null,
+        t.neural!.evidenceReliability ?? null,
+        t.neural!.lossDeduction ?? null,
+        t.neural!.modelRankRange?.low ?? null,
+        t.neural!.modelRankRange?.high ?? null,
       ]),
   ),
 );

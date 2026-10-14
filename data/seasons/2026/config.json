@@ -1,8 +1,8 @@
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "season-only-neural-1",
-  "neural": {"model":"season-only-rich-graph-v1"},
+  "algorithmVersion": "season-only-neural-2",
+  "neural": {"model":"season-only-robust-loss-v2"},
   "classifications": ["fbs", "fcs"],
   "winBonus": 3,
   "shrink": 0.05,

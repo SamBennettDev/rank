@@ -1,32 +1,42 @@
 # Methodology
 
-Rank publishes a **neural ranking of who is more likely to beat whom**, with game forecasts from the same model. This section specifies `season-only-neural-1` / `season-only-neural-v1`. The older earned-credit method below remains available for archived audit and projections.
+Rank publishes a **neural ranking of who is more likely to beat whom**, with game forecasts from the same model. The active method is `season-only-neural-2` / `season-only-neural-v2`. The [previous neural method](NEURAL_V1.md) and earned-credit method below remain archived for comparison and projections.
 
-## Neural probabilities and pairwise ordering
+## Robust neural strength and explicit losses
 
-The saved 2026 model uses shared weights trained on 2006–2025 pregame examples and outcome labels. Team inputs reset each season. Three rich-stat matchup networks receive 64 numeric features and have eight hidden neurons; three graph matchup networks receive 152 features and have 16 hidden neurons. The probability blend, selected on 2018–2019, is **75% rich / 25% graph**. Annual normalization and temperature calibration are saved with the weights.
+Historical pregame examples teach shared weights, while team statistics reset each season. The final model was chosen from three older validation periods, then annually refit using only earlier seasons. The 2026 weights use 2006–2025. Team/player identities, conferences, divisions, recruiting, polls, preseason ratings and live prices are excluded. IDs only join records.
 
-The numeric features cover current-season score margins, capped/robust margins, results, opponent-adjusted offense/defense, EPA and success rates, passing/rushing, disruption, drives, evidence and recent games. Graph inputs add mean opponent and two-hop statistics. Neural inputs exclude team/player identities, conferences, divisions, recruiting, polls, preseason ratings and live betting prices. Names and IDs only join records. Every unplayed team has the same zero numeric inputs.
+Every score margin is capped to ±35 **before** fitting all selected score-derived ratings, including the robust Huber rating. The 50-feature whitelist excludes raw margins and scoring averages, raw EPA averages, margin variation, Elo and record-based ratings. Opponent margin context uses capped ratings. Actual play efficiency can add evidence even when the score cap binds. Play summaries retain the existing garbage-time filters.
 
-For standardized/clipped team vectors h and a, matchup networks process `[h−a, (h+a)/2]` and its reversal. Half the score difference gives an antisymmetric neutral logit; a learned venue coefficient supplies home advantage. Seed logits average within each network group before saved temperature calibration and sigmoid. The final probability averages the two calibrated group probabilities at weights .75/.25. Swapping teams and reversing venue complements the probability. Equal numeric inputs yield a neutral probability of .5.
+Three neural fits have eight hidden neurons. With standardized inputs clipped to ±4, each produces a correction bounded to ±1. Let `n` be completed games against modeled opponents and `L` all current-season losses, including losses to outside opponents:
 
 ```text
-P[i,j] = neural probability that team i beats team j at a neutral venue
-initial score[i] = mean_j P[i,j]
-ordering objective = sum over all upper/lower pairs P[upper,lower]
+correction = tanh(x · linear + tanh(x · W + bias) · output)
+performance = Huber rating fitted to capped margins / 14 + correction
+strength = n / (n + 6) × performance − 2 × L / (n + 4)
+P(A beats B) = sigmoid(T × (mean strength[A] − mean strength[B] + H × venue))
+T = 1.009351327591093
 ```
 
-Start with expected round-robin wins. Evaluate all insertion moves and apply the best improving move repeatedly until no improving insertion remains. Numeric IDs only resolve equal optimization choices and display order; identical probability profiles retain competition-rank ties. This is a deterministic local optimum of a weighted tournament objective, not an exact global Kemeny solution. Matchup cycles can leave some lower-ranked teams favored against higher-ranked ones. `manifest.neural` records initial/final objective, improving moves and remaining disagreeing pairwise favorites; these are ordering diagnostics, not game-prediction accuracy.
+The loss deduction is applied **after** training the performance network. Holding other features and n fixed, another loss strictly lowers strength. An actual loss can also change efficiency, opponent adjustments and sample size, so no fixed number of ranking places is guaranteed. Every unplayed team has zero performance strength. No team receives an identity or division prior.
 
-The displayed average win chance is the mean neutral probability against all modeled FBS/FCS teams, including a .5 self matchup. It summarizes the network, while the consensus determines rank; a team can have a slightly lower mean and still be placed higher by head-to-head evidence. Division/conference UI filters preserve full-field ranks. Teams without counted results remain unranked, although forecasts can use equal zero inputs with an evidence flag.
+At six modeled games, performance strength is shrunk by half; one additional loss lowers calibrated log odds by about 0.20188, turning an otherwise 50% matchup into about 44.97%. `T` is a positive probability-only temperature fitted on the selected 2014–2019 validation forecasts. It preserves picks and ranks. Neutral and venue-reversed probabilities are complementary.
 
-Scheduled-game probabilities and the arbitrary-team comparison tool use the same saved networks, with neutral/home/away venue as appropriate. Current features stay fixed at the selected snapshot; a future fixture’s result is never used. There are no hand-assigned penalties or ranking overrides for particular teams.
+## Ordering and interpretation
 
-## Export, inference and reproducibility
+All networks produce scalar team strengths, so the neutral ordering is consistent: every higher-ranked team is favored over every lower-ranked team, with 50% for equal strengths. The shared engine still runs its deterministic weighted pair ordering; this model needs no improving insertion moves and has no favorite-cycle disagreements. Those properties do not measure predictive accuracy.
 
-`scripts/export-neural.py` reads local season games, teams, play-by-play and rich summaries. `scripts/neural-snapshots.ts` supplies the production calendar cutoffs and included game IDs. The exporter recomputes every numeric feature from only those included completed games; six hours after kickoff is the assumed result-availability time. It never retrains the networks. Weights for the forecast year must already exist and must be trained only on earlier years.
+The displayed average is the mean neutral win probability against the full FBS/FCS field, including a .5 self-match. It is not confidence in a rank. Division and conference filters preserve full-field ranks. Teams without counted results remain unranked. Actual game probabilities include venue; the snapshot’s inputs remain fixed and never use future results.
 
-The portable `neural.json` includes model weights, normalization, training years, numeric feature names, all dated team matrices, included game IDs and source hashes. `neural-parity.json` contains independently computed Python probabilities and round-robin summaries for checking the TypeScript port. Rich summaries and their public-source provenance are published beside the bundle. The automatic data-update workflow refreshes these artifacts after fetching current results and plays. For a manual refresh:
+Team pages show completed games, losses and evidence retained after shrinkage. That weight is not confidence in a rank. Downloaded data also includes rank spread across three fits; it does not quantify all sampling or data uncertainty and is not a confidence interval. Fewer than eight counted games, disconnected schedules or missing play coverage flag limited evidence.
+
+## Evaluation and reproducibility
+
+The [study report](../research/season_only/robust/REPORT.md) documents three registered rounds, 684 new neural fits, 45 optimizer continuations, all dated annual results, matched markets/CFP, full Week 6 rankings, and two different sensitivity checks. Whole-game exclusion changes records and evidence along with performance. A separate score-only check holds those constant and verifies that changing an already extreme margin to 35 leaves the entire new probability matrix unchanged.
+
+On 3,603 weekly FBS games in 2020–2025, the final policy picked 70.16% of winners versus 70.86% for the previous blend. Stronger loss consequences and the cap have a measured accuracy cost. Historical seasons were already inspected, so these are development comparisons, not an untouched holdout or evidence of a general betting-market advantage. Earlier prospective registrations remain unchanged.
+
+`scripts/export-neural.py` rebuilds features from local public-source summaries using production cutoffs and game IDs from `scripts/neural-snapshots.ts`. A result is assumed available six hours after kickoff. The exporter loads saved annual weights and older-fold calibration; it does not retrain. The automatic data-update workflow refreshes rich summaries and numeric snapshots after fetching current results.
 
 ```sh
 python -m pip install -r scripts/requirements-neural.txt
@@ -36,11 +46,9 @@ npm run compute
 npm run verify
 ```
 
-The shared Node/browser inference module factors the matchup layer into reusable team projections, then evaluates pairwise hidden activations with fixed-arithmetic exponentials. Python parity is checked across every current team and snapshot, including neutral and venue-reversed cases. The engine rejects bundles whose team, game, play-by-play or rich-summary hashes differ, whose model year is wrong, or whose snapshot cutoffs/game IDs differ. The comparison tool also checks the bundle hash against the displayed ranking.
+Portable `neural.json` schema 2 includes 50-feature matrices, games/loss counts, outside-opponent losses, weights, policy, normalization, training years and source hashes. `neural-parity.json` supplies independent Python references for every team at every snapshot and venue cases. The engine rejects stale raw hashes, a wrong year/model, mismatched cutoffs/game IDs or counts that disagree with the raw results. The comparison tool also checks the bundle hash against the displayed ranking.
 
-`rank-engine-18` retains schema 2 with explicit neural metadata. `rank`, `tied` and `change` refer to the consensus order. Neural `height` is an ordinal coordinate `field size + 1 − rank` for graph layout; actual probabilities live in `team.neural` and `predictions[].homeProbability`. Neural predictions have `strengthEdge: null` because the old points-scale edge does not apply. `lossPenalty` is null. The old score remains in `earnedHeight` / `earnedRank`; `credits` is its ledger. `projection.target = frozen-earned-points` identifies the retained old simulation target and does not forecast neural rank.
-
-Missing play-by-play features shrink/fall back as specified by the saved feature functions. Fewer than three games, disconnected schedules or incomplete play coverage flag limited evidence. Neural estimates remain uncertain, especially early. The saved blend achieved 70.86% winner accuracy on 3,603 dated FBS games from 2020–2025; these are inspected development seasons, not a pristine holdout. No general market edge is established. The historical research tables use the original average-probability order; the production consensus ordering is a separate deterministic transformation of the same probabilities.
+`rank-engine-19` retains ranking schema 2. `rank`, `tied` and `change` refer to the neural order; `height = field size + 1 − rank` is an ordinal graph coordinate. `teams[].neural` stores full-field probabilities, reliability, calibrated log-odds loss deduction and fit rank spread. Model settings live in `manifest.neural.policy`. `predictions[].homeProbability` is the actual neural forecast; `strengthEdge` is null because the old points scale does not apply. The top-level legacy `lossPenalty` is null for neural methods. `earnedHeight` / `earnedRank`, `credits` and `projection.target = frozen-earned-points` retain the separate archived earned-score calculation.
 
 ## Archived frozen-credit model
 

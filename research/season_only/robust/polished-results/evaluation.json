@@ -1,0 +1,1989 @@
+{
+  "selectionSha256": "8276d25a586374d72483f528042f2f11a28c3437799f02806fee0b0314a89907",
+  "overall": {
+    "weekly": {
+      "bounded": {
+        "games": 3603,
+        "accuracy": 0.7016375242853178,
+        "brier": 0.19524785686644966,
+        "log_loss": 0.5729161125020965
+      },
+      "previous": {
+        "games": 3603,
+        "accuracy": 0.7085761865112407,
+        "brier": 0.19090622014966832,
+        "log_loss": 0.5616669299852725
+      }
+    },
+    "frozen_week6": {
+      "bounded": {
+        "games": 2703,
+        "accuracy": 0.6790603033666297,
+        "brier": 0.20453773225024058,
+        "log_loss": 0.5950322761141253
+      },
+      "previous": {
+        "games": 2703,
+        "accuracy": 0.6886792452830188,
+        "brier": 0.20207928925478497,
+        "log_loss": 0.588221216849177
+      }
+    }
+  },
+  "paired": {
+    "weekly:graph_ensemble": {
+      "model": {
+        "games": 3603,
+        "accuracy": 0.7016375242853178,
+        "brier": 0.19524785686644966,
+        "log_loss": 0.5729161125020965
+      },
+      "benchmark": {
+        "games": 3603,
+        "accuracy": 0.7085761865112407,
+        "brier": 0.19090622014966832,
+        "log_loss": 0.5616669299852725
+      },
+      "comparison": {
+        "games": 3603,
+        "seasons": 6,
+        "accuracy_difference": -0.006938662225922842,
+        "accuracy_95_interval": [
+          -0.019096288327057558,
+          0.006551518761167362
+        ],
+        "log_loss_difference": 0.011249182516824103,
+        "log_loss_95_interval": [
+          0.008438978334061363,
+          0.014263527287034339
+        ]
+      }
+    },
+    "weekly:moneyline_market": {
+      "model": {
+        "games": 3025,
+        "accuracy": 0.6932231404958678,
+        "brier": 0.19897032116892088,
+        "log_loss": 0.582236973695687
+      },
+      "benchmark": {
+        "games": 3025,
+        "accuracy": 0.7114049586776859,
+        "brier": 0.1868509611545353,
+        "log_loss": 0.5520580639217827
+      },
+      "comparison": {
+        "games": 3025,
+        "seasons": 5,
+        "accuracy_difference": -0.01818181818181818,
+        "accuracy_95_interval": [
+          -0.0297029702970297,
+          -0.00670712232513574
+        ],
+        "log_loss_difference": 0.030178909773904333,
+        "log_loss_95_interval": [
+          0.022445814806025907,
+          0.038131628700700866
+        ]
+      }
+    },
+    "weekly:spread_market": {
+      "model": {
+        "games": 3594,
+        "accuracy": 0.7022815804117974,
+        "brier": 0.19495641177428938,
+        "log_loss": 0.572157101140822
+      },
+      "benchmark": {
+        "games": 3594,
+        "accuracy": 0.7232888146911519,
+        "brier": 0.18144944546029537,
+        "log_loss": 0.5388319829598831
+      },
+      "comparison": {
+        "games": 3594,
+        "seasons": 6,
+        "accuracy_difference": -0.02100723427935448,
+        "accuracy_95_interval": [
+          -0.03198083967314737,
+          -0.008881230116648993
+        ],
+        "log_loss_difference": 0.03332511818093904,
+        "log_loss_95_interval": [
+          0.025243321115125072,
+          0.0427116484247707
+        ]
+      }
+    },
+    "weekly:massey": {
+      "model": {
+        "games": 3603,
+        "accuracy": 0.7016375242853178,
+        "brier": 0.19524785686644966,
+        "log_loss": 0.5729161125020965
+      },
+      "benchmark": {
+        "games": 3603,
+        "accuracy": 0.6974743269497641,
+        "brier": 0.19663590950878077,
+        "log_loss": 0.5759756016815203
+      },
+      "comparison": {
+        "games": 3603,
+        "seasons": 6,
+        "accuracy_difference": 0.004163197335553705,
+        "accuracy_95_interval": [
+          -0.009623095429029671,
+          0.018891687657430732
+        ],
+        "log_loss_difference": -0.003059489179423569,
+        "log_loss_95_interval": [
+          -0.018398319943659886,
+          0.007328364982357155
+        ]
+      }
+    },
+    "frozen_week6:graph_ensemble": {
+      "model": {
+        "games": 2703,
+        "accuracy": 0.6790603033666297,
+        "brier": 0.20453773225024058,
+        "log_loss": 0.5950322761141253
+      },
+      "benchmark": {
+        "games": 2703,
+        "accuracy": 0.6886792452830188,
+        "brier": 0.20207928925478497,
+        "log_loss": 0.588221216849177
+      },
+      "comparison": {
+        "games": 2703,
+        "seasons": 6,
+        "accuracy_difference": -0.009618941916389198,
+        "accuracy_95_interval": [
+          -0.017550702028081122,
+          -0.0011596443757247777
+        ],
+        "log_loss_difference": 0.006811059264948383,
+        "log_loss_95_interval": [
+          -0.0015773230305258508,
+          0.014857260559819722
+        ]
+      }
+    },
+    "frozen_week6:moneyline_market": {
+      "model": {
+        "games": 2245,
+        "accuracy": 0.6779510022271715,
+        "brier": 0.20639659173542746,
+        "log_loss": 0.6002956129929782
+      },
+      "benchmark": {
+        "games": 2245,
+        "accuracy": 0.7035634743875279,
+        "brier": 0.1876882607885908,
+        "log_loss": 0.5533105130899599
+      },
+      "comparison": {
+        "games": 2245,
+        "seasons": 5,
+        "accuracy_difference": -0.025612472160356347,
+        "accuracy_95_interval": [
+          -0.038268506900878296,
+          -0.011195807527393997
+        ],
+        "log_loss_difference": 0.04698509990301828,
+        "log_loss_95_interval": [
+          0.03348114070215577,
+          0.05964979707327043
+        ]
+      }
+    },
+    "frozen_week6:spread_market": {
+      "model": {
+        "games": 2695,
+        "accuracy": 0.6795918367346939,
+        "brier": 0.20418076259677517,
+        "log_loss": 0.5941391679856446
+      },
+      "benchmark": {
+        "games": 2695,
+        "accuracy": 0.7179962894248608,
+        "brier": 0.18183723624451104,
+        "log_loss": 0.5391940707530353
+      },
+      "comparison": {
+        "games": 2695,
+        "seasons": 6,
+        "accuracy_difference": -0.03840445269016698,
+        "accuracy_95_interval": [
+          -0.06103195995379284,
+          -0.020373831775700936
+        ],
+        "log_loss_difference": 0.05494509723260928,
+        "log_loss_95_interval": [
+          0.0400573242737958,
+          0.07300196942487973
+        ]
+      }
+    },
+    "frozen_week6:massey": {
+      "model": {
+        "games": 2703,
+        "accuracy": 0.6790603033666297,
+        "brier": 0.20453773225024058,
+        "log_loss": 0.5950322761141253
+      },
+      "benchmark": {
+        "games": 2703,
+        "accuracy": 0.6786903440621531,
+        "brier": 0.20733687541572146,
+        "log_loss": 0.5999539965778063
+      },
+      "comparison": {
+        "games": 2703,
+        "seasons": 6,
+        "accuracy_difference": 0.0003699593044765076,
+        "accuracy_95_interval": [
+          -0.011564625850340135,
+          0.018740031897926633
+        ],
+        "log_loss_difference": -0.0049217204636810685,
+        "log_loss_95_interval": [
+          -0.0262448775265945,
+          0.009574502571473076
+        ]
+      }
+    }
+  },
+  "seasons": [
+    {
+      "year": 2007,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 538,
+      "accuracy": 0.6784386617100372,
+      "brier": 0.21080784262368968,
+      "log_loss": 0.6106774074897682
+    },
+    {
+      "year": 2007,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 538,
+      "accuracy": 0.6598513011152416,
+      "brier": 0.27976612237905696,
+      "log_loss": 1.3622842980796084
+    },
+    {
+      "year": 2007,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 348,
+      "accuracy": 0.6867816091954023,
+      "brier": 0.18965164763942183,
+      "log_loss": 0.5652340829130279
+    },
+    {
+      "year": 2007,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 349,
+      "accuracy": 0.6919770773638968,
+      "brier": 0.19075430071112778,
+      "log_loss": 0.5692791266888485
+    },
+    {
+      "year": 2007,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 538,
+      "accuracy": 0.7026022304832714,
+      "brier": 0.2014435474663734,
+      "log_loss": 0.5942193785165832
+    },
+    {
+      "year": 2007,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 381,
+      "accuracy": 0.6456692913385826,
+      "brier": 0.21710197287931488,
+      "log_loss": 0.6212585498253315
+    },
+    {
+      "year": 2007,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 381,
+      "accuracy": 0.6456692913385826,
+      "brier": 0.2960157489174897,
+      "log_loss": 1.3388087805834419
+    },
+    {
+      "year": 2007,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 242,
+      "accuracy": 0.6818181818181818,
+      "brier": 0.1899412805559285,
+      "log_loss": 0.5628958748899426
+    },
+    {
+      "year": 2007,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 242,
+      "accuracy": 0.6880165289256198,
+      "brier": 0.1911685704603467,
+      "log_loss": 0.565181649819569
+    },
+    {
+      "year": 2007,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 381,
+      "accuracy": 0.6745406824146981,
+      "brier": 0.20630426448088574,
+      "log_loss": 0.5993038555909335
+    },
+    {
+      "year": 2008,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 555,
+      "accuracy": 0.7081081081081081,
+      "brier": 0.19520384499850058,
+      "log_loss": 0.5727792048138269
+    },
+    {
+      "year": 2008,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 555,
+      "accuracy": 0.7081081081081081,
+      "brier": 0.20897413754968253,
+      "log_loss": 0.6575062201435473
+    },
+    {
+      "year": 2008,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 229,
+      "accuracy": 0.7467248908296943,
+      "brier": 0.17609518110648037,
+      "log_loss": 0.5274952861372009
+    },
+    {
+      "year": 2008,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 229,
+      "accuracy": 0.7510917030567685,
+      "brier": 0.17537112887938597,
+      "log_loss": 0.5248681268327196
+    },
+    {
+      "year": 2008,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 555,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.18942917889093247,
+      "log_loss": 0.5632631933842762
+    },
+    {
+      "year": 2008,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 410,
+      "accuracy": 0.7097560975609756,
+      "brier": 0.19737922028458257,
+      "log_loss": 0.5798062028587464
+    },
+    {
+      "year": 2008,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 410,
+      "accuracy": 0.7170731707317073,
+      "brier": 0.20604629522162002,
+      "log_loss": 0.65297891907531
+    },
+    {
+      "year": 2008,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 205,
+      "accuracy": 0.7414634146341463,
+      "brier": 0.1784196311073376,
+      "log_loss": 0.5336952110883366
+    },
+    {
+      "year": 2008,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 205,
+      "accuracy": 0.7463414634146341,
+      "brier": 0.17770903639125674,
+      "log_loss": 0.5315193829131567
+    },
+    {
+      "year": 2008,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 410,
+      "accuracy": 0.724390243902439,
+      "brier": 0.18751488739466313,
+      "log_loss": 0.5558892848258357
+    },
+    {
+      "year": 2009,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 542,
+      "accuracy": 0.7195571955719557,
+      "brier": 0.17852569153317235,
+      "log_loss": 0.5304717949981681
+    },
+    {
+      "year": 2009,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 542,
+      "accuracy": 0.7177121771217713,
+      "brier": 0.1842804439889593,
+      "log_loss": 0.5409052014495237
+    },
+    {
+      "year": 2009,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 364,
+      "accuracy": 0.7623626373626373,
+      "brier": 0.15884126639634108,
+      "log_loss": 0.48178527001940574
+    },
+    {
+      "year": 2009,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 367,
+      "accuracy": 0.7602179836512262,
+      "brier": 0.15588261929747677,
+      "log_loss": 0.4701532007651569
+    },
+    {
+      "year": 2009,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 542,
+      "accuracy": 0.7435424354243543,
+      "brier": 0.17563620362654891,
+      "log_loss": 0.5285950233226083
+    },
+    {
+      "year": 2009,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 392,
+      "accuracy": 0.7091836734693877,
+      "brier": 0.18586383210426274,
+      "log_loss": 0.5507976478889656
+    },
+    {
+      "year": 2009,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 392,
+      "accuracy": 0.6938775510204082,
+      "brier": 0.1977425460812484,
+      "log_loss": 0.5815266116301621
+    },
+    {
+      "year": 2009,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 263,
+      "accuracy": 0.7832699619771863,
+      "brier": 0.15427350285338404,
+      "log_loss": 0.47123309506829214
+    },
+    {
+      "year": 2009,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 266,
+      "accuracy": 0.7838345864661654,
+      "brier": 0.15109207534319571,
+      "log_loss": 0.4596616908366466
+    },
+    {
+      "year": 2009,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 392,
+      "accuracy": 0.7346938775510204,
+      "brier": 0.17858877470735157,
+      "log_loss": 0.5323961579258156
+    },
+    {
+      "year": 2010,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 546,
+      "accuracy": 0.7051282051282052,
+      "brier": 0.192188284143411,
+      "log_loss": 0.5636812303036365
+    },
+    {
+      "year": 2010,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 546,
+      "accuracy": 0.7197802197802198,
+      "brier": 0.1904357159678311,
+      "log_loss": 0.5632993252076642
+    },
+    {
+      "year": 2010,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 358,
+      "accuracy": 0.7486033519553073,
+      "brier": 0.17540583692777922,
+      "log_loss": 0.5198339988872133
+    },
+    {
+      "year": 2010,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 359,
+      "accuracy": 0.7506963788300836,
+      "brier": 0.1736521406762138,
+      "log_loss": 0.5146410452720482
+    },
+    {
+      "year": 2010,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 546,
+      "accuracy": 0.7142857142857143,
+      "brier": 0.18992093560035622,
+      "log_loss": 0.5586681001485715
+    },
+    {
+      "year": 2010,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 393,
+      "accuracy": 0.7048346055979644,
+      "brier": 0.1948305083351375,
+      "log_loss": 0.5681007421068206
+    },
+    {
+      "year": 2010,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 393,
+      "accuracy": 0.6895674300254453,
+      "brier": 0.19936761886898344,
+      "log_loss": 0.5834519852083037
+    },
+    {
+      "year": 2010,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 257,
+      "accuracy": 0.7315175097276264,
+      "brier": 0.18313872341472512,
+      "log_loss": 0.5384614349106721
+    },
+    {
+      "year": 2010,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 257,
+      "accuracy": 0.7334630350194552,
+      "brier": 0.1817620643093782,
+      "log_loss": 0.5347051720270777
+    },
+    {
+      "year": 2010,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 393,
+      "accuracy": 0.6921119592875318,
+      "brier": 0.19617023200282646,
+      "log_loss": 0.5718118815782237
+    },
+    {
+      "year": 2011,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 547,
+      "accuracy": 0.7148080438756855,
+      "brier": 0.18687010917557573,
+      "log_loss": 0.5520315517353629
+    },
+    {
+      "year": 2011,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 547,
+      "accuracy": 0.716636197440585,
+      "brier": 0.18397611272573877,
+      "log_loss": 0.5440240435520327
+    },
+    {
+      "year": 2011,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 393,
+      "accuracy": 0.7519083969465649,
+      "brier": 0.16614155563540198,
+      "log_loss": 0.49594918629060775
+    },
+    {
+      "year": 2011,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 393,
+      "accuracy": 0.7531806615776081,
+      "brier": 0.16564948272122768,
+      "log_loss": 0.4941519301530738
+    },
+    {
+      "year": 2011,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 547,
+      "accuracy": 0.70018281535649,
+      "brier": 0.18780581658204892,
+      "log_loss": 0.5539397846926356
+    },
+    {
+      "year": 2011,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 395,
+      "accuracy": 0.6886075949367089,
+      "brier": 0.206762881612007,
+      "log_loss": 0.597056604005477
+    },
+    {
+      "year": 2011,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 395,
+      "accuracy": 0.6784810126582278,
+      "brier": 0.20332909124397225,
+      "log_loss": 0.5908223763795437
+    },
+    {
+      "year": 2011,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 282,
+      "accuracy": 0.7429078014184397,
+      "brier": 0.17835248878733492,
+      "log_loss": 0.525658105206574
+    },
+    {
+      "year": 2011,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 282,
+      "accuracy": 0.7429078014184397,
+      "brier": 0.17814107755839,
+      "log_loss": 0.5265289866106423
+    },
+    {
+      "year": 2011,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 395,
+      "accuracy": 0.6911392405063291,
+      "brier": 0.20606004066748848,
+      "log_loss": 0.5965169361261522
+    },
+    {
+      "year": 2012,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 564,
+      "accuracy": 0.7606382978723404,
+      "brier": 0.16926399517340643,
+      "log_loss": 0.5079021329592066
+    },
+    {
+      "year": 2012,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 564,
+      "accuracy": 0.7588652482269503,
+      "brier": 0.16965010061370964,
+      "log_loss": 0.5104014890567787
+    },
+    {
+      "year": 2012,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 417,
+      "accuracy": 0.7661870503597122,
+      "brier": 0.15891945642752411,
+      "log_loss": 0.4817939824012622
+    },
+    {
+      "year": 2012,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 417,
+      "accuracy": 0.7637889688249401,
+      "brier": 0.15799128671525792,
+      "log_loss": 0.4775047162768888
+    },
+    {
+      "year": 2012,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 564,
+      "accuracy": 0.7429078014184397,
+      "brier": 0.1738812456767463,
+      "log_loss": 0.524861046729863
+    },
+    {
+      "year": 2012,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 410,
+      "accuracy": 0.7097560975609756,
+      "brier": 0.18433519275883326,
+      "log_loss": 0.5428352179958217
+    },
+    {
+      "year": 2012,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 410,
+      "accuracy": 0.7317073170731707,
+      "brier": 0.17406937755917706,
+      "log_loss": 0.5195543489856228
+    },
+    {
+      "year": 2012,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 304,
+      "accuracy": 0.7680921052631579,
+      "brier": 0.1580183971817041,
+      "log_loss": 0.4792018758146538
+    },
+    {
+      "year": 2012,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 304,
+      "accuracy": 0.7664473684210527,
+      "brier": 0.15712698231908795,
+      "log_loss": 0.475008816886202
+    },
+    {
+      "year": 2012,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 410,
+      "accuracy": 0.7292682926829268,
+      "brier": 0.17665911077153,
+      "log_loss": 0.5276700539114351
+    },
+    {
+      "year": 2013,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 573,
+      "accuracy": 0.7417102966841187,
+      "brier": 0.16589154640661744,
+      "log_loss": 0.4973323000128657
+    },
+    {
+      "year": 2013,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 573,
+      "accuracy": 0.7521815008726004,
+      "brier": 0.16082879287925309,
+      "log_loss": 0.4830115293812883
+    },
+    {
+      "year": 2013,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 420,
+      "accuracy": 0.780952380952381,
+      "brier": 0.1472190960617255,
+      "log_loss": 0.4492066304730747
+    },
+    {
+      "year": 2013,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 420,
+      "accuracy": 0.780952380952381,
+      "brier": 0.14691866858043895,
+      "log_loss": 0.44514180098687245
+    },
+    {
+      "year": 2013,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 573,
+      "accuracy": 0.7242582897033158,
+      "brier": 0.1712143855376548,
+      "log_loss": 0.5111047582145405
+    },
+    {
+      "year": 2013,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 426,
+      "accuracy": 0.7112676056338029,
+      "brier": 0.18602453544758707,
+      "log_loss": 0.5463759057042208
+    },
+    {
+      "year": 2013,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 426,
+      "accuracy": 0.7136150234741784,
+      "brier": 0.180387831591222,
+      "log_loss": 0.5270113610963706
+    },
+    {
+      "year": 2013,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 313,
+      "accuracy": 0.7699680511182109,
+      "brier": 0.14990537350380667,
+      "log_loss": 0.4552919825812829
+    },
+    {
+      "year": 2013,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 313,
+      "accuracy": 0.7699680511182109,
+      "brier": 0.1495522629070822,
+      "log_loss": 0.45103025771302124
+    },
+    {
+      "year": 2013,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 426,
+      "accuracy": 0.6971830985915493,
+      "brier": 0.1881428324420725,
+      "log_loss": 0.548332285403878
+    },
+    {
+      "year": 2014,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 587,
+      "accuracy": 0.6984667802385008,
+      "brier": 0.18961167518044672,
+      "log_loss": 0.5572769368488516
+    },
+    {
+      "year": 2014,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 587,
+      "accuracy": 0.7052810902896082,
+      "brier": 0.18701216327858478,
+      "log_loss": 0.548714008497761
+    },
+    {
+      "year": 2014,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 431,
+      "accuracy": 0.7354988399071926,
+      "brier": 0.1705737401819894,
+      "log_loss": 0.5089417064742473
+    },
+    {
+      "year": 2014,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 431,
+      "accuracy": 0.7378190255220418,
+      "brier": 0.17015853373846418,
+      "log_loss": 0.5073323963750521
+    },
+    {
+      "year": 2014,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 587,
+      "accuracy": 0.7120954003407155,
+      "brier": 0.1913785030958431,
+      "log_loss": 0.5670304520902184
+    },
+    {
+      "year": 2014,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 432,
+      "accuracy": 0.6875,
+      "brier": 0.19545113056473296,
+      "log_loss": 0.5706261819847954
+    },
+    {
+      "year": 2014,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 432,
+      "accuracy": 0.6921296296296297,
+      "brier": 0.19228625633253738,
+      "log_loss": 0.5607360758499378
+    },
+    {
+      "year": 2014,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 316,
+      "accuracy": 0.7310126582278481,
+      "brier": 0.17294048935146883,
+      "log_loss": 0.5157013184275523
+    },
+    {
+      "year": 2014,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 316,
+      "accuracy": 0.7325949367088608,
+      "brier": 0.1721658818280734,
+      "log_loss": 0.512059383735651
+    },
+    {
+      "year": 2014,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 432,
+      "accuracy": 0.6921296296296297,
+      "brier": 0.19264112901314767,
+      "log_loss": 0.5619759358580348
+    },
+    {
+      "year": 2015,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 582,
+      "accuracy": 0.7508591065292096,
+      "brier": 0.17226158125899468,
+      "log_loss": 0.5185920055797034
+    },
+    {
+      "year": 2015,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 582,
+      "accuracy": 0.7542955326460481,
+      "brier": 0.17039889813196205,
+      "log_loss": 0.5122275935436895
+    },
+    {
+      "year": 2015,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 428,
+      "accuracy": 0.7698598130841121,
+      "brier": 0.15538072036741152,
+      "log_loss": 0.47193509929260025
+    },
+    {
+      "year": 2015,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 428,
+      "accuracy": 0.772196261682243,
+      "brier": 0.1546424829054227,
+      "log_loss": 0.4678095864479413
+    },
+    {
+      "year": 2015,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 582,
+      "accuracy": 0.7525773195876289,
+      "brier": 0.17656721291148242,
+      "log_loss": 0.5287943489822001
+    },
+    {
+      "year": 2015,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 417,
+      "accuracy": 0.7266187050359713,
+      "brier": 0.1852182938017654,
+      "log_loss": 0.5500895398876974
+    },
+    {
+      "year": 2015,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 417,
+      "accuracy": 0.7242206235011991,
+      "brier": 0.1854843960204065,
+      "log_loss": 0.553793625263683
+    },
+    {
+      "year": 2015,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 297,
+      "accuracy": 0.7592592592592593,
+      "brier": 0.1574420946121729,
+      "log_loss": 0.47627415054621347
+    },
+    {
+      "year": 2015,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 297,
+      "accuracy": 0.7643097643097643,
+      "brier": 0.1566308179962146,
+      "log_loss": 0.4719326207130187
+    },
+    {
+      "year": 2015,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 417,
+      "accuracy": 0.7314148681055156,
+      "brier": 0.19452498425393794,
+      "log_loss": 0.5760389017725519
+    },
+    {
+      "year": 2016,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 577,
+      "accuracy": 0.7036395147313691,
+      "brier": 0.19772812135925097,
+      "log_loss": 0.5756525465696721
+    },
+    {
+      "year": 2016,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 577,
+      "accuracy": 0.7019064124783362,
+      "brier": 0.18999820296749542,
+      "log_loss": 0.5579640219022807
+    },
+    {
+      "year": 2016,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 422,
+      "accuracy": 0.7037914691943128,
+      "brier": 0.18808892157712118,
+      "log_loss": 0.5530689608482414
+    },
+    {
+      "year": 2016,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 422,
+      "accuracy": 0.7037914691943128,
+      "brier": 0.18948789595300153,
+      "log_loss": 0.5597076817710742
+    },
+    {
+      "year": 2016,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 577,
+      "accuracy": 0.7123050259965338,
+      "brier": 0.19669620061893187,
+      "log_loss": 0.580843389430567
+    },
+    {
+      "year": 2016,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 412,
+      "accuracy": 0.662621359223301,
+      "brier": 0.21000198842644943,
+      "log_loss": 0.6070637981872852
+    },
+    {
+      "year": 2016,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 412,
+      "accuracy": 0.6893203883495146,
+      "brier": 0.19754867354169875,
+      "log_loss": 0.5794097334433358
+    },
+    {
+      "year": 2016,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 299,
+      "accuracy": 0.705685618729097,
+      "brier": 0.1866662613467027,
+      "log_loss": 0.5500488235696185
+    },
+    {
+      "year": 2016,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 299,
+      "accuracy": 0.705685618729097,
+      "brier": 0.18855032986562226,
+      "log_loss": 0.5585847470708665
+    },
+    {
+      "year": 2016,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 412,
+      "accuracy": 0.6723300970873787,
+      "brier": 0.20333863950941233,
+      "log_loss": 0.5918991348268663
+    },
+    {
+      "year": 2017,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 595,
+      "accuracy": 0.7142857142857143,
+      "brier": 0.18653480185805624,
+      "log_loss": 0.5495943781294453
+    },
+    {
+      "year": 2017,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 595,
+      "accuracy": 0.7361344537815127,
+      "brier": 0.17503615051731644,
+      "log_loss": 0.5236576274515892
+    },
+    {
+      "year": 2017,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 427,
+      "accuracy": 0.7740046838407494,
+      "brier": 0.15773498905206998,
+      "log_loss": 0.4855043619955627
+    },
+    {
+      "year": 2017,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 429,
+      "accuracy": 0.7738927738927739,
+      "brier": 0.1575248391906222,
+      "log_loss": 0.4849537325814481
+    },
+    {
+      "year": 2017,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 595,
+      "accuracy": 0.7210084033613445,
+      "brier": 0.18105458289800144,
+      "log_loss": 0.5361562334962598
+    },
+    {
+      "year": 2017,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 429,
+      "accuracy": 0.703962703962704,
+      "brier": 0.19518624180146296,
+      "log_loss": 0.5690448518301848
+    },
+    {
+      "year": 2017,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 429,
+      "accuracy": 0.710955710955711,
+      "brier": 0.1861930866302992,
+      "log_loss": 0.5467412634503718
+    },
+    {
+      "year": 2017,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 314,
+      "accuracy": 0.75,
+      "brier": 0.16550026078373534,
+      "log_loss": 0.5002270522524285
+    },
+    {
+      "year": 2017,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 314,
+      "accuracy": 0.7515923566878981,
+      "brier": 0.16536058420896016,
+      "log_loss": 0.5001728711842476
+    },
+    {
+      "year": 2017,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 429,
+      "accuracy": 0.7016317016317016,
+      "brier": 0.1900832098600013,
+      "log_loss": 0.5553644299837545
+    },
+    {
+      "year": 2018,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 590,
+      "accuracy": 0.7152542372881356,
+      "brier": 0.18784848377305455,
+      "log_loss": 0.5509489475261597
+    },
+    {
+      "year": 2018,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 590,
+      "accuracy": 0.7423728813559322,
+      "brier": 0.17384521845767395,
+      "log_loss": 0.5163763898174707
+    },
+    {
+      "year": 2018,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 440,
+      "accuracy": 0.75,
+      "brier": 0.16149330278387639,
+      "log_loss": 0.48666993006773085
+    },
+    {
+      "year": 2018,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 440,
+      "accuracy": 0.7545454545454545,
+      "brier": 0.16085714704309734,
+      "log_loss": 0.4823798066796224
+    },
+    {
+      "year": 2018,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 590,
+      "accuracy": 0.7254237288135593,
+      "brier": 0.1801574216883523,
+      "log_loss": 0.5363568772129248
+    },
+    {
+      "year": 2018,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 424,
+      "accuracy": 0.7193396226415094,
+      "brier": 0.1878718173058268,
+      "log_loss": 0.553686237180189
+    },
+    {
+      "year": 2018,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 424,
+      "accuracy": 0.7358490566037735,
+      "brier": 0.17304565911106384,
+      "log_loss": 0.514963995724581
+    },
+    {
+      "year": 2018,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 314,
+      "accuracy": 0.7436305732484076,
+      "brier": 0.16548686039488822,
+      "log_loss": 0.49550466791934805
+    },
+    {
+      "year": 2018,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 314,
+      "accuracy": 0.7452229299363057,
+      "brier": 0.16507602021501402,
+      "log_loss": 0.492196015730611
+    },
+    {
+      "year": 2018,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 424,
+      "accuracy": 0.714622641509434,
+      "brier": 0.1755254725802459,
+      "log_loss": 0.5236157171628427
+    },
+    {
+      "year": 2019,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 595,
+      "accuracy": 0.7142857142857143,
+      "brier": 0.18437395374277224,
+      "log_loss": 0.546376204282124
+    },
+    {
+      "year": 2019,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 595,
+      "accuracy": 0.746218487394958,
+      "brier": 0.17308808425359984,
+      "log_loss": 0.5192882214092062
+    },
+    {
+      "year": 2019,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 439,
+      "accuracy": 0.7460136674259681,
+      "brier": 0.1613059141986435,
+      "log_loss": 0.489668550362151
+    },
+    {
+      "year": 2019,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 439,
+      "accuracy": 0.7471526195899773,
+      "brier": 0.16207097236101584,
+      "log_loss": 0.4909343556556024
+    },
+    {
+      "year": 2019,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 595,
+      "accuracy": 0.7310924369747899,
+      "brier": 0.1746655176115721,
+      "log_loss": 0.5240612784623981
+    },
+    {
+      "year": 2019,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 447,
+      "accuracy": 0.70917225950783,
+      "brier": 0.19236877787731602,
+      "log_loss": 0.5675239703022409
+    },
+    {
+      "year": 2019,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 447,
+      "accuracy": 0.727069351230425,
+      "brier": 0.18264126930728902,
+      "log_loss": 0.5464000528566788
+    },
+    {
+      "year": 2019,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 328,
+      "accuracy": 0.7362804878048781,
+      "brier": 0.16595303277168785,
+      "log_loss": 0.5023672948598664
+    },
+    {
+      "year": 2019,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 328,
+      "accuracy": 0.7378048780487805,
+      "brier": 0.16668125882123813,
+      "log_loss": 0.5043828886093421
+    },
+    {
+      "year": 2019,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 447,
+      "accuracy": 0.7024608501118568,
+      "brier": 0.19043652693664886,
+      "log_loss": 0.5597430370439558
+    },
+    {
+      "year": 2020,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 474,
+      "accuracy": 0.7215189873417721,
+      "brier": 0.1936697696954876,
+      "log_loss": 0.5704363232648363
+    },
+    {
+      "year": 2020,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 474,
+      "accuracy": 0.7067510548523207,
+      "brier": 0.18954136273712668,
+      "log_loss": 0.5602706878170615
+    },
+    {
+      "year": 2020,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 471,
+      "accuracy": 0.7494692144373672,
+      "brier": 0.17055410854319303,
+      "log_loss": 0.5153900978234947
+    },
+    {
+      "year": 2020,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 474,
+      "accuracy": 0.6856540084388185,
+      "brier": 0.20780192997115782,
+      "log_loss": 0.6151366328017939
+    },
+    {
+      "year": 2020,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 392,
+      "accuracy": 0.6619897959183674,
+      "brier": 0.20815539078848547,
+      "log_loss": 0.6017902174545667
+    },
+    {
+      "year": 2020,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 392,
+      "accuracy": 0.6594387755102041,
+      "brier": 0.2063410122819107,
+      "log_loss": 0.5952297105584733
+    },
+    {
+      "year": 2020,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 390,
+      "accuracy": 0.7564102564102564,
+      "brier": 0.16512056141445008,
+      "log_loss": 0.5012183979221684
+    },
+    {
+      "year": 2020,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 392,
+      "accuracy": 0.6160714285714286,
+      "brier": 0.2324506549811148,
+      "log_loss": 0.6620260980510448
+    },
+    {
+      "year": 2021,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 585,
+      "accuracy": 0.694017094017094,
+      "brier": 0.1934504897039285,
+      "log_loss": 0.56811597736014
+    },
+    {
+      "year": 2021,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 585,
+      "accuracy": 0.7111111111111111,
+      "brier": 0.19019468598292408,
+      "log_loss": 0.56227507824741
+    },
+    {
+      "year": 2021,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 550,
+      "accuracy": 0.7090909090909091,
+      "brier": 0.1859814667745929,
+      "log_loss": 0.549475547595744
+    },
+    {
+      "year": 2021,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 584,
+      "accuracy": 0.723458904109589,
+      "brier": 0.1792248931909536,
+      "log_loss": 0.5360049740626164
+    },
+    {
+      "year": 2021,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 585,
+      "accuracy": 0.694017094017094,
+      "brier": 0.1968602677654957,
+      "log_loss": 0.5778438149388944
+    },
+    {
+      "year": 2021,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 415,
+      "accuracy": 0.7156626506024096,
+      "brier": 0.19389088550320255,
+      "log_loss": 0.5745927434700163
+    },
+    {
+      "year": 2021,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 415,
+      "accuracy": 0.7397590361445783,
+      "brier": 0.18911657264313114,
+      "log_loss": 0.5665405852006395
+    },
+    {
+      "year": 2021,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 393,
+      "accuracy": 0.7150127226463104,
+      "brier": 0.1796596211007862,
+      "log_loss": 0.5337809726532892
+    },
+    {
+      "year": 2021,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 414,
+      "accuracy": 0.7318840579710145,
+      "brier": 0.17299140187937548,
+      "log_loss": 0.5205587859144389
+    },
+    {
+      "year": 2021,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 415,
+      "accuracy": 0.7228915662650602,
+      "brier": 0.19552903165638813,
+      "log_loss": 0.577077232910962
+    },
+    {
+      "year": 2022,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 584,
+      "accuracy": 0.690068493150685,
+      "brier": 0.20416230970444366,
+      "log_loss": 0.5973137911561565
+    },
+    {
+      "year": 2022,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 584,
+      "accuracy": 0.7071917808219178,
+      "brier": 0.20134413626432418,
+      "log_loss": 0.5878740486555587
+    },
+    {
+      "year": 2022,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 544,
+      "accuracy": 0.7003676470588235,
+      "brier": 0.19727239694361134,
+      "log_loss": 0.5801908364397169
+    },
+    {
+      "year": 2022,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 584,
+      "accuracy": 0.7183219178082192,
+      "brier": 0.1902802943299811,
+      "log_loss": 0.5627473637396104
+    },
+    {
+      "year": 2022,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 584,
+      "accuracy": 0.6746575342465754,
+      "brier": 0.20182278720411115,
+      "log_loss": 0.5852942651523447
+    },
+    {
+      "year": 2022,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 410,
+      "accuracy": 0.6804878048780488,
+      "brier": 0.20503604513047327,
+      "log_loss": 0.5974898230054708
+    },
+    {
+      "year": 2022,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 410,
+      "accuracy": 0.675609756097561,
+      "brier": 0.2078529884115181,
+      "log_loss": 0.6022476095521734
+    },
+    {
+      "year": 2022,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 385,
+      "accuracy": 0.6922077922077922,
+      "brier": 0.1978996814375604,
+      "log_loss": 0.5801175331665939
+    },
+    {
+      "year": 2022,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 410,
+      "accuracy": 0.7109756097560975,
+      "brier": 0.1926125630268146,
+      "log_loss": 0.5670618032524328
+    },
+    {
+      "year": 2022,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 410,
+      "accuracy": 0.6780487804878049,
+      "brier": 0.20713776370449527,
+      "log_loss": 0.5992838735828214
+    },
+    {
+      "year": 2023,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 639,
+      "accuracy": 0.7104851330203443,
+      "brier": 0.1937584940078859,
+      "log_loss": 0.5715722453262839
+    },
+    {
+      "year": 2023,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 639,
+      "accuracy": 0.7183098591549296,
+      "brier": 0.18968560924944494,
+      "log_loss": 0.5598610301331666
+    },
+    {
+      "year": 2023,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 631,
+      "accuracy": 0.7194928684627575,
+      "brier": 0.17848530605413035,
+      "log_loss": 0.5315501585047699
+    },
+    {
+      "year": 2023,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 636,
+      "accuracy": 0.7209119496855346,
+      "brier": 0.17735967109221903,
+      "log_loss": 0.5269318453653687
+    },
+    {
+      "year": 2023,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 639,
+      "accuracy": 0.7167449139280125,
+      "brier": 0.1925324711565202,
+      "log_loss": 0.5641682460904666
+    },
+    {
+      "year": 2023,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 471,
+      "accuracy": 0.6878980891719745,
+      "brier": 0.20871422077373042,
+      "log_loss": 0.607818557754819
+    },
+    {
+      "year": 2023,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 471,
+      "accuracy": 0.6942675159235668,
+      "brier": 0.20298942640245624,
+      "log_loss": 0.5919490570110215
+    },
+    {
+      "year": 2023,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 464,
+      "accuracy": 0.6961206896551724,
+      "brier": 0.18767286689621124,
+      "log_loss": 0.5522918571672215
+    },
+    {
+      "year": 2023,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 468,
+      "accuracy": 0.6976495726495726,
+      "brier": 0.18666316091468937,
+      "log_loss": 0.5484185122182333
+    },
+    {
+      "year": 2023,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 471,
+      "accuracy": 0.6985138004246284,
+      "brier": 0.20367120704364972,
+      "log_loss": 0.5926882894662858
+    },
+    {
+      "year": 2024,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 658,
+      "accuracy": 0.7082066869300911,
+      "brier": 0.19647212330053,
+      "log_loss": 0.5745580330255694
+    },
+    {
+      "year": 2024,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 658,
+      "accuracy": 0.6914893617021277,
+      "brier": 0.19205950472913355,
+      "log_loss": 0.5626327295176288
+    },
+    {
+      "year": 2024,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 650,
+      "accuracy": 0.7061538461538461,
+      "brier": 0.18873817568530202,
+      "log_loss": 0.5550598688347478
+    },
+    {
+      "year": 2024,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 656,
+      "accuracy": 0.7057926829268293,
+      "brier": 0.18827999176142338,
+      "log_loss": 0.5529817987809107
+    },
+    {
+      "year": 2024,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 658,
+      "accuracy": 0.6960486322188449,
+      "brier": 0.19706380545839258,
+      "log_loss": 0.5743478185783665
+    },
+    {
+      "year": 2024,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 503,
+      "accuracy": 0.6600397614314115,
+      "brier": 0.21515665114776245,
+      "log_loss": 0.6168092991271769
+    },
+    {
+      "year": 2024,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 503,
+      "accuracy": 0.679920477137177,
+      "brier": 0.20699461039473058,
+      "log_loss": 0.5964340220474226
+    },
+    {
+      "year": 2024,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 498,
+      "accuracy": 0.7028112449799196,
+      "brier": 0.18854233532969197,
+      "log_loss": 0.5548605052369001
+    },
+    {
+      "year": 2024,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 501,
+      "accuracy": 0.7005988023952096,
+      "brier": 0.1889537367865315,
+      "log_loss": 0.5550989446461359
+    },
+    {
+      "year": 2024,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 503,
+      "accuracy": 0.6620278330019881,
+      "brier": 0.20981835316350467,
+      "log_loss": 0.6027911597569628
+    },
+    {
+      "year": 2025,
+      "mode": "weekly",
+      "method": "bounded",
+      "games": 663,
+      "accuracy": 0.6892911010558069,
+      "brier": 0.19033016185094412,
+      "log_loss": 0.5570995246339734
+    },
+    {
+      "year": 2025,
+      "mode": "weekly",
+      "method": "graph_ensemble",
+      "games": 663,
+      "accuracy": 0.7164404223227753,
+      "brier": 0.18334748108795748,
+      "log_loss": 0.5398261587396312
+    },
+    {
+      "year": 2025,
+      "mode": "weekly",
+      "method": "moneyline_market",
+      "games": 650,
+      "accuracy": 0.72,
+      "brier": 0.185098653097717,
+      "log_loss": 0.5476049421591254
+    },
+    {
+      "year": 2025,
+      "mode": "weekly",
+      "method": "spread_market",
+      "games": 663,
+      "accuracy": 0.7285067873303167,
+      "brier": 0.18053524425050801,
+      "log_loss": 0.5343247839423849
+    },
+    {
+      "year": 2025,
+      "mode": "weekly",
+      "method": "massey",
+      "games": 663,
+      "accuracy": 0.7119155354449472,
+      "brier": 0.18741639475588784,
+      "log_loss": 0.5511168513512386
+    },
+    {
+      "year": 2025,
+      "mode": "frozen_week6",
+      "method": "bounded",
+      "games": 512,
+      "accuracy": 0.671875,
+      "brier": 0.19572438981296741,
+      "log_loss": 0.5713008651533226
+    },
+    {
+      "year": 2025,
+      "mode": "frozen_week6",
+      "method": "graph_ensemble",
+      "games": 512,
+      "accuracy": 0.68359375,
+      "brier": 0.19903365289345032,
+      "log_loss": 0.5776986736087943
+    },
+    {
+      "year": 2025,
+      "mode": "frozen_week6",
+      "method": "moneyline_market",
+      "games": 505,
+      "accuracy": 0.7108910891089109,
+      "brier": 0.18532325503027317,
+      "log_loss": 0.5474791604584389
+    },
+    {
+      "year": 2025,
+      "mode": "frozen_week6",
+      "method": "spread_market",
+      "games": 512,
+      "accuracy": 0.71875,
+      "brier": 0.18171984388699097,
+      "log_loss": 0.5368783863317617
+    },
+    {
+      "year": 2025,
+      "mode": "frozen_week6",
+      "method": "massey",
+      "games": 512,
+      "accuracy": 0.689453125,
+      "brier": 0.19877366422080478,
+      "log_loss": 0.5754059468562933
+    }
+  ],
+  "cfp": {
+    "any": {
+      "games": 538,
+      "model": {
+        "games": 538,
+        "accuracy": 0.758364312267658,
+        "brier": 0.17172023588637722,
+        "log_loss": 0.5180198395598001
+      },
+      "committee_accuracy": 0.7379182156133829
+    },
+    "both": {
+      "games": 140,
+      "model": {
+        "games": 140,
+        "accuracy": 0.6714285714285714,
+        "brier": 0.21124241683606465,
+        "log_loss": 0.611153234886786
+      },
+      "committee_accuracy": 0.5857142857142857
+    }
+  },
+  "early": {
+    "bounded": {
+      "games": 1738,
+      "accuracy": 0.693325661680092,
+      "brier": 0.20232441335911935,
+      "log_loss": 0.5903367111195524
+    },
+    "previous": {
+      "games": 1738,
+      "accuracy": 0.693325661680092,
+      "brier": 0.19851498437527268,
+      "log_loss": 0.5811599719122802
+    }
+  }
+}

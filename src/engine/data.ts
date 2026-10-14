@@ -192,7 +192,7 @@ export function parseConfig(json: string): SeasonConfig {
     throw new Error("config.winQuality is required for earned-standing-2");
   if (
     c.neural !== undefined &&
-    (!c.neural || c.neural.model !== "season-only-rich-graph-v1")
+    (!c.neural || !["season-only-rich-graph-v1", "season-only-robust-loss-v2"].includes(c.neural.model))
   )
     throw new Error("config.neural must select a supported neural model");
   if (c.algorithmVersion === "season-only-neural-1" && !c.neural)

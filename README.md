@@ -2,16 +2,16 @@
 
 Neural college football predictions and rankings for **every FBS and FCS team**. Website: **https://rank.sam-bennett.dev**.
 
-**Order teams by who is more likely to beat whom.** Six saved neural networks predict every neutral-site head-to-head matchup. The engine starts with expected round-robin wins and improves a weighted consensus ordering across all pairs. Scheduled-game forecasts and the interactive comparison tool use the same networks, with venue adjustment.
+**Order teams by who is more likely to beat whom.** Three saved neural fits provide a bounded adjustment to a robust schedule rating. The model shrinks estimates with limited evidence and deducts losses after performance training. Rankings and venue-aware matchup forecasts use the same strength differences.
 
-- **Current-season team evidence.** Scores, margins, efficiency and opponent statistics reset each season. Shared weights learn from previous seasons’ pregame features and outcomes.
-- **No reputation inputs.** Team names, IDs, conferences, divisions, recruiting, preseason rankings and live betting prices do not enter neural features. IDs only join games to statistics.
-- **Pairwise ordering.** The ranking maximizes agreement with head-to-head win probabilities through deterministic improving insertion moves. Cycles can prevent every higher-ranked team being favored; this is a local optimum, not a certified global solution.
-- **One prediction engine.** Three rich-stat networks contribute 75%; three opponent-graph networks contribute 25%. Browser and Node inference match the independent Python model.
-- **Meaningful probabilities.** The average win chance beside a team summarizes neutral games against the full modeled field. Specific matchup chances appear on the Matchups page; the average is not an additive résumé score.
-- **Auditable snapshots.** Features use games completed by each calendar cutoff, with a six-hour availability lag. Input hashes reject stale exports. The browser can reproduce all published rankings and forecasts from numeric snapshots and trained weights.
+- **Current-season evidence.** Shared weights learn from historical pregame examples; every team’s statistics reset each season. Team identity, conference/division, recruiting, preseason ratings and live prices are excluded.
+- **A strict score cap.** Margins are capped at 35 before every selected score-derived fit, including Huber. Extra scoreboard margin beyond 35 supplies no additional credit. Actual play efficiency remains evidence.
+- **Stronger loss consequences.** Every loss subtracts `2 / (modeled games + 4)` from strength, including losses to outside opponents. This is applied after training. Actual rank changes also depend on performance and other teams.
+- **Small samples and uncertainty.** Retain `games / (games + 6)` of performance strength: 50% after six modeled games. Team pages show evidence retained after shrinkage; that weight is not confidence in a rank. Downloaded fit spread is also not a confidence interval.
+- **Consistent ordering.** Every higher-ranked team is favored on a neutral field. Positive probability calibration preserves winners and ranks. Home advantage applies to actual game forecasts.
+- **Auditable snapshots.** Six-hour result lag, exact team/record reconciliation, source hashes, Python/browser parity, and byte-for-byte reproduction bind forecasts to completed games at each cutoff.
 
-The saved blend picked **70.86%** of winners on 3,603 dated FBS games from 2020–2025. Those inspected seasons are development evidence and do not establish a general betting-market advantage. [Research and reproduction](research/season_only/README.md) describe the models and limits. The previous frozen-credit standings and the alternative résumé experiment remain archived; they do not determine the neural ordering. See [methodology](docs/METHODOLOGY.md).
+The stricter policy picked **70.16%** of winners on 3,603 dated FBS games in 2020–2025, versus **70.86%** for the previous neural blend. It implements the requested score cap and stronger loss consequences, with a measured accuracy cost; it does not establish a betting-market advantage. See the [new study and all Week 6 rankings](research/season_only/robust/REPORT.md), [original research](research/season_only/README.md), and [methodology](docs/METHODOLOGY.md).
 
 ## Run
 
@@ -46,7 +46,7 @@ data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections an
 data/index.json                      available seasons and snapshots
 ```
 
-Schema 2 publishes the neural order in `teams[].rank`. `teams[].neural` stores average full-field win probabilities; `height` is an ordinal graph coordinate. `manifest.neural` records the model, training years, input hash and ordering diagnostics. Supporting opponents appear in `opponents`. `config.neural` enables the saved model; a missing or stale export fails explicitly. `earnedHeight` / `earnedRank`, `credits` and `projection.target = frozen-earned-points` retain the separate archived points model. Division and conference filters preserve full-field ranks.
+Schema 2 publishes the neural order in `teams[].rank`. `teams[].neural` stores average full-field probabilities, evidence shrinkage, loss deductions and fit rank spread; `height` is an ordinal graph coordinate. `manifest.neural` records the model, cap/loss/shrinkage policy, training years, input hash and ordering diagnostics. Supporting opponents appear in `opponents`. `config.neural` enables the saved model; a missing or stale export fails explicitly. `earnedHeight` / `earnedRank`, `credits` and `projection.target = frozen-earned-points` retain the separate archived points model. Division and conference filters preserve full-field ranks.
 
 ## Update results
 

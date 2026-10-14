@@ -8,7 +8,7 @@ export interface NeuralNetwork {
   theta: number[];
 }
 export interface NeuralGroup {
-  name: "rich" | "graph";
+  name: "rich" | "graph" | "robust";
   weight: number;
   featureCount: number;
   components: { temperature: number; networks: NeuralNetwork[] }[];
@@ -18,10 +18,24 @@ export interface NeuralSnapshot {
   asOf: string;
   gameIds: number[];
   features: number[][];
+  gamesPlayed?: number[];
+  losses?: number[];
+  externalLosses?: number[];
+  recordGamesPlayed?: number[];
+}
+export interface NeuralPolicy {
+  evidencePrior: number;
+  lossPenalty: number;
+  lossPrior: number;
+  inputClip: number;
+  anchorScale: number;
+  residualLimit: number;
+  scoreMarginCap: number;
 }
 export interface NeuralBundle {
-  schema: 1;
-  model: "season-only-rich-graph-v1";
+  schema: 1 | 2;
+  model: "season-only-rich-graph-v1" | "season-only-robust-loss-v2";
+  policy?: NeuralPolicy;
   year: number;
   trainingYears: number[];
   teamIds: number[];
@@ -30,8 +44,10 @@ export interface NeuralBundle {
     gamesSha256: string;
     playsSha256: string;
     richSha256: string;
-    richModelSha256: string;
-    graphModelSha256: string;
+    richModelSha256?: string;
+    graphModelSha256?: string;
+    robustModelSha256?: string;
+    calibrationSha256?: string;
     featureCode: Record<string, string>;
   };
   featureNames: string[];
@@ -53,6 +69,8 @@ function compile(
   net: NeuralNetwork,
   rows: readonly number[][],
   featureCount: number,
+  policy?: NeuralPolicy,
+  snapshot?: NeuralSnapshot,
 ) {
   const d = net.scale.length,
     k = net.width,
@@ -74,8 +92,9 @@ function compile(
   const positive = rows.map(() => new Float64Array(k));
   const negative = rows.map(() => new Float64Array(k));
   for (let t = 0; t < rows.length; t++) {
+    const clip = policy?.inputClip ?? 8;
     const x = rows[t]!.slice(0, d).map((v, j) =>
-      Math.max(-8, Math.min(8, v / net.scale[j]!)),
+      Math.max(-clip, Math.min(clip, v / net.scale[j]!)),
     );
     if (net.kind === "rank") {
       let score = 0;
@@ -83,7 +102,13 @@ function compile(
       for (let h = 0; h < k; h++) {
         let z = net.theta[b0 + h]!;
         for (let j = 0; j < d; j++) z += x[j]! * net.theta[dim + j * k + h]!;
-        score += x[20]! * net.scale[20]! * tanh(z) * net.theta[out0 + h]!;
+        score += (policy ? 1 : x[20]! * net.scale[20]!) * tanh(z) * net.theta[out0 + h]!;
+      }
+      if (policy) {
+        const games = snapshot!.gamesPlayed![t]!, losses = snapshot!.losses![t]! + snapshot!.externalLosses![t]!;
+        score = (games / (games + policy.evidencePrior)) *
+          (rows[t]![1]! / policy.anchorScale + policy.residualLimit * tanh(score)) -
+          policy.lossPenalty * losses / (games + policy.lossPrior);
       }
       linear[t] = score;
     } else {
@@ -98,7 +123,7 @@ function compile(
       }
     }
   }
-  return (h: number, a: number, venue: number) => {
+  const predict = (h: number, a: number, venue: number) => {
     let z = linear[h]! - linear[a]! + home * venue;
     if (net.kind === "matchup")
       for (let j = 0; j < k; j++)
@@ -109,14 +134,15 @@ function compile(
             tanh(positive[a]![j]! + negative[h]![j]! + net.theta[b0 + j]!));
     return z;
   };
+  return Object.assign(predict, { strengths: linear });
 }
 
 export function validateNeuralBundle(value: unknown): NeuralBundle {
   const b = value as NeuralBundle;
   if (
     !b ||
-    b.schema !== 1 ||
-    b.model !== "season-only-rich-graph-v1" ||
+    !((b.schema === 1 && b.model === "season-only-rich-graph-v1" && b.policy === undefined) ||
+      (b.schema === 2 && b.model === "season-only-robust-loss-v2")) ||
     !Number.isInteger(b.year) ||
     !Array.isArray(b.trainingYears) ||
     !b.trainingYears.length ||
@@ -125,15 +151,16 @@ export function validateNeuralBundle(value: unknown): NeuralBundle {
     new Set(b.teamIds).size !== b.teamIds.length ||
     b.teamIds.some((id) => !Number.isInteger(id) || id <= 0) ||
     !Array.isArray(b.featureNames) ||
-    b.featureNames.length !== 152 ||
+    b.featureNames.length !== (b.schema === 2 ? 50 : 152) ||
     !Array.isArray(b.groups) ||
-    b.groups.length !== 2 ||
-    b.groups[0]?.name !== "rich" ||
-    b.groups[0]?.weight !== 0.75 ||
-    b.groups[0]?.featureCount !== 64 ||
-    b.groups[1]?.name !== "graph" ||
-    b.groups[1]?.weight !== 0.25 ||
-    b.groups[1]?.featureCount !== 152 ||
+    (b.schema === 1 ?
+      (b.groups.length !== 2 || b.groups[0]?.name !== "rich" ||
+       b.groups[0]?.weight !== 0.75 || b.groups[0]?.featureCount !== 64 ||
+       b.groups[1]?.name !== "graph" || b.groups[1]?.weight !== 0.25 ||
+       b.groups[1]?.featureCount !== 152) :
+      (b.groups.length !== 1 || b.groups[0]?.name !== "robust" ||
+       b.groups[0]?.weight !== 1 || b.groups[0]?.featureCount !== 50 ||
+       !b.policy || b.policy.scoreMarginCap !== 35 || ![b.policy.evidencePrior,b.policy.lossPenalty,b.policy.lossPrior,b.policy.inputClip,b.policy.anchorScale,b.policy.residualLimit].every(v => Number.isFinite(v) && v > 0))) ||
     !Array.isArray(b.snapshots) ||
     new Set(b.snapshots.map((s) => s.id)).size !== b.snapshots.length
   )
@@ -149,6 +176,8 @@ export function validateNeuralBundle(value: unknown): NeuralBundle {
         !c.networks.length
       )
         throw new Error("invalid neural calibration");
+    if (b.schema === 2 && (group.components.length !== 1 || group.components.some(c => c.networks.length !== 3 || c.networks.some(n => n.kind !== "rank"))))
+      throw new Error("invalid robust neural architecture");
   }
   for (const s of b.snapshots)
     if (
@@ -158,11 +187,20 @@ export function validateNeuralBundle(value: unknown): NeuralBundle {
       s.features.some(
         (r) =>
           !Array.isArray(r) ||
-          r.length !== 152 ||
+          r.length !== b.featureNames.length ||
           r.some((v) => !Number.isFinite(v)),
       ) ||
       !Array.isArray(s.gameIds) ||
-      new Set(s.gameIds).size !== s.gameIds.length
+      new Set(s.gameIds).size !== s.gameIds.length ||
+      (b.schema === 2 && (!Array.isArray(s.gamesPlayed) || !Array.isArray(s.losses) ||
+       s.gamesPlayed.length !== b.teamIds.length || s.losses.length !== b.teamIds.length ||
+       !Array.isArray(s.externalLosses) || s.externalLosses.length !== b.teamIds.length ||
+       !Array.isArray(s.recordGamesPlayed) || s.recordGamesPlayed.length !== b.teamIds.length ||
+       s.gamesPlayed.some((v,i) => !Number.isInteger(v) || v < 0 ||
+         !Number.isInteger(s.losses![i]) || s.losses![i]! < 0 || s.losses![i]! > v ||
+         !Number.isInteger(s.externalLosses![i]) || s.externalLosses![i]! < 0 ||
+         !Number.isInteger(s.recordGamesPlayed![i]) || s.recordGamesPlayed![i]! < v ||
+         s.losses![i]! + s.externalLosses![i]! > s.recordGamesPlayed![i]!)))
     )
       throw new Error("invalid neural snapshot");
   return b;
@@ -178,7 +216,7 @@ export function neuralPredictor(
     compiled: g.components.map((c) => ({
       temperature: c.temperature,
       nets: c.networks.map((n) =>
-        compile(n, snapshot.features, g.featureCount),
+        compile(n, snapshot.features, g.featureCount, bundle.policy, snapshot),
       ),
     })),
   }));
@@ -209,7 +247,7 @@ export function neuralPredictor(
       0,
     );
   if (!includeMatrix)
-    return { probability, matrix: [], groupScores: [], scores: [] };
+    return { probability, matrix: [], groupScores: [], scores: [], rankRanges: [] as { low: number; high: number }[] };
   const n = bundle.teamIds.length,
     matrix = Array.from({ length: n }, () => new Float64Array(n));
   const groupScores = groups.map(() => new Float64Array(n).fill(0.5));
@@ -226,11 +264,23 @@ export function neuralPredictor(
       }
     }
   }
+  const rankRanges = bundle.policy ? bundle.teamIds.map(() => ({low: n, high: 1})) : [];
+  if (bundle.policy) {
+    for (const net of groups[0]!.compiled[0]!.nets) {
+      const played = bundle.teamIds.map((_,i) => i).filter(i => snapshot.recordGamesPlayed![i]! > 0);
+      for (const i of played) {
+        const rank = 1 + played.filter(j => net.strengths[j]! > net.strengths[i]! + 1e-10).length;
+        rankRanges[i]!.low = Math.min(rankRanges[i]!.low, rank);
+        rankRanges[i]!.high = Math.max(rankRanges[i]!.high, rank);
+      }
+    }
+  }
   return {
     probability,
     matrix,
     groupScores: groupScores.map((r) => Array.from(r, (v) => v / n)),
     scores: matrix.map((r) => r.reduce((s, p) => s + p, 0) / n),
+    rankRanges,
   };
 }
 

@@ -3,3 +3,7 @@
 data/** text eol=lf
 data/seasons/*/neural*.json linguist-generated=true
 data/seasons/*/rich.csv linguist-generated=true
+research/season_only/robust/*-results/**/*.json linguist-generated=true
+research/season_only/robust/results/**/*.json linguist-generated=true
+research/season_only/robust/**/*.npy binary linguist-generated=true
+research/season_only/robust/**/*predictions.csv.gz binary linguist-generated=true

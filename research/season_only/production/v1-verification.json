@@ -1,0 +1,94 @@
+{
+  "story": "Select a week and two teams; the site loads published numeric snapshots and frozen weights, computes neural matchup probabilities, and displays a consensus ordering and venue-aware forecasts.",
+  "date": "2026-10-14",
+  "timezone": "America/Denver",
+  "model": {
+    "model": "season-only-rich-graph-v1",
+    "ordering": "weighted-pairwise-consensus",
+    "bundleSha256": "543dfb2273061a4e8baaeb2580de6d4c6052bf2a13f5182244bd4cab38c77e23",
+    "trainingYears": [
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "referenceTeams": 266,
+    "orderingMoves": 62,
+    "initialObjective": 28278.235809,
+    "objective": 28278.810691,
+    "disagreements": 29
+  },
+  "sourceHashes": {
+    "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
+    "gamesSha256": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c",
+    "playsSha256": "ad540931176ae4dd20b77e41aa10ae390ca8d1197c754ca59fd7260f8e079123",
+    "richSha256": "280bf5b0920a843444036eedb4468740ee5539f7f6ed71873623cab64066648c",
+    "featureCode": {
+      "features.py": "12706ce0e447f2ec5a3a1435a844b565984b86c3e28e9c38c5b401dd5f2e4cb7",
+      "models.py": "8ac2e4e1e30994359e26305c26907727d61b411c678794c3b430b771b25642a2",
+      "rich_build.py": "8e54b2cd1477fcc949674298148b090730f07e21b41ad3fa5661c7535cad2a6f",
+      "graph_build.py": "3094d0f3c769d14a11e969fdd69af3047f566dcf90d763f8f5cde791fc66eb3d",
+      "neural.py": "0dbb0892566426b36cd516bff55e5c9a187c0a72ab267b3979d6a65005cc239a"
+    },
+    "richModelSha256": "59bc97f30e7ce3216938863f65d51ce6a3f1fc374906eff589758d76a4aca748",
+    "graphModelSha256": "dbf0bb43abc185b8896df715c7fce84c983504205da6fd57414c5bb8864b02ab"
+  },
+  "neuralImplementationSha256": "24a742f3f5ec4cdb64c8bd502bc56e13cddce2f11108186a7f398f4cfdacaa2f",
+  "flow": {
+    "ui": {
+      "rankedTeams": 266,
+      "fbsFilterTeams": 138,
+      "mobileHorizontalOverflow": false,
+      "pageErrors": []
+    },
+    "staticData": {
+      "failedDataResponses": [],
+      "bundleHashMatchesDisplayedRanking": true,
+      "richRefreshReproducedBundle": true
+    },
+    "inference": {
+      "pythonParity": "Every team in all six snapshots and neutral/venue-reversed matchup cases agree to 10 decimal places.",
+      "displayedCases": {
+        "Notre Dame vs Miami neutral": "56.6% / 43.4%",
+        "LSU vs Oregon neutral": "64.1% / 35.9%",
+        "LSU vs Oregon at LSU": "71.4% / 28.6%",
+        "Reversed teams and venue": "Complementary probabilities"
+      }
+    },
+    "responseRendering": {
+      "scheduledGameCards": "Show probabilities for the specific matchup, summing to 100%.",
+      "teamPage": "Shows neural summary and component estimates; game log omits legacy points.",
+      "graph": "Renders consensus order."
+    },
+    "browserReproduction": "Exact match. Your browser rebuilt all 6 neural rankings and matchup forecasts byte for byte."
+  },
+  "checks": {
+    "applicationTests": 71,
+    "typecheck": "pass",
+    "nodeByteVerification": "7 files reproduce byte-for-byte",
+    "productionBuild": "pass",
+    "legacyPointLedgerAudit": "pass",
+    "pythonExportRefresh": "pass"
+  },
+  "ordering": {
+    "pairs": 35245,
+    "remainingFavoriteDisagreements": 29,
+    "optimization": "Best improving insertion until local optimum; no certified global-optimum claim."
+  }
+}
