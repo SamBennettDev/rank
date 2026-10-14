@@ -48,6 +48,8 @@ export interface SeasonConfig {
   calibrationId: string;
   /** Optional v2 win-credit model; omitted only for archived v1 calculations. */
   winQuality?: WinQualitySettings;
+  /** Use frozen historical neural weights with current-season numeric features. */
+  neural?: { model: "season-only-rich-graph-v1" };
 }
 
 export interface WinQualitySettings {
@@ -126,8 +128,16 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Earned win-quality credits minus one point for every loss. */
+  /** Configured standing; neural models use an ordinal coordinate for graph layout. */
   height: number | null;
+  /** Neural height is an ordinal graph coordinate; probabilities live here. */
+  neural?: {
+    roundRobinWinProbability: number;
+    richWinProbability: number;
+    graphWinProbability: number;
+  };
+  earnedHeight?: number | null;
+  earnedRank?: number | null;
   projection: TeamProjection | null;
   component: number | null;
   componentSize: number;
@@ -144,8 +154,9 @@ export interface RankedTeam {
 
 export interface Manifest {
   engine: string;
-  standingMethod: "frozen-win-quality-v1" | "frozen-fbs-quality-v2";
-  lossPenalty: 1;
+  standingMethod:
+    "frozen-win-quality-v1" | "frozen-fbs-quality-v2" | "season-only-neural-v1";
+  lossPenalty: 1 | null;
   algorithmVersion: string;
   winBonus: number;
   shrink: number;
@@ -156,6 +167,17 @@ export interface Manifest {
   residualScale: number;
   calibrationId: string;
   winQuality?: WinQualitySettings;
+  neural?: {
+    model: "season-only-rich-graph-v1";
+    ordering: "weighted-pairwise-consensus";
+    bundleSha256: string;
+    trainingYears: number[];
+    referenceTeams: number;
+    orderingMoves: number;
+    initialObjective: number;
+    objective: number;
+    disagreements: number;
+  };
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
   homeFieldError: number;
@@ -200,10 +222,9 @@ export interface TeamProjection {
 }
 
 export interface ProjectionManifest {
+  target?: "frozen-earned-points";
   method:
-    | "independent-results-v1"
-    | "correlated-results-v1"
-    | "adaptive-results-v1";
+    "independent-results-v1" | "correlated-results-v1" | "adaptive-results-v1";
   samples: number;
   seed: number;
   remainingGames: number;
@@ -238,7 +259,7 @@ export interface MatchupPrediction {
   startDate: string;
   neutralSite: boolean;
   homeProbability: number;
-  strengthEdge: number;
+  strengthEdge: number | null;
   provisional: boolean;
 }
 

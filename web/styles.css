@@ -702,6 +702,16 @@ a.standing-row:hover { background: var(--surface-2); }
 .standing-team .team-meta > span:last-child::before { content: "· "; }
 .matchup-score { display: block; font: 700 28px/1 var(--display); margin-top: 6px; color: var(--ta); white-space: nowrap; }
 .matchup-rank { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; white-space: nowrap; }
+.neural-game-probabilities { display: flex; justify-content: space-between; gap: 16px; padding-top: 16px; font-variant-numeric: tabular-nums; font-size: 13px; }
+.neural-compare { padding: 22px; margin-bottom: 24px; }
+.neural-compare-controls { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+.neural-compare-controls select { width: 100%; min-width: 0; }
+.games.neural-games .lhead, .games.neural-games .grow2 { grid-template-columns: 58px 40px minmax(0, 1fr) 96px; }
+@media (max-width: 720px) {
+  .neural-compare-controls { grid-template-columns: 1fr; }
+  .games.neural-games .lhead, .games.neural-games .grow2 { grid-template-columns: 32px 28px minmax(0, 1fr) 75px; }
+  .neural-game-probabilities { flex-wrap: wrap; }
+}
 .schedule-tools .search { width: 100%; max-width: none; }
 .games .lhead, .games .grow2 { grid-template-columns: 58px 40px minmax(0, 1fr) 96px 80px; }
 @media (max-width: 960px) {

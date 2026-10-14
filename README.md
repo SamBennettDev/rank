@@ -1,18 +1,17 @@
 # Rank
 
-Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
+Neural college football predictions and rankings for **every FBS and FCS team**. Website: **https://rank.sam-bennett.dev**.
 
-**One current score.** A win earns **2 × the opponent’s pre-week probability of beating an average FBS team at that venue**. An average-quality neutral-site win earns 1 point; every loss deducts exactly 1. The standings show rank, team and score, with a carousel of the current top 10.
+**Order teams by who is more likely to beat whom.** Six saved neural networks predict every neutral-site head-to-head matchup. The engine starts with expected round-robin wins and improves a weighted consensus ordering across all pairs. Scheduled-game forecasts and the interactive comparison tool use the same networks, with venue adjustment.
 
-- **A consistent benchmark.** Opponent strength is measured relative to the average FBS team, including the benchmark’s uncertainty and covariance. It does not use the weaker pooled FBS/FCS average.
-- **Stable early estimates.** A division gap measured on 2014–2019 results and calibrated regularization stabilize sparse schedules. Current games can establish that an FCS opponent is strong; no division has a rank ceiling or fixed credit cap.
-- **Losses always cost one.** Win credits stay frozen before each calendar week. Later losses cannot revalue earlier wins and offset their own deductions.
-- **Lower-division results count.** Unmodeled opponent wins earn zero quality points. Losses still deduct 1, and all resolved results remain in records and receipts.
-- **Every score starts at zero.** Historical division assumptions inform opponent strength, not starting points. No team reputation, recruiting, poll, conference bonus or head-to-head override.
-- **Both divisions, one standing.** Division and conference filters preserve the full-field ranks. The current #1 sets Rank’s accent color.
-- **Reproduce every point.** The Node scripts and browser share one engine. Credits include the prior cutoff, estimated probability, reference strength, venue adjustment and uncertainty.
+- **Current-season team evidence.** Scores, margins, efficiency and opponent statistics reset each season. Shared weights learn from previous seasons’ pregame features and outcomes.
+- **No reputation inputs.** Team names, IDs, conferences, divisions, recruiting, preseason rankings and live betting prices do not enter neural features. IDs only join games to statistics.
+- **Pairwise ordering.** The ranking maximizes agreement with head-to-head win probabilities through deterministic improving insertion moves. Cycles can prevent every higher-ranked team being favored; this is a local optimum, not a certified global solution.
+- **One prediction engine.** Three rich-stat networks contribute 75%; three opponent-graph networks contribute 25%. Browser and Node inference match the independent Python model.
+- **Meaningful probabilities.** The average win chance beside a team summarizes neutral games against the full modeled field. Specific matchup chances appear on the Matchups page; the average is not an additive résumé score.
+- **Auditable snapshots.** Features use games completed by each calendar cutoff, with a six-hour availability lag. Input hashes reject stale exports. The browser can reproduce all published rankings and forecasts from numeric snapshots and trained weights.
 
-Version 2 fixes a pooled-reference error, equal-strength assumptions for sparse lower-division opponents, an imbalance between average win credit and fixed loss deductions, and dropped lower-division losses. `research/win-quality-calibration.json` records the **2014–2019** design study; `win-quality-development.json` compares already-inspected **2021–2025**; `win-quality-audit.json` traces the current teams on identical inputs. They are development findings, not an untouched holdout or proof of universal superiority. The simulation engine and older reports remain available for audit and research; the site displays current scores. See [methodology](docs/METHODOLOGY.md).
+The saved blend picked **70.86%** of winners on 3,603 dated FBS games from 2020–2025. Those inspected seasons are development evidence and do not establish a general betting-market advantage. [Research and reproduction](research/season_only/README.md) describe the models and limits. The previous frozen-credit standings and the alternative résumé experiment remain archived; they do not determine the neural ordering. See [methodology](docs/METHODOLOGY.md).
 
 ## Run
 
@@ -25,7 +24,8 @@ npm run typecheck
 npm test
 npm run compute
 npm run verify
-npm run audit-win-quality -- 2026
+npm run audit-neural -- 2026
+npm run audit-win-quality -- 2026  # archived earned-point ledger
 npm run build
 npm run backtest -- --history 2021-2025
 npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json
@@ -39,12 +39,14 @@ npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlate
 data/seasons/<year>/teams.csv         configured teams
 data/seasons/<year>/games.csv         scores, sites, kickoffs and schedule
 data/seasons/<year>/plays.csv         condensed public play-by-play
+data/seasons/<year>/rich.csv          passing, rushing, drive and disruption summaries
+data/seasons/<year>/neural.json       trained weights and causal numeric snapshots
 data/seasons/<year>/config.json       prediction settings and calibration ID
 data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections and game forecasts
 data/index.json                      available seasons and snapshots
 ```
 
-Schema 2 publishes FBS/FCS standings in `teams`. Unranked supporting metadata appears in `opponents`, including teams outside the modeled field needed for complete result receipts. `config.classifications` selects the ranked field; `opponentClassifications` can retain additional model inputs. `config.winQuality` fixes the v2 benchmark, priors, regularization and balanced win scale. Unsupported opponents contribute zero win quality and fixed loss deductions, without affecting the strength fit. Downloadable projections cover the known modeled schedule; the site displays current scores. All snapshots use calendar cutoffs.
+Schema 2 publishes the neural order in `teams[].rank`. `teams[].neural` stores average full-field win probabilities; `height` is an ordinal graph coordinate. `manifest.neural` records the model, training years, input hash and ordering diagnostics. Supporting opponents appear in `opponents`. `config.neural` enables the saved model; a missing or stale export fails explicitly. `earnedHeight` / `earnedRank`, `credits` and `projection.target = frozen-earned-points` retain the separate archived points model. Division and conference filters preserve full-field ranks.
 
 ## Update results
 
@@ -52,10 +54,13 @@ Get a free key at <https://collegefootballdata.com/key>, then:
 
 ```sh
 CFBD_API_KEY=... npm run fetch -- 2026
-npm run fetch-plays -- 2026
+REFRESH=1 npm run fetch-plays -- 2026
+npm run neural:export -- --year 2026 --refresh-rich
 npm run compute
 npm run verify
 ```
+
+The exporter needs Python 3.12 and `python -m pip install -r scripts/requirements-neural.txt`. Ordinary verification and the browser use saved artifacts and need no Python. Annual model checkpoints must exist before enabling a new forecast year.
 
 Commit the changed data. GitHub’s **Update data** workflow uses the `CFBD_API_KEY` repository secret to refresh and publish automatically.
 

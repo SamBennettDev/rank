@@ -7,6 +7,8 @@ import {
   board,
   breakdown,
   fmtHeight,
+  fmtTeamScore,
+  scoreLabel,
   href,
   rankLabel,
   record,
@@ -81,7 +83,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         { class: "tstats" },
         stat("Current rank", rankLabel(team.rank, team.tied)),
         stat("Record", record(team)),
-        stat("Score", fmtHeight(team.height, 2)),
+        stat(scoreLabel(ctx), fmtTeamScore(ctx, team)),
         stat(
           "This week",
           team.change === null
@@ -222,6 +224,48 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
 // How the rating is built: immutable win credits and fixed loss deductions.
 function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const me = ctx.byId.get(teamId)!;
+  if (me.neural)
+    return h(
+      "div",
+      { class: "panel why" },
+      h("h2", {}, "Neural prediction"),
+      h(
+        "p",
+        {},
+        `Average neutral-site win chance: ${fmtTeamScore(ctx, me)} across the full ${ctx.ranking.manifest.neural!.referenceTeams}-team field.`,
+      ),
+      h(
+        "p",
+        { class: "hint" },
+        "The ranking orders teams using all head-to-head neural win probabilities. The average is a summary; individual matchups can favor a different team.",
+      ),
+      h(
+        "div",
+        { class: "credit-equation" },
+        h(
+          "div",
+          {},
+          h("b", {}, `${(100 * me.neural.richWinProbability).toFixed(1)}%`),
+          h("small", {}, "Rich-stat networks · 75%"),
+        ),
+        h(
+          "div",
+          {},
+          h("b", {}, `${(100 * me.neural.graphWinProbability).toFixed(1)}%`),
+          h("small", {}, "Opponent-graph networks · 25%"),
+        ),
+      ),
+      h(
+        "p",
+        { class: "hint" },
+        "Both groups use this season’s scores, efficiency and opponent statistics. Shared weights were trained on prior seasons. Team names, recruiting and preseason ratings are excluded.",
+      ),
+      h(
+        "a",
+        { class: "btn", href: href(ctx.entry.season, ctx.snapId, "matchups") },
+        "Compare any two teams",
+      ),
+    );
   const b = breakdown(ctx, teamId);
   const order = (l: GameLine) =>
     (l.edge.seasonType === "postseason" ? 99 : l.edge.week) * 1e9 +
@@ -560,24 +604,28 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         h("i", {}, l.won ? "W" : "L"),
         `${l.won ? e.winnerPoints : e.loserPoints}–${l.won ? e.loserPoints : e.winnerPoints}`,
       ),
-      h(
-        "span",
-        {
-          class: `r ${pull >= 0 ? "pos" : "neg"}`,
-          title:
-            l.won && credit?.unmodeled
-              ? "Unmodeled opponent: no quality points awarded. Losses against these opponents still cost exactly 1 point."
-              : l.won && credit?.quality
-                ? `2 × ${(credit.quality.probability * 100).toFixed(1)}% pre-week opponent chance against an average FBS team. Opponent evidence: ${credit.quality.opponentGames} games.`
-                : "Points this result adds to or subtracts from the standing",
-        },
-        fmtHeight(pull, 3),
-      ),
+      ctx.ranking.manifest.neural
+        ? ""
+        : h(
+            "span",
+            {
+              class: `r ${pull >= 0 ? "pos" : "neg"}`,
+              title:
+                l.won && credit?.unmodeled
+                  ? "Unmodeled opponent: no quality points awarded. Losses against these opponents still cost exactly 1 point."
+                  : l.won && credit?.quality
+                    ? `2 × ${(credit.quality.probability * 100).toFixed(1)}% pre-week opponent chance against an average FBS team. Opponent evidence: ${credit.quality.opponentGames} games.`
+                    : "Points this result adds to or subtracts from the standing",
+            },
+            fmtHeight(pull, 3),
+          ),
     );
   });
   return h(
     "section",
-    { class: "ladder games" },
+    {
+      class: `ladder games${ctx.ranking.manifest.neural ? " neural-games" : ""}`,
+    },
     h(
       "div",
       { class: "lhead" },
@@ -585,7 +633,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h("div"),
       h("div", {}, "Opponent"),
       h("div", {}, "Result"),
-      h("div", { class: "r" }, "Points"),
+      ctx.ranking.manifest.neural ? "" : h("div", { class: "r" }, "Points"),
     ),
     ...rows,
   );

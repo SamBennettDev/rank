@@ -1,4 +1,12 @@
-import { type Ctx, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
+import {
+  type Ctx,
+  fmtTeamScore,
+  scoreLabel,
+  href,
+  rankLabel,
+  record,
+  teamHref,
+} from "../ctx";
 import type { RankedTeam } from "../../src/engine/types";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
@@ -13,7 +21,7 @@ function leaderCard(ctx: Ctx, t: RankedTeam, index: number, total: number) {
       href: teamHref(ctx, t.id),
       style: teamVars(ctx.teams.get(t.id)?.color),
       "aria-roledescription": "slide",
-      "aria-label": `${index + 1} of ${total}. ${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Score ${fmtHeight(t.height, 3)}.`,
+      "aria-label": `${index + 1} of ${total}. ${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Score ${fmtTeamScore(ctx, t)}.`,
     },
     h(
       "div",
@@ -38,8 +46,8 @@ function leaderCard(ctx: Ctx, t: RankedTeam, index: number, total: number) {
       h(
         "div",
         { class: "leader-score" },
-        h("span", { class: "stat-label" }, "Score"),
-        h("b", {}, fmtHeight(t.height, 3)),
+        h("span", { class: "stat-label" }, scoreLabel(ctx)),
+        h("b", {}, fmtTeamScore(ctx, t)),
       ),
     ),
   );
@@ -169,7 +177,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
             class: "standing-row",
             href: teamHref(ctx, t.id),
             title: t.school,
-            "aria-label": `${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Current score ${fmtHeight(t.height, 3)}.`,
+            "aria-label": `${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Current score ${fmtTeamScore(ctx, t)}.`,
           },
           h(
             "b",
@@ -197,7 +205,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
               ),
             ),
           ),
-          h("b", { class: "standing-score" }, fmtHeight(t.height, 3)),
+          h("b", { class: "standing-score" }, fmtTeamScore(ctx, t)),
         ),
       ),
     );
@@ -220,6 +228,13 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
           `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
         ),
         h("h1", {}, "Rankings"),
+        ctx.ranking.manifest.neural
+          ? h(
+              "p",
+              { class: "hint" },
+              "Neural predictions · ordered by who is more likely to beat whom on a neutral field",
+            )
+          : "",
       ),
     ),
     leadersCarousel(ctx, onCleanup),
@@ -285,7 +300,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
         { class: "standing-row standing-head", "aria-hidden": "true" },
         h("span", {}, "Rank"),
         h("span", {}, "Team"),
-        h("span", {}, "Score"),
+        h("span", {}, scoreLabel(ctx)),
       ),
       body,
     ),

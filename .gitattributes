@@ -1,3 +1,5 @@
 # Published data is hashed byte-for-byte, so line endings must never be rewritten.
 * text=auto eol=lf
 data/** text eol=lf
+data/seasons/*/neural*.json linguist-generated=true
+data/seasons/*/rich.csv linguist-generated=true

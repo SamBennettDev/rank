@@ -16,9 +16,14 @@ import { fitUnits } from "./units";
 import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
 import { makeWinQualityContext } from "./win-quality";
+import {
+  consensusOrder,
+  neuralPredictor,
+  validateNeuralBundle,
+} from "./neural";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-16";
+export const ENGINE_VERSION = "rank-engine-18";
 
 export interface SeasonFiles {
   season: string;
@@ -26,6 +31,9 @@ export interface SeasonFiles {
   gamesCsv: string;
   /** Play-by-play summary (plays.csv); without it there are no unit ratings. */
   playsCsv?: string;
+  /** Exported numeric snapshots and saved weights, bound to the raw input hashes. */
+  neuralJson?: string;
+  richCsv?: string;
 }
 
 export interface SeasonInput extends SeasonFiles {
@@ -83,6 +91,27 @@ export async function computeSeason(
     input.playsCsv === undefined ? null : await sha256Hex(input.playsCsv);
   const plays =
     input.playsCsv === undefined ? null : parsePlays(input.playsCsv);
+  if (config.neural && !input.neuralJson)
+    throw new Error("missing neural.json; run npm run neural:export");
+  const neuralBundle = config.neural
+    ? validateNeuralBundle(JSON.parse(input.neuralJson!))
+    : null;
+  const neuralSha256 = neuralBundle ? await sha256Hex(input.neuralJson!) : null;
+  const richSha256 =
+    input.richCsv === undefined ? null : await sha256Hex(input.richCsv);
+  if (
+    neuralBundle &&
+    (neuralBundle.year !== Number(input.season) ||
+      neuralBundle.source.teamsSha256 !== teamsSha256 ||
+      neuralBundle.source.gamesSha256 !== gamesSha256 ||
+      neuralBundle.source.playsSha256 !== playsSha256 ||
+      neuralBundle.source.richSha256 !== richSha256 ||
+      neuralBundle.teamIds.length !== teams.length ||
+      neuralBundle.teamIds.some((id, i) => id !== teams[i]!.id))
+  )
+    throw new Error(
+      "stale neural inputs; run npm run neural:export for these CSVs",
+    );
 
   const index = new Map(teams.map((t, i) => [t.id, i]));
   const eligible = new Set(
@@ -220,6 +249,7 @@ export async function computeSeason(
       quality,
     );
     const projection = {
+      ...(neuralBundle ? { target: "frozen-earned-points" as const } : {}),
       method: `${PROJECTION_MODE}-results-v1` as const,
       samples: futureGames.length ? config.projectionSamples : 1,
       seed: config.projectionSeed,
@@ -234,6 +264,31 @@ export async function computeSeason(
       ).length,
       teams: projected.teams,
     };
+    const neuralSnapshot = neuralBundle?.snapshots.find(
+      (s) => s.id === snap.id,
+    );
+    if (
+      neuralBundle &&
+      (!neuralSnapshot ||
+        neuralSnapshot.asOf !== snap.asOf ||
+        neuralSnapshot.gameIds.length !== included.size ||
+        neuralSnapshot.gameIds.some((id) => !included.has(id)))
+    )
+      throw new Error(
+        `neural snapshot does not match causal game cutoff: ${snap.id}`,
+      );
+    const neural = neuralBundle
+      ? neuralPredictor(neuralBundle, neuralSnapshot!)
+      : null;
+    const ordered = neural
+      ? consensusOrder(
+          neural.matrix,
+          teams.map((t) => t.id),
+          teams.flatMap((t, i) =>
+            eligible.has(i) && (wins.has(t.id) || losses.has(t.id)) ? [i] : [],
+          ),
+        )
+      : null;
     const predictions = futureGames
       .filter(
         (g) =>
@@ -243,7 +298,8 @@ export async function computeSeason(
       .flatMap((g) => {
         const h = index.get(g.homeId)!,
           a = index.get(g.awayId)!;
-        return model.heights[h] === null || model.heights[a] === null
+        return !neural &&
+          (model.heights[h] === null || model.heights[a] === null)
           ? []
           : [
               {
@@ -252,7 +308,16 @@ export async function computeSeason(
                 away: g.awayId,
                 startDate: g.startDate,
                 neutralSite: g.neutralSite,
-                ...predictMatchup(model, h, a, g.neutralSite, config),
+                ...(neural
+                  ? {
+                      homeProbability: round6(
+                        neural.probability(h, a, g.neutralSite ? 0 : 1),
+                      ),
+                      strengthEdge: null,
+                      provisional:
+                        model.provisional[h]! || model.provisional[a]!,
+                    }
+                  : predictMatchup(model, h, a, g.neutralSite, config)),
               },
             ];
       });
@@ -262,12 +327,23 @@ export async function computeSeason(
     const unit = (v: number | null | undefined) =>
       v === null || v === undefined ? null : round6(v);
     const heights = new Map(
-      played.map((t) => [t.id, standing.heights[index.get(t.id)!]!]),
+      played.map((t) => {
+        const i = index.get(t.id)!;
+        return [
+          t.id,
+          ordered
+            ? ordered.ranks[i] === null
+              ? null
+              : teams.length + 1 - ordered.ranks[i]!
+            : standing.heights[i]!,
+        ] as const;
+      }),
     );
 
-    const standingRanks = rankValues(
+    const earnedRanks = rankValues(
       standing.heights.map((v, i) => (eligible.has(i) ? v : null)),
     );
+    const standingRanks = ordered?.ranks ?? earnedRanks;
     const allTeams: RankedTeam[] = teams.map((t, i) => {
       const height = heights.get(t.id) ?? null;
       const rank = standingRanks[i] ?? null;
@@ -281,13 +357,26 @@ export async function computeSeason(
         rank,
         tied:
           rank !== null &&
-          standing.heights.filter((v, j) => eligible.has(j) && v === height)
-            .length > 1,
+          standingRanks.filter((v, j) => eligible.has(j) && v === rank).length >
+            1,
         height,
+        ...(neural
+          ? {
+              neural: {
+                roundRobinWinProbability: round6(neural.scores[i]!),
+                richWinProbability: round6(neural.groupScores[0]![i]!),
+                graphWinProbability: round6(neural.groupScores[1]![i]!),
+              },
+              earnedHeight: standing.heights[i]!,
+              earnedRank: earnedRanks[i]!,
+            }
+          : {}),
         projection: projected.projections[i]!,
         component: height === null ? null : teams[model.components[i]!]!.id,
         componentSize: model.sizes.get(model.components[i]!) ?? 0,
-        provisional: model.provisional[i]!,
+        provisional:
+          model.provisional[i]! ||
+          (neuralSnapshot ? neuralSnapshot.features[i]![22]! < 0.5 : false),
         offense: unit(units?.offense[i]),
         defense: unit(units?.defense[i]),
         special: unit(units?.special[i]),
@@ -328,10 +417,12 @@ export async function computeSeason(
 
     const manifest: Manifest = {
       engine: ENGINE_VERSION,
-      standingMethod: config.winQuality
-        ? "frozen-fbs-quality-v2"
-        : "frozen-win-quality-v1",
-      lossPenalty: 1,
+      standingMethod: neuralBundle
+        ? "season-only-neural-v1"
+        : config.winQuality
+          ? "frozen-fbs-quality-v2"
+          : "frozen-win-quality-v1",
+      lossPenalty: neuralBundle ? null : 1,
       algorithmVersion: config.algorithmVersion,
       winBonus: config.winBonus,
       shrink: config.shrink,
@@ -342,6 +433,21 @@ export async function computeSeason(
       residualScale: config.residualScale,
       calibrationId: config.calibrationId,
       ...(config.winQuality ? { winQuality: config.winQuality } : {}),
+      ...(neuralBundle
+        ? {
+            neural: {
+              model: neuralBundle.model,
+              ordering: "weighted-pairwise-consensus" as const,
+              bundleSha256: neuralSha256!,
+              trainingYears: neuralBundle.trainingYears,
+              referenceTeams: teams.length,
+              orderingMoves: ordered!.moves,
+              initialObjective: ordered!.initialObjective,
+              objective: ordered!.objective,
+              disagreements: ordered!.disagreements,
+            },
+          }
+        : {}),
       homeField: round6(homeField),
       homeFieldError: round6(model.uncertainty.homeFieldError),
       connectedComponents: model.sizes.size,

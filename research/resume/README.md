@@ -1,6 +1,6 @@
 # Results-only résumé rankings
 
-**Archived experiment.** The default standings have been restored to the previous frozen-credit ranking at the user's request. This directory preserves the alternative résumé study and its Week 6 snapshot; it does not describe the active ranking. Its application implementation remains available at Git commit `9b601d9`.
+**Archived experiment.** This directory preserves the alternative résumé study and its Week 6 snapshot; it does not describe the active neural ranking. Its application implementation remains available at Git commit `9b601d9`.
 
 The experimental standing measures **wins earned above a results-based top-25 FBS benchmark against the same schedule**. It answers an earned-results question; the neural matchup models remain in `../season_only/`.
 
@@ -36,7 +36,7 @@ Historical inputs are the existing public pinned schedules under `../season_only
 
 ## Production integration
 
-At experiment commit `9b601d9`, `src/engine/resume.ts` is shared by Node and the browser. A matrix-free Newton/conjugate-gradient solver uses fixed-arithmetic exponentials. `config.resume` enables the method. `manifest.standingMethod`, `manifest.resume`, `team.resume`, and `resume.games` make its policy and receipts explicit. In that archived version, published `rank`, `height`, `change` and ties refer to the résumé. The active version uses the previous frozen-credit ranking.
+At experiment commit `9b601d9`, `src/engine/resume.ts` is shared by Node and the browser. A matrix-free Newton/conjugate-gradient solver uses fixed-arithmetic exponentials. `config.resume` enables the method. `manifest.standingMethod`, `manifest.resume`, `team.resume`, and `resume.games` make its policy and receipts explicit. In that archived version, published `rank`, `height`, `change` and ties refer to the résumé. The active version uses a neural pairwise ordering.
 
 The archived frozen-point standing remains in `earnedHeight` / `earnedRank`; `credits` remains its old ledger. `projection.target = frozen-earned-points` identifies the legacy simulation target. Matchup probabilities and neural research remain separate. No prospective neural forecast or original registration was overwritten.
 

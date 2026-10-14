@@ -37,6 +37,8 @@ Available model names: `recommended`, `basic`, `rich`, `graph`, `market_distille
 
 The common reference field for neural rankings is all modeled FBS/FCS teams. `--field fbs` only filters the resulting output; division does not affect the neural model. Rank scores average neutral-site win probabilities against that common field. Scores from different algorithms have different units.
 
+The production site converts these same neural probabilities into a weighted head-to-head consensus order. Its [Week 6 ordering](production/2026-week-06-rankings.csv), [35,245 neutral matchup probabilities](production/2026-week-06-head-to-head.csv), [ordering audit](production/2026-week-06-audit.json), and [verification evidence](production/verification.json) are saved separately. The original research tables retain their average-probability ordering.
+
 ## Reproduce
 
 The compact `inputs/` files and original repository `data/seasons/2026/` suffice for rebuilding features without downloading raw plays. Raw caches and derived feature matrices live under `/tmp/rank-season-only`, outside Git. For a fresh reproduction, use a fresh cache: `build.py` reuses existing yearly feature files, so remove stale derived files when changing inputs or feature code. Keep BLAS threads at one for stable CPU usage; scripts use three worker processes.
@@ -89,4 +91,4 @@ Prices are benchmark inputs or historical supplemental *labels*, never neural fe
 
 The CFP is a committee rather than a public numerical algorithm. Its benchmark picks the higher-ranked team from a list available before kickoff, and omits games between two unranked teams. No official Week 6 2026 CFP list exists; the first release is November 3. The implemented classical methods are explicit equal-start variants, including a margin-based LRMC variant; this study does not establish superiority over every public or proprietary football model.
 
-Inputs and models are isolated under this research directory. The website’s earned-results ranking is a different objective and is not changed by this study.
+The website now runs the saved recommended six-network blend through `src/engine/neural.ts`. `scripts/export-neural.py` exports causal numeric snapshots and weights into `data/seasons/<year>/neural.json`. The original research ranking tables retain their average round-robin ordering. The production site additionally improves a weighted head-to-head consensus order, so individual positions can differ while the underlying win probabilities remain the same. Its arbitrary-team comparison tool and scheduled forecasts use those same probabilities. See the root methodology for refresh commands, input hashes and ordering diagnostics.

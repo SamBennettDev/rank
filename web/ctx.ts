@@ -9,12 +9,7 @@ import type {
 } from "../src/engine/types";
 
 export type View =
-  | "list"
-  | "graph"
-  | "team"
-  | "about"
-  | "matchups"
-  | "projection";
+  "list" | "graph" | "team" | "about" | "matchups" | "projection";
 export interface Ctx {
   seasons: SeasonIndexEntry[];
   entry: SeasonIndexEntry;
@@ -48,6 +43,14 @@ export const rankLabel = (rank: number | null, tied: boolean) =>
   rank === null ? "—" : `${tied ? "T-" : ""}${rank}`;
 export const fmtHeight = (v: number | null, d = 1) =>
   v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+export const fmtTeamScore = (ctx: Ctx, t: RankedTeam) =>
+  ctx.ranking.manifest.neural
+    ? t.rank === null
+      ? "—"
+      : `${(100 * t.neural!.roundRobinWinProbability).toFixed(1)}%`
+    : fmtHeight(t.height, 3);
+export const scoreLabel = (ctx: Ctx) =>
+  ctx.ranking.manifest.neural ? "Avg win chance" : "Score";
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 export function upsets(ctx: Ctx) {
   return ctx.edges

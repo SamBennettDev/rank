@@ -1,0 +1,6 @@
+{
+  "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2026.parquet",
+  "raw_sha256": "ae84be84c605bf16c8e0c484b305114cbead673ccb59aeff64c5a74be3c28aef",
+  "rich_sha256": "280bf5b0920a843444036eedb4468740ee5539f7f6ed71873623cab64066648c",
+  "team_game_rows": 896
+}

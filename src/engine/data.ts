@@ -190,6 +190,13 @@ export function parseConfig(json: string): SeasonConfig {
   }
   if (c.algorithmVersion === "earned-standing-2" && !c.winQuality)
     throw new Error("config.winQuality is required for earned-standing-2");
+  if (
+    c.neural !== undefined &&
+    (!c.neural || c.neural.model !== "season-only-rich-graph-v1")
+  )
+    throw new Error("config.neural must select a supported neural model");
+  if (c.algorithmVersion === "season-only-neural-1" && !c.neural)
+    throw new Error("config.neural is required for season-only-neural-1");
   return c;
 }
 

@@ -4,6 +4,8 @@ import type { Edge, RankedTeam } from "../../src/engine/types";
 import {
   type Ctx,
   fmtHeight,
+  fmtTeamScore,
+  scoreLabel,
   rankLabel,
   record,
   teamHref,
@@ -207,7 +209,7 @@ export function graphView(
         h(
           "div",
           { class: "t2" },
-          `${record(t)} · score ${fmtHeight(t.height)} · ${t.conference}`,
+          `${record(t)} · score ${fmtTeamScore(ctx, t)} · ${t.conference}`,
         ),
       ),
     );
@@ -394,7 +396,12 @@ export function graphView(
             h("span", {}, "Rank"),
           ),
           h("div", {}, h("b", {}, record(t)), h("span", {}, "Record")),
-          h("div", {}, h("b", {}, fmtHeight(t.height)), h("span", {}, "Score")),
+          h(
+            "div",
+            {},
+            h("b", {}, fmtTeamScore(ctx, t)),
+            h("span", {}, scoreLabel(ctx)),
+          ),
         ),
       ),
       t.provisional ? h("p", { class: "hint" }, "Limited data") : "",

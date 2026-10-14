@@ -28,6 +28,9 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip, cache-dependency-path: scripts/requirements-neural.txt }
+      - run: python -m pip install -r scripts/requirements-neural.txt
       - name: Fetch results
         env:
           CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
@@ -43,6 +46,11 @@ jobs:
       - name: Fetch play-by-play summary
         # Public sportsdataverse release, no key. If it lags or is missing, keep the last summary.
         run: npm run fetch-plays -- "$YEAR" || echo "::warning::Play-by-play summary for $YEAR was not updated"
+      - name: Export current-season neural inputs
+        run: |
+          if node -e 'const c=require("./data/seasons/"+process.env.YEAR+"/config.json");process.exit(c.neural?0:1)'; then
+            npm run neural:export -- --year "$YEAR" --refresh-rich
+          fi
       - run: npm run compute
       - run: npm run verify
       - name: Commit changes

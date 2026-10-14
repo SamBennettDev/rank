@@ -2,8 +2,10 @@ import { computeSeason } from "../../src/engine/season";
 import type { Ctx } from "../ctx";
 import { h, type Child } from "../dom";
 import { fetchText, rankingPath, seasonFiles } from "../store";
+import { neuralMethodView } from "./neural-method";
 
 export function aboutView(ctx: Ctx): HTMLElement {
+  if (ctx.ranking.manifest.neural) return neuralMethodView(ctx);
   const m = ctx.ranking.manifest,
     season = ctx.entry.season,
     files = seasonFiles(season),
