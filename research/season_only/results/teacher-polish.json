@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "feature_set": "rich",
+    "kind": "rank",
+    "width": 16,
+    "ridge": 0.003,
+    "teacher_alpha": 0.75
+  },
+  "validation": {
+    "games": 1185,
+    "accuracy": 0.7367088607594937,
+    "brier": 0.17530027385284946,
+    "log_loss": 0.5227080092997215
+  },
+  "temperature": 1.1386552069712386,
+  "margin_scale": 9.945430013444541,
+  "training_market_games": 4515,
+  "iterations": [
+    1013,
+    1161,
+    1147
+  ],
+  "converged": [
+    true,
+    true,
+    true
+  ]
+}

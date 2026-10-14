@@ -1,0 +1,866 @@
+[
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7189873417721518,
+      "brier": 0.18689844466973393,
+      "log_loss": 0.561187668559702
+    },
+    "temperature": 1.15153394456692,
+    "margin_scale": 7.713178884547185,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7164556962025317,
+      "brier": 0.19195515422250362,
+      "log_loss": 0.5742087471420922
+    },
+    "temperature": 1.551207628424042,
+    "margin_scale": 10.367711291682276,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7080168776371308,
+      "brier": 0.19026335069590905,
+      "log_loss": 0.5680924852575274
+    },
+    "temperature": 1.2589717234699884,
+    "margin_scale": 8.425694981657745,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7130801687763713,
+      "brier": 0.19119396541533173,
+      "log_loss": 0.5690567883090857
+    },
+    "temperature": 1.615531119707747,
+    "margin_scale": 10.93963747503242,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17187939694148524,
+      "log_loss": 0.513244493268961
+    },
+    "temperature": 1.0124150145375026,
+    "margin_scale": 9.06573700072592,
+    "iterations": [
+      73,
+      74,
+      70
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17169413334969763,
+      "log_loss": 0.5130224851481339
+    },
+    "temperature": 1.3717257266279348,
+    "margin_scale": 12.256510336095987,
+    "iterations": [
+      81,
+      83,
+      80
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17178298876683323,
+      "log_loss": 0.5130203681314228
+    },
+    "temperature": 1.0607165218958343,
+    "margin_scale": 9.50031321361933,
+    "iterations": [
+      76,
+      81,
+      77
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17159942066750286,
+      "log_loss": 0.5127843315083863
+    },
+    "temperature": 1.3782145944595439,
+    "margin_scale": 12.320596391277581,
+    "iterations": [
+      82,
+      85,
+      83
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7215189873417721,
+      "brier": 0.19694832246865213,
+      "log_loss": 0.6074012946559347
+    },
+    "temperature": 1.2647516204087867,
+    "margin_scale": 7.363399821515048,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7113924050632912,
+      "brier": 0.2012313778257884,
+      "log_loss": 0.6164517069889842
+    },
+    "temperature": 1.677401367450896,
+    "margin_scale": 10.110071834488528,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7105485232067511,
+      "brier": 0.20260766736672342,
+      "log_loss": 0.6235142867936355
+    },
+    "temperature": 1.4074594297001073,
+    "margin_scale": 8.198543102771042,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7122362869198312,
+      "brier": 0.20247009330134902,
+      "log_loss": 0.6178810857455346
+    },
+    "temperature": 1.7669921116741183,
+    "margin_scale": 10.704244485587402,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17187978021834083,
+      "log_loss": 0.5132456082425203
+    },
+    "temperature": 1.0124017825908584,
+    "margin_scale": 9.06561826505798,
+    "iterations": [
+      72,
+      73,
+      74
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17169342868774995,
+      "log_loss": 0.5130212545880808
+    },
+    "temperature": 1.3717775548139384,
+    "margin_scale": 12.256937731400129,
+    "iterations": [
+      79,
+      78,
+      81
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17178310945875366,
+      "log_loss": 0.5130203239289514
+    },
+    "temperature": 1.0607091305464242,
+    "margin_scale": 9.500260380839158,
+    "iterations": [
+      80,
+      77,
+      79
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.1715987278028883,
+      "log_loss": 0.5127833907848693
+    },
+    "temperature": 1.3781697885200048,
+    "margin_scale": 12.32017848867639,
+    "iterations": [
+      82,
+      87,
+      88
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7265822784810126,
+      "brier": 0.20427665147985757,
+      "log_loss": 0.6593173252311064
+    },
+    "temperature": 1.4830138891654026,
+    "margin_scale": 6.970422739261576,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7181434599156118,
+      "brier": 0.20971538057500713,
+      "log_loss": 0.6899774218012201
+    },
+    "temperature": 2.0126577038052607,
+    "margin_scale": 9.404949465099016,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7147679324894515,
+      "brier": 0.20639948808580136,
+      "log_loss": 0.6683445346240532
+    },
+    "temperature": 1.617715244736214,
+    "margin_scale": 7.8918331281716885,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7223628691983123,
+      "brier": 0.20174708191642685,
+      "log_loss": 0.6556983446979385
+    },
+    "temperature": 2.1028955620084857,
+    "margin_scale": 10.302365142938347,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17187998882682454,
+      "log_loss": 0.5132459899875597
+    },
+    "temperature": 1.0124530313268985,
+    "margin_scale": 9.066071046756344,
+    "iterations": [
+      68,
+      73,
+      76
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.1716937288081726,
+      "log_loss": 0.5130224878689136
+    },
+    "temperature": 1.3717620095173602,
+    "margin_scale": 12.256805251317724,
+    "iterations": [
+      78,
+      81,
+      78
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17178321952012357,
+      "log_loss": 0.5130209439589702
+    },
+    "temperature": 1.0607219218662622,
+    "margin_scale": 9.500359810757415,
+    "iterations": [
+      77,
+      78,
+      77
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17159901210596862,
+      "log_loss": 0.5127828887022792
+    },
+    "temperature": 1.3782473867720089,
+    "margin_scale": 12.32087069128722,
+    "iterations": [
+      80,
+      86,
+      83
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7012658227848101,
+      "brier": 0.21869632760537325,
+      "log_loss": 0.742930727508568
+    },
+    "temperature": 1.6323560566096573,
+    "margin_scale": 6.719619429628719,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7080168776371308,
+      "brier": 0.21745841889737608,
+      "log_loss": 0.7442668567214729
+    },
+    "temperature": 2.1797832919978255,
+    "margin_scale": 8.870225368081552,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7181434599156118,
+      "brier": 0.2191026313486582,
+      "log_loss": 0.7721777003912061
+    },
+    "temperature": 1.9054077372876563,
+    "margin_scale": 7.732251029307333,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7071729957805907,
+      "brier": 0.22399278740015724,
+      "log_loss": 0.7723465979545611
+    },
+    "temperature": 2.371747251859438,
+    "margin_scale": 9.870240297809097,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17187839617170636,
+      "log_loss": 0.5132414366290967
+    },
+    "temperature": 1.0124302556347833,
+    "margin_scale": 9.065878631147482,
+    "iterations": [
+      75,
+      77,
+      71
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.0,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17169280713554771,
+      "log_loss": 0.5130199420119361
+    },
+    "temperature": 1.3717138849222759,
+    "margin_scale": 12.256357726619502,
+    "iterations": [
+      79,
+      77,
+      79
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.0
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17178232205905808,
+      "log_loss": 0.5130189063533193
+    },
+    "temperature": 1.0607201817121017,
+    "margin_scale": 9.500339600888505,
+    "iterations": [
+      76,
+      81,
+      79
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.03,
+      "focus": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17159949971342567,
+      "log_loss": 0.5127849703463369
+    },
+    "temperature": 1.3781847008332226,
+    "margin_scale": 12.320317051816106,
+    "iterations": [
+      88,
+      84,
+      84
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  }
+]

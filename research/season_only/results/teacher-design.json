@@ -1,0 +1,2018 @@
+[
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.1755367275752598,
+      "log_loss": 0.5250386010749597
+    },
+    "temperature": 1.1190592786257578,
+    "margin_scale": 9.444733836250471,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1746773172957667,
+      "log_loss": 0.5220439442488326
+    },
+    "temperature": 1.1147288613100277,
+    "margin_scale": 9.690806797221038,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7375527426160338,
+      "brier": 0.17409910236806803,
+      "log_loss": 0.5199991148662766
+    },
+    "temperature": 1.1214261904249827,
+    "margin_scale": 9.918257404361315,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.1755946502936648,
+      "log_loss": 0.5236155156641412
+    },
+    "temperature": 1.0656683908857183,
+    "margin_scale": 9.688461626551113,
+    "training_market_games": 4515,
+    "iterations": [
+      316,
+      350,
+      350
+    ],
+    "converged": [
+      true,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.740084388185654,
+      "brier": 0.17511793883739737,
+      "log_loss": 0.5221165296973219
+    },
+    "temperature": 1.0809829546916145,
+    "margin_scale": 9.864326633279584,
+    "training_market_games": 4515,
+    "iterations": [
+      346,
+      341,
+      350
+    ],
+    "converged": [
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17473515743032464,
+      "log_loss": 0.5208089391734733
+    },
+    "temperature": 1.0908479595766796,
+    "margin_scale": 10.010699816709105,
+    "training_market_games": 4515,
+    "iterations": [
+      72,
+      77,
+      105
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1757398856139905,
+      "log_loss": 0.5233984133044335
+    },
+    "temperature": 1.073492320470327,
+    "margin_scale": 9.863771290144477,
+    "training_market_games": 4515,
+    "iterations": [
+      50,
+      53,
+      56
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.1754332044501666,
+      "log_loss": 0.522457808935448
+    },
+    "temperature": 1.087855357634869,
+    "margin_scale": 10.015391050335271,
+    "training_market_games": 4515,
+    "iterations": [
+      51,
+      51,
+      52
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.729957805907173,
+      "brier": 0.1751955939844372,
+      "log_loss": 0.5217064897528982
+    },
+    "temperature": 1.0999898540398323,
+    "margin_scale": 10.152914989041498,
+    "training_market_games": 4515,
+    "iterations": [
+      52,
+      51,
+      53
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.18034710995897948,
+      "log_loss": 0.5378196341010857
+    },
+    "temperature": 1.1619042001805362,
+    "margin_scale": 9.46792319103809,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1763094984151016,
+      "log_loss": 0.5264110134445094
+    },
+    "temperature": 1.1378659841549654,
+    "margin_scale": 9.736830370844032,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7417721518987341,
+      "brier": 0.17427400539536833,
+      "log_loss": 0.5203781598929782
+    },
+    "temperature": 1.1254774344559328,
+    "margin_scale": 9.94383549035847,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17557554196578895,
+      "log_loss": 0.5235672568656681
+    },
+    "temperature": 1.0655168919139624,
+    "margin_scale": 9.68617571486982,
+    "training_market_games": 4515,
+    "iterations": [
+      268,
+      257,
+      284
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.740084388185654,
+      "brier": 0.1751169081409219,
+      "log_loss": 0.5221129710847463
+    },
+    "temperature": 1.0809576673848629,
+    "margin_scale": 9.864123435372813,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      256,
+      350
+    ],
+    "converged": [
+      false,
+      true,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17473469469659736,
+      "log_loss": 0.5208067984922612
+    },
+    "temperature": 1.090811975662282,
+    "margin_scale": 10.01031394513794,
+    "training_market_games": 4515,
+    "iterations": [
+      123,
+      141,
+      113
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1757395974060111,
+      "log_loss": 0.5233975868312616
+    },
+    "temperature": 1.0734948713013164,
+    "margin_scale": 9.863815442299591,
+    "training_market_games": 4515,
+    "iterations": [
+      55,
+      53,
+      53
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.17543238691537072,
+      "log_loss": 0.5224562157549619
+    },
+    "temperature": 1.087879068091995,
+    "margin_scale": 10.015608150547338,
+    "training_market_games": 4515,
+    "iterations": [
+      51,
+      53,
+      55
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.729957805907173,
+      "brier": 0.17519525030439587,
+      "log_loss": 0.5217052968904076
+    },
+    "temperature": 1.0999975951673358,
+    "margin_scale": 10.152989766774182,
+    "training_market_games": 4515,
+    "iterations": [
+      53,
+      50,
+      52
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7316455696202532,
+      "brier": 0.18003948577086026,
+      "log_loss": 0.5381456575706663
+    },
+    "temperature": 1.2394588132939388,
+    "margin_scale": 9.51315969985071,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7265822784810126,
+      "brier": 0.175816482910477,
+      "log_loss": 0.524607908578449
+    },
+    "temperature": 1.213888939602619,
+    "margin_scale": 9.887393066517602,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7274261603375527,
+      "brier": 0.17383206229334514,
+      "log_loss": 0.5171510883791874
+    },
+    "temperature": 1.1721123483827056,
+    "margin_scale": 10.09620425502956,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17541820861192578,
+      "log_loss": 0.5229356264129332
+    },
+    "temperature": 1.0617499910396901,
+    "margin_scale": 9.69439533885609,
+    "training_market_games": 4515,
+    "iterations": [
+      110,
+      94,
+      97
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17503472627022257,
+      "log_loss": 0.5217598452412663
+    },
+    "temperature": 1.0777308792178952,
+    "margin_scale": 9.86184218892047,
+    "training_market_games": 4515,
+    "iterations": [
+      97,
+      87,
+      107
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17474429763618549,
+      "log_loss": 0.5208355408542984
+    },
+    "temperature": 1.0907767023041468,
+    "margin_scale": 10.010495773939784,
+    "training_market_games": 4515,
+    "iterations": [
+      99,
+      95,
+      92
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17573932706390483,
+      "log_loss": 0.5233968027370292
+    },
+    "temperature": 1.0734963047155024,
+    "margin_scale": 9.86382793483592,
+    "training_market_games": 4515,
+    "iterations": [
+      51,
+      56,
+      58
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.17543324434584562,
+      "log_loss": 0.5224576389633291
+    },
+    "temperature": 1.0878718745884706,
+    "margin_scale": 10.015565343832643,
+    "training_market_games": 4515,
+    "iterations": [
+      52,
+      53,
+      53
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.729957805907173,
+      "brier": 0.17519520013972575,
+      "log_loss": 0.521705216875192
+    },
+    "temperature": 1.0999965833703915,
+    "margin_scale": 10.152990111735114,
+    "training_market_games": 4515,
+    "iterations": [
+      54,
+      51,
+      54
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7257383966244726,
+      "brier": 0.17995291414861492,
+      "log_loss": 0.5425793554097068
+    },
+    "temperature": 1.318226437950133,
+    "margin_scale": 9.471819358133741,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7291139240506329,
+      "brier": 0.17789564411486158,
+      "log_loss": 0.5294402585209691
+    },
+    "temperature": 1.2456655663405543,
+    "margin_scale": 9.914104134924413,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.1733051077506205,
+      "log_loss": 0.5168996788195322
+    },
+    "temperature": 1.189962259411401,
+    "margin_scale": 10.146430761276862,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17541950722189587,
+      "log_loss": 0.5229390810547906
+    },
+    "temperature": 1.061738517532777,
+    "margin_scale": 9.694266537476691,
+    "training_market_games": 4515,
+    "iterations": [
+      118,
+      186,
+      112
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17503474222738535,
+      "log_loss": 0.5217600621914017
+    },
+    "temperature": 1.077732080228788,
+    "margin_scale": 9.861871770287257,
+    "training_market_games": 4515,
+    "iterations": [
+      106,
+      110,
+      90
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17474428075532641,
+      "log_loss": 0.5208356719946945
+    },
+    "temperature": 1.090754692753378,
+    "margin_scale": 10.010297334205509,
+    "training_market_games": 4515,
+    "iterations": [
+      99,
+      94,
+      92
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17573941795258294,
+      "log_loss": 0.5233969941562889
+    },
+    "temperature": 1.0734739736282832,
+    "margin_scale": 9.863615696643611,
+    "training_market_games": 4515,
+    "iterations": [
+      56,
+      55,
+      56
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.1754329038651951,
+      "log_loss": 0.5224564849669037
+    },
+    "temperature": 1.087871841694705,
+    "margin_scale": 10.015578147315864,
+    "training_market_games": 4515,
+    "iterations": [
+      58,
+      56,
+      57
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.729957805907173,
+      "brier": 0.17519489166542926,
+      "log_loss": 0.5217038050343495
+    },
+    "temperature": 1.0999838303511174,
+    "margin_scale": 10.152900300986065,
+    "training_market_games": 4515,
+    "iterations": [
+      55,
+      55,
+      57
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7122362869198312,
+      "brier": 0.18608219660583486,
+      "log_loss": 0.5569634685427353
+    },
+    "temperature": 1.2821798958033557,
+    "margin_scale": 9.095519789279393,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7189873417721518,
+      "brier": 0.179173114624426,
+      "log_loss": 0.534565820180449
+    },
+    "temperature": 1.267856462976478,
+    "margin_scale": 9.629666897176335,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7316455696202532,
+      "brier": 0.17591175787768878,
+      "log_loss": 0.5255412718407959
+    },
+    "temperature": 1.220215619856787,
+    "margin_scale": 9.885060071212623,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7375527426160338,
+      "brier": 0.17170433628084206,
+      "log_loss": 0.5136381495361397
+    },
+    "temperature": 1.0906524131934463,
+    "margin_scale": 9.526954146166247,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17163621465829848,
+      "log_loss": 0.5128455033441222
+    },
+    "temperature": 1.100141753637832,
+    "margin_scale": 9.756609243960865,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7316455696202532,
+      "brier": 0.17219228996399039,
+      "log_loss": 0.5136871325318602
+    },
+    "temperature": 1.1062272235544623,
+    "margin_scale": 9.932168933762062,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      182
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17181444046723032,
+      "log_loss": 0.5127875833157893
+    },
+    "temperature": 1.0819872930614882,
+    "margin_scale": 9.719469201648158,
+    "training_market_games": 4515,
+    "iterations": [
+      77,
+      80,
+      75
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17200337401792473,
+      "log_loss": 0.5129785088658112
+    },
+    "temperature": 1.0991599702980648,
+    "margin_scale": 9.914375938549938,
+    "training_market_games": 4515,
+    "iterations": [
+      74,
+      81,
+      75
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.1723517439966518,
+      "log_loss": 0.5136136696849879
+    },
+    "temperature": 1.1117329052594802,
+    "margin_scale": 10.081426004865271,
+    "training_market_games": 4515,
+    "iterations": [
+      73,
+      77,
+      69
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7240506329113924,
+      "brier": 0.18604895330550922,
+      "log_loss": 0.5612718032907335
+    },
+    "temperature": 1.3852061268485791,
+    "margin_scale": 9.09222319972428,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7240506329113924,
+      "brier": 0.18207518637987477,
+      "log_loss": 0.5457221706069635
+    },
+    "temperature": 1.3480197538565524,
+    "margin_scale": 9.63071729264227,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17659800710653448,
+      "log_loss": 0.5290381441982351
+    },
+    "temperature": 1.27177085074611,
+    "margin_scale": 9.887243068937597,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.739240506329114,
+      "brier": 0.17162612769568836,
+      "log_loss": 0.5134510315931802
+    },
+    "temperature": 1.0919347036485672,
+    "margin_scale": 9.524796803023321,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17161849589156392,
+      "log_loss": 0.5128030479033914
+    },
+    "temperature": 1.1004163726798104,
+    "margin_scale": 9.756846867879513,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7316455696202532,
+      "brier": 0.17205458137528226,
+      "log_loss": 0.513346848766955
+    },
+    "temperature": 1.1076414232219047,
+    "margin_scale": 9.935836126993431,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17181376889527863,
+      "log_loss": 0.512785711043995
+    },
+    "temperature": 1.0820050084680883,
+    "margin_scale": 9.719631277093898,
+    "training_market_games": 4515,
+    "iterations": [
+      78,
+      78,
+      78
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.1720032819672491,
+      "log_loss": 0.5129780349338943
+    },
+    "temperature": 1.0991513652771863,
+    "margin_scale": 9.914310012870796,
+    "training_market_games": 4515,
+    "iterations": [
+      78,
+      78,
+      75
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17235176967751734,
+      "log_loss": 0.513613966009422
+    },
+    "temperature": 1.1117424008347865,
+    "margin_scale": 10.08147242801201,
+    "training_market_games": 4515,
+    "iterations": [
+      77,
+      77,
+      71
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7080168776371308,
+      "brier": 0.19931721530645222,
+      "log_loss": 0.6149450299315667
+    },
+    "temperature": 1.6077251109519999,
+    "margin_scale": 9.076882442741129,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7215189873417721,
+      "brier": 0.18321979021023035,
+      "log_loss": 0.5505682770762985
+    },
+    "temperature": 1.4773840965561693,
+    "margin_scale": 9.63766845091687,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17905491449297678,
+      "log_loss": 0.5365234355363309
+    },
+    "temperature": 1.3837455607050062,
+    "margin_scale": 10.034718798494506,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.17202427091586694,
+      "log_loss": 0.514099323109525
+    },
+    "temperature": 1.1171723498937736,
+    "margin_scale": 9.63692330456537,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17105483148525655,
+      "log_loss": 0.5110766346851081
+    },
+    "temperature": 1.1097803143355724,
+    "margin_scale": 9.817574381396653,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7282700421940929,
+      "brier": 0.17181954272154049,
+      "log_loss": 0.5124903218707402
+    },
+    "temperature": 1.1091552316360092,
+    "margin_scale": 9.962914763204541,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      151
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.1718137082253554,
+      "log_loss": 0.5127855061104015
+    },
+    "temperature": 1.081995871443807,
+    "margin_scale": 9.719548069057847,
+    "training_market_games": 4515,
+    "iterations": [
+      80,
+      80,
+      75
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17200329498349123,
+      "log_loss": 0.512978113586103
+    },
+    "temperature": 1.0991697357045427,
+    "margin_scale": 9.914480861303112,
+    "training_market_games": 4515,
+    "iterations": [
+      72,
+      74,
+      78
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17235079699934483,
+      "log_loss": 0.5136109479114825
+    },
+    "temperature": 1.1117380610839631,
+    "margin_scale": 10.081460891327067,
+    "training_market_games": 4515,
+    "iterations": [
+      76,
+      77,
+      79
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7257383966244726,
+      "brier": 0.20490246584931537,
+      "log_loss": 0.6652829750614757
+    },
+    "temperature": 1.8193435664890996,
+    "margin_scale": 8.918090054653845,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7215189873417721,
+      "brier": 0.19221387978687288,
+      "log_loss": 0.5973305149029533
+    },
+    "temperature": 1.6680846839758179,
+    "margin_scale": 9.685517663185086,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7257383966244726,
+      "brier": 0.18113964080198974,
+      "log_loss": 0.5428964391432897
+    },
+    "temperature": 1.4361422085930262,
+    "margin_scale": 9.994511881389558,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.17191165452186224,
+      "log_loss": 0.5137646148955339
+    },
+    "temperature": 1.1372027160264104,
+    "margin_scale": 9.649612984525865,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      159
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.17076347777135154,
+      "log_loss": 0.510365360036133
+    },
+    "temperature": 1.1165231298886793,
+    "margin_scale": 9.807048792869379,
+    "training_market_games": 4515,
+    "iterations": [
+      350,
+      350,
+      136
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.17183043111382096,
+      "log_loss": 0.5126232061991157
+    },
+    "temperature": 1.1046745862899425,
+    "margin_scale": 9.946980125508176,
+    "training_market_games": 4515,
+    "iterations": [
+      161,
+      350,
+      139
+    ],
+    "converged": [
+      true,
+      false,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.25
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.1718128598228489,
+      "log_loss": 0.5127836479324792
+    },
+    "temperature": 1.081999169978374,
+    "margin_scale": 9.719591879862277,
+    "training_market_games": 4515,
+    "iterations": [
+      81,
+      74,
+      81
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.5
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17200316319596184,
+      "log_loss": 0.5129775983891535
+    },
+    "temperature": 1.0991399505334334,
+    "margin_scale": 9.914195292246855,
+    "training_market_games": 4515,
+    "iterations": [
+      76,
+      73,
+      77
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "settings": {
+      "feature_set": "graph",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "teacher_alpha": 0.75
+    },
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17235144035518501,
+      "log_loss": 0.5136122169791273
+    },
+    "temperature": 1.111717466799733,
+    "margin_scale": 10.081286435394532,
+    "training_market_games": 4515,
+    "iterations": [
+      81,
+      79,
+      77
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  }
+]

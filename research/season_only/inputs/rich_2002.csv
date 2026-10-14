@@ -1,0 +1,3 @@
+game_id,team_id,opponent_id,scrimmage_snaps,pass_epa_sum,pass_epa_n,rush_epa_sum,rush_epa_n,pass_success_sum,pass_success_n,rush_success_sum,rush_success_n,pass_yards_sum,pass_yards_n,rush_yards_sum,rush_yards_n,explosive_sum,explosive_n,turnover_sum,turnover_n,sack_sum,sack_n,third_success_sum,third_success_n,nonto_epa_sum,nonto_epa_n,completion_sum,completion_n,drive_epa_sum,drive_epa_n,field_position_sum,field_position_n
+230020030,30,2294,80,11.652477,31,-11.659265,49,18,31,21,49,304,31,247,49,10.000000,80,80,80,31,31,11.000000,16,-0.006789,80,21,31,-0.006789,11,346,11
+230020030,2294,30,49,0.269542,28,1.683160,21,9,28,9,21,120,28,131,21,6.000000,49,49,49,28,28,6.000000,12,1.952702,49,9,28,1.952702,9,262,9

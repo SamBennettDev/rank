@@ -1,0 +1,1271 @@
+[
+  {
+    "name": "win_percentage",
+    "family": "win_percentage",
+    "params": {}
+  },
+  {
+    "name": "net_wins",
+    "family": "net_wins",
+    "params": {}
+  },
+  {
+    "name": "colley",
+    "family": "colley",
+    "params": {}
+  },
+  {
+    "name": "pythagorean:exponent=1.5",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 1.5
+    }
+  },
+  {
+    "name": "pythagorean:exponent=2.0",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 2.0
+    }
+  },
+  {
+    "name": "pythagorean:exponent=2.37",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 2.37
+    }
+  },
+  {
+    "name": "pythagorean:exponent=3.0",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 3.0
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=0.1",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 0.1
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=0.3",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 0.3
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=1.0",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=3.0",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 3.0
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=0.05",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 0.05
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=0.05",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 0.05
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=0.05",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 0.05
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=0.25",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=0.25",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=0.25",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=1.0",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=1.0",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=1.0",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=4.0",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=4.0",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=4.0",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=14.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 14.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "capped_margin:cap=21.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 21.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "capped_margin:cap=28.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 28.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "capped_margin:cap=35.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 35.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "capped_margin:cap=50.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 50.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "capped_margin:cap=14.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 14.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=21.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 21.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=28.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 28.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=35.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 35.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=50.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 50.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=14.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 14.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=21.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 21.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=28.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 28.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=35.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 35.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "capped_margin:cap=50.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 50.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "robust_margin:huber=7.0,ridge=0.25",
+    "family": "robust_margin",
+    "params": {
+      "huber": 7.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "robust_margin:huber=14.0,ridge=0.25",
+    "family": "robust_margin",
+    "params": {
+      "huber": 14.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "robust_margin:huber=21.0,ridge=0.25",
+    "family": "robust_margin",
+    "params": {
+      "huber": 21.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "robust_margin:huber=7.0,ridge=1.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 7.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "robust_margin:huber=14.0,ridge=1.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 14.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "robust_margin:huber=21.0,ridge=1.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 21.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "robust_margin:huber=7.0,ridge=4.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 7.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "robust_margin:huber=14.0,ridge=4.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 14.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "robust_margin:huber=21.0,ridge=4.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 21.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=14.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 14.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=28.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 28.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=56.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 56.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=112.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 112.0,
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=14.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 14.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=28.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 28.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=56.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 56.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=112.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 112.0,
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=14.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 14.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=28.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 28.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=56.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 56.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=112.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 112.0,
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "win_springs:ridge=0.05,win_only=True",
+    "family": "win_springs",
+    "params": {
+      "ridge": 0.05,
+      "win_only": true
+    }
+  },
+  {
+    "name": "win_springs:ridge=1.0,win_only=True",
+    "family": "win_springs",
+    "params": {
+      "ridge": 1.0,
+      "win_only": true
+    }
+  },
+  {
+    "name": "win_springs:ridge=4.0,win_only=True",
+    "family": "win_springs",
+    "params": {
+      "ridge": 4.0,
+      "win_only": true
+    }
+  },
+  {
+    "name": "margin_springs:ridge=1.0,spring=True,win_only=True",
+    "family": "margin_springs",
+    "params": {
+      "ridge": 1.0,
+      "spring": true,
+      "win_only": true
+    }
+  },
+  {
+    "name": "margin_springs:ridge=10.0,spring=True,win_only=True",
+    "family": "margin_springs",
+    "params": {
+      "ridge": 10.0,
+      "spring": true,
+      "win_only": true
+    }
+  },
+  {
+    "name": "margin_springs:ridge=50.0,spring=True,win_only=True",
+    "family": "margin_springs",
+    "params": {
+      "ridge": 50.0,
+      "spring": true,
+      "win_only": true
+    }
+  },
+  {
+    "name": "elo:k=20,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 20,
+      "mov": false
+    }
+  },
+  {
+    "name": "elo:k=20,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 20,
+      "mov": true
+    }
+  },
+  {
+    "name": "elo:k=40,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 40,
+      "mov": false
+    }
+  },
+  {
+    "name": "elo:k=40,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 40,
+      "mov": true
+    }
+  },
+  {
+    "name": "elo:k=80,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 80,
+      "mov": false
+    }
+  },
+  {
+    "name": "elo:k=80,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 80,
+      "mov": true
+    }
+  },
+  {
+    "name": "elo:k=160,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 160,
+      "mov": false
+    }
+  },
+  {
+    "name": "elo:k=160,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 160,
+      "mov": true
+    }
+  },
+  {
+    "name": "offense_defense_score:ridge=0.25",
+    "family": "offense_defense_score",
+    "params": {
+      "ridge": 0.25
+    }
+  },
+  {
+    "name": "offense_defense_score:ridge=1.0",
+    "family": "offense_defense_score",
+    "params": {
+      "ridge": 1.0
+    }
+  },
+  {
+    "name": "offense_defense_score:ridge=4.0",
+    "family": "offense_defense_score",
+    "params": {
+      "ridge": 4.0
+    }
+  },
+  {
+    "name": "pagerank:damping=0.5,margin=False",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.5,
+      "margin": false
+    }
+  },
+  {
+    "name": "pagerank:damping=0.5,margin=True",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.5,
+      "margin": true
+    }
+  },
+  {
+    "name": "pagerank:damping=0.75,margin=False",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.75,
+      "margin": false
+    }
+  },
+  {
+    "name": "pagerank:damping=0.75,margin=True",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.75,
+      "margin": true
+    }
+  },
+  {
+    "name": "pagerank:damping=0.9,margin=False",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.9,
+      "margin": false
+    }
+  },
+  {
+    "name": "pagerank:damping=0.9,margin=True",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.9,
+      "margin": true
+    }
+  },
+  {
+    "name": "keener:epsilon=0.001",
+    "family": "keener",
+    "params": {
+      "epsilon": 0.001
+    }
+  },
+  {
+    "name": "keener:epsilon=0.01",
+    "family": "keener",
+    "params": {
+      "epsilon": 0.01
+    }
+  },
+  {
+    "name": "keener:epsilon=0.1",
+    "family": "keener",
+    "params": {
+      "epsilon": 0.1
+    }
+  },
+  {
+    "name": "lrmc:scale=0.04",
+    "family": "lrmc",
+    "params": {
+      "scale": 0.04
+    }
+  },
+  {
+    "name": "lrmc:scale=0.08",
+    "family": "lrmc",
+    "params": {
+      "scale": 0.08
+    }
+  },
+  {
+    "name": "lrmc:scale=0.16",
+    "family": "lrmc",
+    "params": {
+      "scale": 0.16
+    }
+  },
+  {
+    "name": "epa_units:all_plays=False,ridge=60.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_units:all_plays=True,ridge=60.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_units:all_plays=False,ridge=180.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_units:all_plays=True,ridge=180.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_units:all_plays=False,ridge=400.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_units:all_plays=True,ridge=400.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "success_units:all_plays=False,ridge=60.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "success_units:all_plays=True,ridge=60.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "success_units:all_plays=False,ridge=180.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "success_units:all_plays=True,ridge=180.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "success_units:all_plays=False,ridge=400.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "success_units:all_plays=True,ridge=400.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.25,ridge=60.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.5,ridge=60.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.75,ridge=60.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.25,ridge=180.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.5,ridge=180.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.75,ridge=180.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.25,ridge=400.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.5,ridge=400.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.75,ridge=400.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.25,ridge=60.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.5,ridge=60.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.75,ridge=60.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.25,ridge=180.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.5,ridge=180.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.75,ridge=180.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.25,ridge=400.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.5,ridge=400.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.75,ridge=400.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.25,ridge=60.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.5,ridge=60.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.75,ridge=60.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 60.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.25,ridge=180.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.5,ridge=180.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.75,ridge=180.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 180.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.25,ridge=400.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.5,ridge=400.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.75,ridge=400.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 400.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    }
+  }
+]

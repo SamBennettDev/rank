@@ -1,0 +1,5 @@
+*.pdf binary
+REPORT.html linguist-generated=true
+METHODS.html linguist-generated=true
+results/** linguist-generated=true
+inputs/** linguist-generated=true

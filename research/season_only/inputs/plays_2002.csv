@@ -1,0 +1,3 @@
+game_id,team_id,opponent_id,all_snaps,all_epa,all_success,snaps,epa,success,special_epa,spread
+230020030,30,2294,80,-0.006789,39,80,-0.006789,39,-12.545323,2.500000
+230020030,2294,30,57,2.289681,23,49,1.952702,18,12.545323,2.500000

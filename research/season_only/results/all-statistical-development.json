@@ -1,0 +1,2177 @@
+[
+  {
+    "name": "win_percentage",
+    "family": "win_percentage",
+    "params": {},
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6738828753816264,
+      "brier": 0.20979721992045758,
+      "log_loss": 0.6078644426313663
+    }
+  },
+  {
+    "name": "net_wins",
+    "family": "net_wins",
+    "params": {},
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6731890091590341,
+      "brier": 0.2099565858748497,
+      "log_loss": 0.6077150281067824
+    }
+  },
+  {
+    "name": "colley",
+    "family": "colley",
+    "params": {},
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6805439911185124,
+      "brier": 0.20725458285966084,
+      "log_loss": 0.6012408554689104
+    }
+  },
+  {
+    "name": "pythagorean:exponent=1.5",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 1.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6941437690813211,
+      "brier": 0.20146727832120756,
+      "log_loss": 0.5883630248469054
+    }
+  },
+  {
+    "name": "pythagorean:exponent=2.0",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 2.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6946988620593949,
+      "brier": 0.20167902640768562,
+      "log_loss": 0.5889221417444752
+    }
+  },
+  {
+    "name": "pythagorean:exponent=2.37",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 2.37
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6958090480155426,
+      "brier": 0.20199054012462533,
+      "log_loss": 0.5897319410045843
+    }
+  },
+  {
+    "name": "pythagorean:exponent=3.0",
+    "family": "pythagorean",
+    "params": {
+      "exponent": 3.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6930335831251735,
+      "brier": 0.2027144096438053,
+      "log_loss": 0.591532124591093
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=0.1",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 0.1
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6733277824035526,
+      "brier": 0.20935553735410473,
+      "log_loss": 0.6061998444106387
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=0.3",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 0.3
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.674993061337774,
+      "brier": 0.20801716027189648,
+      "log_loss": 0.6027900971398102
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=1.0",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6797113516514016,
+      "brier": 0.20765503709489727,
+      "log_loss": 0.6019125626008511
+    }
+  },
+  {
+    "name": "bradley_terry:ridge=3.0",
+    "family": "bradley_terry",
+    "params": {
+      "ridge": 3.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6733277824035526,
+      "brier": 0.20831539534886992,
+      "log_loss": 0.6035375136331512
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=0.05",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 0.05
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6974743269497641,
+      "brier": 0.1967420256984473,
+      "log_loss": 0.5760967495373462
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=0.05",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 0.05
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6974743269497641,
+      "brier": 0.1966359095091627,
+      "log_loss": 0.5759756016825073
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=0.05",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 0.05
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6935886761032473,
+      "brier": 0.19709043560963665,
+      "log_loss": 0.5772598864622224
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=0.25",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6966416874826533,
+      "brier": 0.19571077563679115,
+      "log_loss": 0.5724141795072141
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=0.25",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6958090480155426,
+      "brier": 0.1955663101748738,
+      "log_loss": 0.5721718690498011
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=0.25",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6949764085484319,
+      "brier": 0.1959499875103893,
+      "log_loss": 0.5732823206029254
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=1.0",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6955315015265057,
+      "brier": 0.19538491286317108,
+      "log_loss": 0.5711075868879534
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=1.0",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6946988620593949,
+      "brier": 0.19511126220813724,
+      "log_loss": 0.5706130329615633
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=1.0",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6941437690813211,
+      "brier": 0.1953152160856665,
+      "log_loss": 0.5713404709999995
+    }
+  },
+  {
+    "name": "massey:bonus=0.0,ridge=4.0",
+    "family": "massey",
+    "params": {
+      "bonus": 0.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6946988620593949,
+      "brier": 0.1963442746542897,
+      "log_loss": 0.5735718583469706
+    }
+  },
+  {
+    "name": "massey:bonus=3.0,ridge=4.0",
+    "family": "massey",
+    "params": {
+      "bonus": 3.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6974743269497641,
+      "brier": 0.19598545224406985,
+      "log_loss": 0.5728710419568266
+    }
+  },
+  {
+    "name": "massey:bonus=7.0,ridge=4.0",
+    "family": "massey",
+    "params": {
+      "bonus": 7.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7021926172633917,
+      "brier": 0.19604696693926157,
+      "log_loss": 0.5732276996923201
+    }
+  },
+  {
+    "name": "capped_margin:cap=14.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 14.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6863724673882875,
+      "brier": 0.2010483408896373,
+      "log_loss": 0.5870194852541868
+    }
+  },
+  {
+    "name": "capped_margin:cap=21.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 21.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6924784901470996,
+      "brier": 0.19894212305749692,
+      "log_loss": 0.5817748478592087
+    }
+  },
+  {
+    "name": "capped_margin:cap=28.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 28.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6983069664168748,
+      "brier": 0.19740104351711704,
+      "log_loss": 0.5778412251238983
+    }
+  },
+  {
+    "name": "capped_margin:cap=35.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 35.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6952539550374688,
+      "brier": 0.19658734083519275,
+      "log_loss": 0.5753767693475994
+    }
+  },
+  {
+    "name": "capped_margin:cap=50.0,ridge=0.25",
+    "family": "capped_margin",
+    "params": {
+      "cap": 50.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6999722453510963,
+      "brier": 0.1955401978238395,
+      "log_loss": 0.5721763057711808
+    }
+  },
+  {
+    "name": "capped_margin:cap=14.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 14.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6899805717457674,
+      "brier": 0.1997507127074418,
+      "log_loss": 0.5829502827833292
+    }
+  },
+  {
+    "name": "capped_margin:cap=21.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 21.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6949764085484319,
+      "brier": 0.19796857594471523,
+      "log_loss": 0.5785764650025003
+    }
+  },
+  {
+    "name": "capped_margin:cap=28.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 28.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6955315015265057,
+      "brier": 0.19668103412501672,
+      "log_loss": 0.5753369989837107
+    }
+  },
+  {
+    "name": "capped_margin:cap=35.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 35.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6941437690813211,
+      "brier": 0.1960305672869256,
+      "log_loss": 0.5733799973301315
+    }
+  },
+  {
+    "name": "capped_margin:cap=50.0,ridge=1.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 50.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6985845129059117,
+      "brier": 0.19516399833447923,
+      "log_loss": 0.5707574852632339
+    }
+  },
+  {
+    "name": "capped_margin:cap=14.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 14.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6874826533444351,
+      "brier": 0.19967860563485804,
+      "log_loss": 0.5824351194836075
+    }
+  },
+  {
+    "name": "capped_margin:cap=21.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 21.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6930335831251735,
+      "brier": 0.1981679729249029,
+      "log_loss": 0.5789063132532416
+    }
+  },
+  {
+    "name": "capped_margin:cap=28.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 28.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6969192339716903,
+      "brier": 0.19722021892651512,
+      "log_loss": 0.5766012358306328
+    }
+  },
+  {
+    "name": "capped_margin:cap=35.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 35.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6971967804607272,
+      "brier": 0.19675661586757037,
+      "log_loss": 0.5751955451436455
+    }
+  },
+  {
+    "name": "capped_margin:cap=50.0,ridge=4.0",
+    "family": "capped_margin",
+    "params": {
+      "cap": 50.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6966416874826533,
+      "brier": 0.19616986647541815,
+      "log_loss": 0.5732864455961785
+    }
+  },
+  {
+    "name": "robust_margin:huber=7.0,ridge=0.25",
+    "family": "robust_margin",
+    "params": {
+      "huber": 7.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6863724673882875,
+      "brier": 0.1994002588757352,
+      "log_loss": 0.581212169860436
+    }
+  },
+  {
+    "name": "robust_margin:huber=14.0,ridge=0.25",
+    "family": "robust_margin",
+    "params": {
+      "huber": 14.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6933111296142104,
+      "brier": 0.197177767455435,
+      "log_loss": 0.5757598168364773
+    }
+  },
+  {
+    "name": "robust_margin:huber=21.0,ridge=0.25",
+    "family": "robust_margin",
+    "params": {
+      "huber": 21.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6952539550374688,
+      "brier": 0.1961089558510398,
+      "log_loss": 0.5732912355904151
+    }
+  },
+  {
+    "name": "robust_margin:huber=7.0,ridge=1.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 7.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6869275603663614,
+      "brier": 0.19996319333619014,
+      "log_loss": 0.5828583423060437
+    }
+  },
+  {
+    "name": "robust_margin:huber=14.0,ridge=1.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 14.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6927560366361366,
+      "brier": 0.19721049196885493,
+      "log_loss": 0.5757119304779933
+    }
+  },
+  {
+    "name": "robust_margin:huber=21.0,ridge=1.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 21.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6938662225922843,
+      "brier": 0.19597284817891447,
+      "log_loss": 0.5724623870046746
+    }
+  },
+  {
+    "name": "robust_margin:huber=7.0,ridge=4.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 7.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6810990840965861,
+      "brier": 0.20197676166484274,
+      "log_loss": 0.5874702787436584
+    }
+  },
+  {
+    "name": "robust_margin:huber=14.0,ridge=4.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 14.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6902581182348043,
+      "brier": 0.1988735091807452,
+      "log_loss": 0.5802250492489913
+    }
+  },
+  {
+    "name": "robust_margin:huber=21.0,ridge=4.0",
+    "family": "robust_margin",
+    "params": {
+      "huber": 21.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6927560366361366,
+      "brier": 0.1972451737258578,
+      "log_loss": 0.5761803202522986
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=14.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 14.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6774909797391063,
+      "brier": 0.2011567004460011,
+      "log_loss": 0.5853985949837237
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=28.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 28.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6894254787676936,
+      "brier": 0.19749686064660177,
+      "log_loss": 0.5769967270759249
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=56.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 56.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6952539550374688,
+      "brier": 0.19650695046706515,
+      "log_loss": 0.5748869297422519
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=112.0,ridge=0.25",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 112.0,
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6946988620593949,
+      "brier": 0.196402187954272,
+      "log_loss": 0.5747886776597103
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=14.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 14.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6805439911185124,
+      "brier": 0.2015283586079809,
+      "log_loss": 0.5862546732101505
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=28.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 28.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6894254787676936,
+      "brier": 0.19741402640326558,
+      "log_loss": 0.5765518712880631
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=56.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 56.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.694421315570358,
+      "brier": 0.1961718744090857,
+      "log_loss": 0.573611213419182
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=112.0,ridge=1.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 112.0,
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6941437690813211,
+      "brier": 0.19594224035942212,
+      "log_loss": 0.5731045246448174
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=14.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 14.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6813766305856231,
+      "brier": 0.20336131967061138,
+      "log_loss": 0.5908486274915921
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=28.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 28.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6905356647238412,
+      "brier": 0.1984667286212043,
+      "log_loss": 0.5791887979317738
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=56.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 56.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6969192339716903,
+      "brier": 0.19701617140651204,
+      "log_loss": 0.5757361201585718
+    }
+  },
+  {
+    "name": "recency_margin:cap=35.0,half=112.0,ridge=4.0",
+    "family": "recency_margin",
+    "params": {
+      "cap": 35.0,
+      "half": 112.0,
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6966416874826533,
+      "brier": 0.19671797759283058,
+      "log_loss": 0.5750485811619402
+    }
+  },
+  {
+    "name": "win_springs:ridge=0.05,win_only=True",
+    "family": "win_springs",
+    "params": {
+      "ridge": 0.05,
+      "win_only": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6677768526228143,
+      "brier": 0.21273064791633917,
+      "log_loss": 0.615839636768009
+    }
+  },
+  {
+    "name": "win_springs:ridge=1.0,win_only=True",
+    "family": "win_springs",
+    "params": {
+      "ridge": 1.0,
+      "win_only": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6738828753816264,
+      "brier": 0.20878507408398972,
+      "log_loss": 0.6052614395590353
+    }
+  },
+  {
+    "name": "win_springs:ridge=4.0,win_only=True",
+    "family": "win_springs",
+    "params": {
+      "ridge": 4.0,
+      "win_only": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6783236192062171,
+      "brier": 0.20773595620299462,
+      "log_loss": 0.6023359221647425
+    }
+  },
+  {
+    "name": "margin_springs:ridge=1.0,spring=True,win_only=True",
+    "family": "margin_springs",
+    "params": {
+      "ridge": 1.0,
+      "spring": true,
+      "win_only": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.674993061337774,
+      "brier": 0.20823883961996076,
+      "log_loss": 0.6053841296052087
+    }
+  },
+  {
+    "name": "margin_springs:ridge=10.0,spring=True,win_only=True",
+    "family": "margin_springs",
+    "params": {
+      "ridge": 10.0,
+      "spring": true,
+      "win_only": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6813766305856231,
+      "brier": 0.20429105477929005,
+      "log_loss": 0.594595133077211
+    }
+  },
+  {
+    "name": "margin_springs:ridge=50.0,spring=True,win_only=True",
+    "family": "margin_springs",
+    "params": {
+      "ridge": 50.0,
+      "spring": true,
+      "win_only": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6908132112128782,
+      "brier": 0.20085296065662014,
+      "log_loss": 0.585580547089249
+    }
+  },
+  {
+    "name": "elo:k=20,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 20,
+      "mov": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6716625034693311,
+      "brier": 0.20998003386573139,
+      "log_loss": 0.6074980571077699
+    }
+  },
+  {
+    "name": "elo:k=20,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 20,
+      "mov": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6835970024979184,
+      "brier": 0.20245961041241045,
+      "log_loss": 0.589354855141095
+    }
+  },
+  {
+    "name": "elo:k=40,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 40,
+      "mov": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6741604218706634,
+      "brier": 0.20947284946603112,
+      "log_loss": 0.6062449370335447
+    }
+  },
+  {
+    "name": "elo:k=40,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 40,
+      "mov": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6866500138773245,
+      "brier": 0.20227627848301163,
+      "log_loss": 0.5889056523008384
+    }
+  },
+  {
+    "name": "elo:k=80,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 80,
+      "mov": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.672217596447405,
+      "brier": 0.20914950287429915,
+      "log_loss": 0.6054256024450505
+    }
+  },
+  {
+    "name": "elo:k=80,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 80,
+      "mov": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6783236192062171,
+      "brier": 0.20388544403660558,
+      "log_loss": 0.5928113874756985
+    }
+  },
+  {
+    "name": "elo:k=160,mov=False",
+    "family": "elo",
+    "params": {
+      "k": 160,
+      "mov": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6741604218706634,
+      "brier": 0.2100203160364863,
+      "log_loss": 0.6074217157450696
+    }
+  },
+  {
+    "name": "elo:k=160,mov=True",
+    "family": "elo",
+    "params": {
+      "k": 160,
+      "mov": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6680543991118513,
+      "brier": 0.20800752165426617,
+      "log_loss": 0.6027960501985159
+    }
+  },
+  {
+    "name": "offense_defense_score:ridge=0.25",
+    "family": "offense_defense_score",
+    "params": {
+      "ridge": 0.25
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6966416874826533,
+      "brier": 0.19572313067789257,
+      "log_loss": 0.5724520086943139
+    }
+  },
+  {
+    "name": "offense_defense_score:ridge=1.0",
+    "family": "offense_defense_score",
+    "params": {
+      "ridge": 1.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6960865945045795,
+      "brier": 0.1954043458174836,
+      "log_loss": 0.5711670308766096
+    }
+  },
+  {
+    "name": "offense_defense_score:ridge=4.0",
+    "family": "offense_defense_score",
+    "params": {
+      "ridge": 4.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6946988620593949,
+      "brier": 0.19636365071394019,
+      "log_loss": 0.5736254619016217
+    }
+  },
+  {
+    "name": "pagerank:damping=0.5,margin=False",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.5,
+      "margin": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6566749930613378,
+      "brier": 0.21795445611494352,
+      "log_loss": 0.6259181552381982
+    }
+  },
+  {
+    "name": "pagerank:damping=0.5,margin=True",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.5,
+      "margin": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6647238412434082,
+      "brier": 0.21354568397793883,
+      "log_loss": 0.6159204389575125
+    }
+  },
+  {
+    "name": "pagerank:damping=0.75,margin=False",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.75,
+      "margin": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6522342492367471,
+      "brier": 0.21889495289604116,
+      "log_loss": 0.6282185590468535
+    }
+  },
+  {
+    "name": "pagerank:damping=0.75,margin=True",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.75,
+      "margin": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.662225922842076,
+      "brier": 0.2150497174462429,
+      "log_loss": 0.6196848062800003
+    }
+  },
+  {
+    "name": "pagerank:damping=0.9,margin=False",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.9,
+      "margin": false
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6483485983902304,
+      "brier": 0.21975661370449345,
+      "log_loss": 0.6303013396759074
+    }
+  },
+  {
+    "name": "pagerank:damping=0.9,margin=True",
+    "family": "pagerank",
+    "params": {
+      "damping": 0.9,
+      "margin": true
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6633361087982237,
+      "brier": 0.21644676140432306,
+      "log_loss": 0.623128183762927
+    }
+  },
+  {
+    "name": "keener:epsilon=0.001",
+    "family": "keener",
+    "params": {
+      "epsilon": 0.001
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.678601165695254,
+      "brier": 0.21647081980768584,
+      "log_loss": 0.632547825742411
+    }
+  },
+  {
+    "name": "keener:epsilon=0.01",
+    "family": "keener",
+    "params": {
+      "epsilon": 0.01
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6860949208992506,
+      "brier": 0.21161615741586096,
+      "log_loss": 0.6222111862922094
+    }
+  },
+  {
+    "name": "keener:epsilon=0.1",
+    "family": "keener",
+    "params": {
+      "epsilon": 0.1
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6910907577019151,
+      "brier": 0.20395357608410067,
+      "log_loss": 0.6020778642476348
+    }
+  },
+  {
+    "name": "lrmc:scale=0.04",
+    "family": "lrmc",
+    "params": {
+      "scale": 0.04
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6922009436580627,
+      "brier": 0.20037028466146337,
+      "log_loss": 0.5874285359771891
+    }
+  },
+  {
+    "name": "lrmc:scale=0.08",
+    "family": "lrmc",
+    "params": {
+      "scale": 0.08
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6888703857896198,
+      "brier": 0.20032429480959357,
+      "log_loss": 0.5866678337742847
+    }
+  },
+  {
+    "name": "lrmc:scale=0.16",
+    "family": "lrmc",
+    "params": {
+      "scale": 0.16
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6885928393005828,
+      "brier": 0.20230132973907813,
+      "log_loss": 0.5907827688803249
+    }
+  },
+  {
+    "name": "epa_units:all_plays=False,ridge=60.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6810990840965861,
+      "brier": 0.20224466893829787,
+      "log_loss": 0.5885289488730407
+    }
+  },
+  {
+    "name": "epa_units:all_plays=True,ridge=60.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6744379683597003,
+      "brier": 0.20498524372079802,
+      "log_loss": 0.5951214459789952
+    }
+  },
+  {
+    "name": "epa_units:all_plays=False,ridge=180.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6774909797391063,
+      "brier": 0.2029194257335648,
+      "log_loss": 0.590485097249171
+    }
+  },
+  {
+    "name": "epa_units:all_plays=True,ridge=180.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6747155148487372,
+      "brier": 0.20513977860375332,
+      "log_loss": 0.5956533736855772
+    }
+  },
+  {
+    "name": "epa_units:all_plays=False,ridge=400.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.675270607826811,
+      "brier": 0.20416924668929348,
+      "log_loss": 0.5936971730803332
+    }
+  },
+  {
+    "name": "epa_units:all_plays=True,ridge=400.0",
+    "family": "epa_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6777685262281432,
+      "brier": 0.2059374167305979,
+      "log_loss": 0.5977327616131586
+    }
+  },
+  {
+    "name": "success_units:all_plays=False,ridge=60.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6852622814321399,
+      "brier": 0.203376347085892,
+      "log_loss": 0.5918399176110476
+    }
+  },
+  {
+    "name": "success_units:all_plays=True,ridge=60.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6738828753816264,
+      "brier": 0.20517098710172588,
+      "log_loss": 0.5958178895292248
+    }
+  },
+  {
+    "name": "success_units:all_plays=False,ridge=180.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6838745489869553,
+      "brier": 0.20424496672191314,
+      "log_loss": 0.593827403692242
+    }
+  },
+  {
+    "name": "success_units:all_plays=True,ridge=180.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6761032472939217,
+      "brier": 0.2056791663842654,
+      "log_loss": 0.5969743255554882
+    }
+  },
+  {
+    "name": "success_units:all_plays=False,ridge=400.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": false,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6774909797391063,
+      "brier": 0.20548346392617065,
+      "log_loss": 0.5967532734839534
+    }
+  },
+  {
+    "name": "success_units:all_plays=True,ridge=400.0",
+    "family": "success_units",
+    "params": {
+      "all_plays": true,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6736053288925895,
+      "brier": 0.2065033833809744,
+      "log_loss": 0.5988650036382341
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.25,ridge=60.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6985845129059117,
+      "brier": 0.19522610791906914,
+      "log_loss": 0.5711781190473805
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.5,ridge=60.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6974743269497641,
+      "brier": 0.1963281289493533,
+      "log_loss": 0.5743804414944432
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.75,ridge=60.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6899805717457674,
+      "brier": 0.1986897059866121,
+      "log_loss": 0.5802320998058821
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.25,ridge=180.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6960865945045795,
+      "brier": 0.1951876874179231,
+      "log_loss": 0.570964097776794
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.5,ridge=180.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6983069664168748,
+      "brier": 0.19598594238577877,
+      "log_loss": 0.5734439180384185
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.75,ridge=180.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6910907577019151,
+      "brier": 0.19833466430056113,
+      "log_loss": 0.5795637778060556
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.25,ridge=400.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6955315015265057,
+      "brier": 0.1951492159120894,
+      "log_loss": 0.5707540127726237
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.5,ridge=400.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6966416874826533,
+      "brier": 0.19562062022711454,
+      "log_loss": 0.5723519058020818
+    }
+  },
+  {
+    "name": "epa_margin:alpha=0.75,ridge=400.0",
+    "family": "epa_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6924784901470996,
+      "brier": 0.19782382465199483,
+      "log_loss": 0.5783404420436405
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.25,ridge=60.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7005273383291701,
+      "brier": 0.19400340917497833,
+      "log_loss": 0.5682192186497479
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.5,ridge=60.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7052456286427977,
+      "brier": 0.19399287594908662,
+      "log_loss": 0.5689277464976511
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.75,ridge=60.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.694421315570358,
+      "brier": 0.19669337741274923,
+      "log_loss": 0.5760889891687373
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.25,ridge=180.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6983069664168748,
+      "brier": 0.19422442824792996,
+      "log_loss": 0.568629414362102
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.5,ridge=180.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.700804884818207,
+      "brier": 0.1938850437818852,
+      "log_loss": 0.5683943905271817
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.75,ridge=180.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7002497918401333,
+      "brier": 0.19607222066141816,
+      "log_loss": 0.5744273660928392
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.25,ridge=400.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6985845129059117,
+      "brier": 0.19442580353310682,
+      "log_loss": 0.5690150323855554
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.5,ridge=400.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6994171523730225,
+      "brier": 0.1938223318077581,
+      "log_loss": 0.5679937271695966
+    }
+  },
+  {
+    "name": "success_margin:alpha=0.75,ridge=400.0",
+    "family": "success_margin",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.70413544268665,
+      "brier": 0.19525811092588627,
+      "log_loss": 0.5722633285942229
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.25,ridge=60.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6969192339716903,
+      "brier": 0.1997656089982599,
+      "log_loss": 0.5834567224026259
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.5,ridge=60.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.694421315570358,
+      "brier": 0.19901511593567,
+      "log_loss": 0.5814982674425063
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.75,ridge=60.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 60.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6883152928115459,
+      "brier": 0.20017421212960726,
+      "log_loss": 0.5839132266959602
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.25,ridge=180.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6952539550374688,
+      "brier": 0.2006552207148199,
+      "log_loss": 0.5856966639168775
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.5,ridge=180.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6891479322786567,
+      "brier": 0.19984294785250362,
+      "log_loss": 0.5837375197972304
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.75,ridge=180.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 180.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6841520954759922,
+      "brier": 0.20091837283320818,
+      "log_loss": 0.5860247043192369
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.25,ridge=400.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.25,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6897030252567306,
+      "brier": 0.2020046493704495,
+      "log_loss": 0.5889818270110663
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.5,ridge=400.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.5,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6863724673882875,
+      "brier": 0.20119588243660333,
+      "log_loss": 0.5871128637826691
+    }
+  },
+  {
+    "name": "epa_success:alpha=0.75,ridge=400.0",
+    "family": "epa_success",
+    "params": {
+      "alpha": 0.75,
+      "ridge": 400.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6813766305856231,
+      "brier": 0.20222357396762666,
+      "log_loss": 0.5893433737073787
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6991396058839856,
+      "brier": 0.19455797216077306,
+      "log_loss": 0.5693991607714991
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.697751873438801,
+      "brier": 0.19450584606733898,
+      "log_loss": 0.569284191758959
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7005273383291701,
+      "brier": 0.19435060161356563,
+      "log_loss": 0.5691187552652928
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.701082431307244,
+      "brier": 0.19427547279730353,
+      "log_loss": 0.5689318044076064
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7030252567305023,
+      "brier": 0.19438083574077675,
+      "log_loss": 0.5695415718239001
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6985845129059117,
+      "brier": 0.19428344173285617,
+      "log_loss": 0.5692740816958499
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6969192339716903,
+      "brier": 0.19476325304193437,
+      "log_loss": 0.5698746027878006
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6969192339716903,
+      "brier": 0.19473127137687127,
+      "log_loss": 0.5698037869409067
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6991396058839856,
+      "brier": 0.19458723508970774,
+      "log_loss": 0.569630219500209
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6985845129059117,
+      "brier": 0.19454428583924763,
+      "log_loss": 0.5695201207249221
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6983069664168748,
+      "brier": 0.19454062613375844,
+      "log_loss": 0.569771408666288
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=0.5,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 0.5,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6988620593949486,
+      "brier": 0.194489376936692,
+      "log_loss": 0.5696216742098346
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7019150707743547,
+      "brier": 0.19422911862288644,
+      "log_loss": 0.5690962973414292
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7027477102414654,
+      "brier": 0.19407624274692714,
+      "log_loss": 0.5687627771699689
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7035803497085762,
+      "brier": 0.19466205122479086,
+      "log_loss": 0.5707419997325005
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7016375242853178,
+      "brier": 0.19438374229963554,
+      "log_loss": 0.5700777059866845
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.697751873438801,
+      "brier": 0.1969466159284991,
+      "log_loss": 0.5769370270438696
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=100.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 100.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6991396058839856,
+      "brier": 0.19647526144100555,
+      "log_loss": 0.5757237056083704
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6988620593949486,
+      "brier": 0.19438048187913287,
+      "log_loss": 0.5693271234051608
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=10.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 10.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.6994171523730225,
+      "brier": 0.1942935448680204,
+      "log_loss": 0.5691356917512163
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7021926172633917,
+      "brier": 0.19436701598297307,
+      "log_loss": 0.5697479992984628
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=30.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 30.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7005273383291701,
+      "brier": 0.19422455306107,
+      "log_loss": 0.5693939075300232
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.0",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.0
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7033028032195393,
+      "brier": 0.1950881824832181,
+      "log_loss": 0.572095410932281
+    }
+  },
+  {
+    "name": "evidence_blend:alpha=1.0,disagreement=1000.0,ridge=180.0,snaps=400.0,st=0.5",
+    "family": "evidence_blend",
+    "params": {
+      "alpha": 1.0,
+      "disagreement": 1000.0,
+      "ridge": 180.0,
+      "snaps": 400.0,
+      "st": 0.5
+    },
+    "exploratory_development": {
+      "games": 3603,
+      "accuracy": 0.7030252567305023,
+      "brier": 0.19486197518351261,
+      "log_loss": 0.5714794572501508
+    }
+  }
+]

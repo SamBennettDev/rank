@@ -1,0 +1,2050 @@
+[
+  {
+    "name": "rank:width=4,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0355648286874057,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7240499149177538,
+      "brier": 0.18093839153953803,
+      "log_loss": 0.5355757695818302
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7416275193211093,
+      "brier": 0.17235905120862247,
+      "log_loss": 0.513535535730533
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0901763655996701,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7203630175836642,
+      "brier": 0.18058621348270762,
+      "log_loss": 0.5343502609171795
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7392029095317473,
+      "brier": 0.17287950469620483,
+      "log_loss": 0.514815466607856
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0150089122249777,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7257515598411798,
+      "brier": 0.17994072073175282,
+      "log_loss": 0.5330460973997988
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7299590847098045,
+      "brier": 0.17811919748664687,
+      "log_loss": 0.5281332496931547
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0585603992544819,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7260351673284174,
+      "brier": 0.17989216054252186,
+      "log_loss": 0.532943750715149
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7302621609334747,
+      "brier": 0.17809417728566102,
+      "log_loss": 0.5280511394316273
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.029001827123314,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.18130006428529571,
+      "log_loss": 0.5368705032856419
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.1795613417082609,
+      "log_loss": 0.5320106990597387
+    },
+    "iterations": [
+      30,
+      32,
+      32
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.067654685014247,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122209728531774,
+      "log_loss": 0.5366783742272524
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.17952269416476863,
+      "log_loss": 0.5319136338154343
+    },
+    "iterations": [
+      32,
+      33,
+      32
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1557375928364326,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.182952125839107,
+      "log_loss": 0.5411899627267632
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.18085466641149286,
+      "log_loss": 0.5353567227167628
+    },
+    "iterations": [
+      13,
+      13,
+      13
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=4,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 4,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1763955260843804,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285714749994444,
+      "log_loss": 0.5409402155519256
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078050335158202,
+      "log_loss": 0.5351717128987782
+    },
+    "iterations": [
+      12,
+      13,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0564143799543881,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7229154849688032,
+      "brier": 0.18156425378930308,
+      "log_loss": 0.5385394412092902
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7458705864524928,
+      "brier": 0.16930340206487063,
+      "log_loss": 0.5057109591461283
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1116374578316244,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7251843448667045,
+      "brier": 0.1817224874316764,
+      "log_loss": 0.5383262550481311
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7455675102288225,
+      "brier": 0.16912220212495763,
+      "log_loss": 0.5055683884709721
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.016180730611311,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7257515598411798,
+      "brier": 0.17991954701358648,
+      "log_loss": 0.5330310145074411
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7295044703742991,
+      "brier": 0.17797938197436258,
+      "log_loss": 0.5277783384198185
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0614537790566925,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7268859897901304,
+      "brier": 0.1798213101659965,
+      "log_loss": 0.5328364949830751
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7299590847098045,
+      "brier": 0.17781438696895785,
+      "log_loss": 0.527335266001639
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0290353655252897,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.18130039525362124,
+      "log_loss": 0.536871402917853
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.17956137833788705,
+      "log_loss": 0.5320106778316172
+    },
+    "iterations": [
+      28,
+      27,
+      31
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0676548808864021,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122211167382252,
+      "log_loss": 0.5366783441431255
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.1795226479718474,
+      "log_loss": 0.5319134888097107
+    },
+    "iterations": [
+      32,
+      33,
+      32
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1557443863772008,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.18295209722632574,
+      "log_loss": 0.5411898957124184
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.18085465722553337,
+      "log_loss": 0.5353566982533283
+    },
+    "iterations": [
+      13,
+      12,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=8,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1763949916125407,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285715764018762,
+      "log_loss": 0.5409402441202702
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078053518673123,
+      "log_loss": 0.5351717976577208
+    },
+    "iterations": [
+      13,
+      13,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0945142678528492,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7149744753261487,
+      "brier": 0.18554730425711324,
+      "log_loss": 0.5500194610498836
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7614790119715108,
+      "brier": 0.16139202907720104,
+      "log_loss": 0.4857320075919665
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1567708071822937,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7146908678389109,
+      "brier": 0.18536386737780886,
+      "log_loss": 0.5504053132864833
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7590544021821488,
+      "brier": 0.1624893868325982,
+      "log_loss": 0.48895818180538336
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0174480316786954,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7274532047646057,
+      "brier": 0.17984946581080133,
+      "log_loss": 0.5329272864400306
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7308683133808153,
+      "brier": 0.1777454289057799,
+      "log_loss": 0.52715933822488
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.061146360420367,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7277368122518435,
+      "brier": 0.17979147999416625,
+      "log_loss": 0.5328012058716541
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7299590847098045,
+      "brier": 0.17773649031597333,
+      "log_loss": 0.5271159201387983
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0290075272290937,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.1813000945283789,
+      "log_loss": 0.5368704882116329
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.17956130075468377,
+      "log_loss": 0.5320106140505643
+    },
+    "iterations": [
+      30,
+      31,
+      34
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.067645893361454,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122213248809876,
+      "log_loss": 0.5366783595013369
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.1795227305096733,
+      "log_loss": 0.5319136653392827
+    },
+    "iterations": [
+      33,
+      35,
+      33
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1557421767865936,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.18295211935591973,
+      "log_loss": 0.5411899517102275
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.180854656208017,
+      "log_loss": 0.5353567032627808
+    },
+    "iterations": [
+      13,
+      13,
+      13
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=16,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1763941544131529,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285714714463563,
+      "log_loss": 0.5409402034087206
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078051115501229,
+      "log_loss": 0.5351717484050857
+    },
+    "iterations": [
+      12,
+      12,
+      13
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1286099907240217,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7141236528644356,
+      "brier": 0.19082554046390932,
+      "log_loss": 0.5705208891272923
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7731474465828155,
+      "brier": 0.15322605475812043,
+      "log_loss": 0.46512725983554964
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.2172468802524001,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7115711854792967,
+      "brier": 0.1913580510124862,
+      "log_loss": 0.5701412939254238
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7751174420366722,
+      "brier": 0.15435273018177648,
+      "log_loss": 0.46799852387290564
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0185430149960157,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7274532047646057,
+      "brier": 0.17987317560471108,
+      "log_loss": 0.5328648680031194
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7295044703742991,
+      "brier": 0.17768655915748152,
+      "log_loss": 0.5270083334365298
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0633833030995856,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7266023823028928,
+      "brier": 0.17983420928145957,
+      "log_loss": 0.5327780813560593
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7301106228216396,
+      "brier": 0.17767666712480393,
+      "log_loss": 0.5269761442995045
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0290070128302122,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.181300078938257,
+      "log_loss": 0.5368704357513172
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.17956123854566983,
+      "log_loss": 0.5320105245585055
+    },
+    "iterations": [
+      34,
+      32,
+      33
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.067660489629666,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122212709421034,
+      "log_loss": 0.536678339998796
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.1795226450133825,
+      "log_loss": 0.5319134599568652
+    },
+    "iterations": [
+      33,
+      35,
+      33
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.155748838415559,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.1829521173942983,
+      "log_loss": 0.5411899478576088
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.18085465544790952,
+      "log_loss": 0.5353566864157588
+    },
+    "iterations": [
+      15,
+      13,
+      15
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rank:width=32,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1764013554576709,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285715173266448,
+      "log_loss": 0.5409402262392298
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078051704380477,
+      "log_loss": 0.5351717543516463
+    },
+    "iterations": [
+      14,
+      12,
+      13
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1019211060102596,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7234826999432785,
+      "brier": 0.18312623902607145,
+      "log_loss": 0.5440448298589582
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7537505682679194,
+      "brier": 0.16408701115712307,
+      "log_loss": 0.49277151344325554
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1501378470305865,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7138400453771979,
+      "brier": 0.18435230271125072,
+      "log_loss": 0.5453741792863135
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7499621154720412,
+      "brier": 0.16511123940370262,
+      "log_loss": 0.49536950841502064
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0240927938312776,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7240499149177538,
+      "brier": 0.1806858044557053,
+      "log_loss": 0.5353951537047722
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7314744658281558,
+      "brier": 0.17721882347847387,
+      "log_loss": 0.5256038048701251
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0701310922500644,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7214974475326149,
+      "brier": 0.18088491426707945,
+      "log_loss": 0.5356954522957641
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7311713896044856,
+      "brier": 0.17666779357031395,
+      "log_loss": 0.52448950450817
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0289983540100884,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.18130004315105516,
+      "log_loss": 0.5368703856714718
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.17956136228414682,
+      "log_loss": 0.5320107185403715
+    },
+    "iterations": [
+      32,
+      32,
+      30
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0676575927639265,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122210827207705,
+      "log_loss": 0.5366783837214527
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.179522728545145,
+      "log_loss": 0.5319137098791799
+    },
+    "iterations": [
+      33,
+      33,
+      33
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1557370837364769,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.18295208982816402,
+      "log_loss": 0.541189865310735
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.18085465601984876,
+      "log_loss": 0.5353567108519055
+    },
+    "iterations": [
+      12,
+      12,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=4,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 4,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1763868760312186,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285709923960983,
+      "log_loss": 0.5409400811098656
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078048520304663,
+      "log_loss": 0.5351716984535877
+    },
+    "iterations": [
+      13,
+      12,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.183218444737068,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.707033465683494,
+      "brier": 0.1908207056013307,
+      "log_loss": 0.5722333346724252
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7807243521745719,
+      "brier": 0.1503576505104442,
+      "log_loss": 0.4578209538782381
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.2435035452616916,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.716392512762337,
+      "brier": 0.19063367949486512,
+      "log_loss": 0.5691240969855506
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7731474465828155,
+      "brier": 0.1538872318627393,
+      "log_loss": 0.46612918528763414
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0311533464268734,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7249007373794668,
+      "brier": 0.18027855861196818,
+      "log_loss": 0.5346761482897388
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7325352326110016,
+      "brier": 0.17653676138830834,
+      "log_loss": 0.5238009286284849
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.070015674067897,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7214974475326149,
+      "brier": 0.18014091464249352,
+      "log_loss": 0.5336551327803325
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7301106228216396,
+      "brier": 0.17701535260260662,
+      "log_loss": 0.5252942412642716
+    },
+    "iterations": [
+      160,
+      160,
+      128
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0289944689067634,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.18130030360682414,
+      "log_loss": 0.5368710843890622
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.1795613076387643,
+      "log_loss": 0.5320105108862689
+    },
+    "iterations": [
+      32,
+      33,
+      33
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.067657154868552,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122182788204563,
+      "log_loss": 0.5366776342806888
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.1795225552267362,
+      "log_loss": 0.5319132825939068
+    },
+    "iterations": [
+      34,
+      35,
+      32
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1557348401538574,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.18295207996161414,
+      "log_loss": 0.5411898483742212
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.1808546649555331,
+      "log_loss": 0.5353567239161323
+    },
+    "iterations": [
+      12,
+      13,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=8,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1763869489052539,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285712825973607,
+      "log_loss": 0.5409401776514605
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078050802526605,
+      "log_loss": 0.5351717479708823
+    },
+    "iterations": [
+      13,
+      13,
+      13
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.2904598491670816,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.711287577992059,
+      "brier": 0.1989090219061525,
+      "log_loss": 0.6163081578657621
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.8092135171995757,
+      "brier": 0.13358762636596921,
+      "log_loss": 0.41362208075479634
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.347252936917205,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7115711854792967,
+      "brier": 0.1983655466547946,
+      "log_loss": 0.6056038859949373
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7960297014699197,
+      "brier": 0.1392767867114609,
+      "log_loss": 0.42694081739714995
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0401464404855487,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7231990924560409,
+      "brier": 0.18121016060462,
+      "log_loss": 0.537975512583766
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7332929231701772,
+      "brier": 0.17542792870435658,
+      "log_loss": 0.5211174210439169
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0868021389917646,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7217810550198526,
+      "brier": 0.18076288628408643,
+      "log_loss": 0.5355193372864004
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.731777542051826,
+      "brier": 0.175283040476981,
+      "log_loss": 0.5208228191161924
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.02900443418363,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.18130004788076418,
+      "log_loss": 0.5368703572860729
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.17956136768669168,
+      "log_loss": 0.5320108683201421
+    },
+    "iterations": [
+      39,
+      34,
+      34
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.067654357202317,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122204196341074,
+      "log_loss": 0.5366781470568495
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.1795225542604481,
+      "log_loss": 0.5319132582445129
+    },
+    "iterations": [
+      36,
+      37,
+      33
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.1557339358018828,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.18295206753870796,
+      "log_loss": 0.5411897939941
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.1808546458400582,
+      "log_loss": 0.5353566960864576
+    },
+    "iterations": [
+      15,
+      13,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=16,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.17640288273296,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18285708678642404,
+      "log_loss": 0.5409400468383163
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.1807804599497559,
+      "log_loss": 0.5351716513510884
+    },
+    "iterations": [
+      14,
+      14,
+      14
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.0003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.0003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.4413177225494869,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.6863301191151446,
+      "brier": 0.22331794928568516,
+      "log_loss": 0.7252129516348672
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.8467949689346871,
+      "brier": 0.10785750296089247,
+      "log_loss": 0.340939952475885
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.0003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.0003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.533137593690809,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.6900170164492343,
+      "brier": 0.2166363372225381,
+      "log_loss": 0.6836771463282297
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.8401272920139415,
+      "brier": 0.11500932093346007,
+      "log_loss": 0.36193531543817226
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.003,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.003,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.0531980330504926,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7214974475326149,
+      "brier": 0.18103921659969108,
+      "log_loss": 0.5370474368377335
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7351113805121988,
+      "brier": 0.17404236223567682,
+      "log_loss": 0.5176347688996109
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.003,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.003,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0978354689483931,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7217810550198526,
+      "brier": 0.1809173746133075,
+      "log_loss": 0.5359956842106393
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.734050613729353,
+      "brier": 0.17443696440731504,
+      "log_loss": 0.5186696673551833
+    },
+    "iterations": [
+      160,
+      160,
+      160
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.03,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.03,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.029010765646467,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7200794100964265,
+      "brier": 0.18130016084476447,
+      "log_loss": 0.5368706354939119
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.726928322473102,
+      "brier": 0.17956134460693635,
+      "log_loss": 0.5320108903621603
+    },
+    "iterations": [
+      38,
+      36,
+      32
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.03,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.03,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.0676329408141874,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.18122202468706392,
+      "log_loss": 0.5366780781956098
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7264737081375966,
+      "brier": 0.179522650796502,
+      "log_loss": 0.5319136115601975
+    },
+    "iterations": [
+      44,
+      33,
+      37
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.3,auxiliary=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.3,
+      "auxiliary": 0.0
+    },
+    "temperature": 1.155723377240957,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7144072603516732,
+      "brier": 0.18295208232760204,
+      "log_loss": 0.5411898715356345
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7251098651310804,
+      "brier": 0.1808546386792982,
+      "log_loss": 0.5353566736188444
+    },
+    "iterations": [
+      15,
+      14,
+      12
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "matchup:width=32,ridge=0.3,auxiliary=0.03",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.3,
+      "auxiliary": 0.03
+    },
+    "temperature": 1.1763823667231592,
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.1828570894386524,
+      "log_loss": 0.5409400925530355
+    },
+    "training": {
+      "games": 6599,
+      "accuracy": 0.7248067889074102,
+      "brier": 0.18078050917836855,
+      "log_loss": 0.5351717531930935
+    },
+    "iterations": [
+      16,
+      15,
+      14
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  }
+]

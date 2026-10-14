@@ -1,0 +1,318 @@
+[
+  {
+    "name": "family=logistic_features,C=0.03",
+    "config": {
+      "family": "logistic_features",
+      "C": 0.03
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7260351673284174,
+      "brier": 0.18008928370157076,
+      "log_loss": 0.5337658532001823
+    }
+  },
+  {
+    "name": "family=logistic_features,C=0.3",
+    "config": {
+      "family": "logistic_features",
+      "C": 0.3
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7268859897901304,
+      "brier": 0.17970038352405168,
+      "log_loss": 0.5328937731519812
+    }
+  },
+  {
+    "name": "family=logistic_features,C=3",
+    "config": {
+      "family": "logistic_features",
+      "C": 3
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7257515598411798,
+      "brier": 0.17969234521405983,
+      "log_loss": 0.5329404221961253
+    }
+  },
+  {
+    "name": "family=logistic_features,C=30",
+    "config": {
+      "family": "logistic_features",
+      "C": 30
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7254679523539421,
+      "brier": 0.17969168536707106,
+      "log_loss": 0.5329557636615702
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=2,regularization=1.0,iterations=100",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 2,
+      "regularization": 1.0,
+      "iterations": 100
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7175269427112876,
+      "brier": 0.18292960064912708,
+      "log_loss": 0.5419142320259002
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=2,regularization=1.0,iterations=250",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 2,
+      "regularization": 1.0,
+      "iterations": 250
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7180941576857629,
+      "brier": 0.18195874302689108,
+      "log_loss": 0.5393311756983212
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=2,regularization=10.0,iterations=100",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 2,
+      "regularization": 10.0,
+      "iterations": 100
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7180941576857629,
+      "brier": 0.1829615454746058,
+      "log_loss": 0.5422211797673495
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=2,regularization=10.0,iterations=250",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 2,
+      "regularization": 10.0,
+      "iterations": 250
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7189449801474759,
+      "brier": 0.18210477796969962,
+      "log_loss": 0.5398412078002061
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=3,regularization=1.0,iterations=100",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 3,
+      "regularization": 1.0,
+      "iterations": 100
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7158252977878616,
+      "brier": 0.18258256956515856,
+      "log_loss": 0.5411019971394703
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=3,regularization=1.0,iterations=250",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 3,
+      "regularization": 1.0,
+      "iterations": 250
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7183777651730006,
+      "brier": 0.18238542644618505,
+      "log_loss": 0.5413198681709273
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=3,regularization=10.0,iterations=100",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 3,
+      "regularization": 10.0,
+      "iterations": 100
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7158252977878616,
+      "brier": 0.18248459986230842,
+      "log_loss": 0.5409054012813881
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=3,regularization=10.0,iterations=250",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 3,
+      "regularization": 10.0,
+      "iterations": 250
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7197958026091889,
+      "brier": 0.1822608230572828,
+      "log_loss": 0.5410074089287588
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=5,regularization=1.0,iterations=100",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 5,
+      "regularization": 1.0,
+      "iterations": 100
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7152580828133863,
+      "brier": 0.18313154323604366,
+      "log_loss": 0.5431374117503949
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=5,regularization=1.0,iterations=250",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 5,
+      "regularization": 1.0,
+      "iterations": 250
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.715541690300624,
+      "brier": 0.18387192916703674,
+      "log_loss": 0.5465748603499598
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=5,regularization=10.0,iterations=100",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 5,
+      "regularization": 10.0,
+      "iterations": 100
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7166761202495746,
+      "brier": 0.18334209740960947,
+      "log_loss": 0.5433098022562092
+    }
+  },
+  {
+    "name": "family=gradient_boosting,depth=5,regularization=10.0,iterations=250",
+    "config": {
+      "family": "gradient_boosting",
+      "depth": 5,
+      "regularization": 10.0,
+      "iterations": 250
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7146908678389109,
+      "brier": 0.18371235575163467,
+      "log_loss": 0.5452735148087055
+    }
+  },
+  {
+    "name": "family=extra_trees,leaf=10,max_features=0.5",
+    "config": {
+      "family": "extra_trees",
+      "leaf": 10,
+      "max_features": 0.5
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7141236528644356,
+      "brier": 0.18423670707471426,
+      "log_loss": 0.5449597649729386
+    }
+  },
+  {
+    "name": "family=extra_trees,leaf=10,max_features=1.0",
+    "config": {
+      "family": "extra_trees",
+      "leaf": 10,
+      "max_features": 1.0
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7172433352240499,
+      "brier": 0.18484543020200148,
+      "log_loss": 0.5469760770531571
+    }
+  },
+  {
+    "name": "family=extra_trees,leaf=30,max_features=0.5",
+    "config": {
+      "family": "extra_trees",
+      "leaf": 30,
+      "max_features": 0.5
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7127056154282473,
+      "brier": 0.18373501572583237,
+      "log_loss": 0.5433916742919701
+    }
+  },
+  {
+    "name": "family=extra_trees,leaf=30,max_features=1.0",
+    "config": {
+      "family": "extra_trees",
+      "leaf": 30,
+      "max_features": 1.0
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7141236528644356,
+      "brier": 0.18418585826515937,
+      "log_loss": 0.5449811422436786
+    }
+  },
+  {
+    "name": "family=extra_trees,leaf=80,max_features=0.5",
+    "config": {
+      "family": "extra_trees",
+      "leaf": 80,
+      "max_features": 0.5
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7118547929665343,
+      "brier": 0.1839094469204334,
+      "log_loss": 0.5436677197710674
+    }
+  },
+  {
+    "name": "family=extra_trees,leaf=80,max_features=1.0",
+    "config": {
+      "family": "extra_trees",
+      "leaf": 80,
+      "max_features": 1.0
+    },
+    "validation": {
+      "games": 3526,
+      "accuracy": 0.7107203630175837,
+      "brier": 0.18385901798089155,
+      "log_loss": 0.5436260791652112
+    }
+  }
+]

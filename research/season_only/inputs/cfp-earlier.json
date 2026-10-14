@@ -1,0 +1,2601 @@
+[
+  {
+    "year": 2014,
+    "dates": [
+      "10-28",
+      "11-04",
+      "11-11",
+      "11-18",
+      "11-25",
+      "12-02",
+      "12-07"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2014",
+    "rows": [
+      {
+        "team": "Mississippi State",
+        "ranks": [
+          1,
+          1,
+          1,
+          4,
+          4,
+          10,
+          7
+        ]
+      },
+      {
+        "team": "Florida State",
+        "ranks": [
+          2,
+          2,
+          3,
+          3,
+          3,
+          4,
+          3
+        ]
+      },
+      {
+        "team": "Auburn",
+        "ranks": [
+          3,
+          3,
+          9,
+          14,
+          15,
+          19,
+          19
+        ]
+      },
+      {
+        "team": "Mississippi",
+        "ranks": [
+          4,
+          11,
+          10,
+          8,
+          19,
+          12,
+          9
+        ]
+      },
+      {
+        "team": "Oregon",
+        "ranks": [
+          5,
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "team": "Alabama",
+        "ranks": [
+          6,
+          5,
+          5,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "team": "TCU",
+        "ranks": [
+          7,
+          6,
+          4,
+          5,
+          5,
+          3,
+          6
+        ]
+      },
+      {
+        "team": "Michigan State",
+        "ranks": [
+          8,
+          8,
+          12,
+          11,
+          10,
+          8,
+          8
+        ]
+      },
+      {
+        "team": "Kansas State",
+        "ranks": [
+          9,
+          7,
+          13,
+          12,
+          12,
+          9,
+          11
+        ]
+      },
+      {
+        "team": "Notre Dame",
+        "ranks": [
+          10,
+          10,
+          18,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Georgia",
+        "ranks": [
+          11,
+          20,
+          15,
+          10,
+          9,
+          14,
+          13
+        ]
+      },
+      {
+        "team": "Arizona",
+        "ranks": [
+          12,
+          19,
+          14,
+          15,
+          11,
+          7,
+          10
+        ]
+      },
+      {
+        "team": "Baylor",
+        "ranks": [
+          13,
+          12,
+          7,
+          7,
+          7,
+          6,
+          5
+        ]
+      },
+      {
+        "team": "Arizona State",
+        "ranks": [
+          14,
+          9,
+          6,
+          13,
+          13,
+          17,
+          15
+        ]
+      },
+      {
+        "team": "Nebraska",
+        "ranks": [
+          15,
+          13,
+          16,
+          23,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Ohio State",
+        "ranks": [
+          16,
+          14,
+          8,
+          6,
+          6,
+          5,
+          4
+        ]
+      },
+      {
+        "team": "Utah",
+        "ranks": [
+          17,
+          17,
+          23,
+          17,
+          25,
+          23,
+          22
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          18,
+          15,
+          null,
+          21,
+          20,
+          20,
+          null
+        ]
+      },
+      {
+        "team": "LSU",
+        "ranks": [
+          19,
+          16,
+          17,
+          null,
+          null,
+          24,
+          23
+        ]
+      },
+      {
+        "team": "West Virginia",
+        "ranks": [
+          20,
+          23,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Clemson",
+        "ranks": [
+          21,
+          21,
+          19,
+          22,
+          21,
+          18,
+          17
+        ]
+      },
+      {
+        "team": "UCLA",
+        "ranks": [
+          22,
+          18,
+          11,
+          9,
+          8,
+          15,
+          14
+        ]
+      },
+      {
+        "team": "East Carolina",
+        "ranks": [
+          23,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Duke",
+        "ranks": [
+          24,
+          22,
+          21,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Louisville",
+        "ranks": [
+          25,
+          null,
+          null,
+          24,
+          22,
+          21,
+          21
+        ]
+      },
+      {
+        "team": "Georgia Tech",
+        "ranks": [
+          null,
+          24,
+          22,
+          18,
+          16,
+          11,
+          12
+        ]
+      },
+      {
+        "team": "Wisconsin",
+        "ranks": [
+          null,
+          25,
+          20,
+          16,
+          14,
+          13,
+          18
+        ]
+      },
+      {
+        "team": "Texas A&M",
+        "ranks": [
+          null,
+          null,
+          24,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Minnesota",
+        "ranks": [
+          null,
+          null,
+          25,
+          25,
+          18,
+          null,
+          25
+        ]
+      },
+      {
+        "team": "Southern California",
+        "ranks": [
+          null,
+          null,
+          null,
+          19,
+          null,
+          25,
+          24
+        ]
+      },
+      {
+        "team": "Missouri",
+        "ranks": [
+          null,
+          null,
+          null,
+          20,
+          17,
+          16,
+          16
+        ]
+      },
+      {
+        "team": "Boise State",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          23,
+          22,
+          20
+        ]
+      },
+      {
+        "team": "Marshall",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          24,
+          null,
+          null
+        ]
+      }
+    ],
+    "corrections": [
+      {
+        "team": "Georgia",
+        "date": "12-02",
+        "from_rank": 13,
+        "to_rank": 14,
+        "source": "https://collegefootballplayoff.com/sports/2021/9/7/rankings-appearances"
+      }
+    ]
+  },
+  {
+    "year": 2015,
+    "dates": [
+      "11-03",
+      "11-10",
+      "11-17",
+      "11-24",
+      "12-01",
+      "12-06"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2015",
+    "rows": [
+      {
+        "team": "Clemson",
+        "ranks": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "team": "LSU",
+        "ranks": [
+          2,
+          9,
+          15,
+          null,
+          21,
+          20
+        ]
+      },
+      {
+        "team": "Ohio State",
+        "ranks": [
+          3,
+          3,
+          3,
+          8,
+          6,
+          7
+        ]
+      },
+      {
+        "team": "Alabama",
+        "ranks": [
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "team": "Notre Dame",
+        "ranks": [
+          5,
+          4,
+          4,
+          6,
+          8,
+          8
+        ]
+      },
+      {
+        "team": "Baylor",
+        "ranks": [
+          6,
+          6,
+          10,
+          7,
+          12,
+          17
+        ]
+      },
+      {
+        "team": "Michigan State",
+        "ranks": [
+          7,
+          13,
+          9,
+          5,
+          5,
+          3
+        ]
+      },
+      {
+        "team": "TCU",
+        "ranks": [
+          8,
+          15,
+          18,
+          19,
+          11,
+          11
+        ]
+      },
+      {
+        "team": "Iowa",
+        "ranks": [
+          9,
+          5,
+          5,
+          4,
+          4,
+          5
+        ]
+      },
+      {
+        "team": "Florida",
+        "ranks": [
+          10,
+          11,
+          8,
+          12,
+          18,
+          19
+        ]
+      },
+      {
+        "team": "Stanford",
+        "ranks": [
+          11,
+          7,
+          11,
+          9,
+          7,
+          6
+        ]
+      },
+      {
+        "team": "Utah",
+        "ranks": [
+          12,
+          10,
+          13,
+          23,
+          24,
+          22
+        ]
+      },
+      {
+        "team": "Memphis",
+        "ranks": [
+          13,
+          21,
+          21,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Oklahoma State",
+        "ranks": [
+          14,
+          8,
+          6,
+          11,
+          17,
+          16
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          15,
+          12,
+          7,
+          3,
+          3,
+          4
+        ]
+      },
+      {
+        "team": "Florida State",
+        "ranks": [
+          16,
+          16,
+          14,
+          13,
+          9,
+          9
+        ]
+      },
+      {
+        "team": "Michigan",
+        "ranks": [
+          17,
+          14,
+          12,
+          10,
+          15,
+          14
+        ]
+      },
+      {
+        "team": "Mississippi",
+        "ranks": [
+          18,
+          null,
+          22,
+          18,
+          13,
+          12
+        ]
+      },
+      {
+        "team": "Texas A&M",
+        "ranks": [
+          19,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Mississippi State",
+        "ranks": [
+          20,
+          17,
+          null,
+          21,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Northwestern",
+        "ranks": [
+          21,
+          18,
+          20,
+          16,
+          14,
+          13
+        ]
+      },
+      {
+        "team": "Temple",
+        "ranks": [
+          22,
+          22,
+          null,
+          25,
+          22,
+          24
+        ]
+      },
+      {
+        "team": "UCLA",
+        "ranks": [
+          23,
+          19,
+          null,
+          22,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Toledo",
+        "ranks": [
+          24,
+          null,
+          null,
+          24,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Houston",
+        "ranks": [
+          25,
+          24,
+          19,
+          null,
+          19,
+          18
+        ]
+      },
+      {
+        "team": "Navy",
+        "ranks": [
+          null,
+          20,
+          16,
+          15,
+          23,
+          21
+        ]
+      },
+      {
+        "team": "North Carolina",
+        "ranks": [
+          null,
+          23,
+          17,
+          14,
+          10,
+          10
+        ]
+      },
+      {
+        "team": "Wisconsin",
+        "ranks": [
+          null,
+          25,
+          25,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Oregon",
+        "ranks": [
+          null,
+          null,
+          23,
+          17,
+          16,
+          15
+        ]
+      },
+      {
+        "team": "Southern California",
+        "ranks": [
+          null,
+          null,
+          24,
+          null,
+          20,
+          25
+        ]
+      },
+      {
+        "team": "Washington State",
+        "ranks": [
+          null,
+          null,
+          null,
+          20,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Tennessee",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          25,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2016,
+    "dates": [
+      "11-01",
+      "11-08",
+      "11-15",
+      "11-22",
+      "11-29",
+      "12-04"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2016",
+    "rows": [
+      {
+        "team": "Alabama",
+        "ranks": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "team": "Clemson",
+        "ranks": [
+          2,
+          2,
+          4,
+          4,
+          3,
+          2
+        ]
+      },
+      {
+        "team": "Michigan",
+        "ranks": [
+          3,
+          3,
+          3,
+          3,
+          5,
+          6
+        ]
+      },
+      {
+        "team": "Texas A&M",
+        "ranks": [
+          4,
+          8,
+          25,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Washington",
+        "ranks": [
+          5,
+          4,
+          6,
+          5,
+          4,
+          4
+        ]
+      },
+      {
+        "team": "Ohio State",
+        "ranks": [
+          6,
+          5,
+          2,
+          2,
+          2,
+          3
+        ]
+      },
+      {
+        "team": "Louisville",
+        "ranks": [
+          7,
+          6,
+          5,
+          11,
+          13,
+          13
+        ]
+      },
+      {
+        "team": "Wisconsin",
+        "ranks": [
+          8,
+          7,
+          7,
+          6,
+          6,
+          8
+        ]
+      },
+      {
+        "team": "Auburn",
+        "ranks": [
+          9,
+          9,
+          15,
+          13,
+          14,
+          14
+        ]
+      },
+      {
+        "team": "Nebraska",
+        "ranks": [
+          10,
+          19,
+          18,
+          16,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Florida",
+        "ranks": [
+          11,
+          null,
+          23,
+          15,
+          15,
+          17
+        ]
+      },
+      {
+        "team": "Penn State",
+        "ranks": [
+          12,
+          10,
+          8,
+          7,
+          7,
+          5
+        ]
+      },
+      {
+        "team": "LSU",
+        "ranks": [
+          13,
+          24,
+          16,
+          null,
+          21,
+          20
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          14,
+          11,
+          9,
+          8,
+          9,
+          7
+        ]
+      },
+      {
+        "team": "Colorado",
+        "ranks": [
+          15,
+          12,
+          10,
+          9,
+          8,
+          10
+        ]
+      },
+      {
+        "team": "Utah",
+        "ranks": [
+          16,
+          15,
+          12,
+          22,
+          20,
+          19
+        ]
+      },
+      {
+        "team": "Baylor",
+        "ranks": [
+          17,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Oklahoma State",
+        "ranks": [
+          18,
+          13,
+          11,
+          10,
+          10,
+          12
+        ]
+      },
+      {
+        "team": "Virginia Tech",
+        "ranks": [
+          19,
+          14,
+          null,
+          null,
+          23,
+          22
+        ]
+      },
+      {
+        "team": "West Virginia",
+        "ranks": [
+          20,
+          16,
+          14,
+          18,
+          16,
+          16
+        ]
+      },
+      {
+        "team": "North Carolina",
+        "ranks": [
+          21,
+          17,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Florida State",
+        "ranks": [
+          22,
+          18,
+          17,
+          14,
+          12,
+          11
+        ]
+      },
+      {
+        "team": "Western Michigan",
+        "ranks": [
+          23,
+          21,
+          21,
+          21,
+          17,
+          15
+        ]
+      },
+      {
+        "team": "Boise State",
+        "ranks": [
+          24,
+          22,
+          20,
+          19,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Washington State",
+        "ranks": [
+          25,
+          23,
+          22,
+          23,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Southern California",
+        "ranks": [
+          null,
+          20,
+          13,
+          12,
+          11,
+          9
+        ]
+      },
+      {
+        "team": "Arkansas",
+        "ranks": [
+          null,
+          25,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Tennessee",
+        "ranks": [
+          null,
+          null,
+          19,
+          17,
+          22,
+          21
+        ]
+      },
+      {
+        "team": "Stanford",
+        "ranks": [
+          null,
+          null,
+          24,
+          24,
+          18,
+          18
+        ]
+      },
+      {
+        "team": "Houston",
+        "ranks": [
+          null,
+          null,
+          null,
+          20,
+          24,
+          null
+        ]
+      },
+      {
+        "team": "Navy",
+        "ranks": [
+          null,
+          null,
+          null,
+          25,
+          19,
+          25
+        ]
+      },
+      {
+        "team": "Pittsburgh",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          25,
+          23
+        ]
+      },
+      {
+        "team": "Temple",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          24
+        ]
+      }
+    ],
+    "date_header_correction": {
+      "column": 3,
+      "from_date": "December 15",
+      "to_date": "November 15",
+      "source": "https://collegefootballplayoff.com/sports/2021/9/7/rankings-appearances"
+    }
+  },
+  {
+    "year": 2017,
+    "dates": [
+      "10-31",
+      "11-07",
+      "11-14",
+      "11-21",
+      "11-28",
+      "12-03"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2017",
+    "rows": [
+      {
+        "team": "Georgia",
+        "ranks": [
+          1,
+          1,
+          7,
+          7,
+          6,
+          3
+        ]
+      },
+      {
+        "team": "Alabama",
+        "ranks": [
+          2,
+          2,
+          1,
+          1,
+          5,
+          4
+        ]
+      },
+      {
+        "team": "Notre Dame",
+        "ranks": [
+          3,
+          3,
+          8,
+          8,
+          15,
+          14
+        ]
+      },
+      {
+        "team": "Clemson",
+        "ranks": [
+          4,
+          4,
+          2,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          5,
+          5,
+          4,
+          4,
+          3,
+          2
+        ]
+      },
+      {
+        "team": "Ohio State",
+        "ranks": [
+          6,
+          13,
+          9,
+          9,
+          8,
+          5
+        ]
+      },
+      {
+        "team": "Penn State",
+        "ranks": [
+          7,
+          14,
+          10,
+          10,
+          9,
+          9
+        ]
+      },
+      {
+        "team": "TCU",
+        "ranks": [
+          8,
+          6,
+          12,
+          12,
+          11,
+          15
+        ]
+      },
+      {
+        "team": "Wisconsin",
+        "ranks": [
+          9,
+          8,
+          5,
+          5,
+          4,
+          6
+        ]
+      },
+      {
+        "team": "Miami (FL)",
+        "ranks": [
+          10,
+          7,
+          3,
+          2,
+          7,
+          10
+        ]
+      },
+      {
+        "team": "Oklahoma State",
+        "ranks": [
+          11,
+          15,
+          13,
+          19,
+          19,
+          19
+        ]
+      },
+      {
+        "team": "Washington",
+        "ranks": [
+          12,
+          9,
+          18,
+          17,
+          13,
+          11
+        ]
+      },
+      {
+        "team": "Virginia Tech",
+        "ranks": [
+          13,
+          17,
+          null,
+          25,
+          22,
+          22
+        ]
+      },
+      {
+        "team": "Auburn",
+        "ranks": [
+          14,
+          10,
+          6,
+          6,
+          2,
+          7
+        ]
+      },
+      {
+        "team": "Iowa State",
+        "ranks": [
+          15,
+          21,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Mississippi State",
+        "ranks": [
+          16,
+          16,
+          16,
+          14,
+          23,
+          23
+        ]
+      },
+      {
+        "team": "Southern California",
+        "ranks": [
+          17,
+          11,
+          11,
+          11,
+          10,
+          8
+        ]
+      },
+      {
+        "team": "UCF",
+        "ranks": [
+          18,
+          18,
+          15,
+          15,
+          14,
+          12
+        ]
+      },
+      {
+        "team": "LSU",
+        "ranks": [
+          19,
+          24,
+          20,
+          18,
+          17,
+          17
+        ]
+      },
+      {
+        "team": "NC State",
+        "ranks": [
+          20,
+          23,
+          19,
+          null,
+          24,
+          24
+        ]
+      },
+      {
+        "team": "Stanford",
+        "ranks": [
+          21,
+          null,
+          22,
+          21,
+          12,
+          13
+        ]
+      },
+      {
+        "team": "Arizona",
+        "ranks": [
+          22,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Memphis",
+        "ranks": [
+          23,
+          22,
+          21,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "team": "Michigan State",
+        "ranks": [
+          24,
+          12,
+          17,
+          16,
+          16,
+          16
+        ]
+      },
+      {
+        "team": "Washington State",
+        "ranks": [
+          25,
+          19,
+          14,
+          13,
+          18,
+          18
+        ]
+      },
+      {
+        "team": "Iowa",
+        "ranks": [
+          null,
+          20,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Northwestern",
+        "ranks": [
+          null,
+          25,
+          23,
+          22,
+          21,
+          21
+        ]
+      },
+      {
+        "team": "Michigan",
+        "ranks": [
+          null,
+          null,
+          24,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Boise State",
+        "ranks": [
+          null,
+          null,
+          25,
+          23,
+          null,
+          25
+        ]
+      },
+      {
+        "team": "South Carolina",
+        "ranks": [
+          null,
+          null,
+          null,
+          24,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Fresno State",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          25,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2018,
+    "dates": [
+      "10-30",
+      "11-06",
+      "11-13",
+      "11-20",
+      "11-27",
+      "12-02"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2018",
+    "rows": [
+      {
+        "team": "Alabama",
+        "ranks": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "team": "Clemson",
+        "ranks": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "team": "LSU",
+        "ranks": [
+          3,
+          7,
+          7,
+          7,
+          10,
+          11
+        ]
+      },
+      {
+        "team": "Notre Dame",
+        "ranks": [
+          4,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "team": "Michigan",
+        "ranks": [
+          5,
+          4,
+          4,
+          4,
+          7,
+          7
+        ]
+      },
+      {
+        "team": "Georgia",
+        "ranks": [
+          6,
+          5,
+          5,
+          5,
+          4,
+          5
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          7,
+          6,
+          6,
+          6,
+          5,
+          4
+        ]
+      },
+      {
+        "team": "Washington State",
+        "ranks": [
+          8,
+          8,
+          8,
+          8,
+          13,
+          13
+        ]
+      },
+      {
+        "team": "Kentucky",
+        "ranks": [
+          9,
+          11,
+          17,
+          15,
+          15,
+          14
+        ]
+      },
+      {
+        "team": "Ohio State",
+        "ranks": [
+          10,
+          10,
+          10,
+          10,
+          6,
+          6
+        ]
+      },
+      {
+        "team": "Florida",
+        "ranks": [
+          11,
+          15,
+          13,
+          11,
+          9,
+          10
+        ]
+      },
+      {
+        "team": "UCF",
+        "ranks": [
+          12,
+          12,
+          11,
+          9,
+          8,
+          8
+        ]
+      },
+      {
+        "team": "West Virginia",
+        "ranks": [
+          13,
+          9,
+          9,
+          13,
+          16,
+          16
+        ]
+      },
+      {
+        "team": "Penn State",
+        "ranks": [
+          14,
+          20,
+          14,
+          12,
+          12,
+          12
+        ]
+      },
+      {
+        "team": "Utah",
+        "ranks": [
+          15,
+          null,
+          19,
+          17,
+          17,
+          17
+        ]
+      },
+      {
+        "team": "Iowa",
+        "ranks": [
+          16,
+          21,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Texas",
+        "ranks": [
+          17,
+          19,
+          15,
+          14,
+          14,
+          15
+        ]
+      },
+      {
+        "team": "Mississippi State",
+        "ranks": [
+          18,
+          16,
+          21,
+          18,
+          18,
+          18
+        ]
+      },
+      {
+        "team": "Syracuse",
+        "ranks": [
+          19,
+          13,
+          12,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "team": "Texas A&M",
+        "ranks": [
+          20,
+          null,
+          null,
+          22,
+          19,
+          19
+        ]
+      },
+      {
+        "team": "NC State",
+        "ranks": [
+          21,
+          14,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Boston College",
+        "ranks": [
+          22,
+          17,
+          20,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Fresno State",
+        "ranks": [
+          23,
+          23,
+          null,
+          null,
+          25,
+          21
+        ]
+      },
+      {
+        "team": "Iowa State",
+        "ranks": [
+          24,
+          22,
+          16,
+          25,
+          23,
+          24
+        ]
+      },
+      {
+        "team": "Virginia",
+        "ranks": [
+          25,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Michigan State",
+        "ranks": [
+          null,
+          18,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Auburn",
+        "ranks": [
+          null,
+          24,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Washington",
+        "ranks": [
+          null,
+          25,
+          18,
+          16,
+          11,
+          9
+        ]
+      },
+      {
+        "team": "Northwestern",
+        "ranks": [
+          null,
+          null,
+          22,
+          19,
+          21,
+          22
+        ]
+      },
+      {
+        "team": "Utah State",
+        "ranks": [
+          null,
+          null,
+          23,
+          21,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Cincinnati",
+        "ranks": [
+          null,
+          null,
+          24,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Boise State",
+        "ranks": [
+          null,
+          null,
+          25,
+          23,
+          22,
+          25
+        ]
+      },
+      {
+        "team": "Pittsburgh",
+        "ranks": [
+          null,
+          null,
+          null,
+          24,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Missouri",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          24,
+          23
+        ]
+      }
+    ],
+    "corrections": [
+      {
+        "team": "Utah State",
+        "date": "11-20",
+        "from_rank": 24,
+        "to_rank": 21,
+        "source": "https://collegefootballplayoff.com/sports/2021/9/7/rankings-appearances"
+      }
+    ]
+  },
+  {
+    "year": 2019,
+    "dates": [
+      "11-05",
+      "11-12",
+      "11-19",
+      "11-26",
+      "12-03",
+      "12-08"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2019",
+    "rows": [
+      {
+        "team": "Ohio State",
+        "ranks": [
+          1,
+          2,
+          2,
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "team": "LSU",
+        "ranks": [
+          2,
+          1,
+          1,
+          2,
+          2,
+          1
+        ]
+      },
+      {
+        "team": "Alabama",
+        "ranks": [
+          3,
+          5,
+          5,
+          5,
+          12,
+          13
+        ]
+      },
+      {
+        "team": "Penn State",
+        "ranks": [
+          4,
+          9,
+          8,
+          10,
+          10,
+          10
+        ]
+      },
+      {
+        "team": "Clemson",
+        "ranks": [
+          5,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "team": "Georgia",
+        "ranks": [
+          6,
+          4,
+          4,
+          4,
+          4,
+          5
+        ]
+      },
+      {
+        "team": "Oregon",
+        "ranks": [
+          7,
+          6,
+          6,
+          14,
+          13,
+          6
+        ]
+      },
+      {
+        "team": "Utah",
+        "ranks": [
+          8,
+          7,
+          7,
+          6,
+          5,
+          11
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          9,
+          10,
+          9,
+          7,
+          6,
+          4
+        ]
+      },
+      {
+        "team": "Florida",
+        "ranks": [
+          10,
+          11,
+          11,
+          11,
+          9,
+          9
+        ]
+      },
+      {
+        "team": "Auburn",
+        "ranks": [
+          11,
+          12,
+          15,
+          15,
+          11,
+          12
+        ]
+      },
+      {
+        "team": "Baylor",
+        "ranks": [
+          12,
+          13,
+          14,
+          9,
+          7,
+          7
+        ]
+      },
+      {
+        "team": "Wisconsin",
+        "ranks": [
+          13,
+          14,
+          12,
+          12,
+          8,
+          8
+        ]
+      },
+      {
+        "team": "Michigan",
+        "ranks": [
+          14,
+          15,
+          13,
+          13,
+          14,
+          14
+        ]
+      },
+      {
+        "team": "Notre Dame",
+        "ranks": [
+          15,
+          16,
+          16,
+          16,
+          15,
+          15
+        ]
+      },
+      {
+        "team": "Kansas State",
+        "ranks": [
+          16,
+          24,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Minnesota",
+        "ranks": [
+          17,
+          8,
+          10,
+          8,
+          18,
+          18
+        ]
+      },
+      {
+        "team": "Iowa",
+        "ranks": [
+          18,
+          20,
+          17,
+          17,
+          16,
+          16
+        ]
+      },
+      {
+        "team": "Wake Forest",
+        "ranks": [
+          19,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Cincinnati",
+        "ranks": [
+          20,
+          17,
+          19,
+          19,
+          20,
+          21
+        ]
+      },
+      {
+        "team": "Memphis",
+        "ranks": [
+          21,
+          18,
+          18,
+          18,
+          17,
+          17
+        ]
+      },
+      {
+        "team": "Boise State",
+        "ranks": [
+          22,
+          21,
+          20,
+          20,
+          19,
+          19
+        ]
+      },
+      {
+        "team": "Oklahoma State",
+        "ranks": [
+          23,
+          22,
+          21,
+          21,
+          25,
+          25
+        ]
+      },
+      {
+        "team": "Navy",
+        "ranks": [
+          24,
+          23,
+          null,
+          null,
+          24,
+          23
+        ]
+      },
+      {
+        "team": "SMU",
+        "ranks": [
+          25,
+          null,
+          25,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Texas",
+        "ranks": [
+          null,
+          19,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Appalachian State",
+        "ranks": [
+          null,
+          25,
+          24,
+          25,
+          21,
+          20
+        ]
+      },
+      {
+        "team": "Iowa State",
+        "ranks": [
+          null,
+          null,
+          22,
+          23,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Southern California",
+        "ranks": [
+          null,
+          null,
+          23,
+          22,
+          22,
+          22
+        ]
+      },
+      {
+        "team": "Virginia Tech",
+        "ranks": [
+          null,
+          null,
+          null,
+          24,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Virginia",
+        "ranks": [
+          null,
+          null,
+          null,
+          null,
+          23,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2020,
+    "dates": [
+      "11-24",
+      "12-01",
+      "12-08",
+      "12-15",
+      "12-20"
+    ],
+    "url": "https://collegefootballplayoff.com/sports/2021/9/7/wk-x-wk-rankings-2020",
+    "rows": [
+      {
+        "team": "Alabama",
+        "ranks": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "team": "Notre Dame",
+        "ranks": [
+          2,
+          2,
+          2,
+          2,
+          4
+        ]
+      },
+      {
+        "team": "Clemson",
+        "ranks": [
+          3,
+          3,
+          3,
+          3,
+          2
+        ]
+      },
+      {
+        "team": "Ohio State",
+        "ranks": [
+          4,
+          4,
+          4,
+          4,
+          3
+        ]
+      },
+      {
+        "team": "Texas A&M",
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "team": "Florida",
+        "ranks": [
+          6,
+          6,
+          6,
+          7,
+          7
+        ]
+      },
+      {
+        "team": "Cincinnati",
+        "ranks": [
+          7,
+          7,
+          8,
+          9,
+          8
+        ]
+      },
+      {
+        "team": "Northwestern",
+        "ranks": [
+          8,
+          14,
+          14,
+          14,
+          14
+        ]
+      },
+      {
+        "team": "Georgia",
+        "ranks": [
+          9,
+          8,
+          9,
+          8,
+          9
+        ]
+      },
+      {
+        "team": "Miami (FL)",
+        "ranks": [
+          10,
+          10,
+          10,
+          18,
+          18
+        ]
+      },
+      {
+        "team": "Oklahoma",
+        "ranks": [
+          11,
+          11,
+          11,
+          10,
+          6
+        ]
+      },
+      {
+        "team": "Indiana",
+        "ranks": [
+          12,
+          12,
+          12,
+          11,
+          11
+        ]
+      },
+      {
+        "team": "Iowa State",
+        "ranks": [
+          13,
+          9,
+          7,
+          6,
+          10
+        ]
+      },
+      {
+        "team": "BYU",
+        "ranks": [
+          14,
+          13,
+          18,
+          17,
+          16
+        ]
+      },
+      {
+        "team": "Oregon",
+        "ranks": [
+          15,
+          23,
+          null,
+          null,
+          25
+        ]
+      },
+      {
+        "team": "Wisconsin",
+        "ranks": [
+          16,
+          16,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Texas",
+        "ranks": [
+          17,
+          null,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "team": "Southern California",
+        "ranks": [
+          18,
+          20,
+          15,
+          13,
+          17
+        ]
+      },
+      {
+        "team": "North Carolina",
+        "ranks": [
+          19,
+          17,
+          17,
+          15,
+          13
+        ]
+      },
+      {
+        "team": "Coastal Carolina",
+        "ranks": [
+          20,
+          18,
+          13,
+          12,
+          12
+        ]
+      },
+      {
+        "team": "Marshall",
+        "ranks": [
+          21,
+          21,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Auburn",
+        "ranks": [
+          22,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Oklahoma State",
+        "ranks": [
+          23,
+          15,
+          22,
+          21,
+          21
+        ]
+      },
+      {
+        "team": "Iowa",
+        "ranks": [
+          24,
+          19,
+          16,
+          16,
+          15
+        ]
+      },
+      {
+        "team": "Tulsa",
+        "ranks": [
+          25,
+          24,
+          24,
+          23,
+          24
+        ]
+      },
+      {
+        "team": "Washington",
+        "ranks": [
+          null,
+          22,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "Louisiana",
+        "ranks": [
+          null,
+          25,
+          19,
+          19,
+          19
+        ]
+      },
+      {
+        "team": "Colorado",
+        "ranks": [
+          null,
+          null,
+          21,
+          25,
+          null
+        ]
+      },
+      {
+        "team": "NC State",
+        "ranks": [
+          null,
+          null,
+          23,
+          22,
+          23
+        ]
+      },
+      {
+        "team": "Missouri",
+        "ranks": [
+          null,
+          null,
+          25,
+          null,
+          null
+        ]
+      },
+      {
+        "team": "San Jose State",
+        "ranks": [
+          null,
+          null,
+          null,
+          24,
+          22
+        ]
+      }
+    ]
+  }
+]

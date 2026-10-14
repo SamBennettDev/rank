@@ -1,0 +1,13 @@
+{
+  "url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/betting/csv/cfb_line_odds.csv.gz",
+  "sha256": "7ae899d9035750dccf22470d7923087a2659052aeb37a44204c35fbf6bf38d4d",
+  "team_labels_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/teams/teams_colors_logos.csv",
+  "team_labels_sha256": "d559f26ad046e7995ceba9403730cde862b5c6d4cdb750fecd7d94733efc7294",
+  "output_sha256": "3f1b3507e2fd3cf8e868d377d119ac18fd94c577417101fea1f9250965f99d57",
+  "games": 12669,
+  "moneyline_games": 11363,
+  "spread_games": 12668,
+  "unresolved_team_book_labels": 120647,
+  "canonical_side_reversals": 0,
+  "note": "Game date_time is not a quote capture timestamp. Stored odds cannot be certified as closing or contemporaneous with the Monday model cutoff. No betting profitability claim."
+}

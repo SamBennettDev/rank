@@ -1,0 +1,13 @@
+{
+  "experimental_settings": 264,
+  "experimental_network_fits": 795,
+  "annual_network_fits": 240,
+  "total_network_fits": 1035,
+  "statistical_configurations": 151,
+  "selected_model": "graph_ensemble",
+  "selection_years": [
+    2018,
+    2019
+  ],
+  "weekly_accuracy": 0.7085761865112407
+}

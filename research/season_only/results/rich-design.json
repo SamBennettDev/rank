@@ -1,0 +1,3362 @@
+[
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.1957747949459971,
+    "margin_scale": 8.285042873521432,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7232067510548523,
+      "brier": 0.1853093989000755,
+      "log_loss": 0.5566163645817548
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7836595492289442,
+      "brier": 0.1479283378622645,
+      "log_loss": 0.4501815736579622
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.0660433139279635,
+    "margin_scale": 7.560428266392984,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7097046413502109,
+      "brier": 0.19235035033252829,
+      "log_loss": 0.576496903913303
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7760972716488731,
+      "brier": 0.15081067459733224,
+      "log_loss": 0.4592470742323705
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.0464307820344056,
+    "margin_scale": 14.685767184288965,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7240506329113924,
+      "brier": 0.1821610822276472,
+      "log_loss": 0.5444482752958238
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7759489916963227,
+      "brier": 0.1520494724991452,
+      "log_loss": 0.46026599542544233
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.859607306942172,
+    "margin_scale": 13.745044659026473,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7063291139240506,
+      "brier": 0.18919921650747965,
+      "log_loss": 0.5625387003458916
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7729833926453143,
+      "brier": 0.15458743853898804,
+      "log_loss": 0.46905367770913103
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.271495649243211,
+    "margin_scale": 9.000099598890413,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7257383966244726,
+      "brier": 0.18675171364568713,
+      "log_loss": 0.5584102006844022
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7812870699881376,
+      "brier": 0.14925025707100922,
+      "log_loss": 0.4538834601000178
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.1554181541365218,
+    "margin_scale": 8.30400686148093,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7071729957805907,
+      "brier": 0.1937615612010602,
+      "log_loss": 0.5822697577444536
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7835112692763938,
+      "brier": 0.15066865818956007,
+      "log_loss": 0.459790482554733
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.0118385008921162,
+    "margin_scale": 14.619296816402269,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7265822784810126,
+      "brier": 0.18289281292420018,
+      "log_loss": 0.5454854516384662
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7743179122182681,
+      "brier": 0.1525235422424963,
+      "log_loss": 0.46197797429876103
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.8444727150778442,
+    "margin_scale": 13.688756634682273,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7105485232067511,
+      "brier": 0.18967071101818947,
+      "log_loss": 0.5642592444965107
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7734282325029656,
+      "brier": 0.15456387922546683,
+      "log_loss": 0.4687759597849674
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0232039027101183,
+    "margin_scale": 9.326330284537319,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17573977008610428,
+      "log_loss": 0.5235884917083237
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7345788849347569,
+      "brier": 0.17596261092788265,
+      "log_loss": 0.5242587108219825
+    },
+    "iterations": [
+      98,
+      100,
+      102
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 0.9982880608476113,
+    "margin_scale": 9.042098794048101,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17622444879521484,
+      "log_loss": 0.5255105511475152
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7350237247924081,
+      "brier": 0.1756037910847964,
+      "log_loss": 0.5232837983033429
+    },
+    "iterations": [
+      350,
+      350,
+      296
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.8097372120002038,
+    "margin_scale": 16.45832299563081,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17557607136139236,
+      "log_loss": 0.5232279543534762
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573632583797777,
+      "log_loss": 0.5235660326029934
+    },
+    "iterations": [
+      102,
+      100,
+      105
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7595384767991924,
+    "margin_scale": 15.978945324212013,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17589606381498457,
+      "log_loss": 0.5245290636949966
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7347271648873073,
+      "brier": 0.17581840605081353,
+      "log_loss": 0.5238831986363524
+    },
+    "iterations": [
+      302,
+      119,
+      118
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0697944199224385,
+    "margin_scale": 9.752691440635589,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17565883727619222,
+      "log_loss": 0.5233630319714278
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7356168446026097,
+      "brier": 0.17592259273803074,
+      "log_loss": 0.5241421674889437
+    },
+    "iterations": [
+      114,
+      117,
+      103
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.046937788802021,
+    "margin_scale": 9.482128780988566,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.17614686747713362,
+      "log_loss": 0.525313341428258
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7351720047449585,
+      "brier": 0.17551335725400458,
+      "log_loss": 0.5230636446621233
+    },
+    "iterations": [
+      350,
+      350,
+      327
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.7563187662214534,
+    "margin_scale": 15.978086785513081,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17546109455931277,
+      "log_loss": 0.5229156424066004
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573451650810118,
+      "log_loss": 0.5235500428216816
+    },
+    "iterations": [
+      105,
+      108,
+      109
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=8,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7102797953559543,
+    "margin_scale": 15.533177254802947,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17579003640027083,
+      "log_loss": 0.5242453806424197
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7347271648873073,
+      "brier": 0.17578481045742936,
+      "log_loss": 0.5237819597912379
+    },
+    "iterations": [
+      256,
+      138,
+      132
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.3420562355373444,
+    "margin_scale": 7.5533256053561795,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6886075949367089,
+      "brier": 0.20753502568837273,
+      "log_loss": 0.6303680799173789
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8214709371293001,
+      "brier": 0.12503196434773753,
+      "log_loss": 0.38888660930643226
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.1748482926879162,
+    "margin_scale": 7.028772283383768,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6970464135021097,
+      "brier": 0.21093572415141604,
+      "log_loss": 0.6384266976376747
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8177639383155397,
+      "brier": 0.12981630758273713,
+      "log_loss": 0.40521002071927215
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.2598741593372327,
+    "margin_scale": 13.836915753780481,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6970464135021097,
+      "brier": 0.2013892397046213,
+      "log_loss": 0.6029162101530997
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8017497034400949,
+      "brier": 0.13477049019304801,
+      "log_loss": 0.4135755481440307
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.075626013461972,
+    "margin_scale": 12.860954043056424,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.70042194092827,
+      "brier": 0.20888359154003716,
+      "log_loss": 0.6369571505935812
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8063463819691578,
+      "brier": 0.134208951002589,
+      "log_loss": 0.4156932825727599
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.4517432941047699,
+    "margin_scale": 8.483667471113549,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7029535864978903,
+      "brier": 0.2036359151068636,
+      "log_loss": 0.6117174664465804
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8198398576512456,
+      "brier": 0.12649206604972402,
+      "log_loss": 0.39380060516654947
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.3141279561193673,
+    "margin_scale": 7.933326092458996,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6835443037974683,
+      "brier": 0.21208889040238718,
+      "log_loss": 0.6387137796866444
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8167259786476868,
+      "brier": 0.12934478998611815,
+      "log_loss": 0.40452997979801253
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.243583610303154,
+    "margin_scale": 13.938133449872637,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6902953586497891,
+      "brier": 0.20237917660452753,
+      "log_loss": 0.6017880951744742
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.802491103202847,
+      "brier": 0.13498728254638684,
+      "log_loss": 0.41423725819760204
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.0552651803542026,
+    "margin_scale": 12.999129417539725,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6902953586497891,
+      "brier": 0.2075729478314684,
+      "log_loss": 0.6267465423870943
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8044187425860023,
+      "brier": 0.1354712073386992,
+      "log_loss": 0.4198074977018683
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0259924593776601,
+    "margin_scale": 9.328893933350932,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1757960930455316,
+      "log_loss": 0.52382479338778
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7350237247924081,
+      "brier": 0.17571330538209318,
+      "log_loss": 0.5235364284722405
+    },
+    "iterations": [
+      236,
+      233,
+      109
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 0.9981094905953163,
+    "margin_scale": 9.038732976218924,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7375527426160338,
+      "brier": 0.17621508077726222,
+      "log_loss": 0.5254945057859451
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7348754448398577,
+      "brier": 0.1755975650510425,
+      "log_loss": 0.5232709920060182
+    },
+    "iterations": [
+      275,
+      350,
+      280
+    ],
+    "converged": [
+      true,
+      false,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.8097996466224195,
+    "margin_scale": 16.458834142386,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17557540730121618,
+      "log_loss": 0.5232270707607758
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573600580853901,
+      "log_loss": 0.5235654918479703
+    },
+    "iterations": [
+      143,
+      141,
+      112
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7606804281726756,
+    "margin_scale": 15.937904166764518,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7375527426160338,
+      "brier": 0.17611517585172232,
+      "log_loss": 0.5252966401265636
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7341340450771056,
+      "brier": 0.17555881245289318,
+      "log_loss": 0.5231071500880714
+    },
+    "iterations": [
+      350,
+      255,
+      350
+    ],
+    "converged": [
+      false,
+      true,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0730979653395807,
+    "margin_scale": 9.758438955826653,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17572722992011497,
+      "log_loss": 0.5236438089181793
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17565304151528763,
+      "log_loss": 0.5233726008601742
+    },
+    "iterations": [
+      270,
+      241,
+      124
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.0467463081407247,
+    "margin_scale": 9.480161091281495,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.1761543126626879,
+      "log_loss": 0.5253375179519171
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7348754448398577,
+      "brier": 0.17551787169927877,
+      "log_loss": 0.5230710218411011
+    },
+    "iterations": [
+      277,
+      350,
+      288
+    ],
+    "converged": [
+      true,
+      false,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.756276158433939,
+    "margin_scale": 15.97768762714788,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17546058245396362,
+      "log_loss": 0.5229147327917059
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.1757342129140704,
+      "log_loss": 0.5235494801829053
+    },
+    "iterations": [
+      145,
+      182,
+      113
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=16,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7118429537160598,
+    "margin_scale": 15.49294670160293,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.17602729153293054,
+      "log_loss": 0.5250883259975327
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7344306049822064,
+      "brier": 0.17550602647244212,
+      "log_loss": 0.5229586013712823
+    },
+    "iterations": [
+      350,
+      273,
+      350
+    ],
+    "converged": [
+      false,
+      true,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.5844026329425949,
+    "margin_scale": 6.773927501889894,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6843881856540084,
+      "brier": 0.2336871275168651,
+      "log_loss": 0.7726112414268116
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8646204033214709,
+      "brier": 0.09708979300821084,
+      "log_loss": 0.31010189154930395
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.3401204682889487,
+    "margin_scale": 6.270294993842012,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6919831223628692,
+      "brier": 0.22554186998543638,
+      "log_loss": 0.7541431943246316
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8563167259786477,
+      "brier": 0.10386929393076369,
+      "log_loss": 0.3331885071893132
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.559816081793363,
+    "margin_scale": 12.612757142521037,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6987341772151898,
+      "brier": 0.21882466993635669,
+      "log_loss": 0.6936759385614705
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8377817319098458,
+      "brier": 0.11280080337706944,
+      "log_loss": 0.35260017695566265
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.261997398616252,
+    "margin_scale": 11.451246312047944,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6894514767932489,
+      "brier": 0.2285541637652168,
+      "log_loss": 0.7427766134209213
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.841785290628707,
+      "brier": 0.11321959756184319,
+      "log_loss": 0.3577120085025477
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.7524860273944232,
+    "margin_scale": 7.807125871860501,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6919831223628692,
+      "brier": 0.22885166357719366,
+      "log_loss": 0.7526675271822617
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8622479240806643,
+      "brier": 0.09859296494784772,
+      "log_loss": 0.31376119491263516
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.5208742920054745,
+    "margin_scale": 7.306108140160214,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6708860759493671,
+      "brier": 0.23629981810305015,
+      "log_loss": 0.7805072227174983
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8561684460260973,
+      "brier": 0.10281273937977684,
+      "log_loss": 0.3316929861813771
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.6584358420066923,
+    "margin_scale": 12.945086221286505,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6987341772151898,
+      "brier": 0.21612882392970947,
+      "log_loss": 0.6954281767398037
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8413404507710558,
+      "brier": 0.11008018388008572,
+      "log_loss": 0.3450049661978533
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.323255246759281,
+    "margin_scale": 11.890786000587074,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6911392405063291,
+      "brier": 0.2236485900785432,
+      "log_loss": 0.717221901551849
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8401542111506525,
+      "brier": 0.11308302765298972,
+      "log_loss": 0.35682615316399774
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0269958749803592,
+    "margin_scale": 9.327045242277066,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17584247136929357,
+      "log_loss": 0.5239991375406489
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7351720047449585,
+      "brier": 0.1756114348156546,
+      "log_loss": 0.5232409896894615
+    },
+    "iterations": [
+      240,
+      224,
+      243
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 0.998404665826119,
+    "margin_scale": 9.04442319494463,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.17620327247761422,
+      "log_loss": 0.5254520494749828
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7347271648873073,
+      "brier": 0.17560991491219186,
+      "log_loss": 0.5233128558527234
+    },
+    "iterations": [
+      309,
+      312,
+      287
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.8098115676584214,
+    "margin_scale": 16.458886723922955,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1755773718641651,
+      "log_loss": 0.5232319045208872
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.1757363089051364,
+      "log_loss": 0.5235661002717057
+    },
+    "iterations": [
+      116,
+      125,
+      118
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.76066340223928,
+    "margin_scale": 15.9379777355049,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7375527426160338,
+      "brier": 0.17611826001371683,
+      "log_loss": 0.5253073801513688
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7341340450771056,
+      "brier": 0.17555990062012297,
+      "log_loss": 0.5231100353566289
+    },
+    "iterations": [
+      309,
+      245,
+      270
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0743442412674808,
+    "margin_scale": 9.75738725692178,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17578456465089068,
+      "log_loss": 0.5238565827652301
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7357651245551602,
+      "brier": 0.17553826635071357,
+      "log_loss": 0.5230469106528971
+    },
+    "iterations": [
+      243,
+      241,
+      303
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.0470529975306464,
+    "margin_scale": 9.485727391338708,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.176159339448269,
+      "log_loss": 0.5253413916078458
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7348754448398577,
+      "brier": 0.17553507881696992,
+      "log_loss": 0.5231191175593886
+    },
+    "iterations": [
+      350,
+      350,
+      287
+    ],
+    "converged": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.7563133588377031,
+    "margin_scale": 15.977993585746184,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17546198623740997,
+      "log_loss": 0.5229178559056188
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573441856879157,
+      "log_loss": 0.5235496619680179
+    },
+    "iterations": [
+      162,
+      148,
+      126
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=rank,width=32,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "rank",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7118489481849484,
+    "margin_scale": 15.492381523382308,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7367088607594937,
+      "brier": 0.1760271152389691,
+      "log_loss": 0.5250876424289963
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7344306049822064,
+      "brier": 0.17550291591547554,
+      "log_loss": 0.5229504045418367
+    },
+    "iterations": [
+      342,
+      259,
+      246
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.4718165452868743,
+    "margin_scale": 7.254426347599762,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7122362869198312,
+      "brier": 0.2047317839136838,
+      "log_loss": 0.6513974647825463
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8391162514827996,
+      "brier": 0.11348952498719492,
+      "log_loss": 0.3596646349937976
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.2198238647390232,
+    "margin_scale": 6.648595199901418,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6902953586497891,
+      "brier": 0.20972774688085344,
+      "log_loss": 0.6539179428039026
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8340747330960854,
+      "brier": 0.12013943534532316,
+      "log_loss": 0.38330350302491734
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.550017919534548,
+    "margin_scale": 13.03969294098187,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7021097046413503,
+      "brier": 0.20463447444517804,
+      "log_loss": 0.6449980970484153
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8291814946619217,
+      "brier": 0.11769197054689473,
+      "log_loss": 0.3679464836786146
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.16072126364734,
+    "margin_scale": 11.941104093683412,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7248945147679325,
+      "brier": 0.1948168347834288,
+      "log_loss": 0.608967926790416
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8220640569395018,
+      "brier": 0.1230658965403351,
+      "log_loss": 0.3877524320110004
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.594883925598116,
+    "margin_scale": 8.33797052162891,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7097046413502109,
+      "brier": 0.20281711879149955,
+      "log_loss": 0.6347103405573817
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8348161328588375,
+      "brier": 0.11476564773136481,
+      "log_loss": 0.36241618425544475
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.3427001788567052,
+    "margin_scale": 7.8912503635385605,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7097046413502109,
+      "brier": 0.1995855073664012,
+      "log_loss": 0.6167399876929006
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8299228944246738,
+      "brier": 0.1232220940643986,
+      "log_loss": 0.38974502192975724
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 2.5173901425423493,
+    "margin_scale": 13.49991298207363,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7223628691983123,
+      "brier": 0.19576808248218347,
+      "log_loss": 0.6183284846503846
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8245848161328588,
+      "brier": 0.12186227571190664,
+      "log_loss": 0.3784336875354016
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.1921148577148766,
+    "margin_scale": 12.474931478562214,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7206751054852321,
+      "brier": 0.19648518223472813,
+      "log_loss": 0.6125677093021207
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.824288256227758,
+      "brier": 0.12426445877601737,
+      "log_loss": 0.3904921822939522
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0233907977582684,
+    "margin_scale": 9.322283465719345,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17572591884950742,
+      "log_loss": 0.5235656227071472
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7347271648873073,
+      "brier": 0.17595531506529957,
+      "log_loss": 0.5242331215533149
+    },
+    "iterations": [
+      94,
+      90,
+      89
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 0.9976726099504658,
+    "margin_scale": 9.072142127835292,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17604923670930908,
+      "log_loss": 0.524673934188224
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7353202846975089,
+      "brier": 0.17592054212309965,
+      "log_loss": 0.524239347559785
+    },
+    "iterations": [
+      199,
+      93,
+      93
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.8098139191991718,
+    "margin_scale": 16.458901001816052,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1755769558685437,
+      "log_loss": 0.5232311852130422
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573598887677833,
+      "log_loss": 0.5235650851205188
+    },
+    "iterations": [
+      100,
+      92,
+      98
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7575707161607041,
+    "margin_scale": 15.987121978225176,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17584139784654784,
+      "log_loss": 0.5243095973234236
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7344306049822064,
+      "brier": 0.17599575365194411,
+      "log_loss": 0.5244045141884048
+    },
+    "iterations": [
+      100,
+      77,
+      108
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0697764355331434,
+    "margin_scale": 9.75253372111142,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17565913769271244,
+      "log_loss": 0.523364419600733
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7356168446026097,
+      "brier": 0.17592281749244174,
+      "log_loss": 0.5241426375644076
+    },
+    "iterations": [
+      105,
+      94,
+      94
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.0430948714383892,
+    "margin_scale": 9.509833484558072,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.17589283439877518,
+      "log_loss": 0.5243520156791825
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7351720047449585,
+      "brier": 0.17613740057163124,
+      "log_loss": 0.5248415918714275
+    },
+    "iterations": [
+      137,
+      98,
+      103
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.7562890824426096,
+    "margin_scale": 15.977816019775547,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.1754598620181509,
+      "log_loss": 0.5229137339483816
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.175734596311205,
+      "log_loss": 0.5235501008985121
+    },
+    "iterations": [
+      99,
+      88,
+      102
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=8,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7080701425179772,
+    "margin_scale": 15.541378390983683,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17573326936808467,
+      "log_loss": 0.5240118934223822
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7347271648873073,
+      "brier": 0.17598160438689722,
+      "log_loss": 0.5243523177460903
+    },
+    "iterations": [
+      110,
+      98,
+      120
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.9149433291429891,
+    "margin_scale": 6.160263864315522,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6919831223628692,
+      "brier": 0.23865093762735431,
+      "log_loss": 0.8895910659534464
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.902876631079478,
+      "brier": 0.07277097684210876,
+      "log_loss": 0.24185880067011264
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.4423112029822125,
+    "margin_scale": 5.8113652429238885,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6928270042194092,
+      "brier": 0.22235672090515246,
+      "log_loss": 0.7574473688352042
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8841933570581257,
+      "brier": 0.0859412026094225,
+      "log_loss": 0.2857453141393623
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 3.0935020180946844,
+    "margin_scale": 10.915361074054243,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6987341772151898,
+      "brier": 0.2250855941369009,
+      "log_loss": 0.8058256298178677
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.880338078291815,
+      "brier": 0.08442618334046223,
+      "log_loss": 0.271366873172672
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.4117235857261305,
+    "margin_scale": 10.236359376639713,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6936708860759494,
+      "brier": 0.22370670322611794,
+      "log_loss": 0.7533173842309211
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8672894424673784,
+      "brier": 0.09684752972789766,
+      "log_loss": 0.3149190291367899
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.9850207390819739,
+    "margin_scale": 7.602800152054385,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7105485232067511,
+      "brier": 0.2179783396769308,
+      "log_loss": 0.7846583621111946
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.888938315539739,
+      "brier": 0.08046306835864823,
+      "log_loss": 0.2608608508586768
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.6525745399717418,
+    "margin_scale": 6.968296972253107,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7223628691983123,
+      "brier": 0.21924616200807545,
+      "log_loss": 0.7685643208968772
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8846381969157769,
+      "brier": 0.08563951837515654,
+      "log_loss": 0.28549396949064676
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 3.165343868452727,
+    "margin_scale": 12.078185429440705,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6928270042194092,
+      "brier": 0.22415033956793748,
+      "log_loss": 0.8000862179801888
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8781138790035588,
+      "brier": 0.08497108123938289,
+      "log_loss": 0.27405671933566456
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.5633784150808228,
+    "margin_scale": 11.41915455728613,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7037974683544304,
+      "brier": 0.21935531748239842,
+      "log_loss": 0.7325867474415519
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.8655100830367735,
+      "brier": 0.09641436280494656,
+      "log_loss": 0.31251684977583283
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0232159562107985,
+    "margin_scale": 9.326387138933107,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.1757401623592712,
+      "log_loss": 0.5235899745264423
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7345788849347569,
+      "brier": 0.17596225315834327,
+      "log_loss": 0.5242578916927768
+    },
+    "iterations": [
+      103,
+      97,
+      93
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 0.9995497654581714,
+    "margin_scale": 9.074656025422792,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7375527426160338,
+      "brier": 0.17603314732696282,
+      "log_loss": 0.5246757223357218
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7348754448398577,
+      "brier": 0.1757428967972736,
+      "log_loss": 0.5237785048642706
+    },
+    "iterations": [
+      117,
+      266,
+      98
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.8099358735760405,
+    "margin_scale": 16.4601173055535,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17557644641433892,
+      "log_loss": 0.523228946440219
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573680389077476,
+      "log_loss": 0.5235672600232015
+    },
+    "iterations": [
+      86,
+      109,
+      123
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7576089169614961,
+    "margin_scale": 15.987447202712369,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17584336499762615,
+      "log_loss": 0.5243141792698843
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7344306049822064,
+      "brier": 0.1759959818154385,
+      "log_loss": 0.524405320638959
+    },
+    "iterations": [
+      111,
+      111,
+      111
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0697778301266112,
+    "margin_scale": 9.752566501193034,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.1756585703093063,
+      "log_loss": 0.5233628697398022
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7356168446026097,
+      "brier": 0.17592292307699414,
+      "log_loss": 0.5241430725112407
+    },
+    "iterations": [
+      103,
+      108,
+      94
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.048194531945179,
+    "margin_scale": 9.515707379129864,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17596598974667876,
+      "log_loss": 0.5244797085173011
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7348754448398577,
+      "brier": 0.17565377544152766,
+      "log_loss": 0.5235316078884159
+    },
+    "iterations": [
+      134,
+      261,
+      118
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.7596938283276229,
+    "margin_scale": 15.916472931831679,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7333333333333333,
+      "brier": 0.17532975677006543,
+      "log_loss": 0.5226735439492918
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7363582443653618,
+      "brier": 0.17564564308588745,
+      "log_loss": 0.5232605371058598
+    },
+    "iterations": [
+      117,
+      107,
+      130
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=16,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.708083893612729,
+    "margin_scale": 15.541471813713283,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.1757328887092459,
+      "log_loss": 0.5240111921433548
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7347271648873073,
+      "brier": 0.17598142812747658,
+      "log_loss": 0.5243527642181879
+    },
+    "iterations": [
+      119,
+      128,
+      111
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 3.2059791879231136,
+    "margin_scale": 4.898287496312882,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6987341772151898,
+      "brier": 0.2664198186923739,
+      "log_loss": 1.6730243961979212
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9701957295373665,
+      "brier": 0.022409337672428302,
+      "log_loss": 0.07867408991778566
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.8141757165147634,
+    "margin_scale": 4.997624807429494,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6953586497890295,
+      "brier": 0.24346834369030887,
+      "log_loss": 0.9787708339858877
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9344602609727165,
+      "brier": 0.04947864756575561,
+      "log_loss": 0.17538524588319113
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 5.10107550441425,
+    "margin_scale": 8.604237720154487,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6936708860759494,
+      "brier": 0.26943820389817735,
+      "log_loss": 1.5542702820286358
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9580367734282325,
+      "brier": 0.031567802277138,
+      "log_loss": 0.10826748397871615
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 3.1681671195412906,
+    "margin_scale": 8.747547951568041,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6919831223628692,
+      "brier": 0.25032547767174546,
+      "log_loss": 1.06538953193497
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9291221826809015,
+      "brier": 0.05326830758365397,
+      "log_loss": 0.18501140371523211
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 3.5654532333266555,
+    "margin_scale": 6.451318131657926,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6869198312236287,
+      "brier": 0.27009110087182486,
+      "log_loss": 1.5531032603167367
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9670818505338078,
+      "brier": 0.024275317154297347,
+      "log_loss": 0.08401985706510615
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 2.0790222491768775,
+    "margin_scale": 6.458579845970276,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6835443037974683,
+      "brier": 0.24862277183814135,
+      "log_loss": 0.9756369222668911
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9332740213523132,
+      "brier": 0.050921115381129575,
+      "log_loss": 0.1789958594186379
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 5.089172093336369,
+    "margin_scale": 10.310300419924122,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.6877637130801688,
+      "brier": 0.2631323094596833,
+      "log_loss": 1.3190926451447373
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9518090154211151,
+      "brier": 0.035372957816602206,
+      "log_loss": 0.1204392318412146
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.001,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.001,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 3.297471880073968,
+    "margin_scale": 10.3289459067541,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7071729957805907,
+      "brier": 0.23618273222564284,
+      "log_loss": 0.9544896027356446
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.9224495848161328,
+      "brier": 0.05814013124427502,
+      "log_loss": 0.19910595853272758
+    },
+    "iterations": [
+      350,
+      350,
+      350
+    ],
+    "converged": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.025408355697587,
+    "margin_scale": 9.287420561201408,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7324894514767932,
+      "brier": 0.1755627215182824,
+      "log_loss": 0.5232226083014683
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7350237247924081,
+      "brier": 0.17579184324603805,
+      "log_loss": 0.5237529839671771
+    },
+    "iterations": [
+      97,
+      94,
+      149
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.0,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.0012551041538074,
+    "margin_scale": 9.07413189229119,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7383966244725738,
+      "brier": 0.17601836557007766,
+      "log_loss": 0.5246923694875024
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7354685646500593,
+      "brier": 0.17555486748781376,
+      "log_loss": 0.5233030950340238
+    },
+    "iterations": [
+      150,
+      230,
+      189
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.80985944001682,
+    "margin_scale": 16.459334119967682,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17557721804086532,
+      "log_loss": 0.5232321810478431
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17573589436520637,
+      "log_loss": 0.5235652590745409
+    },
+    "iterations": [
+      108,
+      115,
+      127
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.0,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.0,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.7575647917964767,
+    "margin_scale": 15.987026862405227,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.1758430158163465,
+      "log_loss": 0.5243135560437052
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7344306049822064,
+      "brier": 0.17599570301055978,
+      "log_loss": 0.5244037317976133
+    },
+    "iterations": [
+      122,
+      124,
+      131
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.0697549104056392,
+    "margin_scale": 9.752370321477379,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7350210970464135,
+      "brier": 0.17565923861378943,
+      "log_loss": 0.52336427693892
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7356168446026097,
+      "brier": 0.1759230254850482,
+      "log_loss": 0.5241432807185749
+    },
+    "iterations": [
+      92,
+      102,
+      105
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.03,focus=0.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 0.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.0517639615100227,
+    "margin_scale": 9.513339054060427,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7358649789029535,
+      "brier": 0.17598777264219106,
+      "log_loss": 0.524652152777003
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7359134045077106,
+      "brier": 0.17527950634109135,
+      "log_loss": 0.5225930251594354
+    },
+    "iterations": [
+      313,
+      233,
+      306
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=0.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 0.0
+    },
+    "temperature": 1.7630542522985009,
+    "margin_scale": 15.851595450964524,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7308016877637131,
+      "brier": 0.1752059484465945,
+      "log_loss": 0.5224715031920951
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7376927639383155,
+      "brier": 0.17556684620863147,
+      "log_loss": 0.5230037101105645
+    },
+    "iterations": [
+      154,
+      113,
+      136
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "name": "rich:kind=matchup,width=32,ridge=0.01,auxiliary=0.03,focus=1.0,training_half_life=4.0",
+    "settings": {
+      "kind": "matchup",
+      "width": 32,
+      "ridge": 0.01,
+      "auxiliary": 0.03,
+      "focus": 1.0,
+      "training_half_life": 4.0
+    },
+    "temperature": 1.708013357545416,
+    "margin_scale": 15.540899723559217,
+    "validation": {
+      "games": 1185,
+      "accuracy": 0.7341772151898734,
+      "brier": 0.17573501082893167,
+      "log_loss": 0.5240164580575597
+    },
+    "training": {
+      "games": 6744,
+      "accuracy": 0.7345788849347569,
+      "brier": 0.17598176246069538,
+      "log_loss": 0.5243534414840686
+    },
+    "iterations": [
+      142,
+      147,
+      174
+    ],
+    "converged": [
+      true,
+      true,
+      true
+    ]
+  }
+]

@@ -1,0 +1,230 @@
+{
+  "2002": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2002.csv",
+    "schedule_sha256": "cad41175d46b4262be952b32fedda1e5d084270d0775ea7ac01ee8f57f9b34b6",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2002.parquet",
+    "raw_pbp_sha256": "14f05bd56ae78422566e01d104a7f598a3cb1993a1bfd7d3ffb9da2a1b06e21c",
+    "plays_sha256": "424d4bb569d7a7630008d64e12cf56d7d4a1562ad406913b2edeb585af611842",
+    "team_game_rows": 2
+  },
+  "2003": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2003.csv",
+    "schedule_sha256": "1ab868d1c8553d8cc294c1754b3db1fb341725ddda5f22c95dac4f196b2b3d24",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2003.parquet",
+    "raw_pbp_sha256": "4dfc1d15388d75772037ebc2d6c2dc12e6f6f7fee617805a138cf745d634ddff",
+    "plays_sha256": "130d43ff77de4497679f0f6551ac72f926c2a1928a74ba1c9215292c73abc862",
+    "team_game_rows": 968
+  },
+  "2004": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2004.csv",
+    "schedule_sha256": "466c87606cef55f75e05275162f930a8f835792f5e5e358f3356b4ec2c18da06",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2004.parquet",
+    "raw_pbp_sha256": "5afe39d5c9eb9873a9bfe927bdaf26316755026661c9edaf392f54fb59ee856f",
+    "plays_sha256": "0c64e6487334daa784b576d048a7dcf9bfa4e96bb8f6c0f9cab598b73701c865",
+    "team_game_rows": 904
+  },
+  "2005": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2005.csv",
+    "schedule_sha256": "ea98d357995c06d9bd6c6f10a8faad814cfb919c17631d92d798583882fa4a7c",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2005.parquet",
+    "raw_pbp_sha256": "419cd065939040dfa53a6c3f166de5ef3f3ccceabe98eff6a9c3bf16447315e3",
+    "plays_sha256": "03c7f7f684cc5ff18aa1f7698b31d966ca0d4094b9eee81ff8a554016752cf17",
+    "team_game_rows": 1192
+  },
+  "2006": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2006.csv",
+    "schedule_sha256": "8ed38b4cd69849649ad90a9e421fcc74cbd5c42852320e0c3d030ec011874869",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2006.parquet",
+    "raw_pbp_sha256": "bce81db7809464d83b6c0a599ab673f2eccb4c18fb1cb3e22472a2450d7cfa63",
+    "plays_sha256": "f7f0e4e92c4b739aa66768ea55dcf6038cbce6e300fde32c0cec154a288d626a",
+    "team_game_rows": 1365
+  },
+  "2007": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2007.csv",
+    "schedule_sha256": "6b4a87e86c60a91fd57f0a3ddba056ef05c3e2f2f5d4d259b2b198889c47b022",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2007.parquet",
+    "raw_pbp_sha256": "eb1c431da14b28514aa9bd5ac09232294971e34b1ed26cc75fc0c1a4a12c2206",
+    "plays_sha256": "b417e626162fea72004df091d3a68fbb72f18222e4fb9a4c7fa9c48a95dc8016",
+    "team_game_rows": 1414
+  },
+  "2008": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2008.csv",
+    "schedule_sha256": "7c3c9e9c9a30846c95af14f975fa61f691c3f1ca73b573450d780c7e1fd79517",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2008.parquet",
+    "raw_pbp_sha256": "4ae7c6844307c9da57831bf306c5da7559a784fb558e8287fe0f3648ae345315",
+    "plays_sha256": "bd9718b618addc7b97c15aa69e175b1e2a9a615b8e5f133f17e777100e99fd2f",
+    "team_game_rows": 1552
+  },
+  "2009": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2009.csv",
+    "schedule_sha256": "69d32eef2f43c8879eea53470b8361227c078aa98f559500d768d55d678d7e53",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2009.parquet",
+    "raw_pbp_sha256": "538d03c71feb91639a31531d9db3aa0d0d8ac7ba4ceeaa3100e5f6e6ef18f70d",
+    "plays_sha256": "0abb0a5fd70fa1f8cc21793f1415c1cc5e85f10b4c759810c5ae3b7aabddec0d",
+    "team_game_rows": 1578
+  },
+  "2010": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2010.csv",
+    "schedule_sha256": "375c0ad0a028f6e4876846de0645e2aebb2bfe4e4c67b52f82d5932d8098147a",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2010.parquet",
+    "raw_pbp_sha256": "26c2a2ccc1deefec09d0649af7146fe1d08d2f38bbb4e6958419d9a2a74e954e",
+    "plays_sha256": "4d17057aefdc30125393aa58802440cb6a23d49583134a34e7c1e98b2aa79b36",
+    "team_game_rows": 1572
+  },
+  "2011": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2011.csv",
+    "schedule_sha256": "1de613eaf815c49b40539805c25edc50ec5007c8b3c6a13ea4466fa2d05d9a49",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2011.parquet",
+    "raw_pbp_sha256": "0be6b656396aa804eaa992e320fa0593b60e21f11537a6f4b2925b3e99b4c782",
+    "plays_sha256": "b6182c6037b918a9d097702920340c03f741a30e2cf8c374f2b7f38ef4cd0d15",
+    "team_game_rows": 1606
+  },
+  "2012": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2012.csv",
+    "schedule_sha256": "b74561c0054182d048f14959906db23f7556e828e04c15951f05f778dc52a3b5",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2012.parquet",
+    "raw_pbp_sha256": "f00fa80217c5c38a6a423ed398c9c3250637f5b5d11e8815fe2e29569c6d4d79",
+    "plays_sha256": "5466feddc6049cc1db713c6b4937556fe36115380951802ffeb5b62f6798ba64",
+    "team_game_rows": 1650
+  },
+  "2013": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2013.csv",
+    "schedule_sha256": "8ce379ae3ba10ce5b003130460c4cff2d1bbd7602253821e4a41f85f7b9f8354",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2013.parquet",
+    "raw_pbp_sha256": "b3463d48e8ef72dadce5e55b1dd23f4badda08a969deb2822a50dea45c009981",
+    "plays_sha256": "5753551031d7194f7a790be519b825ac6219def6c08e47302bc0f4e86244bdee",
+    "team_game_rows": 1710
+  },
+  "2014": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2014.csv",
+    "schedule_sha256": "5b1a1f78bc63114c1e076b10e0d9316d079091afa9ac798982048fce6ce5a128",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2014.parquet",
+    "raw_pbp_sha256": "5303452e618d659b62048a7aa1c623070851f6524587e0ad50203a847165388c",
+    "plays_sha256": "ad174d7956e3bcf0b9a7960dbd9d1e2a3672c2a06718eb985d7126f2d4059003",
+    "team_game_rows": 1622
+  },
+  "2015": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2015.csv",
+    "schedule_sha256": "3044e8911721a711202f976133230a0c2cb557cfaf621cb1f3c21722cfd86fe9",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2015.parquet",
+    "raw_pbp_sha256": "8f605ca909559e4950b2051414ece7be916c7cb9215b1a67f3c34eba4ae82222",
+    "plays_sha256": "ba6e4e11b60b972fee4b830ff0b2a62e9c912fa5f9c64293623bdc3fb2ef574d",
+    "team_game_rows": 1644
+  },
+  "2016": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2016.csv",
+    "schedule_sha256": "f60e57cdab028d2d35bd589c46139a6dce11ee8c52c3f4ca975c5d98522f403c",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2016.parquet",
+    "raw_pbp_sha256": "0ee787ab6fe7827d4b9e96390da3d4d049ae2f1402e3210d102a37767bf14762",
+    "plays_sha256": "9f4573b6e3084028edf16eb63a56bc52136c6c853c8d0e9049ad5784e35a6eed",
+    "team_game_rows": 1632
+  },
+  "2017": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2017.csv",
+    "schedule_sha256": "c5a6f47dc1b121e366c0e9ef6cf1524e6ea54f58cf997874bf6d818e46fa3b26",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2017.parquet",
+    "raw_pbp_sha256": "f23b34f73cf2e8f1228b10c0228f7ab8bac636bc11200144d87647601368c96f",
+    "plays_sha256": "b2863ec938c039130f2adf8b75233c4cc0431782d6eae84804c9619ae8445d56",
+    "team_game_rows": 1658
+  },
+  "2018": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2018.csv",
+    "schedule_sha256": "a4d4c2ccd06f933c1b6848b3ef4fddbc56695f6b066c9376b1249bfb9d29c00f",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2018.parquet",
+    "raw_pbp_sha256": "49d483c7f42d46d4c3a9e3f1ad6a2b77212d924b0945511b353842ed5c6f757e",
+    "plays_sha256": "3a7e166869ba8d486dfd9a06c15ece4359b91830f557a38a020b3b5d7706e543",
+    "team_game_rows": 1684
+  },
+  "2019": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2019.csv",
+    "schedule_sha256": "d8665fa0aced3d02d59405c8b9ff157ba00ef128a90c1c5eab31d268d917abac",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2019.parquet",
+    "raw_pbp_sha256": "c9b1c0ed2ed88dca2ef8f4c04fc37c289d05598422cbe17abf17eb67ca801bb8",
+    "plays_sha256": "52325300e5e8ecfe6891a9f8f5f8e983df05ffbb0cb8cf273b75b37640e99882",
+    "team_game_rows": 1694
+  },
+  "2020": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2020.csv",
+    "schedule_sha256": "f902a845a7e79199ab15dff7c3ed91ee7ef1cb54d32ef80fed5aad5c0ac6c316",
+    "raw_pbp_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/pbp/parquet/play_by_play_2020.parquet",
+    "raw_pbp_sha256": "48e3aa3ae95b9d83e613f5455863c9f9b49716411bfb4fb18c420130a93894b2",
+    "plays_sha256": "e078fe7bc7bcb3f67a4614f750b9369f5afa70c935e3cf174c02c382f01ea4ec",
+    "team_game_rows": 1126
+  },
+  "2021": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2021.csv",
+    "schedule_sha256": "91616be40e7f4d611a6e714ee7284cdd7372249888287b05b790019e9397d5fd",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2021.parquet",
+    "raw_pbp_sha256": "d3717713352f1167cdc9c0d7f558f33525f6b2fb16a27189e6bd2327c99eb07e",
+    "plays_sha256": "a3d3a23438e513d5e66a15a3b66366c1d720256013c54cfdaec654b45b7fc1d9",
+    "team_game_rows": 1698
+  },
+  "2022": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2022.csv",
+    "schedule_sha256": "bfee92544d7269f764dcb5726ce5c037837cb100a8c6326e0e4c7103a2e6656d",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2022.parquet",
+    "raw_pbp_sha256": "c1b3041e55fb3896d4ef9de7a68522415c326c7efcbf7a2c6b704461f3a7bb87",
+    "plays_sha256": "808943217b4ce9d8385c95f95276e7ea9e979ca1022261edc9694ea2dce41431",
+    "team_game_rows": 2822
+  },
+  "2023": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2023.csv",
+    "schedule_sha256": "7ffc245da1242fc44c021dae724029074aece78544ba498937cc7703417f0dff",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2023.parquet",
+    "raw_pbp_sha256": "167889e635679d2a745a0f73690bf51afcb28236d3bbaed32aeabb154b726be9",
+    "plays_sha256": "7c5885eeb498e8bd02d38110373af264289f57f860f1ac6237b19ffe7316bced",
+    "team_game_rows": 2987
+  },
+  "2024": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2024.csv",
+    "schedule_sha256": "3e4f3cab542657015ff73d1b527c41df58e6a17acf5fbe7d6fb518a1aabcac61",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2024.parquet",
+    "raw_pbp_sha256": "60489da0c61c56b86698ee14be65cb521010f707e9a2f4ded8d561e9ef592bd4",
+    "plays_sha256": "90cd4fce0e55c1deeda1231d07600e63b94406f019c075faf89dce8704e866ec",
+    "team_game_rows": 3218
+  },
+  "2025": {
+    "aggregation_version": 2,
+    "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/a3dd960090c1bfa169cebd491beabf7028b379b2/schedules/csv/cfb_schedules_2025.csv",
+    "schedule_sha256": "bfecf10bc5a8ffd2e3b6a76b5f0b03b406e17c1a0e03b2000bdf7e2263712db4",
+    "raw_pbp_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfbfastR_cfb_pbp/play_by_play_2025.parquet",
+    "raw_pbp_sha256": "2290311f156083730b6b9d9e6662d121dc86953d71e11aafc9da4c0753819369",
+    "plays_sha256": "526217111e43b45fdf76248ed558b580f2fa6980e03f164c3bfc87fd03318376",
+    "team_game_rows": 3314
+  },
+  "2026_teams.csv": {
+    "path": "data/seasons/2026/teams.csv",
+    "sha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c"
+  },
+  "2026_games.csv": {
+    "path": "data/seasons/2026/games.csv",
+    "sha256": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c"
+  },
+  "2026_plays.csv": {
+    "path": "data/seasons/2026/plays.csv",
+    "sha256": "ad540931176ae4dd20b77e41aa10ae390ca8d1197c754ca59fd7260f8e079123"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "2002": {
+    "raw_sha256": "14f05bd56ae78422566e01d104a7f598a3cb1993a1bfd7d3ffb9da2a1b06e21c",
+    "rich_sha256": "246581fc3f1ada65fa8f589fc4d462c969f54271518dabf1241efd9185f1bea2",
+    "team_game_rows": 2
+  },
+  "2003": {
+    "raw_sha256": "4dfc1d15388d75772037ebc2d6c2dc12e6f6f7fee617805a138cf745d634ddff",
+    "rich_sha256": "25653cbe5cf766b445a0fbc088abbe244655a693a1eef3fe6ef61467e7929797",
+    "team_game_rows": 968
+  },
+  "2004": {
+    "raw_sha256": "5afe39d5c9eb9873a9bfe927bdaf26316755026661c9edaf392f54fb59ee856f",
+    "rich_sha256": "aaec4503dc1b1a60083dcd0dde35c16608a2c61a86965205ef008b24839a2a35",
+    "team_game_rows": 904
+  },
+  "2005": {
+    "raw_sha256": "419cd065939040dfa53a6c3f166de5ef3f3ccceabe98eff6a9c3bf16447315e3",
+    "rich_sha256": "f79bcc617c197e7543f8a162090f0ed86df692b380403d76703ce4bce42b902d",
+    "team_game_rows": 1192
+  },
+  "2006": {
+    "raw_sha256": "bce81db7809464d83b6c0a599ab673f2eccb4c18fb1cb3e22472a2450d7cfa63",
+    "rich_sha256": "9773413e04e84730e144863b6715391175ebe46062e38706fd36eca0deccd9f0",
+    "team_game_rows": 1365
+  },
+  "2007": {
+    "raw_sha256": "eb1c431da14b28514aa9bd5ac09232294971e34b1ed26cc75fc0c1a4a12c2206",
+    "rich_sha256": "7dcc59df038f2970b9bf07e95d082f9e79e9e30a85d2211959add633b0ef3d60",
+    "team_game_rows": 1413
+  },
+  "2008": {
+    "raw_sha256": "4ae7c6844307c9da57831bf306c5da7559a784fb558e8287fe0f3648ae345315",
+    "rich_sha256": "4375acec042132670a529b8fb5567d3b68472b854820b81037593abb648435a8",
+    "team_game_rows": 1552
+  },
+  "2009": {
+    "raw_sha256": "538d03c71feb91639a31531d9db3aa0d0d8ac7ba4ceeaa3100e5f6e6ef18f70d",
+    "rich_sha256": "9de19abc62823a4ed72d883c083c3b1758a990172298aa6eab02969fd3e5bea6",
+    "team_game_rows": 1578
+  },
+  "2010": {
+    "raw_sha256": "26c2a2ccc1deefec09d0649af7146fe1d08d2f38bbb4e6958419d9a2a74e954e",
+    "rich_sha256": "dc7aae4a5e8d081fb6638d71b9532f6fea6fc53181302e23a2d777ff78beffaa",
+    "team_game_rows": 1572
+  },
+  "2011": {
+    "raw_sha256": "0be6b656396aa804eaa992e320fa0593b60e21f11537a6f4b2925b3e99b4c782",
+    "rich_sha256": "725ff4437377d071164ec480f79bbcac5d2febb107c41a75c9c0c62a70c5731a",
+    "team_game_rows": 1605
+  },
+  "2012": {
+    "raw_sha256": "f00fa80217c5c38a6a423ed398c9c3250637f5b5d11e8815fe2e29569c6d4d79",
+    "rich_sha256": "aac79387d641fb2ae051c2c6d5e47455727dcabf686aa5f3ddd0f9ea3ee14016",
+    "team_game_rows": 1650
+  },
+  "2013": {
+    "raw_sha256": "b3463d48e8ef72dadce5e55b1dd23f4badda08a969deb2822a50dea45c009981",
+    "rich_sha256": "f7c242ce5a12cbd9175014e4290a4c95829f0830b60ec1aef14d5681b8b38577",
+    "team_game_rows": 1710
+  },
+  "2014": {
+    "raw_sha256": "5303452e618d659b62048a7aa1c623070851f6524587e0ad50203a847165388c",
+    "rich_sha256": "a3bd847b941c33d3dbe03a2250009cb8bcaddc920ae4546c3eedef5b5c2466d0",
+    "team_game_rows": 1619
+  },
+  "2015": {
+    "raw_sha256": "8f605ca909559e4950b2051414ece7be916c7cb9215b1a67f3c34eba4ae82222",
+    "rich_sha256": "25c2b002380f240fcc4b62ddba031cb898c77580271ff465eefa3a8f135f51e2",
+    "team_game_rows": 1644
+  },
+  "2016": {
+    "raw_sha256": "0ee787ab6fe7827d4b9e96390da3d4d049ae2f1402e3210d102a37767bf14762",
+    "rich_sha256": "ecaca0e08badbf6c56b1337b2d83825b9341edfe2c1cb408f203af739b6d028f",
+    "team_game_rows": 1632
+  },
+  "2017": {
+    "raw_sha256": "f23b34f73cf2e8f1228b10c0228f7ab8bac636bc11200144d87647601368c96f",
+    "rich_sha256": "abd734bb864becba54980085b663f0c51c0b75601a20a3ec553e5c2ee9263800",
+    "team_game_rows": 1658
+  },
+  "2018": {
+    "raw_sha256": "49d483c7f42d46d4c3a9e3f1ad6a2b77212d924b0945511b353842ed5c6f757e",
+    "rich_sha256": "1c1b625ddfbac8dd8676327ec9bcfcd250c01c3288bf47b811984421ee6ef291",
+    "team_game_rows": 1684
+  },
+  "2019": {
+    "raw_sha256": "c9b1c0ed2ed88dca2ef8f4c04fc37c289d05598422cbe17abf17eb67ca801bb8",
+    "rich_sha256": "f00ad4bdebd28c77c40ee380cea0aaf28f081d77a7816ce608ec09938eca1c5d",
+    "team_game_rows": 1694
+  },
+  "2020": {
+    "raw_sha256": "48e3aa3ae95b9d83e613f5455863c9f9b49716411bfb4fb18c420130a93894b2",
+    "rich_sha256": "586aadc2ca9042d91462cccaace301d65a7e4c3e6cf345416334df0eef69ccf9",
+    "team_game_rows": 1126
+  },
+  "2021": {
+    "raw_sha256": "d3717713352f1167cdc9c0d7f558f33525f6b2fb16a27189e6bd2327c99eb07e",
+    "rich_sha256": "deddc9489c361a0130a876866b962a965c9882cd1b870373dc1678bd16203d86",
+    "team_game_rows": 1698
+  },
+  "2022": {
+    "raw_sha256": "c1b3041e55fb3896d4ef9de7a68522415c326c7efcbf7a2c6b704461f3a7bb87",
+    "rich_sha256": "62f92e187c2ae9f803d7db8c83b420a512778ed1cdcde893128343d88d2c592b",
+    "team_game_rows": 2822
+  },
+  "2023": {
+    "raw_sha256": "167889e635679d2a745a0f73690bf51afcb28236d3bbaed32aeabb154b726be9",
+    "rich_sha256": "6539af261d969df304c48f2e420816b71ea392090d1ff2d36c5313f73d8afff9",
+    "team_game_rows": 2985
+  },
+  "2024": {
+    "raw_sha256": "60489da0c61c56b86698ee14be65cb521010f707e9a2f4ded8d561e9ef592bd4",
+    "rich_sha256": "044f04720338f01c88dff539616efced480a6e84f44162d9d78bd2dda3bbc69f",
+    "team_game_rows": 3218
+  },
+  "2025": {
+    "raw_sha256": "2290311f156083730b6b9d9e6662d121dc86953d71e11aafc9da4c0753819369",
+    "rich_sha256": "bec725c267fa55c5bc240ce278899bbb682f370c49b9b66a436ed66776be3589",
+    "team_game_rows": 3314
+  },
+  "2026": {
+    "raw_sha256": "ae84be84c605bf16c8e0c484b305114cbead673ccb59aeff64c5a74be3c28aef",
+    "rich_sha256": "280bf5b0920a843444036eedb4468740ee5539f7f6ed71873623cab64066648c",
+    "team_game_rows": 896
+  }
+}

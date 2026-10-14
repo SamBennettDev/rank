@@ -1,0 +1,14 @@
+{
+  "url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-cfb-data/8c248d2acdf625327b5167df4b0a52cbb03a74ce/cfb/betting/parquet/betting_2026.parquet",
+  "raw_sha256": "404ff2b9bccf0e441bc3a23620a70128bc73beb5c41d10406bfdff4b752161fe",
+  "compact_sha256": "cef362321c8e52ecc272709026e01aa45de76ade4efdabfbcba986af7afea9bb",
+  "cutoff": "2026-10-11T08:30:00+00:00",
+  "games": 448,
+  "home_field": 4.480629611622258,
+  "schedule_url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-cfb-data/8c248d2acdf625327b5167df4b0a52cbb03a74ce/cfb/cfb_schedules/parquet/cfb_schedules_2026.parquet",
+  "schedule_sha256": "5335a2776ab6425e304bd6c05aeed7ad408ae351f1c8547a1b54e08f34f92176",
+  "canonical_side_reversals": 0,
+  "fbs_teams_with_quotes": 138,
+  "fbs_teams": 138,
+  "interpretation": "Least-squares strengths fitted to stored game spreads through Week 6, with equal shrink and fitted venue effect. This is an inferred market ranking, not an official sportsbook poll. Quote capture times are unavailable."
+}
