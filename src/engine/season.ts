@@ -10,12 +10,14 @@ import type {
   RankedTeam,
   Ranking,
   SeasonIndexEntry,
+  SeasonConfig,
   Team,
 } from "./types";
 import { fitUnits } from "./units";
 import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
 import { makeWinQualityContext } from "./win-quality";
+import { fitSprings, SPRING_TOLERANCE } from "./springs";
 import {
   consensusOrder,
   neuralPredictor,
@@ -23,7 +25,7 @@ import {
 } from "./neural";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-19";
+export const ENGINE_VERSION = "rank-engine-20";
 
 export interface SeasonFiles {
   season: string;
@@ -74,6 +76,8 @@ export async function computeSeason(
   onProgress?: (done: number, total: number) => void | Promise<void>,
 ): Promise<SeasonOutput> {
   const config = parseConfig(input.configJson);
+  if (config.method === "one-sided-springs-v1")
+    return computeSpringSeason(input, config, onProgress);
   const modelClassifications = [
     ...new Set([
       ...config.classifications,
@@ -268,22 +272,30 @@ export async function computeSeason(
     const neuralSnapshot = neuralBundle?.snapshots.find(
       (s) => s.id === snap.id,
     );
-    const modeledGames = new Map<number,number>(), modeledLosses = new Map<number,number>();
-    if (neuralBundle?.policy) for (const edge of edges) {
-      for (const id of [edge.winner,edge.loser]) modeledGames.set(id,(modeledGames.get(id) ?? 0)+1);
-      modeledLosses.set(edge.loser,(modeledLosses.get(edge.loser) ?? 0)+1);
-    }
+    const modeledGames = new Map<number, number>(),
+      modeledLosses = new Map<number, number>();
+    if (neuralBundle?.policy)
+      for (const edge of edges) {
+        for (const id of [edge.winner, edge.loser])
+          modeledGames.set(id, (modeledGames.get(id) ?? 0) + 1);
+        modeledLosses.set(edge.loser, (modeledLosses.get(edge.loser) ?? 0) + 1);
+      }
     if (
       neuralBundle &&
       (!neuralSnapshot ||
         neuralSnapshot.asOf !== snap.asOf ||
         neuralSnapshot.gameIds.length !== included.size ||
         neuralSnapshot.gameIds.some((id) => !included.has(id)) ||
-        (neuralBundle.policy && teams.some((t,i) =>
-          neuralSnapshot.losses![i] !== (modeledLosses.get(t.id) ?? 0) ||
-          neuralSnapshot.externalLosses![i] !== (losses.get(t.id) ?? 0) - (modeledLosses.get(t.id) ?? 0) ||
-          neuralSnapshot.recordGamesPlayed![i] !== (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) ||
-          neuralSnapshot.gamesPlayed![i] !== (modeledGames.get(t.id) ?? 0))))
+        (neuralBundle.policy &&
+          teams.some(
+            (t, i) =>
+              neuralSnapshot.losses![i] !== (modeledLosses.get(t.id) ?? 0) ||
+              neuralSnapshot.externalLosses![i] !==
+                (losses.get(t.id) ?? 0) - (modeledLosses.get(t.id) ?? 0) ||
+              neuralSnapshot.recordGamesPlayed![i] !==
+                (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) ||
+              neuralSnapshot.gamesPlayed![i] !== (modeledGames.get(t.id) ?? 0),
+          )))
     )
       throw new Error(
         `neural snapshot does not match causal game cutoff: ${snap.id}`,
@@ -375,14 +387,28 @@ export async function computeSeason(
           ? {
               neural: {
                 roundRobinWinProbability: round6(neural.scores[i]!),
-                ...(neuralBundle!.policy ? {
-                  evidenceReliability: round6(neuralSnapshot!.gamesPlayed![i]! / (neuralSnapshot!.gamesPlayed![i]! + neuralBundle!.policy.evidencePrior)),
-                  lossDeduction: round6(neuralBundle!.groups[0]!.components[0]!.temperature * neuralBundle!.policy.lossPenalty * (losses.get(t.id) ?? 0) / (neuralSnapshot!.gamesPlayed![i]! + neuralBundle!.policy.lossPrior)),
-                  ...(rank !== null ? { modelRankRange: neural.rankRanges[i]! } : {}),
-                } : {
-                  richWinProbability: round6(neural.groupScores[0]![i]!),
-                  graphWinProbability: round6(neural.groupScores[1]![i]!),
-                }),
+                ...(neuralBundle!.policy
+                  ? {
+                      evidenceReliability: round6(
+                        neuralSnapshot!.gamesPlayed![i]! /
+                          (neuralSnapshot!.gamesPlayed![i]! +
+                            neuralBundle!.policy.evidencePrior),
+                      ),
+                      lossDeduction: round6(
+                        (neuralBundle!.groups[0]!.components[0]!.temperature *
+                          neuralBundle!.policy.lossPenalty *
+                          (losses.get(t.id) ?? 0)) /
+                          (neuralSnapshot!.gamesPlayed![i]! +
+                            neuralBundle!.policy.lossPrior),
+                      ),
+                      ...(rank !== null
+                        ? { modelRankRange: neural.rankRanges[i]! }
+                        : {}),
+                    }
+                  : {
+                      richWinProbability: round6(neural.groupScores[0]![i]!),
+                      graphWinProbability: round6(neural.groupScores[1]![i]!),
+                    }),
               },
               earnedHeight: standing.heights[i]!,
               earnedRank: earnedRanks[i]!,
@@ -393,8 +419,11 @@ export async function computeSeason(
         componentSize: model.sizes.get(model.components[i]!) ?? 0,
         provisional:
           model.provisional[i]! ||
-          (neuralSnapshot ? neuralSnapshot.features[i]![neuralBundle!.policy ? 11 : 22]! < 0.5 : false) ||
-          (!!neuralBundle?.policy && (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) < 8),
+          (neuralSnapshot
+            ? neuralSnapshot.features[i]![neuralBundle!.policy ? 11 : 22]! < 0.5
+            : false) ||
+          (!!neuralBundle?.policy &&
+            (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) < 8),
         offense: unit(units?.offense[i]),
         defense: unit(units?.defense[i]),
         special: unit(units?.special[i]),
@@ -436,7 +465,9 @@ export async function computeSeason(
     const manifest: Manifest = {
       engine: ENGINE_VERSION,
       standingMethod: neuralBundle
-        ? neuralBundle.policy ? "season-only-neural-v2" : "season-only-neural-v1"
+        ? neuralBundle.policy
+          ? "season-only-neural-v2"
+          : "season-only-neural-v1"
         : config.winQuality
           ? "frozen-fbs-quality-v2"
           : "frozen-win-quality-v1",
@@ -512,6 +543,172 @@ export async function computeSeason(
   };
 }
 
+/** Raw W/L graph, with no neural features, score fits, credits, or forecasts. */
+async function computeSpringSeason(
+  input: SeasonInput,
+  config: SeasonConfig,
+  onProgress?: (done: number, total: number) => void | Promise<void>,
+): Promise<SeasonOutput> {
+  const all = new Map(parseTeams(input.teamsCsv).map((t) => [t.id, t]));
+  const published = new Set(
+    [...all.values()]
+      .filter((t) => config.classifications.includes(t.classification))
+      .map((t) => t.id),
+  );
+  if (!published.size) throw new Error("no teams match config.classifications");
+  const games = parseGames(input.gamesCsv);
+  // Actual outside opponents are ordinary graph nodes, with the same zero start.
+  for (const g of [...games].sort((a, b) => a.id - b.id))
+    for (const [id, school] of [
+      [g.homeId, g.homeTeam],
+      [g.awayId, g.awayTeam],
+    ] as const)
+      if (id > 0 && !all.has(id))
+        all.set(id, {
+          id,
+          school,
+          abbreviation: school,
+          conference: "Other opponents",
+          classification: "other",
+          color: "",
+        });
+  const teams = [...all.values()].sort((a, b) => a.id - b.id);
+  const teamsSha256 = await sha256Hex(input.teamsCsv),
+    gamesSha256 = await sha256Hex(input.gamesCsv);
+  const snapshots = listSnapshots(games),
+    files: SeasonOutput["files"] = [];
+  let previous = new Map<number, number>();
+  for (const snap of snapshots) {
+    const { edges, counts } = buildEdges(games, teams, snap);
+    const fit = fitSprings(
+      teams.map((t) => t.id),
+      edges,
+    );
+    const wins = new Map<number, number>(),
+      losses = new Map<number, number>();
+    for (const e of edges) {
+      wins.set(e.winner, (wins.get(e.winner) ?? 0) + 1);
+      losses.set(e.loser, (losses.get(e.loser) ?? 0) + 1);
+    }
+    const values = teams.map((t) => {
+      const h = fit.heights.get(t.id)!;
+      return published.has(t.id) && h !== null ? round6(h) : null;
+    });
+    const ranks = rankValues(values);
+    const records: RankedTeam[] = teams.map((t, i) => {
+      const height = fit.heights.get(t.id)!,
+        component = fit.components.get(t.id)!,
+        rank = ranks[i]!;
+      return {
+        ...t,
+        rank,
+        tied: rank !== null && ranks.filter((r) => r === rank).length > 1,
+        height: height === null ? null : round6(height),
+        projection: null,
+        component,
+        componentSize: component === null ? 0 : fit.sizes.get(component)!,
+        provisional:
+          height === null ||
+          fit.sizes.size > 1 ||
+          (wins.get(t.id) ?? 0) + (losses.get(t.id) ?? 0) < 3,
+        offense: null,
+        defense: null,
+        special: null,
+        wins: wins.get(t.id) ?? 0,
+        losses: losses.get(t.id) ?? 0,
+        change:
+          rank !== null && previous.has(t.id)
+            ? previous.get(t.id)! - rank
+            : null,
+      };
+    });
+    const ranked = records
+      .filter((t) => published.has(t.id))
+      .sort(
+        (a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id,
+      );
+    previous = new Map(
+      ranked.flatMap((t) => (t.rank === null ? [] : [[t.id, t.rank]])),
+    );
+    const manifest: Manifest = {
+      engine: ENGINE_VERSION,
+      standingMethod: "one-sided-springs-v1",
+      algorithmVersion: config.algorithmVersion,
+      lossPenalty: null,
+      winBonus: 0,
+      shrink: 0,
+      projectionSamples: 0,
+      projectionSeed: 0,
+      homeFieldShrink: 0,
+      probabilityScale: 0,
+      residualScale: 0,
+      calibrationId: "none",
+      homeField: 0,
+      homeFieldError: 0,
+      connectedComponents: fit.sizes.size,
+      classifications: config.classifications,
+      teamsSha256,
+      gamesSha256,
+      playsSha256: null,
+      snapsPerGame: null,
+      counts,
+      springs: {
+        restGap: 1,
+        initialization: "zero",
+        normalization: "component-mean-zero",
+        solver: "simultaneous-relaxation-v1",
+        iterations: fit.iterations,
+        forceTolerance: SPRING_TOLERANCE,
+        maxNetForce: fit.maxNetForce,
+        energy: fit.energy,
+        compressedGames: fit.springs.filter((e) => e.compression > 1e-6).length,
+        reversedGames: fit.springs.filter((e) => e.gap < -1e-6).length,
+        tiedGames: fit.springs.filter((e) => Math.abs(e.gap) <= 1e-6).length,
+      },
+    };
+    files.push({
+      id: snap.id,
+      json: formatRanking({
+        schema: 2,
+        season: input.season,
+        snapshot: snap,
+        manifest,
+        projection: {
+          method: "none",
+          samples: 0,
+          seed: 0,
+          remainingGames: 0,
+          horizon: null,
+          unknownMatchups: 0,
+          teams: 0,
+        },
+        predictions: [],
+        credits: [],
+        springs: fit.springs.map((e) => ({
+          ...e,
+          gap: round6(e.gap),
+          compression: round6(e.compression),
+          energy: round6(e.energy),
+        })),
+        teams: ranked,
+        opponents: records.filter(
+          (t) => !published.has(t.id) && t.height !== null,
+        ),
+      }),
+    });
+    await onProgress?.(files.length, snapshots.length);
+  }
+  return {
+    files,
+    index: {
+      season: input.season,
+      label: config.label,
+      demo: config.demo,
+      snapshots: snapshots.map((s) => ({ id: s.id, label: s.label })),
+    },
+  };
+}
+
 /** Fixed key order, one team per line, so git diffs of published rankings stay readable. */
 export function formatRanking(r: Ranking): string {
   const indent = (s: string) =>
@@ -551,6 +748,17 @@ export function formatRanking(r: Ranking): string {
       ...r.opponents.map(
         (t, i) =>
           `    ${JSON.stringify(t)}${i < r.opponents!.length - 1 ? "," : ""}`,
+      ),
+      "  ]",
+    );
+  }
+  if (r.springs) {
+    lines[lines.length - 1] += ",";
+    lines.push(
+      '  "springs": [',
+      ...r.springs.map(
+        (e, i) =>
+          `    ${JSON.stringify(e)}${i < r.springs!.length - 1 ? "," : ""}`,
       ),
       "  ]",
     );

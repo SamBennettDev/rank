@@ -1,19 +1,16 @@
 # Rank
 
-Neural college football predictions and rankings for **every FBS and FCS team**. Website: **https://rank.sam-bennett.dev**.
+College football rankings from a **raw graph of current-season results**. Each team is a node; each completed, non-tied game is an equal one-sided spring that pushes its winner above its loser. Website: https://rank.sam-bennett.dev.
 
-**Order teams by who is more likely to beat whom.** Three saved neural fits provide a bounded adjustment to a robust schedule rating. The model shrinks estimates with limited evidence and deducts losses after performance training. Rankings and venue-aware matchup forecasts use the same strength differences.
+Every spring wants a one-unit winner–loser gap. It pushes the winner up and the loser down while compressed, then stops pushing once separated. All nodes start at zero. Simultaneous relaxation settles the forces, each connected group is centered at zero, and heights determine the standing. Equal published heights share a rank.
 
-- **Current-season evidence.** Shared weights learn from historical pregame examples; every team’s statistics reset each season. Team identity, conference/division, recruiting, preseason ratings and live prices are excluded.
-- **A strict score cap.** Margins are capped at 35 before every selected score-derived fit, including Huber. Extra scoreboard margin beyond 35 supplies no additional credit. Actual play efficiency remains evidence.
-- **Stronger loss consequences.** Every loss subtracts `2 / (modeled games + 4)` from strength, including losses to outside opponents. This is applied after training. Actual rank changes also depend on performance and other teams.
-- **Small samples and uncertainty.** Retain `games / (games + 6)` of performance strength: 50% after six modeled games. Team pages show evidence retained after shrinkage; that weight is not confidence in a rank. Downloaded fit spread is also not a confidence interval.
-- **Consistent ordering.** Every higher-ranked team is favored on a neutral field. Positive probability calibration preserves winners and ranks. Home advantage applies to actual game forecasts.
-- **Auditable snapshots.** Six-hour result lag, exact team/record reconciliation, source hashes, Python/browser parity, and byte-for-byte reproduction bind forecasts to completed games at each cutoff.
+Circular results cannot all be ordered perfectly. They settle into the lowest total squared compression, which can leave a winner below its loser. The graph shows every game, with arrows from loser to winner and compressed springs highlighted. Supporting opponents participate equally; only configured FBS/FCS teams receive published ranks. Disconnected groups cannot be compared from their games and remain provisional.
 
-The stricter policy picked **70.16%** of winners on 3,603 dated FBS games in 2020–2025, versus **70.86%** for the previous neural blend. It implements the requested score cap and stronger loss consequences, with a measured accuracy cost; it does not establish a betting-market advantage. See the [new study and all Week 6 rankings](research/season_only/robust/REPORT.md), [original research](research/season_only/README.md), and [methodology](docs/METHODOLOGY.md).
+Only winners and losers affect the calculation. Score margin, venue, polls, previous seasons, division strength and neural estimates are unused. There is no extra loss deduction or win credit: each result acts through its spring. This method is a results graph, with no calibrated matchup probabilities or claimed betting-market advantage.
 
-## Run
+See the [methodology](docs/METHODOLOGY.md), [Week 6 report and full rankings](research/springs/2026/REPORT.md), and [six-snapshot equilibrium audit](research/springs/2026/audit.json). The previous [neural research](research/season_only/robust/REPORT.md) and [neural methodology](docs/NEURAL_V2.md) remain archived; they do not drive the active ranking.
+
+## Run and verify
 
 Requires Node 22+.
 
@@ -24,63 +21,47 @@ npm run typecheck
 npm test
 npm run compute
 npm run verify
-npm run audit-neural -- 2026
-npm run audit-win-quality -- 2026  # archived earned-point ledger
+npm run audit-springs -- 2026
 npm run build
-npm run backtest -- --history 2021-2025
-npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json
 ```
 
-`npm run calibrate` reproduces the archived v1 prediction calibration from pinned 2014–2019 schedules. It writes defaults and a training report; update versioned season configurations deliberately if settings change. `npm run backtest -- --history 2021-2025 --include-repo --summary --report research/development-results.json` reproduces game-prediction results; omit `--summary` for per-game forecasts.
+The browser and Node use the same engine. The Method page can rebuild all published snapshots and compare their exact bytes. Tests cover spring forces, chains, cycles, repeated meetings, disconnected components, equal starts, identifier independence, causal cutoffs and record reconciliation.
 
-## Data and audit
+## Data
 
 ```text
-data/seasons/<year>/teams.csv         configured teams
-data/seasons/<year>/games.csv         scores, sites, kickoffs and schedule
-data/seasons/<year>/plays.csv         condensed public play-by-play
-data/seasons/<year>/rich.csv          passing, rushing, drive and disruption summaries
-data/seasons/<year>/neural.json       trained weights and causal numeric snapshots
-data/seasons/<year>/config.json       prediction settings and calibration ID
-data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections and game forecasts
+data/seasons/<year>/teams.csv         names, unique IDs and publication scope
+data/seasons/<year>/games.csv         results and dated schedule
+data/seasons/<year>/config.json       spring method and ranked classifications
+data/rankings/<year>/<snapshot>.json  heights, ranks, records and one spring per game
 data/index.json                      available seasons and snapshots
+research/springs/<year>/              generated report, CSV and equilibrium audit
 ```
 
-Schema 2 publishes the neural order in `teams[].rank`. `teams[].neural` stores average full-field probabilities, evidence shrinkage, loss deductions and fit rank spread; `height` is an ordinal graph coordinate. `manifest.neural` records the model, cap/loss/shrinkage policy, training years, input hash and ordering diagnostics. Supporting opponents appear in `opponents`. `config.neural` enables the saved model; a missing or stale export fails explicitly. `earnedHeight` / `earnedRank`, `credits` and `projection.target = frozen-earned-points` retain the separate archived points model. Division and conference filters preserve full-field ranks.
+A snapshot counts completed non-tied games whose assumed score availability (kickoff + six hours) is before its cutoff. All actual opponents in the supplied game file join the graph, including opponents outside the published field. Their nodes start at zero, with no division bonus. The supplied schedule determines the available evidence; no unprovided games are inferred. Tied games have no winner edge and are reported separately. Unplayed teams stay unranked.
+
+`manifest.springs` records normalization, convergence, energy and conflicts. `springs[]` records each game's endpoints, height gap, compression and energy. `height` is an actual graph position. Legacy schema fields for predictions, credits and projections are empty/inactive. Historical play summaries and saved neural bundles remain available for archived research but are not read by the spring pipeline.
 
 ## Update results
 
-Get a free key at <https://collegefootballdata.com/key>, then:
+Fetch public CollegeFootballData results with its free API key, then rebuild:
 
 ```sh
 CFBD_API_KEY=... npm run fetch -- 2026
-REFRESH=1 npm run fetch-plays -- 2026
-npm run neural:export -- --year 2026 --refresh-rich
 npm run compute
 npm run verify
+npm run audit-springs -- 2026
 ```
 
-The exporter needs Python 3.12 and `python -m pip install -r scripts/requirements-neural.txt`. Ordinary verification and the browser use saved artifacts and need no Python. Annual model checkpoints must exist before enabling a new forecast year.
-
-Commit the changed data. GitHub’s **Update data** workflow uses the `CFBD_API_KEY` repository secret to refresh and publish automatically.
-
-## Deploy
-
-GitHub Settings → Pages → Source: **GitHub Actions**, with custom domain `rank.sam-bennett.dev`. The DNS CNAME for `rank` points to `sambennettdev.github.io`. Add the API secret and run **Update data** once.
+Commit the changed data. The **Update data** GitHub workflow fetches results and rebuilds the graph; no Python training, play data or model export is required. New seasons default to the spring method. Deployment uses the existing GitHub Pages workflow and domain configuration.
 
 ## Layout
 
-```text
-src/engine/  earned standings, prediction model, season simulation, chronology and pipeline
-scripts/     fetching, calibration, computation, verification and backtesting
-web/         static TypeScript site, sharing the same engine
-tests/       math, fixed loss deductions, forecasts, chronology and determinism
-research/    pinned design comparisons, development reports and archived experiments
-docs/        full methodology
-```
+- `src/engine/springs.ts`: the pure winner/loser spring solver.
+- `src/engine/season.ts`: causal snapshots, records, normalization and publication.
+- `web/`: graph, standings, team pages and browser verification.
+- `scripts/`: public data fetching, computation and audits; older research tools remain available.
+- `tests/`: spring math and integration, plus archived prediction-model tests.
+- `research/`: current spring audits and previous research, explicitly separated.
 
-`tests/fixtures/demo` is fictional, generated by `npm run demo`. Logos load from ESPN’s CDN by team ID.
-
-## License
-
-MIT
+MIT licensed. Logos load from ESPN by unique team ID.

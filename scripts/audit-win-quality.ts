@@ -11,6 +11,8 @@ const season = process.argv[2] ?? "2026";
 const dir = join(DATA_DIR, "seasons", season);
 const read = (file: string) => readFileSync(join(dir, file), "utf8");
 const config = JSON.parse(read("config.json"));
+if (config.method === "one-sided-springs-v1")
+  throw new Error("The active ranking is a raw spring graph. Use npm run audit-springs; earned-point ledgers belong to the archived methods.");
 const input = {
   season,
   teamsCsv: read("teams.csv"),

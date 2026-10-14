@@ -228,13 +228,19 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
           `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
         ),
         h("h1", {}, "Rankings"),
-        ctx.ranking.manifest.neural
+        ctx.ranking.manifest.springs
           ? h(
               "p",
               { class: "hint" },
-              "Neural predictions · ordered by who is more likely to beat whom on a neutral field",
+              "Game graph · equal one-sided springs push each winner above its loser. Equal heights share a rank.",
             )
-          : "",
+          : ctx.ranking.manifest.neural
+            ? h(
+                "p",
+                { class: "hint" },
+                "Neural predictions · ordered by who is more likely to beat whom on a neutral field",
+              )
+            : "",
       ),
     ),
     leadersCarousel(ctx, onCleanup),

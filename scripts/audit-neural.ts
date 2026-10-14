@@ -24,6 +24,8 @@ const ranking: Ranking = JSON.parse(
   ),
 );
 const byId = new Map(ranking.teams.map((t) => [t.id, t]));
+if (!ranking.manifest.neural)
+  throw new Error("The active ranking is a raw spring graph. Use npm run audit-springs; archived neural results are in research/season_only/robust/production-2026.");
 const p = neuralPredictor(bundle, snapshot);
 const eligible = bundle.teamIds.flatMap((id, i) =>
   byId.get(id)?.rank != null ? [i] : [],

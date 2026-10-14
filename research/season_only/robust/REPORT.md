@@ -1,6 +1,8 @@
 # Robust neural rankings with stronger loss consequences
 
-The active model uses a robust schedule rating plus a **bounded neural correction**, shrinks performance estimates with limited current-season evidence, and deducts losses **after** performance training. A single neutral-field strength determines both rankings and matchup predictions. Team identity, previous-season team ratings, conference/division, recruiting, polls and live prices remain excluded.
+This is an archived study. The active application now uses a [raw one-sided game-spring graph](../../../docs/METHODOLOGY.md). The final neural configuration and Week 6 output are saved in [production-2026](./production-2026/).
+
+The model studied here uses a robust schedule rating plus a **bounded neural correction**, shrinks performance estimates with limited current-season evidence, and deducts losses **after** performance training. A single neutral-field strength determines both rankings and matchup predictions. Team identity, previous-season team ratings, conference/division, recruiting, polls and live prices remain excluded.
 
 This implements a more loss-sensitive ranking policy. It does **not** establish a predictive accuracy improvement: the new policy picks **70.16%** of winners on 3,603 FBS games in 2020–2025, versus **70.86%** previously, an accuracy difference of -0.69 percentage points. Probability calibration uses 2014–2019 forecasts only and cannot change picks or ranks.
 

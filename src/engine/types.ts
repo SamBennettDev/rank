@@ -26,6 +26,8 @@ export interface Game {
 }
 
 export interface SeasonConfig {
+  /** Raw results graph; legacy numeric settings below are ignored in this mode. */
+  method?: "one-sided-springs-v1";
   /** Display name, e.g. "2026 season". */
   label: string;
   /** True for the fictional fixture season. */
@@ -49,7 +51,9 @@ export interface SeasonConfig {
   /** Optional v2 win-credit model; omitted only for archived v1 calculations. */
   winQuality?: WinQualitySettings;
   /** Use frozen historical neural weights with current-season numeric features. */
-  neural?: { model: "season-only-rich-graph-v1" | "season-only-robust-loss-v2" };
+  neural?: {
+    model: "season-only-rich-graph-v1" | "season-only-robust-loss-v2";
+  };
 }
 
 export interface WinQualitySettings {
@@ -128,7 +132,7 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Configured standing; neural models use an ordinal coordinate for graph layout. */
+  /** Actual spring height in graph mode; archived neural modes use an ordinal coordinate. */
   height: number | null;
   /** Neural height is an ordinal graph coordinate; probabilities live here. */
   neural?: {
@@ -158,7 +162,24 @@ export interface RankedTeam {
 export interface Manifest {
   engine: string;
   standingMethod:
-    "frozen-win-quality-v1" | "frozen-fbs-quality-v2" | "season-only-neural-v1" | "season-only-neural-v2";
+    | "frozen-win-quality-v1"
+    | "frozen-fbs-quality-v2"
+    | "season-only-neural-v1"
+    | "season-only-neural-v2"
+    | "one-sided-springs-v1";
+  springs?: {
+    restGap: 1;
+    initialization: "zero";
+    normalization: "component-mean-zero";
+    solver: "simultaneous-relaxation-v1";
+    iterations: number;
+    forceTolerance: number;
+    maxNetForce: number;
+    energy: number;
+    compressedGames: number;
+    reversedGames: number;
+    tiedGames: number;
+  };
   lossPenalty: 1 | null;
   algorithmVersion: string;
   winBonus: number;
@@ -172,7 +193,15 @@ export interface Manifest {
   winQuality?: WinQualitySettings;
   neural?: {
     model: "season-only-rich-graph-v1" | "season-only-robust-loss-v2";
-    policy?: { evidencePrior: number; lossPenalty: number; lossPrior: number; inputClip: number; anchorScale: number; residualLimit: number; scoreMarginCap: number };
+    policy?: {
+      evidencePrior: number;
+      lossPenalty: number;
+      lossPrior: number;
+      inputClip: number;
+      anchorScale: number;
+      residualLimit: number;
+      scoreMarginCap: number;
+    };
     ordering: "weighted-pairwise-consensus";
     bundleSha256: string;
     trainingYears: number[];
@@ -205,8 +234,17 @@ export interface Ranking {
   projection: ProjectionManifest;
   predictions: MatchupPrediction[];
   credits: StandingCredit[];
+  /** One entry per completed game, including repeated meetings. */
+  springs?: {
+    gameId: number;
+    winner: number;
+    loser: number;
+    gap: number;
+    compression: number;
+    energy: number;
+  }[];
   teams: RankedTeam[];
-  /** Supporting opponents outside the published field, with no standing. */
+  /** Supporting opponents outside the published field; graph mode retains their heights. */
   opponents?: RankedTeam[];
 }
 
@@ -228,7 +266,10 @@ export interface TeamProjection {
 export interface ProjectionManifest {
   target?: "frozen-earned-points";
   method:
-    "independent-results-v1" | "correlated-results-v1" | "adaptive-results-v1";
+    | "independent-results-v1"
+    | "correlated-results-v1"
+    | "adaptive-results-v1"
+    | "none";
   samples: number;
   seed: number;
   remainingGames: number;

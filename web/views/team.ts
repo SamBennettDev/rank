@@ -224,6 +224,61 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
 // How the rating is built: immutable win credits and fixed loss deductions.
 function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const me = ctx.byId.get(teamId)!;
+  if (ctx.ranking.manifest.springs) {
+    const lines = breakdown(ctx, teamId).lines;
+    return h(
+      "div",
+      { class: "panel why" },
+      h("h2", {}, "One-sided game springs"),
+      h(
+        "p",
+        {},
+        `Graph height: ${fmtTeamScore(ctx, me)}. Each win pushes this team upward; each loss pushes it downward until the winner is one unit above the loser.`,
+      ),
+      h(
+        "p",
+        { class: "hint" },
+        "Springs stop pushing once separated. At equilibrium the remaining upward and downward forces balance. Circular results can leave winners tied with or below their losers.",
+      ),
+      h(
+        "div",
+        { class: "credit-equation" },
+        h(
+          "div",
+          {},
+          h(
+            "b",
+            {},
+            lines
+              .filter((l) => l.won)
+              .reduce((s, l) => s + l.value, 0)
+              .toFixed(3),
+          ),
+          h("small", {}, "Upward force"),
+        ),
+        h(
+          "div",
+          {},
+          h(
+            "b",
+            {},
+            (-lines
+              .filter((l) => !l.won)
+              .reduce((s, l) => s + l.value, 0)).toFixed(3),
+          ),
+          h("small", {}, "Downward force"),
+        ),
+      ),
+      h(
+        "a",
+        {
+          class: "morelink",
+          href: href(ctx.entry.season, ctx.snapId, "graph"),
+        },
+        "Explore the game graph →",
+      ),
+    );
+  }
   if (me.neural)
     return h(
       "div",
@@ -244,22 +299,53 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "credit-equation" },
-        ...(ctx.ranking.manifest.neural!.policy ? [
-          h("div", {}, h("b", {}, me.wins + me.losses), h("small", {}, "Completed games")),
-          h("div", {}, h("b", {}, me.losses), h("small", {}, "Losses · explicit deduction")),
-          h("div", {}, h("b", {}, `${(100 * me.neural.evidenceReliability!).toFixed(0)}%`), h("small", {}, "Evidence retained")),
-        ] : [h(
-          "div",
-          {},
-          h("b", {}, `${(100 * me.neural.richWinProbability!).toFixed(1)}%`),
-          h("small", {}, "Rich-stat networks · 75%"),
-        ),
-        h(
-          "div",
-          {},
-          h("b", {}, `${(100 * me.neural.graphWinProbability!).toFixed(1)}%`),
-          h("small", {}, "Opponent-graph networks · 25%"),
-        )]),
+        ...(ctx.ranking.manifest.neural!.policy
+          ? [
+              h(
+                "div",
+                {},
+                h("b", {}, me.wins + me.losses),
+                h("small", {}, "Completed games"),
+              ),
+              h(
+                "div",
+                {},
+                h("b", {}, me.losses),
+                h("small", {}, "Losses · explicit deduction"),
+              ),
+              h(
+                "div",
+                {},
+                h(
+                  "b",
+                  {},
+                  `${(100 * me.neural.evidenceReliability!).toFixed(0)}%`,
+                ),
+                h("small", {}, "Evidence retained"),
+              ),
+            ]
+          : [
+              h(
+                "div",
+                {},
+                h(
+                  "b",
+                  {},
+                  `${(100 * me.neural.richWinProbability!).toFixed(1)}%`,
+                ),
+                h("small", {}, "Rich-stat networks · 75%"),
+              ),
+              h(
+                "div",
+                {},
+                h(
+                  "b",
+                  {},
+                  `${(100 * me.neural.graphWinProbability!).toFixed(1)}%`,
+                ),
+                h("small", {}, "Opponent-graph networks · 25%"),
+              ),
+            ]),
       ),
       h(
         "p",
@@ -618,8 +704,9 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
             "span",
             {
               class: `r ${pull >= 0 ? "pos" : "neg"}`,
-              title:
-                l.won && credit?.unmodeled
+              title: ctx.ranking.manifest.springs
+                ? "Remaining spring force on this team, after the whole game graph has settled. This is not a fixed game credit."
+                : l.won && credit?.unmodeled
                   ? "Unmodeled opponent: no quality points awarded. Losses against these opponents still cost exactly 1 point."
                   : l.won && credit?.quality
                     ? `2 × ${(credit.quality.probability * 100).toFixed(1)}% pre-week opponent chance against an average FBS team. Opponent evidence: ${credit.quality.opponentGames} games.`
@@ -632,7 +719,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
   return h(
     "section",
     {
-      class: `ladder games${ctx.ranking.manifest.neural ? " neural-games" : ""}`,
+      class: `ladder games${ctx.ranking.manifest.neural ? " neural-games" : ctx.ranking.manifest.springs ? " spring-games" : ""}`,
     },
     h(
       "div",
@@ -641,7 +728,13 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h("div"),
       h("div", {}, "Opponent"),
       h("div", {}, "Result"),
-      ctx.ranking.manifest.neural ? "" : h("div", { class: "r" }, "Points"),
+      ctx.ranking.manifest.neural
+        ? ""
+        : h(
+            "div",
+            { class: "r" },
+            ctx.ranking.manifest.springs ? "Force" : "Points",
+          ),
     ),
     ...rows,
   );

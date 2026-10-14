@@ -1,0 +1,24 @@
+{
+  "label": "2026 season",
+  "demo": false,
+  "algorithmVersion": "season-only-neural-2",
+  "neural": {"model":"season-only-robust-loss-v2"},
+  "classifications": ["fbs", "fcs"],
+  "winBonus": 3,
+  "shrink": 0.05,
+  "projectionSamples": 2048,
+  "projectionSeed": 20261013,
+  "homeFieldShrink": 0.0001,
+  "probabilityScale": 12,
+  "residualScale": 14.934045,
+  "calibrationId": "win-quality-fbs-reference-2014-2019-v2",
+  "winQuality": {
+    "reference": "fbs",
+    "divisionGap": 31.644079,
+    "shrink": 1,
+    "homeField": 2.668394,
+    "homeFieldShrink": 64,
+    "winScale": 2,
+    "calibrationId": "win-quality-fbs-reference-2014-2019-v2"
+  }
+}

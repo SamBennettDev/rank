@@ -8,10 +8,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { gamesToCsv, teamsToCsv, parseConfig } from "../src/engine/data";
-import type { Game, SeasonConfig, Team } from "../src/engine/types";
+import type { Game, Team } from "../src/engine/types";
 import { DATA_DIR } from "./lib";
-import { DEFAULT_SETTINGS } from "../src/engine/defaults";
-import { DEFAULT_WIN_QUALITY } from "../src/engine/win-quality-settings";
 
 const API = "https://api.collegefootballdata.com";
 const year = process.argv[2];
@@ -53,20 +51,22 @@ const num = (v: unknown) => (v === undefined ? null : Number(v));
 
 const dir = join(DATA_DIR, "seasons", year);
 const configPath = join(dir, "config.json");
-const config: SeasonConfig = existsSync(configPath)
-  ? parseConfig(readFileSync(configPath, "utf8"))
-  : {
-      label: `${year} season`,
-      demo: false,
-      ...DEFAULT_SETTINGS,
-      algorithmVersion: "earned-standing-2",
-      classifications: ["fbs", "fcs"],
-      winQuality: DEFAULT_WIN_QUALITY,
-      calibrationId: DEFAULT_WIN_QUALITY.calibrationId,
-    };
+const configJson = existsSync(configPath)
+  ? readFileSync(configPath, "utf8")
+  : JSON.stringify(
+      {
+        label: `${year} season`,
+        demo: false,
+        algorithmVersion: "one-sided-springs-1",
+        method: "one-sided-springs-v1",
+        classifications: ["fbs", "fcs"],
+      },
+      null,
+      2,
+    ) + "\n";
+const config = parseConfig(configJson);
 mkdirSync(dir, { recursive: true });
-if (!existsSync(configPath))
-  writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n");
+if (!existsSync(configPath)) writeFileSync(configPath, configJson);
 
 const rawTeams = await get("/teams", { year });
 const modelClassifications = [

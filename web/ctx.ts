@@ -26,6 +26,10 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
   const { edges } = buildEdges(base.games, allTeams, base.ranking.snapshot);
   return {
     ...base,
+    teams: new Map([
+      ...allTeams.map((t) => [t.id, { ...t, color: "" }] as const),
+      ...base.teams,
+    ]),
     edges,
     byId: new Map(allTeams.map((t) => [t.id, t])),
     ranked: base.ranking.teams.filter((t) => t.rank !== null),
@@ -50,7 +54,11 @@ export const fmtTeamScore = (ctx: Ctx, t: RankedTeam) =>
       : `${(100 * t.neural!.roundRobinWinProbability).toFixed(1)}%`
     : fmtHeight(t.height, 3);
 export const scoreLabel = (ctx: Ctx) =>
-  ctx.ranking.manifest.neural ? "Avg win chance" : "Score";
+  ctx.ranking.manifest.springs
+    ? "Graph height"
+    : ctx.ranking.manifest.neural
+      ? "Avg win chance"
+      : "Score";
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 export function upsets(ctx: Ctx) {
   return ctx.edges
@@ -93,7 +101,13 @@ export function breakdown(ctx: Ctx, teamId: number) {
         opponent,
         where,
         margin,
-        value: won ? credits.get(edge.gameId)!.value : -1,
+        value: ctx.ranking.manifest.springs
+          ? (won ? 1 : -1) *
+            ctx.ranking.springs!.find((e) => e.gameId === edge.gameId)!
+              .compression
+          : won
+            ? credits.get(edge.gameId)!.value
+            : -1,
       };
     });
   const fromGames = lines.reduce((sum, l) => sum + l.value, 0);

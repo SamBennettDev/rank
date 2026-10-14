@@ -151,6 +151,24 @@ export function parseConfig(json: string): SeasonConfig {
     throw new Error(
       "config.opponentClassifications must be a non-empty array of strings",
     );
+  if (c.method !== undefined && c.method !== "one-sided-springs-v1")
+    throw new Error("config.method must select one-sided-springs-v1");
+  if (c.method && (c.neural || c.winQuality))
+    throw new Error(
+      "spring rankings cannot include neural or win-quality settings",
+    );
+  if (c.method)
+    return {
+      ...c,
+      winBonus: 0,
+      shrink: 0,
+      projectionSamples: 0,
+      projectionSeed: 0,
+      homeFieldShrink: 0,
+      probabilityScale: 0,
+      residualScale: 0,
+      calibrationId: "none",
+    };
   num("winBonus", (v) => v >= 0, "a number >= 0");
   num("shrink", (v) => v > 0, "a positive number");
   num(
@@ -192,7 +210,10 @@ export function parseConfig(json: string): SeasonConfig {
     throw new Error("config.winQuality is required for earned-standing-2");
   if (
     c.neural !== undefined &&
-    (!c.neural || !["season-only-rich-graph-v1", "season-only-robust-loss-v2"].includes(c.neural.model))
+    (!c.neural ||
+      !["season-only-rich-graph-v1", "season-only-robust-loss-v2"].includes(
+        c.neural.model,
+      ))
   )
     throw new Error("config.neural must select a supported neural model");
   if (c.algorithmVersion === "season-only-neural-1" && !c.neural)

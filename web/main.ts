@@ -49,7 +49,9 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       view === "list" || view === "team",
     ),
     link("Graph", navIcons.graph(), "graph", view === "graph"),
-    link("Matchups", navIcons.matchups(), "matchups", view === "matchups"),
+    ...(!ctx.ranking.manifest.springs
+      ? [link("Matchups", navIcons.matchups(), "matchups", view === "matchups")]
+      : []),
     link("Method", navIcons.about(), "about", view === "about"),
   );
   document
@@ -143,7 +145,7 @@ async function route() {
     const [path = ""] = location.hash.replace(/^#\/?/, "").split("?");
     const parts = path.split("/").filter(Boolean);
     const [season, snapId] = parts;
-    let view = (parts[2] ?? "list") as View;
+    let view = (parts[2] ?? "graph") as View;
 
     if (!season || !seasons.some((x) => x.season === season)) {
       const e = defaultEntry();
@@ -151,7 +153,7 @@ async function route() {
         href(
           e.season,
           e.snapshots.at(-1)!.id,
-          season === "about" ? "about" : "list",
+          season === "about" ? "about" : "graph",
         ),
       );
       return;
@@ -178,6 +180,10 @@ async function route() {
       loadTeams(season),
     ]);
     const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
+    if (ranking.manifest.springs && view === "matchups") {
+      location.replace(href(season, snapId, "graph"));
+      return;
+    }
     applyLeaderTheme(ctx);
     renderChrome(ctx, view, teamId);
 

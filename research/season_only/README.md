@@ -1,6 +1,6 @@
 # Season-only college football research
 
-The active application now uses the [robust neural model with explicit loss deductions](robust/REPORT.md). This directory’s original reports and prediction command retain the previous model for comparison.
+The active application now uses a [raw one-sided game-spring graph](../../docs/METHODOLOGY.md). This directory preserves earlier predictive experiments, including the [robust neural model with explicit loss deductions](robust/REPORT.md). These models and their historical accuracy figures do not drive or evaluate the active spring ranking.
 
 Historical supervised learning is compatible with equal preseason starts: learn shared weights from older seasons’ **pregame current-season features plus eventual winner labels**, then apply those weights to the forecast season’s statistics. No team identity, conference, division, recruiting, poll, preseason rating, or carried team strength enters a neural feature vector.
 

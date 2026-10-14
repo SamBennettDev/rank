@@ -1,0 +1,36 @@
+{
+  "method": "one-sided-springs-v1",
+  "engine": "rank-engine-20",
+  "verifiedAt": "2026-10-14T17:08:10.733621+00:00",
+  "typecheck": "passed",
+  "tests": {
+    "passed": 84,
+    "files": 9
+  },
+  "byteReproduction": {
+    "passed": true,
+    "files": 7,
+    "snapshots": 6
+  },
+  "springAudit": "all six snapshots passed",
+  "productionBuild": "passed",
+  "browser": {
+    "errors": [],
+    "nodes": 318,
+    "gameEdges": 812,
+    "compressedEdges": 215,
+    "recompute": "Exact match. Your browser rebuilt all 6 rankings byte for byte.",
+    "mobile_graph": {
+      "overflow": false
+    },
+    "mobile_team/154": {
+      "overflow": false
+    },
+    "mobile_list": {
+      "overflow": false
+    },
+    "mobile_about": {
+      "overflow": false
+    }
+  }
+}

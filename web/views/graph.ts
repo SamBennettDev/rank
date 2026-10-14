@@ -23,9 +23,14 @@ export function graphView(
   ctx: Ctx,
   onCleanup: (fn: () => void) => void,
 ): HTMLElement {
-  const nodes = [...ctx.ranked].sort(
-    (a, b) => b.height! - a.height! || a.id - b.id,
-  );
+  const springMode = !!ctx.ranking.manifest.springs;
+  const springByGame = new Map(ctx.ranking.springs?.map((e) => [e.gameId, e]));
+  const nodes = [
+    ...ctx.ranked,
+    ...(springMode
+      ? (ctx.ranking.opponents ?? []).filter((t) => t.height !== null)
+      : []),
+  ].sort((a, b) => b.height! - a.height! || a.id - b.id);
   const L = computeLayout(
     nodes.map((t) => ({ id: t.id, height: t.height!, lane: t.conference })),
     {
@@ -40,6 +45,9 @@ export function graphView(
   );
   const upsetSet = new Map(upsets(ctx).map((u) => [u.edge.gameId, u.gap]));
   const isUpset = (e: Edge) => upsetSet.has(e.gameId);
+  const isCompressed = (e: Edge) =>
+    (springByGame.get(e.gameId)?.compression ?? 0) > 1e-6;
+  const highlight = springMode ? isCompressed : isUpset;
   const adj = new Map<number, Edge[]>();
   for (const e of edges)
     for (const id of [e.winner, e.loser])
@@ -52,6 +60,26 @@ export function graphView(
       "The game graph. Each team sits at its rating; higher is better.",
   });
   const scene = svg("g");
+  const defs = svg("defs");
+  const marker = svg("marker", {
+    id: "game-arrow",
+    viewBox: "0 0 10 10",
+    refX: 9,
+    refY: 5,
+    markerWidth: 6,
+    markerHeight: 6,
+    orient: "auto",
+    markerUnits: "userSpaceOnUse",
+  });
+  marker.appendChild(
+    svg("path", {
+      d: "M0,0 L10,5 L0,10 Z",
+      fill: "context-stroke",
+      opacity: 0.35,
+    }),
+  );
+  defs.appendChild(marker);
+  root.appendChild(defs);
   const gBack = svg("g");
   const gEdges = svg("g");
   const gFocus = svg("g");
@@ -90,20 +118,36 @@ export function graphView(
     g.appendChild(t);
     gBack.appendChild(g);
   };
+  const guideHeights = new Set<number>();
   for (const r of [1, 10, 50, 100, 150, 200, 250]) {
-    const t = nodes.find((n) => n.rank! >= r);
-    if (t && r <= nodes.length) tick(L.y(t.height!), `Rank #${r}`);
+    const t = ctx.ranked.find((n) => n.rank! >= r);
+    if (t && r <= ctx.ranked.length && !guideHeights.has(t.height!)) {
+      tick(L.y(t.height!), `Rank ${t.tied ? "T-" : "#"}${t.rank}`);
+      guideHeights.add(t.height!);
+    }
   }
-  const n25 = nodes.filter((t) => t.rank! <= 25).at(-1);
-  const n26 = nodes.find((t) => t.rank! > 25);
+  const n25 = ctx.ranked.filter((t) => t.rank! <= 25).at(-1);
+  const n26 = ctx.ranked.find((t) => t.rank! > 25);
   if (n25 && n26)
     tick((L.y(n25.height!) + L.y(n26.height!)) / 2, "TOP 25", "top25");
 
+  const meetings = new Map<string, Edge[]>();
+  for (const e of edges) {
+    const key = [e.winner, e.loser].sort((a, b) => a - b).join(":");
+    (meetings.get(key) ?? meetings.set(key, []).get(key)!).push(e);
+  }
   const curve = (e: Edge) => {
     const a = P(e.loser);
     const b = P(e.winner);
-    const cx = (a.x + b.x) / 2 + (b.y - a.y) * 0.12;
-    return `M${a.x},${a.y} Q${cx},${(a.y + b.y) / 2} ${b.x},${b.y}`;
+    const group = meetings.get(
+      [e.winner, e.loser].sort((x, y) => x - y).join(":"),
+    )!;
+    const bend = (group.indexOf(e) - (group.length - 1) / 2) * 22;
+    const cx = (a.x + b.x) / 2 + (b.y - a.y) * 0.12 + bend;
+    const cy = (a.y + b.y) / 2;
+    const ra = (NODE / 2 + 3) / Math.max(1, Math.hypot(cx - a.x, cy - a.y));
+    const rb = (NODE / 2 + 3) / Math.max(1, Math.hypot(b.x - cx, b.y - cy));
+    return `M${a.x + (cx - a.x) * ra},${a.y + (cy - a.y) * ra} Q${cx},${cy} ${b.x - (b.x - cx) * rb},${b.y - (b.y - cy) * rb}`;
   };
 
   // Nodes: ring + logo, monogram underneath if the logo cannot load.
@@ -117,7 +161,7 @@ export function graphView(
       style: teamVars(tl?.color),
       tabindex: 0,
       role: "button",
-      "aria-label": `${t.school}, rank ${rankLabel(t.rank, t.tied)}`,
+      "aria-label": `${t.school}, ${t.rank === null ? "supporting opponent" : `rank ${rankLabel(t.rank, t.tied)}`}`,
     });
     g.appendChild(svg("circle", { class: "ring", r: NODE / 2 + 1.5 }));
     const mono = svg("g", { class: "mono" });
@@ -150,14 +194,25 @@ export function graphView(
   }
 
   // ---------------------------------------------------------------- edges
-  let mode: EdgeMode = "none";
+  let mode: EdgeMode = springMode ? "all" : "none";
+  const edgePath = (e: Edge, cls: string) => {
+    const path = svg("path", {
+      class: `e ${cls}`,
+      d: curve(e),
+      "marker-end": springMode ? "url(#game-arrow)" : "",
+      "data-game-id": e.gameId,
+      style: springMode ? "pointer-events:stroke" : "",
+    });
+    const title = svg("title");
+    title.textContent = `${ctx.byId.get(e.winner)!.school} beat ${ctx.byId.get(e.loser)!.school}${springMode ? ` · gap ${springByGame.get(e.gameId)!.gap.toFixed(3)} · force ${springByGame.get(e.gameId)!.compression.toFixed(3)}` : ""}`;
+    path.appendChild(title);
+    return path;
+  };
   const drawEdges = () => {
     const list =
-      mode === "all" ? edges : mode === "upsets" ? edges.filter(isUpset) : [];
+      mode === "all" ? edges : mode === "upsets" ? edges.filter(highlight) : [];
     gEdges.replaceChildren(
-      ...list.map((e) =>
-        svg("path", { class: `e ${isUpset(e) ? "up" : "all"}`, d: curve(e) }),
-      ),
+      ...list.map((e) => edgePath(e, highlight(e) ? "up" : "all")),
     );
   };
 
@@ -172,10 +227,7 @@ export function graphView(
       const won = e.winner === id;
       nodeEls.get(won ? e.loser : e.winner)?.classList.add("hi");
       gFocus.appendChild(
-        svg("path", {
-          class: `e ${won ? "w" : "l"}${isUpset(e) ? " up" : ""}`,
-          d: curve(e),
-        }),
+        edgePath(e, `${won ? "w" : "l"}${highlight(e) ? " up" : ""}`),
       );
     }
     // keep the focused node on top
@@ -209,7 +261,7 @@ export function graphView(
         h(
           "div",
           { class: "t2" },
-          `${record(t)} · score ${fmtTeamScore(ctx, t)} · ${t.conference}`,
+          `${record(t)} · ${scoreLabel(ctx).toLowerCase()} ${fmtTeamScore(ctx, t)} · ${t.conference}`,
         ),
       ),
     );
@@ -268,18 +320,48 @@ export function graphView(
   // ---------------------------------------------------------------- side panel
   const panel = h("aside", { class: "gpanel", "aria-live": "polite" });
   const defaultPanel = () => {
-    const ups = upsets(ctx).slice(0, 12);
+    const ups = (
+      springMode
+        ? edges
+            .filter(isCompressed)
+            .map((edge) => ({
+              edge,
+              gap: springByGame.get(edge.gameId)!.compression,
+            }))
+            .sort((a, b) => b.gap - a.gap || a.edge.gameId - b.edge.gameId)
+        : upsets(ctx)
+    ).slice(0, 12);
     panel.replaceChildren(
       h(
         "div",
         { class: "sec" },
         h("h3", {}, "How to read it"),
-        h("p", {}, "Higher = more earned points. Columns = conferences."),
+        h(
+          "p",
+          {},
+          springMode
+            ? "Each arrow is one game, pointing from loser to winner. A compressed spring pushes the winner up and loser down until the winner is one unit higher."
+            : "Higher = more earned points. Columns = conferences.",
+        ),
+        springMode
+          ? h(
+              "p",
+              {},
+              "Height is the settled spring position. Columns only organize the display. Circular results can keep springs compressed; equal heights share a rank. Supporting opponents have no published rank.",
+            )
+          : "",
+        springMode
+          ? h(
+              "p",
+              { class: "hint" },
+              `${edges.length} game springs · ${ctx.ranking.manifest.springs!.reversedGames} winners below their losers · ${ctx.ranking.manifest.springs!.tiedGames} level. All nodes start at zero; each connected group is centered at zero.`,
+            )
+          : "",
         ctx.ranking.manifest.connectedComponents > 1
           ? h(
               "p",
               { class: "hint" },
-              `${ctx.ranking.manifest.connectedComponents} disconnected groups · limited evidence`,
+              `${ctx.ranking.manifest.connectedComponents} disconnected groups · their relative heights cannot be established by these games`,
             )
           : "",
         h(
@@ -291,10 +373,16 @@ export function graphView(
       h(
         "div",
         { class: "sec" },
-        h("h3", {}, "Biggest upsets"),
+        h("h3", {}, springMode ? "Most compressed springs" : "Biggest upsets"),
         ups.length === 0
           ? h("p", {}, "No wins over higher-ranked teams.")
-          : h("p", { class: "muted" }, "Wins over higher-ranked teams."),
+          : h(
+              "p",
+              { class: "muted" },
+              springMode
+                ? "These games exert the most remaining force."
+                : "Wins over higher-ranked teams.",
+            ),
         ...ups.map((u, i) => {
           const w = ctx.byId.get(u.edge.winner)!;
           const l = ctx.byId.get(u.edge.loser)!;
@@ -338,9 +426,11 @@ export function graphView(
               "span",
               {
                 class: "g",
-                title: "How far below the loser the winner is rated",
+                title: springMode
+                  ? "Remaining spring force"
+                  : "How far below the loser the winner is rated",
               },
-              fmtHeight(-u.gap),
+              springMode ? u.gap.toFixed(3) : fmtHeight(-u.gap),
             ),
           );
         }),
@@ -438,11 +528,17 @@ export function graphView(
           );
         }),
       ),
-      h(
-        "a",
-        { class: "morelink", href: teamHref(ctx, id) },
-        "Full breakdown →",
-      ),
+      t.rank !== null
+        ? h(
+            "a",
+            { class: "morelink", href: teamHref(ctx, id) },
+            "Full breakdown →",
+          )
+        : h(
+            "p",
+            { class: "hint" },
+            "Supporting opponent · participates equally in the springs; outside the published field.",
+          ),
     );
     panel.scrollTop = 0;
   };
@@ -467,7 +563,7 @@ export function graphView(
       ...(
         [
           ["No lines", "none"],
-          ["Upsets", "upsets"],
+          [springMode ? "Compressed" : "Upsets", "upsets"],
           ["All games", "all"],
         ] as [string, EdgeMode][]
       ).map(([label, m]) =>
@@ -547,7 +643,12 @@ export function graphView(
     h("span", { class: "up-arrow" }, "↑ Higher is better"),
     h("span", {}, h("i", { class: "lw" }), "Beat"),
     h("span", {}, h("i", { class: "ll" }), "Lost to"),
-    h("span", {}, h("i", { class: "lu" }), "Upset (winner rated lower)"),
+    h(
+      "span",
+      {},
+      h("i", { class: "lu" }),
+      springMode ? "Compressed (gap < 1)" : "Upset (winner rated lower)",
+    ),
   );
   canvas.appendChild(legend);
 

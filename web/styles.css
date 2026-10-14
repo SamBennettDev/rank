@@ -365,6 +365,10 @@ select:hover { border-color: var(--faint); }
 .hist .pt { fill: var(--surface); stroke: var(--ta); stroke-width: 2.5; }
 .hist .pv { fill: var(--text); font: 700 13px var(--display); text-anchor: middle; }
 .games { margin-top: 16px; }
+.games.spring-games .lhead, .games.spring-games .grow2 { grid-template-columns: 48px 34px minmax(0, 1fr) 88px 70px; }
+@media (max-width: 640px) {
+  .games.spring-games .lhead, .games.spring-games .grow2 { grid-template-columns: 30px 24px minmax(0, 1fr) 68px 46px; gap: 6px; padding: 0 10px; }
+}
 
 .games .lhead, .games .grow2 { display: grid; grid-template-columns: 58px 40px minmax(140px, 1fr) 96px 70px 80px; gap: 12px; align-items: center; padding: 0 18px; }
 .games .grow2 { height: 60px; border-bottom: 1px solid var(--line); }

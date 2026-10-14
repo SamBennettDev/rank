@@ -157,7 +157,7 @@ describe("saved season-only neural inference", () => {
       gamesCsv: read("games.csv"),
       playsCsv: read("plays.csv"),
       richCsv: read("rich.csv"),
-      configJson: read("config.json"),
+      configJson: readFileSync("research/season_only/robust/production-2026/config.json", "utf8"),
       neuralJson: raw,
     };
     await expect(
@@ -175,7 +175,7 @@ describe("saved season-only neural inference", () => {
   }, 20000);
   it("publishes consensus ranks and neural probabilities from the same model", () => {
     const ranking = JSON.parse(
-      readFileSync("data/rankings/2026/week-06.json", "utf8"),
+      readFileSync("research/season_only/robust/production-2026/week-06.json", "utf8"),
     );
     const p = outputs.get("week-06")!;
     const order = consensusOrder(
