@@ -1,0 +1,267 @@
+id,school,abbreviation,conference,classification,color
+2,Auburn,AUB,SEC,fbs,#0c2340
+5,UAB,UAB,American Athletic,fbs,#1a5632
+6,South Alabama,USA,Sun Belt,fbs,#00205b
+8,Arkansas,ARK,SEC,fbs,#a32136
+9,Arizona State,ASU,Big 12,fbs,#ffc627
+12,Arizona,ARIZ,Big 12,fbs,#cc0033
+13,Cal Poly,CP,Big Sky,fcs,#1E4D2B
+16,Sacramento State,SAC,Mid-American,fbs,#00573c
+21,San Diego State,SDSU,Pac-12,fbs,#a6192e
+23,San José State,SJSU,Mountain West,fbs,#0055a2
+24,Stanford,STAN,ACC,fbs,#8c1515
+25,California,CAL,ACC,fbs,#041e42
+26,UCLA,UCLA,Big Ten,fbs,#2774ae
+30,USC,USC,Big Ten,fbs,#990000
+36,Colorado State,CSU,Pac-12,fbs,#1e4d2b
+38,Colorado,COLO,Big 12,fbs,#cfb87c
+41,UConn,CONN,FBS Independents,fbs,#000e2f
+43,Yale,YALE,Ivy,fcs,#004a81
+46,Georgetown,GTWN,Patriot,fcs,#110E42
+47,Howard,HOW,MEAC,fcs,#003a63
+48,Delaware,DEL,Conference USA,fbs,#00539f
+50,Florida A&M,FAMU,SWAC,fcs,#F89728
+52,Florida State,FSU,ACC,fbs,#782f40
+55,Jacksonville State,JXST,Conference USA,fbs,#cc0000
+56,Stetson,STET,Pioneer,fcs,#0a5640
+57,Florida,FLA,SEC,fbs,#0021a5
+58,South Florida,USF,American Athletic,fbs,#006747
+59,Georgia Tech,GT,ACC,fbs,#b3a369
+61,Georgia,UGA,SEC,fbs,#ba0c2f
+62,Hawai'i,HAW,Mountain West,fbs,#024731
+66,Iowa State,ISU,Big 12,fbs,#c8102e
+68,Boise State,BOIS,Pac-12,fbs,#0033a0
+70,Idaho,IDHO,Big Sky,fcs,#000000
+77,Northwestern,NU,Big Ten,fbs,#582c83
+79,Southern Illinois,SIU,MVFC,fcs,#85283D
+84,Indiana,IU,Big Ten,fbs,#990000
+87,Notre Dame,ND,FBS Independents,fbs,#0c2340
+93,Murray State,MUR,MVFC,fcs,#002148
+96,Kentucky,UK,SEC,fbs,#0033a0
+97,Louisville,LOU,ACC,fbs,#c9001f
+98,Western Kentucky,WKU,Conference USA,fbs,#c60c30
+99,LSU,LSU,SEC,fbs,#461d7c
+103,Boston College,BC,ACC,fbs,#8c2232
+107,Holy Cross,HC,Patriot,fcs,#582c83
+108,Harvard,HARV,Ivy,fcs,#990000
+113,Massachusetts,MASS,Mid-American,fbs,#881c1c
+119,Towson,TOW,Coastal Athletic,fcs,#FFC229
+120,Maryland,MD,Big Ten,fbs,#ce1126
+127,Michigan State,MSU,Big Ten,fbs,#173f35
+130,Michigan,MICH,Big Ten,fbs,#00274c
+135,Minnesota,MINN,Big Ten,fbs,#7a0019
+142,Missouri,MIZ,SEC,fbs,#f1b82d
+145,Ole Miss,MISS,SEC,fbs,#13294b
+147,Montana State,MTST,Big Sky,fcs,#00205c
+149,Montana,MONT,Big Sky,fcs,#751D4A
+150,Duke,DUKE,ACC,fbs,#00539b
+151,East Carolina,ECU,American Athletic,fbs,#592a8a
+152,NC State,NCSU,ACC,fbs,#cc0000
+153,North Carolina,UNC,ACC,fbs,#7bafd4
+154,Wake Forest,WAKE,ACC,fbs,#ceb888
+155,North Dakota,UND,MVFC,fcs,#00A26B
+158,Nebraska,NEB,Big Ten,fbs,#d00000
+159,Dartmouth,DART,Ivy,fcs,#005730
+160,New Hampshire,UNH,Coastal Athletic,fcs,#004990
+163,Princeton,PRIN,Ivy,fcs,#000000
+164,Rutgers,RUTG,Big Ten,fbs,#ce0e2d
+166,New Mexico State,NMSU,Conference USA,fbs,#8c0b42
+167,New Mexico,UNM,Mountain West,fbs,#ba0c2f
+171,Columbia,COLU,Ivy,fcs,#7ba4db
+172,Cornell,COR,Ivy,fcs,#b31b1b
+183,Syracuse,SYR,ACC,fbs,#f76900
+189,Bowling Green,BGSU,Mid-American,fbs,#fd5000
+193,Miami (OH),M-OH,Mid-American,fbs,#c41230
+194,Ohio State,OSU,Big Ten,fbs,#ba0c2f
+195,Ohio,OHIO,Mid-American,fbs,#024230
+197,Oklahoma State,OKST,Big 12,fbs,#fe5c00
+201,Oklahoma,OU,SEC,fbs,#841617
+202,Tulsa,TLSA,American Athletic,fbs,#003595
+204,Oregon State,ORST,Pac-12,fbs,#dc4405
+213,Penn State,PSU,Big Ten,fbs,#001e44
+218,Temple,TEM,American Athletic,fbs,#a41e35
+219,Pennsylvania,PENN,Ivy,fcs,#082A74
+221,Pittsburgh,PITT,ACC,fbs,#003594
+222,Villanova,VILL,Patriot,fcs,#00205b
+225,Brown,BRWN,Ivy,fcs,#411e09
+227,Rhode Island,URI,Coastal Athletic,fcs,#091f3f
+228,Clemson,CLEM,ACC,fbs,#f56600
+231,Furman,FUR,Southern,fcs,#582c83
+233,South Dakota,SDAK,MVFC,fcs,#CD1241
+235,Memphis,MEM,American Athletic,fbs,#00498f
+236,Chattanooga,UTC,Southern,fcs,#00386b
+238,Vanderbilt,VAN,SEC,fbs,#000000
+239,Baylor,BAY,Big 12,fbs,#154734
+242,Rice,RICE,American Athletic,fbs,#00205b
+245,Texas A&M,TA&M,SEC,fbs,#500000
+248,Houston,HOU,Big 12,fbs,#c8102e
+249,North Texas,UNT,American Athletic,fbs,#00853e
+251,Texas,TEX,SEC,fbs,#bf5700
+252,BYU,BYU,Big 12,fbs,#003da5
+253,Southern Utah,SUU,Big Sky,fcs,#c72026
+254,Utah,UTAH,Big 12,fbs,#be0000
+256,James Madison,JMU,Sun Belt,fbs,#450084
+257,Richmond,RICH,Patriot,fcs,#9e0712
+258,Virginia,UVA,ACC,fbs,#232d4b
+259,Virginia Tech,VT,ACC,fbs,#861f41
+264,Washington,WASH,Big Ten,fbs,#33006f
+265,Washington State,WSU,Pac-12,fbs,#a60f2d
+275,Wisconsin,WIS,Big Ten,fbs,#a00000
+276,Marshall,MRSH,Sun Belt,fbs,#00b140
+277,West Virginia,WVU,Big 12,fbs,#eaaa00
+278,Fresno State,FRES,Pac-12,fbs,#c41230
+282,Indiana State,INST,MVFC,fcs,#00669a
+284,Stonehill,STO,NEC,fcs,#000000
+290,Georgia Southern,GASO,Sun Belt,fbs,#041e42
+292,UT Rio Grande Valley,RGV,Southland,fcs,#null
+295,Old Dominion,ODU,Sun Belt,fbs,#043657
+301,San Diego,USD,Pioneer,fcs,#2f99d4
+302,UC Davis,UCD,Big Sky,fcs,#002855
+304,Idaho State,IDST,Big Sky,fcs,#ef8c00
+309,Louisiana,UL,Sun Belt,fbs,#ce181e
+311,Maine,ME,Coastal Athletic,fcs,#127dbe
+322,Lafayette,LAF,Patriot,fcs,#790000
+324,Coastal Carolina,CCU,Sun Belt,fbs,#006f71
+326,Texas State,TXST,Pac-12,fbs,#501214
+328,Utah State,USU,Pac-12,fbs,#0f2439
+331,Eastern Washington,EWU,Big Sky,fcs,#a10022
+333,Alabama,ALA,SEC,fbs,#9e1b32
+338,Kennesaw State,KENN,Conference USA,fbs,#fdbb30
+344,Mississippi State,MSST,SEC,fbs,#5d1725
+349,Army,ARMY,American Athletic,fbs,#000000
+356,Illinois,ILL,Big Ten,fbs,#ff5f05
+399,UAlbany,UALB,Coastal Athletic,fcs,#3D2777
+2000,Abilene Christian,ACU,UAC,fcs,#592d82
+2005,Air Force,AF,Mountain West,fbs,#003594
+2006,Akron,AKR,Mid-American,fbs,#041e42
+2010,Alabama A&M,AAMU,SWAC,fcs,#790000
+2011,Alabama State,ALST,SWAC,fcs,#e9a900
+2016,Alcorn State,ALCN,SWAC,fcs,#4b0058
+2026,App State,APP,Sun Belt,fbs,#000000
+2029,Arkansas-Pine Bluff,UAPB,SWAC,fcs,#e0aa0f
+2032,Arkansas State,ARST,Sun Belt,fbs,#cc092f
+2046,Austin Peay,APSU,UAC,fcs,#8e0b0b
+2050,Ball State,BALL,Mid-American,fbs,#ba0c2f
+2065,Bethune-Cookman,BCU,SWAC,fcs,#7b1831
+2083,Bucknell,BUCK,Patriot,fcs,#000060
+2084,Buffalo,BUF,Mid-American,fbs,#005bbb
+2086,Butler,BTLR,Pioneer,fcs,#0d1361
+2097,Campbell,CAM,Coastal Athletic,fcs,#000000
+2110,Central Arkansas,CARK,UAC,fcs,#a7a9ac
+2115,Central Connecticut,CCSU,NEC,fcs,#1B49A2
+2116,UCF,UCF,Big 12,fbs,#000000
+2117,Central Michigan,CMU,Mid-American,fbs,#6a0032
+2127,Charleston Southern,CHSO,OVC,fcs,#2e3192
+2130,Chicago State,null,FCS Independents,fcs,#null
+2132,Cincinnati,CIN,Big 12,fbs,#000000
+2142,Colgate,COLG,Patriot,fcs,#821019
+2166,Davidson,DAV,Pioneer,fcs,#000000
+2168,Dayton,DAY,Pioneer,fcs,#004B8D
+2169,Delaware State,DSU,MEAC,fcs,#009cdb
+2181,Drake,DRKE,Pioneer,fcs,#005596
+2184,Duquesne,DUQ,NEC,fcs,#002D62
+2193,East Tennessee State,ETSU,Southern,fcs,#002d61
+2197,Eastern Illinois,EIU,OVC,fcs,#000000
+2198,Eastern Kentucky,EKU,UAC,fcs,#660819
+2199,Eastern Michigan,EMU,Mid-American,fbs,#046a38
+2210,Elon,ELON,Coastal Athletic,fcs,#020303
+2226,Florida Atlantic,FAU,American Athletic,fbs,#003366
+2229,Florida International,FIU,Conference USA,fbs,#091f3f
+2230,Fordham,FOR,Patriot,fcs,#830032
+2241,Gardner-Webb,GWEB,OVC,fcs,#c12535
+2247,Georgia State,GAST,Sun Belt,fbs,#0039a6
+2261,Hampton,HAMP,Coastal Athletic,fcs,#0067AC
+2277,Houston Christian,HCU,Southland,fcs,#00539c
+2287,Illinois State,ILST,MVFC,fcs,#CE1126
+2294,Iowa,IOWA,Big Ten,fbs,#000000
+2296,Jackson State,JKST,SWAC,fcs,#123297
+2305,Kansas,KU,Big 12,fbs,#0051ba
+2306,Kansas State,KSU,Big 12,fbs,#512888
+2309,Kent State,KENT,Mid-American,fbs,#002664
+2320,Lamar,LAM,Southland,fcs,#000000
+2329,Lehigh,LEH,Patriot,fcs,#6c2b2a
+2335,Liberty,LIB,Conference USA,fbs,#0a254e
+2341,Long Island University,LIU,NEC,fcs,#null
+2348,Louisiana Tech,LT,Sun Belt,fbs,#003087
+2368,Marist,MRST,Pioneer,fcs,#e53730
+2377,McNeese,MCN,Southland,fcs,#00529C
+2382,Mercer,MER,Southern,fcs,#ff7f29
+2385,Mercyhurst,MERC,NEC,fcs,#000000
+2390,Miami,MIA,ACC,fbs,#f47321
+2393,Middle Tennessee,MTSU,Conference USA,fbs,#036eb7
+2400,Mississippi Valley State,MVSU,SWAC,fcs,#005328
+2405,Monmouth,MONM,Coastal Athletic,fcs,#051844
+2413,Morehead State,MORE,Pioneer,fcs,#094FA3
+2415,Morgan State,MORG,MEAC,fcs,#014786
+2426,Navy,NAVY,American Athletic,fbs,#00225b
+2428,North Carolina Central,NCCU,MEAC,fcs,#880023
+2429,Charlotte,CLT,American Athletic,fbs,#005035
+2433,UL Monroe,ULM,Sun Belt,fbs,#840029
+2439,UNLV,UNLV,Mountain West,fbs,#cf0a2c
+2440,Nevada,NEV,Mountain West,fbs,#041e42
+2441,New Haven,NHVN,NEC,fcs,#041e42
+2447,Nicholls,NICH,Southland,fcs,#C41230
+2448,North Carolina A&T,NCAT,Coastal Athletic,fcs,#0505aa
+2449,North Dakota State,NDSU,Mountain West,fbs,#00583d
+2450,Norfolk State,NORF,MEAC,fcs,#0c8968
+2453,North Alabama,UNA,UAC,fcs,#000000
+2458,Northern Colorado,UNCO,Big Sky,fcs,#13558D
+2459,Northern Illinois,NIU,Mountain West,fbs,#c8102e
+2460,Northern Iowa,UNI,MVFC,fcs,#473282
+2464,Northern Arizona,NAU,Big Sky,fcs,#003976
+2466,Northwestern State,NWST,Southland,fcs,#492F91
+2483,Oregon,ORE,Big Ten,fbs,#007030
+2502,Portland State,PRST,Big Sky,fcs,#00311e
+2504,Prairie View A&M,PV,SWAC,fcs,#582c83
+2506,Presbyterian,PRES,Pioneer,fcs,#194896
+2509,Purdue,PUR,Big Ten,fbs,#ceb888
+2523,Robert Morris,RMU,NEC,fcs,#00214D
+2529,Sacred Heart,SHU,Coastal Athletic,fcs,#a40012
+2534,Sam Houston,SHSU,Conference USA,fbs,#f56423
+2535,Samford,SAM,Southern,fcs,#005485
+2545,SE Louisiana,SELA,Southland,fcs,#215732
+2546,Southeast Missouri State,SEMO,OVC,fcs,#c8102e
+2567,SMU,SMU,ACC,fbs,#d70000
+2569,South Carolina State,SCST,MEAC,fcs,#7d1315
+2571,South Dakota State,SDST,MVFC,fcs,#0033a0
+2572,Southern Miss,USM,Sun Belt,fbs,#ffc72c
+2579,South Carolina,SC,SEC,fbs,#73000a
+2582,Southern,SOU,SWAC,fcs,#004B97
+2617,Stephen F. Austin,SFA,Southland,fcs,#393996
+2619,Stony Brook,STBK,Coastal Athletic,fcs,#990000
+2623,Missouri State,MOST,Conference USA,fbs,#5e0009
+2627,Tarleton State,TAR,UAC,fcs,#000000
+2628,TCU,TCU,Big 12,fbs,#4d1979
+2630,UT Martin,UTM,OVC,fcs,#FF6700
+2633,Tennessee,TENN,SEC,fbs,#ff8200
+2634,Tennessee State,TNST,OVC,fcs,#171796
+2635,Tennessee Tech,TNTC,Southern,fcs,#5A4099
+2636,UTSA,UTSA,American Athletic,fbs,#0c2340
+2638,UTEP,UTEP,Mountain West,fbs,#ff8200
+2640,Texas Southern,TXSO,SWAC,fcs,#860038
+2641,Texas Tech,TTU,Big 12,fbs,#c30020
+2643,The Citadel,CIT,Southern,fcs,#7badd3
+2649,Toledo,TOL,Mid-American,fbs,#0b2240
+2653,Troy,TROY,Sun Belt,fbs,#862633
+2655,Tulane,TULN,American Athletic,fbs,#006747
+2674,Valparaiso,VAL,Pioneer,fcs,#794500
+2678,VMI,VMI,Southern,fcs,#ae122a
+2681,Wagner,WAG,NEC,fcs,#00483A
+2692,Weber State,WEB,Big Sky,fcs,#18005a
+2698,West Georgia,WGA,UAC,fcs,#0033a1
+2710,Western Illinois,WIU,OVC,fcs,#4e1e8a
+2711,Western Michigan,WMU,Mid-American,fbs,#532e1f
+2717,Western Carolina,WCU,Southern,fcs,#492F91
+2729,William & Mary,W&M,Patriot,fcs,#115740
+2747,Wofford,WOF,Southern,fcs,#533B23
+2751,Wyoming,WYO,Mountain West,fbs,#492f24
+2754,Youngstown State,YSU,MVFC,fcs,#E51936
+2755,Grambling,GRAM,SWAC,fcs,#ee8601
+2771,Merrimack,MRMK,FCS Independents,fcs,#000000
+2803,Bryant,BRY,Coastal Athletic,fcs,#000000
+2815,Lindenwood,LIN,OVC,fcs,#000000
+2837,East Texas A&M,ETAM,Southland,fcs,#000000
+2900,St. Thomas (MN),STMN,Pioneer,fcs,#000000
+2916,Incarnate Word,UIW,Southland,fcs,#000000
+3101,Utah Tech,UTU,Big Sky,fcs,#000000
+110242,West Florida,WFL,UAC,fcs,#null

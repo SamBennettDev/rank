@@ -1,0 +1,28 @@
+{
+  "label": "2026 season",
+  "demo": false,
+  "algorithmVersion": "two-pass-springs-1",
+  "classifications": [
+    "fbs",
+    "fcs"
+  ],
+  "springs": {
+    "strengthShrink": 10,
+    "qualityScale": 2,
+    "rankShrink": 0.1,
+    "marginWeight": 0.5,
+    "homeField": 2.7,
+    "headToHeadWindow": 0.25
+  },
+  "matchup": {
+    "winBonus": 3,
+    "divisionGap": 31.644079,
+    "shrink": 1,
+    "homeField": 2.668394,
+    "homeFieldShrink": 64,
+    "probabilityScale": 12,
+    "residualScale": 14.934045,
+    "calibrationId": "matchup-2014-2019"
+  },
+  "unitShrink": 0.05
+}
