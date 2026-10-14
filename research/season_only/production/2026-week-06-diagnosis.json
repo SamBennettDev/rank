@@ -1,0 +1,421 @@
+{
+  "year": 2026,
+  "snapshot": "week-06",
+  "asOf": "2026-10-11T08:30:00.000Z",
+  "bundleSha256": "543dfb2273061a4e8baaeb2580de6d4c6052bf2a13f5182244bd4cab38c77e23",
+  "sourceHashes": {
+    "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
+    "gamesSha256": "de6fcc7c708712c01aad5ad5940462956f78ddded1a557e143afca4e8d08096c",
+    "playsSha256": "ad540931176ae4dd20b77e41aa10ae390ca8d1197c754ca59fd7260f8e079123",
+    "richSha256": "280bf5b0920a843444036eedb4468740ee5539f7f6ed71873623cab64066648c",
+    "featureCode": {
+      "features.py": "12706ce0e447f2ec5a3a1435a844b565984b86c3e28e9c38c5b401dd5f2e4cb7",
+      "models.py": "8ac2e4e1e30994359e26305c26907727d61b411c678794c3b430b771b25642a2",
+      "rich_build.py": "8e54b2cd1477fcc949674298148b090730f07e21b41ad3fa5661c7535cad2a6f",
+      "graph_build.py": "3094d0f3c769d14a11e969fdd69af3047f566dcf90d763f8f5cde791fc66eb3d",
+      "neural.py": "0dbb0892566426b36cd516bff55e5c9a187c0a72ab267b3979d6a65005cc239a"
+    },
+    "richModelSha256": "59bc97f30e7ce3216938863f65d51ce6a3f1fc374906eff589758d76a4aca748",
+    "graphModelSha256": "dbf0bb43abc185b8896df715c7fce84c983504205da6fd57414c5bb8864b02ab"
+  },
+  "diagnosticCodeSha256": "91d403a7be5da58841368ec942ed508cd03844b4a0ea2be70e9f762dc6b851e8",
+  "checks": {
+    "uniqueTeamIds": true,
+    "uniqueSchoolNames": true,
+    "featuresReproduce": true,
+    "publishedScoresReproduce": true,
+    "publishedConsensusRanksReproduce": true,
+    "historicalWeightsOnly": true,
+    "cutoffRespected": true
+  },
+  "interpretation": "Leave-one-game-out refits every team feature and the full ordering with the same frozen weights. These are sensitivity scenarios, not confidence intervals, feature importance, or evidence of better future accuracy. Opponent ranks are current model outputs, not independent validation.",
+  "selection": "Every Wake Forest game and the largest margin win for Oregon State and Oregon.",
+  "teams": [
+    {
+      "teamId": 154,
+      "team": "Wake Forest",
+      "publishedRank": 9,
+      "wins": 5,
+      "losses": 1,
+      "averageProbability": 0.8950608428900867,
+      "averageProbabilityRank": 8,
+      "averageFbsProbability": 0.8161989089594677,
+      "averageOtherTop25Probability": 0.5341627370677228,
+      "componentAverages": {
+        "roundRobinWinProbability": 0.895061,
+        "richWinProbability": 0.891764,
+        "graphWinProbability": 0.904951
+      },
+      "games": [
+        {
+          "gameId": 401858204,
+          "home": "Wake Forest",
+          "away": "Akron",
+          "homePoints": 38,
+          "awayPoints": 16,
+          "opponentCurrentRank": 181
+        },
+        {
+          "gameId": 401858224,
+          "home": "Purdue",
+          "away": "Wake Forest",
+          "homePoints": 36,
+          "awayPoints": 38,
+          "opponentCurrentRank": 55
+        },
+        {
+          "gameId": 401858226,
+          "home": "Wake Forest",
+          "away": "Miami",
+          "homePoints": 20,
+          "awayPoints": 33,
+          "opponentCurrentRank": 2
+        },
+        {
+          "gameId": 401858243,
+          "home": "Louisville",
+          "away": "Wake Forest",
+          "homePoints": 27,
+          "awayPoints": 30,
+          "opponentCurrentRank": 37
+        },
+        {
+          "gameId": 401858251,
+          "home": "Wake Forest",
+          "away": "Stanford",
+          "homePoints": 57,
+          "awayPoints": 3,
+          "opponentCurrentRank": 147
+        },
+        {
+          "gameId": 401858260,
+          "home": "NC State",
+          "away": "Wake Forest",
+          "homePoints": 14,
+          "awayPoints": 38,
+          "opponentCurrentRank": 81
+        }
+      ],
+      "simplerMethods": [
+        {
+          "method": "margin_rating",
+          "rank": 20
+        },
+        {
+          "method": "capped_margin_rating",
+          "rank": 25
+        },
+        {
+          "method": "robust_margin_rating",
+          "rank": 25
+        },
+        {
+          "method": "win_rating",
+          "rank": 14
+        },
+        {
+          "method": "colley",
+          "rank": 17
+        },
+        {
+          "method": "bradley_terry",
+          "rank": 16
+        },
+        {
+          "method": "elo",
+          "rank": 26
+        },
+        {
+          "method": "score_offense_plus_defense",
+          "rank": 20
+        },
+        {
+          "method": "epa_offense_plus_defense",
+          "rank": 14
+        },
+        {
+          "method": "success_offense_plus_defense",
+          "rank": 33
+        }
+      ],
+      "leaveOneGameOut": [
+        {
+          "case": "154-without-401858204",
+          "gameId": 401858204,
+          "averageProbability": 0.9102197727800989,
+          "averageProbabilityRank": 6,
+          "probabilityChange": 0.015158929890012218,
+          "consensusRank": 6
+        },
+        {
+          "case": "154-without-401858224",
+          "gameId": 401858224,
+          "averageProbability": 0.898522594106469,
+          "averageProbabilityRank": 7,
+          "probabilityChange": 0.0034617512163822584,
+          "consensusRank": 8
+        },
+        {
+          "case": "154-without-401858226",
+          "gameId": 401858226,
+          "averageProbability": 0.8951300522929204,
+          "averageProbabilityRank": 8,
+          "probabilityChange": 6.920940283372534e-05,
+          "consensusRank": 9
+        },
+        {
+          "case": "154-without-401858243",
+          "gameId": 401858243,
+          "averageProbability": 0.8855159704014764,
+          "averageProbabilityRank": 11,
+          "probabilityChange": -0.009544872488610245,
+          "consensusRank": 11
+        },
+        {
+          "case": "154-without-401858251",
+          "gameId": 401858251,
+          "averageProbability": 0.8748377556879927,
+          "averageProbabilityRank": 13,
+          "probabilityChange": -0.02022308720209398,
+          "consensusRank": 13
+        },
+        {
+          "case": "154-without-401858260",
+          "gameId": 401858260,
+          "averageProbability": 0.8720813461204475,
+          "averageProbabilityRank": 13,
+          "probabilityChange": -0.022979496769639174,
+          "consensusRank": 13
+        }
+      ]
+    },
+    {
+      "teamId": 204,
+      "team": "Oregon State",
+      "publishedRank": 18,
+      "wins": 4,
+      "losses": 2,
+      "averageProbability": 0.8598015820992264,
+      "averageProbabilityRank": 17,
+      "averageFbsProbability": 0.7581778690058308,
+      "averageOtherTop25Probability": 0.43452241855160195,
+      "componentAverages": {
+        "roundRobinWinProbability": 0.859802,
+        "richWinProbability": 0.862784,
+        "graphWinProbability": 0.850855
+      },
+      "games": [
+        {
+          "gameId": 401856778,
+          "home": "Houston",
+          "away": "Oregon State",
+          "homePoints": 33,
+          "awayPoints": 20,
+          "opponentCurrentRank": 11
+        },
+        {
+          "gameId": 401856783,
+          "home": "Oregon State",
+          "away": "Texas Tech",
+          "homePoints": 24,
+          "awayPoints": 35,
+          "opponentCurrentRank": 14
+        },
+        {
+          "gameId": 401860886,
+          "home": "Oregon State",
+          "away": "Montana",
+          "homePoints": 52,
+          "awayPoints": 17,
+          "opponentCurrentRank": 131
+        },
+        {
+          "gameId": 401860895,
+          "home": "UTEP",
+          "away": "Oregon State",
+          "homePoints": 7,
+          "awayPoints": 33,
+          "opponentCurrentRank": 209
+        },
+        {
+          "gameId": 401860899,
+          "home": "Colorado State",
+          "away": "Oregon State",
+          "homePoints": 26,
+          "awayPoints": 56,
+          "opponentCurrentRank": 111
+        },
+        {
+          "gameId": 401860902,
+          "home": "Oregon State",
+          "away": "San Diego State",
+          "homePoints": 66,
+          "awayPoints": 14,
+          "opponentCurrentRank": 120
+        }
+      ],
+      "simplerMethods": [
+        {
+          "method": "margin_rating",
+          "rank": 15
+        },
+        {
+          "method": "capped_margin_rating",
+          "rank": 15
+        },
+        {
+          "method": "robust_margin_rating",
+          "rank": 17
+        },
+        {
+          "method": "win_rating",
+          "rank": 39
+        },
+        {
+          "method": "colley",
+          "rank": 45
+        },
+        {
+          "method": "bradley_terry",
+          "rank": 52
+        },
+        {
+          "method": "elo",
+          "rank": 25
+        },
+        {
+          "method": "score_offense_plus_defense",
+          "rank": 15
+        },
+        {
+          "method": "epa_offense_plus_defense",
+          "rank": 25
+        },
+        {
+          "method": "success_offense_plus_defense",
+          "rank": 14
+        }
+      ],
+      "leaveOneGameOut": [
+        {
+          "case": "204-without-401860902",
+          "gameId": 401860902,
+          "averageProbability": 0.8314367163838823,
+          "averageProbabilityRank": 25,
+          "probabilityChange": -0.028364865715344134,
+          "consensusRank": 25
+        }
+      ]
+    },
+    {
+      "teamId": 2483,
+      "team": "Oregon",
+      "publishedRank": 20,
+      "wins": 3,
+      "losses": 2,
+      "averageProbability": 0.8440615777474898,
+      "averageProbabilityRank": 19,
+      "averageFbsProbability": 0.7330613906389587,
+      "averageOtherTop25Probability": 0.39628917106320577,
+      "componentAverages": {
+        "roundRobinWinProbability": 0.844062,
+        "richWinProbability": 0.843204,
+        "graphWinProbability": 0.846633
+      },
+      "games": [
+        {
+          "gameId": 401858433,
+          "home": "Oregon",
+          "away": "Boise State",
+          "homePoints": 34,
+          "awayPoints": 27,
+          "opponentCurrentRank": 34
+        },
+        {
+          "gameId": 401856782,
+          "home": "Oklahoma State",
+          "away": "Oregon",
+          "homePoints": 39,
+          "awayPoints": 31,
+          "opponentCurrentRank": 24
+        },
+        {
+          "gameId": 401858455,
+          "home": "Oregon",
+          "away": "Portland State",
+          "homePoints": 84,
+          "awayPoints": 0,
+          "opponentCurrentRank": 219
+        },
+        {
+          "gameId": 401858469,
+          "home": "USC",
+          "away": "Oregon",
+          "homePoints": 27,
+          "awayPoints": 41,
+          "opponentCurrentRank": 29
+        },
+        {
+          "gameId": 401858484,
+          "home": "Oregon",
+          "away": "UCLA",
+          "homePoints": 15,
+          "awayPoints": 17,
+          "opponentCurrentRank": 17
+        }
+      ],
+      "simplerMethods": [
+        {
+          "method": "margin_rating",
+          "rank": 11
+        },
+        {
+          "method": "capped_margin_rating",
+          "rank": 23
+        },
+        {
+          "method": "robust_margin_rating",
+          "rank": 22
+        },
+        {
+          "method": "win_rating",
+          "rank": 32
+        },
+        {
+          "method": "colley",
+          "rank": 37
+        },
+        {
+          "method": "bradley_terry",
+          "rank": 55
+        },
+        {
+          "method": "elo",
+          "rank": 67
+        },
+        {
+          "method": "score_offense_plus_defense",
+          "rank": 11
+        },
+        {
+          "method": "epa_offense_plus_defense",
+          "rank": 17
+        },
+        {
+          "method": "success_offense_plus_defense",
+          "rank": 37
+        }
+      ],
+      "leaveOneGameOut": [
+        {
+          "case": "2483-without-401858455",
+          "gameId": 401858455,
+          "averageProbability": 0.8035707552415059,
+          "averageProbabilityRank": 31,
+          "probabilityChange": -0.0404908225059839,
+          "consensusRank": 31
+        }
+      ]
+    }
+  ]
+}

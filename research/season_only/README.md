@@ -8,6 +8,8 @@ The [four-improvement follow-up](v2/README.md) adds early-season experts, availa
 
 The selected neural blend achieved **70.86%** winner accuracy on 3,603 FBS games in 2020–2025. On the same 3,594 games with archived spreads, it achieved **70.90% versus 72.33%** for spread favorites. On the same 3,025 moneyline games, it achieved **70.35% versus 71.14%** for market favorites. This research does **not** establish a general market edge. It does outperform the CFP higher-ranked-team pick on the matched committee-ranking games. Details, uncertainty, coverage, and differing information dates are in the report.
 
+The [Week 6 Wake Forest/Oregon diagnosis](production/2026-week-06-diagnosis.md) checks team identity, reproduces all published neural scores and ranks, compares simpler methods, and refits the features and ordering after individual game exclusions. It documents sensitivity without retraining or changing the standings.
+
 ## Saved work
 
 - 24 historical input seasons, 2002–2025; 2026 through completed Week 6.
