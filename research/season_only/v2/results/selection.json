@@ -1,0 +1,26 @@
+{
+  "chosen": {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7291479778464145,
+      "macro_season_accuracy": 0.7299559543346503,
+      "macro_early_accuracy": 0.7283400013581788,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7300056721497448,
+        "brier": 0.18042567619574396,
+        "log_loss": 0.5346647333471556
+      }
+    }
+  },
+  "configurations": 32,
+  "blend_candidates": 96,
+  "experimental_network_fits": 576,
+  "protocol_sha256": "c6b60fad8289a7634224c57d9d1b9c699a82fcbcd1eaeddd2ceaba31368b72c4"
+}

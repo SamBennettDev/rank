@@ -1,0 +1,9 @@
+{
+  "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_injuries/injuries_2026.parquet",
+  "raw_sha256": "7773d449f276b78e0b6577602e72ba5a52df5d94ceac52723056db4193598c4b",
+  "rows": 120,
+  "fresh_current_season_rows": 0,
+  "rejected_stale_or_undated": 120,
+  "rule": "Snapshot date alone does not refresh an old injury note. Unknown absence of a report is not healthy.",
+  "coverage": "Curated published announcements are a small, nonrepresentative pilot; full historical conference reports are not available in this input archive."
+}

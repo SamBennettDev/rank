@@ -1,0 +1,37 @@
+{
+  "rows": 20,
+  "sources": [
+    "https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky",
+    "https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football",
+    "https://floridagators.com/news/2024/11/6/football-carters-corner-hbc-meets-mcconaughey-wilson-webb-takes-on-napier",
+    "https://kutv.com/sports/utah-utes/utah-qb-cam-rising-out-indefinitely-freshman-isaac-wilson-named-starter",
+    "https://news.wfsu.org/wfsu-local-news/2023-11-20/college-football-playoffs-can-florida-state-keep-playoff-hopes-alive-after-travis-injury",
+    "https://soonersports.com/news/2025/9/23/football-mateer-to-undergo-surgery-wednesday",
+    "https://www.cbsnews.com/losangeles/news/heisman-winner-caleb-williams-to-skip-uscs-holiday-bowl-trip-fueling-nfl-expectations-2/",
+    "https://www.clickorlando.com/sports/2022/10/15/nc-state-qb-devin-leary-out-for-season-will-have-surgery/",
+    "https://www.reuters.com/sports/nc-state-qb-grayson-mccall-concussions-retires-football-2024-10-24/",
+    "https://www.wral.com/sports/archive/21749965/"
+  ],
+  "output_sha256": "f5b4e5ad7d71f03cf55facd23d1521824fa728081c2dba41798d0db2a1b1f90a",
+  "timestamp_rule": "Day-only announcements become available after the end of the publication day in America/New_York. They are never assigned a fabricated intra-day time.",
+  "roster_sources": {
+    "2022": {
+      "url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-cfb-data/8c248d2acdf625327b5167df4b0a52cbb03a74ce/cfb/cfb_rosters/parquet/cfb_rosters_2022.parquet",
+      "sha256": "308e5486457cedeffa4bf603a92b636ac1b25e0fa00022de7e41a0d06bb71c61"
+    },
+    "2023": {
+      "url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-cfb-data/8c248d2acdf625327b5167df4b0a52cbb03a74ce/cfb/cfb_rosters/parquet/cfb_rosters_2023.parquet",
+      "sha256": "4ab0283a75ee1889068b971e88cbd853d710a9a71a20de02afa890f8fdf7cab4"
+    },
+    "2024": {
+      "url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-cfb-data/8c248d2acdf625327b5167df4b0a52cbb03a74ce/cfb/cfb_rosters/parquet/cfb_rosters_2024.parquet",
+      "sha256": "5d0f008bc4490ecd4ae0cd9c5224d5da4abc93914bd43321aa9cb854c168ba34"
+    },
+    "2025": {
+      "url": "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-cfb-data/8c248d2acdf625327b5167df4b0a52cbb03a74ce/cfb/cfb_rosters/parquet/cfb_rosters_2025.parquet",
+      "sha256": "087aec645b7d5edac3cb52d61f631c780b61fa7ffcf0f459c1002c604b1b4b25"
+    }
+  },
+  "roster_identity_joins": 20,
+  "scope": "Small curated pilot selected for integration checks, not a representative injury dataset; report coverage is unknown outside these rows."
+}

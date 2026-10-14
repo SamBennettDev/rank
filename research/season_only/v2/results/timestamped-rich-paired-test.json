@@ -1,0 +1,7 @@
+{
+  "games": 130,
+  "neural_only_correct": 16,
+  "market_only_correct": 12,
+  "exact_two_sided_mcnemar_p": 0.5715881884098053,
+  "interpretation": "Descriptive comparison among multiple preselected variants on a small replay cohort; not a prospective superiority claim."
+}

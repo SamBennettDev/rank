@@ -1,0 +1,990 @@
+{
+  "revision": "4cd9934927a9510ca534a540a0a2eebcec7408e6",
+  "files": [
+    {
+      "path": "data_files/raw/snapshots/cfbd_lines/season=2026/captured_date=2026-08-27/20260827T010713808967Z_67dcfa311df44ed59e2c89ba4f768a90.json",
+      "sha": "0637a088a01e8ddab3bf3fa98dbe804cbde1a0dc",
+      "size": 2
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-27/20260827T230723483627Z_c0dacffd65c5410a86ee90173dc572e9.json",
+      "sha": "54cb1d46b920fe31068af834ca9160104caf651f",
+      "size": 49209
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-28/20260828T205710059132Z_07fa07996ea240f3a16202da8d43a997.json",
+      "sha": "8952a24a1b527a6020ed59a372c175fb19dceb0c",
+      "size": 48965
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-28/20260828T215656870903Z_12f1d8fb6ac24df0a2e4ac3a32a1261a.json",
+      "sha": "7028d652ecf83044eb0e92bf2bade9f557e1c7c5",
+      "size": 48965
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-29/20260829T120658279730Z_6ecbc56dfd9c45568f0dfec68d31d709.json",
+      "sha": "92b803343ece42dc7cd3c3a894dae7a743954a1f",
+      "size": 46628
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-29/20260829T150718011083Z_a9628b2f6e3b4b80bfd0418c14fe4d70.json",
+      "sha": "797f2ec2eda121c6a9d0c56d31a92c93570ae4c0",
+      "size": 46821
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-29/20260829T160445316004Z_5d686b4a46df4118bd1a5a60f5ccecb8.json",
+      "sha": "ec0214854590b9bf0c93091e7b90c5ac6c4f14f7",
+      "size": 46878
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-29/20260829T200441240037Z_b58b5e123d2547a8a0a3c70d47251065.json",
+      "sha": "5ce0b1bdeff55cc1d0f8e60b859d7b6c1a989df2",
+      "size": 44375
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-30/20260830T150743507699Z_7e126ff28879465cb18840336e025a53.json",
+      "sha": "f3ebc16dc25dd9a1c939c8596e3c450ee48c5081",
+      "size": 34853
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-31/20260831T150850893977Z_18356b74d29b43d89dbd790c7b4009eb.json",
+      "sha": "829f8660c81c9ff5261183da0cdfed0abfdc5a50",
+      "size": 34846
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-01/20260901T070137551564Z_df5689c12c474d88a25f538bd1737e5c.json",
+      "sha": "d55573861a5f94b732be064c5b7c829afa14a095",
+      "size": 34845
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-02/20260902T151127067218Z_a8ab1294048c432fab462263f5b08050.json",
+      "sha": "92c5dfb0c8069a2d093cf2383ce3a4638600d411",
+      "size": 35544
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-03/20260903T120803162882Z_00b13e3f102d488b9b47cc2a74032da6.json",
+      "sha": "6b9a49f3d8b13946f9a05b87bc53a09c806eafb8",
+      "size": 35991
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-03/20260903T150915644295Z_29eeda898d8b46b1aab4cde2d0c9ac74.json",
+      "sha": "62d10b611581b43299996689aa00ddab908a4bf9",
+      "size": 36012
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-03/20260903T200505724016Z_c44dfde277054810b759a21ff1afe01c.json",
+      "sha": "ba801071eb6d298cd09bbe02fc45fd5667dffddd",
+      "size": 35966
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-04/20260904T002350880907Z_37879b46ff5342b8930973391f75d784.json",
+      "sha": "862009da5fdc1c4e6405cc08d6ef895ce117202b",
+      "size": 32477
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-04/20260904T120744631796Z_cc2388f0aa4b4afb985c8084707ebb6e.json",
+      "sha": "f43b9d19c26d45b251db2c184bef5fb23a4be82e",
+      "size": 31612
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-04/20260904T150845439414Z_8690db833a6b441da22689d28bf5c37c.json",
+      "sha": "9b9b0efd8391ef46768342aad66de2e0fef13d1a",
+      "size": 31601
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-04/20260904T200457850422Z_7cc865df22194770b1455555918e9b07.json",
+      "sha": "4e828d85c9f05f9bf16757460b03c2abe369de3a",
+      "size": 37612
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-05/20260905T002419060473Z_2b0ce0982cde42f497911c3391f5f28b.json",
+      "sha": "a5a0e3187efcf7e4e678f7b014dc1e6c8115404e",
+      "size": 39388
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-05/20260905T120618246399Z_acd951282f80446baa3b13ccba3f1946.json",
+      "sha": "604f1f18b0a50697b94474cf8bc148ecda0b74f5",
+      "size": 39599
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-05/20260905T150727773644Z_47f6c82a3c7b417dbbf7578ca3d58093.json",
+      "sha": "28ee16b90e22fe028a549ff2c2db4cd8f3be34d4",
+      "size": 39566
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-05/20260905T200454435692Z_71e53a26ff7145809201482cc8314bef.json",
+      "sha": "8988d507981de02969a2cd1117ab80d63efe9c38",
+      "size": 27039
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-06/20260906T002817229059Z_4f3f19d2a56c43358c3268e13a9f68bc.json",
+      "sha": "fad98f3dad4dd76befdce98456a4777c376b8483",
+      "size": 14070
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-06/20260906T150740922292Z_265ca31eb5e644a8b7e39f3e2a439c6f.json",
+      "sha": "c1288abffeccded42e570517318b0e4c185cb6b8",
+      "size": 12501
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-07/20260907T172926748276Z_d50b88cfe4554d9baaf645326af54678.json",
+      "sha": "4173526fe17a40bf45c78200479089b7f64c52ba",
+      "size": 26248
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-08/20260908T061248976674Z_89713c3c742f402ba2970e3d4690c23d.json",
+      "sha": "4eb42cd8e18eea89c8898daa6eba72440c6ec3b1",
+      "size": 26306
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-08/20260908T150905414295Z_782bb00051664c6e9e6bebae4ad9d0cd.json",
+      "sha": "32b036f708a6bfc5b11cacffad2aaf33919839c7",
+      "size": 26777
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-09/20260909T150820396929Z_b87d2695d411419f8697a4755a5a742c.json",
+      "sha": "97c36f8208fd5f73d482df81952c1924f7557320",
+      "size": 28244
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-10/20260910T120729258577Z_d1a7cb3674f84cfd86353e43aa6aff75.json",
+      "sha": "d109c923409c6b19eaea5aca0bacfedd06a2a02f",
+      "size": 32360
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-10/20260910T150857153856Z_174c4bcaee3b4bf7b70f3763cf2db024.json",
+      "sha": "4a8e7a79e9c70636abed67454302ed20cfea9fb7",
+      "size": 32366
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-10/20260910T200454130476Z_3cd65afefd4a4c008a10d2c52357b996.json",
+      "sha": "ae2a3f013a90b0f8939242ba283722bab34fcf46",
+      "size": 32375
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-11/20260911T002545251187Z_6b978832f4324a62ba4e43dac7d4d9c9.json",
+      "sha": "c05b8648b484c656e753a744768820c3853fc790",
+      "size": 32369
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-11/20260911T120734854680Z_2b3387b620844c078e6a9905eb9ed3f5.json",
+      "sha": "785e751536935b3afbffe80b9e447a775d2c9096",
+      "size": 32497
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-11/20260911T150840726472Z_af543de0e9da4dbb8df2026746d117df.json",
+      "sha": "d048bec4127b4d88c84acad92f0e0187261aca14",
+      "size": 32500
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-11/20260911T200443249892Z_f328544b3cb440baa77907adc6ebe78f.json",
+      "sha": "6b99b2c3008781181a4c880b2e978bca1ff37f67",
+      "size": 40863
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-12/20260912T002400345741Z_c4b1d703effe407386d2c1d28fac8013.json",
+      "sha": "eeadf0b2cb94e19751fdac585d5e04e2f5f019b8",
+      "size": 43386
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-12/20260912T120633756402Z_bde4a246cb2b48e59216eb5d4e8abfa2.json",
+      "sha": "b80b9b2107c2fd0fede66979e8a75b1aee346d30",
+      "size": 44331
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-12/20260912T150702339714Z_eb1383660ba041b48a99f46dab7d54af.json",
+      "sha": "dfba72005f1f62bc7a14aefa47d8048e56bb085e",
+      "size": 44287
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-12/20260912T174113740912Z_3545de0be0d94a9e818594c0cceb85ca.json",
+      "sha": "6f0d3d00aaa54a4fd1be8edfbe867b6ef480faf1",
+      "size": 37071
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-12/20260912T192409135474Z_14a2cdbc1c964efb8b22655bccee055c.json",
+      "sha": "0086a3aa266ab9b931245607ba2949f6be2ca115",
+      "size": 34999
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-13/20260913T002814174888Z_00ffa829d5f140b7bfa822a388f27b00.json",
+      "sha": "cef5871034cca00f7bfcc8e98cce23dd0faf6389",
+      "size": 6531
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-13/20260913T150745966460Z_b07ceac6770843cbaa13d3db42d23f46.json",
+      "sha": "f91fc2ed5f168eb57043751b6b0b0143babf92b1",
+      "size": 6915
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-16/20260916T150851083942Z_8204b5ce254944f08be0d5595c445ce9.json",
+      "sha": "3d722a1af6b85d546ccbff36a130e578f2100960",
+      "size": 28038
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-17/20260917T120826184299Z_d4744c317be045b8b6cd1f03937150ab.json",
+      "sha": "ffa337a3e7391a3d3d85d7123c32f9d23187c3f0",
+      "size": 28555
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-17/20260917T150949723753Z_a44b1db124ab4612a9f3f749ff2ba6c9.json",
+      "sha": "c96ab0311f8201025410b88bcd36f359f72f7809",
+      "size": 28559
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-17/20260917T160642104051Z_3d55104472664d55821a3627078b78d8.json",
+      "sha": "8b1d4357ea1a2b2264bde0e89db7371971e5a72a",
+      "size": 28558
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-18/20260918T002508940696Z_b2a63a5a1bbb42779b320c14d3dce1f7.json",
+      "sha": "65614ada72e308af16c5e7ff1a08def9fe2b8222",
+      "size": 28124
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-18/20260918T120730467628Z_92772cae6da0441fb265fb2e32289fb4.json",
+      "sha": "e2046fe39903b1b7a8addd2424831836653c757c",
+      "size": 28120
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-18/20260918T150836024364Z_424a1abc959041bcbb642e32e366371a.json",
+      "sha": "f7a793eea408cac1ce059633bce728d0e444dd30",
+      "size": 29063
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-18/20260918T200533691872Z_7fbfdc72401e460685f4050f8e48ea2c.json",
+      "sha": "d724173b6a7e7eb6aa8e0bc39c5c5fcc38f1ea1e",
+      "size": 45444
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-19/20260919T002512480633Z_9bb7d3f6236f459a9a2df6b25f496a43.json",
+      "sha": "6a5381c43f0dbf6e02331cf45aad5def23fb461c",
+      "size": 45310
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-19/20260919T120705341276Z_c622afe7ad404835abdc3ad1915acebd.json",
+      "sha": "2c67850396837349cd61c49c2bdcd5f9611aa70f",
+      "size": 45173
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-19/20260919T150738185149Z_459f4f03cbc7453f83341de06f231c6f.json",
+      "sha": "6dfb21fd6c77f0633dfe75b89c62c649ff0db3e2",
+      "size": 44977
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-19/20260919T160519727586Z_ff45c5f86193417487c6a2626e8cc167.json",
+      "sha": "e8b825128a07ff267c083ecbf3bfdeee9d6527e9",
+      "size": 38944
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-19/20260919T200521772870Z_9d990f57073041cca1d0dbae1108dd6c.json",
+      "sha": "cf2af0de4e952a8d7bbe92de2c28a2ff25f17dc4",
+      "size": 25850
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-20/20260920T002824320267Z_a7f4fe7267ec4875bf948db8d3d45fa2.json",
+      "sha": "4f26aa903fc1723ed41b711407d75c754c277029",
+      "size": 6741
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-20/20260920T150734466909Z_7fd4c5ff2bb542c7a6ab1aa264726652.json",
+      "sha": "68cfbf89786c0dd539dd01f9f57b596ca2cc0bef",
+      "size": 11020
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-21/20260921T150849692940Z_3ae50badf368445ea6bab0bfd01ed4c9.json",
+      "sha": "b112028355ce54f96ca228be7b4c734fa614e5dd",
+      "size": 22833
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-22/20260922T061350936001Z_c623c9c172c44862ba7f4341a26eef93.json",
+      "sha": "e18dc2efdaa3c7817000021e0b0cb5c1753684e2",
+      "size": 22817
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-22/20260922T150912421250Z_b0b7d6768a3b4300ae6a65a1fa759d56.json",
+      "sha": "a4f7f4f28fd0a924469d316831e392857607ab34",
+      "size": 22802
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-23/20260923T150904915927Z_c244ed48719f4190aef1cd9bd1b00a8d.json",
+      "sha": "c1c49d86db46993ab07553c99d7d501bf04ad9d1",
+      "size": 27467
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-24/20260924T120829409620Z_30a4850f514f47af8edf4ddb844dfe80.json",
+      "sha": "6e2969614e918918131911484b8385441048da05",
+      "size": 28193
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-24/20260924T150916391996Z_646cb599d3924b3a92b0445e9d1577c0.json",
+      "sha": "574cb34c5d1f042c04d930c384a22e6f8ed72a75",
+      "size": 28191
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-24/20260924T200559669581Z_de7c24f9aced443eafe9797bc730ecbf.json",
+      "sha": "774271195a116382545efb8034703a0c63a3bb3c",
+      "size": 28394
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-25/20260925T002620332501Z_aa27bf9d3e554624afab9625113bbec5.json",
+      "sha": "703607abe0e503fbea92c8087fe28ef3c491688a",
+      "size": 27968
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-25/20260925T120836175062Z_0801c265e6eb437481f0b61c44caa6a6.json",
+      "sha": "b97e0cea301f49465b56a68769a7b8ccf6a47722",
+      "size": 28394
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-25/20260925T150942133961Z_02b1c9a88e994881908f8cf449398d3f.json",
+      "sha": "d56d2232e9bbb4b90353dcf44e7f871df8e62a67",
+      "size": 28402
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-25/20260925T200511699187Z_dfabc3533c884c20b213545ac1728455.json",
+      "sha": "ea15029643a2105d6115329708187525e84ffbb1",
+      "size": 44145
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-26/20260926T002527456401Z_9a35530199d2435f93d2fb5dd1a8862f.json",
+      "sha": "d076c695ccef0882090899bb5c43a39f9e9385c8",
+      "size": 44659
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-26/20260926T120713488723Z_5afc72e18a7843b6bb3d0fad0f7f5850.json",
+      "sha": "80c4801be8251fff394ace913483817e3043b58b",
+      "size": 45553
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-26/20260926T150834979138Z_719dbc5c5d1b4e80a390525601a8b408.json",
+      "sha": "2bb7eeb4d3fd3433493aa3f32854310afeabbc99",
+      "size": 45569
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-26/20260926T200519341154Z_ac7c30265810425a97548fb1304dbefc.json",
+      "sha": "09a6cdf346e6fe8e0e2f9df0e08cdad22b93af6d",
+      "size": 23493
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-27/20260927T002949087868Z_f2c03272c38746dcb01ed2c7d321244d.json",
+      "sha": "821b214acfd61cefca3005179d66546b1caaecc4",
+      "size": 7469
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-27/20260927T150844999075Z_54435fa397c44d719a1fc5032a0fca7a.json",
+      "sha": "c5a6b11e2b3ef90edd3eb74a48d45911ab054a4b",
+      "size": 10340
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-28/20260928T150946141292Z_18f27283bd8f428ebf12ed922d5e657d.json",
+      "sha": "8fab2a13b436478eafa51aff3fb0f80dfe2d26ea",
+      "size": 22928
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-29/20260929T115030230745Z_6b50de37a8bb4a65a61fb61832f1cdea.json",
+      "sha": "41503f167e4c4b77508db4462959d9b0cffc292e",
+      "size": 22917
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-29/20260929T150955229895Z_f56af33b8dfe44d389c1446637be8a48.json",
+      "sha": "df6933dd27849db936b48bd54dcc04e5c1596340",
+      "size": 22903
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-09-30/20260930T151111232519Z_0c3eb792bcd9497fb46ed0c67b9fe4f5.json",
+      "sha": "146817925930046db5e24ba6d0d90ddf5e99e868",
+      "size": 23753
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-01/20261001T120916153703Z_d13bd55845ca449a98eddc15eff9760c.json",
+      "sha": "986a46360b5735f228cb2c4ff6cd0b9eac4d8578",
+      "size": 26463
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-01/20261001T151007855261Z_a293842fb70f4d8d9cbfca6d525a243b.json",
+      "sha": "65843e24e13758badc2e0f103caa148fddeccbe8",
+      "size": 26614
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-01/20261001T204306737926Z_321bbf975b1a43d4833b6b63646fad4f.json",
+      "sha": "5c30c758f3a72a659e6e4c98985d5fd54f90d727",
+      "size": 26605
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-02/20261002T002821273980Z_8412d8576ec145f19a450b59e079237f.json",
+      "sha": "87915f9b8a4261fdd88b5f657468e0eafc6a973e",
+      "size": 26172
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-02/20261002T170548164410Z_2f69d8fb775943b6924fef7f10fdb5fa.json",
+      "sha": "52bbe8b96542902f0098dafa034ff74f97b46eae",
+      "size": 37110
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-02/20261002T194411244938Z_5ba982428ee541afb3b4a2597296aed5.json",
+      "sha": "3706f03180939e68ea6d62959ba4f9fa24abbffd",
+      "size": 43181
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-02/20261002T232731279744Z_71a5f83858a3404a823ecc35c1491054.json",
+      "sha": "7115f3e4d0a84b4aff1c9305ab180b2a453ea64e",
+      "size": 43778
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-03/20261003T033912029442Z_5775f37ca96140ce8467f1263aef5a40.json",
+      "sha": "613943f9b35ba77ae5388e86190501042d61684e",
+      "size": 44777
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-03/20261003T152740022049Z_884c6c8716ca46aa97a599f918d8dc69.json",
+      "sha": "c3819f269656c61712a3a51f3aa11aa2aecb49fa",
+      "size": 44813
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-03/20261003T183050791179Z_63904dda643a4761acc16c83520827f4.json",
+      "sha": "5ff73964233795eff762981cde16e1f5ea4f108e",
+      "size": 33366
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-03/20261003T223430340618Z_aff7d5a5178a42338325b70a9da46e51.json",
+      "sha": "f3d5730faca36fd50b678791c8c3c6d5c4f4ec7a",
+      "size": 16606
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-04/20261004T040836925089Z_506d1b4c288f4b09a4c49ce219584329.json",
+      "sha": "ee0538ffaceeebd766c49aeae9885c61dcf493b2",
+      "size": 5015
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-04/20261004T183124477492Z_c3bdd68e3c264684997d3f49927832d8.json",
+      "sha": "d2265540bd43ec173f1c8a9f7d225001834fe097",
+      "size": 17905
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-05/20261005T214755055369Z_ff9e0ae29fb44e94b72d76a2a621ff3f.json",
+      "sha": "c45b8a011df263e1a47e3b967603cec1c1e2b0e2",
+      "size": 24527
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-06/20261006T062458116732Z_7afa01c0a2534f69bd9fcd7c118a6052.json",
+      "sha": "97c7980e5addaa72222fba72714d3f9de9347def",
+      "size": 24507
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-06/20261006T195808309342Z_e17685a879664c0d81c538d5094a2396.json",
+      "sha": "016e677a80d6853c6fefd601899d3be3caefcbde",
+      "size": 24485
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-08/20261008T181317073759Z_5d5e90573a664c66b5c708f7d167a780.json",
+      "sha": "dce606676164fcde6b1cfeba0e78bc77be748fac",
+      "size": 26116
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-09/20261009T230150207525Z_fb94eb45b7ca44efbe4670b541bcd661.json",
+      "sha": "ef878f5b30bbd6aa0efb4ff91651cfc25ea1ebd5",
+      "size": 37714
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-09/20261009T234425673678Z_07fa52efdb744114911cc3e0c1181e87.json",
+      "sha": "c1830ae704499ee760a349d17ba1365d352cc889",
+      "size": 39416
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-10/20261010T041016811256Z_601fed3d716c4faea542d39434b7904a.json",
+      "sha": "147f35d174360d1336bddb05c50c131b63a649b5",
+      "size": 38559
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-10/20261010T163911073010Z_0b048c3e8029430f810e28a434c2e8fb.json",
+      "sha": "3b11438e021b892254cc4b8eee70e9dfdfabe044",
+      "size": 31785
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-10/20261010T190700771729Z_18e636bfb2d24e3b8e9efcee1b522a28.json",
+      "sha": "67df9a114742080b4e5dc61cec474d54725c16a6",
+      "size": 25464
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-10/20261010T230652302068Z_c87154c1120f4fc89573737a86a7a6ef.json",
+      "sha": "d34ecc4f358515c9120a518103e9d03601d668db",
+      "size": 9761
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-11/20261011T034701917457Z_17339fdbb70148239940daaec4159869.json",
+      "sha": "2dca115d3d57872d9f84c6e0599c079bc496babe",
+      "size": 5288
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-11/20261011T191859617360Z_b0b5598d168444a7a42e8376bcde59d9.json",
+      "sha": "2b564680eacb7ba44c733bae5404e432b12c58fe",
+      "size": 16878
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-12/20261012T222238179546Z_9f7d228c6bb14f8e8449b398b0ba3d52.json",
+      "sha": "1b7cc16160da0fef9175ee227f55f24d2f8c2751",
+      "size": 24550
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-13/20261013T134336636466Z_bf7920d4f85f48928f29bc71a6077fb6.json",
+      "sha": "3e466af7a3040e2e56976dd6875b672ecf95710b",
+      "size": 24553
+    },
+    {
+      "path": "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-10-13/20261013T202926513986Z_0860c1df4f1f4d57a0fd725bf2fe61d9.json",
+      "sha": "b7186beb3ba6d22d554d5e9620eab3ce66bb9ee7",
+      "size": 24541
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-12/20260912T174146535165Z_68ab4eb9517e4e2689d60d5a0138a188.json",
+      "sha": "e6c297d974f3bd0eceee5d8d1311a778ef7804f2",
+      "size": 299248
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-12/20260912T175331903781Z_d38ff9161e8741c58a0614cb48ba40e9.json",
+      "sha": "9377e609ed4d097bb6c767c9c05eab14c329d1ba",
+      "size": 293828
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-12/20260912T180811560814Z_81a54351588e40df9e6460d97d2fb313.json",
+      "sha": "c30ce155b54a06ebb787bb50302767604340bd1c",
+      "size": 300943
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-12/20260912T192512296239Z_690cd84a9454469eb14bd3b800075f2e.json",
+      "sha": "6008677e096736ec2c8fbe7582e39164b3ecc549",
+      "size": 299000
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-12/20260912T200824276346Z_362bb51a259f45ee9246f604ee441a17.json",
+      "sha": "bf22ba49ca09219ce6267e9b4edcd104ee2e6b53",
+      "size": 199650
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-13/20260913T002858226878Z_6e0e336b8154453eb575761a758d0e38.json",
+      "sha": "377dbce3104e1afff6fd403f637882f914e38826",
+      "size": 39300
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-13/20260913T150820742668Z_9122509d499d490e89769590c97b5fec.json",
+      "sha": "3f672c144dcc866f848fc3b6241c43504792f377",
+      "size": 74536
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-16/20260916T150928806058Z_56d9e1ff361a4b289fa48a661197bb6d.json",
+      "sha": "7d38525a5f2a0f77007cba088576d2061bf4db82",
+      "size": 308095
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-17/20260917T120931735780Z_d6b2b4d6459b48fca9437552190b92cf.json",
+      "sha": "11b70fc75ba1ff0590ef7c0c756ceac35c7d6b50",
+      "size": 317078
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-17/20260917T151055415223Z_e698aceea07f4507abf7d1736b391b2c.json",
+      "sha": "fd2116aa0b4aa68217cd469c10dadb0baca3933f",
+      "size": 312939
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-17/20260917T160740414760Z_8a996ad1fc3d4d29b6790a67fed30f7e.json",
+      "sha": "d2e7abb93383834bc92c0b83b93447e8ff5cae56",
+      "size": 314807
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-18/20260918T002612919242Z_dc0205de541b4214974727f80e5722e0.json",
+      "sha": "9f734ddb7f04e2bf6b4a457fe6289da12cb7f741",
+      "size": 329907
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-18/20260918T120806933694Z_3f502963422f42b698a08e8b73e61650.json",
+      "sha": "42b59514eb2733814586fc08747cc3193b64f5f2",
+      "size": 332411
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-18/20260918T150925499327Z_74a794caf9f246e683a6175cbf050c9c.json",
+      "sha": "1870fc926e0471ada4f96caacfa50aa6e82b1664",
+      "size": 335859
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-18/20260918T200632908293Z_c5458ad48fe84482ac701c53ad1024c8.json",
+      "sha": "3c5f3fa6ee902976c112a95c5b11ebe9e5713590",
+      "size": 336189
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-19/20260919T002559940393Z_f3a9d837b7634b0c9789f17af9c2c1f7.json",
+      "sha": "c71657fd0f8d27c561f9d87f6dea1d70b14ac37c",
+      "size": 332616
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-19/20260919T120816600502Z_c0f9ed792fc24794a68380c48b75faf9.json",
+      "sha": "2dd565cc8ae1b10f106818666b04d35b0f086f8b",
+      "size": 344251
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-19/20260919T150821388717Z_aef74dd892d24c15b750c236b348531a.json",
+      "sha": "60ac4d02ec441639017dd516cb7346b139a55774",
+      "size": 347322
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-19/20260919T160625937378Z_44e68c1cde1041abbf8fda673ec43e3c.json",
+      "sha": "ac0f41dcffc9f152f2ea19ede076e0811dacad8b",
+      "size": 337946
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-19/20260919T200633276703Z_ab12827dd22b46e385f8de86b024f8a9.json",
+      "sha": "481d8389d57fbd9d67f0c36d2473209e64e0d730",
+      "size": 192077
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-20/20260920T002907255661Z_3dab06418ee74771b36f544bf705ab26.json",
+      "sha": "49627794683a7788585a7a382f114cf3dd8bbc30",
+      "size": 34506
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-20/20260920T150821133051Z_0647121117b74a81ad6251f32582d5fb.json",
+      "sha": "c927e497ee0e07c204c0df356895b7f98042cf32",
+      "size": 120254
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-21/20260921T150930804435Z_f58cbc45484a4e84ad3672fd0aa2bffb.json",
+      "sha": "a624a170e06b53315810016a7a9b483d7ae22bdf",
+      "size": 232168
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-22/20260922T061453113818Z_2aa4c195789548dca2d12e5814af2407.json",
+      "sha": "5ecebb519a69165f19727c6eb39f3f2adb500034",
+      "size": 246288
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-22/20260922T150956249253Z_4843114ca4dd47368708567e4aca3358.json",
+      "sha": "0d463469a78968b676f7ebc7db301799cf259aac",
+      "size": 246686
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-23/20260923T151009891780Z_e8978cd487ef420e870753ae6a1ef7eb.json",
+      "sha": "dc304cb22297a2b6fcea806303077c8b15da4277",
+      "size": 297368
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-24/20260924T120927487241Z_acab299123d146faab513e9535afb8b3.json",
+      "sha": "fbc49064c1930880c84589e1a9f2be242e73bc57",
+      "size": 301920
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-24/20260924T151018043526Z_abb81539149844bd8fe2663ac510208d.json",
+      "sha": "fa37692feaeabfbba0945463b275ab14fdd65da5",
+      "size": 300193
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-24/20260924T160837454666Z_e71473284eb745b4bf25c22a7a6d2bbf.json",
+      "sha": "05547dc82eed5e1068df9823ed3cf2c80f22fe9e",
+      "size": 300225
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-24/20260924T200704926196Z_b439b8b87fa44067ba6f730999dffb17.json",
+      "sha": "cb500de891ce8e7b2500a944e362e2979d36a4b7",
+      "size": 300992
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-25/20260925T002653429989Z_7ee2ac704eae476d82b7c5bf198ac9a1.json",
+      "sha": "cb4bff6ff5760592c853a8dbb09a3c3616eac144",
+      "size": 302752
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-25/20260925T120941075881Z_6449f85c6d114ffeb0d5e3ca69c08146.json",
+      "sha": "45e8f3130dc6fb226c3f72e718321f0e4d897a31",
+      "size": 303790
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-25/20260925T151022178665Z_95ee0776e18f4dda80ed5c035a5da583.json",
+      "sha": "731c231cf56a8199973939e5c4f3ce0755bf1f85",
+      "size": 317832
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-25/20260925T160824434111Z_97062aa4087b4b5c99ff6516c499beb3.json",
+      "sha": "599ef1abc2361a59d258b00b180904ba9027cc9a",
+      "size": 318110
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-25/20260925T200610489384Z_dbb1dcb031e84db7af9e23b41e677050.json",
+      "sha": "2325ce7f01e8ec8aecd3b0ad61bcf320598b5726",
+      "size": 327052
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-26/20260926T002632100315Z_c83024a3f8534b758352ca5bea8d13cb.json",
+      "sha": "13de2d03d559c3b74a13c266a98b9c74433cb547",
+      "size": 310741
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-26/20260926T120820465433Z_c8d6458b9f8d4d91b3ac1cf3f8097f57.json",
+      "sha": "e2849cf382005511c9df7d63b6c72e0cd2e66276",
+      "size": 350791
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-26/20260926T150925800360Z_480631ecd9ef4566a567eaae02baa3d7.json",
+      "sha": "998ec34836fffa0a715b6caaebe103cb5411d2a5",
+      "size": 359437
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-26/20260926T160751913910Z_974157cd1bec4f03a33b66668ff4da97.json",
+      "sha": "11dad9e17f591db715e410ee67ca9d0c43436440",
+      "size": 308196
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-27/20260927T003016827823Z_fff1f252206e4dddbcc42df5b4f30a56.json",
+      "sha": "1c7e849b4ac212d46026676da0e8bea9349e9f14",
+      "size": 45873
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-27/20260927T150934539469Z_43c6ad09b1c7465ebc3822afbd187b29.json",
+      "sha": "fe92002c349860ff39f2e2d8521914217956aecb",
+      "size": 113475
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-28/20260928T151038445483Z_436430adb03a4add9b14c2f1bee006a7.json",
+      "sha": "f35d8d5fc2251606438860a621c9e768f37ff7de",
+      "size": 245685
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-29/20260929T115116266619Z_11bc9a0800c248aaa977b404e69c4bd5.json",
+      "sha": "092d484573fd7b1d3c71e5c3842ac1bf11a0a3dd",
+      "size": 250586
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-29/20260929T151031425457Z_a4417bf3d1ee45c1b5df6e6bd321545f.json",
+      "sha": "0c2d2315df02baa81203db4e6f832492ff37b08d",
+      "size": 270841
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-09-30/20260930T151212354055Z_7862f7edee09436f99154b8a6b04975c.json",
+      "sha": "8cb718e68246c324e910f080fe4faea176d10a52",
+      "size": 327488
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-01/20261001T121020406153Z_d73e2963711642a085565ec9a42c5c48.json",
+      "sha": "df79ea339d53772750f10d14434fb95f0c77f169",
+      "size": 338124
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-01/20261001T151055922469Z_864ebdb0fe8b4bea871930af073b11ac.json",
+      "sha": "d13936e4bba6af7c511a004ef4ae25fff8750db5",
+      "size": 337561
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-01/20261001T204408395285Z_f23ca2fd8485457daf20b033b4fb5cd0.json",
+      "sha": "6aa89a0e7d6c3eaa0e74331a26047c045f3f731c",
+      "size": 338347
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-02/20261002T002920436258Z_3a5fdfc7731c4a7695bd0e8f9d6f1bbc.json",
+      "sha": "a359382a05c915d99fc1434e5d8d4aceb5c09ec0",
+      "size": 334303
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-02/20261002T170631710947Z_f1cdabb0a5304d0883ddc6bde2490570.json",
+      "sha": "fdfb4ac237813a17debf9bd90d0ef26f49b9a557",
+      "size": 350875
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-02/20261002T194513328125Z_9365a43f33024eaa9c20b20cf2dcf69c.json",
+      "sha": "911682a565657114abcfe08092b3533f6bcef84b",
+      "size": 350733
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-03/20261003T034015183714Z_70f35d039b7c492fb93d49ea644ad0c2.json",
+      "sha": "3f6b0de0054e200426ed7987c2b3de71966f7e97",
+      "size": 333513
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-03/20261003T152812334191Z_436441cd4c5147a88d0b1d9e43f9569f.json",
+      "sha": "c729205ae19e561c73068000a596a09fd4cedf12",
+      "size": 320651
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-03/20261003T183131387759Z_a522726c5e1c437eb33b3391fbe8802b.json",
+      "sha": "dc3c124b50864d70a0437c5b14f6e5576edcf601",
+      "size": 166117
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-03/20261003T185746356887Z_c0dd9d1f5e2c4f90af5ccfa8313a5523.json",
+      "sha": "76a6bf32291b6f53d8c4799ebfdd543c99072e73",
+      "size": 236555
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-03/20261003T223516958221Z_10b35dcd361e48c29a35e990641452d5.json",
+      "sha": "851400c4cd3637dc658146b8cc3b5fc39a531f0d",
+      "size": 101558
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-04/20261004T040915183312Z_5d99fff466414d519b99d70b2a2768cc.json",
+      "sha": "dcee56c2320f22d311ab613ccff0b9c1b4c763ca",
+      "size": 6284
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-04/20261004T183215905075Z_7057f6234db547948283e240832d2e90.json",
+      "sha": "dea61ef941b723d14b09cd1d922e4dae2838cb88",
+      "size": 179380
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-05/20261005T214826070456Z_cb9c5dedd88a49d79f05e08a58183063.json",
+      "sha": "2a93a8e1c89954866b30f38e7727f9c198b14142",
+      "size": 255609
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-06/20261006T062540569371Z_9d793d852f914d569e850d40938aa854.json",
+      "sha": "f934f94300a4bc1d814c552919305db91e7f6bbc",
+      "size": 255802
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-06/20261006T195858698904Z_89faf8f0edeb47658aa264cbc3fda597.json",
+      "sha": "c08dd5da0444502da81430d5ba88b988b1e9bd79",
+      "size": 260584
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-07/20261007T202603361006Z_cd61661baf554fce95e7a1d5d8e15b8f.json",
+      "sha": "163f721c05901ea103a674bbf3026aeff240aa6d",
+      "size": 166756
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-08/20261008T181405780401Z_36e3e392b13648639a9b06148670c754.json",
+      "sha": "296c50483f9467a90faccfd394586a1ea22469b4",
+      "size": 95469
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-09/20261009T234534231479Z_c5c12d748abc4535a5f07c526170d67c.json",
+      "sha": "fe2b2bfc8ef67bf32b6dea1f845c6611d0fa356c",
+      "size": 248194
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-10/20261010T041128263487Z_5ca6ee50754b4b88b337797f5f90074c.json",
+      "sha": "8a12c79672d4004e318d7d7d7bda7e0818329333",
+      "size": 232982
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-10/20261010T164006864519Z_138a051709804c1f88e32f5a2d6e1309.json",
+      "sha": "b40119108716d74b70486fc9bba661860e9d875a",
+      "size": 193258
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-10/20261010T190800639052Z_5c881bdd74f646b5ae3e4021ad47bce0.json",
+      "sha": "719c4ec2841a4898074e9f8af989131f126dd2f6",
+      "size": 55061
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-10/20261010T230746015479Z_d1d67857c99042aa9faf215108ff234b.json",
+      "sha": "a2555924fd16f94b05e14bc369ecb7558832e295",
+      "size": 56740
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-11/20261011T034749861213Z_65646e8e7d1b4bd1ad365ca31b1031ec.json",
+      "sha": "7ff6382ec7dfeb6ac9fc955d36aa28c979697dc5",
+      "size": 16388
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-11/20261011T191956509841Z_8e901c59d0ba4e91b4c18f0bbe4c8718.json",
+      "sha": "200ff4ec4dd1066af13622eb3f42315a43611732",
+      "size": 225050
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-12/20261012T222322589819Z_b20a73b8927c42909258a64584f47aea.json",
+      "sha": "eb370b7aa90a66ae5aae1508658cb699d19f7f1b",
+      "size": 259958
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-13/20261013T134435570006Z_0bdce01a4fec42f3b9d4aaad7975433e.json",
+      "sha": "ad65a102b0bc82ffacc8e838c7cd9ac43043c67f",
+      "size": 261108
+    },
+    {
+      "path": "data_files/raw/snapshots/parlay_api/season=2026/captured_date=2026-10-13/20261013T203028762050Z_ef0dff33b21d4b66ae8ba255f12755de.json",
+      "sha": "ac2ba18e99411fcd3f7a4d992ad28cadabf5eadf",
+      "size": 266308
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-08-27/20260827T212442632708Z_3cf9490a92c7432d9d9bd25e27d936b3.json",
+      "sha": "f46a5a34f7cedcf260ab2e5a14a1abf010fadc4c",
+      "size": 17398
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-01/20260901T150842788443Z_953e7cd8cff14001bef5d48a61bc64fb.json",
+      "sha": "fe13388d2788fddd731a67c4256df78ffe6538b4",
+      "size": 41393
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-03/20260903T160606014010Z_6e9ddada651541a2bf4776c1030f3c7b.json",
+      "sha": "92a37463807be612c284cfc84c9552ad38a23ec8",
+      "size": 41580
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-04/20260904T160536040993Z_9cdb2b66e1254184b1639538233340c0.json",
+      "sha": "9ce832a9d7522bf78dadf6a2941b9834b47ad5dd",
+      "size": 38284
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-05/20260905T160446381671Z_49fd625b829a4bdb9c2792a87db8a545.json",
+      "sha": "2649e01e9ed213fa7b9a88dec71fe394c1a78796",
+      "size": 39525
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-10/20260910T160525398265Z_285b7abc185f49cfb99b1275e6991bf4.json",
+      "sha": "6a71172a62e06cef9a5ab08b74db1dfe6befed47",
+      "size": 41946
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-11/20260911T160535261843Z_c939e300bb64474b803e08faca5358b2.json",
+      "sha": "d18bddbf4013f36b0d0cd726665e49415b7fb701",
+      "size": 40494
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-12/20260912T160500536244Z_0d73733815004aaf89cddaf2379dec93.json",
+      "sha": "ebe56d83461f765edced209ffdd5db7bb18f8ff1",
+      "size": 38869
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-12/20260912T175254186317Z_4fc303c4418a42ba8d282650da7b8db5.json",
+      "sha": "e2a42ee9f6e0bab7d3a22b979bc623e862b6af9c",
+      "size": 35682
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-12/20260912T180720326047Z_7afccbbd96ed4178b522bf8c5b21f838.json",
+      "sha": "40d0a4adceb511fb12d7a15dde50a33170840ca0",
+      "size": 34054
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-12/20260912T200726152741Z_4a265793bd214a6c8f681fe1a0bca6de.json",
+      "sha": "411a94335fa43bd78f22e16da8587596ee77e7da",
+      "size": 25183
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-18/20260918T160601430211Z_8147e8d933bc4d35bd4b204f7f38c979.json",
+      "sha": "51d16c25b8ca2ed6d7580d6cb9e1e29c30a44029",
+      "size": 40109
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-24/20260924T160732059978Z_a08a1de8ab4843c9bcd3e4f9fe41dd21.json",
+      "sha": "59e17ff79c09b3868c0022527eda6f83957cc2c9",
+      "size": 40994
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-25/20260925T160721604079Z_8b9fa7e54f43441d86292b2197162cd4.json",
+      "sha": "5365e8910c7612463e26ee1c1e4d7445b923184e",
+      "size": 41509
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-09-26/20260926T160701153186Z_6bf04873bf914e56af1d1273978db83c.json",
+      "sha": "fc48672c89b0fdc705bcf18376368705cfb20881",
+      "size": 37132
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-10-03/20261003T185650586754Z_ac54cadd71ca4f959d081589f858ba62.json",
+      "sha": "7f8150ec0b481470b7dd98d7ae414485285a620a",
+      "size": 26900
+    },
+    {
+      "path": "data_files/raw/snapshots/therundown/season=2026/captured_date=2026-10-07/20261007T202506475081Z_25ba1b32e2094c06b6cdcf8786047172.json",
+      "sha": "8fa5124266b0ff053688a7ac3a2642d7c5eaae04",
+      "size": 34902
+    }
+  ]
+}

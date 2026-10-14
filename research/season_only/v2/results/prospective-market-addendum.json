@@ -1,0 +1,5175 @@
+{
+  "recorded_at": "2026-10-14T02:40:02.799222+00:00",
+  "registration_sha256": "8145969d2633de4c068c6c5f4de05ed5232089b3578e3be5196418fb66d6d15c",
+  "original_issued_at": "2026-10-14T02:32:02.767092+00:00",
+  "reason": "Normalize sportsbook case aliases (Bet365/bet365) to one book identity; exclude raw payload references absent from the pinned Git tree. No model prediction changes.",
+  "eligibility": "All corrected quotes still must have been observed, captured, and available by original issuance, and be at most 24 hours old.",
+  "original_quotes_sha256": "93f740aeb22b0d32ecd37bd54128ea5ffc35ff30de2e79ba9ff9935152458f24",
+  "original_market_code_sha256": "51cfb8cc8c378063c23a0c417a0801eb1637cef56fabcdae8a1cd63514c8f311",
+  "corrected_quotes_sha256": "9a9ac43d2b130716da7c2066e907cd94ea29eaf526d75850efbd45ba6727feac",
+  "corrected_market_code_sha256": "396cae8549eda522ae973e391cb3f83225c4a41da18e8811faa94fbc4305c7ef",
+  "source_manifest_sha256": "1ab3df3ee81bcb0d5f81835d73cc42f2fdd4ca63bf8dbb22780d6f8c7c980688",
+  "quotes": [
+    {
+      "game_id": 401856719,
+      "original_probability": 0.9105882352941176,
+      "corrected_probability": 0.9089978213507626,
+      "quote": {
+        "value": 0.9089978213507626,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856720,
+      "original_probability": 0.8091644404368569,
+      "corrected_probability": 0.8092485549132947,
+      "quote": {
+        "value": 0.8092485549132947,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856721,
+      "original_probability": 0.658515671251387,
+      "corrected_probability": 0.6582776333039609,
+      "quote": {
+        "value": 0.6582776333039609,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856722,
+      "original_probability": 0.6957071093183138,
+      "corrected_probability": 0.6912521440823327,
+      "quote": {
+        "value": 0.6912521440823327,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856723,
+      "original_probability": 0.26240386065450155,
+      "corrected_probability": 0.2617578933608432,
+      "quote": {
+        "value": 0.2617578933608432,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856724,
+      "original_probability": 0.7769148201977977,
+      "corrected_probability": 0.7768331562167907,
+      "quote": {
+        "value": 0.7768331562167907,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856725,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856726,
+      "original_probability": 0.6704377766847024,
+      "corrected_probability": 0.669722398873946,
+      "quote": {
+        "value": 0.669722398873946,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856727,
+      "original_probability": 0.5727229047978585,
+      "corrected_probability": 0.5727229047978585,
+      "quote": {
+        "value": 0.5727229047978585,
+        "books": 1,
+        "newest_capture": "2026-10-13T20:29:26.513986+00:00",
+        "oldest_observation": "2026-10-13T20:29:26.513986+00:00",
+        "newest_availability": "2026-10-13T20:29:26.513986+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856728,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856729,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856730,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856731,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856732,
+      "original_probability": 0.726063829787234,
+      "corrected_probability": 0.726063829787234,
+      "quote": {
+        "value": 0.726063829787234,
+        "books": 1,
+        "newest_capture": "2026-10-13T20:29:26.513986+00:00",
+        "oldest_observation": "2026-10-13T20:29:26.513986+00:00",
+        "newest_availability": "2026-10-13T20:29:26.513986+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856733,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856734,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856735,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856736,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856737,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856738,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856739,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856740,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856741,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856742,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856743,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856744,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856745,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856746,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856747,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856748,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856749,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856750,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856751,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856752,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856753,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856754,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856755,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856756,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856757,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856758,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856759,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856760,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856761,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856762,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856763,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856764,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856765,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856809,
+      "original_probability": 0.23587004895416108,
+      "corrected_probability": 0.2336448598130841,
+      "quote": {
+        "value": 0.2336448598130841,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856828,
+      "original_probability": 0.8459558783437477,
+      "corrected_probability": 0.8454106280193238,
+      "quote": {
+        "value": 0.8454106280193238,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856829,
+      "original_probability": 0.5324675324675325,
+      "corrected_probability": 0.5324675324675325,
+      "quote": {
+        "value": 0.5324675324675325,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856830,
+      "original_probability": 0.6385542168674698,
+      "corrected_probability": 0.6385542168674698,
+      "quote": {
+        "value": 0.6385542168674698,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T13:44:21+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856831,
+      "original_probability": 0.6305197828540652,
+      "corrected_probability": 0.6301020408163266,
+      "quote": {
+        "value": 0.6301020408163266,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856832,
+      "original_probability": 0.6636481241914618,
+      "corrected_probability": 0.6652001195169049,
+      "quote": {
+        "value": 0.6652001195169049,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856833,
+      "original_probability": 0.1475409836065574,
+      "corrected_probability": 0.1475409836065574,
+      "quote": {
+        "value": 0.1475409836065574,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856834,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856835,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856836,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856837,
+      "original_probability": 0.6818181818181818,
+      "corrected_probability": 0.6818181818181818,
+      "quote": {
+        "value": 0.6818181818181818,
+        "books": 1,
+        "newest_capture": "2026-10-13T20:29:26.513986+00:00",
+        "oldest_observation": "2026-10-13T20:29:26.513986+00:00",
+        "newest_availability": "2026-10-13T20:29:26.513986+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401856838,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856839,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856840,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856841,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856842,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856843,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856844,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856845,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856846,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856847,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856848,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856849,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856850,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856851,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856852,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856853,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856854,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856855,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856856,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856857,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856858,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856859,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856860,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856861,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856862,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856863,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856864,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856865,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856866,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856867,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856868,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856869,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856870,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856871,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856872,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856873,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856874,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856875,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856876,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856877,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856878,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856879,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856880,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856882,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856883,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856884,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856885,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856886,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856887,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856888,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401856889,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858261,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858262,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858263,
+      "original_probability": 0.9128630705394192,
+      "corrected_probability": 0.9128630705394192,
+      "quote": {
+        "value": 0.9128630705394192,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858264,
+      "original_probability": 0.760246913580247,
+      "corrected_probability": 0.7600000000000001,
+      "quote": {
+        "value": 0.7600000000000001,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858265,
+      "original_probability": 0.16345908603132667,
+      "corrected_probability": 0.1626698850815973,
+      "quote": {
+        "value": 0.1626698850815973,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858266,
+      "original_probability": 0.5911949685534592,
+      "corrected_probability": 0.5911949685534592,
+      "quote": {
+        "value": 0.5911949685534592,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858267,
+      "original_probability": 0.3295622233152976,
+      "corrected_probability": 0.3295622233152976,
+      "quote": {
+        "value": 0.3295622233152976,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858268,
+      "original_probability": 0.740871613663133,
+      "corrected_probability": 0.740871613663133,
+      "quote": {
+        "value": 0.740871613663133,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858269,
+      "original_probability": 0.24465464465789238,
+      "corrected_probability": 0.24414799899320414,
+      "quote": {
+        "value": 0.24414799899320414,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858270,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858271,
+      "original_probability": 0.6968455551003688,
+      "corrected_probability": 0.6968455551003688,
+      "quote": {
+        "value": 0.6968455551003688,
+        "books": 1,
+        "newest_capture": "2026-10-13T20:29:26.513986+00:00",
+        "oldest_observation": "2026-10-13T20:29:26.513986+00:00",
+        "newest_availability": "2026-10-13T20:29:26.513986+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858272,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858273,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858274,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858275,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858276,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858277,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858278,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858279,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858280,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858281,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858282,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858283,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858284,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858285,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858286,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858287,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858288,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858289,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858290,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858291,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858292,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858293,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858294,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858295,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858296,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858297,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858298,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858299,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858300,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858301,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858302,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858303,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858304,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858305,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858306,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858307,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858308,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858309,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858310,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858311,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858312,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858313,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858314,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858315,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858316,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858317,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858488,
+      "original_probability": 0.3835616438356164,
+      "corrected_probability": 0.3835616438356164,
+      "quote": {
+        "value": 0.3835616438356164,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858489,
+      "original_probability": 0.6369041816941223,
+      "corrected_probability": 0.6369041816941223,
+      "quote": {
+        "value": 0.6369041816941223,
+        "books": 9,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T13:43:43+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858490,
+      "original_probability": 0.6805555555555556,
+      "corrected_probability": 0.6805555555555556,
+      "quote": {
+        "value": 0.6805555555555556,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858491,
+      "original_probability": 0.2716994956018685,
+      "corrected_probability": 0.2699228791773779,
+      "quote": {
+        "value": 0.2699228791773779,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858492,
+      "original_probability": 0.713908112048204,
+      "corrected_probability": 0.7135512302607419,
+      "quote": {
+        "value": 0.7135512302607419,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858493,
+      "original_probability": 0.6092072489908099,
+      "corrected_probability": 0.6092217417245347,
+      "quote": {
+        "value": 0.6092217417245347,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858494,
+      "original_probability": 0.5510489235922402,
+      "corrected_probability": 0.5506567324679315,
+      "quote": {
+        "value": 0.5506567324679315,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858495,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858496,
+      "original_probability": 0.3181818181818181,
+      "corrected_probability": 0.3181818181818181,
+      "quote": {
+        "value": 0.3181818181818181,
+        "books": 1,
+        "newest_capture": "2026-10-13T20:29:26.513986+00:00",
+        "oldest_observation": "2026-10-13T20:29:26.513986+00:00",
+        "newest_availability": "2026-10-13T20:29:26.513986+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401858497,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858498,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858499,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858500,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858501,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858502,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858503,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858504,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858505,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858506,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858507,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858508,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858509,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858510,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858511,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858512,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858513,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858514,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858515,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858516,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858517,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858518,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858519,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858520,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858521,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858522,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858523,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858524,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858525,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858526,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858527,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858528,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858529,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858530,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858531,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858532,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858533,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858534,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858535,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858536,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858537,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858538,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858539,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858540,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858541,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858542,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858543,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401858544,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401859185,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860903,
+      "original_probability": 0.8729007022134407,
+      "corrected_probability": 0.8720930232558138,
+      "quote": {
+        "value": 0.8720930232558138,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401860904,
+      "original_probability": 0.27424749163879597,
+      "corrected_probability": 0.27424749163879597,
+      "quote": {
+        "value": 0.27424749163879597,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401860905,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860906,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860907,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860908,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860909,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860910,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860911,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860912,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860913,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860914,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860915,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860916,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860917,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860918,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860919,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860920,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860923,
+      "original_probability": 0.8310131280892887,
+      "corrected_probability": 0.8291571753986332,
+      "quote": {
+        "value": 0.8291571753986332,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401860924,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401860925,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401861965,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401861966,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401861967,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401861968,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401861969,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862800,
+      "original_probability": 0.3716458035813388,
+      "corrected_probability": 0.37116624340691545,
+      "quote": {
+        "value": 0.37116624340691545,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862801,
+      "original_probability": 0.30423004792665137,
+      "corrected_probability": 0.30423004792665137,
+      "quote": {
+        "value": 0.30423004792665137,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862802,
+      "original_probability": 0.5613591246888856,
+      "corrected_probability": 0.5599461158509206,
+      "quote": {
+        "value": 0.5599461158509206,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862803,
+      "original_probability": 0.9238738988309602,
+      "corrected_probability": 0.9238738988309602,
+      "quote": {
+        "value": 0.9238738988309602,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862804,
+      "original_probability": 0.6945121557269809,
+      "corrected_probability": 0.6945121557269809,
+      "quote": {
+        "value": 0.6945121557269809,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862805,
+      "original_probability": 0.3739454479581802,
+      "corrected_probability": 0.3739769620858582,
+      "quote": {
+        "value": 0.3739769620858582,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862806,
+      "original_probability": 0.9039548022598869,
+      "corrected_probability": 0.9035903043557498,
+      "quote": {
+        "value": 0.9035903043557498,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401862807,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862808,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862809,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862810,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862811,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862812,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862813,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862814,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862815,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862816,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862817,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862818,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862819,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862820,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862821,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862822,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862823,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862824,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862825,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862826,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862827,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862828,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862829,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862830,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862831,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862832,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862833,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862834,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862835,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862836,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862837,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862838,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862839,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862840,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862841,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862842,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862843,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401862844,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864520,
+      "original_probability": 0.8465071542573424,
+      "corrected_probability": 0.8465011286681716,
+      "quote": {
+        "value": 0.8465011286681716,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401864521,
+      "original_probability": 0.15983522950176537,
+      "corrected_probability": 0.15999999999999998,
+      "quote": {
+        "value": 0.15999999999999998,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401864522,
+      "original_probability": 0.7297297297297298,
+      "corrected_probability": 0.7295615989239629,
+      "quote": {
+        "value": 0.7295615989239629,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401864523,
+      "original_probability": 0.27529587833146724,
+      "corrected_probability": 0.2763442650241385,
+      "quote": {
+        "value": 0.2763442650241385,
+        "books": 9,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401864524,
+      "original_probability": 0.4987684729064039,
+      "corrected_probability": 0.5,
+      "quote": {
+        "value": 0.5,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T13:43:25+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401864525,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864526,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864527,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864528,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864529,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864530,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864531,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864532,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864533,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864534,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864535,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864536,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864537,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864538,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864539,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864540,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864541,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864542,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864543,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864544,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864545,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864546,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864547,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864548,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864549,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401864550,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866441,
+      "original_probability": 0.6922751646093505,
+      "corrected_probability": 0.6912521440823327,
+      "quote": {
+        "value": 0.6912521440823327,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401866442,
+      "original_probability": 0.6755725190839694,
+      "corrected_probability": 0.6748881316547978,
+      "quote": {
+        "value": 0.6748881316547978,
+        "books": 8,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:30:14+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401866443,
+      "original_probability": 0.30874785591766724,
+      "corrected_probability": 0.30874785591766724,
+      "quote": {
+        "value": 0.30874785591766724,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401866444,
+      "original_probability": 0.32239446213311934,
+      "corrected_probability": 0.3214198699327173,
+      "quote": {
+        "value": 0.3214198699327173,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401866445,
+      "original_probability": 0.16434500980265582,
+      "corrected_probability": 0.16203240648129627,
+      "quote": {
+        "value": 0.16203240648129627,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401866446,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866447,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866448,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866449,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866450,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866451,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866452,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866453,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866454,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866455,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866456,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866457,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866458,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866459,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866460,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866461,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866462,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866463,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866464,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866465,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866466,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866467,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866468,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866469,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866470,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866471,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866472,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866473,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866474,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866475,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866476,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866478,
+      "original_probability": 0.7604938271604939,
+      "corrected_probability": 0.7616139164049288,
+      "quote": {
+        "value": 0.7616139164049288,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401866663,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866664,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866665,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866666,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866667,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866668,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866669,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866670,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866671,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866672,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866673,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866674,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866675,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866676,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866677,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866678,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866679,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866680,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866681,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866682,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866683,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866684,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866685,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866686,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866687,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866688,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866689,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866690,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866691,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866692,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866693,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866694,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866695,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866696,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866697,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866698,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866699,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401866700,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867689,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867807,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867808,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867809,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867810,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867811,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867812,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867821,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867822,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867823,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867824,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867825,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867830,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867831,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867832,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867833,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867837,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867838,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867839,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867841,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867842,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867843,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867844,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867849,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867850,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867851,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867852,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867853,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867854,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867861,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867862,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867863,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867864,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867870,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867871,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867872,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867873,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867878,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867879,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867880,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867881,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867887,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867888,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867892,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867893,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867897,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867901,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867902,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867903,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867904,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867905,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867906,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867912,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867913,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867914,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867915,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867920,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867921,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867922,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867923,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867925,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867926,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867927,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867931,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867932,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867933,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867934,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867955,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867956,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867957,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867958,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867959,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867962,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867963,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867964,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867965,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867968,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867969,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867970,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867971,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867975,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867976,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867981,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867993,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867994,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867995,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867996,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867997,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401867998,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868002,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868003,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868004,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868005,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868006,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868012,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868013,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868014,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868015,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868019,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868020,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868021,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868026,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868027,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868030,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868031,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868032,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868035,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868036,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868038,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868039,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868055,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868056,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868057,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868058,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868059,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868066,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868067,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868068,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868069,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868079,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868080,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868081,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868082,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868083,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868088,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868089,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868090,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868091,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868092,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868096,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868097,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868098,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868099,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868100,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868105,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868106,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868107,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868108,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868109,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868116,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868117,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868121,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868122,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868125,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868126,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868127,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868128,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868132,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868134,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868135,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868136,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868137,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868138,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868145,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868146,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868147,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868152,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868153,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868157,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868161,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868165,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868166,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868167,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868174,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868175,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868176,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868177,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868178,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868181,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868182,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868183,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868184,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868185,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868189,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868190,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868191,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868192,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868193,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868199,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868200,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868201,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868202,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868203,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868207,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868208,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868213,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868214,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868215,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868216,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868217,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868218,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868222,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868223,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868224,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868225,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868226,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868230,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868231,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868232,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868233,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868234,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868238,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868239,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868244,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868250,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868251,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868252,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868253,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868257,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868258,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868259,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868260,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868266,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868267,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868268,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868271,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868272,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868277,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868278,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868283,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868286,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868287,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868289,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868293,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868294,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868296,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868301,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868302,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868303,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868304,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868310,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868311,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868312,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868313,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868314,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868319,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868320,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868321,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868322,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868323,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868330,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868331,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868332,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868341,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868342,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868343,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868344,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868348,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868349,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868350,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868351,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868352,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868353,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868361,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868362,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868363,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868364,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868365,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868377,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868378,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868379,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868380,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868383,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868384,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868385,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868388,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868389,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868392,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868393,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868395,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868396,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868398,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868399,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868937,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868938,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868939,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868940,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868941,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868943,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868944,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868945,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868946,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868947,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868949,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868950,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868951,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868956,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868957,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868961,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868969,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401868972,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869132,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869133,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869134,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869135,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869138,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869139,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869140,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869141,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869145,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869146,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869148,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869149,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869152,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869153,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869154,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869155,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869844,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869845,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869846,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869927,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869928,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869929,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869930,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869934,
+      "original_probability": 0.30423004792665137,
+      "corrected_probability": 0.3046844002741172,
+      "quote": {
+        "value": 0.3046844002741172,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401869935,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869936,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869937,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869938,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869939,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869944,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869945,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869946,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869947,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869950,
+      "original_probability": 0.38932620989513766,
+      "corrected_probability": 0.38938400499084014,
+      "quote": {
+        "value": 0.38938400499084014,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401869951,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869952,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869953,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869954,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869957,
+      "original_probability": 0.7916666666666667,
+      "corrected_probability": 0.7915141532454857,
+      "quote": {
+        "value": 0.7915141532454857,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401869958,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869959,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869963,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869964,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869966,
+      "original_probability": 0.6187290969899665,
+      "corrected_probability": 0.6187290969899665,
+      "quote": {
+        "value": 0.6187290969899665,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401869967,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869968,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401869969,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870752,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870769,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870795,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870796,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870804,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870841,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401870842,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871054,
+      "original_probability": 0.4176257809930944,
+      "corrected_probability": 0.4179383657817183,
+      "quote": {
+        "value": 0.4179383657817183,
+        "books": 12,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401871055,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871056,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871057,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871058,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871059,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871060,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871061,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871062,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871063,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871068,
+      "original_probability": 0.4812687995624829,
+      "corrected_probability": 0.4782608695652174,
+      "quote": {
+        "value": 0.4782608695652174,
+        "books": 11,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401871069,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871070,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871071,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871072,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871073,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871074,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871075,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871076,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871077,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871078,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871079,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871080,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871081,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871082,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871083,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871091,
+      "original_probability": 0.15404412165625242,
+      "corrected_probability": 0.15404412165625242,
+      "quote": {
+        "value": 0.15404412165625242,
+        "books": 10,
+        "newest_capture": "2026-10-13T20:30:28.762050+00:00",
+        "oldest_observation": "2026-10-13T20:29:19+00:00",
+        "newest_availability": "2026-10-13T20:30:28.762050+00:00",
+        "max_age_hours": 24
+      }
+    },
+    {
+      "game_id": 401871092,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871093,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871094,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871095,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871096,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871097,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871098,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871099,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871100,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871101,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871102,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401871103,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401872617,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401872619,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401872643,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    },
+    {
+      "game_id": 401891330,
+      "original_probability": null,
+      "corrected_probability": null,
+      "quote": null
+    }
+  ]
+}

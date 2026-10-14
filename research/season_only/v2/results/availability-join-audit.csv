@@ -1,0 +1,39 @@
+game_id,team_id,player,status,matched,nominal_absence_probability,source
+401411146,152,Devin Leary,out,True,1.0,https://www.clickorlando.com/sports/2022/10/15/nc-state-qb-devin-leary-out-for-season-will-have-surgery/
+401411154,152,Devin Leary,out,True,1.0,https://www.clickorlando.com/sports/2022/10/15/nc-state-qb-devin-leary-out-for-season-will-have-surgery/
+401411161,152,Devin Leary,out,True,1.0,https://www.clickorlando.com/sports/2022/10/15/nc-state-qb-devin-leary-out-for-season-will-have-surgery/
+401411167,152,Devin Leary,out,True,1.0,https://www.clickorlando.com/sports/2022/10/15/nc-state-qb-devin-leary-out-for-season-will-have-surgery/
+401411172,152,Devin Leary,out,True,1.0,https://www.clickorlando.com/sports/2022/10/15/nc-state-qb-devin-leary-out-for-season-will-have-surgery/
+401520429,52,Jordan Travis,out,True,1.0,https://news.wfsu.org/wfsu-local-news/2023-11-20/college-football-playoffs-can-florida-state-keep-playoff-hopes-alive-after-travis-injury
+401539478,52,Jordan Travis,out,True,1.0,https://news.wfsu.org/wfsu-local-news/2023-11-20/college-football-playoffs-can-florida-state-keep-playoff-hopes-alive-after-travis-injury
+401581109,30,Caleb Williams,opt_out,True,1.0,https://www.cbsnews.com/losangeles/news/heisman-winner-caleb-williams-to-skip-uscs-holiday-bowl-trip-fueling-nfl-expectations-2/
+401551773,52,Jordan Travis,out,True,1.0,https://news.wfsu.org/wfsu-local-news/2023-11-20/college-football-playoffs-can-florida-state-keep-playoff-hopes-alive-after-travis-injury
+401628393,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky
+401636903,254,Cameron Rising,out,True,1.0,https://kutv.com/sports/utah-utes/utah-qb-cam-rising-out-indefinitely-freshman-isaac-wilson-named-starter
+401635516,152,Grayson McCall,out,True,1.0,https://www.reuters.com/sports/nc-state-qb-grayson-mccall-concussions-retires-football-2024-10-24/
+401628408,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky
+401628417,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky
+401628417,57,Eugene Wilson III,out,True,1.0,https://floridagators.com/news/2024/11/6/football-carters-corner-hbc-meets-mcconaughey-wilson-webb-takes-on-napier
+401635608,152,Grayson McCall,out,True,1.0,https://www.reuters.com/sports/nc-state-qb-grayson-mccall-concussions-retires-football-2024-10-24/
+401628420,57,Jamari Lyons,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Kahleil Jackson,out,True,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Eugene Wilson III,out,True,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Jason Marshall Jr.,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Devin Moore,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Asa Turner,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Ja'Keem Jackson,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Devon Manuel,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Treyaun Webb,out,True,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401628420,57,Grayson Howard,out,False,1.0,https://floridagators.com/news/2024/11/15/football-the-opening-kickoff-no-21-lsu-at-florida-lagway-back-at-qb-florida-vs-lsu-sec-football
+401634772,152,Grayson McCall,out,True,1.0,https://www.reuters.com/sports/nc-state-qb-grayson-mccall-concussions-retires-football-2024-10-24/
+401628429,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky
+401628429,57,Eugene Wilson III,out,True,1.0,https://floridagators.com/news/2024/11/6/football-carters-corner-hbc-meets-mcconaughey-wilson-webb-takes-on-napier
+401635624,152,Grayson McCall,out,True,1.0,https://www.reuters.com/sports/nc-state-qb-grayson-mccall-concussions-retires-football-2024-10-24/
+401628438,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky
+401628438,57,Eugene Wilson III,out,True,1.0,https://floridagators.com/news/2024/11/6/football-carters-corner-hbc-meets-mcconaughey-wilson-webb-takes-on-napier
+401677084,57,Graham Mertz,out,True,1.0,https://floridagators.com/news/2024/10/14/football-gators-freshman-qb-Lagways-time-has-arrived-with-veteran-mertzs-season-over-florida-sec-kentucky
+401677084,57,Eugene Wilson III,out,True,1.0,https://floridagators.com/news/2024/11/6/football-carters-corner-hbc-meets-mcconaughey-wilson-webb-takes-on-napier
+401677098,152,Grayson McCall,out,True,1.0,https://www.reuters.com/sports/nc-state-qb-grayson-mccall-concussions-retires-football-2024-10-24/
+401677105,150,Maalik Murphy,opt_out,True,1.0,https://www.wral.com/sports/archive/21749965/
+401752729,201,John Mateer,out,True,1.0,https://soonersports.com/news/2025/9/23/football-mateer-to-undergo-surgery-wednesday

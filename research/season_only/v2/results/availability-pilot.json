@@ -1,0 +1,21 @@
+{
+  "games": 24,
+  "interpretation": "Nonrepresentative hand-curated integration pilot. No claim of a general availability-model improvement.",
+  "actual_report_events": 20,
+  "source_urls": 10,
+  "changed_forecasts": 9,
+  "baseline": {
+    "games": 24,
+    "accuracy": 0.625,
+    "brier": 0.2419899055586465,
+    "log_loss": 0.6902765446647794
+  },
+  "with_availability": {
+    "games": 24,
+    "accuracy": 0.625,
+    "brier": 0.24115389701944992,
+    "log_loss": 0.6889877369845703
+  },
+  "matched_report_rows": 31,
+  "unsupported_or_unmatched_rows": 7
+}

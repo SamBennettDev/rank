@@ -1,0 +1,25 @@
+{
+  "frozen_at": "2026-10-14T02:21:06.930312+00:00",
+  "validation_years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "gates": [
+    "constant",
+    "sample_size"
+  ],
+  "weights": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "criterion": "Highest macro-season overall winner accuracy; tie by macro-season early accuracy, then pooled log loss.",
+  "interpretation": "Additional older-fold selection before reading V2 later-season results; all results remain retrospective development.",
+  "source_selection_sha256": "6356e0c693e5000a7b82e4f6e444f98a66f11f0dc9a2a0d8f381fceabb35b1c8"
+}

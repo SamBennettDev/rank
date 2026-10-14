@@ -1,0 +1,21 @@
+{
+  "repository": "gmalbert/college-football-predictions",
+  "revision": "4cd9934927a9510ca534a540a0a2eebcec7408e6",
+  "url": "https://raw.githubusercontent.com/gmalbert/college-football-predictions/4cd9934927a9510ca534a540a0a2eebcec7408e6/data_files/processed/line_snapshots.parquet",
+  "raw_sha256": "fdf3de448cdf24b680b8e59461873192bfb8b53780a6e0f0f921d4e570f2e355",
+  "games_url": "https://raw.githubusercontent.com/gmalbert/college-football-predictions/4cd9934927a9510ca534a540a0a2eebcec7408e6/data_files/processed/games.parquet",
+  "games_sha256": "170bd41f749fca520ea57c88e88dffddc2df9d3aedbacfe4988af72a543fcbcd",
+  "output_sha256": "9a9ac43d2b130716da7c2066e907cd94ea29eaf526d75850efbd45ba6727feac",
+  "source_rows": 347808,
+  "eligible_rows": 105798,
+  "games": 808,
+  "quote_side_reversals": 0,
+  "unresolved_participant_games": 0,
+  "missing_raw_paths": [
+    "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-27/20260827T202743545274Z_1be4efe2704b48b0b1d037e9d6cf1b59.json",
+    "data_files/raw/snapshots/odds_api_io/season=2026/captured_date=2026-08-27/20260827T202901567835Z_5b989b1f8b834a3fbfd2347e4a73fd82.json"
+  ],
+  "unresolved_raw_path_rows": 1626,
+  "raw_index_sha256": "fcd26be34894d676e3320a012d2fa18fb102d1d3b8fcffa41781bfb430569a9f",
+  "interpretation": "Public third-party immutable capture archive; timestamps are source assertions, not independently audited bookmaker clocks. No historical capture is invented. Captures must precede canonical kickoff; inferred top-ups are excluded."
+}

@@ -1,0 +1,276 @@
+{
+  "frozen_at": "2026-10-14T02:07:26.713278+00:00",
+  "folds": [
+    {
+      "training": [
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013
+      ],
+      "validation": [
+        2014,
+        2015
+      ]
+    },
+    {
+      "training": [
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "validation": [
+        2016,
+        2017
+      ]
+    },
+    {
+      "training": [
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "validation": [
+        2018,
+        2019
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    }
+  ],
+  "alphas": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "criterion": "Mean of macro-season overall winner accuracy and macro-season low-evidence accuracy; tie by pooled log loss.",
+  "low_evidence": "Either team has at most five completed current-season games.",
+  "forbidden_selection_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "status": "All historical tests are retrospective development; future games after protocol freeze are prospective.",
+  "source_manifest_sha256": "98690d784994a39a6bac6afbf28e9bf9d3ea8e47b684cf296e14807023900cbb",
+  "code_sha256": {
+    "train_experts.py": "7f6a9fb390997812d32a19556a02e59e1472f711c5a9eefdb3926ed78ff942bc",
+    "model.py": "81e575cbc0122a19b64f9624a5bb8f6a608ee861943ea2e1f22348ab50098fe5",
+    "context_features.py": "b5749577b8e66bd9a14d80269fad0c9acfb24deee371ee877e9dc41cc20a7fbb"
+  }
+}

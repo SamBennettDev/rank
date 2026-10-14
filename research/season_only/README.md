@@ -4,6 +4,8 @@ Historical supervised learning is compatible with equal preseason starts: learn 
 
 Open [REPORT.html](REPORT.html) for the interactive comparison and every Week 6 ranking, [REPORT.pdf](REPORT.pdf) for the printable report, and [METHODS.html](METHODS.html) for mechanisms, formulas, and all features.
 
+The [four-improvement follow-up](v2/README.md) adds early-season experts, availability ingestion and a sourced pilot, richer situation/drive/player features, multi-period validation, timestamp-matched public odds, and an immutable prospective registration. Its [report](v2/REPORT.html) compares the new variants with this original baseline.
+
 The selected neural blend achieved **70.86%** winner accuracy on 3,603 FBS games in 2020–2025. On the same 3,594 games with archived spreads, it achieved **70.90% versus 72.33%** for spread favorites. On the same 3,025 moneyline games, it achieved **70.35% versus 71.14%** for market favorites. This research does **not** establish a general market edge. It does outperform the CFP higher-ranked-team pick on the matched committee-ranking games. Details, uncertainty, coverage, and differing information dates are in the report.
 
 ## Saved work

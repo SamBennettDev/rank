@@ -1,0 +1,1922 @@
+[
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7206338512564772,
+      "macro_season_accuracy": 0.7251333035866129,
+      "macro_early_accuracy": 0.7161343989263416,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17927891686800865,
+        "log_loss": 0.5324328197006956
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7252045731322392,
+      "macro_season_accuracy": 0.7279682086814258,
+      "macro_early_accuracy": 0.7224409375830527,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7280204197390812,
+        "brier": 0.17899891187985914,
+        "log_loss": 0.5317764487766224
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7260998131677796,
+      "macro_season_accuracy": 0.7282295080566593,
+      "macro_early_accuracy": 0.7239701182789,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7283040272263188,
+        "brier": 0.17882303608940278,
+        "log_loss": 0.5313954759374567
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7159838167193235,
+      "macro_season_accuracy": 0.7251546467737491,
+      "macro_early_accuracy": 0.7068129866648981,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.18009502035117322,
+        "log_loss": 0.5344224928881145
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7167608786802231,
+      "macro_season_accuracy": 0.7251520998145947,
+      "macro_early_accuracy": 0.7083696575458515,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17983255306388057,
+        "log_loss": 0.5338042681666999
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.717104827887391,
+      "macro_season_accuracy": 0.7251329466846514,
+      "macro_early_accuracy": 0.7090767090901305,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.1796233837346351,
+        "log_loss": 0.5333302253199901
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7207746291337644,
+      "macro_season_accuracy": 0.7254148593411874,
+      "macro_early_accuracy": 0.7161343989263416,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7254679523539421,
+        "brier": 0.17927537208961086,
+        "log_loss": 0.5323921129498943
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7242718168168014,
+      "macro_season_accuracy": 0.7276755830401039,
+      "macro_early_accuracy": 0.720868050593499,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17899382013584691,
+        "log_loss": 0.5317373862631483
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7253159429199563,
+      "macro_season_accuracy": 0.7282284048072616,
+      "macro_early_accuracy": 0.7224034810326511,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7283040272263188,
+        "brier": 0.17881738044718384,
+        "log_loss": 0.5313592362094901
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7159838167193235,
+      "macro_season_accuracy": 0.7251546467737491,
+      "macro_early_accuracy": 0.7068129866648981,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.18009519391365064,
+        "log_loss": 0.5344229570547364
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7167608786802231,
+      "macro_season_accuracy": 0.7251520998145947,
+      "macro_early_accuracy": 0.7083696575458515,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17983263248815057,
+        "log_loss": 0.5338044907531554
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.717104827887391,
+      "macro_season_accuracy": 0.7251329466846514,
+      "macro_early_accuracy": 0.7090767090901305,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17962336584730393,
+        "log_loss": 0.5333302038864449
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7204250013412503,
+      "macro_season_accuracy": 0.7262676436454263,
+      "macro_early_accuracy": 0.7145823590370742,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7263187748156551,
+        "brier": 0.1793837454704404,
+        "log_loss": 0.532779875632668
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7213673007651535,
+      "macro_season_accuracy": 0.7265374427963626,
+      "macro_early_accuracy": 0.7161971587339445,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7266023823028928,
+        "brier": 0.1791081659151208,
+        "log_loss": 0.5319986265776868
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7202438053472067,
+      "macro_season_accuracy": 0.7250967583449518,
+      "macro_early_accuracy": 0.7153908523494615,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17907804470157776,
+        "log_loss": 0.5318643916939915
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7159838167193235,
+      "macro_season_accuracy": 0.7251546467737491,
+      "macro_early_accuracy": 0.7068129866648981,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.18009511797332356,
+        "log_loss": 0.5344227159387861
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7167608786802231,
+      "macro_season_accuracy": 0.7251520998145947,
+      "macro_early_accuracy": 0.7083696575458515,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17983264118723133,
+        "log_loss": 0.533804470556932
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.717104827887391,
+      "macro_season_accuracy": 0.7251329466846514,
+      "macro_early_accuracy": 0.7090767090901305,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17962344742268138,
+        "log_loss": 0.533330372695798
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7197773061890615,
+      "macro_season_accuracy": 0.7265676061825076,
+      "macro_early_accuracy": 0.7129870061956155,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7266023823028928,
+        "brier": 0.17942878429857562,
+        "log_loss": 0.5328231169762151
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7264799251605939,
+      "macro_season_accuracy": 0.7305167258102306,
+      "macro_early_accuracy": 0.7224431245109572,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7305728871242201,
+        "brier": 0.17919267150685178,
+        "log_loss": 0.5320901814867983
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7258343324267786,
+      "macro_season_accuracy": 0.7299450913734886,
+      "macro_early_accuracy": 0.7217235734800687,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7300056721497448,
+        "brier": 0.1791981277772247,
+        "log_loss": 0.5319824697798063
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7159838167193235,
+      "macro_season_accuracy": 0.7251546467737491,
+      "macro_early_accuracy": 0.7068129866648981,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.18009502606752126,
+        "log_loss": 0.5344224670502817
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7167608786802231,
+      "macro_season_accuracy": 0.7251520998145947,
+      "macro_early_accuracy": 0.7083696575458515,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17983255936617312,
+        "log_loss": 0.5338042373045572
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "rich",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.717104827887391,
+      "macro_season_accuracy": 0.7251329466846514,
+      "macro_early_accuracy": 0.7090767090901305,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17962340242477373,
+        "log_loss": 0.5333302254000354
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7215889244279955,
+      "macro_season_accuracy": 0.7240048883432019,
+      "macro_early_accuracy": 0.7191729605127891,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7240499149177538,
+        "brier": 0.1810524403356338,
+        "log_loss": 0.5359128748706241
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7227933988701178,
+      "macro_season_accuracy": 0.7248643776075987,
+      "macro_early_accuracy": 0.720722420132637,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7249007373794668,
+        "brier": 0.1806267870008976,
+        "log_loss": 0.5349790306080889
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7291479778464145,
+      "macro_season_accuracy": 0.7299559543346503,
+      "macro_early_accuracy": 0.7283400013581788,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7300056721497448,
+        "brier": 0.18042567619574396,
+        "log_loss": 0.5346647333471556
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7155404101564086,
+      "macro_season_accuracy": 0.724575043505646,
+      "macro_early_accuracy": 0.7065057768071711,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7246171298922292,
+        "brier": 0.17973282723056838,
+        "log_loss": 0.5331772803662936
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7210660539500119,
+      "macro_season_accuracy": 0.7276952902662791,
+      "macro_early_accuracy": 0.7144368176337447,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17950576680016528,
+        "log_loss": 0.532588533272878
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7206691005602327,
+      "macro_season_accuracy": 0.7268352113411093,
+      "macro_early_accuracy": 0.7145029897793561,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17938530083750814,
+        "log_loss": 0.532295409367521
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.721076761298904,
+      "macro_season_accuracy": 0.7228705945881688,
+      "macro_early_accuracy": 0.7192829280096391,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7229154849688032,
+        "brier": 0.1809435392006473,
+        "log_loss": 0.5357696756493645
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7242859115800258,
+      "macro_season_accuracy": 0.7254440271794822,
+      "macro_early_accuracy": 0.7231277959805694,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7254679523539421,
+        "brier": 0.18047722869220695,
+        "log_loss": 0.5347755909234241
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7273821873375883,
+      "macro_season_accuracy": 0.7279535540128451,
+      "macro_early_accuracy": 0.7268108206623314,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7280204197390812,
+        "brier": 0.1802846664110782,
+        "log_loss": 0.5345401064462184
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7160811072044586,
+      "macro_season_accuracy": 0.724855155550464,
+      "macro_early_accuracy": 0.7073070588584532,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7249007373794668,
+        "brier": 0.17973226359396285,
+        "log_loss": 0.5331754810021574
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7210660539500119,
+      "macro_season_accuracy": 0.7276952902662791,
+      "macro_early_accuracy": 0.7144368176337447,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.179505370290636,
+        "log_loss": 0.5325872387513078
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7206691005602327,
+      "macro_season_accuracy": 0.7268352113411093,
+      "macro_early_accuracy": 0.7145029897793561,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17938504334286506,
+        "log_loss": 0.5322945470685947
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7163668875416513,
+      "macro_season_accuracy": 0.7234442160916599,
+      "macro_early_accuracy": 0.7092895589916429,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7234826999432785,
+        "brier": 0.18028086907336188,
+        "log_loss": 0.5341930942614528
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7182858265044523,
+      "macro_season_accuracy": 0.7243188842586915,
+      "macro_early_accuracy": 0.712252768750213,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7243335224049915,
+        "brier": 0.17962800619226443,
+        "log_loss": 0.5328475644355072
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7259440678941356,
+      "macro_season_accuracy": 0.7288355168008079,
+      "macro_early_accuracy": 0.7230526189874631,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7288712422007941,
+        "brier": 0.17947860615854208,
+        "log_loss": 0.533079046412627
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7160811072044586,
+      "macro_season_accuracy": 0.724855155550464,
+      "macro_early_accuracy": 0.7073070588584532,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7249007373794668,
+        "brier": 0.17973212003792777,
+        "log_loss": 0.5331752475574286
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7210660539500119,
+      "macro_season_accuracy": 0.7276952902662791,
+      "macro_early_accuracy": 0.7144368176337447,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.179505279482676,
+        "log_loss": 0.5325871147735615
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7206691005602327,
+      "macro_season_accuracy": 0.7268352113411093,
+      "macro_early_accuracy": 0.7145029897793561,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17938501343701,
+        "log_loss": 0.5322945545212842
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.714998334362712,
+      "macro_season_accuracy": 0.7211783984744343,
+      "macro_early_accuracy": 0.7088182702509896,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7212138400453773,
+        "brier": 0.18158530356340163,
+        "log_loss": 0.53872108890363
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7199122128160111,
+      "macro_season_accuracy": 0.7231442535545783,
+      "macro_early_accuracy": 0.7166801720774439,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7231990924560409,
+        "brier": 0.181277052430067,
+        "log_loss": 0.538157950974032
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7214030881360689,
+      "macro_season_accuracy": 0.7231416834435338,
+      "macro_early_accuracy": 0.7196644928286039,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7231990924560409,
+        "brier": 0.18181310327973285,
+        "log_loss": 0.5403840851206965
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7160811072044586,
+      "macro_season_accuracy": 0.724855155550464,
+      "macro_early_accuracy": 0.7073070588584532,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7249007373794668,
+        "brier": 0.1797318029816624,
+        "log_loss": 0.5331743646191925
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7210660539500119,
+      "macro_season_accuracy": 0.7276952902662791,
+      "macro_early_accuracy": 0.7144368176337447,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17950502957703077,
+        "log_loss": 0.5325864086709587
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7206691005602327,
+      "macro_season_accuracy": 0.7268352113411093,
+      "macro_early_accuracy": 0.7145029897793561,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17938482266411393,
+        "log_loss": 0.532294005900146
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.719070289964002,
+      "macro_season_accuracy": 0.7226393700204713,
+      "macro_early_accuracy": 0.7155012099075327,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7226318774815655,
+        "brier": 0.1827069342518552,
+        "log_loss": 0.5415805556836997
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7202482956947858,
+      "macro_season_accuracy": 0.7234890599796114,
+      "macro_early_accuracy": 0.7170075314099601,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7234826999432785,
+        "brier": 0.18255082512242818,
+        "log_loss": 0.5411859446704225
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.719595426955827,
+      "macro_season_accuracy": 0.7223171964870031,
+      "macro_early_accuracy": 0.7168736574246509,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7223482699943279,
+        "brier": 0.18283444641714752,
+        "log_loss": 0.5420844790851689
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7167402725872212,
+      "macro_season_accuracy": 0.7237126476987976,
+      "macro_early_accuracy": 0.7097678974756448,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7237663074305162,
+        "brier": 0.1794007226848499,
+        "log_loss": 0.532512013535599
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7200206876738398,
+      "macro_season_accuracy": 0.7262796561597663,
+      "macro_early_accuracy": 0.7137617191879131,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7263187748156551,
+        "brier": 0.17920957251132497,
+        "log_loss": 0.532064398849244
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7186779670187814,
+      "macro_season_accuracy": 0.725155259586412,
+      "macro_early_accuracy": 0.7122006744511508,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17914771208740837,
+        "log_loss": 0.531970539335599
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.721161817801522,
+      "macro_season_accuracy": 0.7214482879712012,
+      "macro_early_accuracy": 0.7208753476318428,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7214974475326149,
+        "brier": 0.18454345192790084,
+        "log_loss": 0.5466515396721263
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7228504233498689,
+      "macro_season_accuracy": 0.7217590943465059,
+      "macro_early_accuracy": 0.723941752353232,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7217810550198526,
+        "brier": 0.18432891864579806,
+        "log_loss": 0.5460548159671257
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7180557913609251,
+      "macro_season_accuracy": 0.718622742497248,
+      "macro_early_accuracy": 0.7174888402246022,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7186613726602382,
+        "brier": 0.1847385446105728,
+        "log_loss": 0.5472615031439384
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7167402725872212,
+      "macro_season_accuracy": 0.7237126476987976,
+      "macro_early_accuracy": 0.7097678974756448,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7237663074305162,
+        "brier": 0.17940087074177516,
+        "log_loss": 0.5325122702684517
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7200206876738398,
+      "macro_season_accuracy": 0.7262796561597663,
+      "macro_early_accuracy": 0.7137617191879131,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7263187748156551,
+        "brier": 0.1792097933774867,
+        "log_loss": 0.5320648645423522
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7186779670187814,
+      "macro_season_accuracy": 0.725155259586412,
+      "macro_early_accuracy": 0.7122006744511508,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.17914800491724256,
+        "log_loss": 0.531971193510736
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7185189044124278,
+      "macro_season_accuracy": 0.7217051743488435,
+      "macro_early_accuracy": 0.7153326344760123,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7217810550198526,
+        "brier": 0.18606998745012374,
+        "log_loss": 0.5548889353068841
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7145867871295888,
+      "macro_season_accuracy": 0.7194577826370633,
+      "macro_early_accuracy": 0.7097157916221143,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7195121951219512,
+        "brier": 0.18572739086818638,
+        "log_loss": 0.5534801434823808
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7172002968626511,
+      "macro_season_accuracy": 0.7214694032487815,
+      "macro_early_accuracy": 0.7129311904765206,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7214974475326149,
+        "brier": 0.18626430941424355,
+        "log_loss": 0.5555092427943106
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7167402725872212,
+      "macro_season_accuracy": 0.7237126476987976,
+      "macro_early_accuracy": 0.7097678974756448,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7237663074305162,
+        "brier": 0.17940051438921495,
+        "log_loss": 0.5325115373655895
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7200206876738398,
+      "macro_season_accuracy": 0.7262796561597663,
+      "macro_early_accuracy": 0.7137617191879131,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7263187748156551,
+        "brier": 0.17920956787471692,
+        "log_loss": 0.5320644261727598
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7186779670187814,
+      "macro_season_accuracy": 0.725155259586412,
+      "macro_early_accuracy": 0.7122006744511508,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.1791479014540152,
+        "log_loss": 0.5319710348417449
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7125354333755586,
+      "macro_season_accuracy": 0.7214777837633936,
+      "macro_early_accuracy": 0.7035930829877236,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7214974475326149,
+        "brier": 0.19103873954177306,
+        "log_loss": 0.5763688658716902
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7158198625100589,
+      "macro_season_accuracy": 0.7226069893962911,
+      "macro_early_accuracy": 0.7090327356238268,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7226318774815655,
+        "brier": 0.19026107161187097,
+        "log_loss": 0.5736409260097524
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7127569237075961,
+      "macro_season_accuracy": 0.7206126954695721,
+      "macro_early_accuracy": 0.7049011519456201,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7206466250709018,
+        "brier": 0.19103453511714866,
+        "log_loss": 0.5771275321295775
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7167402725872212,
+      "macro_season_accuracy": 0.7237126476987976,
+      "macro_early_accuracy": 0.7097678974756448,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7237663074305162,
+        "brier": 0.17940054258069926,
+        "log_loss": 0.5325116637719197
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7200206876738398,
+      "macro_season_accuracy": 0.7262796561597663,
+      "macro_early_accuracy": 0.7137617191879131,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7263187748156551,
+        "brier": 0.179209668858777,
+        "log_loss": 0.5320647691621315
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "full",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7186779670187814,
+      "macro_season_accuracy": 0.725155259586412,
+      "macro_early_accuracy": 0.7122006744511508,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7251843448667045,
+        "brier": 0.1791480530649309,
+        "log_loss": 0.531971519392711
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7220841252272358,
+      "macro_season_accuracy": 0.7249055155915946,
+      "macro_early_accuracy": 0.719262734862877,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7249007373794668,
+        "brier": 0.18640538732765985,
+        "log_loss": 0.5597163539208212
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.723458641258372,
+      "macro_season_accuracy": 0.7246046229333815,
+      "macro_early_accuracy": 0.7223126595833625,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7246171298922292,
+        "brier": 0.1859170674888255,
+        "log_loss": 0.5580275345365832
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7184714481951521,
+      "macro_season_accuracy": 0.7211646160636617,
+      "macro_early_accuracy": 0.7157782803266425,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7212138400453773,
+        "brier": 0.18634170547028048,
+        "log_loss": 0.5592270069772844
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7234967350611248,
+      "macro_season_accuracy": 0.726865594159301,
+      "macro_early_accuracy": 0.7201278759629485,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.1780064336547448,
+        "log_loss": 0.5292246046561856
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7243608854511399,
+      "macro_season_accuracy": 0.7271392340027724,
+      "macro_early_accuracy": 0.7215825368995074,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7271695972773681,
+        "brier": 0.1778500441660071,
+        "log_loss": 0.5288742457492853
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7247003460891015,
+      "macro_season_accuracy": 0.7277276833031102,
+      "macro_early_accuracy": 0.7216730088750927,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17786670843104627,
+        "log_loss": 0.5290066695499314
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7159084535207055,
+      "macro_season_accuracy": 0.720346360072157,
+      "macro_early_accuracy": 0.711470546969254,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7203630175836642,
+        "brier": 0.18723897633128214,
+        "log_loss": 0.5629259855768625
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7216140618424696,
+      "macro_season_accuracy": 0.7231792723040474,
+      "macro_early_accuracy": 0.7200488513808917,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7231990924560409,
+        "brier": 0.18733793867446666,
+        "log_loss": 0.5632322722868796
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7199372621820734,
+      "macro_season_accuracy": 0.7223062258242942,
+      "macro_early_accuracy": 0.7175682985398528,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7223482699943279,
+        "brier": 0.18856904417790774,
+        "log_loss": 0.5670436300669178
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7234967350611248,
+      "macro_season_accuracy": 0.726865594159301,
+      "macro_early_accuracy": 0.7201278759629485,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17800615001051404,
+        "log_loss": 0.529223690909138
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7243608854511399,
+      "macro_season_accuracy": 0.7271392340027724,
+      "macro_early_accuracy": 0.7215825368995074,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7271695972773681,
+        "brier": 0.1778497339555362,
+        "log_loss": 0.5288732790613637
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "rank",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7247003460891015,
+      "macro_season_accuracy": 0.7277276833031102,
+      "macro_early_accuracy": 0.7216730088750927,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17786634934181772,
+        "log_loss": 0.5290055957690065
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7143428971228665,
+      "macro_season_accuracy": 0.7211714376035746,
+      "macro_early_accuracy": 0.7075143566421582,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7212138400453773,
+        "brier": 0.1954324806988123,
+        "log_loss": 0.6096050004488315
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.71302540413718,
+      "macro_season_accuracy": 0.7202950026221443,
+      "macro_early_accuracy": 0.7057558056522155,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7203630175836642,
+        "brier": 0.1943328739655223,
+        "log_loss": 0.6025749516862019
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7145516653844322,
+      "macro_season_accuracy": 0.7211420205648659,
+      "macro_early_accuracy": 0.7079613102039984,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7212138400453773,
+        "brier": 0.19525691368736525,
+        "log_loss": 0.6054521174318694
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7234967350611248,
+      "macro_season_accuracy": 0.726865594159301,
+      "macro_early_accuracy": 0.7201278759629485,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17800682083607997,
+        "log_loss": 0.5292254694670637
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7243608854511399,
+      "macro_season_accuracy": 0.7271392340027724,
+      "macro_early_accuracy": 0.7215825368995074,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7271695972773681,
+        "brier": 0.17785032998530623,
+        "log_loss": 0.5288748825202167
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 8,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7247003460891015,
+      "macro_season_accuracy": 0.7277276833031102,
+      "macro_early_accuracy": 0.7216730088750927,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17786687320835926,
+        "log_loss": 0.5290070426577732
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7213923701884231,
+      "macro_season_accuracy": 0.7242173896402276,
+      "macro_early_accuracy": 0.7185673507366185,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7243335224049915,
+        "brier": 0.1985948844776931,
+        "log_loss": 0.629768489492916
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7234793817276597,
+      "macro_season_accuracy": 0.7270526160724611,
+      "macro_early_accuracy": 0.7199061473828584,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7271695972773681,
+        "brier": 0.1963355944930516,
+        "log_loss": 0.6191713902464406
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.01
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7269539551239905,
+      "macro_season_accuracy": 0.7270683739904396,
+      "macro_early_accuracy": 0.7268395362575414,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7271695972773681,
+        "brier": 0.19609035828664825,
+        "log_loss": 0.6190916951611442
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.0,
+    "validation": {
+      "utility": 0.7234967350611248,
+      "macro_season_accuracy": 0.726865594159301,
+      "macro_early_accuracy": 0.7201278759629485,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7268859897901304,
+        "brier": 0.17800620806369172,
+        "log_loss": 0.529223980048246
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 0.5,
+    "validation": {
+      "utility": 0.7243608854511399,
+      "macro_season_accuracy": 0.7271392340027724,
+      "macro_early_accuracy": 0.7215825368995074,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7271695972773681,
+        "brier": 0.17784989337012302,
+        "log_loss": 0.5288738121619336
+      }
+    }
+  },
+  {
+    "settings": {
+      "feature_set": "graph_context",
+      "kind": "matchup",
+      "width": 16,
+      "ridge": 0.1
+    },
+    "alpha": 1.0,
+    "validation": {
+      "utility": 0.7247003460891015,
+      "macro_season_accuracy": 0.7277276833031102,
+      "macro_early_accuracy": 0.7216730088750927,
+      "pooled": {
+        "games": 3526,
+        "accuracy": 0.7277368122518435,
+        "brier": 0.17786661594019745,
+        "log_loss": 0.5290063973921459
+      }
+    }
+  }
+]
