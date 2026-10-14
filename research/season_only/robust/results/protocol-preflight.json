@@ -1,0 +1,238 @@
+{
+  "settings": [
+    {
+      "width": 8,
+      "ridge": 0.01,
+      "evidence_prior": 2.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.01,
+      "evidence_prior": 2.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.01,
+      "evidence_prior": 2.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.01,
+      "evidence_prior": 6.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.01,
+      "evidence_prior": 6.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.01,
+      "evidence_prior": 6.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.05,
+      "evidence_prior": 2.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.05,
+      "evidence_prior": 2.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.05,
+      "evidence_prior": 2.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.05,
+      "evidence_prior": 6.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.05,
+      "evidence_prior": 6.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 8,
+      "ridge": 0.05,
+      "evidence_prior": 6.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.01,
+      "evidence_prior": 2.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.01,
+      "evidence_prior": 2.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.01,
+      "evidence_prior": 2.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.01,
+      "evidence_prior": 6.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.01,
+      "evidence_prior": 6.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.01,
+      "evidence_prior": 6.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.05,
+      "evidence_prior": 2.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.05,
+      "evidence_prior": 2.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.05,
+      "evidence_prior": 2.0,
+      "loss_penalty": 4.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.05,
+      "evidence_prior": 6.0,
+      "loss_penalty": 1.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.05,
+      "evidence_prior": 6.0,
+      "loss_penalty": 2.0
+    },
+    {
+      "width": 16,
+      "ridge": 0.05,
+      "evidence_prior": 6.0,
+      "loss_penalty": 4.0
+    }
+  ],
+  "folds": [
+    [
+      2014,
+      [
+        2014,
+        2015
+      ]
+    ],
+    [
+      2016,
+      [
+        2016,
+        2017
+      ]
+    ],
+    [
+      2018,
+      [
+        2018,
+        2019
+      ]
+    ]
+  ],
+  "seeds": [
+    7,
+    19,
+    43
+  ],
+  "feature_names": [
+    "capped_margin_rating",
+    "robust_margin_rating",
+    "epa_offense",
+    "epa_defense",
+    "success_offense",
+    "success_defense",
+    "special_teams",
+    "capped_opponent_margin_mean",
+    "recent_margin_rating",
+    "game_evidence",
+    "snap_evidence",
+    "pbp_coverage",
+    "raw_offensive_success",
+    "raw_defensive_success",
+    "pass_epa_offense",
+    "pass_epa_defense",
+    "rush_epa_offense",
+    "rush_epa_defense",
+    "pass_success_offense",
+    "pass_success_defense",
+    "rush_success_offense",
+    "rush_success_defense",
+    "pass_yards_offense",
+    "pass_yards_defense",
+    "rush_yards_offense",
+    "rush_yards_defense",
+    "explosive_offense",
+    "explosive_defense",
+    "turnover_offense",
+    "turnover_defense",
+    "sack_offense",
+    "sack_defense",
+    "third_success_offense",
+    "third_success_defense",
+    "nonto_epa_offense",
+    "nonto_epa_defense",
+    "drive_epa_offense",
+    "drive_epa_defense",
+    "completion_offense",
+    "completion_defense",
+    "field_position_offense",
+    "field_position_defense",
+    "recent_pass_offense",
+    "recent_pass_defense",
+    "recent_rush_offense",
+    "recent_rush_defense",
+    "pass_fraction",
+    "drive_evidence",
+    "pass_evidence",
+    "recent_pbp_evidence"
+  ],
+  "training_half_life": 4,
+  "loss_prior": 4,
+  "input_clip": 4,
+  "selection": "Maximize mean of macro-season overall and <=6-prior-game accuracy, then minimize pooled log loss. All candidates have positive loss deduction and positive evidence shrinkage. Do not select on 2020\u20132026 or individual current ranks.",
+  "evaluation": "Annual prior-season-only refits 2007\u20132026. Report 2020\u20132025 development results, frozen Week 6, matched market/CFP, per-season metrics, and older hindcasts. All historical seasons were previously inspected; no untouched holdout claim.",
+  "source": {
+    "features.py": "6359b0790c527d99f0b319f34bf4c5a9d33fb679079ae1c046d641551b0e599c",
+    "network.py": "e34df4dd73e133c0035ed468c000e75618e81d666c7832e36acce46fc251dbe2",
+    "study.py": "a7737bb1555f036bcce78b2f5a9089e9a58ec0cbf5c661d026d63b5999c6e201"
+  }
+}

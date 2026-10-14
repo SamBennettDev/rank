@@ -60,7 +60,6 @@ def fit(config, first_forecast_year, training=None):
 
 def score(meta, p):
     annual, early = [], []
-    counts = np.minimum(records_from_metadata(meta, 'h'), records_from_metadata(meta, 'a')) if '_hg' in meta else None
     for year in sorted(meta.year.unique()):
         m = meta.year.eq(year).to_numpy()
         annual.append(metrics(meta.y[m], p[m])['accuracy'])
@@ -68,9 +67,6 @@ def score(meta, p):
         if e.any(): early.append(metrics(meta.y[e], p[e])['accuracy'])
     return dict(utility=float((np.mean(annual)+np.mean(early))/2),
         macro_accuracy=float(np.mean(annual)), macro_early_accuracy=float(np.mean(early)), pooled=metrics(meta.y, p))
-
-
-def records_from_metadata(meta, side): return meta['_' + side + 'g'].to_numpy()
 
 
 def baseline(forecast_year, raw, venue):
@@ -90,7 +86,7 @@ def register():
         source={str(p.relative_to(HERE)):digest(p) for p in [HERE/'features.py', HERE/'network.py', Path(__file__)]})
     path = OUT / 'protocol.json'
     if path.exists():
-        assert json.loads(path.read_text()) == protocol, 'Registered protocol changed; explicitly version a new experiment.'
+        assert json.dumps(json.loads(path.read_text()), sort_keys=True) == json.dumps(protocol, sort_keys=True), 'Registered protocol changed; explicitly version a new experiment.'
     else: path.write_text(json.dumps(protocol, indent=2)+'\n')
 
 
