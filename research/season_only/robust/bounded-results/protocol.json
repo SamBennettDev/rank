@@ -1,0 +1,192 @@
+{
+  "settings": [
+    {
+      "ridge": 0.003,
+      "evidence_prior": 2.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 2.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 2.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 2.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 6.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 6.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 6.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.003,
+      "evidence_prior": 6.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 2.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 2.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 2.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 2.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 6.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 6.0,
+      "residual_limit": 0.5,
+      "anchor_scale": 14.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 6.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 10.0
+    },
+    {
+      "ridge": 0.03,
+      "evidence_prior": 6.0,
+      "residual_limit": 1.0,
+      "anchor_scale": 14.0
+    }
+  ],
+  "loss_penalties": [
+    2.0,
+    4.0,
+    6.0
+  ],
+  "folds": [
+    [
+      2014,
+      [
+        2014,
+        2015
+      ]
+    ],
+    [
+      2016,
+      [
+        2016,
+        2017
+      ]
+    ],
+    [
+      2018,
+      [
+        2018,
+        2019
+      ]
+    ]
+  ],
+  "seeds": [
+    7,
+    19,
+    43
+  ],
+  "feature_names": [
+    "capped_margin_rating",
+    "robust_margin_rating",
+    "epa_offense",
+    "epa_defense",
+    "success_offense",
+    "success_defense",
+    "special_teams",
+    "capped_opponent_margin_mean",
+    "recent_margin_rating",
+    "game_evidence",
+    "snap_evidence",
+    "pbp_coverage",
+    "raw_offensive_success",
+    "raw_defensive_success",
+    "pass_epa_offense",
+    "pass_epa_defense",
+    "rush_epa_offense",
+    "rush_epa_defense",
+    "pass_success_offense",
+    "pass_success_defense",
+    "rush_success_offense",
+    "rush_success_defense",
+    "pass_yards_offense",
+    "pass_yards_defense",
+    "rush_yards_offense",
+    "rush_yards_defense",
+    "explosive_offense",
+    "explosive_defense",
+    "turnover_offense",
+    "turnover_defense",
+    "sack_offense",
+    "sack_defense",
+    "third_success_offense",
+    "third_success_defense",
+    "nonto_epa_offense",
+    "nonto_epa_defense",
+    "drive_epa_offense",
+    "drive_epa_defense",
+    "completion_offense",
+    "completion_defense",
+    "field_position_offense",
+    "field_position_defense",
+    "recent_pass_offense",
+    "recent_pass_defense",
+    "recent_rush_offense",
+    "recent_rush_defense",
+    "pass_fraction",
+    "drive_evidence",
+    "pass_evidence",
+    "recent_pbp_evidence"
+  ],
+  "selection": "Maximize equal-weight macro-season overall and <=6-prior-game accuracy, then minimize pooled log loss, using 2014\u20132019 only. Loss deduction is applied AFTER fitting the performance network. No current-team rank targets.",
+  "disclosure": "Second design round after inspecting first-round 2020\u20132025 results and current rankings. All historical results are exploratory development evidence. Do not claim an untouched holdout or a general market edge.",
+  "source": {
+    "bounded_study.py": "1a0be94e86f62b7a087bea4969b63cb32236831138287f4b3f71e4dcc2dbbf2e",
+    "bounded_network.py": "51542185d0318fc2e4a7b259e4062c974a0e85ef7e4c5f6c3e7af67b5d5e6242",
+    "features.py": "6359b0790c527d99f0b319f34bf4c5a9d33fb679079ae1c046d641551b0e599c"
+  }
+}
