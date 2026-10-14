@@ -1,0 +1,5 @@
+{
+  "sourceSha256": "bc6cc5106a28a24c997f68198e80f2b2a74441bf08249d47c6f13d7282541c27",
+  "selectionSha256": "8276d25a586374d72483f528042f2f11a28c3437799f02806fee0b0314a89907",
+  "policy": "Continue the identical selected performance objective from saved weights, with 2,000 additional iterations, ftol 1e-10, gtol 1e-6. No architecture, feature, loss, season-weight, or sample-selection changes. Require convergence. Recalibrate positive temperature on the same older validation forecasts. Later-season outputs remain development evidence."
+}
