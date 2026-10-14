@@ -1,0 +1,13 @@
+{
+  "years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "method": "One positive temperature, no intercept, minimizing log loss on the selected older-fold forecasts only. It preserves every winner pick and rank. No later outcomes are read.",
+  "sourceSha256": "dc119a57945ada3b2704577ee86e0d2bdb6d9402e8e449b421674070da9d875a",
+  "selectionSha256": "8276d25a586374d72483f528042f2f11a28c3437799f02806fee0b0314a89907"
+}
