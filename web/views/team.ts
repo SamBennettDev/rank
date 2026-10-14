@@ -219,7 +219,7 @@ function unitsPanel(ctx: Ctx, teamId: number): HTMLElement | "" {
 }
 
 // ---------------------------------------------------------------------------
-// Per-game contributions for the configured current standing.
+// How the rating is built: immutable win credits and fixed loss deductions.
 function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const me = ctx.byId.get(teamId)!;
   const b = breakdown(ctx, teamId);
@@ -229,9 +229,6 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   const lines = [...b.lines].sort((x, y) => order(x) - order(y));
   const earned = lines
     .filter((l) => l.won)
-    .reduce((sum, l) => sum + l.value, 0);
-  const deductions = -lines
-    .filter((l) => !l.won)
     .reduce((sum, l) => sum + l.value, 0);
   return h(
     "div",
@@ -250,8 +247,8 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "deducted" },
-        h("b", {}, me.resume ? deductions.toFixed(3) : me.losses),
-        h("small", {}, me.resume ? "Loss costs" : "Losses × 1"),
+        h("b", {}, me.losses),
+        h("small", {}, "Losses × 1"),
       ),
       h("span", { "aria-hidden": "true" }, "="),
       h(
@@ -262,13 +259,6 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       ),
     ),
     breakdownChart(ctx, b.fromGames, lines),
-    me.resume
-      ? h(
-          "p",
-          { class: "hint" },
-          `A top-25 benchmark would expect ${me.resume.expectedWins.toFixed(2)} wins against this schedule; ${me.wins} earned. Its chance of matching or exceeding this record is ${(100 * me.resume.recordProbability).toFixed(1)}%.`,
-        )
-      : "",
     h(
       "details",
       { class: "quiet-details" },
@@ -276,11 +266,9 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        me.resume
-          ? "Each result earns actual wins minus a top-25 benchmark’s expected wins at that venue. Difficult wins earn more; losses to weaker opponents cost more. Opponent quality updates with current-season results, excluding every game involving this team. Score margins and preseason ratings do not count."
-          : ctx.ranking.manifest.winQuality
-            ? "A win earns twice the opponent’s pre-week chance of beating an average FBS team. Average-quality win: +1. Every loss: −1. Credits stay fixed. Division-level starting estimates come from 2014–2019 results, then current games update them."
-            : "Wins earn 0–1 point based on pre-week opponent quality. Credits stay fixed. Every loss deducts exactly 1 point.",
+        ctx.ranking.manifest.winQuality
+          ? "A win earns twice the opponent’s pre-week chance of beating an average FBS team. Average-quality win: +1. Every loss: −1. Credits stay fixed. Division-level starting estimates come from 2014–2019 results, then current games update them."
+          : "Wins earn 0–1 point based on pre-week opponent quality. Credits stay fixed. Every loss deducts exactly 1 point.",
       ),
     ),
   );
@@ -358,7 +346,7 @@ function breakdownChart(
     stem(
       y,
       l.value,
-      `${score} against ${o.school}: ${ctx.ranking.manifest.resume ? "résumé contribution" : l.won ? "pre-week win credit" : "fixed loss deduction"} ${fmtHeight(l.value, 3)}`,
+      `${score} against ${o.school}: ${l.won ? "pre-week win credit" : "fixed loss deduction"} ${fmtHeight(l.value, 3)}`,
       o.id,
     );
   });
@@ -377,7 +365,7 @@ function breakdownChart(
     y: H - 6,
     "text-anchor": "middle",
   });
-  rt.textContent = `Total ${ctx.ranking.manifest.resume ? "wins above benchmark" : "earned points"} ${fmtHeight(rating, 3)}`;
+  rt.textContent = `Total earned points ${fmtHeight(rating, 3)}`;
   root.appendChild(rt);
   return root;
 }
@@ -538,7 +526,6 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     const pull = l.value;
     const published = ctx.ranking.teams.some((t) => t.id === o.id);
     const credit = ctx.ranking.credits.find((c) => c.gameId === e.gameId);
-    const resumeGame = me.resume?.games.find((g) => g.gameId === e.gameId);
     return h(
       published ? "a" : "div",
       {
@@ -577,11 +564,8 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         "span",
         {
           class: `r ${pull >= 0 ? "pos" : "neg"}`,
-          title: resumeGame
-            ? resumeGame.unmodeled
-              ? "Opponent outside the modeled field: no quality established; a win earns zero and a loss costs one."
-              : `Top-25 benchmark win chance: ${(100 * resumeGame.benchmarkWinProbability).toFixed(1)}%. Opponent evidence: ${resumeGame.opponentGames} other games. Contribution: result (${l.won ? 1 : 0}) minus expected wins.`
-            : l.won && credit?.unmodeled
+          title:
+            l.won && credit?.unmodeled
               ? "Unmodeled opponent: no quality points awarded. Losses against these opponents still cost exactly 1 point."
               : l.won && credit?.quality
                 ? `2 × ${(credit.quality.probability * 100).toFixed(1)}% pre-week opponent chance against an average FBS team. Opponent evidence: ${credit.quality.opponentGames} games.`

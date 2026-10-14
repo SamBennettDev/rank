@@ -1,6 +1,8 @@
 # Results-only résumé rankings
 
-The current standing measures **wins earned above a results-based top-25 FBS benchmark against the same schedule**. It answers an earned-results question; the neural matchup models remain in `../season_only/`.
+**Archived experiment.** The default standings have been restored to the previous frozen-credit ranking at the user's request. This directory preserves the alternative résumé study and its Week 6 snapshot; it does not describe the active ranking. Its application implementation remains available at Git commit `9b601d9`.
+
+The experimental standing measures **wins earned above a results-based top-25 FBS benchmark against the same schedule**. It answers an earned-results question; the neural matchup models remain in `../season_only/`.
 
 - [Interactive report](REPORT.html): all 266 current teams, individual game explanations, seven historical methods, and filters for season range, snapshot, and game cohort.
 - [PDF report](REPORT.pdf), [Week 6 rankings](week6-2026-rankings.csv), [historical summary](historical-summary.csv).
@@ -34,7 +36,7 @@ Historical inputs are the existing public pinned schedules under `../season_only
 
 ## Production integration
 
-`src/engine/resume.ts` is shared by Node and the browser. A matrix-free Newton/conjugate-gradient solver uses fixed-arithmetic exponentials. `config.resume` enables the method. `manifest.standingMethod`, `manifest.resume`, `team.resume`, and `resume.games` make its policy and receipts explicit. Published `rank`, `height`, `change` and ties refer to the résumé.
+At experiment commit `9b601d9`, `src/engine/resume.ts` is shared by Node and the browser. A matrix-free Newton/conjugate-gradient solver uses fixed-arithmetic exponentials. `config.resume` enables the method. `manifest.standingMethod`, `manifest.resume`, `team.resume`, and `resume.games` make its policy and receipts explicit. In that archived version, published `rank`, `height`, `change` and ties refer to the résumé. The active version uses the previous frozen-credit ranking.
 
 The archived frozen-point standing remains in `earnedHeight` / `earnedRank`; `credits` remains its old ledger. `projection.target = frozen-earned-points` identifies the legacy simulation target. Matchup probabilities and neural research remain separate. No prospective neural forecast or original registration was overwritten.
 
@@ -47,13 +49,14 @@ OPENBLAS_NUM_THREADS=1 python research/resume/study.py calibrate
 OPENBLAS_NUM_THREADS=1 python research/resume/study.py evaluate
 OPENBLAS_NUM_THREADS=1 python research/resume/compare_legacy.py
 npm run compute
-npm run audit-resume -- 2026
 OPENBLAS_NUM_THREADS=1 python research/resume/report.py
 npm run typecheck
 npm test
 npm run verify
 npm run build
 ```
+
+The report reads `week6-2026-snapshot.json`, preserving the experimental ranking independently of the active standings. To reproduce the experimental application and its `npm run audit-resume -- 2026` command, use commit `9b601d9` in a separate checkout.
 
 Calibration and evaluation are deliberately separate commands. To study a new policy, save a new protocol before inspecting later comparisons. Repeated historical experimentation cannot manufacture a fresh holdout.
 

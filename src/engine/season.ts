@@ -16,10 +16,9 @@ import { fitUnits } from "./units";
 import { projectSeason, PROJECTION_MODE } from "./projection";
 import { aggregateCredits, indexedGames, scoreStandings } from "./standing";
 import { makeWinQualityContext } from "./win-quality";
-import { calculateResumes } from "./resume";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-17";
+export const ENGINE_VERSION = "rank-engine-16";
 
 export interface SeasonFiles {
   season: string;
@@ -96,7 +95,7 @@ export async function computeSeason(
   // Keep lower-division results without inventing ratings for opponents absent
   // from the model. Their wins earn no quality credit; every loss still counts.
   const otherTeams = new Map<number, Team>();
-  if (quality || config.resume)
+  if (quality)
     for (const g of [...games].sort((a, b) => a.id - b.id)) {
       if (!index.has(g.homeId) && !index.has(g.awayId)) continue;
       for (const [id, school] of [
@@ -142,29 +141,25 @@ export async function computeSeason(
 
   for (const snap of snapshots) {
     const { edges, counts: modelCounts } = buildEdges(games, teams, snap);
-    const result =
-      quality || config.resume
-        ? buildEdges(games, resultTeams, snap)
-        : { edges, counts: modelCounts };
+    const result = quality
+      ? buildEdges(games, resultTeams, snap)
+      : { edges, counts: modelCounts };
     const resultEdges = result.edges.filter(
       (e) => index.has(e.winner) || index.has(e.loser),
     );
     const externalEdges = resultEdges.filter(
       (e) => !index.has(e.winner) || !index.has(e.loser),
     );
-    const counts =
-      quality || config.resume
-        ? {
-            ...result.counts,
-            included: resultEdges.length,
-            outOfScope:
-              result.counts.outOfScope +
-              result.edges.length -
-              resultEdges.length,
-            modeled: edges.length,
-            unmodeled: externalEdges.length,
-          }
-        : modelCounts;
+    const counts = quality
+      ? {
+          ...result.counts,
+          included: resultEdges.length,
+          outOfScope:
+            result.counts.outOfScope + result.edges.length - resultEdges.length,
+          modeled: edges.length,
+          unmodeled: externalEdges.length,
+        }
+      : modelCounts;
     const wins = new Map<number, number>();
     const losses = new Map<number, number>();
     for (const e of resultEdges) {
@@ -225,7 +220,6 @@ export async function computeSeason(
       quality,
     );
     const projection = {
-      ...(config.resume ? { target: "frozen-earned-points" as const } : {}),
       method: `${PROJECTION_MODE}-results-v1` as const,
       samples: futureGames.length ? config.projectionSamples : 1,
       seed: config.projectionSeed,
@@ -267,26 +261,13 @@ export async function computeSeason(
       : null;
     const unit = (v: number | null | undefined) =>
       v === null || v === undefined ? null : round6(v);
-    const resume = config.resume
-      ? calculateResumes(teams, resultEdges, config.resume)
-      : null;
-    const currentHeights = resume
-      ? resume.teams.map((r) => r?.score ?? null)
-      : standing.heights.slice(0, teams.length);
     const heights = new Map(
-      played.map((t) => [t.id, currentHeights[index.get(t.id)!]!]),
+      played.map((t) => [t.id, standing.heights[index.get(t.id)!]!]),
     );
 
     const standingRanks = rankValues(
-      currentHeights.map((v, i) => (eligible.has(i) ? v : null)),
+      standing.heights.map((v, i) => (eligible.has(i) ? v : null)),
     );
-    const earnedRanks = config.resume
-      ? rankValues(
-          standing.heights
-            .slice(0, teams.length)
-            .map((v, i) => (eligible.has(i) ? v : null)),
-        )
-      : null;
     const allTeams: RankedTeam[] = teams.map((t, i) => {
       const height = heights.get(t.id) ?? null;
       const rank = standingRanks[i] ?? null;
@@ -300,22 +281,13 @@ export async function computeSeason(
         rank,
         tied:
           rank !== null &&
-          currentHeights.filter((v, j) => eligible.has(j) && v === height)
+          standing.heights.filter((v, j) => eligible.has(j) && v === height)
             .length > 1,
         height,
-        ...(resume
-          ? {
-              resume: resume.teams[i]!,
-              earnedHeight: standing.heights[i]!,
-              earnedRank: earnedRanks![i]!,
-            }
-          : {}),
         projection: projected.projections[i]!,
         component: height === null ? null : teams[model.components[i]!]!.id,
         componentSize: model.sizes.get(model.components[i]!) ?? 0,
-        provisional: resume
-          ? (resume.teams[i]?.limitedEvidence ?? true)
-          : model.provisional[i]!,
+        provisional: model.provisional[i]!,
         offense: unit(units?.offense[i]),
         defense: unit(units?.defense[i]),
         special: unit(units?.special[i]),
@@ -356,12 +328,10 @@ export async function computeSeason(
 
     const manifest: Manifest = {
       engine: ENGINE_VERSION,
-      standingMethod: config.resume
-        ? "opponent-independent-resume-v1"
-        : config.winQuality
-          ? "frozen-fbs-quality-v2"
-          : "frozen-win-quality-v1",
-      lossPenalty: config.resume ? null : 1,
+      standingMethod: config.winQuality
+        ? "frozen-fbs-quality-v2"
+        : "frozen-win-quality-v1",
+      lossPenalty: 1,
       algorithmVersion: config.algorithmVersion,
       winBonus: config.winBonus,
       shrink: config.shrink,
@@ -372,7 +342,6 @@ export async function computeSeason(
       residualScale: config.residualScale,
       calibrationId: config.calibrationId,
       ...(config.winQuality ? { winQuality: config.winQuality } : {}),
-      ...(config.resume ? { resume: config.resume } : {}),
       homeField: round6(homeField),
       homeFieldError: round6(model.uncertainty.homeFieldError),
       connectedComponents: model.sizes.size,

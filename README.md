@@ -2,17 +2,17 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-**Rank the résumé earned this season.** Score = **actual wins − the wins a results-based top-25 FBS benchmark expects against the same schedule**. Quality wins earn more, bad losses cost more, and road results account for venue. A score of +1 means one more win than that benchmark expects. The standings show rank, team and score, with a carousel of the current top 10.
+**One current score.** A win earns **2 × the opponent’s pre-week probability of beating an average FBS team at that venue**. An average-quality neutral-site win earns 1 point; every loss deducts exactly 1. The standings show rank, team and score, with a carousel of the current top 10.
 
-- **Results establish quality.** Regularized Bradley–Terry uses current-season wins, losses and venues. Every team starts equal; margins, polls, recruiting and division strength priors do not enter the résumé.
-- **No self-credit.** Remove every focal-team game before assessing its opponents and its benchmark. Flipping one of its losses to a win increases its score by exactly one on the same schedule.
-- **Opponent résumés develop.** Later opponent results revalue earlier games. Wins earn `1 − benchmark win probability`; losses cost that probability.
+- **A consistent benchmark.** Opponent strength is measured relative to the average FBS team, including the benchmark’s uncertainty and covariance. It does not use the weaker pooled FBS/FCS average.
+- **Stable early estimates.** A division gap measured on 2014–2019 results and calibrated regularization stabilize sparse schedules. Current games can establish that an FCS opponent is strong; no division has a rank ceiling or fixed credit cap.
+- **Losses always cost one.** Win credits stay frozen before each calendar week. Later losses cannot revalue earlier wins and offset their own deductions.
 - **Lower-division results count.** Unmodeled opponent wins earn zero quality points. Losses still deduct 1, and all resolved results remain in records and receipts.
-- **Sparse evidence stays visible.** An amber dot marks opponents with fewer than three independent modeled results. There is no team, conference or division bonus, rank ceiling, or head-to-head override.
+- **Every score starts at zero.** Historical division assumptions inform opponent strength, not starting points. No team reputation, recruiting, poll, conference bonus or head-to-head override.
 - **Both divisions, one standing.** Division and conference filters preserve the full-field ranks. The current #1 sets Rank’s accent color.
-- **Reproduce every point.** The Node scripts and browser share one engine. Each team’s résumé includes every result’s benchmark probability, venue, independent opponent evidence and contribution.
+- **Reproduce every point.** The Node scripts and browser share one engine. Credits include the prior cutoff, estimated probability, reference strength, venue adjustment and uncertainty.
 
-Version 3 calibrates two shared probability settings on **2014–2019** and compares seven résumé methods across **2002–2025**. The top-25 benchmark and additive scoring rule are explicit policies. [The résumé report](research/resume/REPORT.html) separates descriptive completed-result agreement from future-game accuracy and explains the remaining limits. All historical seasons are development data. The previous frozen-credit model remains in `earnedHeight` / `earnedRank`; downloadable projections explicitly target those archived points. Neural matchup research remains separate. See [methodology](docs/METHODOLOGY.md).
+Version 2 fixes a pooled-reference error, equal-strength assumptions for sparse lower-division opponents, an imbalance between average win credit and fixed loss deductions, and dropped lower-division losses. `research/win-quality-calibration.json` records the **2014–2019** design study; `win-quality-development.json` compares already-inspected **2021–2025**; `win-quality-audit.json` traces the current teams on identical inputs. They are development findings, not an untouched holdout or proof of universal superiority. The simulation engine and older reports remain available for audit and research; the site displays current scores. See [methodology](docs/METHODOLOGY.md).
 
 ## Run
 
@@ -26,7 +26,6 @@ npm test
 npm run compute
 npm run verify
 npm run audit-win-quality -- 2026
-npm run audit-resume -- 2026
 npm run build
 npm run backtest -- --history 2021-2025
 npm run project-backtest -- --history 2021-2025 --samples 2048 --modes correlated --report research/projection-results.json
@@ -45,7 +44,7 @@ data/rankings/<year>/<snapshot>.json  standing, per-game credits, projections an
 data/index.json                      available seasons and snapshots
 ```
 
-Schema 2 publishes FBS/FCS standings in `teams`. `config.resume` selects the results-only standing; `team.resume.games` is its complete ledger. `rank` / `height` refer to that standing. Unranked supporting metadata appears in `opponents`. `config.classifications` selects the published field; `opponentClassifications` can retain model inputs. `config.winQuality` retains the archived v2 earned-point and prediction settings. `credits` is the archived frozen-credit ledger, and `projection.target` identifies its target as `frozen-earned-points`. All snapshots use calendar cutoffs and a six-hour score-availability lag.
+Schema 2 publishes FBS/FCS standings in `teams`. Unranked supporting metadata appears in `opponents`, including teams outside the modeled field needed for complete result receipts. `config.classifications` selects the ranked field; `opponentClassifications` can retain additional model inputs. `config.winQuality` fixes the v2 benchmark, priors, regularization and balanced win scale. Unsupported opponents contribute zero win quality and fixed loss deductions, without affecting the strength fit. Downloadable projections cover the known modeled schedule; the site displays current scores. All snapshots use calendar cutoffs.
 
 ## Update results
 

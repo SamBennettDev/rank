@@ -19,7 +19,6 @@
     "compute": "tsx scripts/compute.ts",
     "verify": "tsx scripts/verify.ts",
     "audit-win-quality": "tsx scripts/audit-win-quality.ts",
-    "audit-resume": "tsx scripts/audit-resume.ts",
     "backtest": "tsx scripts/backtest.ts",
     "calibrate": "tsx scripts/calibrate.ts",
     "project-backtest": "tsx scripts/project-backtest.ts",

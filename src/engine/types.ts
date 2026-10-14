@@ -48,38 +48,6 @@ export interface SeasonConfig {
   calibrationId: string;
   /** Optional v2 win-credit model; omitted only for archived v1 calculations. */
   winQuality?: WinQualitySettings;
-  /** Optional results-only resume standing; predictive settings stay separate. */
-  resume?: ResumeSettings;
-}
-
-export interface ResumeSettings {
-  method: "opponent-independent-resume-v1";
-  ridge: number;
-  homeAdvantage: number;
-  benchmarkRank: number;
-  reference: "fbs";
-  leaveTeamOut: true;
-}
-
-export interface ResumeGame {
-  gameId: number;
-  opponentId: number;
-  won: boolean;
-  where: -1 | 0 | 1;
-  benchmarkWinProbability: number;
-  value: number;
-  opponentGames: number;
-  unmodeled: boolean;
-}
-
-export interface TeamResume {
-  score: number;
-  expectedWins: number;
-  scheduleDifficulty: number;
-  recordProbability: number;
-  benchmarkStrength: number;
-  limitedEvidence: boolean;
-  games: ResumeGame[];
 }
 
 export interface WinQualitySettings {
@@ -158,13 +126,8 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Current configured standing: resume score in v3, frozen earned points in v2. */
+  /** Earned win-quality credits minus one point for every loss. */
   height: number | null;
-  /** Present when the published standing is the results-only resume. */
-  resume?: TeamResume | null;
-  /** Archived frozen-credit standing, also the target of legacy projections. */
-  earnedHeight?: number | null;
-  earnedRank?: number | null;
   projection: TeamProjection | null;
   component: number | null;
   componentSize: number;
@@ -181,11 +144,8 @@ export interface RankedTeam {
 
 export interface Manifest {
   engine: string;
-  standingMethod:
-    | "frozen-win-quality-v1"
-    | "frozen-fbs-quality-v2"
-    | "opponent-independent-resume-v1";
-  lossPenalty: 1 | null;
+  standingMethod: "frozen-win-quality-v1" | "frozen-fbs-quality-v2";
+  lossPenalty: 1;
   algorithmVersion: string;
   winBonus: number;
   shrink: number;
@@ -196,7 +156,6 @@ export interface Manifest {
   residualScale: number;
   calibrationId: string;
   winQuality?: WinQualitySettings;
-  resume?: ResumeSettings;
   /** Fitted home-field edge in points, rounded to 1e-6. */
   homeField: number;
   homeFieldError: number;
@@ -241,10 +200,10 @@ export interface TeamProjection {
 }
 
 export interface ProjectionManifest {
-  /** Resume standings do not relabel archived earned-point projections. */
-  target?: "frozen-earned-points";
   method:
-    "independent-results-v1" | "correlated-results-v1" | "adaptive-results-v1";
+    | "independent-results-v1"
+    | "correlated-results-v1"
+    | "adaptive-results-v1";
   samples: number;
   seed: number;
   remainingGames: number;

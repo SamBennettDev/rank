@@ -25,7 +25,7 @@ def summaries(report):
 
 def main():
     evaluation=json.loads((HERE/'evaluation.json').read_text())
-    current=json.loads((ROOT/'data/rankings/2026/week-06.json').read_text())
+    current=json.loads((HERE/'week6-2026-snapshot.json').read_text())
     protocol=json.loads((HERE/'protocol.json').read_text())
     settings=protocol['selected']
     assert settings==current['manifest']['resume']
@@ -55,7 +55,7 @@ def main():
     <p>These percentages describe how often the final standing places a completed game’s winner above its loser, with ties worth half. They are <b>not future-game accuracy, an objective résumé label, or proof of universal superiority</b>. Colley and Bradley–Terry remain competitive.</p>"""
     document='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rank · Results-only résumé study</title>
 <style>:root{color-scheme:dark}body{font:16px/1.65 system-ui,sans-serif;background:#0c121b;color:#e4eaf4;max-width:1160px;margin:auto;padding:32px 22px}h1{font-size:clamp(30px,5vw,52px);line-height:1.15}h2{margin-top:38px}a{color:#80c9ff}p{max-width:950px}.eyebrow{color:#8db9e4}.lede{font-size:21px}.cards{display:flex;gap:16px;flex-wrap:wrap}article{background:#172333;border:1px solid #304154;border-radius:12px;padding:20px;flex:1;min-width:200px}article b{font-size:32px;display:block;color:#9ce2c4}article span{color:#b6c4d7}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}th,td{padding:10px;border-bottom:1px solid #2a3849;text-align:right;white-space:nowrap}th:nth-child(2),td:nth-child(2){text-align:left}th:first-child,td:first-child{text-align:left}tr.selected{background:#19352e}select,button{font:inherit;color:inherit;background:#172333;border:1px solid #476076;padding:8px;margin:6px;border-radius:6px}.note{color:#b6c4d7}code{color:#a8dbff}details{border-bottom:1px solid #304154;padding:12px 0}.formula{padding:22px;background:#172333;border-radius:12px;font-size:22px}summary{cursor:pointer}footer{margin-top:40px;border-top:1px solid #304154;padding-top:18px}</style>
-<p class="eyebrow">RANK · RÉSUMÉ RESEARCH · 2026-10-13, America/Denver</p><h1>Rank the season a team earned.</h1>'''+intro+'''
+<p class="eyebrow">RANK · RÉSUMÉ RESEARCH · 2026-10-13, America/Denver</p><p><b>Archived experiment.</b> The default standings have been restored to the previous frozen-credit ranking. This report preserves the alternative résumé study and its original Week 6 snapshot.</p><h1>Rank the season a team earned.</h1>'''+intro+'''
 <h2>The scoring rule</h2><div class="formula">Résumé = Σ (game result − benchmark win probability)</div>
 <p>A win has result 1; a loss has result 0. If the benchmark would win 20% of the time, winning earns +0.80 and losing costs −0.20. If it would win 95%, winning earns +0.05 and losing costs −0.95. A score of +1 means one more win than the benchmark expects against that schedule. Playing a difficult schedule without winning cannot create positive credit.</p>
 <p>Opponent strength is fit from current-season <b>wins, losses and venues</b> using regularized Bradley–Terry. Every team starts equal. When assessing a team, remove <b>every game involving that team</b>, then fit the opponent ratings and choose the 25th-highest FBS strength as its benchmark. This stops a team’s own results from manufacturing opponent quality. Later opponent results revalue earlier games. Road wins receive more credit than equivalent home wins.</p>
@@ -97,6 +97,7 @@ def pdf_report(current,comparison,evaluation):
         t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e6edf6')),('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),('FONTSIZE',(0,0),(-1,-1),8),('BOTTOMPADDING',(0,0),(-1,-1),7),('LINEBELOW',(0,0),(-1,-1),.3,colors.HexColor('#c4ccda'))]))
         story.append(t);story.append(Spacer(1,12))
     p('Rank the season a team earned','Title')
+    p('<b>Archived experiment.</b> The default standings use the previous frozen-credit ranking. This report preserves the alternative résumé study.')
     p('Results-only résumé research · 2026-10-13 · America/Denver')
     p('<b>Résumé = actual wins minus the wins a top-25 benchmark expects against the same schedule.</b> A difficult win earns more; a bad loss costs more. Road results account for venue. Later opponent results revalue earlier games.')
     p('Opponent quality is regularized Bradley–Terry from current-season wins, losses and venues. Remove all focal-team games before fitting its opponents and the reference. All teams start equal. Ridge 0.5 and home advantage 0.3 log odds were calibrated on dated 2014–2019 future-game probabilities. Benchmark rank 25 and additive scoring are declared policies. There are no team/division priors, margins, polls, EPA, betting prices, or preseason rankings in the résumé.')
