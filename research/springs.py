@@ -14,9 +14,7 @@ import numpy as np
 REVISION = "a3dd960090c1bfa169cebd491beabf7028b379b2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Settings from src/engine/defaults.ts (DEFAULT_SPRINGS).
-STRENGTH_SHRINK, QUALITY_SCALE, RANK_SHRINK = 10.0, 2.0, 0.1
-MARGIN_WEIGHT, HOME_FIELD, WINDOW = 0.5, 2.7, 0.25
-HOLD_GAP, HOLD_STIFFNESS = 0.05, 1000.0
+STRENGTH_SHRINK, QUALITY_SCALE, RANK_SHRINK = 0.2, 1.5, 0.1
 
 
 def load(year):
@@ -58,88 +56,41 @@ def load(year):
     return dict(
         n=len(ids), names=[names[t] for t in ids],
         order=np.array([last + 1 if r["post"] else r["week"] for r in rows]),
-        winner=np.where(won, home, away), loser=np.where(won, away, home), margin=np.abs(hp - ap),
-        site=np.array([0 if r["neutral"] else (1 if w else -1) for r, w in zip(rows, won)]),
+        winner=np.where(won, home, away), loser=np.where(won, away, home),
     )
 
 
-def solve(n, w, l, k, gap, shrink, held=None, start=None):
-    """Heights minimising ½Σ k(h_w − h_l − gap)² + ½·shrink·Σ h², plus one-sided head-to-head holds."""
-    def system(hold):
-        A = np.zeros((n, n)); b = np.zeros(n)
-        springs = [(k, gap)] + ([(hold, np.full(len(w), HOLD_GAP))] if hold is not None else [])
-        for K, D in springs:
-            np.add.at(A, (w, w), K); np.add.at(A, (l, l), K); np.add.at(A, (w, l), -K); np.add.at(A, (l, w), -K)
-            np.add.at(b, w, K * D); np.add.at(b, l, -K * D)
-        A[np.diag_indices(n)] += shrink
-        return np.linalg.solve(A, b)
-
-    if held is None or not held.any():
-        return system(None)
-
-    def energy(x):
-        g = x[w] - x[l]; s = np.maximum(0, HOLD_GAP - g)
-        return np.sum(k * (g - gap) ** 2) + HOLD_STIFFNESS * np.sum(np.where(held, s * s, 0)) + shrink * np.sum(x * x)
-
-    x = start.copy(); active = held & (x[w] - x[l] < HOLD_GAP)
-    for _ in range(200):
-        nxt = system(np.where(active, HOLD_STIFFNESS, 0.0))
-        if np.array_equal(held & (nxt[w] - nxt[l] < HOLD_GAP), active):
-            return nxt
-        e0, t, y = energy(x), 1.0, nxt
-        while energy(y) >= e0 and t > 1e-10:
-            t /= 2; y = x + t * (nxt - x)
-        x = y; active = held & (x[w] - x[l] < HOLD_GAP)
-    raise RuntimeError("head-to-head holds did not settle")
+def solve(n, w, l, k, shrink):
+    """Heights minimising ½Σ k(h_w − h_l − 1)² + ½·shrink·Σ h²."""
+    A = np.zeros((n, n)); b = np.zeros(n)
+    np.add.at(A, (w, w), k); np.add.at(A, (l, l), k); np.add.at(A, (w, l), -k); np.add.at(A, (l, w), -k)
+    np.add.at(b, w, k); np.add.at(b, l, -k)
+    A[np.diag_indices(n)] += shrink
+    return np.linalg.solve(A, b)
 
 
-def rank(n, w, l, margin, site):
-    """Pass 1: margins give strength. Pass 2: strength sets each spring's pull, log margin its gap."""
-    strength = solve(n, w, l, margin.astype(float), np.ones(len(w)), STRENGTH_SHRINK)
+def rank(n, w, l):
+    """Pass 1: plain SpringRank gives strength. Pass 2: strength sets each spring's pull."""
+    strength = solve(n, w, l, np.ones(len(w)), STRENGTH_SHRINK)
     q = 1 / (1 + np.exp(-QUALITY_SCALE * strength))
-    pull = q[l] + 1 - q[w]
-    gap = 1 + MARGIN_WEIGHT * np.log1p(np.maximum(0, margin - HOME_FIELD * site))
-    h = solve(n, w, l, pull, gap, RANK_SHRINK)
-    held = np.zeros(len(w), bool)
-    above = [[] for _ in range(n)]
-
-    def required(a, b):
-        stack, seen = [a], set()
-        while stack:
-            x = stack.pop()
-            if x == b:
-                return True
-            if x not in seen:
-                seen.add(x); stack.extend(above[x])
-        return False
-
-    for _ in range(100):
-        short = h[l] - h[w]; added = False
-        for e in np.lexsort((np.arange(len(w)), short)):
-            if held[e] or not (-HOLD_GAP < short[e] < WINDOW) or required(l[e], w[e]):
-                continue
-            above[w[e]].append(l[e]); held[e] = True; added = True
-        if not added:
-            return h
-        h = solve(n, w, l, pull, gap, RANK_SHRINK, held, h)
-    raise RuntimeError("head-to-head holds did not settle")
+    return solve(n, w, l, q[l] + 1 - q[w], RANK_SHRINK)
 
 
 def evaluate(years):
     right = games = agree = counted = 0
     for y in years:
         S = load(y)
-        W, L, M, T, O = S["winner"], S["loser"], S["margin"], S["site"], S["order"]
+        W, L, O = S["winner"], S["loser"], S["order"]
         for wk in sorted(set(O)):
             if wk < 4:
                 continue
             p = O < wk
-            h = rank(S["n"], W[p], L[p], M[p], T[p])
+            h = rank(S["n"], W[p], L[p])
             played = np.zeros(S["n"], bool); played[W[p]] = played[L[p]] = True
             c = (O == wk) & played[W] & played[L]
             d = h[W[c]] - h[L[c]]
             right += np.sum(d > 0) + 0.5 * np.sum(d == 0); games += c.sum()
-        h = rank(S["n"], W, L, M, T)
+        h = rank(S["n"], W, L)
         agree += np.sum(h[W] > h[L]); counted += len(W)
     print(f"{years[0]}-{years[-1]}: picks {100 * right / games:.2f}% of {games} next-week games; "
           f"final ranking has the winner above the loser in {100 * agree / counted:.2f}% of {counted} games")
@@ -148,7 +99,7 @@ def evaluate(years):
 if __name__ == "__main__":
     if sys.argv[1] == "--top":
         S = load(int(sys.argv[2]))
-        h = rank(S["n"], S["winner"], S["loser"], S["margin"], S["site"])
+        h = rank(S["n"], S["winner"], S["loser"])
         wins = np.bincount(S["winner"], minlength=S["n"]); losses = np.bincount(S["loser"], minlength=S["n"])
         for j, i in enumerate(np.argsort(-h)[:25]):
             print(f"{j + 1:>2} {S['names'][i]} {wins[i]}-{losses[i]} {h[i]:+.3f}")

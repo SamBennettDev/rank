@@ -1,5 +1,4 @@
 import { buildEdges } from "../src/engine/graph";
-import { HOLD_GAP, HOLD_STIFFNESS } from "../src/engine/springs";
 import type {
   Edge,
   Game,
@@ -65,21 +64,14 @@ export interface GameLine {
   opponent: RankedTeam;
   where: -1 | 0 | 1;
   margin: number;
-  /** Where this game's spring wants the team: opponent's height + gap after a win, − gap after a loss. */
+  /** Where this game's spring wants the team: opponent's height + 1 after a win, − 1 after a loss. */
   value: number;
   /** Pass-2 spring strength (0–2). */
   pull: number;
-  /** Steps this game wants between winner and loser. */
-  gap: number;
-  /** Head-to-head hold on this game. */
-  held: boolean;
-  /** That hold's push on this team's weighted sum (+ up, − down); 0 when slack. */
-  hold: number;
 }
 /**
  * Rebuilds a team's height the way the spring graph defines it: the pull-weighted
- * average of what its games say, plus any engaged head-to-head holds, with
- * `rankShrink` weight on 0 (an average team).
+ * average of what its games say, with `rankShrink` weight on 0 (an average team).
  */
 export function breakdown(ctx: Ctx, teamId: number) {
   const springs = new Map(ctx.ranking.springs.map((s) => [s.gameId, s]));
@@ -95,14 +87,6 @@ export function breakdown(ctx: Ctx, teamId: number) {
         margin = won
           ? edge.winnerPoints - edge.loserPoints
           : edge.loserPoints - edge.winnerPoints;
-      const me = ctx.byId.get(teamId)!;
-      const apart = won
-        ? me.height! - opponent.height!
-        : opponent.height! - me.height!;
-      const push =
-        spring.held && apart < HOLD_GAP
-          ? HOLD_STIFFNESS * (HOLD_GAP - apart)
-          : 0;
       return [
         {
           edge,
@@ -110,23 +94,18 @@ export function breakdown(ctx: Ctx, teamId: number) {
           opponent,
           where,
           margin,
-          value: opponent.height! + (won ? spring.gap : -spring.gap),
+          value: opponent.height! + (won ? 1 : -1),
           pull: spring.pull,
-          gap: spring.gap,
-          held: spring.held,
-          hold: won ? push : -push,
         },
       ];
     });
   const shrink = ctx.ranking.manifest.springs.rankShrink;
   const totalPull = lines.reduce((sum, l) => sum + l.pull, 0);
-  const holds = lines.reduce((sum, l) => sum + l.hold, 0);
-  const pulled = lines.reduce((sum, l) => sum + l.pull * l.value, 0) + holds;
+  const pulled = lines.reduce((sum, l) => sum + l.pull * l.value, 0);
   return {
     lines,
     shrink,
     totalPull,
-    holds,
     pulled,
     height: pulled / (totalPull + shrink),
   };
@@ -141,7 +120,7 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Height on the game graph. Every game is a spring holding its winner above its loser: one step for the win, more for a bigger margin, with each extra point counting less. Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls. Head-to-head breaks close calls.",
+    "Height on the game graph. Every game is a spring holding its winner one step above its loser; the score doesn't matter. Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

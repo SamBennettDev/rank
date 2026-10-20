@@ -1,18 +1,15 @@
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "two-pass-springs-1",
+  "algorithmVersion": "two-pass-springs-2",
   "classifications": [
     "fbs",
     "fcs"
   ],
   "springs": {
-    "strengthShrink": 10,
-    "qualityScale": 2,
-    "rankShrink": 0.1,
-    "marginWeight": 0.5,
-    "homeField": 2.7,
-    "headToHeadWindow": 0.25
+    "strengthShrink": 0.2,
+    "qualityScale": 1.5,
+    "rankShrink": 0.1
   },
   "matchup": {
     "winBonus": 3,

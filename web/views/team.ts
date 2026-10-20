@@ -238,13 +238,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
         "div",
         { class: "total" },
         h("b", {}, fmtHeight(b.pulled, 2)),
-        h(
-          "small",
-          {},
-          b.holds
-            ? `Σ pull × target, ${fmtHeight(b.holds, 2)} head-to-head`
-            : "Σ pull × target",
-        ),
+        h("small", {}, "Σ pull × target"),
       ),
       h("span", { "aria-hidden": "true" }, "÷"),
       h(
@@ -269,7 +263,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Every game is a spring between its winner and its loser. Pass 1 makes each spring as strong as the winning margin, which gives every team a strength. Pass 2 rebuilds the graph with springs set by those strengths: pull = loser’s quality + (1 − winner’s quality), where quality is the chance of beating an average team. Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls. Each pass-2 spring wants the winner 1 + ${ctx.ranking.manifest.springs.marginWeight} × ln(1 + margin) steps above the loser, with the margin adjusted ${ctx.ranking.manifest.springs.homeField} points for home field, so every extra point counts a little less. A game’s target is the opponent’s height plus that gap for a win, minus it for a loss, and the height is the pull-weighted average of the targets, with a little weight on 0 (an average team). If a team ends within ${ctx.ranking.manifest.springs.headToHeadWindow} steps below a team it beat, head-to-head holds it just above (H2H).`,
+        `Every game is a spring that wants its winner one step above its loser; the score doesn’t matter. Pass 1 is plain SpringRank: every spring has strength 1, which gives every team a strength. Pass 2 solves the same graph again with springs set by those strengths: pull = loser’s quality + (1 − winner’s quality), where quality is the chance of beating an average team. Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls. A game’s target is the opponent’s height plus 1 for a win, minus 1 for a loss, and the height is the pull-weighted average of the targets, with a little weight on 0 (an average team).`,
       ),
     ),
   );
@@ -574,18 +568,6 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
           `${published ? `#${rankLabel(o.rank, o.tied)}` : o.classification.toUpperCase()} · ${shortConf(o.conference)}`,
           upset ? " " : "",
           upset ? h("span", { class: "tag-up" }, "UPSET") : "",
-          l.held ? " " : "",
-          l.held
-            ? h(
-                "span",
-                {
-                  class: "tag-held",
-                  title:
-                    "Head-to-head: the winner is held just above the loser",
-                },
-                "H2H",
-              )
-            : "",
         ),
       ),
       h(
@@ -598,7 +580,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         "span",
         {
           class: `r ${l.value >= me.height! ? "pos" : "neg"}`,
-          title: `Spring strength (0–2): ${l.won ? "beating" : "losing to"} ${o.school}, quality ${((o.quality ?? 0) * 100).toFixed(0)}%. It wants ${l.gap.toFixed(2)} steps between the teams, pulling this team toward ${fmtHeight(l.value, 2)}.${l.held ? " Head-to-head holds the winner just above." : ""}`,
+          title: `Spring strength (0–2): ${l.won ? "beating" : "losing to"} ${o.school}, quality ${((o.quality ?? 0) * 100).toFixed(0)}%. It wants the winner one step above the loser, pulling this team toward ${fmtHeight(l.value, 2)}.`,
         },
         l.pull.toFixed(2),
       ),

@@ -72,9 +72,6 @@ export function aboutView(ctx: Ctx): HTMLElement {
     ["Pass 1 pull toward average", String(m.springs.strengthShrink)],
     ["Quality scale", String(m.springs.qualityScale)],
     ["Pass 2 pull toward average", String(m.springs.rankShrink)],
-    ["Margin weight (log)", String(m.springs.marginWeight)],
-    ["Home-field discount", `${m.springs.homeField} points`],
-    ["Head-to-head window", `${m.springs.headToHeadWindow} steps`],
     ["Matchup calibration", m.matchup.calibrationId],
     ["Matchup win premium", `${m.matchup.winBonus} points`],
     ["Matchup FBS–FCS starting gap", `${m.matchup.divisionGap} points`],
@@ -118,8 +115,8 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "div",
         { class: "recipe-block win" },
-        h("b", {}, "Margin"),
-        h("span", {}, "Pass 1 spring"),
+        h("b", {}, "Strength"),
+        h("span", {}, "Pass 1: SpringRank"),
       ),
       h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "→"),
       h(
@@ -139,7 +136,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h(
       "p",
       { class: "method-caption" },
-      "Every game is a spring holding its winner above its loser, further for a bigger win. Beat a good team or lose to a bad one: a hard pull. Beat a bad team or lose to a good one: barely a tug. Close calls go to the team that won head-to-head.",
+      "Every game is a spring holding its winner one step above its loser; the score doesn’t matter. Beat a good team or lose to a bad one: a hard pull. Beat a bad team or lose to a good one: barely a tug.",
     ),
     details(
       "The two passes",
@@ -147,35 +144,23 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Pass 1, strength. "),
-        `Each game is a spring as strong as its winning margin: a 35-point win holds its winner above its loser far more firmly than a 3-point win. Solving the whole graph at once gives every team a strength. Each strength becomes a quality, the chance of beating an average team (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best).`,
+        `Plain SpringRank: every game is a spring of strength 1 that wants its winner one step above its loser. Solving the whole graph at once gives every team a strength. Each strength becomes a quality, the chance of beating an average team (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best).`,
       ),
       h(
         "p",
         {},
         h("b", {}, "Pass 2, the ranking. "),
-        "The same games are rebuilt with new spring strengths: pull = quality of the loser + (1 − quality of the winner). A win over a good team and a loss to a bad team make stiff springs; a win over a bad team and a loss to a good team make weak ones. Two average teams make a spring of 1. The heights of this second graph are the ranking.",
+        "The same graph is solved again with new spring strengths: pull = quality of the loser + (1 − quality of the winner). A win over a good team and a loss to a bad team make stiff springs; a win over a bad team and a loss to a good team make weak ones. Two average teams make a spring of 1. Every spring still wants one step. The heights of this second graph are the ranking.",
       ),
       h(
         "p",
         {},
-        h("b", {}, "Margin counts, with diminishing returns. "),
-        `In pass 2 each spring wants its winner 1 + ${m.springs.marginWeight} × ln(1 + margin) steps above its loser. Every win is worth one step; a 1-point win adds 0.35 more, a 14-point win 1.35 and a 50-point win only 1.97, so each extra point counts less than the one before. Home wins are discounted ${m.springs.homeField} points and road wins credited the same before the margin counts.`,
-      ),
-      h(
-        "p",
-        {},
-        h("b", {}, "Head-to-head breaks close calls. "),
-        `If a team finishes less than ${m.springs.headToHeadWindow} steps below a team it beat, a stiff one-sided spring holds it just above, and the whole graph is solved again. Closest calls go first; a hold that would contradict others (A beat B, B beat C, C beat A) is skipped. This week ${ctx.ranking.springs.filter((s) => s.held).length} games were decided this way; team pages tag them H2H.`,
-      ),
-      h(
-        "p",
-        {},
-        `In both passes a team’s height is the pull-weighted average of what its games say (the opponent’s height plus the gap for a win, minus it for a loss), with a small weight (${m.springs.strengthShrink} in pass 1, ${m.springs.rankShrink} in pass 2) on 0, an average team. Every team starts the season at 0. No polls, preseason, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count too.`,
+        `In both passes a team’s height is the pull-weighted average of what its games say (the opponent’s height plus 1 for a win, minus 1 for a loss), with a small weight (${m.springs.strengthShrink} in pass 1, ${m.springs.rankShrink} in pass 2) on 0, an average team. Scores, home field and head-to-head play no part. Every team starts the season at 0. No polls, preseason, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count too.`,
       ),
       h(
         "p",
         { class: "muted" },
-        "On 2014–2019, the final ranking has the winner above the loser in 88.4% of games and picks 69.3% of next week’s winners; on 2021–2026, 88.1% and 68.2%. The matchup odds come from a separate, calibrated margin model.",
+        "On 2014–2019, the final ranking has the winner above the loser in 84.2% of games and picks 68.5% of next week’s winners; on 2021–2026, 83.5% and 66.9%. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     details(

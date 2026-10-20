@@ -4,12 +4,14 @@ Open, deterministic college football rankings for **every FBS and FCS team**. Li
 
 **One graph, two passes.** Every game is a spring between its winner and its loser.
 
-1. **Pass 1, strength.** Each spring is as strong as the winning margin. Solving the whole graph gives every team a strength, and from it a quality: the chance of beating an average team.
-2. **Pass 2, the ranking.** The same games are rebuilt with spring strength = quality of the loser + (1 − quality of the winner). Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls. Each spring wants the winner 1 + 0.5 × ln(1 + margin) steps above the loser (margin adjusted 2.7 points for home field), so every extra point counts less. A team within 0.25 steps below a team it beat is held just above it. The heights of this graph are the ranking.
+1. **Pass 1, strength.** Plain SpringRank: every spring has strength 1 and wants its winner one step above its loser. Solving the whole graph gives every team a strength, and from it a quality: the chance of beating an average team.
+2. **Pass 2, the ranking.** The same graph is solved again with spring strength = quality of the loser + (1 − quality of the winner). Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls. Every spring still wants one step. The heights of this graph are the ranking.
+
+Nothing else enters: no margins, home field or head-to-head rules.
 
 - **Every team starts at zero.** No preseason, polls, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count.
-- **Explainable game by game.** A team's height is the pull-weighted average of its opponents' heights plus each win's gap and minus each loss's, plus any head-to-head holds. The team page draws every spring.
-- **Measured.** On 2014–2019, where the settings were chosen, the weekly rankings pick 69.3% of next week's winners and the final ranking has the winner above the loser in 88.4% of games (68.2% and 88.1% on 2021–2026). `research/springs.py` reproduces both.
+- **Explainable game by game.** A team's height is the pull-weighted average of its opponents' heights plus one for each win and minus one for each loss. The team page draws every spring.
+- **Measured.** On 2014–2019, where the settings were chosen, the weekly rankings pick 68.5% of next week's winners and the final ranking has the winner above the loser in 84.2% of games (66.9% and 83.5% on 2021–2026). `research/springs.py` reproduces both.
 - **Reproduce every number.** The Node scripts and the browser share one engine; Recompute on the method page rebuilds every published file byte for byte.
 
 Matchup odds come from a separate calibrated margin model and never change the ranking. See [methodology](docs/METHODOLOGY.md).
@@ -41,7 +43,7 @@ data/rankings/<year>/<snapshot>.json  heights, every game's springs, and game od
 data/index.json                       available seasons and snapshots
 ```
 
-Each ranking file lists ranked FBS/FCS teams in `teams` with their pass-1 `strength`, `quality` and pass-2 `height`, and every counted game in `springs` with its `margin` (pass-1 spring strength), `pull` (pass-2 spring strength), `gap` (pass-2 length) and `held` (head-to-head). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
+Each ranking file lists ranked FBS/FCS teams in `teams` with their pass-1 `strength`, `quality` and pass-2 `height`, and every counted game in `springs` with its `margin` (shown only; the ranking ignores it) and `pull` (pass-2 spring strength). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
 
 ## Update results
 

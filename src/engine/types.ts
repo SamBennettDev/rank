@@ -45,18 +45,12 @@ export interface SeasonConfig {
 }
 
 export interface SpringSettings {
-  /** Pass 1 pull toward 0 (an average team), in points of spring strength. */
+  /** Pass 1 pull toward 0 (an average team), in games' worth (each game is 1). */
   strengthShrink: number;
   /** Converts a pass-1 strength into a chance of beating an average team. */
   qualityScale: number;
   /** Pass 2 pull toward 0, in spring-strength units (each game is 0–2). */
   rankShrink: number;
-  /** Pass 2 gap = 1 + marginWeight × ln(1 + home-adjusted margin), in steps. */
-  marginWeight: number;
-  /** Points a home win is discounted (a road win credited) before its margin counts. */
-  homeField: number;
-  /** A winner below its loser by less than this many steps is held just above it. */
-  headToHeadWindow: number;
 }
 
 export interface MatchupSettings {
@@ -144,7 +138,7 @@ export interface RankedTeam {
   tied: boolean;
   /** Pass-2 spring height: the ranking. */
   height: number | null;
-  /** Pass-1 spring height (margins as spring strength). */
+  /** Pass-1 spring height (plain SpringRank: every game a spring of strength 1). */
   strength: number | null;
   /** Chance of beating an average team, from `strength`. */
   quality: number | null;
@@ -199,14 +193,10 @@ export interface PublishedSpring {
   gameId: number;
   winner: number;
   loser: number;
-  /** Pass-1 spring strength: the winning margin in points. */
+  /** Winning margin in points (shown only; the ranking ignores it). */
   margin: number;
   /** Pass-2 spring strength: quality(loser) + 1 − quality(winner), 0–2. */
   pull: number;
-  /** Pass-2 gap the spring wants, in steps: 1 + marginWeight × ln(1 + adjusted margin). */
-  gap: number;
-  /** Head-to-head hold: the winner is kept just above the loser. */
-  held: boolean;
 }
 
 export interface MatchupPrediction {

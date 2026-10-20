@@ -1,34 +1,34 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams: each team's **height on a two-pass spring graph** (`two-pass-springs-1`, `src/engine/springs.ts`). Every game is a spring between its winner and its loser. The first pass uses the winning margins to give every team a strength. The second pass rebuilds the same graph with each spring's strength set by how good the two teams are and its length set by the log of the margin; head-to-head breaks close calls. Its heights are the ranking. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams: each team's **height on a two-pass spring graph** (`two-pass-springs-2`, `src/engine/springs.ts`). Every game is a spring between its winner and its loser. The first pass is plain SpringRank and gives every team a strength. The second pass solves the same graph again with each spring's strength set by how good the two teams are. Its heights are the ranking. Only who beat whom enters: no margins, home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## One pass of the graph
 
-Each game `e` is a spring that wants its winner `gap[e]` steps above its loser, with spring strength `k[e]`. Heights `h` minimise
+Each game `e` is a spring that wants its winner one step above its loser, with spring strength `k[e]`. Heights `h` minimise
 
 ```text
-½ Σ_games k[e] × (h[winner] − h[loser] − gap[e])²  +  ½ shrink × Σ_teams h[i]²
+½ Σ_games k[e] × (h[winner] − h[loser] − 1)²  +  ½ shrink × Σ_teams h[i]²
 ```
 
 Setting the slope to zero gives one symmetric positive-definite linear system, solved exactly with a Cholesky decomposition. At the answer every team's height is the **spring-weighted average of what its games say**, with `shrink` weight on 0 (an average team):
 
 ```text
-h[i] = Σ_games of i  k[e] × (h[opponent] ± gap[e])  /  (Σ_games of i k[e] + shrink)
+h[i] = Σ_games of i  k[e] × (h[opponent] ± 1)  /  (Σ_games of i k[e] + shrink)
 ```
 
-where the target is the opponent's height + gap after a win and − gap after a loss. The team page draws exactly this for pass 2. A team with no games stays at 0. The pull toward 0 keeps the system solvable while the graph is still in pieces early in the season.
+where the target is the opponent's height + 1 after a win and − 1 after a loss. The team page draws exactly this for pass 2. A team with no games stays at 0. The pull toward 0 keeps the system solvable while the graph is still in pieces early in the season.
 
-## Pass 1: margins give strength
+## Pass 1: SpringRank gives strength
 
-Spring strength is the winning margin in points: a 35-point win holds its winner above its loser seven times as firmly as a 5-point win. Every pass-1 spring has a gap of 1, so a blowout is stronger evidence of order, not a bigger gap. The solution, with `strengthShrink = 10`, is each team's **strength**. It becomes a **quality**, the chance of beating an average (height-0) team:
+Every spring has strength 1. The solution, with `strengthShrink = 0.2`, is each team's **strength**. It becomes a **quality**, the chance of beating an average (height-0) team:
 
 ```text
-quality[i] = logistic(qualityScale × strength[i]),   qualityScale = 2
+quality[i] = logistic(qualityScale × strength[i]),   qualityScale = 1.5
 ```
 
 ## Pass 2: the ranking
 
-The same games are rebuilt. Each spring's strength comes from the two teams' qualities:
+The same games are solved again. Each spring's strength comes from the two teams' qualities:
 
 ```text
 pull[e] = quality[loser] + (1 − quality[winner])
@@ -41,29 +41,18 @@ pull[e] = quality[loser] + (1 − quality[winner])
 | Beat a bad team | weak |
 | Lose to a good team | weak |
 
-Pull runs from 0 to 2; two average teams make a spring of 1. Each spring's gap grows with the log of the margin, adjusted for home field:
+Pull runs from 0 to 2; two average teams make a spring of 1. Every spring still wants one step. These springs, with `rankShrink = 0.1`, give the heights, which are the ranking.
 
-```text
-gap[e] = 1 + marginWeight × ln(1 + max(0, margin − homeField × site))
-marginWeight = 0.5, homeField = 2.7, site = +1 home win, −1 road win, 0 neutral
-```
-
-Every win is worth one step. A 1-point win adds 0.35 more, a 14-point win 1.35 and a 50-point win 1.97: each extra point counts less than the one before. The log uses fixed arithmetic (`logFixed`). These springs, with `rankShrink = 0.1`, give the heights before head-to-head.
-
-## Head-to-head breaks close calls
-
-If a winner finishes below its loser by less than `headToHeadWindow = 0.25` steps (or above it by less than 0.05), the game gets a **hold**: a one-sided spring of strength 1000 that engages only while the winner is less than 0.05 steps above the loser. The whole graph is solved again (`holdHeadToHead`), which can bring new close pairs into the window, so this repeats until no new hold is added. Candidates go closest first, then by game order; a hold is skipped when the loser is already required, through other holds, to stay above the winner, so cycles of close results never fight. Teams further apart keep their places. On the team page, each engaged hold's push (1000 × (0.05 − the teams' gap)) is added to the winner's sum and subtracted from the loser's.
-
-Each game's `margin`, `pull`, `gap` and `held` are published in `springs`, and each team's `strength`, `quality` and `height` in `teams`. Published six-decimal heights sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
+Each game's `margin` (shown only) and `pull` are published in `springs`, and each team's `strength`, `quality` and `height` in `teams`. Published six-decimal heights sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
 
 ## Settings and accuracy
 
-The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen. `strengthShrink` gave pass 1 its best next-week accuracy and `qualityScale` its best log loss, so quality is a calibrated win probability. `marginWeight`, `homeField`, `rankShrink` and `headToHeadWindow` balance two measures: next-week winners picked by each week's ranking (from week 4, using only earlier games) and season-end agreement (the final ranking has the winner above the loser). `python3 research/springs.py 2014-2019` reproduces them:
+The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen. `strengthShrink` gave pass 1 its best next-week accuracy, `qualityScale` its best log loss, so quality is a calibrated win probability, and `rankShrink` gave pass 2 its best next-week accuracy. Accuracy is measured two ways: next-week winners picked by each week's ranking (from week 4, using only earlier games) and season-end agreement (the final ranking has the winner above the loser). `python3 research/springs.py 2014-2019` reproduces them:
 
 | Seasons | Next-week winners | Winner above loser at season end |
 |---|---:|---:|
-| 2014–2019 (design, 6,797 and 8,770 games) | 69.3% | 88.4% |
-| 2021–2026 through week 6 (6,287 and 8,497 games) | 68.2% | 88.1% |
+| 2014–2019 (design, 6,797 and 8,770 games) | 68.5% | 84.2% |
+| 2021–2026 through week 7 (6,403 and 8,613 games) | 66.9% | 83.5% |
 
 2021–2026 were looked at during design, so they are a check rather than an untouched holdout.
 
@@ -98,8 +87,8 @@ Offense, defense and special teams are explanatory outputs from public cfbfastR 
 
 ## Determinism and changes
 
-Teams and games use numeric ID order for summation. Both spring passes, the matchup model, variances and ranking use fixed loops and Cholesky with only + − × / and √. The quality logistic, probabilities and pass-2 log gaps use fixed-arithmetic `expFixed` and `logFixed`, avoiding platform-dependent transcendental functions in published bytes. Values round to six decimals. JSON has fixed key order with one team, prediction and spring per line.
+Teams and games use numeric ID order for summation. Both spring passes, the matchup model, variances and ranking use fixed loops and Cholesky with only + − × / and √. The quality logistic and probabilities use fixed-arithmetic `expFixed`, avoiding platform-dependent transcendental functions in published bytes. Values round to six decimals. JSON has fixed key order with one team, prediction and spring per line.
 
-Schema 1 includes engine/algorithm versions, spring and prediction settings, hashes, counts, diagnostics, every game's springs (`springs`: margin, pull, gap and held), each team's pass-1 `strength`, `quality` and pass-2 `height`, and matchup predictions. Node verification and browser Recompute call the same `computeSeason` pipeline. There is no runtime randomness or wall-clock input.
+Schema 1 includes engine/algorithm versions, spring and prediction settings, hashes, counts, diagnostics, every game's springs (`springs`: margin and pull), each team's pass-1 `strength`, `quality` and pass-2 `height`, and matchup predictions. Node verification and browser Recompute call the same `computeSeason` pipeline. There is no runtime randomness or wall-clock input.
 
 Mathematical or setting changes bump `algorithmVersion`; output-byte/schema changes bump `ENGINE_VERSION`. Regenerate every ranking and update this specification together. CI checks type safety, tests, byte reproduction and the production build.

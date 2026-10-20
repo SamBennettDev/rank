@@ -163,13 +163,6 @@ export function parseConfig(json: string): SeasonConfig {
     "a positive number",
   );
   numbers(
-    "config.springs",
-    c.springs,
-    ["marginWeight", "homeField", "headToHeadWindow"],
-    nonNegative,
-    "a number >= 0",
-  );
-  numbers(
     "config.matchup",
     c.matchup,
     ["shrink", "homeFieldShrink", "probabilityScale", "residualScale"],

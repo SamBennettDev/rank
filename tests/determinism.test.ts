@@ -12,7 +12,7 @@ import {
 } from "../src/engine/data";
 import { computeSeason, ENGINE_VERSION } from "../src/engine/season";
 import { DEFAULT_SETTINGS } from "../src/engine/defaults";
-import { logFixed, quality } from "../src/engine/springs";
+import { quality } from "../src/engine/springs";
 
 const dir = join(import.meta.dirname, "fixtures/demo");
 const read = (f: string) => readFileSync(join(dir, f), "utf8");
@@ -68,8 +68,9 @@ describe("determinism", () => {
     expect([away.rank, home.rank]).toEqual([1, 2]);
     // Two teams, one spring of strength k and pull toward 0 of `shrink` each:
     // the winner sits k / (2k + shrink) above 0 and the loser the same below.
+    // Pass 1 is plain SpringRank (k = 1); the 21-point margin plays no part.
     const sp = DEFAULT_SETTINGS.springs;
-    const strength = 21 / (2 * 21 + sp.strengthShrink);
+    const strength = 1 / (2 + sp.strengthShrink);
     expect(away.strength).toBeCloseTo(strength, 6);
     expect(home.strength).toBeCloseTo(-strength, 6);
     const pull =
@@ -77,12 +78,17 @@ describe("determinism", () => {
       1 -
       quality(strength, sp.qualityScale);
     expect(JSON.parse(out.files[0]!.json).springs).toEqual([
-      expect.objectContaining({ gameId: 1, margin: 21, held: false }),
+      {
+        gameId: 1,
+        winner: base.awayId,
+        loser: base.homeId,
+        margin: 21,
+        pull: expect.any(Number),
+      },
     ]);
-    // Pass 2 wants a gap of 1 + marginWeight × ln(1 + 21) at a neutral site.
-    const gap = 1 + sp.marginWeight * logFixed(22);
+    // Pass 2 keeps the gap of 1, with spring strength `pull`.
     expect(away.height - home.height).toBeCloseTo(
-      (2 * pull * gap) / (2 * pull + sp.rankShrink),
+      (2 * pull) / (2 * pull + sp.rankShrink),
       5,
     );
   });
@@ -228,11 +234,8 @@ describe("pipeline", () => {
       /strengthShrink/,
     );
     await expect(springs({ rankShrink: -1 })).rejects.toThrow(/rankShrink/);
-    await expect(springs({ headToHeadWindow: -1 })).rejects.toThrow(
-      /headToHeadWindow/,
-    );
-    await expect(springs({ marginWeight: null })).rejects.toThrow(
-      /marginWeight/,
+    await expect(springs({ qualityScale: null })).rejects.toThrow(
+      /qualityScale/,
     );
     await expect(
       bad({ matchup: { ...cfg.matchup, winBonus: -1 } }),

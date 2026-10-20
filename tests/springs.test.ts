@@ -3,25 +3,16 @@ import { gamesToCsv, teamsToCsv } from "../src/engine/data";
 import { DEFAULT_SETTINGS } from "../src/engine/defaults";
 import { computeSeason } from "../src/engine/season";
 import {
-  HOLD_GAP,
-  holdHeadToHead,
-  logFixed,
   pullStrength,
   quality,
   solveSprings,
-  springGap,
   twoPass,
   type Spring,
 } from "../src/engine/springs";
 import type { Team } from "../src/engine/types";
 
 const S = DEFAULT_SETTINGS.springs;
-const win = (winner: number, loser: number, margin = 7): Spring => ({
-  winner,
-  loser,
-  margin,
-  site: 0,
-});
+const win = (winner: number, loser: number): Spring => ({ winner, loser });
 
 describe("solveSprings", () => {
   it("spaces a chain of equal springs evenly, winners on top", () => {
@@ -53,7 +44,7 @@ describe("solveSprings", () => {
   });
 
   it("is bit-identical across runs", () => {
-    const springs = [win(0, 1, 3), win(2, 1, 40), win(2, 0, 1)];
+    const springs = [win(0, 1), win(2, 1), win(2, 0)];
     expect(twoPass(3, springs, S)).toEqual(twoPass(3, springs, S));
   });
 });
@@ -84,16 +75,16 @@ describe("pass 2 pull", () => {
 
   it("costs more to lose to a bad team than to a good one", () => {
     // 0 is strong (beats 2 and 3 by a lot), 3 is weak (loses to everyone else).
-    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
-    const loseToGood = twoPass(5, [...base, win(0, 4, 10)], S).height;
-    const loseToBad = twoPass(5, [...base, win(3, 4, 10)], S).height;
+    const base = [win(0, 2), win(0, 3), win(1, 3), win(2, 3)];
+    const loseToGood = twoPass(5, [...base, win(0, 4)], S).height;
+    const loseToBad = twoPass(5, [...base, win(3, 4)], S).height;
     expect(loseToBad[4]!).toBeLessThan(loseToGood[4]!);
   });
 
   it("rewards beating a good team more than beating a bad one", () => {
-    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
-    const beatGood = twoPass(5, [...base, win(4, 0, 10)], S).height;
-    const beatBad = twoPass(5, [...base, win(4, 3, 10)], S).height;
+    const base = [win(0, 2), win(0, 3), win(1, 3), win(2, 3)];
+    const beatGood = twoPass(5, [...base, win(4, 0)], S).height;
+    const beatBad = twoPass(5, [...base, win(4, 3)], S).height;
     expect(beatGood[4]!).toBeGreaterThan(beatBad[4]!);
   });
 
@@ -102,75 +93,22 @@ describe("pass 2 pull", () => {
   });
 });
 
-describe("pass 2 gap", () => {
-  it("computes the natural log with fixed arithmetic", () => {
-    for (const x of [1, 1.5, 2, 3, 15, 85, 1e-3, 1e6])
-      expect(logFixed(x)).toBeCloseTo(Math.log(x), 12);
-    expect(() => logFixed(0)).toThrow();
+describe("two passes", () => {
+  it("pass 1 is plain SpringRank: every game a spring of strength 1", () => {
+    const springs = [win(0, 1), win(1, 2), win(0, 2), win(3, 2)];
+    const { strength } = twoPass(4, springs, S);
+    const plain = solveSprings(4, springs, [1, 1, 1, 1], S.strengthShrink);
+    expect(Array.from(strength)).toEqual(Array.from(plain));
   });
 
-  it("makes every win one step, and each extra point count less than the one before", () => {
-    const g = (margin: number, site: -1 | 0 | 1 = 0) =>
-      springGap({ winner: 0, loser: 1, margin, site }, S);
-    expect(g(0)).toBe(1);
-    const steps = [1, 2, 3, 7, 14, 28].map((m) => g(m) - g(m - 1));
-    for (let i = 1; i < steps.length; i++)
-      expect(steps[i]!).toBeLessThan(steps[i - 1]!);
-    expect(g(14) - g(1)).toBeGreaterThan(g(50) - g(14)); // diminishing returns
-  });
-
-  it("discounts a home win and credits a road win by the home-field edge", () => {
-    const g = (site: -1 | 0 | 1) =>
-      springGap({ winner: 0, loser: 1, margin: 10, site }, S);
-    expect(g(1)).toBeLessThan(g(0));
-    expect(g(-1)).toBeGreaterThan(g(0));
-    expect(springGap({ winner: 0, loser: 1, margin: 2, site: 1 }, S)).toBe(1);
-  });
-});
-
-describe("head-to-head holds", () => {
-  it("lifts a close winner just above the team it beat", () => {
-    // 1 beat 0 by a point (a weak spring), but 0 crushed 2 and 2 crushed 1.
-    const springs = [win(1, 0, 1), win(0, 2, 40), win(0, 3, 40), win(2, 1, 20)];
-    const k = [0.05, 1, 1, 1],
-      gaps = springs.map((s) => springGap(s, S));
-    const plain = solveSprings(4, springs, k, S.rankShrink, gaps);
-    expect(plain[0]!).toBeGreaterThan(plain[1]!);
-    const { height, held } = holdHeadToHead(
-      4,
-      springs,
-      k,
-      S.rankShrink,
-      gaps,
-      10,
+  it("pass 2 reuses the graph with pass-1 pulls and a gap of 1", () => {
+    const springs = [win(0, 1), win(1, 2), win(0, 2), win(3, 2)];
+    const { quality: q, pull, height } = twoPass(4, springs, S);
+    springs.forEach((s, e) =>
+      expect(pull[e]).toBe(pullStrength(q[s.winner]!, q[s.loser]!)),
     );
-    expect(held[0]).toBe(true);
-    expect(height[1]! - height[0]!).toBeGreaterThan(HOLD_GAP * 0.9);
-  });
-
-  it("leaves teams further apart than the window alone", () => {
-    const springs = [win(1, 0, 1), win(0, 2, 40), win(0, 3, 40), win(2, 1, 20)];
-    const k = [0.05, 1, 1, 1],
-      gaps = springs.map((s) => springGap(s, S));
-    const plain = solveSprings(4, springs, k, S.rankShrink, gaps);
-    const { height, held } = holdHeadToHead(
-      4,
-      springs,
-      k,
-      S.rankShrink,
-      gaps,
-      1,
-    );
-    expect(held.some(Boolean)).toBe(false);
-    expect(Array.from(height)).toEqual(Array.from(plain));
-  });
-
-  it("settles a three-team cycle without fighting", () => {
-    const springs = [win(0, 1, 3), win(1, 2, 3), win(2, 0, 3)];
-    const k = [1, 1, 1],
-      gaps = springs.map((s) => springGap(s, S));
-    const { held } = holdHeadToHead(3, springs, k, S.rankShrink, gaps, 10);
-    expect(held.filter(Boolean).length).toBe(2);
+    const again = solveSprings(4, springs, pull, S.rankShrink);
+    expect(Array.from(height)).toEqual(Array.from(again));
   });
 });
 
