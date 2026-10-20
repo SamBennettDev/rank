@@ -92,10 +92,26 @@ function segment<T extends string>(
   return group;
 }
 
+/** Conferences ordered by the average quality of their ranked teams, strongest first. */
+function conferencesByStrength(teams: RankedTeam[]) {
+  const sums = new Map<string, { total: number; n: number }>();
+  for (const t of teams) {
+    if (t.height === null) continue;
+    const s = sums.get(t.conference) ?? { total: 0, n: 0 };
+    s.total += t.height;
+    s.n++;
+    sums.set(t.conference, s);
+  }
+  return [...sums]
+    .map(([name, s]) => ({ name, avg: s.total / s.n }))
+    .sort((a, b) => b.avg - a.avg || a.name.localeCompare(b.name));
+}
+
 export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
   let query = "",
     board: Board = "quality",
-    division: Division = "all";
+    division: Division = "all",
+    conference = "";
   const field = ctx.ranking.teams;
   const body = h("div", { class: "home-rows" });
   const root = h("div", { class: "home", "data-board": board });
@@ -146,6 +162,7 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
       .filter(
         (t) =>
           (division === "all" || t.classification === division) &&
+          (!conference || t.conference === conference) &&
           (!query ||
             t.school.toLowerCase().includes(query) ||
             t.abbreviation.toLowerCase() === query),
@@ -171,47 +188,65 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
   root.append(
     h(
       "div",
-      { class: "home-sticky" },
+      { class: "home-tools" },
       h(
-        "div",
-        { class: "home-tools" },
+        "label",
+        { class: "home-search" },
+        searchIcon(),
+        h("input", {
+          type: "search",
+          placeholder: "Search",
+          "aria-label": "Search teams",
+          oninput: (event: Event) => {
+            query = (event.target as HTMLInputElement).value
+              .trim()
+              .toLowerCase();
+            draw();
+          },
+        }),
+      ),
+      h(
+        "label",
+        { class: "sel home-conf" },
         h(
-          "label",
-          { class: "home-search" },
-          searchIcon(),
-          h("input", {
-            type: "search",
-            placeholder: "Search",
-            "aria-label": "Search teams",
-            oninput: (event: Event) => {
-              query = (event.target as HTMLInputElement).value
-                .trim()
-                .toLowerCase();
+          "select",
+          {
+            "aria-label": "Conference, strongest first",
+            onchange: (event: Event) => {
+              conference = (event.target as HTMLSelectElement).value;
               draw();
             },
-          }),
-        ),
-        segment(
-          "Division",
-          DIVISIONS,
-          () => division,
-          (v) => {
-            division = v;
-            draw();
           },
-          "division",
-        ),
-        segment(
-          "Ranking board",
-          BOARDS,
-          () => board,
-          (v) => {
-            board = v;
-            draw();
-          },
-          "boards",
+          h("option", { value: "" }, "All conferences"),
+          ...conferencesByStrength(field).map((c) =>
+            h("option", { value: c.name }, `${c.name} · ${c.avg.toFixed(2)}`),
+          ),
         ),
       ),
+      segment(
+        "Division",
+        DIVISIONS,
+        () => division,
+        (v) => {
+          division = v;
+          draw();
+        },
+        "division",
+      ),
+      segment(
+        "Ranking board",
+        BOARDS,
+        () => board,
+        (v) => {
+          board = v;
+          draw();
+        },
+        "boards",
+      ),
+    ),
+    h(
+      "div",
+      { class: "home-scroll", tabindex: "0", "aria-label": "Teams" },
       h(
         "div",
         { class: "hrow hhead", "aria-hidden": "true" },
@@ -225,8 +260,8 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
         h("span", { class: "hr-val" }),
         h("span", { class: "hr-move" }, "Move"),
       ),
+      body,
     ),
-    body,
   );
   draw();
   return root;

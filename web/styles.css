@@ -613,16 +613,19 @@ body[data-view="graph"] .foot { display: none; }
 }
 
 /* ==========================================================================
-   Home: top-10 strip, sticky search and board switch, every team
+   Home: search, filters and board switch above one scrolling list of every team
    ========================================================================== */
-.home { padding-top: 0; }
+.home { display: flex; flex-direction: column; height: calc(100dvh - 60px - 20px); min-height: 360px; padding-top: 14px; }
+body[data-view="list"] main { padding-bottom: 20px; }
 
-.home-sticky { position: sticky; top: 60px; z-index: 20; padding: 14px 0 0; background: var(--bg); }
-.home-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-bottom: 12px; }
+.home-tools { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-bottom: 12px; }
 .home-search { flex: 1 1 260px; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); }
 .home-search:focus-within { border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
 .home-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 16px; }
 .home-search input::placeholder { color: var(--muted); }
+.home-conf { flex: 0 0 230px; display: block; }
+.home-conf select { width: 100%; min-height: 44px; padding: 0 36px 0 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font: 600 15px var(--body); text-overflow: ellipsis; }
+.home-conf.sel::after { right: 16px; }
 .home-seg { display: flex; gap: 3px; padding: 3px; border-radius: 999px; background: var(--surface-3); }
 .home-seg button { min-height: 38px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: 700 15px var(--display); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
 .home-seg button:hover { color: var(--text); }
@@ -631,9 +634,9 @@ body[data-view="graph"] .foot { display: none; }
 .hrow { display: grid; grid-template-columns: 44px 32px minmax(0, 1fr) 96px 104px 104px 104px 56px; gap: 14px; align-items: center; min-height: 54px; padding: 0 18px; border-bottom: 1px solid var(--line); }
 .hrow .hr-val { display: none; }
 a.hrow:hover { background: var(--surface-2); }
-.hhead { min-height: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px 16px 0 0; color: var(--muted); font: 700 12px var(--display); letter-spacing: .1em; text-transform: uppercase; }
+.home-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+.hhead { position: sticky; top: 0; z-index: 2; min-height: 40px; background: var(--surface); box-shadow: 0 1px 0 var(--line); color: var(--muted); font: 700 12px var(--display); letter-spacing: .1em; text-transform: uppercase; }
 .hhead > span:first-child { text-align: center; }
-.home-rows { background: var(--surface); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 16px 16px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 8px; }
 .home-rows .hrow:last-child { border-bottom: 0; }
 .hr-rank { font: 800 22px/1 var(--display); font-variant-numeric: tabular-nums; text-align: center; white-space: nowrap; }
 .hr-name { display: flex; align-items: center; gap: 8px; min-width: 0; }
@@ -663,14 +666,18 @@ a.hrow:hover { background: var(--surface-2); }
   .brand span { display: inline; font-size: 22px; }
   .picker { margin-left: auto; }
 
-  .home-sticky { margin: 0 -12px; padding: 10px 12px 0; }
+  body[data-view="list"] main { padding-bottom: 0; }
+  body[data-view="list"] .foot { display: none; }
+  .home { height: calc(100dvh - 60px - 65px - env(safe-area-inset-bottom)); padding-top: 10px; }
   .home-tools { gap: 8px; padding-bottom: 10px; }
-  .home-search { flex-basis: 100%; }
+  .home-search { flex: 1 1 0; min-width: 0; padding: 0 12px; }
+  .home-conf { flex: 0 0 46%; }
+  .home-conf select { padding: 0 30px 0 14px; font-size: 14px; }
+  .home-conf.sel::after { right: 14px; }
+  .home-seg.boards { flex: 1 1 100%; }
   .home-seg.division { display: none; }
-  .home-seg.boards { flex: 1; }
   .home-seg.boards button { flex: 1; padding: 0 8px; }
   .hhead { display: none; }
-  .home-rows { border-top: 1px solid var(--line); border-radius: 16px; }
   .hrow { grid-template-columns: 34px 30px minmax(0, 1fr) auto 36px; gap: 10px; min-height: 52px; padding: 0 12px; }
   .hrow .hr-conf, .hrow .hr-col { display: none; }
   .hrow .hr-val { display: block; }
