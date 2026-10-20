@@ -155,6 +155,9 @@ export interface RankedTeam {
   losses: number;
   /** Places gained since the previous snapshot (positive = moved up). */
   change: number | null;
+  /** The same for the résumé and schedule boards. */
+  resumeChange: number | null;
+  scheduleChange: number | null;
 }
 
 export interface Manifest {

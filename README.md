@@ -45,7 +45,7 @@ data/rankings/<year>/<snapshot>.json  quality, résumé, schedule, every game's 
 data/index.json                       available seasons and snapshots
 ```
 
-Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (quality, 0–7: the ranking), `strength` (points better than average), `resume` and `resumeRank`, and `schedule` and `scheduleRank`, and every counted game in `springs` with its `margin`, `spring` (spring strength), `win` (résumé points the winner earned) and `loss` (résumé points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
+Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (quality, 0–7: the ranking), `strength` (points better than average), `resume` and `resumeRank`, `schedule` and `scheduleRank`, and each board's weekly movement (`change`, `resumeChange`, `scheduleChange`), and every counted game in `springs` with its `margin`, `spring` (spring strength), `win` (résumé points the winner earned) and `loss` (résumé points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
 
 ## Update results
 

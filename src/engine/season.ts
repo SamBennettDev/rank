@@ -17,7 +17,7 @@ import { rankByQuality } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-7";
+export const ENGINE_VERSION = "rank-engine-8";
 
 export interface SeasonFiles {
   season: string;
@@ -121,7 +121,12 @@ export async function computeSeason(
   const resultIndex = new Map(resultTeams.map((t, i) => [t.id, i]));
   const files: SeasonOutput["files"] = [];
   const snapshots = listSnapshots(games);
-  let previous = new Map<number, number>();
+  // Each board's ranks in the previous snapshot, for week-to-week movement.
+  let previous = new Map<number, number>(),
+    previousResume = new Map<number, number>(),
+    previousSchedule = new Map<number, number>();
+  const moved = (now: number | null, before: number | undefined) =>
+    now !== null && before !== undefined ? before - now : null;
 
   for (const snap of snapshots) {
     const { edges } = buildEdges(games, teams, snap);
@@ -220,7 +225,6 @@ export async function computeSeason(
     const allTeams: RankedTeam[] = teams.map((t, i) => {
       const height = at(graph.quality, t.id);
       const rank = ranks[i] ?? null;
-      const prev = previous.get(t.id);
       return {
         id: t.id,
         school: t.school,
@@ -245,7 +249,12 @@ export async function computeSeason(
         special: unit(units?.special[i]),
         wins: wins.get(t.id) ?? 0,
         losses: losses.get(t.id) ?? 0,
-        change: rank !== null && prev !== undefined ? prev - rank : null,
+        change: moved(rank, previous.get(t.id)),
+        resumeChange: moved(resumeRanks[i] ?? null, previousResume.get(t.id)),
+        scheduleChange: moved(
+          scheduleRanks[i] ?? null,
+          previousSchedule.get(t.id),
+        ),
       };
     });
     const ranked = allTeams.filter((t) =>
@@ -274,13 +283,19 @@ export async function computeSeason(
         wins: wins.get(t.id) ?? 0,
         losses: losses.get(t.id) ?? 0,
         change: null,
+        resumeChange: null,
+        scheduleChange: null,
       });
     ranked.sort(
       (a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.id - b.id,
     );
-    previous = new Map(
-      ranked.filter((t) => t.rank !== null).map((t) => [t.id, t.rank!]),
-    );
+    const ranksOf = (pick: (t: RankedTeam) => number | null) =>
+      new Map(
+        ranked.flatMap((t) => (pick(t) === null ? [] : [[t.id, pick(t)!]])),
+      );
+    previous = ranksOf((t) => t.rank);
+    previousResume = ranksOf((t) => t.resumeRank);
+    previousSchedule = ranksOf((t) => t.scheduleRank);
 
     const manifest: Manifest = {
       engine: ENGINE_VERSION,

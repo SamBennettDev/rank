@@ -2,7 +2,7 @@ import { type Ctx, fmtHeight, rankLabel, record, teamHref } from "../ctx";
 import type { RankedTeam } from "../../src/engine/types";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
-import { logo, shortConf, teamVars } from "../team";
+import { logo, shortConf } from "../team";
 import { provisionalFlag } from "../visuals";
 
 type Board = "quality" | "resume" | "schedule";
@@ -33,8 +33,15 @@ const value = (t: RankedTeam, b: Board) =>
     ? fmtHeight(t.resume, 2)
     : fmt2(b === "schedule" ? t.schedule : t.height);
 
-function moveCell(t: RankedTeam) {
-  const c = t.change;
+const change = (t: RankedTeam, b: Board) =>
+  b === "resume"
+    ? t.resumeChange
+    : b === "schedule"
+      ? t.scheduleChange
+      : t.change;
+
+function moveCell(t: RankedTeam, b: Board) {
+  const c = change(t, b);
   if (!c) return h("span", { class: "hr-move" }, c === 0 ? "–" : "");
   return h(
     "span",
@@ -43,29 +50,6 @@ function moveCell(t: RankedTeam) {
       "aria-label": `${c > 0 ? "Up" : "Down"} ${Math.abs(c)}`,
     },
     `${c > 0 ? "▲" : "▼"}${Math.abs(c)}`,
-  );
-}
-
-/** The ten best teams by quality, as a compact strip of team-colour tiles. */
-function topStrip(ctx: Ctx) {
-  return h(
-    "nav",
-    { class: "home-strip", "aria-label": "Top 10" },
-    ...ctx.ranked.slice(0, 10).map((t) => {
-      const team = ctx.teams.get(t.id);
-      return h(
-        "a",
-        {
-          class: `tile${t.rank === 1 ? " first" : ""}`,
-          href: teamHref(ctx, t.id),
-          style: teamVars(team?.color),
-          "aria-label": `#${rankLabel(t.rank, t.tied)} ${t.school}`,
-        },
-        h("b", { class: "tile-rank" }, rankLabel(t.rank, t.tied)),
-        h("span", { class: "tile-logo" }, logo(team, 26)),
-        h("span", { class: "tile-abbr" }, t.abbreviation || t.school),
-      );
-    }),
   );
 }
 
@@ -153,7 +137,7 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
         h("small", {}, t.scheduleRank ?? "—"),
       ),
       h("span", { class: "hr-val" }, value(t, board)),
-      moveCell(t),
+      moveCell(t, board),
     );
 
   const draw = () => {
@@ -185,7 +169,6 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
   };
 
   root.append(
-    topStrip(ctx),
     h(
       "div",
       { class: "home-sticky" },
