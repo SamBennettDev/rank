@@ -77,8 +77,15 @@ def margin_gap(margin):
 
 
 def rank(n, w, l, margin):
-    """Pass 1: margin SpringRank gives quality (0-7). Pass 2: average of +loser's quality per win, -(7 - winner's) per loss."""
-    strength = solve(n, w, l, np.ones(len(w)), margin_gap(margin), STRENGTH_SHRINK)
+    """Pass 1: margin SpringRank, springs weighted by surprise, gives quality (0-7). Pass 2: average of +loser's quality per win, -(7 - winner's) per loss."""
+    gap = margin_gap(margin)
+    strength = solve(n, w, l, np.ones(len(w)), gap, STRENGTH_SHRINK)
+    for _ in range(200):  # weight each spring by surprise until the strengths settle
+        p = 1 / (1 + np.exp(-QUALITY_SCALE * strength))
+        nxt = solve(n, w, l, p[l] + 1 - p[w], gap, STRENGTH_SHRINK)
+        moved = np.abs(nxt - strength).max(); strength = nxt
+        if moved < 1e-9:
+            break
     q = WIN_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
     points = np.zeros(n)
     np.add.at(points, w, q[l]); np.add.at(points, l, -(WIN_POINTS - q[w]))

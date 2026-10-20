@@ -7,6 +7,7 @@ import {
   gamePoints,
   quality,
   solveSprings,
+  surprise,
   twoPass,
   type Spring,
 } from "../src/engine/springs";
@@ -18,7 +19,6 @@ const win = (winner: number, loser: number, margin = 7): Spring => ({
   loser,
   margin,
 });
-const ones = (n: number) => Array.from({ length: n }, () => 1);
 
 describe("solveSprings", () => {
   it("spaces a chain of equal springs evenly, winners on top", () => {
@@ -112,17 +112,36 @@ describe("two passes", () => {
     expect(() => marginGap(0)).toThrow();
   });
 
-  it("pass 1 is margin SpringRank: strength 1, gap from the margin", () => {
+  it("pass 1 settles where every spring's strength is its result's surprise", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
-    const { strength } = twoPass(4, springs, S);
-    const plain = solveSprings(
+    const { strength, quality: q, stiffness } = twoPass(4, springs, S);
+    springs.forEach((s, e) =>
+      expect(stiffness[e]).toBeCloseTo(surprise(q[s.winner]!, q[s.loser]!), 8),
+    );
+    const again = solveSprings(
       4,
       springs,
-      ones(4),
+      stiffness,
       springs.map((s) => marginGap(s.margin)),
       S.strengthShrink,
     );
-    expect(Array.from(strength)).toEqual(Array.from(plain));
+    for (let i = 0; i < 4; i++) expect(strength[i]).toBeCloseTo(again[i]!, 8);
+  });
+
+  it("barely lets a blowout of a weak team pull the winner down", () => {
+    // 0 and 1 are strong and close; 2 is weak. 0 also crushes 2 by 56.
+    const base = [
+      win(0, 1, 4),
+      win(1, 2, 30),
+      win(0, 2, 30),
+      win(1, 3, 20),
+      win(3, 2, 21),
+    ];
+    const without = twoPass(4, base, S).strength;
+    const withBlowout = twoPass(4, [...base, win(0, 2, 56)], S);
+    const k = withBlowout.stiffness.at(-1)!;
+    expect(k).toBeLessThan(0.5);
+    expect(withBlowout.strength[0]! - without[0]!).toBeGreaterThan(-1);
   });
 
   it("pass 2 averages each team's game points", () => {

@@ -12,7 +12,7 @@ import {
 } from "../src/engine/data";
 import { computeSeason, ENGINE_VERSION } from "../src/engine/season";
 import { DEFAULT_SETTINGS } from "../src/engine/defaults";
-import { marginGap, quality } from "../src/engine/springs";
+import { marginGap, quality, surprise } from "../src/engine/springs";
 
 const dir = join(import.meta.dirname, "fixtures/demo");
 const read = (f: string) => readFileSync(join(dir, f), "utf8");
@@ -67,12 +67,19 @@ describe("determinism", () => {
     const away = teams.find((t: { id: number }) => t.id === base.awayId);
     expect([away.rank, home.rank]).toEqual([1, 2]);
     // Two teams, one spring of strength k and pull toward 0 of `shrink` each:
-    // the winner sits k / (2k + shrink) above 0 and the loser the same below.
-    // Pass 1 (k = 1) wants the 21-point winner marginGap(21) points above.
+    // the winner sits k·gap / (2k + shrink) above 0 and the loser the same below.
+    // Pass 1 settles where k is the game's surprise at those strengths.
     const sp = DEFAULT_SETTINGS.springs;
-    const strength = marginGap(21) / (2 + sp.strengthShrink);
-    expect(away.strength).toBeCloseTo(strength, 6);
+    const strength = away.strength;
     expect(home.strength).toBeCloseTo(-strength, 6);
+    const k = surprise(
+      quality(strength, sp.qualityScale),
+      quality(-strength, sp.qualityScale),
+    );
+    expect(strength).toBeCloseTo(
+      (k * marginGap(21)) / (2 * k + sp.strengthShrink),
+      5,
+    );
     const qAway = quality(strength, sp.qualityScale),
       qHome = quality(-strength, sp.qualityScale);
     expect(JSON.parse(out.files[0]!.json).springs).toEqual([
@@ -81,6 +88,7 @@ describe("determinism", () => {
         winner: base.awayId,
         loser: base.homeId,
         margin: 21,
+        spring: expect.any(Number),
         win: expect.any(Number),
         loss: expect.any(Number),
       },

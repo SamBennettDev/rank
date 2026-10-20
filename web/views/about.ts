@@ -143,7 +143,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Pass 1, strength. "),
-        `SpringRank with margins: every game is a spring of strength 1 that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser. A 1-point win is worth 7, a 2-point win 10.5, a 3-point win 12.8, a 14-point win 22.8 and a 35-point win 29.0, so each extra point counts less than the one before. Solving the whole graph at once gives every team a strength. Each strength becomes a quality: 7 × the chance of beating an average team, from 0 to 7 (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best). A team’s height in this pass is the average of what its games say (the opponent’s height plus the gap for a win, minus it for a loss), with a small weight (${m.springs.strengthShrink}) on 0, an average team.`,
+        `SpringRank with margins: every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser. A 1-point win is worth 7, a 2-point win 10.5, a 3-point win 12.8, a 14-point win 22.8 and a 35-point win 29.0, so each extra point counts less than the one before. Each spring is as strong as its result was surprising: quality of the loser + (1 − quality of the winner), as chances. An upset or a win over a good team pulls hard; a good team beating a bad one barely pulls, so a blowout of a weak team doesn’t drag the winner down. Solving the whole graph, and repeating until the spring strengths settle, gives every team a strength. Each strength becomes a quality: 7 × the chance of beating an average team, from 0 to 7 (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best). A team’s height in this pass is the spring-weighted average of what its games say (the opponent’s height plus the gap for a win, minus it for a loss), with a small weight (${m.springs.strengthShrink}) on 0, an average team.`,
       ),
       h(
         "p",
@@ -159,7 +159,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "p",
         { class: "muted" },
-        "On 2014–2019, the final ranking has the winner above the loser in 83.4% of games and picks 68.6% of next week’s winners; on 2021–2026, 82.9% and 67.2%. The matchup odds come from a separate, calibrated margin model.",
+        "On 2014–2019, the final ranking has the winner above the loser in 83.4% of games and picks 68.6% of next week’s winners; on 2021–2026, 82.8% and 67.3%. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     details(

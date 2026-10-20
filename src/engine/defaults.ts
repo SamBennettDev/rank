@@ -19,7 +19,7 @@ export const DEFAULT_MATCHUP: MatchupSettings = {
 };
 
 export const DEFAULT_SETTINGS = {
-  algorithmVersion: "springs-then-points-2",
+  algorithmVersion: "springs-then-points-3",
   classifications: ["fbs", "fcs"],
   springs: DEFAULT_SPRINGS,
   matchup: DEFAULT_MATCHUP,

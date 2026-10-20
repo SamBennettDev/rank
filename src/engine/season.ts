@@ -17,7 +17,7 @@ import { twoPass } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-5";
+export const ENGINE_VERSION = "rank-engine-6";
 
 export interface SeasonFiles {
   season: string;
@@ -302,6 +302,7 @@ export async function computeSeason(
           winner: e.winner,
           loser: e.loser,
           margin: e.winnerPoints - e.loserPoints,
+          spring: round6(graph.stiffness[k]!),
           win: round6(graph.points[k]!.win),
           loss: round6(graph.points[k]!.loss),
         })),

@@ -1,7 +1,7 @@
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "springs-then-points-2",
+  "algorithmVersion": "springs-then-points-3",
   "classifications": [
     "fbs",
     "fcs"

@@ -4,14 +4,14 @@ Open, deterministic college football rankings for **every FBS and FCS team**. Li
 
 **Two passes.**
 
-1. **Pass 1, quality.** SpringRank with margins: every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Solving the whole graph gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7.
+1. **Pass 1, quality.** SpringRank with margins: every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising: an upset or a win over a good team pulls hard, a good team beating a bad one barely pulls, so cupcake blowouts don't drag anyone down. Solving the whole graph (repeated until the spring strengths settle) gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7.
 2. **Pass 2, the ranking.** Each team averages its games. A win earns the beaten team's quality; a loss costs 7 minus the winner's quality. Beating a good team or losing to a bad one counts most. Points per game played is the ranking.
 
 No home field or head-to-head rules.
 
 - **Every team starts at zero.** No preseason, polls, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count.
 - **Explainable game by game.** A team's height is the average of what each game earned. The team page shows every game's points.
-- **Measured.** On 2014–2019, where the settings were chosen, the weekly rankings pick 68.6% of next week's winners and the final ranking has the winner above the loser in 83.4% of games (67.2% and 82.9% on 2021–2026). `research/springs.py` reproduces both.
+- **Measured.** On 2014–2019, where the settings were chosen, the weekly rankings pick 68.6% of next week's winners and the final ranking has the winner above the loser in 83.4% of games (67.3% and 82.8% on 2021–2026). `research/springs.py` reproduces both.
 - **Reproduce every number.** The Node scripts and the browser share one engine; Recompute on the method page rebuilds every published file byte for byte.
 
 Matchup odds come from a separate calibrated margin model and never change the ranking. See [methodology](docs/METHODOLOGY.md).
@@ -43,7 +43,7 @@ data/rankings/<year>/<snapshot>.json  heights, every game's springs, and game od
 data/index.json                       available seasons and snapshots
 ```
 
-Each ranking file lists ranked FBS/FCS teams in `teams` with their pass-1 `strength`, `quality` (chance of beating an average team; ×7 for quality points) and pass-2 `height` (points per game), and every counted game in `springs` with its `margin`, `win` (points the winner earned) and `loss` (points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
+Each ranking file lists ranked FBS/FCS teams in `teams` with their pass-1 `strength`, `quality` (chance of beating an average team; ×7 for quality points) and pass-2 `height` (points per game), and every counted game in `springs` with its `margin`, `spring` (pass-1 spring strength), `win` (points the winner earned) and `loss` (points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
 
 ## Update results
 

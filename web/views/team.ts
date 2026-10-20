@@ -262,7 +262,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Pass 1 is SpringRank with margins: every game is a spring of strength 1 that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. That gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Pass 2 averages the games. A win earns the beaten team’s quality; a loss costs 7 minus the winner’s quality; the height is the average per game played. Beating a good team or losing to a bad one moves a team most; beating a bad team or losing to a good one barely moves it.`,
+        `Pass 1 is SpringRank with margins: every game is a spring that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Pass 2 averages the games. A win earns the beaten team’s quality; a loss costs 7 minus the winner’s quality; the height is the average per game played. Beating a good team or losing to a bad one moves a team most; beating a bad team or losing to a good one barely moves it.`,
       ),
     ),
   );

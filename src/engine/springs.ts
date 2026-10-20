@@ -48,6 +48,19 @@ export const gamePoints = (winnerQuality: number, loserQuality: number) => ({
 });
 
 /**
+ * Pass-1 spring strength for one game: quality(loser) + (1 − quality(winner)), 0–2.
+ * A surprising result (an upset, or a win over a good team) is a stiff spring; an
+ * expected one (a good team beating a bad one) barely pulls either team.
+ */
+export const surprise = (winnerQuality: number, loserQuality: number) =>
+  loserQuality + (1 - winnerQuality);
+
+/** Pass 1 repeats until no strength moves more than this many points... */
+export const SETTLE = 1e-9;
+/** ...or this many rounds have run. */
+export const MAX_ROUNDS = 200;
+
+/**
  * Heights that minimise
  *
  *   ½ Σ_games stiffness · (h[winner] − h[loser] − gap)²  +  ½ shrink · Σ_teams h²
@@ -85,23 +98,55 @@ export function solveSprings(
 }
 
 /**
- * The ranking. Pass 1 is margin SpringRank: every game is a spring of strength 1
- * that wants its winner `marginGap(margin)` points above its loser, which gives
- * every team a strength in points and from it a quality. Pass 2 averages each
- * team's game points (see `gamePoints`); the averages are the published ranking.
+ * Pass 1: margin SpringRank with springs weighted by surprise. Every game wants its
+ * winner `marginGap(margin)` points above its loser. It starts with every spring at
+ * strength 1, then sets each spring from the teams' qualities (see `surprise`) and
+ * solves again, until the strengths settle.
+ */
+export function strengthPass(
+  n: number,
+  springs: readonly Spring[],
+  settings: SpringSettings,
+) {
+  const gaps = springs.map((s) => marginGap(s.margin));
+  let stiffness = springs.map(() => 1);
+  let strength = solveSprings(
+    n,
+    springs,
+    stiffness,
+    gaps,
+    settings.strengthShrink,
+  );
+  for (let round = 0; round < MAX_ROUNDS; round++) {
+    const q = Array.from(strength, (x) => quality(x, settings.qualityScale));
+    stiffness = springs.map((s) => surprise(q[s.winner]!, q[s.loser]!));
+    const next = solveSprings(
+      n,
+      springs,
+      stiffness,
+      gaps,
+      settings.strengthShrink,
+    );
+    let moved = 0;
+    for (let i = 0; i < n; i++)
+      moved = Math.max(moved, Math.abs(next[i]! - strength[i]!));
+    strength = next;
+    if (moved < SETTLE) return { strength, stiffness };
+  }
+  throw new Error("pass 1 did not settle");
+}
+
+/**
+ * The ranking. Pass 1 (see `strengthPass`) gives every team a strength in points
+ * and from it a quality. Pass 2 averages each team's game points (see
+ * `gamePoints`); the averages are the published ranking.
  */
 export function twoPass(
   n: number,
   springs: readonly Spring[],
   settings: SpringSettings,
 ) {
-  const strength = solveSprings(
-    n,
-    springs,
-    springs.map(() => 1),
-    springs.map((s) => marginGap(s.margin)),
-    settings.strengthShrink,
-  );
+  const { strength, stiffness } = strengthPass(n, springs, settings);
   const q = Array.from(strength, (s) => quality(s, settings.qualityScale));
   const points = springs.map((s) => gamePoints(q[s.winner]!, q[s.loser]!));
   const total = new Float64Array(n),
@@ -113,5 +158,5 @@ export function twoPass(
     games[s.loser]!++;
   });
   const height = total.map((t, i) => (games[i]! > 0 ? t / games[i]! : 0));
-  return { strength, quality: q, points, height };
+  return { strength, quality: q, stiffness, points, height };
 }

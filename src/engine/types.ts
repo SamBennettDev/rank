@@ -136,7 +136,7 @@ export interface RankedTeam {
   tied: boolean;
   /** Pass-2 average: points earned from wins and losses per game played. The ranking. */
   height: number | null;
-  /** Pass-1 spring height in points (margin SpringRank: each spring wants 7 × H(margin)). */
+  /** Pass-1 spring height in points (each spring wants 7 × H(margin), weighted by surprise). */
   strength: number | null;
   /** Chance of beating an average team, from `strength`; ×7 gives its quality points. */
   quality: number | null;
@@ -193,6 +193,8 @@ export interface PublishedSpring {
   loser: number;
   /** Winning margin in points; the pass-1 spring wants 7 × (1 + 1/2 + … + 1/margin). */
   margin: number;
+  /** Pass-1 spring strength, 0–2: quality(loser) + 1 − quality(winner). */
+  spring: number;
   /** Pass-2 points the winner earns: 7 × quality(loser), 0 to 7. */
   win: number;
   /** Pass-2 points the loser earns: −(7 − 7 × quality(winner)), −7 to 0. */
