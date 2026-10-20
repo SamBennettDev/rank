@@ -134,7 +134,7 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Pass-2 total: Σ points earned from wins and losses. The ranking. */
+  /** Pass-2 average: points earned from wins and losses per game played. The ranking. */
   height: number | null;
   /** Pass-1 spring height in points (margin SpringRank: each spring wants 7 × H(margin)). */
   strength: number | null;

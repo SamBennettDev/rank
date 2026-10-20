@@ -125,7 +125,7 @@ describe("two passes", () => {
     expect(Array.from(strength)).toEqual(Array.from(plain));
   });
 
-  it("pass 2 adds up each team's game points", () => {
+  it("pass 2 averages each team's game points", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
     const { quality: q, points, height } = twoPass(4, springs, S);
     const total = [0, 0, 0, 0];
@@ -134,7 +134,8 @@ describe("two passes", () => {
       total[s.winner]! += points[e]!.win;
       total[s.loser]! += points[e]!.loss;
     });
-    expect(Array.from(height)).toEqual(total);
+    const games = [2, 2, 3, 1];
+    expect(Array.from(height)).toEqual(total.map((t, i) => t / games[i]!));
   });
 });
 

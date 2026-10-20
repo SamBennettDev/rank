@@ -67,7 +67,7 @@ export interface GameLine {
   /** Points this game earned: + the beaten team's quality points, or −(7 − the winner's). */
   value: number;
 }
-/** Rebuilds a team's height: the sum of the points its games earned. */
+/** Rebuilds a team's height: the average of the points its games earned. */
 export function breakdown(ctx: Ctx, teamId: number) {
   const springs = new Map(ctx.ranking.springs.map((s) => [s.gameId, s]));
   const lines: GameLine[] = ctx.edges
@@ -95,7 +95,14 @@ export function breakdown(ctx: Ctx, teamId: number) {
     });
   const earned = lines.reduce((sum, l) => sum + (l.value > 0 ? l.value : 0), 0);
   const lost = lines.reduce((sum, l) => sum + (l.value < 0 ? l.value : 0), 0);
-  return { lines, earned, lost, height: earned + lost };
+  const games = lines.length;
+  return {
+    lines,
+    earned,
+    lost,
+    games,
+    height: games ? (earned + lost) / games : 0,
+  };
 }
 export type Metric = "overall" | "offense" | "defense" | "special";
 export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
@@ -107,7 +114,7 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Points earned. A win earns the beaten team's quality (0–7); a loss costs 7 minus the winner's quality. Quality comes from a first pass, a spring graph that counts margins with diminishing returns.",
+    "Points per game. A win earns the beaten team's quality (0–7); a loss costs 7 minus the winner's quality. Quality comes from a first pass, a spring graph that counts margins with diminishing returns.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

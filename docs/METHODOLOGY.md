@@ -1,6 +1,6 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams in two passes (`springs-then-points-1`, `src/engine/springs.ts`). The first pass is SpringRank with margins counted at diminishing returns, and gives every team a quality from 0 to 7. The second pass adds up each team's games: a win earns the beaten team's quality, a loss costs 7 minus the winner's. The totals are the ranking. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams in two passes (`springs-then-points-1`, `src/engine/springs.ts`). The first pass is SpringRank with margins counted at diminishing returns, and gives every team a quality from 0 to 7. The second pass averages each team's games: a win earns the beaten team's quality, a loss costs 7 minus the winner's. Points per game played is the ranking. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## Pass 1: SpringRank with margins
 
@@ -44,7 +44,7 @@ loser earns   − (7 − quality[winner])
 | Beat a bad team (quality 0.5) | +0.5 |
 | Lose to a bad team (quality 0.5) | −6.5 |
 
-A team's **height** is the sum of its games' points. That total is the ranking.
+A team's **height** is its games' points divided by the games it played. That average is the ranking, so an extra game is no advantage by itself.
 
 Each game's `margin`, `win` (the winner's points) and `loss` (the loser's points) are published in `springs`, and each team's `strength`, `quality` (published as the 0–1 chance; × 7 for quality points) and `height` in `teams`. Published six-decimal heights sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
 
@@ -54,8 +54,8 @@ The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen.
 
 | Seasons | Next-week winners | Winner above loser at season end |
 |---|---:|---:|
-| 2014–2019 (design, 6,797 and 8,770 games) | 67.9% | 83.1% |
-| 2021–2026 through week 7 (6,403 and 8,613 games) | 66.9% | 82.9% |
+| 2014–2019 (design, 6,797 and 8,770 games) | 68.6% | 83.4% |
+| 2021–2026 through week 7 (6,403 and 8,613 games) | 67.2% | 82.9% |
 
 2021–2026 were looked at during design, so they are a check rather than an untouched holdout.
 
@@ -90,7 +90,7 @@ Offense, defense and special teams are explanatory outputs from public cfbfastR 
 
 ## Determinism and changes
 
-Teams and games use numeric ID order for summation. The pass-1 spring graph, pass-2 sums, the matchup model, variances and ranking use fixed loops and Cholesky with only + − × / and √. The quality logistic and probabilities use fixed-arithmetic `expFixed`, avoiding platform-dependent transcendental functions in published bytes. Values round to six decimals. JSON has fixed key order with one team, prediction and spring per line.
+Teams and games use numeric ID order for summation. The pass-1 spring graph, pass-2 averages, the matchup model, variances and ranking use fixed loops and Cholesky with only + − × / and √. The quality logistic and probabilities use fixed-arithmetic `expFixed`, avoiding platform-dependent transcendental functions in published bytes. Values round to six decimals. JSON has fixed key order with one team, prediction and spring per line.
 
 Schema 1 includes engine/algorithm versions, spring and prediction settings, hashes, counts, diagnostics, every game's points (`springs`: margin, win and loss), each team's pass-1 `strength`, `quality` and pass-2 `height`, and matchup predictions. Node verification and browser Recompute call the same `computeSeason` pipeline. There is no runtime randomness or wall-clock input.
 

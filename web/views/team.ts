@@ -237,22 +237,21 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "total" },
-        h("b", {}, fmtHeight(b.earned, 2)),
-        h("small", {}, "From wins"),
+        h("b", {}, fmtHeight(b.earned + b.lost, 2)),
+        h(
+          "small",
+          {},
+          `${fmtHeight(b.earned, 2)} from wins, −${Math.abs(b.lost).toFixed(2)} from losses`,
+        ),
       ),
-      h("span", { "aria-hidden": "true" }, "−"),
-      h(
-        "div",
-        {},
-        h("b", {}, Math.abs(b.lost).toFixed(2)),
-        h("small", {}, "From losses"),
-      ),
+      h("span", { "aria-hidden": "true" }, "÷"),
+      h("div", {}, h("b", {}, String(b.games)), h("small", {}, "Games")),
       h("span", { "aria-hidden": "true" }, "="),
       h(
         "div",
         {},
         h("b", {}, fmtHeight(me.height, 2)),
-        h("small", {}, "Points"),
+        h("small", {}, "Points per game"),
       ),
     ),
     breakdownChart(ctx, me.height!, lines),
@@ -263,7 +262,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Pass 1 is SpringRank with margins: every game is a spring of strength 1 that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. That gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Pass 2 adds up the games. A win earns the beaten team’s quality; a loss costs 7 minus the winner’s quality. Beating a good team or losing to a bad one moves a team most; beating a bad team or losing to a good one barely moves it.`,
+        `Pass 1 is SpringRank with margins: every game is a spring of strength 1 that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. That gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Pass 2 averages the games. A win earns the beaten team’s quality; a loss costs 7 minus the winner’s quality; the height is the average per game played. Beating a good team or losing to a bad one moves a team most; beating a bad team or losing to a good one barely moves it.`,
       ),
     ),
   );
@@ -367,7 +366,7 @@ function breakdownChart(
     y: H - 6,
     "text-anchor": "middle",
   });
-  rt.textContent = `Total ${fmtHeight(rating, 2)}`;
+  rt.textContent = `Average ${fmtHeight(rating, 2)} per game`;
   root.appendChild(rt);
   return root;
 }

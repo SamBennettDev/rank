@@ -77,12 +77,13 @@ def margin_gap(margin):
 
 
 def rank(n, w, l, margin):
-    """Pass 1: margin SpringRank gives quality (0-7). Pass 2: +loser's quality per win, -(7 - winner's) per loss."""
+    """Pass 1: margin SpringRank gives quality (0-7). Pass 2: average of +loser's quality per win, -(7 - winner's) per loss."""
     strength = solve(n, w, l, np.ones(len(w)), margin_gap(margin), STRENGTH_SHRINK)
     q = WIN_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
     points = np.zeros(n)
     np.add.at(points, w, q[l]); np.add.at(points, l, -(WIN_POINTS - q[w]))
-    return points
+    games = np.bincount(w, minlength=n) + np.bincount(l, minlength=n)
+    return points / np.maximum(games, 1)
 
 
 def evaluate(years):

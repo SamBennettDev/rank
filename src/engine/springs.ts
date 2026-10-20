@@ -87,8 +87,8 @@ export function solveSprings(
 /**
  * The ranking. Pass 1 is margin SpringRank: every game is a spring of strength 1
  * that wants its winner `marginGap(margin)` points above its loser, which gives
- * every team a strength in points and from it a quality. Pass 2 adds up each
- * team's games (see `gamePoints`); the totals are the published ranking.
+ * every team a strength in points and from it a quality. Pass 2 averages each
+ * team's game points (see `gamePoints`); the averages are the published ranking.
  */
 export function twoPass(
   n: number,
@@ -104,10 +104,14 @@ export function twoPass(
   );
   const q = Array.from(strength, (s) => quality(s, settings.qualityScale));
   const points = springs.map((s) => gamePoints(q[s.winner]!, q[s.loser]!));
-  const height = new Float64Array(n);
+  const total = new Float64Array(n),
+    games = new Float64Array(n);
   springs.forEach((s, e) => {
-    height[s.winner]! += points[e]!.win;
-    height[s.loser]! += points[e]!.loss;
+    total[s.winner]! += points[e]!.win;
+    total[s.loser]! += points[e]!.loss;
+    games[s.winner]!++;
+    games[s.loser]!++;
   });
+  const height = total.map((t, i) => (games[i]! > 0 ? t / games[i]! : 0));
   return { strength, quality: q, points, height };
 }

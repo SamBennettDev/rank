@@ -17,7 +17,7 @@ import { twoPass } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-4";
+export const ENGINE_VERSION = "rank-engine-5";
 
 export interface SeasonFiles {
   season: string;

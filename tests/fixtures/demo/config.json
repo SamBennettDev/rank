@@ -1,8 +1,10 @@
 {
   "label": "Demo season (fictional data)",
   "demo": true,
-  "algorithmVersion": "springs-then-points-1",
-  "classifications": ["fbs"],
+  "algorithmVersion": "springs-then-points-2",
+  "classifications": [
+    "fbs"
+  ],
   "springs": {
     "strengthShrink": 0.5,
     "qualityScale": 0.08

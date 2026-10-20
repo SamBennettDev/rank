@@ -275,7 +275,7 @@ export function graphView(
         h(
           "p",
           {},
-          "Height = total points from pass 2. Each line is a game between its winner and its loser. Columns = conferences.",
+          "Height = points per game from pass 2. Each line is a game between its winner and its loser. Columns = conferences.",
         ),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(

@@ -129,13 +129,13 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "div",
         { class: "recipe-block" },
         h("b", {}, "Points"),
-        h("span", {}, "Pass 2: the ranking"),
+        h("span", {}, "Per game: the ranking"),
       ),
     ),
     h(
       "p",
       { class: "method-caption" },
-      "Pass 1 is a spring graph that counts the margin, each extra point less than the last, to judge how good every team is. Pass 2 adds up points: a win earns the beaten team’s quality, a loss costs 7 minus the winner’s. Beat a good team or lose to a bad one and it counts most.",
+      "Pass 1 is a spring graph that counts the margin, each extra point less than the last, to judge how good every team is. Pass 2 averages points per game: a win earns the beaten team’s quality, a loss costs 7 minus the winner’s. Beat a good team or lose to a bad one and it counts most.",
     ),
     details(
       "The two passes",
@@ -149,7 +149,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Pass 2, the ranking. "),
-        "Each team adds up its games. A win earns the beaten team’s quality; a loss costs 7 minus the winning team’s quality. Beating a 6.5 team earns +6.5 and losing to it costs only −0.5; beating a 0.5 team earns +0.5 and losing to it costs −6.5. The totals are the ranking.",
+        "Each team averages its games. A win earns the beaten team’s quality; a loss costs 7 minus the winning team’s quality. Beating a 6.5 team earns +6.5 and losing to it costs only −0.5; beating a 0.5 team earns +0.5 and losing to it costs −6.5. Points per game played is the ranking, so playing an extra game is no advantage by itself.",
       ),
       h(
         "p",
@@ -159,7 +159,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "p",
         { class: "muted" },
-        "On 2014–2019, the final ranking has the winner above the loser in 83.1% of games and picks 67.9% of next week’s winners; on 2021–2026, 82.9% and 66.9%. The matchup odds come from a separate, calibrated margin model.",
+        "On 2014–2019, the final ranking has the winner above the loser in 83.4% of games and picks 68.6% of next week’s winners; on 2021–2026, 82.9% and 67.2%. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     details(

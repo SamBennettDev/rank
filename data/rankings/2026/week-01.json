@@ -3,8 +3,8 @@
   "season": "2026",
   "snapshot": {"id":"week-01","label":"Week 1","throughWeek":1,"includePostseason":true,"asOf":"2026-08-31T12:00:00.000Z"},
   "manifest": {
-    "engine": "rank-engine-4",
-    "algorithmVersion": "springs-then-points-1",
+    "engine": "rank-engine-5",
+    "algorithmVersion": "springs-then-points-2",
     "springs": {
       "strengthShrink": 0.5,
       "qualityScale": 0.08
