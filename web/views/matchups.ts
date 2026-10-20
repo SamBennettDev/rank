@@ -1,5 +1,5 @@
 import type { MatchupPrediction } from "../../src/engine/types";
-import { type Ctx, fmtHeight, rankLabel, teamHref } from "../ctx";
+import { type Ctx, rankLabel, teamHref } from "../ctx";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import { logo, teamVars } from "../team";
@@ -27,14 +27,14 @@ export function matchupCard(ctx: Ctx, p: MatchupPrediction) {
           "b",
           { class: "matchup-score" },
           published
-            ? fmtHeight(team.height, 3)
+            ? (team.height ?? 0).toFixed(3)
             : team.classification.toUpperCase(),
         ),
         h(
           "span",
           { class: "matchup-rank" },
           published
-            ? `#${rankLabel(team.rank, team.tied)} · Height`
+            ? `#${rankLabel(team.rank, team.tied)} · Quality`
             : "Opponent",
         ),
       ),

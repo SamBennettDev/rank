@@ -7,8 +7,9 @@ import {
   gamePoints,
   quality,
   solveSprings,
+  rankByQuality,
+  solveStrength,
   surprise,
-  twoPass,
   type Spring,
 } from "../src/engine/springs";
 import type { Team } from "../src/engine/types";
@@ -52,11 +53,11 @@ describe("solveSprings", () => {
 
   it("is bit-identical across runs", () => {
     const springs = [win(0, 1, 3), win(2, 1, 40), win(2, 0, 1)];
-    expect(twoPass(3, springs, S)).toEqual(twoPass(3, springs, S));
+    expect(rankByQuality(3, springs, S)).toEqual(rankByQuality(3, springs, S));
   });
 });
 
-describe("pass 2 pull", () => {
+describe("quality", () => {
   const good = quality(30, S.qualityScale),
     average = quality(0, S.qualityScale),
     bad = quality(-30, S.qualityScale);
@@ -67,41 +68,6 @@ describe("pass 2 pull", () => {
     expect(good + bad).toBeCloseTo(1, 12);
   });
 
-  it("earns the beaten team's quality and loses 7 minus the winner's", () => {
-    expect(gamePoints(good, bad)).toEqual({
-      win: 7 * bad,
-      loss: -(7 - 7 * good),
-    });
-    const beatGood = gamePoints(average, good).win,
-      beatBad = gamePoints(average, bad).win,
-      loseToBad = gamePoints(bad, average).loss,
-      loseToGood = gamePoints(good, average).loss;
-    expect(beatGood).toBeGreaterThan(beatBad);
-    expect(loseToBad).toBeLessThan(loseToGood);
-    expect(gamePoints(average, average)).toEqual({ win: 3.5, loss: -3.5 });
-  });
-
-  it("costs more to lose to a bad team than to a good one", () => {
-    // 0 is strong (beats 2 and 3 by a lot), 3 is weak (loses to everyone else).
-    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
-    const loseToGood = twoPass(5, [...base, win(0, 4)], S).height;
-    const loseToBad = twoPass(5, [...base, win(3, 4)], S).height;
-    expect(loseToBad[4]!).toBeLessThan(loseToGood[4]!);
-  });
-
-  it("rewards beating a good team more than beating a bad one", () => {
-    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
-    const beatGood = twoPass(5, [...base, win(4, 0)], S).height;
-    const beatBad = twoPass(5, [...base, win(4, 3)], S).height;
-    expect(beatGood[4]!).toBeGreaterThan(beatBad[4]!);
-  });
-
-  it("rejects a non-positive pull toward average", () => {
-    expect(() => solveSprings(2, [win(0, 1)], [1], [1], 0)).toThrow(/shrink/);
-  });
-});
-
-describe("two passes", () => {
   it("counts each extra point of margin less than the one before", () => {
     expect(marginGap(1)).toBe(7);
     expect(marginGap(2)).toBeCloseTo(7 + 7 / 2, 12);
@@ -112,11 +78,12 @@ describe("two passes", () => {
     expect(() => marginGap(0)).toThrow();
   });
 
-  it("pass 1 settles where every spring's strength is its result's surprise", () => {
+  it("settles where every spring's strength is its result's surprise", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
-    const { strength, quality: q, stiffness } = twoPass(4, springs, S);
+    const { strength, stiffness } = solveStrength(4, springs, S);
+    const p = Array.from(strength, (x) => quality(x, S.qualityScale));
     springs.forEach((s, e) =>
-      expect(stiffness[e]).toBeCloseTo(surprise(q[s.winner]!, q[s.loser]!), 8),
+      expect(stiffness[e]).toBeCloseTo(surprise(p[s.winner]!, p[s.loser]!), 8),
     );
     const again = solveSprings(
       4,
@@ -128,6 +95,13 @@ describe("two passes", () => {
     for (let i = 0; i < 4; i++) expect(strength[i]).toBeCloseTo(again[i]!, 8);
   });
 
+  it("is 7 × the chance of beating an average team, in strength order", () => {
+    const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
+    const r = rankByQuality(4, springs, S);
+    for (let i = 0; i < 4; i++)
+      expect(r.quality[i]).toBe(7 * quality(r.strength[i]!, S.qualityScale));
+  });
+
   it("barely lets a blowout of a weak team pull the winner down", () => {
     // 0 and 1 are strong and close; 2 is weak. 0 also crushes 2 by 56.
     const base = [
@@ -137,24 +111,59 @@ describe("two passes", () => {
       win(1, 3, 20),
       win(3, 2, 21),
     ];
-    const without = twoPass(4, base, S).strength;
-    const withBlowout = twoPass(4, [...base, win(0, 2, 56)], S);
-    const k = withBlowout.stiffness.at(-1)!;
-    expect(k).toBeLessThan(0.5);
+    const without = solveStrength(4, base, S).strength;
+    const withBlowout = solveStrength(4, [...base, win(0, 2, 56)], S);
+    expect(withBlowout.stiffness.at(-1)!).toBeLessThan(0.5);
     expect(withBlowout.strength[0]! - without[0]!).toBeGreaterThan(-1);
   });
 
-  it("pass 2 averages each team's game points", () => {
+  it("rejects a non-positive pull toward average", () => {
+    expect(() => solveSprings(2, [win(0, 1)], [1], [1], 0)).toThrow(/shrink/);
+  });
+});
+
+describe("résumé and schedule", () => {
+  it("earns the beaten team's quality and loses 7 minus the winner's", () => {
+    expect(gamePoints(6.5, 0.5)).toEqual({ win: 0.5, loss: -0.5 });
+    expect(gamePoints(0.5, 6.5)).toEqual({ win: 6.5, loss: -6.5 });
+    expect(gamePoints(3.5, 3.5)).toEqual({ win: 3.5, loss: -3.5 });
+  });
+
+  it("costs more to lose to a bad team than to a good one", () => {
+    // 0 is strong (beats 2 and 3 by a lot), 3 is weak (loses to everyone else).
+    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
+    const loseToGood = rankByQuality(5, [...base, win(0, 4)], S).resume;
+    const loseToBad = rankByQuality(5, [...base, win(3, 4)], S).resume;
+    expect(loseToBad[4]!).toBeLessThan(loseToGood[4]!);
+  });
+
+  it("rewards beating a good team more than beating a bad one", () => {
+    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
+    const beatGood = rankByQuality(5, [...base, win(4, 0)], S).resume;
+    const beatBad = rankByQuality(5, [...base, win(4, 3)], S).resume;
+    expect(beatGood[4]!).toBeGreaterThan(beatBad[4]!);
+  });
+
+  it("averages game points and opponents' quality per game played", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
-    const { quality: q, points, height } = twoPass(4, springs, S);
-    const total = [0, 0, 0, 0];
+    const {
+      quality: q,
+      points,
+      resume,
+      schedule,
+    } = rankByQuality(4, springs, S);
+    const earned = [0, 0, 0, 0],
+      faced = [0, 0, 0, 0];
     springs.forEach((s, e) => {
       expect(points[e]).toEqual(gamePoints(q[s.winner]!, q[s.loser]!));
-      total[s.winner]! += points[e]!.win;
-      total[s.loser]! += points[e]!.loss;
+      earned[s.winner]! += points[e]!.win;
+      earned[s.loser]! += points[e]!.loss;
+      faced[s.winner]! += q[s.loser]!;
+      faced[s.loser]! += q[s.winner]!;
     });
     const games = [2, 2, 3, 1];
-    expect(Array.from(height)).toEqual(total.map((t, i) => t / games[i]!));
+    expect(Array.from(resume)).toEqual(earned.map((t, i) => t / games[i]!));
+    expect(Array.from(schedule)).toEqual(faced.map((t, i) => t / games[i]!));
   });
 });
 

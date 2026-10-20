@@ -81,7 +81,12 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         { class: "tstats" },
         stat("Current rank", rankLabel(team.rank, team.tied)),
         stat("Record", record(team)),
-        stat("Height", fmtHeight(team.height, 2)),
+        stat("Quality", team.height === null ? "—" : team.height.toFixed(2)),
+        stat("Résumé", team.resumeRank === null ? "—" : `#${team.resumeRank}`),
+        stat(
+          "Schedule",
+          team.scheduleRank === null ? "—" : `#${team.scheduleRank}`,
+        ),
         stat(
           "This week",
           team.change === null
@@ -230,7 +235,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   return h(
     "div",
     { class: "panel why" },
-    h("h2", {}, "Where this team’s points come from"),
+    h("h2", {}, "Résumé: where this team’s points come from"),
     h(
       "div",
       { class: "spring-equation" },
@@ -241,7 +246,9 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
         h(
           "small",
           {},
-          `${fmtHeight(b.earned, 2)} from wins, −${Math.abs(b.lost).toFixed(2)} from losses`,
+          b.lost < 0
+            ? `${fmtHeight(b.earned, 2)} from wins, −${Math.abs(b.lost).toFixed(2)} from losses`
+            : "From wins",
         ),
       ),
       h("span", { "aria-hidden": "true" }, "÷"),
@@ -250,19 +257,19 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         {},
-        h("b", {}, fmtHeight(me.height, 2)),
-        h("small", {}, "Points per game"),
+        h("b", {}, fmtHeight(me.resume, 2)),
+        h("small", {}, `Résumé, #${me.resumeRank ?? "—"}`),
       ),
     ),
-    breakdownChart(ctx, me.height!, lines),
+    breakdownChart(ctx, me.resume!, lines),
     h(
       "details",
       { class: "quiet-details" },
-      h("summary", {}, "How the two passes work"),
+      h("summary", {}, "How quality, résumé and schedule work"),
       h(
         "p",
         {},
-        `Pass 1 is SpringRank with margins: every game is a spring that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Pass 2 averages the games. A win earns the beaten team’s quality; a loss costs 7 minus the winner’s quality; the height is the average per game played. Beating a good team or losing to a bad one moves a team most; beating a bad team or losing to a good one barely moves it.`,
+        `Quality is the ranking. Every game is a spring that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Résumé averages the games: a win earns the beaten team’s quality and a loss costs 7 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
       ),
     ),
   );
@@ -347,7 +354,7 @@ function breakdownChart(
     stem(
       y,
       l.value,
-      `${score} against ${o.school} (quality ${(7 * (o.quality ?? 0)).toFixed(2)} of 7): ${fmtHeight(l.value, 2)} points`,
+      `${score} against ${o.school} (quality ${(o.height ?? 0).toFixed(2)} of 7): ${fmtHeight(l.value, 2)} points`,
       o.id,
     );
   });
@@ -563,7 +570,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         "span",
         {
           class: `r ${l.value >= 0 ? "pos" : "neg"}`,
-          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(7 * (o.quality ?? 0)).toFixed(2)} of 7: ${l.won ? "+ their quality" : "−(7 − their quality)"}.`,
+          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(o.height ?? 0).toFixed(2)} of 7: ${l.won ? "+ their quality" : "−(7 − their quality)"}.`,
         },
         fmtHeight(l.value, 2),
       ),

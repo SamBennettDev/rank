@@ -13,11 +13,11 @@ import type {
   Team,
 } from "./types";
 import { fitUnits } from "./units";
-import { twoPass } from "./springs";
+import { rankByQuality } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-6";
+export const ENGINE_VERSION = "rank-engine-7";
 
 export interface SeasonFiles {
   season: string;
@@ -152,7 +152,7 @@ export async function computeSeason(
     const { homeField } = model.fit;
     const included = new Set(edges.map((e) => e.gameId));
     // The ranking: every counted result, including lower-division opponents, is a spring.
-    const graph = twoPass(
+    const graph = rankByQuality(
       resultTeams.length,
       resultEdges.map((e) => ({
         winner: resultIndex.get(e.winner)!,
@@ -208,11 +208,17 @@ export async function computeSeason(
     const unit = (v: number | null | undefined) =>
       v === null || v === undefined ? null : round6(v);
     const eligibleHeights = teams.map((t, i) =>
-      eligible.has(i) ? at(graph.height, t.id) : null,
+      eligible.has(i) ? at(graph.quality, t.id) : null,
     );
     const ranks = rankValues(eligibleHeights);
+    const rankBy = (values: ArrayLike<number>) =>
+      rankValues(
+        teams.map((t, i) => (eligible.has(i) ? at(values, t.id) : null)),
+      );
+    const resumeRanks = rankBy(graph.resume),
+      scheduleRanks = rankBy(graph.schedule);
     const allTeams: RankedTeam[] = teams.map((t, i) => {
-      const height = at(graph.height, t.id);
+      const height = at(graph.quality, t.id);
       const rank = ranks[i] ?? null;
       const prev = previous.get(t.id);
       return {
@@ -227,7 +233,10 @@ export async function computeSeason(
           eligibleHeights.filter((v) => v === height).length > 1,
         height,
         strength: at(graph.strength, t.id),
-        quality: at(graph.quality, t.id),
+        resume: at(graph.resume, t.id),
+        resumeRank: resumeRanks[i] ?? null,
+        schedule: at(graph.schedule, t.id),
+        scheduleRank: scheduleRanks[i] ?? null,
         component: height === null ? null : teams[model.components[i]!]!.id,
         componentSize: model.sizes.get(model.components[i]!) ?? 0,
         provisional: model.provisional[i]!,
@@ -250,9 +259,12 @@ export async function computeSeason(
         ...t,
         rank: null,
         tied: false,
-        height: at(graph.height, t.id),
+        height: at(graph.quality, t.id),
         strength: at(graph.strength, t.id),
-        quality: at(graph.quality, t.id),
+        resume: at(graph.resume, t.id),
+        resumeRank: null,
+        schedule: at(graph.schedule, t.id),
+        scheduleRank: null,
         component: null,
         componentSize: 0,
         provisional: true,

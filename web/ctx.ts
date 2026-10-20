@@ -67,7 +67,7 @@ export interface GameLine {
   /** Points this game earned: + the beaten team's quality points, or −(7 − the winner's). */
   value: number;
 }
-/** Rebuilds a team's height: the average of the points its games earned. */
+/** Rebuilds a team's résumé: the average of the points its games earned. */
 export function breakdown(ctx: Ctx, teamId: number) {
   const springs = new Map(ctx.ranking.springs.map((s) => [s.gameId, s]));
   const lines: GameLine[] = ctx.edges
@@ -101,20 +101,39 @@ export function breakdown(ctx: Ctx, teamId: number) {
     earned,
     lost,
     games,
-    height: games ? (earned + lost) / games : 0,
+    resume: games ? (earned + lost) / games : 0,
   };
 }
-export type Metric = "overall" | "offense" | "defense" | "special";
-export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
+export type Metric =
+  | "overall"
+  | "resume"
+  | "schedule"
+  | "offense"
+  | "defense"
+  | "special";
+export const METRICS: Metric[] = [
+  "overall",
+  "resume",
+  "schedule",
+  "offense",
+  "defense",
+  "special",
+];
 export const METRIC_LABEL: Record<Metric, string> = {
-  overall: "Height",
+  overall: "Quality",
+  resume: "Résumé",
+  schedule: "Schedule",
   offense: "Offense",
   defense: "Defense",
   special: "Special teams",
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Points per game. A win earns the beaten team's quality (0–7); a loss costs 7 minus the winner's quality. Quality comes from a first pass, a spring graph that counts margins with diminishing returns.",
+    "Quality, 0–7: 7 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting less, and each spring is as strong as the result was surprising.",
+  resume:
+    "Points per game. A win earns the beaten team's quality (0–7); a loss costs 7 minus the winner's quality.",
+  schedule:
+    "Strength of schedule: the average quality (0–7) of the opponents played.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

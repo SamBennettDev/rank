@@ -4,7 +4,7 @@ import type { SpringSettings } from "./types";
 
 export type { SpringSettings };
 
-/** One game: a pass-1 spring from the loser up to the winner. */
+/** One game: a spring from the loser up to the winner. */
 export interface Spring {
   winner: number;
   loser: number;
@@ -12,11 +12,11 @@ export interface Spring {
   margin: number;
 }
 
-/** Points a 1-point win is worth in pass 1, and the most a game can move pass 2. */
+/** Points a 1-point win is worth, and the top of the 0–7 quality scale. */
 export const WIN_POINTS = 7;
 
 /**
- * How far above its loser a pass-1 spring wants the winner, in points:
+ * How far above its loser a spring wants the winner, in points:
  * WIN_POINTS × (1 + 1/2 + … + 1/margin). The first point is worth 7, the second
  * 3.5, the third 2.33: each extra point counts less than the one before.
  */
@@ -28,7 +28,7 @@ export function marginGap(margin: number) {
   return WIN_POINTS * sum;
 }
 
-/** Chance a team at this pass-1 height beats an average (height 0) team. */
+/** Chance a team at this strength beats an average (height 0) team. */
 export const quality = (strength: number, scale: number) => {
   const e = expFixed(-Math.abs(strength) * scale);
   return strength >= 0 ? 1 / (1 + e) : e / (1 + e);
@@ -38,24 +38,26 @@ export const quality = (strength: number, scale: number) => {
 export const qualityPoints = (q: number) => WIN_POINTS * q;
 
 /**
- * Pass-2 points for one game. The winner earns the loser's quality points; the loser
- * loses 7 minus the winner's quality points. Beating a good team or losing to a bad
- * one moves a team most; beating a bad team or losing to a good one barely does.
+ * Résumé points for one game, from 0–7 quality points. The winner earns the loser's
+ * quality; the loser loses 7 minus the winner's quality. Beating a good team or
+ * losing to a bad one moves a résumé most; beating a bad team or losing to a good
+ * one barely does.
  */
 export const gamePoints = (winnerQuality: number, loserQuality: number) => ({
-  win: qualityPoints(loserQuality),
-  loss: -(WIN_POINTS - qualityPoints(winnerQuality)),
+  win: loserQuality,
+  loss: -(WIN_POINTS - winnerQuality),
 });
 
 /**
- * Pass-1 spring strength for one game: quality(loser) + (1 − quality(winner)), 0–2.
+ * Spring strength for one game: chance(loser) + (1 − chance(winner)), 0–2, where
+ * chance is each team's chance of beating an average team.
  * A surprising result (an upset, or a win over a good team) is a stiff spring; an
  * expected one (a good team beating a bad one) barely pulls either team.
  */
 export const surprise = (winnerQuality: number, loserQuality: number) =>
   loserQuality + (1 - winnerQuality);
 
-/** Pass 1 repeats until no strength moves more than this many points... */
+/** The solve repeats until no strength moves more than this many points... */
 export const SETTLE = 1e-9;
 /** ...or this many rounds have run. */
 export const MAX_ROUNDS = 200;
@@ -98,12 +100,12 @@ export function solveSprings(
 }
 
 /**
- * Pass 1: margin SpringRank with springs weighted by surprise. Every game wants its
- * winner `marginGap(margin)` points above its loser. It starts with every spring at
- * strength 1, then sets each spring from the teams' qualities (see `surprise`) and
+ * Margin SpringRank with springs weighted by surprise. Every game wants its winner
+ * `marginGap(margin)` points above its loser. It starts with every spring at
+ * strength 1, then sets each spring from the teams' chances (see `surprise`) and
  * solves again, until the strengths settle.
  */
-export function strengthPass(
+export function solveStrength(
   n: number,
   springs: readonly Spring[],
   settings: SpringSettings,
@@ -118,8 +120,8 @@ export function strengthPass(
     settings.strengthShrink,
   );
   for (let round = 0; round < MAX_ROUNDS; round++) {
-    const q = Array.from(strength, (x) => quality(x, settings.qualityScale));
-    stiffness = springs.map((s) => surprise(q[s.winner]!, q[s.loser]!));
+    const p = Array.from(strength, (x) => quality(x, settings.qualityScale));
+    stiffness = springs.map((s) => surprise(p[s.winner]!, p[s.loser]!));
     const next = solveSprings(
       n,
       springs,
@@ -133,30 +135,43 @@ export function strengthPass(
     strength = next;
     if (moved < SETTLE) return { strength, stiffness };
   }
-  throw new Error("pass 1 did not settle");
+  throw new Error("strengths did not settle");
 }
 
 /**
- * The ranking. Pass 1 (see `strengthPass`) gives every team a strength in points
- * and from it a quality. Pass 2 averages each team's game points (see
- * `gamePoints`); the averages are the published ranking.
+ * The ranking and its two companions. Quality (0–7 points, the ranking) comes from
+ * one surprise-weighted margin SpringRank. Résumé is a team's average game points
+ * (see `gamePoints`); schedule is the average quality of the opponents it played.
  */
-export function twoPass(
+export function rankByQuality(
   n: number,
   springs: readonly Spring[],
   settings: SpringSettings,
 ) {
-  const { strength, stiffness } = strengthPass(n, springs, settings);
-  const q = Array.from(strength, (s) => quality(s, settings.qualityScale));
+  const { strength, stiffness } = solveStrength(n, springs, settings);
+  const q = Array.from(strength, (s) =>
+    qualityPoints(quality(s, settings.qualityScale)),
+  );
   const points = springs.map((s) => gamePoints(q[s.winner]!, q[s.loser]!));
-  const total = new Float64Array(n),
+  const earned = new Float64Array(n),
+    faced = new Float64Array(n),
     games = new Float64Array(n);
   springs.forEach((s, e) => {
-    total[s.winner]! += points[e]!.win;
-    total[s.loser]! += points[e]!.loss;
+    earned[s.winner]! += points[e]!.win;
+    earned[s.loser]! += points[e]!.loss;
+    faced[s.winner]! += q[s.loser]!;
+    faced[s.loser]! += q[s.winner]!;
     games[s.winner]!++;
     games[s.loser]!++;
   });
-  const height = total.map((t, i) => (games[i]! > 0 ? t / games[i]! : 0));
-  return { strength, quality: q, stiffness, points, height };
+  const perGame = (x: Float64Array) =>
+    x.map((v, i) => (games[i]! > 0 ? v / games[i]! : 0));
+  return {
+    strength,
+    quality: Float64Array.from(q),
+    stiffness,
+    points,
+    resume: perGame(earned),
+    schedule: perGame(faced),
+  };
 }

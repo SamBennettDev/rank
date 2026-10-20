@@ -1,9 +1,46 @@
-import { type Ctx, fmtHeight, href, rankLabel, record, teamHref } from "../ctx";
+import {
+  type Ctx,
+  fmtHeight,
+  href,
+  METRIC_HINT,
+  rankLabel,
+  record,
+  teamHref,
+} from "../ctx";
 import type { RankedTeam } from "../../src/engine/types";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import { logo, shortConf, teamVars } from "../team";
 import { provisionalFlag } from "../visuals";
+
+const fmtQuality = (v: number | null) => (v === null ? "—" : v.toFixed(3));
+
+type Board = "overall" | "resume" | "schedule";
+const BOARD_LABEL: Record<Board, string> = {
+  overall: "Quality",
+  resume: "Résumé",
+  schedule: "Schedule",
+};
+/** A team's place and score on one board. */
+function standing(t: RankedTeam, b: Board) {
+  if (b === "resume")
+    return {
+      rank: t.resumeRank,
+      label: t.resumeRank === null ? "—" : String(t.resumeRank),
+      score: fmtHeight(t.resume, 3),
+    };
+  if (b === "schedule")
+    return {
+      rank: t.scheduleRank,
+      label: t.scheduleRank === null ? "—" : String(t.scheduleRank),
+      score: fmtQuality(t.schedule),
+    };
+  return {
+    rank: t.rank,
+    label: rankLabel(t.rank, t.tied),
+    score: fmtQuality(t.height),
+  };
+}
 
 function leaderCard(ctx: Ctx, t: RankedTeam, index: number, total: number) {
   return h(
@@ -13,7 +50,7 @@ function leaderCard(ctx: Ctx, t: RankedTeam, index: number, total: number) {
       href: teamHref(ctx, t.id),
       style: teamVars(ctx.teams.get(t.id)?.color),
       "aria-roledescription": "slide",
-      "aria-label": `${index + 1} of ${total}. ${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Height ${fmtHeight(t.height, 3)}.`,
+      "aria-label": `${index + 1} of ${total}. ${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Quality ${fmtQuality(t.height)}.`,
     },
     h(
       "div",
@@ -38,8 +75,8 @@ function leaderCard(ctx: Ctx, t: RankedTeam, index: number, total: number) {
       h(
         "div",
         { class: "leader-score" },
-        h("span", { class: "stat-label" }, "Height"),
-        h("b", {}, fmtHeight(t.height, 3)),
+        h("span", { class: "stat-label" }, "Quality"),
+        h("b", {}, fmtQuality(t.height)),
       ),
     ),
   );
@@ -148,33 +185,76 @@ function leadersCarousel(ctx: Ctx, onCleanup: (fn: () => void) => void) {
 export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
   let query = "",
     division = "all",
-    conference = "";
+    conference = "",
+    board: Board = "overall";
   const field = ctx.ranking.teams;
   const body = h("div"),
     count = h("span", { class: "count", "aria-live": "polite" });
+  const hint = h("p", { class: "method-caption" }, METRIC_HINT.overall);
+  const scoreHead = h("span", {}, BOARD_LABEL.overall);
+  const boardPicker = h(
+    "div",
+    {},
+    h(
+      "div",
+      { class: "seg", role: "group", "aria-label": "Ranking board" },
+      ...(Object.keys(BOARD_LABEL) as Board[]).map((b) =>
+        h(
+          "button",
+          {
+            type: "button",
+            class: b === board ? "on" : "",
+            "aria-pressed": String(b === board),
+            onclick: (event: Event) => {
+              board = b;
+              hint.textContent = METRIC_HINT[b];
+              scoreHead.textContent = BOARD_LABEL[b];
+              for (const el of (event.currentTarget as HTMLElement)
+                .parentElement!.children) {
+                const on = el === event.currentTarget;
+                el.classList.toggle("on", on);
+                el.setAttribute("aria-pressed", String(on));
+              }
+              draw();
+            },
+          },
+          BOARD_LABEL[b],
+        ),
+      ),
+    ),
+    hint,
+  );
   const draw = () => {
-    const teams = field.filter(
-      (t) =>
-        (division === "all" || t.classification === division) &&
-        (!conference || t.conference === conference) &&
-        (!query ||
-          t.school.toLowerCase().includes(query) ||
-          t.abbreviation.toLowerCase() === query),
-    );
+    const teams = field
+      .filter(
+        (t) =>
+          (division === "all" || t.classification === division) &&
+          (!conference || t.conference === conference) &&
+          (!query ||
+            t.school.toLowerCase().includes(query) ||
+            t.abbreviation.toLowerCase() === query),
+      )
+      .map((t) => ({ t, s: standing(t, board) }))
+      .sort(
+        (a, b) =>
+          (a.s.rank ?? Infinity) - (b.s.rank ?? Infinity) || a.t.id - b.t.id,
+      );
     body.replaceChildren(
-      ...teams.map((t) =>
+      ...teams.map(({ t, s }) =>
         h(
           "a",
           {
             class: "standing-row",
             href: teamHref(ctx, t.id),
             title: t.school,
-            "aria-label": `${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Height ${fmtHeight(t.height, 3)}.`,
+            "aria-label": `${t.school}. ${BOARD_LABEL[board]} rank ${s.label}. ${BOARD_LABEL[board]} ${s.score}.`,
           },
           h(
             "b",
-            { class: `current-position${t.tied ? " tied" : ""}` },
-            rankLabel(t.rank, t.tied),
+            {
+              class: `current-position${board === "overall" && t.tied ? " tied" : ""}`,
+            },
+            s.label,
           ),
           h(
             "div",
@@ -197,7 +277,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
               ),
             ),
           ),
-          h("b", { class: "standing-score" }, fmtHeight(t.height, 3)),
+          h("b", { class: "standing-score" }, s.score),
         ),
       ),
     );
@@ -222,6 +302,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
         h("h1", {}, "Rankings"),
       ),
     ),
+    boardPicker,
     leadersCarousel(ctx, onCleanup),
     h(
       "div",
@@ -289,7 +370,7 @@ export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
         { class: "standing-row standing-head", "aria-hidden": "true" },
         h("span", {}, "Rank"),
         h("span", {}, "Team"),
-        h("span", {}, "Height"),
+        scoreHead,
       ),
       body,
     ),

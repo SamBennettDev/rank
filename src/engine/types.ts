@@ -36,7 +36,7 @@ export interface SeasonConfig {
   classifications: string[];
   /** Divisions kept as inputs without being ranked. */
   opponentClassifications?: string[];
-  /** The two-pass spring graph that produces the ranking. */
+  /** The spring graph that produces the ranking. */
   springs: SpringSettings;
   /** The margin model behind matchup predictions (never the ranking). */
   matchup: MatchupSettings;
@@ -45,9 +45,9 @@ export interface SeasonConfig {
 }
 
 export interface SpringSettings {
-  /** Pass 1 pull toward 0 (an average team), in games' worth (each game is 1). */
+  /** Pull toward 0 (an average team), in games' worth (springs are 0–2). */
   strengthShrink: number;
-  /** Converts a pass-1 strength (points) into a chance of beating an average team. */
+  /** Converts a strength (points) into a chance of beating an average team. */
   qualityScale: number;
 }
 
@@ -134,12 +134,16 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Pass-2 average: points earned from wins and losses per game played. The ranking. */
+  /** Quality, 0–7: 7 × the chance of beating an average team. The ranking. */
   height: number | null;
-  /** Pass-1 spring height in points (each spring wants 7 × H(margin), weighted by surprise). */
+  /** Points better than an average team, from the surprise-weighted margin SpringRank. */
   strength: number | null;
-  /** Chance of beating an average team, from `strength`; ×7 gives its quality points. */
-  quality: number | null;
+  /** Résumé: average game points (a win earns the loser's quality, a loss costs 7 minus the winner's). */
+  resume: number | null;
+  resumeRank: number | null;
+  /** Strength of schedule: average quality of the opponents played. */
+  schedule: number | null;
+  scheduleRank: number | null;
   component: number | null;
   componentSize: number;
   provisional: boolean;
@@ -191,13 +195,13 @@ export interface PublishedSpring {
   gameId: number;
   winner: number;
   loser: number;
-  /** Winning margin in points; the pass-1 spring wants 7 × (1 + 1/2 + … + 1/margin). */
+  /** Winning margin in points; the spring wants 7 × (1 + 1/2 + … + 1/margin). */
   margin: number;
-  /** Pass-1 spring strength, 0–2: quality(loser) + 1 − quality(winner). */
+  /** Spring strength, 0–2: chance(loser) + 1 − chance(winner). */
   spring: number;
-  /** Pass-2 points the winner earns: 7 × quality(loser), 0 to 7. */
+  /** Résumé points the winner earns: the loser's quality, 0 to 7. */
   win: number;
-  /** Pass-2 points the loser earns: −(7 − 7 × quality(winner)), −7 to 0. */
+  /** Résumé points the loser earns: −(7 − the winner's quality), −7 to 0. */
   loss: number;
 }
 

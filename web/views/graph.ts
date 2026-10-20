@@ -207,7 +207,7 @@ export function graphView(
         h(
           "div",
           { class: "t2" },
-          `${record(t)} · height ${fmtHeight(t.height)} · ${t.conference}`,
+          `${record(t)} · quality ${t.height === null ? "—" : t.height.toFixed(2)} · ${t.conference}`,
         ),
       ),
     );
@@ -275,7 +275,7 @@ export function graphView(
         h(
           "p",
           {},
-          "Height = points per game from pass 2. Each line is a game between its winner and its loser. Columns = conferences.",
+          "Height = quality (0–7). Each line is a game between its winner and its loser. Columns = conferences.",
         ),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(
@@ -401,8 +401,8 @@ export function graphView(
           h(
             "div",
             {},
-            h("b", {}, fmtHeight(t.height)),
-            h("span", {}, "Height"),
+            h("b", {}, t.height === null ? "—" : t.height.toFixed(2)),
+            h("span", {}, "Quality"),
           ),
         ),
       ),

@@ -68,7 +68,7 @@ describe("determinism", () => {
     expect([away.rank, home.rank]).toEqual([1, 2]);
     // Two teams, one spring of strength k and pull toward 0 of `shrink` each:
     // the winner sits k·gap / (2k + shrink) above 0 and the loser the same below.
-    // Pass 1 settles where k is the game's surprise at those strengths.
+    // The solve settles where k is the game's surprise at those strengths.
     const sp = DEFAULT_SETTINGS.springs;
     const strength = away.strength;
     expect(home.strength).toBeCloseTo(-strength, 6);
@@ -93,9 +93,16 @@ describe("determinism", () => {
         loss: expect.any(Number),
       },
     ]);
-    // Pass 2: the winner earns the loser's quality points, the loser loses 7 minus the winner's.
-    expect(away.height).toBeCloseTo(7 * qHome, 5);
-    expect(home.height).toBeCloseTo(-(7 - 7 * qAway), 5);
+    // Quality is the ranking. Résumé: the winner earns the loser's quality, the
+    // loser loses 7 minus the winner's. Schedule: the opponent's quality.
+    expect(away.height).toBeCloseTo(7 * qAway, 5);
+    expect(home.height).toBeCloseTo(7 * qHome, 5);
+    expect(away.resume).toBeCloseTo(7 * qHome, 5);
+    expect(home.resume).toBeCloseTo(-(7 - 7 * qAway), 5);
+    expect(away.schedule).toBeCloseTo(7 * qHome, 5);
+    expect(home.schedule).toBeCloseTo(7 * qAway, 5);
+    expect([away.resumeRank, home.resumeRank]).toEqual([1, 2]);
+    expect([away.scheduleRank, home.scheduleRank]).toEqual([2, 1]);
   });
 });
 

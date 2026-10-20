@@ -15,7 +15,7 @@ REVISION = "a3dd960090c1bfa169cebd491beabf7028b379b2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Settings from src/engine/defaults.ts (DEFAULT_SPRINGS).
 STRENGTH_SHRINK, QUALITY_SCALE = 0.5, 0.08
-WIN_POINTS = 7.0  # a 1-point win in pass 1, and the most a game can move pass 2
+WIN_POINTS = 7.0  # a 1-point win, and the top of the 0-7 quality scale
 
 
 def load(year):
@@ -76,8 +76,8 @@ def margin_gap(margin):
     return WIN_POINTS * harmonic[margin]
 
 
-def rank(n, w, l, margin):
-    """Pass 1: margin SpringRank, springs weighted by surprise, gives quality (0-7). Pass 2: average of +loser's quality per win, -(7 - winner's) per loss."""
+def quality(n, w, l, margin):
+    """Margin SpringRank with springs weighted by surprise, as 0-7 quality points."""
     gap = margin_gap(margin)
     strength = solve(n, w, l, np.ones(len(w)), gap, STRENGTH_SHRINK)
     for _ in range(200):  # weight each spring by surprise until the strengths settle
@@ -86,11 +86,12 @@ def rank(n, w, l, margin):
         moved = np.abs(nxt - strength).max(); strength = nxt
         if moved < 1e-9:
             break
-    q = WIN_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
-    points = np.zeros(n)
-    np.add.at(points, w, q[l]); np.add.at(points, l, -(WIN_POINTS - q[w]))
-    games = np.bincount(w, minlength=n) + np.bincount(l, minlength=n)
-    return points / np.maximum(games, 1)
+    return WIN_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
+
+
+def rank(n, w, l, margin):
+    """The ranking is quality."""
+    return quality(n, w, l, margin)
 
 
 def evaluate(years):
