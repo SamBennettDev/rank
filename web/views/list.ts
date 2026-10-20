@@ -1,379 +1,249 @@
-import {
-  type Ctx,
-  fmtHeight,
-  href,
-  METRIC_HINT,
-  rankLabel,
-  record,
-  teamHref,
-} from "../ctx";
+import { type Ctx, fmtHeight, rankLabel, record, teamHref } from "../ctx";
 import type { RankedTeam } from "../../src/engine/types";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import { logo, shortConf, teamVars } from "../team";
 import { provisionalFlag } from "../visuals";
 
-const fmtQuality = (v: number | null) => (v === null ? "—" : v.toFixed(3));
+type Board = "quality" | "resume" | "schedule";
+type Division = "all" | "fbs" | "fcs";
 
-type Board = "overall" | "resume" | "schedule";
-const BOARD_LABEL: Record<Board, string> = {
-  overall: "Quality",
-  resume: "Résumé",
-  schedule: "Schedule",
-};
-/** A team's place and score on one board. */
-function standing(t: RankedTeam, b: Board) {
-  if (b === "resume")
-    return {
-      rank: t.resumeRank,
-      label: t.resumeRank === null ? "—" : String(t.resumeRank),
-      score: fmtHeight(t.resume, 3),
-    };
-  if (b === "schedule")
-    return {
-      rank: t.scheduleRank,
-      label: t.scheduleRank === null ? "—" : String(t.scheduleRank),
-      score: fmtQuality(t.schedule),
-    };
-  return {
-    rank: t.rank,
-    label: rankLabel(t.rank, t.tied),
-    score: fmtQuality(t.height),
-  };
-}
+const BOARDS: [Board, string][] = [
+  ["quality", "Quality"],
+  ["resume", "Résumé"],
+  ["schedule", "Schedule"],
+];
+const DIVISIONS: [Division, string][] = [
+  ["all", "All"],
+  ["fbs", "FBS"],
+  ["fcs", "FCS"],
+];
 
-function leaderCard(ctx: Ctx, t: RankedTeam, index: number, total: number) {
+const fmt2 = (v: number | null) => (v === null ? "—" : v.toFixed(2));
+const place = (t: RankedTeam, b: Board) =>
+  b === "resume" ? t.resumeRank : b === "schedule" ? t.scheduleRank : t.rank;
+const placeLabel = (t: RankedTeam, b: Board) =>
+  b === "quality"
+    ? rankLabel(t.rank, t.tied)
+    : place(t, b) === null
+      ? "—"
+      : String(place(t, b));
+const value = (t: RankedTeam, b: Board) =>
+  b === "resume"
+    ? fmtHeight(t.resume, 2)
+    : fmt2(b === "schedule" ? t.schedule : t.height);
+
+function moveCell(t: RankedTeam) {
+  const c = t.change;
+  if (!c) return h("span", { class: "hr-move" }, c === 0 ? "–" : "");
   return h(
-    "a",
+    "span",
     {
-      class: "leader-card tv",
-      href: teamHref(ctx, t.id),
-      style: teamVars(ctx.teams.get(t.id)?.color),
-      "aria-roledescription": "slide",
-      "aria-label": `${index + 1} of ${total}. ${t.school}. Rank ${rankLabel(t.rank, t.tied)}. Quality ${fmtQuality(t.height)}.`,
+      class: `hr-move ${c > 0 ? "up" : "down"}`,
+      "aria-label": `${c > 0 ? "Up" : "Down"} ${Math.abs(c)}`,
     },
-    h(
-      "div",
-      { class: "leader-identity" },
-      logo(ctx.teams.get(t.id), 44),
-      h(
-        "div",
-        {},
-        h(
-          "b",
-          {},
-          h("span", { class: "school-label" }, t.school),
-          t.provisional ? provisionalFlag() : "",
-        ),
-        h("span", {}, `${record(t)} · ${shortConf(t.conference)}`),
-      ),
-    ),
-    h(
-      "div",
-      { class: "leader-standing" },
-      h("b", { class: "leader-rank" }, `#${rankLabel(t.rank, t.tied)}`),
-      h(
-        "div",
-        { class: "leader-score" },
-        h("span", { class: "stat-label" }, "Quality"),
-        h("b", {}, fmtQuality(t.height)),
-      ),
-    ),
+    `${c > 0 ? "▲" : "▼"}${Math.abs(c)}`,
   );
 }
 
-function leadersCarousel(ctx: Ctx, onCleanup: (fn: () => void) => void) {
-  const top = ctx.ranked.slice(0, 10);
-  if (!top.length) return "";
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const previous = h(
-    "button",
-    {
-      type: "button",
-      class: "carousel-step",
-      disabled: true,
-      "aria-label": "Previous top teams",
-      "aria-controls": "top-teams-track",
-      onclick: () => step(-1),
-    },
-    "‹",
+/** The ten best teams by quality, as a compact strip of team-colour tiles. */
+function topStrip(ctx: Ctx) {
+  return h(
+    "nav",
+    { class: "home-strip", "aria-label": "Top 10" },
+    ...ctx.ranked.slice(0, 10).map((t) => {
+      const team = ctx.teams.get(t.id);
+      return h(
+        "a",
+        {
+          class: `tile${t.rank === 1 ? " first" : ""}`,
+          href: teamHref(ctx, t.id),
+          style: teamVars(team?.color),
+          "aria-label": `#${rankLabel(t.rank, t.tied)} ${t.school}`,
+        },
+        h("b", { class: "tile-rank" }, rankLabel(t.rank, t.tied)),
+        h("span", { class: "tile-logo" }, logo(team, 26)),
+        h("span", { class: "tile-abbr" }, t.abbreviation || t.school),
+      );
+    }),
   );
-  const next = h(
-    "button",
-    {
-      type: "button",
-      class: "carousel-step",
-      "aria-label": "Next top teams",
-      "aria-controls": "top-teams-track",
-      onclick: () => step(1),
-    },
-    "›",
-  );
-  const progress = h("i");
-  const update = () => {
-    const max = track.scrollWidth - track.clientWidth;
-    previous.disabled = track.scrollLeft <= 1;
-    next.disabled = track.scrollLeft >= max - 1;
-    const visible = Math.min(1, track.clientWidth / track.scrollWidth);
-    progress.style.width = `${visible * 100}%`;
-    progress.style.left = `${max > 0 ? (track.scrollLeft / max) * (1 - visible) * 100 : 0}%`;
-  };
-  const track = h(
-    "div",
-    {
-      id: "top-teams-track",
-      class: "leader-track",
-      tabindex: 0,
-      "aria-label": "Top teams. Use left and right arrow keys to scroll.",
-      onscroll: update,
-      onkeydown: (event: KeyboardEvent) => {
-        if (event.target !== track) return;
-        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-          event.preventDefault();
-          step(event.key === "ArrowLeft" ? -1 : 1);
-        } else if (event.key === "Home" || event.key === "End") {
-          event.preventDefault();
-          track.scrollTo({
-            left: event.key === "Home" ? 0 : track.scrollWidth,
-            behavior: reducedMotion ? "instant" : "smooth",
-          });
-        }
-      },
-    },
-    ...top.map((t, i) => leaderCard(ctx, t, i, top.length)),
-  );
-  function step(direction: number) {
-    const card = track.firstElementChild as HTMLElement;
-    track.scrollBy({
-      left: direction * (card.getBoundingClientRect().width + 12),
-      behavior: reducedMotion ? "instant" : "smooth",
-    });
-  }
-  // The route inserts the returned element synchronously before this frame.
-  const frame = requestAnimationFrame(update);
-  const observer = new ResizeObserver(update);
-  observer.observe(track);
-  onCleanup(() => {
-    cancelAnimationFrame(frame);
-    observer.disconnect();
+}
+
+function segment<T extends string>(
+  label: string,
+  options: [T, string][],
+  current: () => T,
+  pick: (v: T) => void,
+  className = "",
+) {
+  const group = h("div", {
+    class: `home-seg ${className}`.trim(),
+    role: "group",
+    "aria-label": label,
   });
-  return h(
-    "section",
-    {
-      class: "leaders-section",
-      role: "region",
-      "aria-roledescription": "carousel",
-      "aria-label": "Top teams",
-    },
-    h(
-      "div",
-      { class: "section-heading" },
-      h("h2", {}, "Top teams"),
+  const paint = () => {
+    for (const b of group.children) {
+      const on = (b as HTMLElement).dataset.value === current();
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", String(on));
+    }
+  };
+  group.append(
+    ...options.map(([v, text]) =>
       h(
-        "div",
-        { class: "carousel-controls" },
-        h("span", { class: "scope-label" }, `Top ${top.length}`),
-        previous,
-        next,
+        "button",
+        {
+          type: "button",
+          "data-value": v,
+          onclick: () => {
+            pick(v);
+            paint();
+          },
+        },
+        text,
       ),
     ),
-    track,
-    h("div", { class: "carousel-progress", "aria-hidden": "true" }, progress),
   );
+  paint();
+  return group;
 }
 
-export function listView(ctx: Ctx, onCleanup: (fn: () => void) => void) {
+export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
   let query = "",
-    division = "all",
-    conference = "",
-    board: Board = "overall";
+    board: Board = "quality",
+    division: Division = "all";
   const field = ctx.ranking.teams;
-  const body = h("div"),
-    count = h("span", { class: "count", "aria-live": "polite" });
-  const hint = h("p", { class: "method-caption" }, METRIC_HINT.overall);
-  const scoreHead = h("span", {}, BOARD_LABEL.overall);
-  const boardPicker = h(
-    "div",
-    {},
+  const body = h("div", { class: "home-rows" });
+  const root = h("div", { class: "home", "data-board": board });
+
+  const row = (t: RankedTeam) =>
     h(
-      "div",
-      { class: "seg", role: "group", "aria-label": "Ranking board" },
-      ...(Object.keys(BOARD_LABEL) as Board[]).map((b) =>
-        h(
-          "button",
-          {
-            type: "button",
-            class: b === board ? "on" : "",
-            "aria-pressed": String(b === board),
-            onclick: (event: Event) => {
-              board = b;
-              hint.textContent = METRIC_HINT[b];
-              scoreHead.textContent = BOARD_LABEL[b];
-              for (const el of (event.currentTarget as HTMLElement)
-                .parentElement!.children) {
-                const on = el === event.currentTarget;
-                el.classList.toggle("on", on);
-                el.setAttribute("aria-pressed", String(on));
-              }
-              draw();
-            },
-          },
-          BOARD_LABEL[b],
-        ),
+      "a",
+      {
+        class: "hrow",
+        href: teamHref(ctx, t.id),
+        "aria-label": `${placeLabel(t, board)}. ${t.school}, ${record(t)}, ${value(t, board)}`,
+      },
+      h("b", { class: "hr-rank" }, placeLabel(t, board)),
+      logo(ctx.teams.get(t.id), 32, { lazy: true }),
+      h(
+        "span",
+        { class: "hr-name" },
+        h("b", {}, t.school),
+        t.provisional ? provisionalFlag() : "",
+        h("span", { class: "hr-rec" }, record(t)),
       ),
-    ),
-    hint,
-  );
+      h("span", { class: "hr-conf" }, shortConf(t.conference)),
+      h(
+        "span",
+        { class: `hr-col${board === "quality" ? " on" : ""}` },
+        fmt2(t.height),
+        h("small", {}, rankLabel(t.rank, t.tied)),
+      ),
+      h(
+        "span",
+        { class: `hr-col${board === "resume" ? " on" : ""}` },
+        fmtHeight(t.resume, 2),
+        h("small", {}, t.resumeRank ?? "—"),
+      ),
+      h(
+        "span",
+        { class: `hr-col${board === "schedule" ? " on" : ""}` },
+        fmt2(t.schedule),
+        h("small", {}, t.scheduleRank ?? "—"),
+      ),
+      h("span", { class: "hr-val" }, value(t, board)),
+      moveCell(t),
+    );
+
   const draw = () => {
+    root.dataset.board = board;
     const teams = field
       .filter(
         (t) =>
           (division === "all" || t.classification === division) &&
-          (!conference || t.conference === conference) &&
           (!query ||
             t.school.toLowerCase().includes(query) ||
             t.abbreviation.toLowerCase() === query),
       )
-      .map((t) => ({ t, s: standing(t, board) }))
       .sort(
         (a, b) =>
-          (a.s.rank ?? Infinity) - (b.s.rank ?? Infinity) || a.t.id - b.t.id,
+          (place(a, board) ?? Infinity) - (place(b, board) ?? Infinity) ||
+          (a.rank ?? Infinity) - (b.rank ?? Infinity) ||
+          a.id - b.id,
       );
-    body.replaceChildren(
-      ...teams.map(({ t, s }) =>
-        h(
-          "a",
-          {
-            class: "standing-row",
-            href: teamHref(ctx, t.id),
-            title: t.school,
-            "aria-label": `${t.school}. ${BOARD_LABEL[board]} rank ${s.label}. ${BOARD_LABEL[board]} ${s.score}.`,
-          },
-          h(
-            "b",
-            {
-              class: `current-position${board === "overall" && t.tied ? " tied" : ""}`,
-            },
-            s.label,
-          ),
-          h(
-            "div",
-            { class: "row-identity" },
-            logo(ctx.teams.get(t.id), 36, { lazy: true }),
-            h(
-              "div",
-              { class: "standing-team" },
-              h(
-                "b",
-                {},
-                h("span", { class: "school-label" }, t.school),
-                t.provisional ? provisionalFlag() : "",
-              ),
-              h(
-                "div",
-                { class: "team-meta" },
-                h("span", { class: "record-mini" }, record(t)),
-                h("span", {}, shortConf(t.conference)),
-              ),
-            ),
-          ),
-          h("b", { class: "standing-score" }, s.score),
-        ),
-      ),
-    );
+    body.replaceChildren(...teams.map(row));
     if (!teams.length)
-      body.append(h("div", { class: "empty" }, "No teams found."));
-    count.textContent = `${teams.length} teams`;
-  };
-  const root = h(
-    "div",
-    { class: "standings-page" },
-    h(
-      "section",
-      { class: "page-heading" },
-      h(
-        "div",
-        {},
+      body.append(
         h(
           "div",
-          { class: "eyebrow" },
-          `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
+          { class: "home-empty", role: "status" },
+          searchIcon(),
+          "No teams",
         ),
-        h("h1", {}, "Rankings"),
-      ),
-    ),
-    boardPicker,
-    leadersCarousel(ctx, onCleanup),
+      );
+  };
+
+  root.append(
+    topStrip(ctx),
     h(
       "div",
-      { class: "toolbar current-tools" },
-      h(
-        "label",
-        { class: "search" },
-        searchIcon(),
-        h("input", {
-          type: "search",
-          placeholder: "Find a team",
-          "aria-label": "Filter standings",
-          oninput: (event: Event) => {
-            query = (event.target as HTMLInputElement).value
-              .trim()
-              .toLowerCase();
-            draw();
-          },
-        }),
-        count,
-      ),
-      h(
-        "select",
-        {
-          "aria-label": "Standings division",
-          onchange: (event: Event) => {
-            division = (event.target as HTMLSelectElement).value;
-            draw();
-          },
-        },
-        h("option", { value: "all" }, "All teams"),
-        h("option", { value: "fbs" }, "FBS"),
-        h("option", { value: "fcs" }, "FCS"),
-      ),
-      h(
-        "select",
-        {
-          "aria-label": "Standings conference",
-          onchange: (event: Event) => {
-            conference = (event.target as HTMLSelectElement).value;
-            draw();
-          },
-        },
-        h("option", { value: "" }, "All conferences"),
-        ...[...new Set(field.map((t) => t.conference))]
-          .sort()
-          .map((c) => h("option", { value: c }, c)),
-      ),
-    ),
-    h(
-      "div",
-      { class: "board-key" },
-      h("span", {}, provisionalFlag(), "Limited data"),
-      h(
-        "a",
-        { href: href(ctx.entry.season, ctx.snapId, "about") },
-        "How it works",
-      ),
-    ),
-    h(
-      "section",
-      { class: "panel standings-board", "aria-label": "Current standings" },
+      { class: "home-sticky" },
       h(
         "div",
-        { class: "standing-row standing-head", "aria-hidden": "true" },
-        h("span", {}, "Rank"),
-        h("span", {}, "Team"),
-        scoreHead,
+        { class: "home-tools" },
+        h(
+          "label",
+          { class: "home-search" },
+          searchIcon(),
+          h("input", {
+            type: "search",
+            placeholder: "Search",
+            "aria-label": "Search teams",
+            oninput: (event: Event) => {
+              query = (event.target as HTMLInputElement).value
+                .trim()
+                .toLowerCase();
+              draw();
+            },
+          }),
+        ),
+        segment(
+          "Division",
+          DIVISIONS,
+          () => division,
+          (v) => {
+            division = v;
+            draw();
+          },
+          "division",
+        ),
+        segment(
+          "Ranking board",
+          BOARDS,
+          () => board,
+          (v) => {
+            board = v;
+            draw();
+          },
+          "boards",
+        ),
       ),
-      body,
+      h(
+        "div",
+        { class: "hrow hhead", "aria-hidden": "true" },
+        h("span", {}, "#"),
+        h("span", {}),
+        h("span", {}, "Team"),
+        h("span", { class: "hr-conf" }, "Conf"),
+        h("span", { class: "hr-col" }, "Quality"),
+        h("span", { class: "hr-col" }, "Résumé"),
+        h("span", { class: "hr-col" }, "Schedule"),
+        h("span", { class: "hr-val" }),
+        h("span", { class: "hr-move" }, "Move"),
+      ),
     ),
+    body,
   );
   draw();
   return root;
