@@ -137,7 +137,7 @@ select:hover { border-color: var(--faint); }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ==========================================================================
-   Rankings: hero + podium
+   Rankings: hero
    ========================================================================== */
 .hero { padding: 48px 0 28px; animation: rise .5s both; }
 .hero h1 { font: 800 clamp(44px, 7.4vw, 88px)/.9 var(--display); text-transform: uppercase; letter-spacing: -.005em; margin: 14px 0 16px; }
@@ -146,28 +146,6 @@ select:hover { border-color: var(--faint); }
 .hero p.lede b { color: var(--text); font-weight: 600; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 
-.podium { display: grid; grid-template-columns: 1.55fr repeat(4, 1fr); gap: 12px; margin: 28px 0 24px; animation: rise .5s .08s both; }
-.pod {
-  position: relative; overflow: hidden; isolation: isolate; border-radius: 18px; padding: 16px 16px 14px; min-height: 196px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: linear-gradient(155deg, var(--tc) 0%, var(--tc-deep) 100%); color: var(--tc-ink);
-  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,.08);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.pod:hover { transform: translateY(-3px); }
-.pod::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(120% 80% at 100% 0%, rgba(255,255,255,.22), transparent 55%), linear-gradient(0deg, rgba(0,0,0,.28), transparent 55%); }
-.pod .wm { position: absolute; right: -16%; bottom: -22%; z-index: -1; opacity: .16; filter: grayscale(.2); }
-.pod .wm .mono { opacity: 0; }
-.pod .rk { font: 800 64px/.8 var(--display); letter-spacing: -.02em; opacity: .95; }
-.pod .top { display: flex; justify-content: space-between; align-items: flex-start; }
-.pod .logo img { filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
-.pod .name { font: 700 22px/1.05 var(--display); text-transform: uppercase; letter-spacing: .02em; margin-top: 10px; }
-.pod .conf { font-size: 12px; font-weight: 500; opacity: .7; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pod .meta { display: flex; flex-wrap: wrap; white-space: nowrap; gap: 4px 10px; font-size: 12.5px; font-weight: 600; opacity: .85; margin-top: 4px; font-variant-numeric: tabular-nums; }
-.pod.first { min-height: 240px; padding: 22px; }
-.pod.first .rk { font-size: 108px; }
-.pod.first .name { font-size: 36px; }
-.pod.first .meta { font-size: 14px; }
 
 /* ==========================================================================
    Rankings: toolbar + ladder
@@ -438,8 +416,6 @@ body[data-view="graph"] .foot { display: none; }
    Responsive
    ========================================================================== */
 @media (max-width: 1000px) {
-  .podium { grid-template-columns: repeat(4, 1fr); }
-  .podium .pod.first { grid-column: 1 / -1; }
   .gshell { grid-template-columns: 1fr; height: auto; }
   .gmain { height: calc(100vh - 60px); border-right: 0; }
   .gpanel { border-top: 1px solid var(--line); }
@@ -465,10 +441,6 @@ body[data-view="graph"] .foot { display: none; }
   .sel.week .short { display: inline; }
   main { padding: 0 12px 48px; }
   .hero { padding-top: 28px; }
-  .podium { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 16px -12px 20px; padding: 0 12px 8px; }
-  .pod { flex: 0 0 64%; scroll-snap-align: start; min-height: 170px; }
-  .pod.first { flex-basis: 84%; min-height: 200px; }
-  .pod.first .rk { font-size: 80px; } .pod.first .name { font-size: 28px; }
   .toolbar { padding: 10px 12px; margin: 0 -12px 6px; gap: 8px; }
   .toolbar .search { min-width: 0; max-width: none; }
   .fpanel { width: min(340px, calc(100vw - 24px)); }
