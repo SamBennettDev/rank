@@ -47,10 +47,8 @@ export interface SeasonConfig {
 export interface SpringSettings {
   /** Pass 1 pull toward 0 (an average team), in games' worth (each game is 1). */
   strengthShrink: number;
-  /** Converts a pass-1 strength into a chance of beating an average team. */
+  /** Converts a pass-1 strength (points) into a chance of beating an average team. */
   qualityScale: number;
-  /** Pass 2 pull toward 0, in spring-strength units (each game is 0–2). */
-  rankShrink: number;
 }
 
 export interface MatchupSettings {
@@ -136,11 +134,11 @@ export interface RankedTeam {
   /** null when the team has no counted games yet. */
   rank: number | null;
   tied: boolean;
-  /** Pass-2 spring height: the ranking. */
+  /** Pass-2 total: Σ points earned from wins and losses. The ranking. */
   height: number | null;
-  /** Pass-1 spring height (plain SpringRank: every game a spring of strength 1). */
+  /** Pass-1 spring height in points (margin SpringRank: each spring wants 7 × H(margin)). */
   strength: number | null;
-  /** Chance of beating an average team, from `strength`. */
+  /** Chance of beating an average team, from `strength`; ×7 gives its quality points. */
   quality: number | null;
   component: number | null;
   componentSize: number;
@@ -193,10 +191,12 @@ export interface PublishedSpring {
   gameId: number;
   winner: number;
   loser: number;
-  /** Winning margin in points (shown only; the ranking ignores it). */
+  /** Winning margin in points; the pass-1 spring wants 7 × (1 + 1/2 + … + 1/margin). */
   margin: number;
-  /** Pass-2 spring strength: quality(loser) + 1 − quality(winner), 0–2. */
-  pull: number;
+  /** Pass-2 points the winner earns: 7 × quality(loser), 0 to 7. */
+  win: number;
+  /** Pass-2 points the loser earns: −(7 − 7 × quality(winner)), −7 to 0. */
+  loss: number;
 }
 
 export interface MatchupPrediction {

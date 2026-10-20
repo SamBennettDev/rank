@@ -230,29 +230,29 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   return h(
     "div",
     { class: "panel why" },
-    h("h2", {}, "How the springs place this team"),
+    h("h2", {}, "Where this team’s points come from"),
     h(
       "div",
       { class: "spring-equation" },
       h(
         "div",
         { class: "total" },
-        h("b", {}, fmtHeight(b.pulled, 2)),
-        h("small", {}, "Σ pull × target"),
+        h("b", {}, fmtHeight(b.earned, 2)),
+        h("small", {}, "From wins"),
       ),
-      h("span", { "aria-hidden": "true" }, "÷"),
+      h("span", { "aria-hidden": "true" }, "−"),
       h(
         "div",
         {},
-        h("b", {}, (b.totalPull + b.shrink).toFixed(2)),
-        h("small", {}, `Σ pull + ${b.shrink}`),
+        h("b", {}, Math.abs(b.lost).toFixed(2)),
+        h("small", {}, "From losses"),
       ),
       h("span", { "aria-hidden": "true" }, "="),
       h(
         "div",
         {},
         h("b", {}, fmtHeight(me.height, 2)),
-        h("small", {}, "Height"),
+        h("small", {}, "Points"),
       ),
     ),
     breakdownChart(ctx, me.height!, lines),
@@ -263,7 +263,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Every game is a spring that wants its winner one step above its loser; the score doesn’t matter. Pass 1 is plain SpringRank: every spring has strength 1, which gives every team a strength. Pass 2 solves the same graph again with springs set by those strengths: pull = loser’s quality + (1 − winner’s quality), where quality is the chance of beating an average team. Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls. A game’s target is the opponent’s height plus 1 for a win, minus 1 for a loss, and the height is the pull-weighted average of the targets, with a little weight on 0 (an average team).`,
+        `Pass 1 is SpringRank with margins: every game is a spring of strength 1 that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. That gives every team a strength, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Pass 2 adds up the games. A win earns the beaten team’s quality; a loss costs 7 minus the winner’s quality. Beating a good team or losing to a bad one moves a team most; beating a bad team or losing to a good one barely moves it.`,
       ),
     ),
   );
@@ -278,8 +278,7 @@ function breakdownChart(
   const row = 30;
   const pad = { l: 178, r: 24, t: 24, b: 28 };
   const H = pad.t + row * lines.length + pad.b;
-  const vals = [0, rating, ...lines.map((l) => l.value)];
-  const maxPull = Math.max(1, ...lines.map((l) => l.pull));
+  const vals = [0, 7, -7, ...lines.map((l) => l.value)];
   let lo = Math.min(...vals),
     hi = Math.max(...vals);
   const span = Math.max(hi - lo, 2);
@@ -289,8 +288,7 @@ function breakdownChart(
   const root = svg("svg", {
     viewBox: `0 0 ${W} ${H}`,
     role: "img",
-    "aria-label":
-      "Each game's spring, from this team's height to where that game pulls it",
+    "aria-label": "Points each game earned: right for a win, left for a loss",
   });
   const step =
     [0.25, 0.5, 1, 2, 5, 10, 20, 25, 50].find((st) => span / st <= 6) ?? 100;
@@ -313,39 +311,26 @@ function breakdownChart(
     t.textContent = (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v);
     root.appendChild(t);
   }
-  const rx = x(rating);
+  const rx = x(0);
   const lineY = (i: number) => pad.t + row * i + row / 2;
   const label = (y: number, text: string, cls = "rl") => {
     const t = svg("text", { class: cls, x: 40, y: y + 4 });
     t.textContent = text;
     root.appendChild(t);
   };
-  const stem = (
-    y: number,
-    v: number,
-    pull: number,
-    title: string,
-    logoId?: number,
-  ) => {
-    const g = svg("g", { class: `brow ${v >= rating ? "up" : "down"}` });
+  const stem = (y: number, v: number, title: string, logoId?: number) => {
+    const g = svg("g", { class: `brow ${v >= 0 ? "up" : "down"}` });
     g.appendChild(
       svg("line", {
         class: "stem",
-        x1: x(rating),
+        x1: x(0),
         x2: x(v),
         y1: y,
         y2: y,
-        style: `stroke-width:${(1 + (5 * pull) / maxPull).toFixed(2)}px`,
+        style: "stroke-width:4px",
       }),
     );
-    g.appendChild(
-      svg("circle", {
-        class: "pt",
-        cx: x(v),
-        cy: y,
-        r: (2.5 + (4 * pull) / maxPull).toFixed(2),
-      }),
-    );
+    g.appendChild(svg("circle", { class: "pt", cx: x(v), cy: y, r: 4 }));
     const tt = svg("title", {});
     tt.textContent = title;
     g.appendChild(tt);
@@ -363,8 +348,7 @@ function breakdownChart(
     stem(
       y,
       l.value,
-      l.pull,
-      `${score} against ${o.school} (height ${fmtHeight(o.height, 2)}): pulls toward ${fmtHeight(l.value, 2)} with strength ${l.pull.toFixed(2)}`,
+      `${score} against ${o.school} (quality ${(7 * (o.quality ?? 0)).toFixed(2)} of 7): ${fmtHeight(l.value, 2)} points`,
       o.id,
     );
   });
@@ -383,7 +367,7 @@ function breakdownChart(
     y: H - 6,
     "text-anchor": "middle",
   });
-  rt.textContent = `Height ${fmtHeight(rating, 2)}`;
+  rt.textContent = `Total ${fmtHeight(rating, 2)}`;
   root.appendChild(rt);
   return root;
 }
@@ -579,10 +563,10 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h(
         "span",
         {
-          class: `r ${l.value >= me.height! ? "pos" : "neg"}`,
-          title: `Spring strength (0–2): ${l.won ? "beating" : "losing to"} ${o.school}, quality ${((o.quality ?? 0) * 100).toFixed(0)}%. It wants the winner one step above the loser, pulling this team toward ${fmtHeight(l.value, 2)}.`,
+          class: `r ${l.value >= 0 ? "pos" : "neg"}`,
+          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(7 * (o.quality ?? 0)).toFixed(2)} of 7: ${l.won ? "+ their quality" : "−(7 − their quality)"}.`,
         },
-        l.pull.toFixed(2),
+        fmtHeight(l.value, 2),
       ),
     );
   });

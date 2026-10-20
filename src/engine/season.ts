@@ -17,7 +17,7 @@ import { twoPass } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-2";
+export const ENGINE_VERSION = "rank-engine-4";
 
 export interface SeasonFiles {
   season: string;
@@ -157,6 +157,7 @@ export async function computeSeason(
       resultEdges.map((e) => ({
         winner: resultIndex.get(e.winner)!,
         loser: resultIndex.get(e.loser)!,
+        margin: e.winnerPoints - e.loserPoints,
       })),
       config.springs,
     );
@@ -301,7 +302,8 @@ export async function computeSeason(
           winner: e.winner,
           loser: e.loser,
           margin: e.winnerPoints - e.loserPoints,
-          pull: round6(graph.pull[k]!),
+          win: round6(graph.points[k]!.win),
+          loss: round6(graph.points[k]!.loss),
         })),
         teams: ranked,
         ...(opponents.length ? { opponents } : {}),

@@ -12,7 +12,7 @@ import {
 } from "../src/engine/data";
 import { computeSeason, ENGINE_VERSION } from "../src/engine/season";
 import { DEFAULT_SETTINGS } from "../src/engine/defaults";
-import { quality } from "../src/engine/springs";
+import { marginGap, quality } from "../src/engine/springs";
 
 const dir = join(import.meta.dirname, "fixtures/demo");
 const read = (f: string) => readFileSync(join(dir, f), "utf8");
@@ -68,29 +68,26 @@ describe("determinism", () => {
     expect([away.rank, home.rank]).toEqual([1, 2]);
     // Two teams, one spring of strength k and pull toward 0 of `shrink` each:
     // the winner sits k / (2k + shrink) above 0 and the loser the same below.
-    // Pass 1 is plain SpringRank (k = 1); the 21-point margin plays no part.
+    // Pass 1 (k = 1) wants the 21-point winner marginGap(21) points above.
     const sp = DEFAULT_SETTINGS.springs;
-    const strength = 1 / (2 + sp.strengthShrink);
+    const strength = marginGap(21) / (2 + sp.strengthShrink);
     expect(away.strength).toBeCloseTo(strength, 6);
     expect(home.strength).toBeCloseTo(-strength, 6);
-    const pull =
-      quality(-strength, sp.qualityScale) +
-      1 -
-      quality(strength, sp.qualityScale);
+    const qAway = quality(strength, sp.qualityScale),
+      qHome = quality(-strength, sp.qualityScale);
     expect(JSON.parse(out.files[0]!.json).springs).toEqual([
       {
         gameId: 1,
         winner: base.awayId,
         loser: base.homeId,
         margin: 21,
-        pull: expect.any(Number),
+        win: expect.any(Number),
+        loss: expect.any(Number),
       },
     ]);
-    // Pass 2 keeps the gap of 1, with spring strength `pull`.
-    expect(away.height - home.height).toBeCloseTo(
-      (2 * pull) / (2 * pull + sp.rankShrink),
-      5,
-    );
+    // Pass 2: the winner earns the loser's quality points, the loser loses 7 minus the winner's.
+    expect(away.height).toBeCloseTo(7 * qHome, 5);
+    expect(home.height).toBeCloseTo(-(7 - 7 * qAway), 5);
   });
 });
 
@@ -233,7 +230,6 @@ describe("pipeline", () => {
     await expect(springs({ strengthShrink: 0 })).rejects.toThrow(
       /strengthShrink/,
     );
-    await expect(springs({ rankShrink: -1 })).rejects.toThrow(/rankShrink/);
     await expect(springs({ qualityScale: null })).rejects.toThrow(
       /qualityScale/,
     );

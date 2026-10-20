@@ -158,7 +158,7 @@ export function parseConfig(json: string): SeasonConfig {
   numbers(
     "config.springs",
     c.springs,
-    ["strengthShrink", "qualityScale", "rankShrink"],
+    ["strengthShrink", "qualityScale"],
     positive,
     "a positive number",
   );

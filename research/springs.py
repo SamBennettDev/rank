@@ -14,7 +14,8 @@ import numpy as np
 REVISION = "a3dd960090c1bfa169cebd491beabf7028b379b2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Settings from src/engine/defaults.ts (DEFAULT_SPRINGS).
-STRENGTH_SHRINK, QUALITY_SCALE, RANK_SHRINK = 0.2, 1.5, 0.1
+STRENGTH_SHRINK, QUALITY_SCALE = 0.5, 0.08
+WIN_POINTS = 7.0  # a 1-point win in pass 1, and the most a game can move pass 2
 
 
 def load(year):
@@ -56,41 +57,49 @@ def load(year):
     return dict(
         n=len(ids), names=[names[t] for t in ids],
         order=np.array([last + 1 if r["post"] else r["week"] for r in rows]),
-        winner=np.where(won, home, away), loser=np.where(won, away, home),
+        winner=np.where(won, home, away), loser=np.where(won, away, home), margin=np.abs(hp - ap),
     )
 
 
-def solve(n, w, l, k, shrink):
-    """Heights minimising ½Σ k(h_w − h_l − 1)² + ½·shrink·Σ h²."""
+def solve(n, w, l, k, gap, shrink):
+    """Heights minimising ½Σ k(h_w − h_l − gap)² + ½·shrink·Σ h²."""
     A = np.zeros((n, n)); b = np.zeros(n)
     np.add.at(A, (w, w), k); np.add.at(A, (l, l), k); np.add.at(A, (w, l), -k); np.add.at(A, (l, w), -k)
-    np.add.at(b, w, k); np.add.at(b, l, -k)
+    np.add.at(b, w, k * gap); np.add.at(b, l, -k * gap)
     A[np.diag_indices(n)] += shrink
     return np.linalg.solve(A, b)
 
 
-def rank(n, w, l):
-    """Pass 1: plain SpringRank gives strength. Pass 2: strength sets each spring's pull."""
-    strength = solve(n, w, l, np.ones(len(w)), STRENGTH_SHRINK)
-    q = 1 / (1 + np.exp(-QUALITY_SCALE * strength))
-    return solve(n, w, l, q[l] + 1 - q[w], RANK_SHRINK)
+def margin_gap(margin):
+    """WIN_POINTS × (1 + 1/2 + … + 1/margin): each extra point counts less."""
+    harmonic = np.concatenate([[0.0], np.cumsum(1 / np.arange(1, margin.max() + 1))])
+    return WIN_POINTS * harmonic[margin]
+
+
+def rank(n, w, l, margin):
+    """Pass 1: margin SpringRank gives quality (0-7). Pass 2: +loser's quality per win, -(7 - winner's) per loss."""
+    strength = solve(n, w, l, np.ones(len(w)), margin_gap(margin), STRENGTH_SHRINK)
+    q = WIN_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
+    points = np.zeros(n)
+    np.add.at(points, w, q[l]); np.add.at(points, l, -(WIN_POINTS - q[w]))
+    return points
 
 
 def evaluate(years):
     right = games = agree = counted = 0
     for y in years:
         S = load(y)
-        W, L, O = S["winner"], S["loser"], S["order"]
+        W, L, M, O = S["winner"], S["loser"], S["margin"], S["order"]
         for wk in sorted(set(O)):
             if wk < 4:
                 continue
             p = O < wk
-            h = rank(S["n"], W[p], L[p])
+            h = rank(S["n"], W[p], L[p], M[p])
             played = np.zeros(S["n"], bool); played[W[p]] = played[L[p]] = True
             c = (O == wk) & played[W] & played[L]
             d = h[W[c]] - h[L[c]]
             right += np.sum(d > 0) + 0.5 * np.sum(d == 0); games += c.sum()
-        h = rank(S["n"], W, L)
+        h = rank(S["n"], W, L, M)
         agree += np.sum(h[W] > h[L]); counted += len(W)
     print(f"{years[0]}-{years[-1]}: picks {100 * right / games:.2f}% of {games} next-week games; "
           f"final ranking has the winner above the loser in {100 * agree / counted:.2f}% of {counted} games")
@@ -99,7 +108,7 @@ def evaluate(years):
 if __name__ == "__main__":
     if sys.argv[1] == "--top":
         S = load(int(sys.argv[2]))
-        h = rank(S["n"], S["winner"], S["loser"])
+        h = rank(S["n"], S["winner"], S["loser"], S["margin"])
         wins = np.bincount(S["winner"], minlength=S["n"]); losses = np.bincount(S["loser"], minlength=S["n"])
         for j, i in enumerate(np.argsort(-h)[:25]):
             print(f"{j + 1:>2} {S['names'][i]} {wins[i]}-{losses[i]} {h[i]:+.3f}")

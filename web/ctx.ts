@@ -64,15 +64,10 @@ export interface GameLine {
   opponent: RankedTeam;
   where: -1 | 0 | 1;
   margin: number;
-  /** Where this game's spring wants the team: opponent's height + 1 after a win, − 1 after a loss. */
+  /** Points this game earned: + the beaten team's quality points, or −(7 − the winner's). */
   value: number;
-  /** Pass-2 spring strength (0–2). */
-  pull: number;
 }
-/**
- * Rebuilds a team's height the way the spring graph defines it: the pull-weighted
- * average of what its games say, with `rankShrink` weight on 0 (an average team).
- */
+/** Rebuilds a team's height: the sum of the points its games earned. */
 export function breakdown(ctx: Ctx, teamId: number) {
   const springs = new Map(ctx.ranking.springs.map((s) => [s.gameId, s]));
   const lines: GameLine[] = ctx.edges
@@ -94,21 +89,13 @@ export function breakdown(ctx: Ctx, teamId: number) {
           opponent,
           where,
           margin,
-          value: opponent.height! + (won ? 1 : -1),
-          pull: spring.pull,
+          value: won ? spring.win : spring.loss,
         },
       ];
     });
-  const shrink = ctx.ranking.manifest.springs.rankShrink;
-  const totalPull = lines.reduce((sum, l) => sum + l.pull, 0);
-  const pulled = lines.reduce((sum, l) => sum + l.pull * l.value, 0);
-  return {
-    lines,
-    shrink,
-    totalPull,
-    pulled,
-    height: pulled / (totalPull + shrink),
-  };
+  const earned = lines.reduce((sum, l) => sum + (l.value > 0 ? l.value : 0), 0);
+  const lost = lines.reduce((sum, l) => sum + (l.value < 0 ? l.value : 0), 0);
+  return { lines, earned, lost, height: earned + lost };
 }
 export type Metric = "overall" | "offense" | "defense" | "special";
 export const METRICS: Metric[] = ["overall", "offense", "defense", "special"];
@@ -120,7 +107,7 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Height on the game graph. Every game is a spring holding its winner one step above its loser; the score doesn't matter. Beating a good team or losing to a bad one pulls hard; beating a bad team or losing to a good one barely pulls.",
+    "Points earned. A win earns the beaten team's quality (0–7); a loss costs 7 minus the winner's quality. Quality comes from a first pass, a spring graph that counts margins with diminishing returns.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

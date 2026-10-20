@@ -2,9 +2,8 @@ import type { MatchupSettings, SpringSettings } from "./types";
 
 /** The ranking: two passes of the spring graph (chosen on 2014–2019). */
 export const DEFAULT_SPRINGS: SpringSettings = {
-  strengthShrink: 0.2,
-  qualityScale: 1.5,
-  rankShrink: 0.1,
+  strengthShrink: 0.5,
+  qualityScale: 0.08,
 };
 
 /** The matchup-prediction model (calibrated on 2014–2019). */
@@ -20,7 +19,7 @@ export const DEFAULT_MATCHUP: MatchupSettings = {
 };
 
 export const DEFAULT_SETTINGS = {
-  algorithmVersion: "two-pass-springs-2",
+  algorithmVersion: "springs-then-points-1",
   classifications: ["fbs", "fcs"],
   springs: DEFAULT_SPRINGS,
   matchup: DEFAULT_MATCHUP,

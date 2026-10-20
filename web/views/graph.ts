@@ -275,7 +275,7 @@ export function graphView(
         h(
           "p",
           {},
-          "Height = pass-2 spring height. Each line is a game: a spring holding the winner above the loser. Columns = conferences.",
+          "Height = total points from pass 2. Each line is a game between its winner and its loser. Columns = conferences.",
         ),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(
