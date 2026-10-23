@@ -7,7 +7,7 @@
   ],
   "springs": {
     "strengthShrink": 0.5,
-    "qualityScale": 0.08
+    "qualityScale": 0.0056
   },
   "matchup": {
     "winBonus": 3,

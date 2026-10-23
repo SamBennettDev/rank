@@ -13,15 +13,15 @@ export interface Spring {
 }
 
 /** Points a 1-point win is worth: the scale of the springs' gaps. */
-export const WIN_POINTS = 7;
+export const WIN_POINTS = 100;
 
 /** The top of the 0–100 quality scale. */
 export const QUALITY_POINTS = 100;
 
 /**
  * How far above its loser a spring wants the winner, in points:
- * WIN_POINTS × (1 + 1/2 + … + 1/margin). The first point is worth 7, the second
- * 3.5, the third 2.33: each extra point counts less than the one before.
+ * WIN_POINTS × (1 + 1/2 + … + 1/margin). The first point is worth 100, the second
+ * 50, the third 33.3: each extra point counts less than the one before.
  */
 export function marginGap(margin: number) {
   if (!Number.isInteger(margin) || margin < 1)
@@ -61,7 +61,7 @@ export const surprise = (winnerQuality: number, loserQuality: number) =>
   loserQuality + (1 - winnerQuality);
 
 /** The solve repeats until no strength moves more than this many points... */
-export const SETTLE = 1e-9;
+export const SETTLE = 1.5e-8;
 /** ...or this many rounds have run. */
 export const MAX_ROUNDS = 200;
 

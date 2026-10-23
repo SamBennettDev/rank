@@ -14,8 +14,8 @@ import numpy as np
 REVISION = "a3dd960090c1bfa169cebd491beabf7028b379b2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Settings from src/engine/defaults.ts (DEFAULT_SPRINGS).
-STRENGTH_SHRINK, QUALITY_SCALE = 0.5, 0.08
-WIN_POINTS = 7.0  # a 1-point win: the scale of the springs' gaps
+STRENGTH_SHRINK, QUALITY_SCALE = 0.5, 0.0056
+WIN_POINTS = 100.0  # a 1-point win: the scale of the springs' gaps
 QUALITY_POINTS = 100.0  # the top of the 0-100 quality scale
 
 

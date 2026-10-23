@@ -269,7 +269,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Quality is the ranking. Every game is a spring that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé averages the games: a win earns the beaten team’s quality and a loss costs 100 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
+        `Quality is the ranking. Every game is a spring that wants the winner 100 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé averages the games: a win earns the beaten team’s quality and a loss costs 100 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
       ),
     ),
   );

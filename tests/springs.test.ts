@@ -58,9 +58,9 @@ describe("solveSprings", () => {
 });
 
 describe("quality", () => {
-  const good = quality(30, S.qualityScale),
+  const good = quality(430, S.qualityScale),
     average = quality(0, S.qualityScale),
-    bad = quality(-30, S.qualityScale);
+    bad = quality(-430, S.qualityScale);
 
   it("turns strength into a chance of beating an average team", () => {
     expect(average).toBe(0.5);
@@ -69,9 +69,9 @@ describe("quality", () => {
   });
 
   it("counts each extra point of margin less than the one before", () => {
-    expect(marginGap(1)).toBe(7);
-    expect(marginGap(2)).toBeCloseTo(7 + 7 / 2, 12);
-    expect(marginGap(3)).toBeCloseTo(7 + 7 / 2 + 7 / 3, 12);
+    expect(marginGap(1)).toBe(100);
+    expect(marginGap(2)).toBeCloseTo(100 + 100 / 2, 12);
+    expect(marginGap(3)).toBeCloseTo(100 + 100 / 2 + 100 / 3, 12);
     const steps = [2, 3, 7, 14, 28].map((m) => marginGap(m) - marginGap(m - 1));
     for (let i = 1; i < steps.length; i++)
       expect(steps[i]!).toBeLessThan(steps[i - 1]!);
@@ -95,7 +95,7 @@ describe("quality", () => {
     for (let i = 0; i < 4; i++) expect(strength[i]).toBeCloseTo(again[i]!, 8);
   });
 
-  it("is 7 × the chance of beating an average team, in strength order", () => {
+  it("is 100 × the chance of beating an average team, in strength order", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
     const r = rankByQuality(4, springs, S);
     for (let i = 0; i < 4; i++)

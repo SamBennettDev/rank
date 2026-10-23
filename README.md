@@ -2,7 +2,7 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-**One spring graph.** Every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising: an upset or a win over a good team pulls hard, a good team beating a bad one barely pulls, so cupcake blowouts don't drag anyone down. Solving the whole graph (repeated until the spring strengths settle) gives every team a strength, and from it a **quality**: 100 × its chance of beating an average team, from 0 to 100. Quality is the ranking.
+**One spring graph.** Every game is a spring that wants its winner 100 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising: an upset or a win over a good team pulls hard, a good team beating a bad one barely pulls, so cupcake blowouts don't drag anyone down. Solving the whole graph (repeated until the spring strengths settle) gives every team a strength, and from it a **quality**: 100 × its chance of beating an average team, from 0 to 100. Quality is the ranking.
 
 Two more boards come from quality:
 

@@ -3,7 +3,7 @@ import type { MatchupSettings, SpringSettings } from "./types";
 /** The ranking: one surprise-weighted margin spring graph (chosen on 2014–2019). */
 export const DEFAULT_SPRINGS: SpringSettings = {
   strengthShrink: 0.5,
-  qualityScale: 0.08,
+  qualityScale: 0.0056,
 };
 
 /** The matchup-prediction model (calibrated on 2014–2019). */

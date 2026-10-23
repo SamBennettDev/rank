@@ -7,10 +7,10 @@ Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engi
 Each game `e` is a spring of strength `k[e]` that wants its winner `gap[e]` points above its loser:
 
 ```text
-gap[e] = 7 × (1 + 1/2 + 1/3 + … + 1/margin[e])
+gap[e] = 100 × (1 + 1/2 + 1/3 + … + 1/margin[e])
 ```
 
-A 1-point win is worth 7, a 2-point win 10.5, a 3-point win 12.8, a 14-point win 22.8 and a 35-point win 29.0: each extra point counts less than the one before (it grows like the log of the margin). It needs only + and ÷, so it is exact and platform-independent. Strengths `s` minimise
+A 1-point win is worth 100, a 2-point win 150, a 3-point win 183.3, a 14-point win 325.2 and a 35-point win 414.7: each extra point counts less than the one before (it grows like the log of the margin). It needs only + and ÷, so it is exact and platform-independent. Strengths `s` minimise
 
 ```text
 ½ Σ_games k[e] × (s[winner] − s[loser] − gap[e])²  +  ½ strengthShrink × Σ_teams s[i]²
@@ -25,7 +25,7 @@ s[i] = Σ_games of i k[e] × (s[opponent] ± gap[e])  /  (Σ_games of i k[e] + s
 where the target is the opponent's strength + gap after a win and − gap after a loss. A team with no games stays at 0. The pull toward 0 keeps the system solvable while the graph is still in pieces early in the season. Each strength becomes a **quality**, 100 × the chance of beating an average (strength-0) team:
 
 ```text
-quality[i] = 100 × logistic(qualityScale × s[i]),   qualityScale = 0.08
+quality[i] = 100 × logistic(qualityScale × s[i]),   qualityScale = 0.0056
 ```
 
 Each spring's strength is how surprising its result was:
