@@ -2,11 +2,11 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-**One spring graph.** Every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising: an upset or a win over a good team pulls hard, a good team beating a bad one barely pulls, so cupcake blowouts don't drag anyone down. Solving the whole graph (repeated until the spring strengths settle) gives every team a strength, and from it a **quality**: 7 × its chance of beating an average team, from 0 to 7. Quality is the ranking.
+**One spring graph.** Every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising: an upset or a win over a good team pulls hard, a good team beating a bad one barely pulls, so cupcake blowouts don't drag anyone down. Solving the whole graph (repeated until the spring strengths settle) gives every team a strength, and from it a **quality**: 100 × its chance of beating an average team, from 0 to 100. Quality is the ranking.
 
 Two more boards come from quality:
 
-- **Résumé:** points per game. A win earns the beaten team's quality; a loss costs 7 minus the winner's quality.
+- **Résumé:** points per game. A win earns the beaten team's quality; a loss costs 100 minus the winner's quality.
 - **Schedule:** the average quality of the opponents played.
 
 No home field or head-to-head rules.
@@ -45,7 +45,7 @@ data/rankings/<year>/<snapshot>.json  quality, résumé, schedule, every game's 
 data/index.json                       available seasons and snapshots
 ```
 
-Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (quality, 0–7: the ranking), `strength` (points better than average), `resume` and `resumeRank`, `schedule` and `scheduleRank`, and each board's weekly movement (`change`, `resumeChange`, `scheduleChange`), and every counted game in `springs` with its `margin`, `spring` (spring strength), `win` (résumé points the winner earned) and `loss` (résumé points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
+Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (quality, 0–100: the ranking), `strength` (points better than average), `resume` and `resumeRank`, `schedule` and `scheduleRank`, and each board's weekly movement (`change`, `resumeChange`, `scheduleChange`), and every counted game in `springs` with its `margin`, `spring` (spring strength), `win` (résumé points the winner earned) and `loss` (résumé points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
 
 ## Update results
 

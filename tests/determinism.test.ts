@@ -94,13 +94,13 @@ describe("determinism", () => {
       },
     ]);
     // Quality is the ranking. Résumé: the winner earns the loser's quality, the
-    // loser loses 7 minus the winner's. Schedule: the opponent's quality.
-    expect(away.height).toBeCloseTo(7 * qAway, 5);
-    expect(home.height).toBeCloseTo(7 * qHome, 5);
-    expect(away.resume).toBeCloseTo(7 * qHome, 5);
-    expect(home.resume).toBeCloseTo(-(7 - 7 * qAway), 5);
-    expect(away.schedule).toBeCloseTo(7 * qHome, 5);
-    expect(home.schedule).toBeCloseTo(7 * qAway, 5);
+    // loser loses 100 minus the winner's. Schedule: the opponent's quality.
+    expect(away.height).toBeCloseTo(100 * qAway, 5);
+    expect(home.height).toBeCloseTo(100 * qHome, 5);
+    expect(away.resume).toBeCloseTo(100 * qHome, 5);
+    expect(home.resume).toBeCloseTo(-(100 - 100 * qAway), 5);
+    expect(away.schedule).toBeCloseTo(100 * qHome, 5);
+    expect(home.schedule).toBeCloseTo(100 * qAway, 5);
     expect([away.resumeRank, home.resumeRank]).toEqual([1, 2]);
     expect([away.scheduleRank, home.scheduleRank]).toEqual([2, 1]);
   });

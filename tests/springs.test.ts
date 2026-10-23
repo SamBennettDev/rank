@@ -99,7 +99,7 @@ describe("quality", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
     const r = rankByQuality(4, springs, S);
     for (let i = 0; i < 4; i++)
-      expect(r.quality[i]).toBe(7 * quality(r.strength[i]!, S.qualityScale));
+      expect(r.quality[i]).toBe(100 * quality(r.strength[i]!, S.qualityScale));
   });
 
   it("barely lets a blowout of a weak team pull the winner down", () => {
@@ -124,9 +124,9 @@ describe("quality", () => {
 
 describe("résumé and schedule", () => {
   it("earns the beaten team's quality and loses 7 minus the winner's", () => {
-    expect(gamePoints(6.5, 0.5)).toEqual({ win: 0.5, loss: -0.5 });
-    expect(gamePoints(0.5, 6.5)).toEqual({ win: 6.5, loss: -6.5 });
-    expect(gamePoints(3.5, 3.5)).toEqual({ win: 3.5, loss: -3.5 });
+    expect(gamePoints(90, 10)).toEqual({ win: 10, loss: -10 });
+    expect(gamePoints(10, 90)).toEqual({ win: 90, loss: -90 });
+    expect(gamePoints(50, 50)).toEqual({ win: 50, loss: -50 });
   });
 
   it("costs more to lose to a bad team than to a good one", () => {

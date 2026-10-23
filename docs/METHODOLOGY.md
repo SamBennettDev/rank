@@ -1,6 +1,6 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`): **quality**, from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. Two companion boards come from quality: **résumé** (a win earns the beaten team's quality, a loss costs 7 minus the winner's, averaged per game) and **schedule** (the average quality of the opponents played). No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`): **quality**, from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. Two companion boards come from quality: **résumé** (a win earns the beaten team's quality, a loss costs 100 minus the winner's, averaged per game) and **schedule** (the average quality of the opponents played). No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## Quality: SpringRank with margins, the ranking
 
@@ -22,16 +22,16 @@ Setting the slope to zero gives one symmetric positive-definite linear system, s
 s[i] = Σ_games of i k[e] × (s[opponent] ± gap[e])  /  (Σ_games of i k[e] + strengthShrink)
 ```
 
-where the target is the opponent's strength + gap after a win and − gap after a loss. A team with no games stays at 0. The pull toward 0 keeps the system solvable while the graph is still in pieces early in the season. Each strength becomes a **quality**, 7 × the chance of beating an average (strength-0) team:
+where the target is the opponent's strength + gap after a win and − gap after a loss. A team with no games stays at 0. The pull toward 0 keeps the system solvable while the graph is still in pieces early in the season. Each strength becomes a **quality**, 100 × the chance of beating an average (strength-0) team:
 
 ```text
-quality[i] = 7 × logistic(qualityScale × s[i]),   qualityScale = 0.08
+quality[i] = 100 × logistic(qualityScale × s[i]),   qualityScale = 0.08
 ```
 
 Each spring's strength is how surprising its result was:
 
 ```text
-k[e] = p[loser] + (1 − p[winner]),   p[i] = quality[i] / 7
+k[e] = p[loser] + (1 − p[winner]),   p[i] = quality[i] / 100
 ```
 
 An upset or a win over a good team is a stiff spring (up to 2); a good team beating a bad one barely pulls (near 0); two average teams make a spring of 1. Strengths and spring strengths depend on each other, so the solve starts with every `k = 1`, solves, sets each `k` from the qualities, and solves again, repeating until no strength moves more than 1e-9 points (at most 200 rounds; it settles in a few dozen). A blowout of a very weak team can't reach a strong winner's level under diminishing returns, so with equal springs it would drag the winner down; weighted by surprise, it barely counts. Each game's settled `k` is published as `spring`.
@@ -44,7 +44,7 @@ Each game gives résumé points to both teams:
 
 ```text
 winner earns  + quality[loser]
-loser earns   − (7 − quality[winner])
+loser earns   − (100 − quality[winner])
 ```
 
 | Result | Points |

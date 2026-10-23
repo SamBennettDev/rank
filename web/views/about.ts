@@ -111,7 +111,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "div",
         { class: "recipe-block win" },
         h("b", {}, "Quality"),
-        h("span", {}, "The ranking, 0–7"),
+        h("span", {}, "The ranking, 0–100"),
       ),
       h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "→"),
       h(
@@ -139,19 +139,19 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Quality, the ranking. "),
-        `SpringRank with margins: every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser. A 1-point win is worth 7, a 2-point win 10.5, a 3-point win 12.8, a 14-point win 22.8 and a 35-point win 29.0, so each extra point counts less than the one before. Each spring is as strong as its result was surprising: the loser’s chance of beating an average team + (1 − the winner’s). An upset or a win over a good team pulls hard; a good team beating a bad one barely pulls, so a blowout of a weak team doesn’t drag the winner down. Solving the whole graph, and repeating until the spring strengths settle, gives every team a strength in points: the spring-weighted average of what its games say, with a small weight (${m.springs.strengthShrink}) on 0, an average team. Quality is 7 × the chance of beating an average team, from 0 to 7 (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best).`,
+        `SpringRank with margins: every game is a spring that wants its winner 7 × (1 + 1/2 + … + 1/margin) points above its loser. A 1-point win is worth 7, a 2-point win 10.5, a 3-point win 12.8, a 14-point win 22.8 and a 35-point win 29.0, so each extra point counts less than the one before. Each spring is as strong as its result was surprising: the loser’s chance of beating an average team + (1 − the winner’s). An upset or a win over a good team pulls hard; a good team beating a bad one barely pulls, so a blowout of a weak team doesn’t drag the winner down. Solving the whole graph, and repeating until the spring strengths settle, gives every team a strength in points: the spring-weighted average of what its games say, with a small weight (${m.springs.strengthShrink}) on 0, an average team. Quality is 100 × the chance of beating an average team, from 0 to 100 (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best).`,
       ),
       h(
         "p",
         {},
         h("b", {}, "Résumé. "),
-        "Each team averages its games. A win earns the beaten team’s quality; a loss costs 7 minus the winning team’s quality. Beating a 6.5 team earns +6.5 and losing to it costs only −0.5; beating a 0.5 team earns +0.5 and losing to it costs −6.5.",
+        "Each team averages its games. A win earns the beaten team’s quality; a loss costs 100 minus the winning team’s quality. Beating a 90 team earns +90 and losing to it costs only −10; beating a 10 team earns +10 and losing to it costs −90.",
       ),
       h(
         "p",
         {},
         h("b", {}, "Schedule. "),
-        "The average quality of the opponents a team has played, from 0 to 7.",
+        "The average quality of the opponents a team has played, from 0 to 100.",
       ),
       h(
         "p",

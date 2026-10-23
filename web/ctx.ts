@@ -64,7 +64,7 @@ export interface GameLine {
   opponent: RankedTeam;
   where: -1 | 0 | 1;
   margin: number;
-  /** Points this game earned: + the beaten team's quality points, or −(7 − the winner's). */
+  /** Points this game earned: + the beaten team's quality points, or −(100 − the winner's). */
   value: number;
 }
 /** Rebuilds a team's résumé: the average of the points its games earned. */
@@ -129,11 +129,11 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Quality, 0–7: 7 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting less, and each spring is as strong as the result was surprising.",
+    "Quality, 0–100: 100 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting less, and each spring is as strong as the result was surprising.",
   resume:
-    "Points per game. A win earns the beaten team's quality (0–7); a loss costs 7 minus the winner's quality.",
+    "Points per game. A win earns the beaten team's quality (0–100); a loss costs 100 minus the winner's quality.",
   schedule:
-    "Strength of schedule: the average quality (0–7) of the opponents played.",
+    "Strength of schedule: the average quality (0–100) of the opponents played.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

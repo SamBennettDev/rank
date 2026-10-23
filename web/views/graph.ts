@@ -275,7 +275,7 @@ export function graphView(
         h(
           "p",
           {},
-          "Height = quality (0–7). Each line is a game between its winner and its loser. Columns = conferences.",
+          "Height = quality (0–100). Each line is a game between its winner and its loser. Columns = conferences.",
         ),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(

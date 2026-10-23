@@ -269,7 +269,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Quality is the ranking. Every game is a spring that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 7 × its chance of beating an average team, from 0 to 7. Résumé averages the games: a win earns the beaten team’s quality and a loss costs 7 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
+        `Quality is the ranking. Every game is a spring that wants the winner 7 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 7, the second 3.5, the third 2.33, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé averages the games: a win earns the beaten team’s quality and a loss costs 100 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
       ),
     ),
   );
@@ -284,7 +284,7 @@ function breakdownChart(
   const row = 30;
   const pad = { l: 178, r: 24, t: 24, b: 28 };
   const H = pad.t + row * lines.length + pad.b;
-  const vals = [0, 7, -7, ...lines.map((l) => l.value)];
+  const vals = [0, 100, -100, ...lines.map((l) => l.value)];
   let lo = Math.min(...vals),
     hi = Math.max(...vals);
   const span = Math.max(hi - lo, 2);
@@ -354,7 +354,7 @@ function breakdownChart(
     stem(
       y,
       l.value,
-      `${score} against ${o.school} (quality ${(o.height ?? 0).toFixed(2)} of 7): ${fmtHeight(l.value, 2)} points`,
+      `${score} against ${o.school} (quality ${(o.height ?? 0).toFixed(2)} of 100): ${fmtHeight(l.value, 2)} points`,
       o.id,
     );
   });
@@ -570,7 +570,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         "span",
         {
           class: `r ${l.value >= 0 ? "pos" : "neg"}`,
-          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(o.height ?? 0).toFixed(2)} of 7: ${l.won ? "+ their quality" : "−(7 − their quality)"}.`,
+          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(o.height ?? 0).toFixed(2)} of 7: ${l.won ? "+ their quality" : "−(100 − their quality)"}.`,
         },
         fmtHeight(l.value, 2),
       ),

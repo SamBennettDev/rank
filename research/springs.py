@@ -15,7 +15,8 @@ REVISION = "a3dd960090c1bfa169cebd491beabf7028b379b2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Settings from src/engine/defaults.ts (DEFAULT_SPRINGS).
 STRENGTH_SHRINK, QUALITY_SCALE = 0.5, 0.08
-WIN_POINTS = 7.0  # a 1-point win, and the top of the 0-7 quality scale
+WIN_POINTS = 7.0  # a 1-point win: the scale of the springs' gaps
+QUALITY_POINTS = 100.0  # the top of the 0-100 quality scale
 
 
 def load(year):
@@ -77,7 +78,7 @@ def margin_gap(margin):
 
 
 def quality(n, w, l, margin):
-    """Margin SpringRank with springs weighted by surprise, as 0-7 quality points."""
+    """Margin SpringRank with springs weighted by surprise, as 0-100 quality points."""
     gap = margin_gap(margin)
     strength = solve(n, w, l, np.ones(len(w)), gap, STRENGTH_SHRINK)
     for _ in range(200):  # weight each spring by surprise until the strengths settle
@@ -86,7 +87,7 @@ def quality(n, w, l, margin):
         moved = np.abs(nxt - strength).max(); strength = nxt
         if moved < 1e-9:
             break
-    return WIN_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
+    return QUALITY_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
 
 
 def rank(n, w, l, margin):

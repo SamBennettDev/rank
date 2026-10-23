@@ -12,8 +12,11 @@ export interface Spring {
   margin: number;
 }
 
-/** Points a 1-point win is worth, and the top of the 0–7 quality scale. */
+/** Points a 1-point win is worth: the scale of the springs' gaps. */
 export const WIN_POINTS = 7;
+
+/** The top of the 0–100 quality scale. */
+export const QUALITY_POINTS = 100;
 
 /**
  * How far above its loser a spring wants the winner, in points:
@@ -34,18 +37,18 @@ export const quality = (strength: number, scale: number) => {
   return strength >= 0 ? 1 / (1 + e) : e / (1 + e);
 };
 
-/** A team's quality points: WIN_POINTS × its chance of beating an average team (0–7). */
-export const qualityPoints = (q: number) => WIN_POINTS * q;
+/** A team's quality points: QUALITY_POINTS × its chance of beating an average team (0–100). */
+export const qualityPoints = (q: number) => QUALITY_POINTS * q;
 
 /**
- * Résumé points for one game, from 0–7 quality points. The winner earns the loser's
- * quality; the loser loses 7 minus the winner's quality. Beating a good team or
+ * Résumé points for one game, from 0–100 quality points. The winner earns the loser's
+ * quality; the loser loses 100 minus the winner's quality. Beating a good team or
  * losing to a bad one moves a résumé most; beating a bad team or losing to a good
  * one barely does.
  */
 export const gamePoints = (winnerQuality: number, loserQuality: number) => ({
   win: loserQuality,
-  loss: -(WIN_POINTS - winnerQuality),
+  loss: -(QUALITY_POINTS - winnerQuality),
 });
 
 /**
@@ -139,7 +142,7 @@ export function solveStrength(
 }
 
 /**
- * The ranking and its two companions. Quality (0–7 points, the ranking) comes from
+ * The ranking and its two companions. Quality (0–100 points, the ranking) comes from
  * one surprise-weighted margin SpringRank. Résumé is a team's average game points
  * (see `gamePoints`); schedule is the average quality of the opponents it played.
  */
