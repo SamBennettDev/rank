@@ -179,7 +179,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401856834,2026,8,regular,2026-10-24T17:00:00.000Z,false,true,2305,Kansas,25,239,Baylor,24
 401856835,2026,8,regular,2026-10-24T19:30:00.000Z,false,true,2116,UCF,39,252,BYU,31
 401856836,2026,8,regular,2026-10-24T23:00:00.000Z,false,true,197,Oklahoma State,57,38,Colorado,24
-401856837,2026,8,regular,2026-10-25T02:15:00.000Z,false,false,254,Utah,,248,Houston,
+401856837,2026,8,regular,2026-10-25T02:15:00.000Z,false,true,254,Utah,21,248,Houston,13
 401856838,2026,8,regular,2026-10-24T23:30:00.000Z,false,true,12,Arizona,39,66,Iowa State,3
 401856839,2026,8,regular,2026-10-24T19:45:00.000Z,false,true,9,Arizona State,28,2306,Kansas State,17
 401856840,2026,8,regular,2026-10-24T16:00:00.000Z,false,true,2132,Cincinnati,37,2641,Texas Tech,24
@@ -652,7 +652,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401864524,2026,7,regular,2026-10-17T19:30:00.000Z,false,true,2005,Air Force,41,2439,UNLV,31
 401864525,2026,8,regular,2026-10-24T01:00:00.000Z,false,true,2751,Wyoming,28,2005,Air Force,14
 401864526,2026,8,regular,2026-10-24T19:30:00.000Z,false,true,2459,Northern Illinois,21,62,Hawai'i,56
-401864527,2026,8,regular,2026-10-25T02:00:00.000Z,false,false,167,New Mexico,,2449,North Dakota State,
+401864527,2026,8,regular,2026-10-25T02:00:00.000Z,false,true,167,New Mexico,21,2449,North Dakota State,16
 401864528,2026,8,regular,2026-10-24T21:00:00.000Z,false,true,2440,Nevada,28,23,San José State,13
 401864529,2026,9,regular,2026-10-31T20:00:00.000Z,false,false,23,San José State,,167,New Mexico,
 401864530,2026,9,regular,2026-11-01T02:30:00.000Z,false,false,2439,UNLV,,2459,Northern Illinois,
