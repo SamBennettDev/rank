@@ -1,0 +1,7 @@
+name = "rank-update-trigger"
+main = "index.js"
+compatibility_date = "2026-10-01"
+
+# Hourly, on the hour. Cloudflare cron runs on time, unlike GitHub's scheduler.
+[triggers]
+crons = ["0 * * * *"]

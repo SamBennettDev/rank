@@ -80,3 +80,10 @@ docs/        full methodology
 ## License
 
 MIT
+
+## Hourly updates
+
+GitHub's own `schedule` trigger is best-effort and often runs hours late, so a Cloudflare Worker (`cloudflare/trigger`) starts the **Update data** workflow every hour. One-time setup:
+
+1. Create a fine-grained GitHub token for `SamBennettDev/rank` with **Actions: Read and write**.
+2. `cd cloudflare/trigger && npx wrangler secret put GITHUB_TOKEN` (paste the token), then `npx wrangler deploy`.
