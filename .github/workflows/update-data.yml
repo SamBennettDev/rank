@@ -1,9 +1,7 @@
 name: Update data
 on:
   schedule:
-    - cron: "17 8 * * 0,1"     # Sunday and Monday mornings UTC, after the weekend's games
-    - cron: "17 8 15-31 12 *"  # daily through bowl season
-    - cron: "17 8 1-20 1 *"
+    - cron: "17 * * 8-12,1 *"  # hourly during the season (Aug-Jan); only commits and deploys when results change
   workflow_dispatch:
     inputs:
       year:
