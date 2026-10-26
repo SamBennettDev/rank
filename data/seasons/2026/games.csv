@@ -851,7 +851,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401867687,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,2130,Chicago State,20,2450,Norfolk State,43
 401867688,2026,5,regular,2026-10-03T23:00:00.000Z,false,true,2627,Tarleton State,56,2130,Chicago State,21
 401867689,2026,8,regular,2026-10-24T19:00:00.000Z,false,true,2815,Lindenwood,44,2130,Chicago State,9
-401867690,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2130,Chicago State,,124110,UFTL,
+401867690,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,2130,Chicago State,,124110,UFTL,
 401867692,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2729,William & Mary,22,2169,Delaware State,15
 401867796,2026,2,regular,2026-09-12T23:30:00.000Z,false,true,99,LSU,45,2348,Louisiana Tech,14
 401867804,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,239,Baylor,36,2348,Louisiana Tech,19
@@ -984,7 +984,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401867953,2026,2,regular,2026-09-12T19:00:00.000Z,false,true,2169,Delaware State,21,2075,Bowie State,6
 401867954,2026,6,regular,2026-10-10T17:00:00.000Z,false,true,2169,Delaware State,34,112334,Franklin Pierce,0
 401867955,2026,8,regular,2026-10-23T21:00:00.000Z,false,true,2169,Delaware State,12,2428,North Carolina Central,31
-401867956,2026,9,regular,2026-10-31T18:00:00.000Z,false,false,2450,Norfolk State,,2169,Delaware State,
+401867956,2026,9,regular,2026-10-31T19:00:00.000Z,true,false,2450,Norfolk State,,2169,Delaware State,
 401867957,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2169,Delaware State,,2415,Morgan State,
 401867958,2026,11,regular,2026-11-14T18:00:00.000Z,false,false,47,Howard,,2169,Delaware State,
 401867959,2026,12,regular,2026-11-21T18:30:00.000Z,false,false,2569,South Carolina State,,2169,Delaware State,
