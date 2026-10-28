@@ -28,7 +28,7 @@
       "fcs"
     ],
     "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
-    "gamesSha256": "8cf93fb3fcc538b0146a26255bf6e51e100841a4c8ef3b15e41cbdac14ff5c0e",
+    "gamesSha256": "6c4c29da0e5a088c696e8cfe68c5fc38160c9b34601977eda1883e1751f3076e",
     "playsSha256": "4117aec519002391f553c5bf9df40baf0a1d77c04f040dc9d36170d1fa10cb5a",
     "snapsPerGame": 56.871908,
     "counts": {
@@ -175,7 +175,6 @@
     {"gameId":401858511,"home":130,"away":127,"startDate":"2026-11-07T05:00:00.000Z","neutralSite":false,"strengthEdge":7.315588,"homeProbability":0.639759,"provisional":false},
     {"gameId":401858512,"home":135,"away":26,"startDate":"2026-11-07T05:00:00.000Z","neutralSite":false,"strengthEdge":-14.43527,"homeProbability":0.24407,"provisional":false},
     {"gameId":401858513,"home":77,"away":2294,"startDate":"2026-11-07T05:00:00.000Z","neutralSite":false,"strengthEdge":8.937999,"homeProbability":0.668092,"provisional":false},
-    {"gameId":401858514,"home":194,"away":2483,"startDate":"2026-11-07T05:00:00.000Z","neutralSite":false,"strengthEdge":14.887871,"homeProbability":0.762555,"provisional":false},
     {"gameId":401858516,"home":264,"away":213,"startDate":"2026-11-07T05:00:00.000Z","neutralSite":false,"strengthEdge":-4.737225,"homeProbability":0.408291,"provisional":false},
     {"gameId":401856743,"home":142,"away":251,"startDate":"2026-11-07T17:00:00.000Z","neutralSite":false,"strengthEdge":-4.523192,"homeProbability":0.412284,"provisional":false},
     {"gameId":401856849,"home":254,"away":252,"startDate":"2026-11-07T17:00:00.000Z","neutralSite":false,"strengthEdge":7.257791,"homeProbability":0.63845,"provisional":false},
@@ -240,6 +239,7 @@
     {"gameId":401871073,"home":338,"away":48,"startDate":"2026-11-07T20:00:00.000Z","neutralSite":false,"strengthEdge":-0.519263,"homeProbability":0.489789,"provisional":false},
     {"gameId":401856740,"home":99,"away":333,"startDate":"2026-11-07T20:30:00.000Z","neutralSite":false,"strengthEdge":4.751183,"homeProbability":0.592714,"provisional":false},
     {"gameId":401858290,"home":154,"away":2771,"startDate":"2026-11-07T20:30:00.000Z","neutralSite":false,"strengthEdge":62.149685,"homeProbability":0.992421,"provisional":false},
+    {"gameId":401858514,"home":194,"away":2483,"startDate":"2026-11-07T20:30:00.000Z","neutralSite":false,"strengthEdge":14.887871,"homeProbability":0.762555,"provisional":false},
     {"gameId":401862819,"home":5,"away":2429,"startDate":"2026-11-07T20:30:00.000Z","neutralSite":false,"strengthEdge":18.235174,"homeProbability":0.807001,"provisional":false},
     {"gameId":401862820,"home":2426,"away":218,"startDate":"2026-11-07T20:30:00.000Z","neutralSite":false,"strengthEdge":7.928416,"homeProbability":0.650311,"provisional":false},
     {"gameId":401868200,"home":2634,"away":2546,"startDate":"2026-11-07T20:30:00.000Z","neutralSite":false,"strengthEdge":-10.555372,"homeProbability":0.303417,"provisional":false},
