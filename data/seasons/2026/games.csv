@@ -1547,8 +1547,8 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401871054,2026,7,regular,2026-10-14T23:30:00.000Z,false,true,2623,Missouri State,24,338,Kennesaw State,21
 401871055,2026,8,regular,2026-10-20T23:00:00.000Z,false,true,2229,Florida International,23,2393,Middle Tennessee,26
 401871056,2026,8,regular,2026-10-22T23:00:00.000Z,false,true,338,Kennesaw State,6,2335,Liberty,34
-401871057,2026,9,regular,2026-10-29T00:00:00.000Z,false,false,166,New Mexico State,,55,Jacksonville State,
-401871058,2026,9,regular,2026-10-28T23:00:00.000Z,false,false,2393,Middle Tennessee,,338,Kennesaw State,
+401871057,2026,9,regular,2026-10-29T00:00:00.000Z,false,true,166,New Mexico State,0,55,Jacksonville State,24
+401871058,2026,9,regular,2026-10-28T23:00:00.000Z,false,true,2393,Middle Tennessee,28,338,Kennesaw State,44
 401871059,2026,9,regular,2026-10-31T19:30:00.000Z,false,false,2335,Liberty,,2229,Florida International,
 401871060,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,48,Delaware,,2229,Florida International,
 401871061,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,2335,Liberty,,2393,Middle Tennessee,
