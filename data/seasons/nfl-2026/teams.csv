@@ -1,0 +1,33 @@
+id,school,abbreviation,conference,classification,color
+1,Atlanta Falcons,ATL,NFC South,nfl,#a71930
+2,Buffalo Bills,BUF,AFC East,nfl,#00338d
+3,Chicago Bears,CHI,NFC North,nfl,#0b162a
+4,Cincinnati Bengals,CIN,AFC North,nfl,#fb4f14
+5,Cleveland Browns,CLE,AFC North,nfl,#ff3c00
+6,Dallas Cowboys,DAL,NFC East,nfl,#003594
+7,Denver Broncos,DEN,AFC West,nfl,#fb4f14
+8,Detroit Lions,DET,NFC North,nfl,#0076b6
+9,Green Bay Packers,GB,NFC North,nfl,#203731
+10,Tennessee Titans,TEN,AFC South,nfl,#0c2340
+11,Indianapolis Colts,IND,AFC South,nfl,#002c5f
+12,Kansas City Chiefs,KC,AFC West,nfl,#e31837
+13,Las Vegas Raiders,LV,AFC West,nfl,#000000
+14,Los Angeles Rams,LA,NFC West,nfl,#003594
+15,Miami Dolphins,MIA,AFC East,nfl,#008e97
+16,Minnesota Vikings,MIN,NFC North,nfl,#4f2683
+17,New England Patriots,NE,AFC East,nfl,#002244
+18,New Orleans Saints,NO,NFC South,nfl,#d3bc8d
+19,New York Giants,NYG,NFC East,nfl,#0b2265
+20,New York Jets,NYJ,AFC East,nfl,#125740
+21,Philadelphia Eagles,PHI,NFC East,nfl,#004c54
+22,Arizona Cardinals,ARI,NFC West,nfl,#97233f
+23,Pittsburgh Steelers,PIT,AFC North,nfl,#ffb612
+24,Los Angeles Chargers,LAC,AFC West,nfl,#0080c6
+25,San Francisco 49ers,SF,NFC West,nfl,#aa0000
+26,Seattle Seahawks,SEA,NFC West,nfl,#002244
+27,Tampa Bay Buccaneers,TB,NFC South,nfl,#d50a0a
+28,Washington Commanders,WAS,NFC East,nfl,#5a1414
+29,Carolina Panthers,CAR,NFC South,nfl,#0085ca
+30,Jacksonville Jaguars,JAX,AFC South,nfl,#006778
+33,Baltimore Ravens,BAL,AFC North,nfl,#241773
+34,Houston Texans,HOU,AFC South,nfl,#03202f

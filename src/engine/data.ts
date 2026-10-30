@@ -139,6 +139,8 @@ export function parseConfig(json: string): SeasonConfig {
   };
   if (typeof c.algorithmVersion !== "string" || c.algorithmVersion === "")
     throw new Error("config.algorithmVersion must be set");
+  if (c.league !== undefined && c.league !== "nfl")
+    throw new Error('config.league must be "nfl" when set');
   if (!Array.isArray(c.classifications) || c.classifications.length === 0) {
     throw new Error("config.classifications must be a non-empty array");
   }

@@ -8,9 +8,25 @@ import type { Team } from "../src/engine/types";
 
 export type TeamLook = Pick<Team, "id" | "abbreviation" | "color">;
 
-const LOGO_BASE = "https://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa";
-export const logoUrl = (id: number, px: number, dark = false) =>
-  `${LOGO_BASE}/${dark ? "500-dark" : "500"}/${id}.png&w=${px}&h=${px}&scale=crop&cquality=80`;
+const LOGO_BASE = "https://a.espncdn.com/combiner/i?img=/i/teamlogos";
+/** ESPN's NFL logos are named by abbreviation; two differ from nflverse's. */
+const NFL_FILE: Record<string, string> = { WAS: "wsh" };
+let nflAbbr: Map<number, string> | null = null;
+/** Pick the logo set for the season on screen: NFL teams by abbreviation, college teams by id. */
+export function useLogos(league: "nfl" | undefined, teams: Iterable<Team>) {
+  nflAbbr =
+    league === "nfl"
+      ? new Map([...teams].map((t) => [t.id, t.abbreviation]))
+      : null;
+}
+export const logoUrl = (id: number, px: number, dark = false) => {
+  const abbr = nflAbbr?.get(id);
+  const set = dark ? "500-dark" : "500";
+  const path = nflAbbr
+    ? `nfl/${set}/${NFL_FILE[abbr ?? ""] ?? (abbr ?? "").toLowerCase()}`
+    : `ncaa/${set}/${id}`;
+  return `${LOGO_BASE}/${path}.png&w=${px}&h=${px}&scale=crop&cquality=80`;
+};
 
 export const prefersDark = () =>
   window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;

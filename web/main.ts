@@ -1,6 +1,13 @@
 import { h } from "./dom";
 import { navIcons } from "./icons";
-import { type Ctx, type View, href, makeCtx } from "./ctx";
+import {
+  type Ctx,
+  type View,
+  href,
+  makeCtx,
+  postseasonName,
+  seasonLabel,
+} from "./ctx";
 import { loadGames, loadIndex, loadRanking, loadTeams } from "./store";
 import { aboutView } from "./views/about";
 import { graphView } from "./views/graph";
@@ -8,6 +15,7 @@ import { listView } from "./views/list";
 import { teamView } from "./views/team";
 import { matchupsView } from "./views/matchups";
 import { applyLeaderTheme } from "./theme";
+import { useLogos } from "./team";
 import type { SeasonIndexEntry } from "../src/engine/types";
 
 const app = document.getElementById("app")!;
@@ -17,7 +25,10 @@ let seasons: SeasonIndexEntry[] = [];
 let cleanup: (() => void) | null = null;
 
 function defaultEntry(): SeasonIndexEntry {
-  const real = seasons.filter((s) => !s.demo && s.snapshots.length > 0);
+  // College football is the home page; the NFL is one pick away in the season picker.
+  const real = seasons.filter(
+    (s) => !s.demo && !s.league && s.snapshots.length > 0,
+  );
   const pool =
     real.length > 0 ? real : seasons.filter((s) => s.snapshots.length > 0);
   const entry = pool.at(-1);
@@ -82,7 +93,11 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       },
     },
     ...seasons.map((x) =>
-      h("option", { value: x.season, selected: x.season === s }, x.season),
+      h(
+        "option",
+        { value: x.season, selected: x.season === s },
+        seasonLabel(x),
+      ),
     ),
   );
   const idx = ctx.entry.snapshots.findIndex((x) => x.id === ctx.snapId);
@@ -123,7 +138,9 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       h(
         "span",
         { class: "short" },
-        label.replace(/^Week /, "Wk ").replace(/^Postseason$/, "Bowls"),
+        label
+          .replace(/^Week /, "Wk ")
+          .replace(/^Postseason$/, postseasonName(ctx.entry)),
       ),
     ),
     weekSel,
@@ -131,7 +148,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
   picker.replaceChildren(
     seasons.length > 1
       ? h("div", { class: "sel season" }, seasonSel)
-      : h("span", { class: "season-tag" }, s),
+      : h("span", { class: "season-tag" }, seasonLabel(ctx.entry)),
     h("div", { class: "weekpick" }, step(-1), weekFace, step(1)),
   );
 }
@@ -169,6 +186,7 @@ async function route() {
       loadGames(season),
       loadTeams(season),
     ]);
+    useLogos(entry.league, teams.values());
     const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
     applyLeaderTheme(ctx);
     renderChrome(ctx, view, teamId);

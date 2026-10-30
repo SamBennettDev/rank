@@ -10,6 +10,7 @@ import {
   href,
   rankLabel,
   record,
+  seasonLabel,
   teamHref,
 } from "../ctx";
 import { h, svg } from "../dom";
@@ -72,7 +73,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
           h(
             "div",
             { class: "team-hero-meta" },
-            `${shortConf(team.conference)} · ${team.classification.toUpperCase()} · ${ctx.entry.season}`,
+            `${shortConf(team.conference)} · ${team.classification.toUpperCase()} · ${seasonLabel(ctx.entry)}`,
           ),
         ),
       ),
@@ -541,7 +542,11 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h(
         "span",
         { class: "wk" },
-        e.seasonType === "postseason" ? "Bowl" : `Wk ${e.week}`,
+        e.seasonType === "postseason"
+          ? ctx.entry.league
+            ? "Playoff"
+            : "Bowl"
+          : `Wk ${e.week}`,
       ),
       logo(ctx.teams.get(o.id), 34, { lazy: true }),
       h(

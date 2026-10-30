@@ -19,6 +19,7 @@
     "compute": "tsx scripts/compute.ts",
     "verify": "tsx scripts/verify.ts",
     "backtest": "tsx scripts/backtest.ts",
+    "fetch-nfl": "tsx scripts/fetch-nfl.ts",
     "fetch-plays": "tsx scripts/fetch-plays.ts"
   },
   "dependencies": {

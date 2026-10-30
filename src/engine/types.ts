@@ -30,6 +30,8 @@ export interface SeasonConfig {
   label: string;
   /** True for the fictional fixture season. */
   demo: boolean;
+  /** Set for pro leagues; college football leaves it out. */
+  league?: "nfl";
   /** Identifier of the ranking math. Bump it when the math or a setting changes. */
   algorithmVersion: string;
   /** Classifications included in the published ranking. */
@@ -223,5 +225,6 @@ export interface SeasonIndexEntry {
   season: string;
   label: string;
   demo: boolean;
+  league?: "nfl";
   snapshots: { id: string; label: string }[];
 }

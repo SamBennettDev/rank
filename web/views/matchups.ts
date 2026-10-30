@@ -1,5 +1,5 @@
 import type { MatchupPrediction } from "../../src/engine/types";
-import { type Ctx, rankLabel, teamHref } from "../ctx";
+import { type Ctx, rankLabel, seasonLabel, teamHref } from "../ctx";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import { logo, teamVars } from "../team";
@@ -108,7 +108,7 @@ export function matchupsView(ctx: Ctx) {
         h(
           "div",
           { class: "eyebrow" },
-          `${ctx.entry.season} · ${ctx.ranking.snapshot.label}`,
+          `${seasonLabel(ctx.entry)} · ${ctx.ranking.snapshot.label}`,
         ),
         h("h1", {}, "Up next"),
       ),

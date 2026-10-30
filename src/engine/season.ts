@@ -346,6 +346,7 @@ export async function computeSeason(
       season: input.season,
       label: config.label,
       demo: config.demo,
+      ...(config.league ? { league: config.league } : {}),
       snapshots: snapshots.map((s) => ({ id: s.id, label: s.label })),
     },
   };

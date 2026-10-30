@@ -1,0 +1,273 @@
+id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,home_points,away_id,away_team,away_points
+401872656,2026,1,regular,2026-09-10T00:20:00.000Z,false,true,26,Seattle Seahawks,13,17,New England Patriots,10
+401872657,2026,1,regular,2026-09-11T00:35:00.000Z,true,true,14,Los Angeles Rams,7,25,San Francisco 49ers,27
+401872658,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,23,Pittsburgh Steelers,20,1,Atlanta Falcons,13
+401872659,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,11,Indianapolis Colts,23,33,Baltimore Ravens,41
+401872660,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,34,Houston Texans,31,2,Buffalo Bills,36
+401872661,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,29,Carolina Panthers,37,3,Chicago Bears,59
+401872922,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,30,Jacksonville Jaguars,34,5,Cleveland Browns,10
+401872923,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,8,Detroit Lions,31,18,New Orleans Saints,30
+401872924,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,10,Tennessee Titans,10,20,New York Jets,23
+401872925,2026,1,regular,2026-09-13T17:00:00.000Z,false,true,4,Cincinnati Bengals,33,27,Tampa Bay Buccaneers,27
+401872926,2026,1,regular,2026-09-13T20:25:00.000Z,false,true,24,Los Angeles Chargers,14,22,Arizona Cardinals,26
+401872927,2026,1,regular,2026-09-13T20:25:00.000Z,false,true,16,Minnesota Vikings,39,9,Green Bay Packers,22
+401872928,2026,1,regular,2026-09-13T20:25:00.000Z,false,true,13,Las Vegas Raiders,27,15,Miami Dolphins,13
+401872929,2026,1,regular,2026-09-13T20:25:00.000Z,false,true,21,Philadelphia Eagles,24,28,Washington Commanders,22
+401872930,2026,1,regular,2026-09-14T00:20:00.000Z,false,true,19,New York Giants,28,6,Dallas Cowboys,20
+401872931,2026,1,regular,2026-09-15T00:15:00.000Z,false,true,12,Kansas City Chiefs,31,7,Denver Broncos,10
+401872932,2026,2,regular,2026-09-18T00:15:00.000Z,false,true,2,Buffalo Bills,41,8,Detroit Lions,31
+401872933,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,1,Atlanta Falcons,3,29,Carolina Panthers,34
+401872934,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,34,Houston Texans,6,4,Cincinnati Bengals,20
+401872935,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,27,Tampa Bay Buccaneers,19,5,Cleveland Browns,23
+401872936,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,20,New York Jets,17,9,Green Bay Packers,20
+401872937,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,3,Chicago Bears,3,16,Minnesota Vikings,9
+401872938,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,33,Baltimore Ravens,17,18,New Orleans Saints,24
+401872939,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,10,Tennessee Titans,20,21,Philadelphia Eagles,24
+401872940,2026,2,regular,2026-09-20T20:05:00.000Z,false,true,7,Denver Broncos,20,30,Jacksonville Jaguars,13
+401872941,2026,2,regular,2026-09-20T20:05:00.000Z,false,true,24,Los Angeles Chargers,14,13,Las Vegas Raiders,26
+401872942,2026,2,regular,2026-09-20T20:25:00.000Z,false,true,25,San Francisco 49ers,35,15,Miami Dolphins,13
+401872943,2026,2,regular,2026-09-20T20:25:00.000Z,false,true,22,Arizona Cardinals,7,26,Seattle Seahawks,31
+401872944,2026,2,regular,2026-09-20T20:25:00.000Z,false,true,6,Dallas Cowboys,37,28,Washington Commanders,20
+401872945,2026,2,regular,2026-09-21T00:20:00.000Z,false,true,12,Kansas City Chiefs,33,11,Indianapolis Colts,30
+401872946,2026,2,regular,2026-09-20T17:00:00.000Z,false,true,17,New England Patriots,20,23,Pittsburgh Steelers,3
+401872947,2026,2,regular,2026-09-22T00:15:00.000Z,false,true,14,Los Angeles Rams,28,19,New York Giants,6
+401872948,2026,3,regular,2026-09-25T00:15:00.000Z,false,true,9,Green Bay Packers,14,1,Atlanta Falcons,35
+401872949,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,5,Cleveland Browns,21,29,Carolina Panthers,18
+401872950,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,23,Pittsburgh Steelers,30,4,Cincinnati Bengals,27
+401872951,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,11,Indianapolis Colts,19,34,Houston Texans,17
+401872952,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,15,Miami Dolphins,10,12,Kansas City Chiefs,24
+401872953,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,2,Buffalo Bills,24,24,Los Angeles Chargers,16
+401872954,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,8,Detroit Lions,31,20,New York Jets,24
+401872955,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,28,Washington Commanders,33,26,Seattle Seahawks,31
+401872956,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,19,New York Giants,12,10,Tennessee Titans,7
+401872957,2026,3,regular,2026-09-27T17:00:00.000Z,false,true,30,Jacksonville Jaguars,35,17,New England Patriots,6
+401872958,2026,3,regular,2026-09-27T20:05:00.000Z,false,true,25,San Francisco 49ers,36,22,Arizona Cardinals,30
+401872959,2026,3,regular,2026-09-27T20:05:00.000Z,false,true,27,Tampa Bay Buccaneers,16,16,Minnesota Vikings,23
+401872960,2026,3,regular,2026-09-27T20:25:00.000Z,true,true,6,Dallas Cowboys,31,33,Baltimore Ravens,34
+401872961,2026,3,regular,2026-09-27T20:25:00.000Z,false,true,18,New Orleans Saints,27,13,Las Vegas Raiders,35
+401872962,2026,3,regular,2026-09-28T00:20:00.000Z,false,true,7,Denver Broncos,30,14,Los Angeles Rams,26
+401872963,2026,3,regular,2026-09-29T00:15:00.000Z,false,true,3,Chicago Bears,27,21,Philadelphia Eagles,7
+401872964,2026,4,regular,2026-10-02T00:15:00.000Z,false,true,5,Cleveland Browns,27,23,Pittsburgh Steelers,24
+401872965,2026,4,regular,2026-10-04T13:30:00.000Z,true,true,28,Washington Commanders,13,11,Indianapolis Colts,30
+401872966,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,19,New York Giants,36,22,Arizona Cardinals,24
+401872967,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,34,Houston Texans,30,6,Dallas Cowboys,34
+401872968,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,27,Tampa Bay Buccaneers,14,9,Green Bay Packers,17
+401872969,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,4,Cincinnati Bengals,17,30,Jacksonville Jaguars,22
+401872970,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,21,Philadelphia Eagles,20,14,Los Angeles Rams,24
+401872971,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,2,Buffalo Bills,26,17,New England Patriots,29
+401872972,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,3,Chicago Bears,23,20,New York Jets,12
+401872973,2026,4,regular,2026-10-04T17:00:00.000Z,false,true,33,Baltimore Ravens,24,10,Tennessee Titans,18
+401872974,2026,4,regular,2026-10-04T20:05:00.000Z,false,true,16,Minnesota Vikings,15,15,Miami Dolphins,10
+401872975,2026,4,regular,2026-10-04T20:25:00.000Z,false,true,25,San Francisco 49ers,24,7,Denver Broncos,14
+401872976,2026,4,regular,2026-10-04T20:25:00.000Z,false,true,13,Las Vegas Raiders,27,12,Kansas City Chiefs,30
+401872977,2026,4,regular,2026-10-04T20:25:00.000Z,false,true,26,Seattle Seahawks,30,24,Los Angeles Chargers,23
+401872978,2026,4,regular,2026-10-05T00:20:00.000Z,false,true,29,Carolina Panthers,32,8,Detroit Lions,26
+401872979,2026,4,regular,2026-10-06T00:15:00.000Z,false,true,18,New Orleans Saints,24,1,Atlanta Falcons,45
+401872980,2026,5,regular,2026-10-09T00:15:00.000Z,false,true,6,Dallas Cowboys,16,27,Tampa Bay Buccaneers,24
+401872981,2026,5,regular,2026-10-11T13:30:00.000Z,true,true,30,Jacksonville Jaguars,19,21,Philadelphia Eagles,17
+401872982,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,15,Miami Dolphins,24,4,Cincinnati Bengals,31
+401872983,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,20,New York Jets,17,5,Cleveland Browns,12
+401872984,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,10,Tennessee Titans,3,34,Houston Texans,26
+401872985,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,23,Pittsburgh Steelers,34,11,Indianapolis Colts,22
+401872986,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,17,New England Patriots,45,13,Las Vegas Raiders,17
+401872987,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,18,New Orleans Saints,13,16,Minnesota Vikings,23
+401872988,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,28,Washington Commanders,27,19,New York Giants,27
+401872989,2026,5,regular,2026-10-11T20:05:00.000Z,false,true,24,Los Angeles Chargers,17,7,Denver Broncos,23
+401872990,2026,5,regular,2026-10-11T17:00:00.000Z,false,true,9,Green Bay Packers,31,3,Chicago Bears,7
+401872991,2026,5,regular,2026-10-11T20:25:00.000Z,false,true,22,Arizona Cardinals,21,8,Detroit Lions,45
+401872992,2026,5,regular,2026-10-11T20:25:00.000Z,false,true,26,Seattle Seahawks,29,25,San Francisco 49ers,32
+401872993,2026,5,regular,2026-10-12T00:20:00.000Z,false,true,1,Atlanta Falcons,23,33,Baltimore Ravens,30
+401872994,2026,5,regular,2026-10-13T00:15:00.000Z,false,true,14,Los Angeles Rams,34,2,Buffalo Bills,37
+401872995,2026,6,regular,2026-10-16T00:15:00.000Z,false,true,7,Denver Broncos,17,26,Seattle Seahawks,14
+401872996,2026,6,regular,2026-10-18T13:30:00.000Z,true,true,30,Jacksonville Jaguars,31,34,Houston Texans,34
+401872997,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,5,Cleveland Browns,13,33,Baltimore Ravens,10
+401872998,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,21,Philadelphia Eagles,14,29,Carolina Panthers,25
+401872999,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,1,Atlanta Falcons,23,3,Chicago Bears,31
+401873000,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,19,New York Giants,27,18,New Orleans Saints,34
+401873001,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,17,New England Patriots,26,20,New York Jets,19
+401873002,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,27,Tampa Bay Buccaneers,19,23,Pittsburgh Steelers,26
+401873003,2026,6,regular,2026-10-18T17:00:00.000Z,false,true,11,Indianapolis Colts,20,10,Tennessee Titans,26
+401873004,2026,6,regular,2026-10-18T20:05:00.000Z,false,true,14,Los Angeles Rams,16,22,Arizona Cardinals,18
+401873005,2026,6,regular,2026-10-18T20:25:00.000Z,false,true,13,Las Vegas Raiders,30,2,Buffalo Bills,33
+401873006,2026,6,regular,2026-10-18T20:25:00.000Z,false,true,12,Kansas City Chiefs,22,24,Los Angeles Chargers,6
+401873007,2026,6,regular,2026-10-19T00:20:00.000Z,false,true,9,Green Bay Packers,23,6,Dallas Cowboys,13
+401873008,2026,6,regular,2026-10-20T00:15:00.000Z,false,true,25,San Francisco 49ers,23,28,Washington Commanders,17
+401873009,2026,7,regular,2026-10-27T00:15:00.000Z,false,true,21,Philadelphia Eagles,21,6,Dallas Cowboys,38
+401873010,2026,7,regular,2026-10-23T00:15:00.000Z,false,true,3,Chicago Bears,30,17,New England Patriots,24
+401873011,2026,7,regular,2026-10-25T13:30:00.000Z,true,true,18,New Orleans Saints,10,23,Pittsburgh Steelers,16
+401873012,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,33,Baltimore Ravens,13,4,Cincinnati Bengals,35
+401873013,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,10,Tennessee Titans,24,5,Cleveland Browns,27
+401873014,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,16,Minnesota Vikings,16,11,Indianapolis Colts,10
+401873015,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,20,New York Jets,25,15,Miami Dolphins,28
+401873016,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,34,Houston Texans,21,19,New York Giants,27
+401873017,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,1,Atlanta Falcons,29,25,San Francisco 49ers,20
+401873018,2026,7,regular,2026-10-25T17:00:00.000Z,false,true,29,Carolina Panthers,13,27,Tampa Bay Buccaneers,43
+401873019,2026,7,regular,2026-10-25T20:05:00.000Z,false,true,22,Arizona Cardinals,16,7,Denver Broncos,30
+401873020,2026,7,regular,2026-10-25T20:25:00.000Z,false,true,8,Detroit Lions,20,9,Green Bay Packers,17
+401873021,2026,7,regular,2026-10-25T20:25:00.000Z,false,true,13,Las Vegas Raiders,21,14,Los Angeles Rams,35
+401873022,2026,7,regular,2026-10-26T00:20:00.000Z,false,true,26,Seattle Seahawks,20,12,Kansas City Chiefs,3
+401873023,2026,8,regular,2026-10-30T00:15:00.000Z,false,true,9,Green Bay Packers,27,29,Carolina Panthers,19
+401873024,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,6,Dallas Cowboys,,22,Arizona Cardinals,
+401873025,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,27,Tampa Bay Buccaneers,,1,Atlanta Falcons,
+401873026,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,2,Buffalo Bills,,33,Baltimore Ravens,
+401873027,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,23,Pittsburgh Steelers,,5,Cleveland Browns,
+401873028,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,30,Jacksonville Jaguars,,11,Indianapolis Colts,
+401873029,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,20,New York Jets,,13,Las Vegas Raiders,
+401873030,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,8,Detroit Lions,,16,Minnesota Vikings,
+401873031,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,4,Cincinnati Bengals,,10,Tennessee Titans,
+401873032,2026,8,regular,2026-11-01T21:05:00.000Z,false,false,14,Los Angeles Rams,,24,Los Angeles Chargers,
+401873033,2026,8,regular,2026-11-01T21:25:00.000Z,false,false,7,Denver Broncos,,12,Kansas City Chiefs,
+401873034,2026,8,regular,2026-11-01T21:25:00.000Z,false,false,15,Miami Dolphins,,17,New England Patriots,
+401873035,2026,8,regular,2026-11-02T01:20:00.000Z,false,false,28,Washington Commanders,,21,Philadelphia Eagles,
+401873036,2026,8,regular,2026-11-03T01:15:00.000Z,false,false,26,Seattle Seahawks,,3,Chicago Bears,
+401873037,2026,9,regular,2026-11-06T01:15:00.000Z,false,false,33,Baltimore Ravens,,30,Jacksonville Jaguars,
+401873038,2026,9,regular,2026-11-08T14:30:00.000Z,true,false,1,Atlanta Falcons,,4,Cincinnati Bengals,
+401873039,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,18,New Orleans Saints,,5,Cleveland Browns,
+401873040,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,11,Indianapolis Colts,,6,Dallas Cowboys,
+401873041,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,29,Carolina Panthers,,7,Denver Broncos,
+401873042,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,15,Miami Dolphins,,8,Detroit Lions,
+401873043,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,28,Washington Commanders,,14,Los Angeles Rams,
+401873044,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,21,Philadelphia Eagles,,19,New York Giants,
+401873045,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,12,Kansas City Chiefs,,20,New York Jets,
+401873046,2026,9,regular,2026-11-08T21:05:00.000Z,false,false,24,Los Angeles Chargers,,34,Houston Texans,
+401873047,2026,9,regular,2026-11-08T21:05:00.000Z,false,false,25,San Francisco 49ers,,13,Las Vegas Raiders,
+401873048,2026,9,regular,2026-11-08T21:25:00.000Z,false,false,26,Seattle Seahawks,,22,Arizona Cardinals,
+401873049,2026,9,regular,2026-11-08T21:25:00.000Z,false,false,17,New England Patriots,,9,Green Bay Packers,
+401873050,2026,9,regular,2026-11-09T01:20:00.000Z,false,false,3,Chicago Bears,,27,Tampa Bay Buccaneers,
+401873051,2026,9,regular,2026-11-10T01:15:00.000Z,false,false,16,Minnesota Vikings,,2,Buffalo Bills,
+401873052,2026,10,regular,2026-11-13T01:15:00.000Z,false,false,19,New York Giants,,28,Washington Commanders,
+401873053,2026,10,regular,2026-11-15T14:30:00.000Z,true,false,8,Detroit Lions,,17,New England Patriots,
+401873054,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,20,New York Jets,,2,Buffalo Bills,
+401873055,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,18,New Orleans Saints,,29,Carolina Panthers,
+401873056,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,5,Cleveland Browns,,34,Houston Texans,
+401873057,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,10,Tennessee Titans,,30,Jacksonville Jaguars,
+401873058,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,1,Atlanta Falcons,,12,Kansas City Chiefs,
+401873059,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,11,Indianapolis Colts,,15,Miami Dolphins,
+401873060,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,9,Green Bay Packers,,16,Minnesota Vikings,
+401873061,2026,10,regular,2026-11-15T21:05:00.000Z,false,false,22,Arizona Cardinals,,14,Los Angeles Rams,
+401873062,2026,10,regular,2026-11-15T21:05:00.000Z,false,false,13,Las Vegas Raiders,,26,Seattle Seahawks,
+401873063,2026,10,regular,2026-11-15T21:25:00.000Z,false,false,6,Dallas Cowboys,,25,San Francisco 49ers,
+401873064,2026,10,regular,2026-11-16T01:20:00.000Z,false,false,4,Cincinnati Bengals,,23,Pittsburgh Steelers,
+401873065,2026,10,regular,2026-11-17T01:15:00.000Z,false,false,33,Baltimore Ravens,,24,Los Angeles Chargers,
+401873066,2026,11,regular,2026-11-20T01:15:00.000Z,false,false,34,Houston Texans,,11,Indianapolis Colts,
+401873067,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,12,Kansas City Chiefs,,22,Arizona Cardinals,
+401873068,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,29,Carolina Panthers,,33,Baltimore Ravens,
+401873069,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,19,New York Giants,,30,Jacksonville Jaguars,
+401873070,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,2,Buffalo Bills,,15,Miami Dolphins,
+401873071,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,3,Chicago Bears,,18,New Orleans Saints,
+401873072,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,8,Detroit Lions,,27,Tampa Bay Buccaneers,
+401873073,2026,11,regular,2026-11-22T18:00:00.000Z,false,false,6,Dallas Cowboys,,10,Tennessee Titans,
+401873074,2026,11,regular,2026-11-22T21:05:00.000Z,false,false,24,Los Angeles Chargers,,20,New York Jets,
+401873075,2026,11,regular,2026-11-22T21:25:00.000Z,false,false,7,Denver Broncos,,13,Las Vegas Raiders,
+401873076,2026,11,regular,2026-11-22T21:25:00.000Z,false,false,21,Philadelphia Eagles,,23,Pittsburgh Steelers,
+401873077,2026,11,regular,2026-11-23T01:20:00.000Z,true,false,25,San Francisco 49ers,,16,Minnesota Vikings,
+401873078,2026,11,regular,2026-11-24T01:15:00.000Z,false,false,28,Washington Commanders,,4,Cincinnati Bengals,
+401873079,2026,12,regular,2026-11-26T01:00:00.000Z,false,false,14,Los Angeles Rams,,9,Green Bay Packers,
+401873080,2026,12,regular,2026-11-26T21:30:00.000Z,false,false,6,Dallas Cowboys,,21,Philadelphia Eagles,
+401873081,2026,12,regular,2026-11-26T18:00:00.000Z,false,false,8,Detroit Lions,,3,Chicago Bears,
+401873082,2026,12,regular,2026-11-27T01:20:00.000Z,false,false,2,Buffalo Bills,,12,Kansas City Chiefs,
+401873083,2026,12,regular,2026-11-27T20:00:00.000Z,false,false,23,Pittsburgh Steelers,,7,Denver Broncos,
+401873084,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,16,Minnesota Vikings,,1,Atlanta Falcons,
+401873085,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,34,Houston Texans,,33,Baltimore Ravens,
+401873086,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,5,Cleveland Browns,,13,Las Vegas Raiders,
+401873087,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,4,Cincinnati Bengals,,18,New Orleans Saints,
+401873088,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,11,Indianapolis Colts,,19,New York Giants,
+401873089,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,15,Miami Dolphins,,20,New York Jets,
+401873090,2026,12,regular,2026-11-29T21:05:00.000Z,false,false,30,Jacksonville Jaguars,,10,Tennessee Titans,
+401873091,2026,12,regular,2026-11-29T21:25:00.000Z,false,false,25,San Francisco 49ers,,26,Seattle Seahawks,
+401873092,2026,12,regular,2026-11-29T21:25:00.000Z,false,false,22,Arizona Cardinals,,28,Washington Commanders,
+401873093,2026,12,regular,2026-11-30T01:20:00.000Z,false,false,24,Los Angeles Chargers,,17,New England Patriots,
+401873094,2026,12,regular,2026-12-01T01:15:00.000Z,false,false,27,Tampa Bay Buccaneers,,29,Carolina Panthers,
+401873095,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,19,New York Giants,,25,San Francisco 49ers,
+401873096,2026,13,regular,2026-12-04T01:15:00.000Z,false,false,14,Los Angeles Rams,,12,Kansas City Chiefs,
+401873097,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,5,Cleveland Browns,,4,Cincinnati Bengals,
+401873098,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,1,Atlanta Falcons,,8,Detroit Lions,
+401873099,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,18,New Orleans Saints,,9,Green Bay Packers,
+401873100,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,3,Chicago Bears,,30,Jacksonville Jaguars,
+401873101,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,27,Tampa Bay Buccaneers,,24,Los Angeles Chargers,
+401873102,2026,13,regular,2026-12-06T18:00:00.000Z,false,false,10,Tennessee Titans,,28,Washington Commanders,
+401873103,2026,13,regular,2026-12-06T21:05:00.000Z,false,false,7,Denver Broncos,,15,Miami Dolphins,
+401873104,2026,13,regular,2026-12-06T21:05:00.000Z,false,false,22,Arizona Cardinals,,21,Philadelphia Eagles,
+401873105,2026,13,regular,2026-12-06T21:25:00.000Z,false,false,17,New England Patriots,,2,Buffalo Bills,
+401873106,2026,13,regular,2026-12-06T21:25:00.000Z,false,false,16,Minnesota Vikings,,29,Carolina Panthers,
+401873107,2026,13,regular,2026-12-07T01:20:00.000Z,false,false,23,Pittsburgh Steelers,,34,Houston Texans,
+401873108,2026,13,regular,2026-12-08T01:15:00.000Z,false,false,26,Seattle Seahawks,,6,Dallas Cowboys,
+401873109,2026,14,regular,2026-12-11T01:15:00.000Z,false,false,17,New England Patriots,,16,Minnesota Vikings,
+401873110,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,5,Cleveland Browns,,1,Atlanta Falcons,
+401873111,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,15,Miami Dolphins,,3,Chicago Bears,
+401873112,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,20,New York Jets,,7,Denver Broncos,
+401873113,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,28,Washington Commanders,,34,Houston Texans,
+401873114,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,21,Philadelphia Eagles,,11,Indianapolis Colts,
+401873115,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,29,Carolina Panthers,,18,New Orleans Saints,
+401873116,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,33,Baltimore Ravens,,27,Tampa Bay Buccaneers,
+401873117,2026,14,regular,2026-12-13T18:00:00.000Z,false,false,8,Detroit Lions,,10,Tennessee Titans,
+401873118,2026,14,regular,2026-12-13T21:05:00.000Z,false,false,13,Las Vegas Raiders,,24,Los Angeles Chargers,
+401873119,2026,14,regular,2026-12-13T21:25:00.000Z,false,false,4,Cincinnati Bengals,,12,Kansas City Chiefs,
+401873120,2026,14,regular,2026-12-13T21:25:00.000Z,false,false,25,San Francisco 49ers,,14,Los Angeles Rams,
+401873121,2026,14,regular,2026-12-13T21:25:00.000Z,false,false,26,Seattle Seahawks,,19,New York Giants,
+401873122,2026,14,regular,2026-12-14T01:20:00.000Z,false,false,9,Green Bay Packers,,2,Buffalo Bills,
+401873123,2026,14,regular,2026-12-15T01:15:00.000Z,false,false,30,Jacksonville Jaguars,,23,Pittsburgh Steelers,
+401873124,2026,15,regular,2026-12-18T01:15:00.000Z,false,false,24,Los Angeles Chargers,,25,San Francisco 49ers,
+401873125,2026,15,regular,2026-12-19T22:00:00.000Z,false,false,21,Philadelphia Eagles,,26,Seattle Seahawks,
+401873126,2026,15,regular,2026-12-20T01:20:00.000Z,false,false,2,Buffalo Bills,,3,Chicago Bears,
+401873127,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,28,Washington Commanders,,1,Atlanta Falcons,
+401873128,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,23,Pittsburgh Steelers,,33,Baltimore Ravens,
+401873129,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,29,Carolina Panthers,,4,Cincinnati Bengals,
+401873130,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,19,New York Giants,,5,Cleveland Browns,
+401873131,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,10,Tennessee Titans,,11,Indianapolis Colts,
+401873132,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,34,Houston Texans,,30,Jacksonville Jaguars,
+401873133,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,9,Green Bay Packers,,15,Miami Dolphins,
+401873134,2026,15,regular,2026-12-20T18:00:00.000Z,false,false,27,Tampa Bay Buccaneers,,18,New Orleans Saints,
+401873135,2026,15,regular,2026-12-20T21:05:00.000Z,false,false,22,Arizona Cardinals,,20,New York Jets,
+401873136,2026,15,regular,2026-12-20T21:25:00.000Z,false,false,14,Los Angeles Rams,,6,Dallas Cowboys,
+401873137,2026,15,regular,2026-12-20T21:25:00.000Z,false,false,13,Las Vegas Raiders,,7,Denver Broncos,
+401873138,2026,15,regular,2026-12-21T01:20:00.000Z,false,false,16,Minnesota Vikings,,8,Detroit Lions,
+401873139,2026,15,regular,2026-12-22T01:15:00.000Z,false,false,12,Kansas City Chiefs,,17,New England Patriots,
+401873140,2026,16,regular,2026-12-25T01:15:00.000Z,false,false,21,Philadelphia Eagles,,34,Houston Texans,
+401873141,2026,16,regular,2026-12-25T18:00:00.000Z,false,false,3,Chicago Bears,,9,Green Bay Packers,
+401873142,2026,16,regular,2026-12-25T21:30:00.000Z,false,false,7,Denver Broncos,,2,Buffalo Bills,
+401873143,2026,16,regular,2026-12-26T01:15:00.000Z,false,false,26,Seattle Seahawks,,14,Los Angeles Rams,
+401873144,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,23,Pittsburgh Steelers,,29,Carolina Panthers,
+401873145,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,11,Indianapolis Colts,,4,Cincinnati Bengals,
+401873146,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,1,Atlanta Falcons,,27,Tampa Bay Buccaneers,
+401873147,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,16,Minnesota Vikings,,28,Washington Commanders,
+401873148,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,18,New Orleans Saints,,22,Arizona Cardinals,
+401873149,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,33,Baltimore Ravens,,5,Cleveland Browns,
+401873150,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,15,Miami Dolphins,,24,Los Angeles Chargers,
+401873151,2026,16,regular,2026-12-27T18:00:00.000Z,false,false,20,New York Jets,,17,New England Patriots,
+401873152,2026,16,regular,2026-12-27T21:05:00.000Z,false,false,13,Las Vegas Raiders,,10,Tennessee Titans,
+401873153,2026,16,regular,2026-12-27T21:25:00.000Z,false,false,12,Kansas City Chiefs,,25,San Francisco 49ers,
+401873154,2026,16,regular,2026-12-28T01:20:00.000Z,false,false,6,Dallas Cowboys,,30,Jacksonville Jaguars,
+401873155,2026,16,regular,2026-12-29T01:15:00.000Z,false,false,8,Detroit Lions,,19,New York Giants,
+401873156,2026,17,regular,2027-01-01T01:15:00.000Z,false,false,4,Cincinnati Bengals,,33,Baltimore Ravens,
+401873157,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,17,New England Patriots,,7,Denver Broncos,
+401873158,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,24,Los Angeles Chargers,,12,Kansas City Chiefs,
+401873159,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,27,Tampa Bay Buccaneers,,14,Los Angeles Rams,
+401873160,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,30,Jacksonville Jaguars,,28,Washington Commanders,
+401873161,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,15,Miami Dolphins,,2,Buffalo Bills,
+401873162,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,5,Cleveland Browns,,11,Indianapolis Colts,
+401873163,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,20,New York Jets,,16,Minnesota Vikings,
+401873164,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,1,Atlanta Falcons,,18,New Orleans Saints,
+401873165,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,6,Dallas Cowboys,,19,New York Giants,
+401873166,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,10,Tennessee Titans,,23,Pittsburgh Steelers,
+401873167,2026,17,regular,2027-01-03T18:00:00.000Z,false,false,29,Carolina Panthers,,26,Seattle Seahawks,
+401873168,2026,17,regular,2027-01-03T21:05:00.000Z,false,false,22,Arizona Cardinals,,13,Las Vegas Raiders,
+401873169,2026,17,regular,2027-01-03T21:25:00.000Z,false,false,3,Chicago Bears,,8,Detroit Lions,
+401873170,2026,17,regular,2027-01-04T01:20:00.000Z,false,false,25,San Francisco 49ers,,21,Philadelphia Eagles,
+401873171,2026,17,regular,2027-01-05T01:15:00.000Z,false,false,9,Green Bay Packers,,34,Houston Texans,
+401873172,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,29,Carolina Panthers,,1,Atlanta Falcons,
+401873173,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,16,Minnesota Vikings,,3,Chicago Bears,
+401873174,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,4,Cincinnati Bengals,,5,Cleveland Browns,
+401873175,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,28,Washington Commanders,,6,Dallas Cowboys,
+401873176,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,9,Green Bay Packers,,8,Detroit Lions,
+401873177,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,11,Indianapolis Colts,,30,Jacksonville Jaguars,
+401873178,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,12,Kansas City Chiefs,,13,Las Vegas Raiders,
+401873179,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,7,Denver Broncos,,24,Los Angeles Chargers,
+401873180,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,17,New England Patriots,,15,Miami Dolphins,
+401873181,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,2,Buffalo Bills,,20,New York Jets,
+401873182,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,19,New York Giants,,21,Philadelphia Eagles,
+401873183,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,33,Baltimore Ravens,,23,Pittsburgh Steelers,
+401873184,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,22,Arizona Cardinals,,25,San Francisco 49ers,
+401873185,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,14,Los Angeles Rams,,26,Seattle Seahawks,
+401873186,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,18,New Orleans Saints,,27,Tampa Bay Buccaneers,
+401873187,2026,18,regular,2027-01-10T18:00:00.000Z,false,false,34,Houston Texans,,10,Tennessee Titans,

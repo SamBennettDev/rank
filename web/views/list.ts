@@ -217,22 +217,30 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
               draw();
             },
           },
-          h("option", { value: "" }, "All conferences"),
+          h(
+            "option",
+            { value: "" },
+            ctx.entry.league ? "All divisions" : "All conferences",
+          ),
           ...conferencesByStrength(field).map((c) =>
             h("option", { value: c.name }, `${c.name} · ${c.avg.toFixed(2)}`),
           ),
         ),
       ),
-      segment(
-        "Division",
-        DIVISIONS,
-        () => division,
-        (v) => {
-          division = v;
-          draw();
-        },
-        "division",
-      ),
+      ...(ctx.entry.league
+        ? []
+        : [
+            segment(
+              "Division",
+              DIVISIONS,
+              () => division,
+              (v) => {
+                division = v;
+                draw();
+              },
+              "division",
+            ),
+          ]),
       segment(
         "Ranking board",
         BOARDS,

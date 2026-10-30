@@ -73,7 +73,11 @@ export function aboutView(ctx: Ctx): HTMLElement {
     ["Quality scale", String(m.springs.qualityScale)],
     ["Matchup calibration", m.matchup.calibrationId],
     ["Matchup win premium", `${m.matchup.winBonus} points`],
-    ["Matchup FBS–FCS starting gap", `${m.matchup.divisionGap} points`],
+    ...(ctx.entry.league
+      ? []
+      : ([
+          ["Matchup FBS–FCS starting gap", `${m.matchup.divisionGap} points`],
+        ] as [string, string][])),
     ["Matchup team shrink", String(m.matchup.shrink)],
     ["Matchup home-field shrink", String(m.matchup.homeFieldShrink)],
     [
@@ -156,12 +160,16 @@ export function aboutView(ctx: Ctx): HTMLElement {
       h(
         "p",
         {},
-        "Home field and head-to-head play no part. Every team starts the season at 0. No polls, preseason, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count too.",
+        ctx.entry.league
+          ? "Home field and head-to-head play no part. Every team starts the season at 0. No polls, preseason or reputation: only the games played."
+          : "Home field and head-to-head play no part. Every team starts the season at 0. No polls, preseason, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count too.",
       ),
       h(
         "p",
         { class: "muted" },
-        "On 2014–2019, the quality ranking picks 70.4% of next week’s winners and the final ranking has the winner above the loser in 83.1% of games; on 2021–2026, 69.2% and 82.7%. The matchup odds come from a separate, calibrated margin model.",
+        ctx.entry.league
+          ? "The settings were chosen on college football (2014–2019) and are reused for the NFL unchanged; they have not been tuned or backtested on NFL games. The matchup odds come from a separate margin model that is likewise uncalibrated for the NFL."
+          : "On 2014–2019, the quality ranking picks 70.4% of next week’s winners and the final ranking has the winner above the loser in 83.1% of games; on 2021–2026, 69.2% and 82.7%. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     details(

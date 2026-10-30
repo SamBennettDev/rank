@@ -30,6 +30,11 @@ export function makeCtx(base: Omit<Ctx, "edges" | "byId" | "ranked">): Ctx {
     ranked: base.ranking.teams.filter((t) => t.rank !== null),
   };
 }
+/** What the season picker shows: "2026" for college football, "NFL 2026" for the NFL. */
+export const seasonLabel = (e: SeasonIndexEntry) =>
+  e.league === "nfl" ? `NFL ${e.season.replace(/^nfl-/, "")}` : e.season;
+export const postseasonName = (e: SeasonIndexEntry) =>
+  e.league === "nfl" ? "Playoffs" : "Bowls";
 export const href = (
   season: string,
   snap: string,

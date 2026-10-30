@@ -81,6 +81,10 @@ docs/        full methodology
 
 MIT
 
+## NFL
+
+The NFL is ranked with the same engine as its own season (`data/seasons/nfl-<year>`), picked from the season selector. `npm run fetch-nfl -- 2026` pulls results from nflverse's public schedule file (no key needed). Settings are carried over from college football and have not been tuned on NFL games, and there are no play-by-play unit ratings for the NFL.
+
 ## Hourly updates
 
 GitHub's own `schedule` trigger is best-effort and often runs hours late, so a Cloudflare Worker (`cloudflare/trigger`) starts the **Update data** workflow every hour. One-time setup:
