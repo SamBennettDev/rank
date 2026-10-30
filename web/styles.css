@@ -79,6 +79,9 @@ body[data-view="graph"] .bar-inner { max-width: none; }
 .sel.week:focus-within .face { outline: 2px solid var(--brand); outline-offset: 1px; }
 .sel.week .short { display: none; }
 .sel.week select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.leagues { display: flex; padding: 2px; gap: 2px; background: var(--surface-3); border-radius: 10px; }
+.leagues button { height: 30px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font: 700 13px var(--display); letter-spacing: .08em; cursor: pointer; }
+.leagues button.on { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
 .season-tag { font: 700 15px var(--display); letter-spacing: .06em; color: var(--muted); padding: 0 6px; }
 .sel { position: relative; }
 .sel::after { content: ""; position: absolute; right: 12px; top: 50%; width: 6px; height: 6px; border: solid var(--muted); border-width: 0 1.5px 1.5px 0; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
@@ -434,6 +437,7 @@ body[data-view="graph"] .foot { display: none; }
   #nav { gap: 0; }
   #nav a { width: 34px; height: 34px; }
   .picker { gap: 6px; }
+  .leagues button { padding: 0 8px; font-size: 12px; }
   .picker .sel.season, .season-tag, .step { display: none; }
   .sel.week .face { padding: 0 26px 0 10px; font-size: 13.5px; }
   .sel.week::after { right: 10px; }

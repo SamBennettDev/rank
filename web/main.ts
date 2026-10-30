@@ -75,6 +75,42 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       view,
       view === "team" ? teamId : undefined,
     ));
+  // College football and the NFL switch from the header at every screen width.
+  const leagueOf = (x: SeasonIndexEntry) => x.league ?? "cfb";
+  const here = leagueOf(ctx.entry);
+  const leagues = [...new Set(seasons.map(leagueOf))].sort();
+  const leagueSwitch =
+    leagues.length > 1
+      ? h(
+          "div",
+          { class: "leagues", role: "group", "aria-label": "League" },
+          ...leagues.map((lg) =>
+            h(
+              "button",
+              {
+                class: lg === here ? "on" : "",
+                "aria-pressed": lg === here,
+                onclick: () => {
+                  if (lg === here) return;
+                  const next = seasons
+                    .filter((x) => leagueOf(x) === lg && x.snapshots.length > 0)
+                    .at(-1);
+                  if (next)
+                    go(
+                      next.season,
+                      (
+                        next.snapshots.find((x) => x.id === ctx.snapId) ??
+                        next.snapshots.at(-1)!
+                      ).id,
+                    );
+                },
+              },
+              lg === "nfl" ? "NFL" : "CFB",
+            ),
+          ),
+        )
+      : null;
+  const sameLeague = seasons.filter((x) => leagueOf(x) === here);
   const seasonSel = h(
     "select",
     {
@@ -92,7 +128,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
         );
       },
     },
-    ...seasons.map((x) =>
+    ...sameLeague.map((x) =>
       h(
         "option",
         { value: x.season, selected: x.season === s },
@@ -146,7 +182,8 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
     weekSel,
   );
   picker.replaceChildren(
-    seasons.length > 1
+    ...(leagueSwitch ? [leagueSwitch] : []),
+    sameLeague.length > 1
       ? h("div", { class: "sel season" }, seasonSel)
       : h("span", { class: "season-tag" }, seasonLabel(ctx.entry)),
     h("div", { class: "weekpick" }, step(-1), weekFace, step(1)),
