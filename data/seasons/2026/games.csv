@@ -583,7 +583,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401862809,2026,8,regular,2026-10-24T16:00:00.000Z,false,true,2226,Florida Atlantic,51,242,Rice,49
 401862810,2026,8,regular,2026-10-24T19:30:00.000Z,false,true,2426,Navy,39,249,North Texas,49
 401862811,2026,8,regular,2026-10-25T00:00:00.000Z,false,true,2655,Tulane,19,2636,UTSA,42
-401862812,2026,9,regular,2026-10-29T23:30:00.000Z,false,false,249,North Texas,,2226,Florida Atlantic,
+401862812,2026,9,regular,2026-10-29T23:30:00.000Z,false,true,249,North Texas,48,2226,Florida Atlantic,41
 401862813,2026,9,regular,2026-10-30T23:00:00.000Z,false,false,2429,Charlotte,,2655,Tulane,
 401862814,2026,9,regular,2026-11-01T00:00:00.000Z,false,false,235,Memphis,,349,Army,
 401862815,2026,9,regular,2026-10-31T19:00:00.000Z,false,false,151,East Carolina,,218,Temple,
@@ -997,7 +997,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401867966,2026,2,regular,2026-09-12T22:00:00.000Z,false,true,2415,Morgan State,55,2355,Virginia Lynchburg,0
 401867967,2026,5,regular,2026-10-03T17:00:00.000Z,false,true,222,Villanova,35,2415,Morgan State,38
 401867968,2026,7,regular,2026-10-17T22:30:00.000Z,false,true,2634,Tennessee State,25,2415,Morgan State,16
-401867969,2026,9,regular,2026-10-29T23:00:00.000Z,false,false,2415,Morgan State,,2569,South Carolina State,
+401867969,2026,9,regular,2026-10-29T23:00:00.000Z,false,true,2415,Morgan State,10,2569,South Carolina State,51
 401867970,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,2415,Morgan State,,2450,Norfolk State,
 401867971,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,2428,North Carolina Central,,2415,Morgan State,
 401867972,2026,1,regular,2026-08-29T22:00:00.000Z,false,true,2450,Norfolk State,56,2736,Winston-Salem State,0
@@ -1513,7 +1513,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401869960,2026,1,regular,2026-09-05T16:00:00.000Z,false,true,256,James Madison,20,2335,Liberty,13
 401869961,2026,4,regular,2026-09-26T22:00:00.000Z,false,true,295,Old Dominion,20,256,James Madison,46
 401869962,2026,5,regular,2026-10-03T19:45:00.000Z,false,true,256,James Madison,45,276,Marshall,17
-401869963,2026,9,regular,2026-10-29T23:30:00.000Z,false,false,256,James Madison,,2653,Troy,
+401869963,2026,9,regular,2026-10-29T23:30:00.000Z,false,true,256,James Madison,21,2653,Troy,24
 401869964,2026,10,regular,2026-11-06T01:00:00.000Z,false,false,2572,Southern Miss,,256,James Madison,
 401869965,2026,6,regular,2026-10-10T23:30:00.000Z,false,true,2348,Louisiana Tech,32,309,Louisiana,31
 401869966,2026,7,regular,2026-10-17T21:00:00.000Z,false,true,309,Louisiana,33,2653,Troy,6
