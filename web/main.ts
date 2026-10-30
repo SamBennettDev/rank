@@ -95,14 +95,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
                   const next = seasons
                     .filter((x) => leagueOf(x) === lg && x.snapshots.length > 0)
                     .at(-1);
-                  if (next)
-                    go(
-                      next.season,
-                      (
-                        next.snapshots.find((x) => x.id === ctx.snapId) ??
-                        next.snapshots.at(-1)!
-                      ).id,
-                    );
+                  if (next) go(next.season, next.snapshots.at(-1)!.id);
                 },
               },
               lg === "nfl" ? "NFL" : "CFB",
