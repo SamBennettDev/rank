@@ -28,8 +28,8 @@
       "fcs"
     ],
     "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
-    "gamesSha256": "519856b8ddc9ff6d7281783eeb01a4d652bb49228be59d04ed21fb62f81bbe64",
-    "playsSha256": "7ef06f5891cd40d9701ee90b8e8c9b0f3476efd28ad7f0826f2de3d07939615f",
+    "gamesSha256": "ca91a2ab122d7140bf66338397b9f439767cd6b0043ee9fc8c438a128f8efb66",
+    "playsSha256": "33c6fc546a34348588ac2be69589f328c1b1d42f3c95a54e2d0a11478cd1e079",
     "snapsPerGame": 59.9375,
     "counts": {
       "inWindow": 76,
