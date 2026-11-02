@@ -107,17 +107,17 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873021,2026,7,regular,2026-10-25T20:25:00.000Z,false,true,13,Las Vegas Raiders,21,14,Los Angeles Rams,35
 401873022,2026,7,regular,2026-10-26T00:20:00.000Z,false,true,26,Seattle Seahawks,20,12,Kansas City Chiefs,3
 401873023,2026,8,regular,2026-10-30T00:15:00.000Z,false,true,9,Green Bay Packers,27,29,Carolina Panthers,19
-401873024,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,6,Dallas Cowboys,,22,Arizona Cardinals,
-401873025,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,27,Tampa Bay Buccaneers,,1,Atlanta Falcons,
-401873026,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,2,Buffalo Bills,,33,Baltimore Ravens,
-401873027,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,23,Pittsburgh Steelers,,5,Cleveland Browns,
-401873028,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,30,Jacksonville Jaguars,,11,Indianapolis Colts,
-401873029,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,20,New York Jets,,13,Las Vegas Raiders,
-401873030,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,8,Detroit Lions,,16,Minnesota Vikings,
-401873031,2026,8,regular,2026-11-01T18:00:00.000Z,false,false,4,Cincinnati Bengals,,10,Tennessee Titans,
-401873032,2026,8,regular,2026-11-01T21:05:00.000Z,false,false,14,Los Angeles Rams,,24,Los Angeles Chargers,
-401873033,2026,8,regular,2026-11-01T21:25:00.000Z,false,false,7,Denver Broncos,,12,Kansas City Chiefs,
-401873034,2026,8,regular,2026-11-01T21:25:00.000Z,false,false,15,Miami Dolphins,,17,New England Patriots,
+401873024,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,6,Dallas Cowboys,30,22,Arizona Cardinals,33
+401873025,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,27,Tampa Bay Buccaneers,16,1,Atlanta Falcons,0
+401873026,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,2,Buffalo Bills,36,33,Baltimore Ravens,10
+401873027,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,23,Pittsburgh Steelers,27,5,Cleveland Browns,6
+401873028,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,30,Jacksonville Jaguars,42,11,Indianapolis Colts,7
+401873029,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,20,New York Jets,33,13,Las Vegas Raiders,38
+401873030,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,8,Detroit Lions,19,16,Minnesota Vikings,15
+401873031,2026,8,regular,2026-11-01T18:00:00.000Z,false,true,4,Cincinnati Bengals,43,10,Tennessee Titans,36
+401873032,2026,8,regular,2026-11-01T21:05:00.000Z,false,true,14,Los Angeles Rams,24,24,Los Angeles Chargers,9
+401873033,2026,8,regular,2026-11-01T21:25:00.000Z,false,true,7,Denver Broncos,28,12,Kansas City Chiefs,24
+401873034,2026,8,regular,2026-11-01T21:25:00.000Z,false,true,15,Miami Dolphins,19,17,New England Patriots,24
 401873035,2026,8,regular,2026-11-02T01:20:00.000Z,false,false,28,Washington Commanders,,21,Philadelphia Eagles,
 401873036,2026,8,regular,2026-11-03T01:15:00.000Z,false,false,26,Seattle Seahawks,,3,Chicago Bears,
 401873037,2026,9,regular,2026-11-06T01:15:00.000Z,false,false,33,Baltimore Ravens,,30,Jacksonville Jaguars,
