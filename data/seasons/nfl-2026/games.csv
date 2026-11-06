@@ -120,7 +120,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873034,2026,8,regular,2026-11-01T21:25:00.000Z,false,true,15,Miami Dolphins,19,17,New England Patriots,24
 401873035,2026,8,regular,2026-11-02T01:20:00.000Z,false,true,28,Washington Commanders,27,21,Philadelphia Eagles,10
 401873036,2026,8,regular,2026-11-03T01:15:00.000Z,false,true,26,Seattle Seahawks,17,3,Chicago Bears,34
-401873037,2026,9,regular,2026-11-06T01:15:00.000Z,false,false,33,Baltimore Ravens,,30,Jacksonville Jaguars,
+401873037,2026,9,regular,2026-11-06T01:15:00.000Z,false,true,33,Baltimore Ravens,10,30,Jacksonville Jaguars,33
 401873038,2026,9,regular,2026-11-08T14:30:00.000Z,true,false,1,Atlanta Falcons,,4,Cincinnati Bengals,
 401873039,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,18,New Orleans Saints,,5,Cleveland Browns,
 401873040,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,11,Indianapolis Colts,,6,Dallas Cowboys,
