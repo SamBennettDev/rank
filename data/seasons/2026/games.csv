@@ -197,7 +197,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401856852,2026,10,regular,2026-11-08T00:30:00.000Z,false,false,9,Arizona State,,38,Colorado,
 401856853,2026,10,regular,2026-11-07T17:00:00.000Z,false,false,239,Baylor,,66,Iowa State,
 401856854,2026,10,regular,2026-11-07T18:00:00.000Z,false,false,2306,Kansas State,,197,Oklahoma State,
-401856855,2026,10,regular,2026-11-07T03:15:00.000Z,false,false,12,Arizona,,2628,TCU,
+401856855,2026,10,regular,2026-11-07T03:15:00.000Z,false,true,12,Arizona,29,2628,TCU,28
 401856856,2026,10,regular,2026-11-08T02:30:00.000Z,false,false,2641,Texas Tech,,277,West Virginia,
 401856857,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2116,UCF,,9,Arizona State,
 401856858,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,252,BYU,,239,Baylor,
@@ -1086,7 +1086,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868065,2026,6,regular,2026-10-10T23:00:00.000Z,false,true,2046,Austin Peay,32,2627,Tarleton State,40
 401868066,2026,7,regular,2026-10-17T18:00:00.000Z,false,true,2698,West Georgia,10,2046,Austin Peay,24
 401868067,2026,8,regular,2026-10-24T23:00:00.000Z,false,true,2453,North Alabama,21,2046,Austin Peay,27
-401868068,2026,10,regular,2026-11-07T22:00:00.000Z,false,false,2046,Austin Peay,,2198,Eastern Kentucky,
+401868068,2026,10,regular,2026-11-07T21:00:00.000Z,false,false,2046,Austin Peay,,2198,Eastern Kentucky,
 401868069,2026,12,regular,2026-11-21T22:00:00.000Z,false,false,2110,Central Arkansas,,2046,Austin Peay,
 401868070,2026,1,regular,2026-08-27T23:30:00.000Z,false,true,2630,UT Martin,24,2110,Central Arkansas,36
 401868071,2026,1,regular,2026-09-05T23:00:00.000Z,false,true,2110,Central Arkansas,14,110242,West Florida,42
