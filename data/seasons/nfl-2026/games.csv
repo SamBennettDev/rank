@@ -121,11 +121,11 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873035,2026,8,regular,2026-11-02T01:20:00.000Z,false,true,28,Washington Commanders,27,21,Philadelphia Eagles,10
 401873036,2026,8,regular,2026-11-03T01:15:00.000Z,false,true,26,Seattle Seahawks,17,3,Chicago Bears,34
 401873037,2026,9,regular,2026-11-06T01:15:00.000Z,false,true,33,Baltimore Ravens,10,30,Jacksonville Jaguars,33
-401873038,2026,9,regular,2026-11-08T14:30:00.000Z,true,false,1,Atlanta Falcons,,4,Cincinnati Bengals,
+401873038,2026,9,regular,2026-11-08T14:30:00.000Z,true,true,1,Atlanta Falcons,17,4,Cincinnati Bengals,34
 401873039,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,18,New Orleans Saints,,5,Cleveland Browns,
 401873040,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,11,Indianapolis Colts,,6,Dallas Cowboys,
 401873041,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,29,Carolina Panthers,,7,Denver Broncos,
-401873042,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,15,Miami Dolphins,,8,Detroit Lions,
+401873042,2026,9,regular,2026-11-08T18:00:00.000Z,false,true,15,Miami Dolphins,9,8,Detroit Lions,19
 401873043,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,28,Washington Commanders,,14,Los Angeles Rams,
 401873044,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,21,Philadelphia Eagles,,19,New York Giants,
 401873045,2026,9,regular,2026-11-08T18:00:00.000Z,false,false,12,Kansas City Chiefs,,20,New York Jets,
