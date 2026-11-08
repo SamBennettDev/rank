@@ -443,7 +443,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401858516,2026,10,regular,2026-11-07T20:30:00.000Z,false,true,264,Washington,25,213,Penn State,28
 401858517,2026,10,regular,2026-11-07T21:15:00.000Z,false,true,275,Wisconsin,31,164,Rutgers,10
 401858518,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,84,Indiana,,30,USC,
-401858519,2026,11,regular,2026-11-14T05:00:00.000Z,false,false,2294,Iowa,,2509,Purdue,
+401858519,2026,11,regular,2026-11-15T00:30:00.000Z,false,false,2294,Iowa,,2509,Purdue,
 401858520,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,120,Maryland,,275,Wisconsin,
 401858521,2026,11,regular,2026-11-14T21:15:00.000Z,false,false,127,Michigan State,,264,Washington,
 401858522,2026,11,regular,2026-11-14T17:00:00.000Z,false,false,194,Ohio State,,77,Northwestern,
@@ -505,7 +505,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401860909,2026,9,regular,2026-10-31T23:00:00.000Z,false,true,21,San Diego State,26,265,Washington State,20
 401860910,2026,9,regular,2026-10-31T19:30:00.000Z,false,true,328,Utah State,31,36,Colorado State,14
 401860911,2026,10,regular,2026-11-07T23:00:00.000Z,false,true,36,Colorado State,38,68,Boise State,64
-401860912,2026,10,regular,2026-11-08T03:30:00.000Z,false,false,204,Oregon State,,326,Texas State,
+401860912,2026,10,regular,2026-11-08T03:30:00.000Z,false,true,204,Oregon State,21,326,Texas State,42
 401860913,2026,10,regular,2026-11-08T02:30:00.000Z,false,true,328,Utah State,17,278,Fresno State,10
 401860914,2026,11,regular,2026-11-14T23:00:00.000Z,false,false,68,Boise State,,204,Oregon State,
 401860915,2026,11,regular,2026-11-15T02:30:00.000Z,false,false,21,San Diego State,,328,Utah State,
@@ -660,7 +660,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401864532,2026,10,regular,2026-11-08T02:30:00.000Z,false,true,2638,UTEP,14,62,Hawai'i,17
 401864533,2026,10,regular,2026-11-07T02:00:00.000Z,false,true,2440,Nevada,3,167,New Mexico,31
 401864534,2026,10,regular,2026-11-07T21:00:00.000Z,false,true,23,San José State,30,2459,Northern Illinois,19
-401864535,2026,10,regular,2026-11-08T03:30:00.000Z,false,false,2439,UNLV,,2751,Wyoming,
+401864535,2026,10,regular,2026-11-08T03:30:00.000Z,false,true,2439,UNLV,35,2751,Wyoming,41
 401864536,2026,11,regular,2026-11-14T20:30:00.000Z,false,false,2459,Northern Illinois,,2440,Nevada,
 401864537,2026,11,regular,2026-11-15T04:00:00.000Z,false,false,62,Hawai'i,,2449,North Dakota State,
 401864538,2026,11,regular,2026-11-15T00:00:00.000Z,false,false,2005,Air Force,,23,San José State,
@@ -741,13 +741,13 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401866460,2026,11,regular,2026-11-11T01:00:00.000Z,false,false,193,Miami (OH),,195,Ohio,
 401866461,2026,11,regular,2026-11-12T00:30:00.000Z,false,false,2050,Ball State,,2084,Buffalo,
 401866462,2026,11,regular,2026-11-12T00:30:00.000Z,false,false,2117,Central Michigan,,16,Sacramento State,
-401866463,2026,11,regular,2026-11-11T05:00:00.000Z,false,false,2649,Toledo,,113,Massachusetts,
+401866463,2026,11,regular,2026-11-12T00:30:00.000Z,false,false,2649,Toledo,,113,Massachusetts,
 401866464,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,195,Ohio,,2050,Ball State,
 401866465,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,2711,Western Michigan,,2199,Eastern Michigan,
 401866466,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,2309,Kent State,,193,Miami (OH),
 401866467,2026,12,regular,2026-11-18T05:00:00.000Z,false,false,113,Massachusetts,,2006,Akron,
 401866468,2026,12,regular,2026-11-21T00:30:00.000Z,false,false,2649,Toledo,,189,Bowling Green,
-401866469,2026,12,regular,2026-11-18T05:00:00.000Z,false,false,2084,Buffalo,,2117,Central Michigan,
+401866469,2026,12,regular,2026-11-19T00:30:00.000Z,false,false,2084,Buffalo,,2117,Central Michigan,
 401866470,2026,13,regular,2026-11-25T00:00:00.000Z,false,false,2199,Eastern Michigan,,2309,Kent State,
 401866471,2026,13,regular,2026-11-24T05:00:00.000Z,false,false,2711,Western Michigan,,193,Miami (OH),
 401866472,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,2006,Akron,,2084,Buffalo,
