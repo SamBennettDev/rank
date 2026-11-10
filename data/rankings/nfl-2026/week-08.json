@@ -27,7 +27,7 @@
       "nfl"
     ],
     "teamsSha256": "ef1d4955ed8845b4a298a45b834267d66a843afe598bd99760de8ad5c19ed5db",
-    "gamesSha256": "b2e3a56b113231f516288de1ab2e009a087511a1133eb94dfa1471507146c331",
+    "gamesSha256": "2348dfe6af500d98f6c8a178ce5f1cb8a3d951d2d09f5b166e863b984c31b45e",
     "playsSha256": null,
     "snapsPerGame": null,
     "counts": {
@@ -52,7 +52,7 @@
     {"gameId":401873044,"home":21,"away":19,"startDate":"2026-11-08T18:00:00.000Z","neutralSite":false,"strengthEdge":-5.803904,"homeProbability":0.387188,"provisional":false},
     {"gameId":401873045,"home":12,"away":20,"startDate":"2026-11-08T18:00:00.000Z","neutralSite":false,"strengthEdge":9.14955,"homeProbability":0.673677,"provisional":false},
     {"gameId":401873046,"home":24,"away":34,"startDate":"2026-11-08T21:05:00.000Z","neutralSite":false,"strengthEdge":-7.072616,"homeProbability":0.36397,"provisional":false},
-    {"gameId":401873047,"home":25,"away":13,"startDate":"2026-11-08T21:05:00.000Z","neutralSite":false,"strengthEdge":10.459814,"homeProbability":0.696564,"provisional":false},
+    {"gameId":401873047,"home":25,"away":13,"startDate":"2026-11-08T21:25:00.000Z","neutralSite":false,"strengthEdge":10.459814,"homeProbability":0.696564,"provisional":false},
     {"gameId":401873048,"home":26,"away":22,"startDate":"2026-11-08T21:25:00.000Z","neutralSite":false,"strengthEdge":13.286001,"homeProbability":0.743046,"provisional":false},
     {"gameId":401873049,"home":17,"away":9,"startDate":"2026-11-08T21:25:00.000Z","neutralSite":false,"strengthEdge":4.402482,"homeProbability":0.586634,"provisional":false},
     {"gameId":401873050,"home":3,"away":27,"startDate":"2026-11-09T01:20:00.000Z","neutralSite":false,"strengthEdge":3.166325,"homeProbability":0.56261,"provisional":false},
