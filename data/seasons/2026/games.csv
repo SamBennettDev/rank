@@ -456,7 +456,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401858529,2026,12,regular,2026-11-21T01:00:00.000Z,false,false,127,Michigan State,,2483,Oregon,
 401858530,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,135,Minnesota,,77,Northwestern,
 401858531,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,158,Nebraska,,194,Ohio State,
-401858532,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,213,Penn State,,164,Rutgers,
+401858532,2026,12,regular,2026-11-21T20:30:00.000Z,false,false,213,Penn State,,164,Rutgers,
 401858533,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2509,Purdue,,275,Wisconsin,
 401858534,2026,12,regular,2026-11-21T23:15:00.000Z,false,false,30,USC,,120,Maryland,
 401858535,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,264,Washington,,84,Indiana,
