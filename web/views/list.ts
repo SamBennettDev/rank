@@ -9,8 +9,8 @@ type Board = "quality" | "resume" | "schedule";
 type Division = "all" | "fbs" | "fcs";
 
 const BOARDS: [Board, string][] = [
-  ["quality", "Quality"],
   ["resume", "Résumé"],
+  ["quality", "Quality"],
   ["schedule", "Schedule"],
 ];
 const DIVISIONS: [Division, string][] = [
@@ -109,7 +109,7 @@ function conferencesByStrength(teams: RankedTeam[]) {
 
 export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
   let query = "",
-    board: Board = "quality",
+    board: Board = "resume",
     division: Division = "all",
     conference = "";
   const field = ctx.ranking.teams;
@@ -136,15 +136,15 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
       h("span", { class: "hr-conf" }, shortConf(t.conference)),
       h(
         "span",
-        { class: `hr-col${board === "quality" ? " on" : ""}` },
-        fmt2(t.height),
-        h("small", {}, rankLabel(t.rank, t.tied)),
-      ),
-      h(
-        "span",
         { class: `hr-col${board === "resume" ? " on" : ""}` },
         fmtHeight(t.resume, 2),
         h("small", {}, t.resumeRank ?? "—"),
+      ),
+      h(
+        "span",
+        { class: `hr-col${board === "quality" ? " on" : ""}` },
+        fmt2(t.height),
+        h("small", {}, rankLabel(t.rank, t.tied)),
       ),
       h(
         "span",
@@ -262,8 +262,8 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
         h("span", {}),
         h("span", {}, "Team"),
         h("span", { class: "hr-conf" }, "Conf"),
-        h("span", { class: "hr-col" }, "Quality"),
         h("span", { class: "hr-col" }, "Résumé"),
+        h("span", { class: "hr-col" }, "Quality"),
         h("span", { class: "hr-col" }, "Schedule"),
         h("span", { class: "hr-val" }),
         h("span", { class: "hr-move" }, "Move"),

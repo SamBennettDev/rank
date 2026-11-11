@@ -1,8 +1,8 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`): **quality**, from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. Two companion boards come from quality: **résumé** (a win earns the beaten team's quality, a loss costs 100 minus the winner's, averaged per game) and **schedule** (the average quality of the opponents played). No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. The official ranking is **résumé** (a win earns the beaten team's quality, a loss costs 100 minus the winner's, averaged per game); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
-## Quality: SpringRank with margins, the ranking
+## Quality: SpringRank with margins
 
 Each game `e` is a spring of strength `k[e]` that wants its winner `gap[e]` points above its loser:
 
@@ -36,7 +36,7 @@ k[e] = p[loser] + (1 − p[winner]),   p[i] = quality[i] / 100
 
 An upset or a win over a good team is a stiff spring (up to 2); a good team beating a bad one barely pulls (near 0); two average teams make a spring of 1. Strengths and spring strengths depend on each other, so the solve starts with every `k = 1`, solves, sets each `k` from the qualities, and solves again, repeating until no strength moves more than 1e-9 points (at most 200 rounds; it settles in a few dozen). A blowout of a very weak team can't reach a strong winner's level under diminishing returns, so with equal springs it would drag the winner down; weighted by surprise, it barely counts. Each game's settled `k` is published as `spring`.
 
-Quality, published as each team's `height`, is the ranking.
+Quality, published as each team's `height`, is team strength and the second board.
 
 ## Résumé and schedule
 
@@ -67,7 +67,7 @@ The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen.
 | 2014–2019 (design, 6,797 and 8,770 games) | 70.4% | 83.1% |
 | 2021–2026 through week 7 (6,403 and 8,613 games) | 69.2% | 82.7% |
 
-Ordering by résumé instead picks fewer next-week winners (68.6% on 2014–2019, 67.3% on 2021–2026) with similar season-end agreement (83.4%, 82.8%).
+The official ranking is résumé. Ordering by résumé picks 68.6% of next-week winners on 2014–2019 and 67.3% on 2021–2026, with season-end agreement of 83.4% and 82.8%. The table above is for ordering by quality, which picks slightly more next-week winners.
 
 2021–2026 were looked at during design, so they are a check rather than an untouched holdout.
 

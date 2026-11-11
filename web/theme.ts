@@ -3,7 +3,8 @@ import { brandPalette } from "./team";
 
 /** The current leader sets the brand, independently of table filters. */
 export function applyLeaderTheme(ctx: Ctx) {
-  const leader = ctx.ranked.find((t) => t.rank === 1);
+  // The résumé leader is the official #1.
+  const leader = ctx.ranking.teams.find((t) => t.resumeRank === 1);
   const accent = brandPalette(
     leader ? ctx.teams.get(leader.id)?.color : "#d98a00",
   );

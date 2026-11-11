@@ -80,24 +80,32 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "tstats" },
-        stat("Current rank", rankLabel(team.rank, team.tied)),
+        stat(
+          "Current rank",
+          team.resumeRank === null ? "—" : String(team.resumeRank),
+        ),
         stat("Record", record(team)),
-        stat("Quality", team.height === null ? "—" : team.height.toFixed(2)),
-        stat("Résumé", team.resumeRank === null ? "—" : `#${team.resumeRank}`),
+        stat("Résumé", team.resume === null ? "—" : fmtHeight(team.resume, 2)),
+        stat(
+          "Quality",
+          team.height === null
+            ? "—"
+            : `${team.height.toFixed(2)} · #${rankLabel(team.rank, team.tied)}`,
+        ),
         stat(
           "Schedule",
           team.scheduleRank === null ? "—" : `#${team.scheduleRank}`,
         ),
         stat(
           "This week",
-          team.change === null
+          team.resumeChange === null
             ? "New"
-            : team.change === 0
+            : team.resumeChange === 0
               ? "—"
               : h(
                   "span",
-                  { class: team.change > 0 ? "upc" : "downc" },
-                  `${team.change > 0 ? "▲" : "▼"}${Math.abs(team.change)}`,
+                  { class: team.resumeChange > 0 ? "upc" : "downc" },
+                  `${team.resumeChange > 0 ? "▲" : "▼"}${Math.abs(team.resumeChange)}`,
                 ),
         ),
       ),
@@ -266,11 +274,11 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
     h(
       "details",
       { class: "quiet-details" },
-      h("summary", {}, "How quality, résumé and schedule work"),
+      h("summary", {}, "How résumé, quality and schedule work"),
       h(
         "p",
         {},
-        `Quality is the ranking. Every game is a spring that wants the winner 100 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé averages the games: a win earns the beaten team’s quality and a loss costs 100 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
+        `Résumé is the ranking. Quality measures team strength from margins: every game is a spring that wants the winner 100 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé, the ranking, averages the games: a win earns the beaten team’s quality and a loss costs 100 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
       ),
     ),
   );
@@ -427,7 +435,7 @@ async function loadHistory(
   return snaps.map((s, i) => ({
     id: s.id,
     label: s.label.replace("Week ", "W").replace("Postseason", "Post"),
-    rank: rankings[i]!.teams.find((t) => t.id === teamId)?.rank ?? null,
+    rank: rankings[i]!.teams.find((t) => t.id === teamId)?.resumeRank ?? null,
   }));
 }
 
