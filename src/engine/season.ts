@@ -17,7 +17,7 @@ import { rankByQuality } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-8";
+export const ENGINE_VERSION = "rank-engine-9";
 
 export interface SeasonFiles {
   season: string;

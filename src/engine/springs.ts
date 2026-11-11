@@ -41,14 +41,14 @@ export const quality = (strength: number, scale: number) => {
 export const qualityPoints = (q: number) => QUALITY_POINTS * q;
 
 /**
- * Résumé points for one game, from 0–100 quality points. The winner earns the loser's
- * quality; the loser loses 100 minus the winner's quality. Beating a good team or
- * losing to a bad one moves a résumé most; beating a bad team or losing to a good
- * one barely does.
+ * Résumé points for one game, 0–100, from 0–100 quality points. A win earns 50 plus
+ * half the loser's quality (50–100); a loss earns half the winner's quality (0–50).
+ * Beating a good team or losing to a bad one moves a résumé most; beating a bad team
+ * or losing to a good one barely does.
  */
 export const gamePoints = (winnerQuality: number, loserQuality: number) => ({
-  win: loserQuality,
-  loss: -(QUALITY_POINTS - winnerQuality),
+  win: (QUALITY_POINTS + loserQuality) / 2,
+  loss: winnerQuality / 2,
 });
 
 /**

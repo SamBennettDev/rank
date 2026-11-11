@@ -6,7 +6,7 @@ Open, deterministic college football rankings for **every FBS and FCS team**. Li
 
 The ranking itself is **résumé**, and two boards are built from quality:
 
-- **Résumé (the ranking):** points per game. A win earns the beaten team's quality; a loss costs 100 minus the winner's quality.
+- **Résumé (the ranking):** points per game, 0–100. A win earns 50 plus half the beaten team's quality; a loss earns half the winner's quality.
 - **Quality:** team strength from the spring graph, shown as the second board.
 - **Schedule:** the average quality of the opponents played.
 

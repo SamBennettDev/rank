@@ -123,10 +123,10 @@ describe("quality", () => {
 });
 
 describe("résumé and schedule", () => {
-  it("earns the beaten team's quality and loses 7 minus the winner's", () => {
-    expect(gamePoints(90, 10)).toEqual({ win: 10, loss: -10 });
-    expect(gamePoints(10, 90)).toEqual({ win: 90, loss: -90 });
-    expect(gamePoints(50, 50)).toEqual({ win: 50, loss: -50 });
+  it("earns 50 + half the beaten team's quality, or half the winner's", () => {
+    expect(gamePoints(90, 10)).toEqual({ win: 55, loss: 45 });
+    expect(gamePoints(10, 90)).toEqual({ win: 95, loss: 5 });
+    expect(gamePoints(50, 50)).toEqual({ win: 75, loss: 25 });
   });
 
   it("costs more to lose to a bad team than to a good one", () => {

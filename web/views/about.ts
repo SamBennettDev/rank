@@ -122,7 +122,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "div",
         { class: "recipe-block loss" },
         h("b", {}, "Résumé"),
-        h("span", {}, "The ranking: points per game"),
+        h("span", {}, "The ranking, 0–100"),
       ),
       h("span", { class: "recipe-symbol", "aria-hidden": "true" }, "+"),
       h(
@@ -149,7 +149,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Résumé, the ranking. "),
-        "Each team averages its games. A win earns the beaten team’s quality; a loss costs 100 minus the winning team’s quality. Beating a 90 team earns +90 and losing to it costs only −10; beating a 10 team earns +10 and losing to it costs −90.",
+        "Each team averages its games on a 0–100 scale. A win earns 50 plus half the beaten team’s quality; a loss earns half the winning team’s quality. Beating a 90 team earns 95 and losing to it still earns 45; beating a 10 team earns 55 and losing to it earns only 5.",
       ),
       h(
         "p",

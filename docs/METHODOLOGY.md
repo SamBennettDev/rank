@@ -1,6 +1,6 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. The official ranking is **résumé** (a win earns the beaten team's quality, a loss costs 100 minus the winner's, averaged per game); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. The official ranking is **résumé** (0–100: a win earns 50 plus half the beaten team's quality, a loss half the winner's, averaged per game); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## Quality: SpringRank with margins
 
@@ -43,16 +43,16 @@ Quality, published as each team's `height`, is team strength and the second boar
 Each game gives résumé points to both teams:
 
 ```text
-winner earns  + quality[loser]
-loser earns   − (100 − quality[winner])
+winner earns  50 + quality[loser] / 2     (50 to 100)
+loser earns   quality[winner] / 2          (0 to 50)
 ```
 
 | Result | Points |
 |---|---|
-| Beat a good team (quality 6.5) | +6.5 |
-| Lose to a good team (quality 6.5) | −0.5 |
-| Beat a bad team (quality 0.5) | +0.5 |
-| Lose to a bad team (quality 0.5) | −6.5 |
+| Beat a good team (quality 90) | 95 |
+| Lose to a good team (quality 90) | 45 |
+| Beat a bad team (quality 10) | 55 |
+| Lose to a bad team (quality 10) | 5 |
 
 A team's **résumé** is its games' points divided by the games it played, so an extra game is no advantage by itself. Its **schedule** is the average quality of the opponents it played. Both are ranked among the ranked field (`resumeRank`, `scheduleRank`); neither changes the ranking.
 

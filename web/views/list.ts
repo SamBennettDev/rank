@@ -1,4 +1,4 @@
-import { type Ctx, fmtHeight, rankLabel, record, teamHref } from "../ctx";
+import { type Ctx, fmtScore, rankLabel, record, teamHref } from "../ctx";
 import type { RankedTeam } from "../../src/engine/types";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
@@ -30,7 +30,7 @@ const placeLabel = (t: RankedTeam, b: Board) =>
       : String(place(t, b));
 const value = (t: RankedTeam, b: Board) =>
   b === "resume"
-    ? fmtHeight(t.resume, 2)
+    ? fmtScore(t.resume)
     : fmt2(b === "schedule" ? t.schedule : t.height);
 
 const change = (t: RankedTeam, b: Board) =>
@@ -137,7 +137,7 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
       h(
         "span",
         { class: `hr-col${board === "resume" ? " on" : ""}` },
-        fmtHeight(t.resume, 2),
+        fmtScore(t.resume),
         h("small", {}, t.resumeRank ?? "—"),
       ),
       h(
@@ -223,11 +223,7 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
             ctx.entry.league ? "All divisions" : "All conferences",
           ),
           ...conferencesByStrength(field).map((c) =>
-            h(
-              "option",
-              { value: c.name },
-              `${c.name} · ${fmtHeight(c.avg, 2)}`,
-            ),
+            h("option", { value: c.name }, `${c.name} · ${c.avg.toFixed(2)}`),
           ),
         ),
       ),

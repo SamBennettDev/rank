@@ -4,6 +4,7 @@ import type { Edge, RankedTeam } from "../../src/engine/types";
 import {
   type Ctx,
   fmtHeight,
+  fmtScore,
   rankLabel,
   record,
   teamHref,
@@ -208,7 +209,7 @@ export function graphView(
         h(
           "div",
           { class: "t2" },
-          `${record(t)} · résumé ${fmtHeight(t.resume, 2)} · ${t.conference}`,
+          `${record(t)} · résumé ${fmtScore(t.resume)} · ${t.conference}`,
         ),
       ),
     );
@@ -276,7 +277,7 @@ export function graphView(
         h(
           "p",
           {},
-          "Height = résumé (points per game), and the rank numbers are résumé ranks. Each line is a game between its winner and its loser. Columns = conferences.",
+          "Height = résumé (0–100), and the rank numbers are résumé ranks. Each line is a game between its winner and its loser. Columns = conferences.",
         ),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(
@@ -399,12 +400,7 @@ export function graphView(
             h("span", {}, "Rank"),
           ),
           h("div", {}, h("b", {}, record(t)), h("span", {}, "Record")),
-          h(
-            "div",
-            {},
-            h("b", {}, fmtHeight(t.resume, 2)),
-            h("span", {}, "Résumé"),
-          ),
+          h("div", {}, h("b", {}, fmtScore(t.resume)), h("span", {}, "Résumé")),
         ),
       ),
       t.provisional ? h("p", { class: "hint" }, "Limited data") : "",

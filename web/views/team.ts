@@ -7,6 +7,7 @@ import {
   board,
   breakdown,
   fmtHeight,
+  fmtScore,
   href,
   rankLabel,
   record,
@@ -85,7 +86,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
           team.resumeRank === null ? "—" : String(team.resumeRank),
         ),
         stat("Record", record(team)),
-        stat("Résumé", team.resume === null ? "—" : fmtHeight(team.resume, 2)),
+        stat("Résumé", fmtScore(team.resume)),
         stat(
           "Quality",
           team.height === null
@@ -251,12 +252,12 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         { class: "total" },
-        h("b", {}, fmtHeight(b.earned + b.lost, 2)),
+        h("b", {}, fmtScore(b.earned + b.lost)),
         h(
           "small",
           {},
-          b.lost < 0
-            ? `${fmtHeight(b.earned, 2)} from wins, −${Math.abs(b.lost).toFixed(2)} from losses`
+          b.lost > 0
+            ? `${fmtScore(b.earned)} from wins, ${fmtScore(b.lost)} from losses`
             : "From wins",
         ),
       ),
@@ -266,7 +267,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "div",
         {},
-        h("b", {}, fmtHeight(me.resume, 2)),
+        h("b", {}, fmtScore(me.resume)),
         h("small", {}, `Résumé, #${me.resumeRank ?? "—"}`),
       ),
     ),
@@ -278,7 +279,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Résumé is the ranking. Quality measures team strength from margins: every game is a spring that wants the winner 100 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé, the ranking, averages the games: a win earns the beaten team’s quality and a loss costs 100 minus the winner’s, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
+        `Résumé is the ranking. Quality measures team strength from margins: every game is a spring that wants the winner 100 × (1 + 1/2 + … + 1/margin) points above the loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising, so an upset or a win over a good team pulls hard and a good team beating a bad one barely pulls. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé, the ranking, averages the games: a win earns 50 plus half the beaten team’s quality and a loss earns half the winner’s, on a 0–100 scale, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
       ),
     ),
   );
@@ -293,7 +294,7 @@ function breakdownChart(
   const row = 30;
   const pad = { l: 178, r: 24, t: 24, b: 28 };
   const H = pad.t + row * lines.length + pad.b;
-  const vals = [0, 100, -100, ...lines.map((l) => l.value)];
+  const vals = [0, 100];
   let lo = Math.min(...vals),
     hi = Math.max(...vals);
   const span = Math.max(hi - lo, 2);
@@ -303,11 +304,11 @@ function breakdownChart(
   const root = svg("svg", {
     viewBox: `0 0 ${W} ${H}`,
     role: "img",
-    "aria-label": "Points each game earned: right for a win, left for a loss",
+    "aria-label":
+      "Points each game earned, 0 to 100: above 50 for a win, below 50 for a loss",
   });
-  const step =
-    [0.25, 0.5, 1, 2, 5, 10, 20, 25, 50].find((st) => span / st <= 6) ?? 100;
-  for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
+  const step = 25;
+  for (let v = 0; v <= 100; v += step) {
     root.appendChild(
       svg("line", {
         class: "tl",
@@ -323,10 +324,11 @@ function breakdownChart(
       y: 12,
       "text-anchor": "middle",
     });
-    t.textContent = (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v);
+    t.textContent = String(v);
     root.appendChild(t);
   }
-  const rx = x(0);
+  // Bars start at 50, the line between a win and a loss; the marker is the average.
+  const rx = x(rating);
   const lineY = (i: number) => pad.t + row * i + row / 2;
   const label = (y: number, text: string, cls = "rl") => {
     const t = svg("text", { class: cls, x: 40, y: y + 4 });
@@ -334,11 +336,11 @@ function breakdownChart(
     root.appendChild(t);
   };
   const stem = (y: number, v: number, title: string, logoId?: number) => {
-    const g = svg("g", { class: `brow ${v >= 0 ? "up" : "down"}` });
+    const g = svg("g", { class: `brow ${v >= 50 ? "up" : "down"}` });
     g.appendChild(
       svg("line", {
         class: "stem",
-        x1: x(0),
+        x1: x(50),
         x2: x(v),
         y1: y,
         y2: y,
@@ -363,7 +365,7 @@ function breakdownChart(
     stem(
       y,
       l.value,
-      `${score} against ${o.school} (quality ${(o.height ?? 0).toFixed(2)} of 100): ${fmtHeight(l.value, 2)} points`,
+      `${score} against ${o.school} (quality ${(o.height ?? 0).toFixed(2)} of 100): ${fmtScore(l.value)} points`,
       o.id,
     );
   });
@@ -382,7 +384,7 @@ function breakdownChart(
     y: H - 6,
     "text-anchor": "middle",
   });
-  rt.textContent = `Average ${fmtHeight(rating, 2)} per game`;
+  rt.textContent = `Average ${fmtScore(rating)} per game`;
   root.appendChild(rt);
   return root;
 }
@@ -582,10 +584,10 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h(
         "span",
         {
-          class: `r ${l.value >= 0 ? "pos" : "neg"}`,
-          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(o.height ?? 0).toFixed(2)} of 7: ${l.won ? "+ their quality" : "−(100 − their quality)"}.`,
+          class: `r ${l.won ? "pos" : "neg"}`,
+          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(o.height ?? 0).toFixed(2)} of 100: ${l.won ? "50 + half their quality" : "half their quality"}.`,
         },
-        fmtHeight(l.value, 2),
+        fmtScore(l.value),
       ),
     );
   });

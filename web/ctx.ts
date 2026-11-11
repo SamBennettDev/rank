@@ -47,6 +47,9 @@ export const rankLabel = (rank: number | null, tied: boolean) =>
   rank === null ? "—" : `${tied ? "T-" : ""}${rank}`;
 export const fmtHeight = (v: number | null, d = 1) =>
   v === null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+/** Résumé and other 0–100 scores. */
+export const fmtScore = (v: number | null, d = 2) =>
+  v === null ? "—" : v.toFixed(d);
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
 export function upsets(ctx: Ctx) {
   return ctx.edges
@@ -69,7 +72,7 @@ export interface GameLine {
   opponent: RankedTeam;
   where: -1 | 0 | 1;
   margin: number;
-  /** Points this game earned: + the beaten team's quality points, or −(100 − the winner's). */
+  /** Points this game earned, 0–100: 50 + half the beaten team's quality, or half the winner's. */
   value: number;
 }
 /** Rebuilds a team's résumé: the average of the points its games earned. */
@@ -98,8 +101,9 @@ export function breakdown(ctx: Ctx, teamId: number) {
         },
       ];
     });
-  const earned = lines.reduce((sum, l) => sum + (l.value > 0 ? l.value : 0), 0);
-  const lost = lines.reduce((sum, l) => sum + (l.value < 0 ? l.value : 0), 0);
+  // Points from wins and from losses; both are positive on the 0–100 scale.
+  const earned = lines.reduce((sum, l) => sum + (l.won ? l.value : 0), 0);
+  const lost = lines.reduce((sum, l) => sum + (l.won ? 0 : l.value), 0);
   const games = lines.length;
   return {
     lines,
@@ -136,7 +140,7 @@ export const METRIC_HINT: Record<Metric, string> = {
   overall:
     "Quality, 0–100: 100 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting less, and each spring is as strong as the result was surprising.",
   resume:
-    "Points per game. A win earns the beaten team's quality (0–100); a loss costs 100 minus the winner's quality.",
+    "Points per game, 0–100. A win earns 50 plus half the beaten team's quality; a loss earns half the winner's quality.",
   schedule:
     "Strength of schedule: the average quality (0–100) of the opponents played.",
   offense:

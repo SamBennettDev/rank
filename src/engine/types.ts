@@ -140,7 +140,7 @@ export interface RankedTeam {
   height: number | null;
   /** Points better than an average team, from the surprise-weighted margin SpringRank. */
   strength: number | null;
-  /** Résumé: average game points (a win earns the loser's quality, a loss costs 100 minus the winner's). */
+  /** Résumé, 0–100: average game points (a win earns 50 + half the loser's quality, a loss half the winner's). */
   resume: number | null;
   resumeRank: number | null;
   /** Strength of schedule: average quality of the opponents played. */
@@ -204,9 +204,9 @@ export interface PublishedSpring {
   margin: number;
   /** Spring strength, 0–2: chance(loser) + 1 − chance(winner). */
   spring: number;
-  /** Résumé points the winner earns: the loser's quality, 0 to 100. */
+  /** Résumé points the winner earns: 50 + half the loser's quality, 50 to 100. */
   win: number;
-  /** Résumé points the loser earns: −(100 − the winner's quality), −100 to 0. */
+  /** Résumé points the loser earns: half the winner's quality, 0 to 50. */
   loss: number;
 }
 
