@@ -52,13 +52,13 @@ export function upsets(ctx: Ctx) {
   return ctx.edges
     .filter(
       (e) =>
-        ctx.byId.get(e.winner)?.rank !== null &&
-        ctx.byId.get(e.loser)?.rank !== null,
+        ctx.byId.get(e.winner)?.resumeRank != null &&
+        ctx.byId.get(e.loser)?.resumeRank != null,
     )
     .map((edge) => ({
       edge,
       gap:
-        ctx.byId.get(edge.loser)!.height! - ctx.byId.get(edge.winner)!.height!,
+        ctx.byId.get(edge.loser)!.resume! - ctx.byId.get(edge.winner)!.resume!,
     }))
     .filter((u) => u.gap > 0)
     .sort((a, b) => b.gap - a.gap || a.edge.gameId - b.edge.gameId);

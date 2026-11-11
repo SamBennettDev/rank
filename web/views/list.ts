@@ -92,13 +92,13 @@ function segment<T extends string>(
   return group;
 }
 
-/** Conferences ordered by the average quality of their ranked teams, strongest first. */
+/** Conferences ordered by the average résumé of their ranked teams, strongest first. */
 function conferencesByStrength(teams: RankedTeam[]) {
   const sums = new Map<string, { total: number; n: number }>();
   for (const t of teams) {
-    if (t.height === null) continue;
+    if (t.resume === null) continue;
     const s = sums.get(t.conference) ?? { total: 0, n: 0 };
-    s.total += t.height;
+    s.total += t.resume;
     s.n++;
     sums.set(t.conference, s);
   }
@@ -223,7 +223,11 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
             ctx.entry.league ? "All divisions" : "All conferences",
           ),
           ...conferencesByStrength(field).map((c) =>
-            h("option", { value: c.name }, `${c.name} · ${c.avg.toFixed(2)}`),
+            h(
+              "option",
+              { value: c.name },
+              `${c.name} · ${fmtHeight(c.avg, 2)}`,
+            ),
           ),
         ),
       ),

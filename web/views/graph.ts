@@ -21,11 +21,12 @@ export function graphView(
   ctx: Ctx,
   onCleanup: (fn: () => void) => void,
 ): HTMLElement {
-  const nodes = [...ctx.ranked].sort(
-    (a, b) => b.height! - a.height! || a.id - b.id,
-  );
+  // Height and rank are résumé, the official ranking.
+  const nodes = ctx.ranked
+    .filter((t) => t.resumeRank !== null)
+    .sort((a, b) => b.resume! - a.resume! || a.id - b.id);
   const L = computeLayout(
-    nodes.map((t) => ({ id: t.id, height: t.height!, lane: t.conference })),
+    nodes.map((t) => ({ id: t.id, height: t.resume!, lane: t.conference })),
     {
       node: NODE,
       laneWidth: 66,
@@ -89,13 +90,13 @@ export function graphView(
     gBack.appendChild(g);
   };
   for (const r of [1, 10, 50, 100, 150, 200, 250]) {
-    const t = nodes.find((n) => n.rank! >= r);
-    if (t && r <= nodes.length) tick(L.y(t.height!), `Rank #${r}`);
+    const t = nodes.find((n) => n.resumeRank! >= r);
+    if (t && r <= nodes.length) tick(L.y(t.resume!), `Rank #${r}`);
   }
-  const n25 = nodes.filter((t) => t.rank! <= 25).at(-1);
-  const n26 = nodes.find((t) => t.rank! > 25);
+  const n25 = nodes.filter((t) => t.resumeRank! <= 25).at(-1);
+  const n26 = nodes.find((t) => t.resumeRank! > 25);
   if (n25 && n26)
-    tick((L.y(n25.height!) + L.y(n26.height!)) / 2, "TOP 25", "top25");
+    tick((L.y(n25.resume!) + L.y(n26.resume!)) / 2, "TOP 25", "top25");
 
   const curve = (e: Edge) => {
     const a = P(e.loser);
@@ -115,7 +116,7 @@ export function graphView(
       style: teamVars(tl?.color),
       tabindex: 0,
       role: "button",
-      "aria-label": `${t.school}, rank ${rankLabel(t.rank, t.tied)}`,
+      "aria-label": `${t.school}, rank ${rankLabel(t.resumeRank, false)}`,
     });
     g.appendChild(svg("circle", { class: "ring", r: NODE / 2 + 1.5 }));
     const mono = svg("g", { class: "mono" });
@@ -198,7 +199,7 @@ export function graphView(
       return;
     }
     tip.replaceChildren(
-      h("div", { class: "rk" }, rankLabel(t.rank, t.tied)),
+      h("div", { class: "rk" }, rankLabel(t.resumeRank, false)),
       logo(ctx.teams.get(t.id), 30),
       h(
         "div",
@@ -207,7 +208,7 @@ export function graphView(
         h(
           "div",
           { class: "t2" },
-          `${record(t)} · quality ${t.height === null ? "—" : t.height.toFixed(2)} · ${t.conference}`,
+          `${record(t)} · résumé ${fmtHeight(t.resume, 2)} · ${t.conference}`,
         ),
       ),
     );
@@ -275,7 +276,7 @@ export function graphView(
         h(
           "p",
           {},
-          "Height = quality (0–100), and the rank numbers are quality ranks. Each line is a game between its winner and its loser. Columns = conferences.",
+          "Height = résumé (points per game), and the rank numbers are résumé ranks. Each line is a game between its winner and its loser. Columns = conferences.",
         ),
         ctx.ranking.manifest.connectedComponents > 1
           ? h(
@@ -327,12 +328,12 @@ export function graphView(
                 h(
                   "span",
                   { class: "w" },
-                  `#${rankLabel(w.rank, w.tied)} ${w.school}`,
+                  `#${rankLabel(w.resumeRank, false)} ${w.school}`,
                 ),
                 h(
                   "span",
                   { class: "bt" },
-                  `beat #${rankLabel(l.rank, l.tied)} ${l.school}, ${u.edge.winnerPoints}–${u.edge.loserPoints}`,
+                  `beat #${rankLabel(l.resumeRank, false)} ${l.school}, ${u.edge.winnerPoints}–${u.edge.loserPoints}`,
                 ),
               ),
             ),
@@ -394,15 +395,15 @@ export function graphView(
           h(
             "div",
             {},
-            h("b", {}, rankLabel(t.rank, t.tied)),
+            h("b", {}, rankLabel(t.resumeRank, false)),
             h("span", {}, "Rank"),
           ),
           h("div", {}, h("b", {}, record(t)), h("span", {}, "Record")),
           h(
             "div",
             {},
-            h("b", {}, t.height === null ? "—" : t.height.toFixed(2)),
-            h("span", {}, "Quality"),
+            h("b", {}, fmtHeight(t.resume, 2)),
+            h("span", {}, "Résumé"),
           ),
         ),
       ),
@@ -429,7 +430,7 @@ export function graphView(
               "div",
               { class: "op" },
               h("span", {}, o.school),
-              h("small", {}, `#${rankLabel(o.rank, o.tied)}`),
+              h("small", {}, `#${rankLabel(o.resumeRank, false)}`),
               isUpset(e) ? h("span", { class: "up" }, "UPSET") : "",
             ),
             h(
