@@ -736,9 +736,9 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401866455,2026,10,regular,2026-11-05T00:00:00.000Z,false,true,113,Massachusetts,31,2050,Ball State,30
 401866456,2026,10,regular,2026-11-05T00:30:00.000Z,true,true,2199,Eastern Michigan,7,2117,Central Michigan,35
 401866457,2026,10,regular,2026-11-05T00:00:00.000Z,false,true,16,Sacramento State,17,2649,Toledo,20
-401866458,2026,11,regular,2026-11-11T00:00:00.000Z,false,false,2006,Akron,,2711,Western Michigan,
-401866459,2026,11,regular,2026-11-11T00:00:00.000Z,false,false,189,Bowling Green,,2309,Kent State,
-401866460,2026,11,regular,2026-11-11T01:00:00.000Z,false,false,193,Miami (OH),,195,Ohio,
+401866458,2026,11,regular,2026-11-11T00:00:00.000Z,false,true,2006,Akron,14,2711,Western Michigan,42
+401866459,2026,11,regular,2026-11-11T00:00:00.000Z,false,true,189,Bowling Green,33,2309,Kent State,28
+401866460,2026,11,regular,2026-11-11T01:00:00.000Z,false,true,193,Miami (OH),34,195,Ohio,17
 401866461,2026,11,regular,2026-11-12T00:30:00.000Z,false,false,2050,Ball State,,2084,Buffalo,
 401866462,2026,11,regular,2026-11-12T00:30:00.000Z,false,false,2117,Central Michigan,,16,Sacramento State,
 401866463,2026,11,regular,2026-11-12T00:30:00.000Z,false,false,2649,Toledo,,113,Massachusetts,

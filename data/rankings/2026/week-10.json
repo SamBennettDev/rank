@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "season": "2026",
-  "snapshot": {"id":"week-10","label":"Week 10","throughWeek":10,"includePostseason":true,"asOf":"2026-11-08T09:30:00.000Z"},
+  "snapshot": {"id":"week-10","label":"Week 10","throughWeek":10,"includePostseason":true,"asOf":"2026-11-09T12:00:00.000Z"},
   "manifest": {
     "engine": "rank-engine-8",
     "algorithmVersion": "quality-springs-1",
@@ -28,7 +28,7 @@
       "fcs"
     ],
     "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
-    "gamesSha256": "5ffd01965c2d98dd889a80925f949c811e04bec781b6e84c235025b4b3b8e1c2",
+    "gamesSha256": "ba08767326cbb3ba607d315026e01515a0c06701a5c45b802d58ecb60b51d566",
     "playsSha256": "5a4ed310952d29d2cf447007e6c0f465ee88b38f16157a6c79b746ea76befe6d",
     "snapsPerGame": 57.564234,
     "counts": {
