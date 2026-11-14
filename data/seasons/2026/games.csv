@@ -229,7 +229,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401856884,2026,11,regular,2026-11-14T23:15:00.000Z,false,false,96,Kentucky,,57,Florida,
 401856885,2026,11,regular,2026-11-15T00:30:00.000Z,false,false,99,LSU,,251,Texas,
 401856886,2026,11,regular,2026-11-14T21:15:00.000Z,false,false,344,Mississippi State,,2,Auburn,
-401856887,2026,12,regular,2026-11-15T18:00:00.000Z,false,false,201,Oklahoma,,145,Ole Miss,
+401856887,2026,11,regular,2026-11-15T18:00:00.000Z,false,false,201,Oklahoma,,145,Ole Miss,
 401856888,2026,11,regular,2026-11-14T20:00:00.000Z,false,false,245,Texas A&M,,2633,Tennessee,
 401856889,2026,11,regular,2026-11-14T17:45:00.000Z,false,false,238,Vanderbilt,,333,Alabama,
 401858201,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,24,Stanford,37,62,Hawai'i,27
