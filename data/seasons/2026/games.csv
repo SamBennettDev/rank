@@ -452,14 +452,14 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401858525,2026,11,regular,2026-11-14T17:30:00.000Z,false,true,164,Rutgers,0,158,Nebraska,31
 401858526,2026,11,regular,2026-11-14T02:00:00.000Z,false,true,26,UCLA,22,356,Illinois,14
 401858527,2026,12,regular,2026-11-21T19:30:00.000Z,false,false,356,Illinois,,2294,Iowa,
-401858528,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,130,Michigan,,26,UCLA,
+401858528,2026,12,regular,2026-11-21T20:30:00.000Z,false,false,130,Michigan,,26,UCLA,
 401858529,2026,12,regular,2026-11-21T01:00:00.000Z,false,false,127,Michigan State,,2483,Oregon,
 401858530,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,135,Minnesota,,77,Northwestern,
-401858531,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,158,Nebraska,,194,Ohio State,
+401858531,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,158,Nebraska,,194,Ohio State,
 401858532,2026,12,regular,2026-11-21T20:30:00.000Z,false,false,213,Penn State,,164,Rutgers,
 401858533,2026,12,regular,2026-11-21T17:00:00.000Z,false,false,2509,Purdue,,275,Wisconsin,
 401858534,2026,12,regular,2026-11-21T23:15:00.000Z,false,false,30,USC,,120,Maryland,
-401858535,2026,12,regular,2026-11-21T05:00:00.000Z,false,false,264,Washington,,84,Indiana,
+401858535,2026,12,regular,2026-11-21T20:30:00.000Z,false,false,264,Washington,,84,Indiana,
 401858536,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,2294,Iowa,,158,Nebraska,
 401858537,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,77,Northwestern,,356,Illinois,
 401858538,2026,13,regular,2026-11-28T05:00:00.000Z,false,false,84,Indiana,,2509,Purdue,
