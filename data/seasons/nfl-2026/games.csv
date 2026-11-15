@@ -136,14 +136,14 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873050,2026,9,regular,2026-11-09T01:20:00.000Z,false,true,3,Chicago Bears,27,27,Tampa Bay Buccaneers,24
 401873051,2026,9,regular,2026-11-10T01:15:00.000Z,false,true,16,Minnesota Vikings,6,2,Buffalo Bills,23
 401873052,2026,10,regular,2026-11-13T01:15:00.000Z,false,true,19,New York Giants,21,28,Washington Commanders,24
-401873053,2026,10,regular,2026-11-15T14:30:00.000Z,true,false,8,Detroit Lions,,17,New England Patriots,
-401873054,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,20,New York Jets,,2,Buffalo Bills,
-401873055,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,18,New Orleans Saints,,29,Carolina Panthers,
-401873056,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,5,Cleveland Browns,,34,Houston Texans,
-401873057,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,10,Tennessee Titans,,30,Jacksonville Jaguars,
-401873058,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,1,Atlanta Falcons,,12,Kansas City Chiefs,
-401873059,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,11,Indianapolis Colts,,15,Miami Dolphins,
-401873060,2026,10,regular,2026-11-15T18:00:00.000Z,false,false,9,Green Bay Packers,,16,Minnesota Vikings,
+401873053,2026,10,regular,2026-11-15T14:30:00.000Z,true,true,8,Detroit Lions,35,17,New England Patriots,10
+401873054,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,20,New York Jets,12,2,Buffalo Bills,31
+401873055,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,18,New Orleans Saints,17,29,Carolina Panthers,20
+401873056,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,5,Cleveland Browns,27,34,Houston Texans,24
+401873057,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,10,Tennessee Titans,23,30,Jacksonville Jaguars,40
+401873058,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,1,Atlanta Falcons,13,12,Kansas City Chiefs,35
+401873059,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,11,Indianapolis Colts,24,15,Miami Dolphins,22
+401873060,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,9,Green Bay Packers,10,16,Minnesota Vikings,30
 401873061,2026,10,regular,2026-11-15T21:05:00.000Z,false,false,22,Arizona Cardinals,,14,Los Angeles Rams,
 401873062,2026,10,regular,2026-11-15T21:05:00.000Z,false,false,13,Las Vegas Raiders,,26,Seattle Seahawks,
 401873063,2026,10,regular,2026-11-15T21:25:00.000Z,false,false,6,Dallas Cowboys,,25,San Francisco 49ers,
