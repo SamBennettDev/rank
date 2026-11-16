@@ -144,9 +144,9 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873058,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,1,Atlanta Falcons,13,12,Kansas City Chiefs,35
 401873059,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,11,Indianapolis Colts,24,15,Miami Dolphins,22
 401873060,2026,10,regular,2026-11-15T18:00:00.000Z,false,true,9,Green Bay Packers,10,16,Minnesota Vikings,30
-401873061,2026,10,regular,2026-11-15T21:05:00.000Z,false,false,22,Arizona Cardinals,,14,Los Angeles Rams,
-401873062,2026,10,regular,2026-11-15T21:05:00.000Z,false,false,13,Las Vegas Raiders,,26,Seattle Seahawks,
-401873063,2026,10,regular,2026-11-15T21:25:00.000Z,false,false,6,Dallas Cowboys,,25,San Francisco 49ers,
+401873061,2026,10,regular,2026-11-15T21:05:00.000Z,false,true,22,Arizona Cardinals,6,14,Los Angeles Rams,34
+401873062,2026,10,regular,2026-11-15T21:05:00.000Z,false,true,13,Las Vegas Raiders,13,26,Seattle Seahawks,21
+401873063,2026,10,regular,2026-11-15T21:25:00.000Z,false,true,6,Dallas Cowboys,40,25,San Francisco 49ers,46
 401873064,2026,10,regular,2026-11-16T01:20:00.000Z,false,false,4,Cincinnati Bengals,,23,Pittsburgh Steelers,
 401873065,2026,10,regular,2026-11-17T01:15:00.000Z,false,false,33,Baltimore Ravens,,24,Los Angeles Chargers,
 401873066,2026,11,regular,2026-11-20T01:15:00.000Z,false,false,34,Houston Texans,,11,Indianapolis Colts,
