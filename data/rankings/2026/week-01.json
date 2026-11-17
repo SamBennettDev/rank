@@ -28,7 +28,7 @@
       "fcs"
     ],
     "teamsSha256": "625174a62882a13e7d3927454a5fc25a0c2b2fd581b8c0c92400b5a7391bd38c",
-    "gamesSha256": "5dca6696d5e7edf175cbbe45a3c6313043d57b0f6243b07e99d62ee6fd3b85b2",
+    "gamesSha256": "71d510e656c73ac9cedfa28337c556f4cfe8c72ebc396d39e0fa7c6d7974f11b",
     "playsSha256": "8642a4ec37c80b1b7b130857ccd178058033313c178fce001257e5247e5cfe0d",
     "snapsPerGame": 59.9375,
     "counts": {
@@ -390,7 +390,7 @@
     {"gameId":401864544,"home":23,"away":2439,"startDate":"2026-11-22T00:00:00.000Z","neutralSite":false,"strengthEdge":2.284451,"homeProbability":0.537051,"provisional":true},
     {"gameId":401869141,"home":2377,"away":2320,"startDate":"2026-11-22T00:00:00.000Z","neutralSite":false,"strengthEdge":-4.629329,"homeProbability":0.425109,"provisional":true},
     {"gameId":401864549,"home":23,"away":2449,"startDate":"2026-11-27T20:30:00.000Z","neutralSite":false,"strengthEdge":-10.382215,"homeProbability":0.337428,"provisional":true},
-    {"gameId":401858313,"home":153,"away":152,"startDate":"2026-11-28T05:00:00.000Z","neutralSite":false,"strengthEdge":14.580447,"homeProbability":0.721437,"provisional":true},
+    {"gameId":401858313,"home":153,"away":152,"startDate":"2026-11-28T17:00:00.000Z","neutralSite":false,"strengthEdge":14.580447,"homeProbability":0.721437,"provisional":true},
     {"gameId":401864547,"home":62,"away":16,"startDate":"2026-11-29T04:00:00.000Z","neutralSite":false,"strengthEdge":3.704004,"homeProbability":0.560084,"provisional":true}
   ],
   "springs": [
