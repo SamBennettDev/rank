@@ -1135,7 +1135,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868114,2026,5,regular,2026-10-03T20:00:00.000Z,false,true,149,Montana,36,2458,Northern Colorado,14
 401868115,2026,6,regular,2026-10-10T21:00:00.000Z,false,true,2464,Northern Arizona,49,149,Montana,44
 401868116,2026,10,regular,2026-11-07T20:00:00.000Z,false,true,149,Montana,57,2502,Portland State,24
-401868117,2026,12,regular,2026-11-21T19:00:00.000Z,false,false,147,Montana State,,149,Montana,
+401868117,2026,12,regular,2026-11-21T19:05:00.000Z,false,false,147,Montana State,,149,Montana,
 401868118,2026,1,regular,2026-08-30T02:00:00.000Z,false,true,3101,Utah Tech,0,147,Montana State,54
 401868119,2026,1,regular,2026-09-06T00:30:00.000Z,false,true,147,Montana State,51,2086,Butler,24
 401868120,2026,4,regular,2026-09-27T02:30:00.000Z,false,true,147,Montana State,28,2464,Northern Arizona,14
@@ -1317,7 +1317,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868301,2026,7,regular,2026-10-17T19:00:00.000Z,false,true,2010,Alabama A&M,61,2755,Grambling,31
 401868302,2026,10,regular,2026-11-07T20:00:00.000Z,false,true,2504,Prairie View A&M,31,2010,Alabama A&M,10
 401868303,2026,11,regular,2026-11-14T20:00:00.000Z,false,true,2010,Alabama A&M,35,2640,Texas Southern,6
-401868304,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2400,Mississippi Valley State,,2010,Alabama A&M,
+401868304,2026,12,regular,2026-11-21T18:00:00.000Z,false,false,2400,Mississippi Valley State,,2010,Alabama A&M,
 401868305,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2377,McNeese,27,2617,Stephen F. Austin,38
 401868306,2026,1,regular,2026-09-06T00:00:00.000Z,false,true,2617,Stephen F. Austin,44,2837,East Texas A&M,7
 401868307,2026,3,regular,2026-09-20T00:00:00.000Z,false,true,2504,Prairie View A&M,10,2617,Stephen F. Austin,31
@@ -1410,7 +1410,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868938,2026,9,regular,2026-10-31T19:00:00.000Z,false,true,2029,Arkansas-Pine Bluff,63,2065,Bethune-Cookman,21
 401868939,2026,10,regular,2026-11-07T20:00:00.000Z,false,true,2755,Grambling,32,2029,Arkansas-Pine Bluff,35
 401868940,2026,11,regular,2026-11-14T20:00:00.000Z,false,true,2029,Arkansas-Pine Bluff,10,2504,Prairie View A&M,13
-401868941,2026,12,regular,2026-11-21T21:00:00.000Z,false,false,2640,Texas Southern,,2029,Arkansas-Pine Bluff,
+401868941,2026,12,regular,2026-11-21T20:00:00.000Z,false,false,2640,Texas Southern,,2029,Arkansas-Pine Bluff,
 401868942,2026,3,regular,2026-09-19T20:00:00.000Z,false,true,2065,Bethune-Cookman,62,2355,Virginia Lynchburg,3
 401868943,2026,7,regular,2026-10-17T19:00:00.000Z,false,true,2400,Mississippi Valley State,14,2065,Bethune-Cookman,34
 401868944,2026,8,regular,2026-10-24T17:00:00.000Z,false,true,2065,Bethune-Cookman,24,2296,Jackson State,21
