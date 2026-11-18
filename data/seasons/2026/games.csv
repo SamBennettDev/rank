@@ -742,9 +742,9 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401866461,2026,11,regular,2026-11-12T00:30:00.000Z,false,true,2050,Ball State,7,2084,Buffalo,28
 401866462,2026,11,regular,2026-11-12T00:30:00.000Z,false,true,2117,Central Michigan,28,16,Sacramento State,7
 401866463,2026,11,regular,2026-11-12T00:30:00.000Z,false,true,2649,Toledo,24,113,Massachusetts,0
-401866464,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,195,Ohio,,2050,Ball State,
-401866465,2026,12,regular,2026-11-17T23:00:00.000Z,false,false,2711,Western Michigan,,2199,Eastern Michigan,
-401866466,2026,12,regular,2026-11-18T00:00:00.000Z,false,false,2309,Kent State,,193,Miami (OH),
+401866464,2026,12,regular,2026-11-18T00:00:00.000Z,false,true,195,Ohio,35,2050,Ball State,28
+401866465,2026,12,regular,2026-11-17T23:00:00.000Z,false,true,2711,Western Michigan,34,2199,Eastern Michigan,27
+401866466,2026,12,regular,2026-11-18T00:00:00.000Z,false,true,2309,Kent State,3,193,Miami (OH),20
 401866467,2026,12,regular,2026-11-19T00:00:00.000Z,false,false,113,Massachusetts,,2006,Akron,
 401866468,2026,12,regular,2026-11-21T00:30:00.000Z,false,false,2649,Toledo,,189,Bowling Green,
 401866469,2026,12,regular,2026-11-19T00:30:00.000Z,false,false,2084,Buffalo,,2117,Central Michigan,
