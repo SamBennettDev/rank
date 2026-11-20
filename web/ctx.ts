@@ -138,7 +138,7 @@ export const METRIC_LABEL: Record<Metric, string> = {
 };
 export const METRIC_HINT: Record<Metric, string> = {
   overall:
-    "Quality, 0–100: 100 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting less, and each spring is as strong as the result was surprising.",
+    "Quality, 0–100: 100 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting a little less.",
   resume:
     "Points per game, 0–100. A win earns 50 plus half the beaten team's quality; a loss earns half the winner's quality.",
   schedule:

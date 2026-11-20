@@ -1,13 +1,13 @@
 {
   "label": "Demo season (fictional data)",
   "demo": true,
-  "algorithmVersion": "quality-springs-1",
+  "algorithmVersion": "quality-springs-2",
   "classifications": [
     "fbs"
   ],
   "springs": {
-    "strengthShrink": 0.5,
-    "qualityScale": 0.0056
+    "strengthShrink": 0.25,
+    "qualityScale": 0.002
   },
   "matchup": {
     "winBonus": 3,

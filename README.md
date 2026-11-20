@@ -2,7 +2,7 @@
 
 Open, deterministic college football rankings for **every FBS and FCS team**. Live at **https://rank.sam-bennett.dev**.
 
-**One spring graph.** Every game is a spring that wants its winner 100 × (1 + 1/2 + … + 1/margin) points above its loser, so the first point is worth 100, the second 50, the third 33.3, and each extra point counts less. Each spring is as strong as the result was surprising: an upset or a win over a good team pulls hard, a good team beating a bad one barely pulls, so cupcake blowouts don't drag anyone down. Solving the whole graph (repeated until the spring strengths settle) gives every team a strength, and from it a **quality**: 100 × its chance of beating an average team, from 0 to 100. Quality measures team strength.
+**One spring graph.** Every game is a spring that wants its winner 100 × margin^0.75 points above its loser: a 1-point win is worth 100, a 7-point win 430, a 14-point win 724 and a 35-point win 1439, so each extra point counts a little less. Solving the whole graph once gives every team a strength, the average of what its games say, and from it a **quality**: 100 × its chance of beating an average team, from 0 to 100. Quality measures team strength.
 
 The ranking itself is **résumé**, and two boards are built from quality:
 
@@ -14,7 +14,7 @@ No home field or head-to-head rules.
 
 - **Every team starts at zero.** No preseason, polls, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count.
 - **Explainable game by game.** The team page shows every game's résumé points and the team's résumé rank (the official rank) plus quality and schedule.
-- **Measured.** On 2014–2019, where the settings were chosen, the weekly résumé rankings pick 68.6% of next week's winners and the final ranking has the winner above the loser in 83.4% of games (67.3% and 82.8% on 2021–2026). Ordering by quality instead picks 70.4% and 83.1% (69.2% and 82.7%). `research/springs.py` reproduces both.
+- **Measured.** On 2014–2019, where the settings were chosen, the weekly résumé rankings pick 68.5% of next week's winners and the final ranking has the winner above the loser in 83.6% of games (67.2% and 82.5% on 2021–2026). Ordering by quality instead picks 71.7% of next week's winners with 81.5% season-end agreement (70.0% and 80.6%). `research/springs.py` reproduces both; `research/QUALITY.md` compares the alternatives.
 - **Reproduce every number.** The Node scripts and the browser share one engine; Recompute on the method page rebuilds every published file byte for byte.
 
 Matchup odds come from a separate calibrated margin model and never change the ranking. See [methodology](docs/METHODOLOGY.md).
@@ -46,7 +46,7 @@ data/rankings/<year>/<snapshot>.json  quality, résumé, schedule, every game's 
 data/index.json                       available seasons and snapshots
 ```
 
-Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (quality, 0–100) and `resume` and `resumeRank` (the official ranking), `strength` (points better than average), `schedule` and `scheduleRank`, and each board's weekly movement (`change`, `resumeChange`, `scheduleChange`), and every counted game in `springs` with its `margin`, `spring` (spring strength), `win` (résumé points the winner earned) and `loss` (résumé points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
+Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (quality, 0–100) and `resume` and `resumeRank` (the official ranking), `strength` (points better than average), `schedule` and `scheduleRank`, and each board's weekly movement (`change`, `resumeChange`, `scheduleChange`), and every counted game in `springs` with its `margin`, `win` (résumé points the winner earned) and `loss` (résumé points the loser lost). Lower-division opponents are on the graph too and appear, unranked, in `opponents`. `config.classifications` selects the ranked field; `opponentClassifications` can keep additional divisions as inputs. All snapshots use calendar cutoffs.
 
 ## Update results
 
@@ -72,7 +72,7 @@ src/engine/  spring graph, résumé and schedule, matchup model, chronology and 
 scripts/     fetching, computation, verification and backtesting
 web/         static TypeScript site, sharing the same engine
 tests/       spring math, matchup model, chronology and determinism
-research/    reproduces the ranking's accuracy on past seasons
+research/    reproduces the ranking's accuracy on past seasons and compares quality models
 docs/        full methodology
 ```
 

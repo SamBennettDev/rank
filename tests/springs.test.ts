@@ -9,7 +9,6 @@ import {
   solveSprings,
   rankByQuality,
   solveStrength,
-  surprise,
   type Spring,
 } from "../src/engine/springs";
 import type { Team } from "../src/engine/types";
@@ -23,31 +22,30 @@ const win = (winner: number, loser: number, margin = 7): Spring => ({
 
 describe("solveSprings", () => {
   it("spaces a chain of equal springs evenly, winners on top", () => {
-    const h = solveSprings(3, [win(0, 1), win(1, 2)], [1, 1], [1, 1], 1e-9);
+    const h = solveSprings(3, [win(0, 1), win(1, 2)], [1, 1], 1e-9);
     expect(h[0]! - h[1]!).toBeCloseTo(1, 6);
     expect(h[1]! - h[2]!).toBeCloseTo(1, 6);
     expect(h[0]! + h[1]! + h[2]!).toBeCloseTo(0, 6);
   });
 
-  it("puts every team at the stiffness-weighted average of what its games say", () => {
+  it("puts every team at the average of what its games say", () => {
     const springs = [win(0, 1), win(1, 2), win(2, 0), win(0, 3), win(3, 2)];
-    const k = [3, 0.5, 1, 2, 0.25];
     const gap = [7, 3, 10, 1, 2];
-    const h = solveSprings(4, springs, k, gap, 0.1);
+    const h = solveSprings(4, springs, gap, 0.1);
     for (let i = 0; i < 4; i++) {
       let sum = 0,
         weight = 0.1;
       springs.forEach((s, e) => {
-        if (s.winner === i) sum += k[e]! * (h[s.loser]! + gap[e]!);
-        if (s.loser === i) sum += k[e]! * (h[s.winner]! - gap[e]!);
-        if (s.winner === i || s.loser === i) weight += k[e]!;
+        if (s.winner === i) sum += h[s.loser]! + gap[e]!;
+        if (s.loser === i) sum += h[s.winner]! - gap[e]!;
+        if (s.winner === i || s.loser === i) weight += 1;
       });
       expect(h[i]).toBeCloseTo(sum / weight, 9);
     }
   });
 
   it("leaves a team with no games at 0", () => {
-    const h = solveSprings(3, [win(0, 1)], [5], [7], 1);
+    const h = solveSprings(3, [win(0, 1)], [7], 1);
     expect(h[2]).toBe(0);
   });
 
@@ -58,9 +56,9 @@ describe("solveSprings", () => {
 });
 
 describe("quality", () => {
-  const good = quality(430, S.qualityScale),
+  const good = quality(1200, S.qualityScale),
     average = quality(0, S.qualityScale),
-    bad = quality(-430, S.qualityScale);
+    bad = quality(-1200, S.qualityScale);
 
   it("turns strength into a chance of beating an average team", () => {
     expect(average).toBe(0.5);
@@ -70,29 +68,26 @@ describe("quality", () => {
 
   it("counts each extra point of margin less than the one before", () => {
     expect(marginGap(1)).toBe(100);
-    expect(marginGap(2)).toBeCloseTo(100 + 100 / 2, 12);
-    expect(marginGap(3)).toBeCloseTo(100 + 100 / 2 + 100 / 3, 12);
+    expect(marginGap(16)).toBe(800);
+    expect(marginGap(81)).toBe(2700);
+    for (const m of [2, 3, 7, 14, 28, 56])
+      expect(marginGap(m)).toBeCloseTo(100 * m ** 0.75, 9);
     const steps = [2, 3, 7, 14, 28].map((m) => marginGap(m) - marginGap(m - 1));
     for (let i = 1; i < steps.length; i++)
       expect(steps[i]!).toBeLessThan(steps[i - 1]!);
     expect(() => marginGap(0)).toThrow();
   });
 
-  it("settles where every spring's strength is its result's surprise", () => {
+  it("is one solve of the margin springs", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
-    const { strength, stiffness } = solveStrength(4, springs, S);
-    const p = Array.from(strength, (x) => quality(x, S.qualityScale));
-    springs.forEach((s, e) =>
-      expect(stiffness[e]).toBeCloseTo(surprise(p[s.winner]!, p[s.loser]!), 8),
-    );
+    const strength = solveStrength(4, springs, S);
     const again = solveSprings(
       4,
       springs,
-      stiffness,
       springs.map((s) => marginGap(s.margin)),
       S.strengthShrink,
     );
-    for (let i = 0; i < 4; i++) expect(strength[i]).toBeCloseTo(again[i]!, 8);
+    expect(Array.from(strength)).toEqual(Array.from(again));
   });
 
   it("is 100 × the chance of beating an average team, in strength order", () => {
@@ -102,7 +97,7 @@ describe("quality", () => {
       expect(r.quality[i]).toBe(100 * quality(r.strength[i]!, S.qualityScale));
   });
 
-  it("barely lets a blowout of a weak team pull the winner down", () => {
+  it("never lets a blowout of a weak team pull the winner down", () => {
     // 0 and 1 are strong and close; 2 is weak. 0 also crushes 2 by 56.
     const base = [
       win(0, 1, 4),
@@ -111,14 +106,22 @@ describe("quality", () => {
       win(1, 3, 20),
       win(3, 2, 21),
     ];
-    const without = solveStrength(4, base, S).strength;
+    const without = solveStrength(4, base, S);
     const withBlowout = solveStrength(4, [...base, win(0, 2, 56)], S);
-    expect(withBlowout.stiffness.at(-1)!).toBeLessThan(0.5);
-    expect(withBlowout.strength[0]! - without[0]!).toBeGreaterThan(-1);
+    expect(withBlowout[0]!).toBeGreaterThan(without[0]!);
+  });
+
+  it("lifts the winner more the bigger the margin", () => {
+    const base = [win(1, 2, 10), win(2, 3, 10)];
+    const heights = [1, 7, 21, 42].map(
+      (m) => solveStrength(4, [...base, win(0, 2, m)], S)[0]!,
+    );
+    for (let i = 1; i < heights.length; i++)
+      expect(heights[i]!).toBeGreaterThan(heights[i - 1]!);
   });
 
   it("rejects a non-positive pull toward average", () => {
-    expect(() => solveSprings(2, [win(0, 1)], [1], [1], 0)).toThrow(/shrink/);
+    expect(() => solveSprings(2, [win(0, 1)], [1], 0)).toThrow(/shrink/);
   });
 });
 

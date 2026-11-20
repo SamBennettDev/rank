@@ -20,15 +20,15 @@ export const QUALITY_POINTS = 100;
 
 /**
  * How far above its loser a spring wants the winner, in points:
- * WIN_POINTS × (1 + 1/2 + … + 1/margin). The first point is worth 100, the second
- * 50, the third 33.3: each extra point counts less than the one before.
+ * WIN_POINTS × margin^0.75, computed as √margin × √√margin so it uses only √.
+ * A 1-point win is worth 100, 2 points 168.2, 3 points 228.0, 7 points 430.4,
+ * 14 points 723.8, 28 points 1217.2: each extra point counts a little less.
  */
 export function marginGap(margin: number) {
   if (!Number.isInteger(margin) || margin < 1)
     throw new Error("margin must be a positive whole number");
-  let sum = 0;
-  for (let i = 1; i <= margin; i++) sum += 1 / i;
-  return WIN_POINTS * sum;
+  const root = Math.sqrt(margin);
+  return WIN_POINTS * root * Math.sqrt(root);
 }
 
 /** Chance a team at this strength beats an average (height 0) team. */
@@ -52,33 +52,18 @@ export const gamePoints = (winnerQuality: number, loserQuality: number) => ({
 });
 
 /**
- * Spring strength for one game: chance(loser) + (1 − chance(winner)), 0–2, where
- * chance is each team's chance of beating an average team.
- * A surprising result (an upset, or a win over a good team) is a stiff spring; an
- * expected one (a good team beating a bad one) barely pulls either team.
- */
-export const surprise = (winnerQuality: number, loserQuality: number) =>
-  loserQuality + (1 - winnerQuality);
-
-/** The solve repeats until no strength moves more than this many points... */
-export const SETTLE = 1.5e-8;
-/** ...or this many rounds have run. */
-export const MAX_ROUNDS = 200;
-
-/**
  * Heights that minimise
  *
- *   ½ Σ_games stiffness · (h[winner] − h[loser] − gap)²  +  ½ shrink · Σ_teams h²
+ *   ½ Σ_games (h[winner] − h[loser] − gap)²  +  ½ shrink · Σ_teams h²
  *
  * One symmetric positive-definite system, solved by Cholesky with + − × / and sqrt
- * in a fixed order. Each team's height is the stiffness-weighted average of what its
- * games say (opponent + gap after a win, opponent − gap after a loss), with `shrink`
+ * in a fixed order. Each team's height is the average of what its games say
+ * (opponent + gap after a win, opponent − gap after a loss), with `shrink` games'
  * weight on 0.
  */
 export function solveSprings(
   n: number,
   springs: readonly Spring[],
-  stiffness: readonly number[],
   gaps: readonly number[],
   shrink: number,
 ): Float64Array {
@@ -86,27 +71,22 @@ export function solveSprings(
   const matrix = new Float64Array(n * n),
     rhs = new Float64Array(n);
   springs.forEach(({ winner: w, loser: l }, e) => {
-    const k = stiffness[e]!;
-    if (!(k >= 0) || !Number.isFinite(k))
-      throw new Error("spring stiffness must be finite and >= 0");
-    matrix[w * n + w]! += k;
-    matrix[l * n + l]! += k;
-    matrix[w * n + l]! -= k;
-    matrix[l * n + w]! -= k;
+    matrix[w * n + w]! += 1;
+    matrix[l * n + l]! += 1;
+    matrix[w * n + l]! -= 1;
+    matrix[l * n + w]! -= 1;
     const g = gaps[e]!;
     if (!Number.isFinite(g)) throw new Error("spring gap must be finite");
-    rhs[w]! += k * g;
-    rhs[l]! -= k * g;
+    rhs[w]! += g;
+    rhs[l]! -= g;
   });
   for (let i = 0; i < n; i++) matrix[i * n + i]! += shrink;
   return choleskySolve(matrix, rhs, n);
 }
 
 /**
- * Margin SpringRank with springs weighted by surprise. Every game wants its winner
- * `marginGap(margin)` points above its loser. It starts with every spring at
- * strength 1, then sets each spring from the teams' chances (see `surprise`) and
- * solves again, until the strengths settle.
+ * Margin SpringRank: every game wants its winner `marginGap(margin)` points above its
+ * loser, every spring equally strong, so one solve gives every team's strength.
  */
 export function solveStrength(
   n: number,
@@ -114,36 +94,12 @@ export function solveStrength(
   settings: SpringSettings,
 ) {
   const gaps = springs.map((s) => marginGap(s.margin));
-  let stiffness = springs.map(() => 1);
-  let strength = solveSprings(
-    n,
-    springs,
-    stiffness,
-    gaps,
-    settings.strengthShrink,
-  );
-  for (let round = 0; round < MAX_ROUNDS; round++) {
-    const p = Array.from(strength, (x) => quality(x, settings.qualityScale));
-    stiffness = springs.map((s) => surprise(p[s.winner]!, p[s.loser]!));
-    const next = solveSprings(
-      n,
-      springs,
-      stiffness,
-      gaps,
-      settings.strengthShrink,
-    );
-    let moved = 0;
-    for (let i = 0; i < n; i++)
-      moved = Math.max(moved, Math.abs(next[i]! - strength[i]!));
-    strength = next;
-    if (moved < SETTLE) return { strength, stiffness };
-  }
-  throw new Error("strengths did not settle");
+  return solveSprings(n, springs, gaps, settings.strengthShrink);
 }
 
 /**
- * The ranking and its two companions. Quality (0–100 points, the ranking) comes from
- * one surprise-weighted margin SpringRank. Résumé is a team's average game points
+ * The ranking and its two companions. Quality (0–100 points) comes from one margin
+ * SpringRank. Résumé is a team's average game points
  * (see `gamePoints`); schedule is the average quality of the opponents it played.
  */
 export function rankByQuality(
@@ -151,7 +107,7 @@ export function rankByQuality(
   springs: readonly Spring[],
   settings: SpringSettings,
 ) {
-  const { strength, stiffness } = solveStrength(n, springs, settings);
+  const strength = solveStrength(n, springs, settings);
   const q = Array.from(strength, (s) =>
     qualityPoints(quality(s, settings.qualityScale)),
   );
@@ -172,7 +128,6 @@ export function rankByQuality(
   return {
     strength,
     quality: Float64Array.from(q),
-    stiffness,
     points,
     resume: perGame(earned),
     schedule: perGame(faced),

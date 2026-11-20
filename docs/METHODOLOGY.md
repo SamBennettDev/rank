@@ -1,40 +1,34 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams (`quality-springs-1`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at diminishing returns and springs weighted by how surprising each result was. The official ranking is **résumé** (0–100: a win earns 50 plus half the beaten team's quality, a loss half the winner's, averaged per game); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams (`quality-springs-2`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at gently diminishing returns. The official ranking is **résumé** (0–100: a win earns 50 plus half the beaten team's quality, a loss half the winner's, averaged per game); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## Quality: SpringRank with margins
 
-Each game `e` is a spring of strength `k[e]` that wants its winner `gap[e]` points above its loser:
+Each game `e` is a spring that wants its winner `gap[e]` points above its loser:
 
 ```text
-gap[e] = 100 × (1 + 1/2 + 1/3 + … + 1/margin[e])
+gap[e] = 100 × margin[e]^0.75 = 100 × √margin × √√margin
 ```
 
-A 1-point win is worth 100, a 2-point win 150, a 3-point win 183.3, a 14-point win 325.2 and a 35-point win 414.7: each extra point counts less than the one before (it grows like the log of the margin). It needs only + and ÷, so it is exact and platform-independent. Strengths `s` minimise
+A 1-point win is worth 100, a 2-point win 168.2, a 3-point win 228.0, a 7-point win 430.4, a 14-point win 723.8 and a 35-point win 1439.0: each extra point counts a little less than the one before. Computing it with two square roots keeps it exact and platform-independent. Every spring is equally strong, and strengths `s` minimise
 
 ```text
-½ Σ_games k[e] × (s[winner] − s[loser] − gap[e])²  +  ½ strengthShrink × Σ_teams s[i]²
+½ Σ_games (s[winner] − s[loser] − gap[e])²  +  ½ strengthShrink × Σ_teams s[i]²
 ```
 
-Setting the slope to zero gives one symmetric positive-definite linear system, solved exactly with a Cholesky decomposition. At the answer every team's strength is the **spring-weighted average of what its games say**, with `strengthShrink = 0.5` weight on 0 (an average team):
+Setting the slope to zero gives one symmetric positive-definite linear system, solved exactly once with a Cholesky decomposition. At the answer every team's strength is the **average of what its games say**, with `strengthShrink = 0.25` games' weight on 0 (an average team):
 
 ```text
-s[i] = Σ_games of i k[e] × (s[opponent] ± gap[e])  /  (Σ_games of i k[e] + strengthShrink)
+s[i] = Σ_games of i (s[opponent] ± gap[e])  /  (games of i + strengthShrink)
 ```
 
 where the target is the opponent's strength + gap after a win and − gap after a loss. A team with no games stays at 0. The pull toward 0 keeps the system solvable while the graph is still in pieces early in the season. Each strength becomes a **quality**, 100 × the chance of beating an average (strength-0) team:
 
 ```text
-quality[i] = 100 × logistic(qualityScale × s[i]),   qualityScale = 0.0056
+quality[i] = 100 × logistic(qualityScale × s[i]),   qualityScale = 0.002
 ```
 
-Each spring's strength is how surprising its result was:
-
-```text
-k[e] = p[loser] + (1 − p[winner]),   p[i] = quality[i] / 100
-```
-
-An upset or a win over a good team is a stiff spring (up to 2); a good team beating a bad one barely pulls (near 0); two average teams make a spring of 1. Strengths and spring strengths depend on each other, so the solve starts with every `k = 1`, solves, sets each `k` from the qualities, and solves again, repeating until no strength moves more than 1e-9 points (at most 200 rounds; it settles in a few dozen). A blowout of a very weak team can't reach a strong winner's level under diminishing returns, so with equal springs it would drag the winner down; weighted by surprise, it barely counts. Each game's settled `k` is published as `spring`.
+Because margins count at only gently diminishing returns, a blowout of a weak team says the winner is far better, which is what its rating already says, so it doesn't drag a strong winner down; a bigger win over the same opponent always lifts the winner more. (Version 1 used `100 × (1 + 1/2 + … + 1/margin)` with springs re-weighted by surprise to get the same effect; `research/QUALITY.md` shows the simpler model predicts better.)
 
 Quality, published as each team's `height`, is team strength and the second board.
 
@@ -56,18 +50,18 @@ loser earns   quality[winner] / 2          (0 to 50)
 
 A team's **résumé** is its games' points divided by the games it played, so an extra game is no advantage by itself. Its **schedule** is the average quality of the opponents it played. Both are ranked among the ranked field (`resumeRank`, `scheduleRank`); neither changes the ranking.
 
-Each game's `margin`, `spring` (settled spring strength), `win` (the winner's résumé points) and `loss` (the loser's) are published in `springs`, and each team's `height` (quality), `strength`, `resume`, `resumeRank`, `schedule` and `scheduleRank` in `teams`, with `change`, `resumeChange` and `scheduleChange` giving places gained on each board since the previous snapshot. Published six-decimal qualities sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
+Each game's `margin`, `win` (the winner's résumé points) and `loss` (the loser's) are published in `springs`, and each team's `height` (quality), `strength`, `resume`, `resumeRank`, `schedule` and `scheduleRank` in `teams`, with `change`, `resumeChange` and `scheduleChange` giving places gained on each board since the previous snapshot. Published six-decimal qualities sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
 
 ## Settings and accuracy
 
-The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen. `strengthShrink` gave the best next-week accuracy and `qualityScale` the best log loss, so quality is a calibrated win probability. Accuracy is measured two ways: next-week winners picked by each week's ranking (from week 4, using only earlier games) and season-end agreement (the final ranking has the winner above the loser). `python3 research/springs.py 2014-2019` reproduces them:
+The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen. The margin exponent and `strengthShrink` were chosen for next-week log loss (exponents 0.7–0.9 score alike; 0.75 is the one that needs only square roots), and `qualityScale` is the value with the best log loss, so quality is a calibrated win probability. Accuracy is measured two ways: next-week winners picked by each week's ranking (from week 4, using only earlier games) and season-end agreement (the final ranking has the winner above the loser). `python3 research/springs.py 2014-2019` reproduces them:
 
-| Seasons | Next-week winners | Winner above loser at season end |
-|---|---:|---:|
-| 2014–2019 (design, 6,797 and 8,770 games) | 70.4% | 83.1% |
-| 2021–2026 through week 7 (6,403 and 8,613 games) | 69.2% | 82.7% |
+| Seasons | Résumé: next-week winners | Résumé: season end | Quality: next-week winners | Quality: season end |
+|---|---:|---:|---:|---:|
+| 2014–2019 (design, 6,797 and 8,770 games) | 68.5% | 83.6% | 71.7% | 81.5% |
+| 2021–2026 through week 12 (6,889 and 9,099 games) | 67.2% | 82.5% | 70.0% | 80.6% |
 
-The official ranking is résumé. Ordering by résumé picks 68.6% of next-week winners on 2014–2019 and 67.3% on 2021–2026, with season-end agreement of 83.4% and 82.8%. The table above is for ordering by quality, which picks slightly more next-week winners.
+The official ranking is résumé. Quality picks more next-week winners and has lower season-end agreement, as a strength measure should: résumé rewards what was won, quality how good a team is. Against version 1 on the same games, quality picks 1.2 and 1.0 points more next-week winners (70.4% → 71.7%, 69.0% → 70.0%) with lower log loss, and résumé is unchanged (68.6% → 68.5%, 83.4% → 83.6%; 67.1% → 67.2%, 82.5% → 82.5%). On 2008–2013, never used in design, quality picks 73.5% against version 1's 72.3% (`research/quality.py 2008-2013`).
 
 2021–2026 were looked at during design, so they are a check rather than an untouched holdout.
 
@@ -104,6 +98,6 @@ Offense, defense and special teams are explanatory outputs from public cfbfastR 
 
 Teams and games use numeric ID order for summation. The spring graph, résumé and schedule averages, the matchup model, variances and ranking use fixed loops and Cholesky with only + − × / and √. The quality logistic and probabilities use fixed-arithmetic `expFixed`, avoiding platform-dependent transcendental functions in published bytes. Values round to six decimals. JSON has fixed key order with one team, prediction and spring per line.
 
-Schema 1 includes engine/algorithm versions, spring and prediction settings, hashes, counts, diagnostics, every game's springs and résumé points (`springs`: margin, spring, win and loss), each team's `height` (quality), `strength`, `resume`, `schedule` and their ranks, and matchup predictions. Node verification and browser Recompute call the same `computeSeason` pipeline. There is no runtime randomness or wall-clock input.
+Schema 1 includes engine/algorithm versions, spring and prediction settings, hashes, counts, diagnostics, every game's springs and résumé points (`springs`: margin, win and loss), each team's `height` (quality), `strength`, `resume`, `schedule` and their ranks, and matchup predictions. Node verification and browser Recompute call the same `computeSeason` pipeline. There is no runtime randomness or wall-clock input.
 
 Mathematical or setting changes bump `algorithmVersion`; output-byte/schema changes bump `ENGINE_VERSION`. Regenerate every ranking and update this specification together. CI checks type safety, tests, byte reproduction and the production build.

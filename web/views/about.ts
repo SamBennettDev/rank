@@ -135,7 +135,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h(
       "p",
       { class: "method-caption" },
-      "Every game is a spring holding its winner above its loser by the margin, each extra point counting less than the last. Upsets and wins over good teams pull hard; a good team beating a bad one barely pulls. The result is every team’s quality. Résumé, the ranking, and schedule are built from it: a team’s résumé is the average of what its games earned.",
+      "Every game is a spring holding its winner above its loser by the margin, each extra point counting a little less than the last. The result is every team’s quality. Résumé, the ranking, and schedule are built from it: a team’s résumé is the average of what its games earned.",
     ),
     details(
       "Résumé, quality and schedule",
@@ -143,7 +143,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Quality, team strength. "),
-        `SpringRank with margins: every game is a spring that wants its winner 100 × (1 + 1/2 + … + 1/margin) points above its loser. A 1-point win is worth 100, a 2-point win 150, a 3-point win 183.3, a 14-point win 325.2 and a 35-point win 414.7, so each extra point counts less than the one before. Each spring is as strong as its result was surprising: the loser’s chance of beating an average team + (1 − the winner’s). An upset or a win over a good team pulls hard; a good team beating a bad one barely pulls, so a blowout of a weak team doesn’t drag the winner down. Solving the whole graph, and repeating until the spring strengths settle, gives every team a strength in points: the spring-weighted average of what its games say, with a small weight (${m.springs.strengthShrink}) on 0, an average team. Quality is 100 × the chance of beating an average team, from 0 to 100 (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best).`,
+        `SpringRank with margins: every game is a spring that wants its winner 100 × margin^0.75 points above its loser. A 1-point win is worth 100, a 2-point win 168.2, a 3-point win 228.0, a 7-point win 430.4, a 14-point win 723.8 and a 35-point win 1439, so each extra point counts a little less than the one before. Every spring is equally strong. Solving the whole graph once gives every team a strength in points: the average of what its games say (the opponent’s strength plus the gap after a win, minus it after a loss), with a small weight (${m.springs.strengthShrink} games) on 0, an average team. Quality is 100 × the chance of beating an average team, from 0 to 100 (scale ${m.springs.qualityScale}, the value that predicted 2014–2019 games best).`,
       ),
       h(
         "p",
@@ -169,7 +169,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         { class: "muted" },
         ctx.entry.league
           ? "The settings were chosen on college football (2014–2019) and are reused for the NFL unchanged; they have not been tuned or backtested on NFL games. The matchup odds come from a separate margin model that is likewise uncalibrated for the NFL."
-          : "On 2014–2019, the résumé ranking picks 68.6% of next week’s winners and the final ranking has the winner above the loser in 83.4% of games; on 2021–2026, 67.3% and 82.8%. Ordering by quality instead picks slightly more next-week winners (70.4% and 69.2%) with similar season-end agreement (83.1% and 82.7%). The matchup odds come from a separate, calibrated margin model.",
+          : "On 2014–2019, the résumé ranking picks 68.5% of next week’s winners and the final ranking has the winner above the loser in 83.6% of games; on 2021–2026, 67.2% and 82.5%. Ordering by quality instead picks more next-week winners (71.7% and 70.0%) with lower season-end agreement (81.5% and 80.6%): quality measures strength, résumé what was won. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     details(

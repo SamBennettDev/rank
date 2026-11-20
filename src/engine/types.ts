@@ -47,7 +47,7 @@ export interface SeasonConfig {
 }
 
 export interface SpringSettings {
-  /** Pull toward 0 (an average team), in games' worth (springs are 0–2). */
+  /** Pull toward 0 (an average team), in games' worth (every spring is 1). */
   strengthShrink: number;
   /** Converts a strength (points) into a chance of beating an average team. */
   qualityScale: number;
@@ -138,7 +138,7 @@ export interface RankedTeam {
   tied: boolean;
   /** Quality, 0–100: 100 × the chance of beating an average team. The ranking. */
   height: number | null;
-  /** Points better than an average team, from the surprise-weighted margin SpringRank. */
+  /** Points better than an average team, from the margin SpringRank. */
   strength: number | null;
   /** Résumé, 0–100: average game points (a win earns 50 + half the loser's quality, a loss half the winner's). */
   resume: number | null;
@@ -200,10 +200,8 @@ export interface PublishedSpring {
   gameId: number;
   winner: number;
   loser: number;
-  /** Winning margin in points; the spring wants 7 × (1 + 1/2 + … + 1/margin). */
+  /** Winning margin in points; the spring wants 100 × margin^0.75. */
   margin: number;
-  /** Spring strength, 0–2: chance(loser) + 1 − chance(winner). */
-  spring: number;
   /** Résumé points the winner earns: 50 + half the loser's quality, 50 to 100. */
   win: number;
   /** Résumé points the loser earns: half the winner's quality, 0 to 50. */

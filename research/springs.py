@@ -1,6 +1,6 @@
 """Reproduce the published ranking (src/engine/springs.ts) on past seasons and measure it.
 
-  python3 research/springs.py 2014-2019        # walk-forward picks and season-end agreement
+  python3 research/springs.py 2014-2019        # walk-forward picks and season-end agreement, both boards
   python3 research/springs.py 2021-2026
   python3 research/springs.py --top 2026       # a season's final top 25
 
@@ -14,7 +14,7 @@ import numpy as np
 REVISION = "a3dd960090c1bfa169cebd491beabf7028b379b2"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Settings from src/engine/defaults.ts (DEFAULT_SPRINGS).
-STRENGTH_SHRINK, QUALITY_SCALE = 0.5, 0.0056
+STRENGTH_SHRINK, QUALITY_SCALE = 0.25, 0.002
 WIN_POINTS = 100.0  # a 1-point win: the scale of the springs' gaps
 QUALITY_POINTS = 100.0  # the top of the 0-100 quality scale
 
@@ -72,47 +72,50 @@ def solve(n, w, l, k, gap, shrink):
 
 
 def margin_gap(margin):
-    """WIN_POINTS × (1 + 1/2 + … + 1/margin): each extra point counts less."""
-    harmonic = np.concatenate([[0.0], np.cumsum(1 / np.arange(1, margin.max() + 1))])
-    return WIN_POINTS * harmonic[margin]
+    """WIN_POINTS × margin^0.75 (√m·√√m in the engine): each extra point counts a little less."""
+    root = np.sqrt(margin)
+    return WIN_POINTS * root * np.sqrt(root)
 
 
 def quality(n, w, l, margin):
-    """Margin SpringRank with springs weighted by surprise, as 0-100 quality points."""
-    gap = margin_gap(margin)
-    strength = solve(n, w, l, np.ones(len(w)), gap, STRENGTH_SHRINK)
-    for _ in range(200):  # weight each spring by surprise until the strengths settle
-        p = 1 / (1 + np.exp(-QUALITY_SCALE * strength))
-        nxt = solve(n, w, l, p[l] + 1 - p[w], gap, STRENGTH_SHRINK)
-        moved = np.abs(nxt - strength).max(); strength = nxt
-        if moved < 1e-9:
-            break
+    """Margin SpringRank, every spring equally strong, as 0-100 quality points."""
+    strength = solve(n, w, l, np.ones(len(w)), margin_gap(margin), STRENGTH_SHRINK)
     return QUALITY_POINTS / (1 + np.exp(-QUALITY_SCALE * strength))
 
 
 def rank(n, w, l, margin):
-    """The ranking is quality."""
+    """Quality, the second board."""
     return quality(n, w, l, margin)
 
 
+def resume(n, w, l, margin):
+    """The ranking: average game points, 50 + half the loser's quality for a win, half the winner's for a loss."""
+    q = quality(n, w, l, margin)
+    points = np.zeros(n); games = np.zeros(n)
+    np.add.at(points, w, 50 + q[l] / 2); np.add.at(points, l, q[w] / 2)
+    np.add.at(games, w, 1); np.add.at(games, l, 1)
+    return np.where(games > 0, points / np.maximum(games, 1), 0)
+
+
 def evaluate(years):
-    right = games = agree = counted = 0
-    for y in years:
-        S = load(y)
-        W, L, M, O = S["winner"], S["loser"], S["margin"], S["order"]
-        for wk in sorted(set(O)):
-            if wk < 4:
-                continue
-            p = O < wk
-            h = rank(S["n"], W[p], L[p], M[p])
-            played = np.zeros(S["n"], bool); played[W[p]] = played[L[p]] = True
-            c = (O == wk) & played[W] & played[L]
-            d = h[W[c]] - h[L[c]]
-            right += np.sum(d > 0) + 0.5 * np.sum(d == 0); games += c.sum()
-        h = rank(S["n"], W, L, M)
-        agree += np.sum(h[W] > h[L]); counted += len(W)
-    print(f"{years[0]}-{years[-1]}: picks {100 * right / games:.2f}% of {games} next-week games; "
-          f"final ranking has the winner above the loser in {100 * agree / counted:.2f}% of {counted} games")
+    for board, order in (("quality", rank), ("résumé", resume)):
+        right = games = agree = counted = 0
+        for y in years:
+            S = load(y)
+            W, L, M, O = S["winner"], S["loser"], S["margin"], S["order"]
+            for wk in sorted(set(O)):
+                if wk < 4:
+                    continue
+                p = O < wk
+                h = order(S["n"], W[p], L[p], M[p])
+                played = np.zeros(S["n"], bool); played[W[p]] = played[L[p]] = True
+                c = (O == wk) & played[W] & played[L]
+                d = h[W[c]] - h[L[c]]
+                right += np.sum(d > 0) + 0.5 * np.sum(d == 0); games += c.sum()
+            h = order(S["n"], W, L, M)
+            agree += np.sum(h[W] > h[L]); counted += len(W)
+        print(f"{years[0]}-{years[-1]} {board}: picks {100 * right / games:.2f}% of {games} next-week games; "
+              f"final ranking has the winner above the loser in {100 * agree / counted:.2f}% of {counted} games")
 
 
 if __name__ == "__main__":

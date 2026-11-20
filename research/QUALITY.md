@@ -86,7 +86,23 @@ slightly from the published 0.0056 figures.)
 5. Home field (estimated jointly) improves venue-aware predictions (72.2% on 2014–2019) but
    not the ranking order. Not recommended, since the project excludes it.
 
-### Recommendation
+### Adopted (`quality-springs-2`)
+
+The engine now uses springs-pow with exponent 0.75 instead of 0.7, because
+margin^0.75 = √margin·√√margin keeps the engine to + − × / and √. Exponents 0.7–0.9 score
+alike. Gap = 100 × margin^0.75 (with equal springs the solve is linear, so the gap's scale
+only rescales strengths); shrink 0.25; qualityScale 0.002 (fitted: 0.00197).
+
+| margin^0.75, shrink 0.25 | quality pick · log loss · final | résumé pick · final |
+|---|---|---|
+| 2014–2019 | 71.66% · 0.5453 · 81.54% | 68.52% · 83.59% |
+| 2021–2026 | 70.01% · 0.5664 · 80.55% | 67.19% · 82.46% |
+| 2008–2013 | 73.46% · 0.5302 · 83.93% | 70.65% · 85.40% |
+
+(Résumé on the first two rows uses the published 0.002 scale, from `research/springs.py`;
+the 2008–2013 row uses the fitted scale, from `research/quality.py`.)
+
+### Recommendation (as written before adoption)
 
 **springs-pow** is the smallest change that improves quality in every period. Keep the
 spring graph; replace `100 × harmonic(margin)` with `325.2 × (margin / 14)^0.7`; set every

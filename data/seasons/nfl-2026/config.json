@@ -2,13 +2,13 @@
   "label": "NFL 2026 season",
   "demo": false,
   "league": "nfl",
-  "algorithmVersion": "quality-springs-1",
+  "algorithmVersion": "quality-springs-2",
   "classifications": [
     "nfl"
   ],
   "springs": {
-    "strengthShrink": 0.5,
-    "qualityScale": 0.0056
+    "strengthShrink": 0.25,
+    "qualityScale": 0.002
   },
   "matchup": {
     "winBonus": 3,
