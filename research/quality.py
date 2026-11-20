@@ -24,6 +24,9 @@ Scores, from week 4, using only earlier games (as research/springs.py):
 Schedules come from sportsdataverse/cfbfastR-data at scripts/history.ts's revision
 (cached in /tmp/rank-backtest, as research/springs.py); 2026 from data/seasons/2026.
 Before 2014 that file has FBS games only (FCS teams appear just in their FBS games).
+Efficiency blends (section 3 of QUALITY.md) add "eff" and "alpha" to a springs config and read
+play-by-play team-game rows from /tmp/rank-backtest/plays_<year>.csv, built with
+`npm run fetch-plays -- <year> --out /tmp/rank-backtest/plays_<year>.csv` (2014 on).
 Needs numpy.
 """
 import csv, io, json, os, sys, urllib.request
@@ -37,6 +40,7 @@ PRESETS = {
     "current": {"model": "springs", "gap": "harm", "k": "surprise", "lam": 0.5, "qs": 0.0056},
     "current-pow": {"model": "springs", "gap": "pow", "a": 0.5, "bonus": 1, "k": "surprise", "lam": 0.5, "qs": 0.0056},
     "springs-pow": {"model": "springs", "gap": "pow", "a": 0.7, "k": "none", "lam": 0.25},
+    "published": {"model": "springs", "gap": "pow", "a": 0.75, "k": "none", "lam": 0.25},
     "soft-label": {"model": "soft-label", "T": 22, "bonus": 4, "lam": 0.03},
 }
 
@@ -84,8 +88,34 @@ def load(year):
     hp = np.array([int(r["hp"]) for r in rows]); ap = np.array([int(r["ap"]) for r in rows])
     home = np.array([ix[r["h"]] for r in rows]); away = np.array([ix[r["a"]] for r in rows])
     won = hp > ap
-    return dict(n=len(ids), order=np.array([last + 1 if r["post"] else r["week"] for r in rows]),
-                w=np.where(won, home, away), l=np.where(won, away, home), m=np.abs(hp - ap))
+    S = dict(n=len(ids), order=np.array([last + 1 if r["post"] else r["week"] for r in rows]),
+             w=np.where(won, home, away), l=np.where(won, away, home), m=np.abs(hp - ap))
+    S.update(efficiency(year, rows, won))
+    return S
+
+
+def efficiency(year, rows, won):
+    """Per game, from the winner's side: scrimmage EPA margin (garbage time out), net special-teams
+    EPA, EPA-per-snap margin × 65 and success-rate margin, from fetch-plays' team-game rows.
+    `has` is False where either side has no play-by-play (score margin only)."""
+    f = os.path.join(ROOT, "data/seasons/2026/plays.csv") if year == 2026 else f"{CACHE}/plays_{year}.csv"
+    plays = {}
+    if os.path.exists(f):
+        for r in csv.DictReader(open(f, encoding="utf8")):
+            plays[(int(r["game_id"]), int(r["team_id"]))] = (int(r["snaps"]), float(r["epa"]), int(r["success"]), float(r["special_epa"]))
+    out = {k: np.zeros(len(rows)) for k in ("epa", "st", "perplay", "sr")}
+    has = np.zeros(len(rows), bool)
+    for i, (r, hw) in enumerate(zip(rows, won)):
+        a, b = plays.get((r["id"], r["h"])), plays.get((r["id"], r["a"]))
+        if not a or not b or a[0] == 0 or b[0] == 0:
+            continue
+        wv, lv = (a, b) if hw else (b, a)
+        has[i] = True
+        out["epa"][i] = wv[1] - lv[1]
+        out["st"][i] = wv[3]
+        out["perplay"][i] = 65 * (wv[1] / wv[0] - lv[1] / lv[0])
+        out["sr"][i] = wv[2] / wv[0] - lv[2] / lv[0]
+    return dict(has=has, **{f"eff_{k}": v for k, v in out.items()})
 
 
 HARMONIC = np.concatenate([[0.0], np.cumsum(1 / np.arange(1, 400))])
@@ -106,8 +136,26 @@ def solve(n, w, l, k, g, lam):
     return np.linalg.solve(A, b)
 
 
-def springs(n, w, l, m, cfg):
+def signed_gap(cfg, x):
+    """The points gap's shape for a real-valued margin that can favour the loser."""
+    return np.sign(x) * np.abs(x) ** cfg["a"] * (100 * HARMONIC[14] / 14 ** cfg["a"])
+
+
+def blended_gap(cfg, m, E):
+    """Each game wants (1 − α)·gap(score margin) + α·gap(efficiency margin) where it has play-by-play.
+    eff: epa | epa+st | perplay | perplay+st | sr (success-rate margin, scaled by `srScale` points)."""
     g = gap(cfg, m)
+    alpha = cfg.get("alpha", 0.0)
+    if not alpha:
+        return g
+    kind = cfg["eff"]
+    x = {"epa": E["eff_epa"], "epa+st": E["eff_epa"] + E["eff_st"], "perplay": E["eff_perplay"],
+         "perplay+st": E["eff_perplay"] + E["eff_st"], "sr": E["eff_sr"] * cfg.get("srScale", 100)}[kind]
+    return np.where(E["has"], (1 - alpha) * g + alpha * signed_gap(cfg, x), g)
+
+
+def springs(n, w, l, m, cfg, E=None):
+    g = blended_gap(cfg, m, E) if E is not None else gap(cfg, m)
     s = solve(n, w, l, np.ones(len(w)), g, cfg["lam"])
     if cfg.get("k", "surprise") == "none":
         return s
@@ -136,8 +184,10 @@ def soft_label(n, w, l, m, cfg):
 
 
 def fit(S, mask, cfg):
-    model = soft_label if cfg["model"] == "soft-label" else springs
-    return model(S["n"], S["w"][mask], S["l"][mask], S["m"][mask], cfg)
+    if cfg["model"] == "soft-label":
+        return soft_label(S["n"], S["w"][mask], S["l"][mask], S["m"][mask], cfg)
+    E = {k: S[k][mask] for k in ("has", "eff_epa", "eff_st", "eff_perplay", "eff_sr")}
+    return springs(S["n"], S["w"][mask], S["l"][mask], S["m"][mask], cfg, E)
 
 
 def resume(S, s, beta):

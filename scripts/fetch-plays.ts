@@ -4,6 +4,7 @@
  * (EPA) on them, how many succeeded, and its net special-teams EPA.
  *
  *   npm run fetch-plays -- 2026
+ *   npm run fetch-plays -- 2016 --out /tmp/rank-backtest/plays_2016.csv   (history for research/)
  *
  * Source: the cfbfastR play-by-play release of the sportsdataverse project
  * (https://github.com/sportsdataverse/sportsdataverse-data, CFBD-derived; EPA and
@@ -19,15 +20,17 @@
  */
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { asyncBufferFromFile, parquetReadObjects } from "hyparquet";
 import { playsToCsv } from "../src/engine/data";
 import type { TeamGamePlays } from "../src/engine/types";
 import { DATA_DIR } from "./lib";
 
 const year = process.argv[2];
-if (!year || !/^\d{4}$/.test(year)) {
-  console.error("usage: npm run fetch-plays -- <year>");
+const outFlag = process.argv.indexOf("--out");
+const outFile = outFlag > 0 ? process.argv[outFlag + 1] : undefined;
+if (!year || !/^\d{4}$/.test(year) || (outFlag > 0 && !outFile)) {
+  console.error("usage: npm run fetch-plays -- <year> [--out <file>]");
   process.exit(2);
 }
 
@@ -147,9 +150,9 @@ for (const p of rows) {
     get(gameId, opp, team).specialEpa -= epa;
   }
 }
-const dir = join(DATA_DIR, "seasons", year);
-mkdirSync(dir, { recursive: true });
-writeFileSync(join(dir, "plays.csv"), playsToCsv([...out.values()]));
+const target = outFile ?? join(DATA_DIR, "seasons", year, "plays.csv");
+mkdirSync(dirname(target), { recursive: true });
+writeFileSync(target, playsToCsv([...out.values()]));
 console.log(
   `fetch-plays ${year}: ${rows.length} plays -> ${out.size} team-game rows`,
 );

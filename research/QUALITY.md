@@ -121,3 +121,42 @@ python3 research/quality.py 2021-2026
 python3 research/quality.py 2008-2013
 python3 research/quality.py 2014-2019 '{"model": "springs", "gap": "pow", "a": 0.8, "lam": 0.25, "k": "none"}'
 ```
+
+## 3. Efficiency test: does play-by-play improve quality? (November 2026)
+
+Each game with play-by-play on both sides gets the target gap
+`(1 − α) × gap(score margin) + α × gap(efficiency margin)`, the same signed `x^0.75` shape;
+games without it keep the score gap. The efficiency margins come from `fetch-plays`' team-game
+rows (scrimmage EPA with garbage time removed, net special-teams EPA, success rate), built for
+history with `npm run fetch-plays -- <year> --out /tmp/rank-backtest/plays_<year>.csv`. The
+play-by-play release starts in 2014 and before 2022 covers only games with an FBS team, so
+there is no untouched holdout; settings were picked on 2014–2019 and checked on 2022–2026,
+where FCS games are covered too.
+
+| Blend (α) | 2014–2019 pick · log loss · final | 2022–2026 pick · log loss · final |
+|---|---|---|
+| published (score only) | 71.66% · 0.5453 · 81.54% | 70.04% · 0.5658 · 80.76% |
+| EPA + special teams, 0.25 | 71.62% · 0.5461 · 81.48% | 70.32% · 0.5663 · 80.66% |
+| EPA + special teams, 0.5 | 71.24% · 0.5484 · 81.45% | 69.88% · 0.5706 · 80.20% |
+| EPA + special teams, 1.0 (EPA replaces score) | 70.91% · 0.5575 · 81.11% | 68.32% · 0.5909 · 77.75% |
+| EPA per snap + special teams, 0.5 | 71.68% · 0.5478 · 81.13% | 70.01% · 0.5691 · 80.06% |
+| **success rate × 150, 0.25** | **71.86% · 0.5429** · 81.22% | **70.54% · 0.5611** · 80.17% |
+| success rate × 100, 0.55 | 71.81% · 0.5456 · 80.92% | 70.72% · 0.5618 · 79.82% |
+
+(`success rate × 150` turns a 10-point success-rate edge into a 15-point margin. Résumé moves by
+under 0.15 pts in every row.)
+
+- **EPA does not help.** Scaled like points (margin ≈ 0.93 × EPA + 4, correlation 0.79), it
+  still predicts worse than the scoreboard, and the more weight it gets the worse; replacing
+  the score with it costs 0.75–1.7 pts of picks. The final score already contains the EPA plus
+  what the model misses (returns, real turnover value), and the public EPA model is noisy.
+- **Success rate helps a little and consistently**: +0.2 and +0.5 pts of picks, log loss down
+  0.0024 and 0.0047, for 0.3–0.6 pts of quality's season-end agreement. It is a different
+  signal from the score, the share of snaps that kept the offense on schedule.
+- **Not adopted yet.** The gain is a fifth of the margin-curve change's, and it would make
+  quality depend on a second, later-arriving data source with uneven coverage (most FCS games
+  only from 2022, none for the NFL), and make a game's spring no longer readable from its
+  score alone. It is worth adopting if those costs are acceptable.
+
+Reproduce: `python3 research/quality.py 2022-2026 published '{"model": "springs", "gap": "pow", "a": 0.75, "k": "none", "lam": 0.25, "eff": "sr", "srScale": 150, "alpha": 0.25}'`
+(after building the history play files as above).
