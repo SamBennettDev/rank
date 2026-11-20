@@ -1336,7 +1336,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868320,2026,9,regular,2026-10-31T20:00:00.000Z,false,true,2837,East Texas A&M,10,2545,SE Louisiana,7
 401868321,2026,10,regular,2026-11-08T00:00:00.000Z,false,true,2545,SE Louisiana,16,2916,Incarnate Word,35
 401868322,2026,11,regular,2026-11-15T00:00:00.000Z,false,true,2545,SE Louisiana,21,2377,McNeese,17
-401868323,2026,12,regular,2026-11-20T00:00:00.000Z,false,false,2447,Nicholls,,2545,SE Louisiana,
+401868323,2026,12,regular,2026-11-20T00:00:00.000Z,false,true,2447,Nicholls,10,2545,SE Louisiana,38
 401868324,2026,1,regular,2026-08-29T19:00:00.000Z,true,true,2011,Alabama State,30,2582,Southern,17
 401868325,2026,1,regular,2026-09-05T22:00:00.000Z,false,true,2011,Alabama State,34,2323,Lane College,0
 401868326,2026,2,regular,2026-09-12T20:00:00.000Z,false,true,2653,Troy,34,2011,Alabama State,17
