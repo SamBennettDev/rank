@@ -1,6 +1,8 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { computePlayers } from "../src/engine/player-output";
 import { computeSeason } from "../src/engine/season";
+import type { Ranking } from "../src/engine/types";
 
 export const DATA_DIR = resolve(import.meta.dirname, "../data");
 
@@ -34,6 +36,21 @@ export async function expectedOutputs(): Promise<Map<string, string>> {
     const result = await computeSeason({ ...current, configJson });
     for (const f of result.files)
       out.set(`rankings/${season}/${f.id}.json`, f.json);
+    const dir = join(seasonsDir, season);
+    const players = join(dir, "players.csv"),
+      roster = join(dir, "roster.csv");
+    const latest = result.files.at(-1);
+    if (existsSync(players) && existsSync(roster) && latest) {
+      for (const f of computePlayers({
+        season,
+        teamsCsv: current.teamsCsv,
+        playersCsv: readFileSync(players, "utf8"),
+        rosterCsv: readFileSync(roster, "utf8"),
+        ranking: JSON.parse(latest.json) as Ranking,
+      }))
+        out.set(`rankings/${season}/${f.id}.json`, f.json);
+      result.index.players = true;
+    }
     index.push(result.index);
   }
   out.set("index.json", JSON.stringify({ seasons: index }, null, 2) + "\n");

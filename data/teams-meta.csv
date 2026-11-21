@@ -1,0 +1,302 @@
+ncaa_name,id,school,abbreviation,conference,color
+Abilene Christian,2000,Abilene Christian,ACU,UAC,#592d82
+Air Force,2005,Air Force,AF,Mountain West,#003594
+Akron,2006,Akron,AKR,Mid-American,#041e42
+Alabama,333,Alabama,ALA,SEC,#9e1b32
+Alabama A&M,2010,Alabama A&M,AAMU,SWAC,#790000
+Alabama St.,2011,Alabama State,ALST,SWAC,#e9a900
+Albany St. (GA),2013,Albany State,,,
+Alcorn,2016,Alcorn State,ALCN,SWAC,#4b0058
+American Int'l,2022,American International,,,
+Anderson (SC),129469,Anderson (SC),,,
+App State,2026,App State,APP,Sun Belt,#000000
+Arizona,12,Arizona,ARIZ,Big 12,#cc0033
+Arizona St.,9,Arizona State,ASU,Big 12,#ffc627
+Ark.-Pine Bluff,2029,Arkansas-Pine Bluff,UAPB,SWAC,#e0aa0f
+Arkansas,8,Arkansas,ARK,SEC,#a32136
+Arkansas St.,2032,Arkansas State,ARST,Sun Belt,#cc092f
+Army West Point,349,Army,ARMY,American Athletic,#000000
+Auburn,2,Auburn,AUB,SEC,#0c2340
+Austin Peay,2046,Austin Peay,APSU,UAC,#8e0b0b
+BYU,252,BYU,BYU,Big 12,#003da5
+Ball St.,2050,Ball State,BALL,Mid-American,#ba0c2f
+Baylor,239,Baylor,BAY,Big 12,#154734
+Bethune-Cookman,2065,Bethune-Cookman,BCU,SWAC,#7b1831
+Boise St.,68,Boise State,BOIS,Pac-12,#0033a0
+Boston College,103,Boston College,BC,ACC,#8c2232
+Bowie St.,2075,Bowie State,,,
+Bowling Green,189,Bowling Green,BGSU,Mid-American,#fd5000
+Brown,225,Brown,BRWN,Ivy,#411e09
+Bryant,2803,Bryant,BRY,Coastal Athletic,#000000
+Bucknell,2083,Bucknell,BUCK,Patriot,#000060
+Buffalo,2084,Buffalo,BUF,Mid-American,#005bbb
+Butler,2086,Butler,BTLR,Pioneer,#0d1361
+Cal Poly,13,Cal Poly,CP,Big Sky,#1E4D2B
+California,25,California,CAL,ACC,#041e42
+Campbell,2097,Campbell,CAM,Coastal Athletic,#000000
+Central Ark.,2110,Central Arkansas,CARK,UAC,#a7a9ac
+Central Conn. St.,2115,Central Connecticut,CCSU,NEC,#1B49A2
+Central Mich.,2117,Central Michigan,CMU,Mid-American,#6a0032
+Central Okla.,2122,Central Oklahoma,,,
+Central St. (OH),2119,Central State,,,
+Charleston So.,2127,Charleston Southern,CHSO,OVC,#2e3192
+Charlotte,2429,Charlotte,CLT,American Athletic,#005035
+Chattanooga,236,Chattanooga,UTC,Southern,#00386b
+Chicago St.,2130,Chicago State,null,FCS Independents,#null
+Cincinnati,2132,Cincinnati,CIN,Big 12,#000000
+Clark Atlanta,2805,Clark Atlanta,,,
+Clemson,228,Clemson,CLEM,ACC,#f56600
+Coastal Carolina,324,Coastal Carolina,CCU,Sun Belt,#006f71
+Colgate,2142,Colgate,COLG,Patriot,#821019
+Colorado,38,Colorado,COLO,Big 12,#cfb87c
+Colorado St.,36,Colorado State,CSU,Pac-12,#1e4d2b
+Columbia,171,Columbia,COLU,Ivy,#7ba4db
+Concord,2148,Concord,,,
+Cornell,172,Cornell,COR,Ivy,#b31b1b
+Dartmouth,159,Dartmouth,DART,Ivy,#005730
+Davidson,2166,Davidson,DAV,Pioneer,#000000
+Dayton,2168,Dayton,DAY,Pioneer,#004B8D
+Delaware,48,Delaware,DEL,Conference USA,#00539f
+Delaware St.,2169,Delaware State,DSU,MEAC,#009cdb
+Delta St.,2170,Delta State,,,
+Dickinson,2175,Dickinson,,,
+Drake,2181,Drake,DRKE,Pioneer,#005596
+Duke,150,Duke,DUKE,ACC,#00539b
+Duquesne,2184,Duquesne,DUQ,NEC,#002D62
+ETSU,2193,East Tennessee State,ETSU,Southern,#002d61
+East Carolina,151,East Carolina,ECU,American Athletic,#592a8a
+East Texas A&M,2837,East Texas A&M,ETAM,Southland,#000000
+Eastern Ill.,2197,Eastern Illinois,EIU,OVC,#000000
+Eastern Ky.,2198,Eastern Kentucky,EKU,UAC,#660819
+Eastern Mich.,2199,Eastern Michigan,EMU,Mid-American,#046a38
+Eastern Wash.,331,Eastern Washington,EWU,Big Sky,#a10022
+Edward Waters,2206,Edward Waters,,,
+Elizabeth City St.,2207,Elizabeth City State,,,
+Elon,2210,Elon,ELON,Coastal Athletic,#020303
+FIU,2229,Florida International,FIU,Conference USA,#091f3f
+Fairmont St.,2986,Fairmont State,,,
+Fla. Atlantic,2226,Florida Atlantic,FAU,American Athletic,#003366
+Florida,57,Florida,FLA,SEC,#0021a5
+Florida A&M,50,Florida A&M,FAMU,SWAC,#F89728
+Florida St.,52,Florida State,FSU,ACC,#782f40
+Fordham,2230,Fordham,FOR,Patriot,#830032
+Fort Valley St.,2232,Fort Valley State,,,
+Franklin,2233,Franklin,,,
+Franklin Pierce,112334,Franklin Pierce,,,
+Fresno St.,278,Fresno State,FRES,Pac-12,#c41230
+Furman,231,Furman,FUR,Southern,#582c83
+Ga. Southern,290,Georgia Southern,GASO,Sun Belt,#041e42
+Gardner-Webb,2241,Gardner-Webb,GWEB,OVC,#c12535
+Georgetown,46,Georgetown,GTWN,Patriot,#110E42
+Georgia,61,Georgia,UGA,SEC,#ba0c2f
+Georgia St.,2247,Georgia State,GAST,Sun Belt,#0039a6
+Georgia Tech,59,Georgia Tech,GT,ACC,#b3a369
+Glenville St.,2249,Glenville State,,,
+Grambling,2755,Grambling,GRAM,SWAC,#ee8601
+Hampton,2261,Hampton,HAMP,Coastal Athletic,#0067AC
+Harvard,108,Harvard,HARV,Ivy,#990000
+Hawaii,62,Hawai'i,HAW,Mountain West,#024731
+Holy Cross,107,Holy Cross,HC,Patriot,#582c83
+Houston,248,Houston,HOU,Big 12,#c8102e
+Houston Christian,2277,Houston Christian,HCU,Southland,#00539c
+Howard,47,Howard,HOW,MEAC,#003a63
+Idaho,70,Idaho,IDHO,Big Sky,#000000
+Idaho St.,304,Idaho State,IDST,Big Sky,#ef8c00
+Illinois,356,Illinois,ILL,Big Ten,#ff5f05
+Illinois St.,2287,Illinois State,ILST,MVFC,#CE1126
+Indiana,84,Indiana,IU,Big Ten,#990000
+Indiana St.,282,Indiana State,INST,MVFC,#00669a
+Iowa,2294,Iowa,IOWA,Big Ten,#000000
+Iowa St.,66,Iowa State,ISU,Big 12,#c8102e
+Jackson St.,2296,Jackson State,JKST,SWAC,#123297
+Jacksonville St.,55,Jacksonville State,JXST,Conference USA,#cc0000
+James Madison,256,James Madison,JMU,Sun Belt,#450084
+Kansas,2305,Kansas,KU,Big 12,#0051ba
+Kansas St.,2306,Kansas State,KSU,Big 12,#512888
+Kennesaw St.,338,Kennesaw State,KENN,Conference USA,#fdbb30
+Kent St.,2309,Kent State,KENT,Mid-American,#002664
+Kentucky,96,Kentucky,UK,SEC,#0033a0
+LIU,2341,Long Island University,LIU,NEC,#null
+LSU,99,LSU,LSU,SEC,#461d7c
+Lafayette,322,Lafayette,LAF,Patriot,#790000
+Lamar University,2320,Lamar,LAM,Southland,#000000
+Lehigh,2329,Lehigh,LEH,Patriot,#6c2b2a
+Liberty,2335,Liberty,LIB,Conference USA,#0a254e
+Lincoln (PA),2339,Lincoln (PA),,,
+Lindenwood,2815,Lindenwood,LIN,OVC,#000000
+Louisiana,309,Louisiana,UL,Sun Belt,#ce181e
+Louisiana Tech,2348,Louisiana Tech,LT,Sun Belt,#003087
+Louisville,97,Louisville,LOU,ACC,#c9001f
+Maine,311,Maine,ME,Coastal Athletic,#127dbe
+Marist,2368,Marist,MRST,Pioneer,#e53730
+Marshall,276,Marshall,MRSH,Sun Belt,#00b140
+Maryland,120,Maryland,MD,Big Ten,#ce1126
+Massachusetts,113,Massachusetts,MASS,Mid-American,#881c1c
+McNeese,2377,McNeese,MCN,Southland,#00529C
+Memphis,235,Memphis,MEM,American Athletic,#00498f
+Mercer,2382,Mercer,MER,Southern,#ff7f29
+Mercyhurst,2385,Mercyhurst,MERC,NEC,#000000
+Merrimack,2771,Merrimack,MRMK,FCS Independents,#000000
+Miami (FL),2390,Miami,MIA,ACC,#f47321
+Miami (OH),193,Miami (OH),M-OH,Mid-American,#c41230
+Michigan,130,Michigan,MICH,Big Ten,#00274c
+Michigan St.,127,Michigan State,MSU,Big Ten,#173f35
+Middle Tenn.,2393,Middle Tennessee,MTSU,Conference USA,#036eb7
+Miles,2396,Miles,,,
+Minnesota,135,Minnesota,MINN,Big Ten,#7a0019
+Mississippi St.,344,Mississippi State,MSST,SEC,#5d1725
+Mississippi Val.,2400,Mississippi Valley State,MVSU,SWAC,#005328
+Missouri,142,Missouri,MIZ,SEC,#f1b82d
+Missouri St.,2623,Missouri State,MOST,Conference USA,#5e0009
+Monmouth,2405,Monmouth,MONM,Coastal Athletic,#051844
+Montana,149,Montana,MONT,Big Sky,#751D4A
+Montana St.,147,Montana State,MTST,Big Sky,#00205c
+Morehead St.,2413,Morehead State,MORE,Pioneer,#094FA3
+Morehouse,60,Morehouse,,,
+Morgan St.,2415,Morgan State,MORG,MEAC,#014786
+Murray St.,93,Murray State,MUR,MVFC,#002148
+N.C. A&T,2448,North Carolina A&T,NCAT,Coastal Athletic,#0505aa
+N.C. Central,2428,North Carolina Central,NCCU,MEAC,#880023
+NC State,152,NC State,NCSU,ACC,#cc0000
+NIU,2459,Northern Illinois,NIU,Mountain West,#c8102e
+Navy,2426,Navy,NAVY,American Athletic,#00225b
+Nebraska,158,Nebraska,NEB,Big Ten,#d00000
+Nevada,2440,Nevada,NEV,Mountain West,#041e42
+New Hampshire,160,New Hampshire,UNH,Coastal Athletic,#004990
+New Haven,2441,New Haven,NHVN,NEC,#041e42
+New Mexico,167,New Mexico,UNM,Mountain West,#ba0c2f
+New Mexico St.,166,New Mexico State,NMSU,Conference USA,#8c0b42
+Nicholls,2447,Nicholls,NICH,Southland,#C41230
+Norfolk St.,2450,Norfolk State,NORF,MEAC,#0c8968
+North Ala.,2453,North Alabama,UNA,UAC,#000000
+North Carolina,153,North Carolina,UNC,ACC,#7bafd4
+North Dakota,155,North Dakota,UND,MVFC,#00A26B
+North Dakota St.,2449,North Dakota State,NDSU,Mountain West,#00583d
+North Texas,249,North Texas,UNT,American Athletic,#00853e
+Northeastern St.,196,Northeastern State,,,
+Northern Ariz.,2464,Northern Arizona,NAU,Big Sky,#003976
+Northern Colo.,2458,Northern Colorado,UNCO,Big Sky,#13558D
+Northern Mich.,128,Northern Michigan,,,
+Northwestern,77,Northwestern,NU,Big Ten,#582c83
+Northwestern St.,2466,Northwestern State,NWST,Southland,#492F91
+Notre Dame,87,Notre Dame,ND,FBS Independents,#0c2340
+Ohio,195,Ohio,OHIO,Mid-American,#024230
+Ohio Dominican,2477,Ohio Dominican,,,
+Ohio St.,194,Ohio State,OSU,Big Ten,#ba0c2f
+Oklahoma,201,Oklahoma,OU,SEC,#841617
+Oklahoma St.,197,Oklahoma State,OKST,Big 12,#fe5c00
+Old Dominion,295,Old Dominion,ODU,Sun Belt,#043657
+Ole Miss,145,Ole Miss,MISS,SEC,#13294b
+Oregon,2483,Oregon,ORE,Big Ten,#007030
+Oregon St.,204,Oregon State,ORST,Pac-12,#dc4405
+Penn,219,Pennsylvania,PENN,Ivy,#082A74
+Penn St.,213,Penn State,PSU,Big Ten,#001e44
+Pittsburgh,221,Pittsburgh,PITT,ACC,#003594
+Portland St.,2502,Portland State,PRST,Big Sky,#00311e
+Prairie View,2504,Prairie View A&M,PV,SWAC,#582c83
+Presbyterian,2506,Presbyterian,PRES,Pioneer,#194896
+Princeton,163,Princeton,PRIN,Ivy,#000000
+Purdue,2509,Purdue,PUR,Big Ten,#ceb888
+Rhode Island,227,Rhode Island,URI,Coastal Athletic,#091f3f
+Rice,242,Rice,RICE,American Athletic,#00205b
+Richmond,257,Richmond,RICH,Patriot,#9e0712
+Robert Morris,2523,Robert Morris,RMU,NEC,#00214D
+Roosevelt,127991,Roosevelt,,,
+Rutgers,164,Rutgers,RUTG,Big Ten,#ce0e2d
+SFA,2617,Stephen F. Austin,SFA,Southland,#393996
+SMU,2567,SMU,SMU,ACC,#d70000
+Sacramento St.,16,Sacramento State,SAC,Mid-American,#00573c
+Sacred Heart,2529,Sacred Heart,SHU,Coastal Athletic,#a40012
+Sam Houston,2534,Sam Houston,SHSU,Conference USA,#f56423
+Samford,2535,Samford,SAM,Southern,#005485
+San Diego,301,San Diego,USD,Pioneer,#2f99d4
+San Diego St.,21,San Diego State,SDSU,Pac-12,#a6192e
+San Jose St.,23,San José State,SJSU,Mountain West,#0055a2
+Savannah St.,2542,Savannah State,,,
+South Alabama,6,South Alabama,USA,Sun Belt,#00205b
+South Carolina,2579,South Carolina,SC,SEC,#73000a
+South Carolina St.,2569,South Carolina State,SCST,MEAC,#7d1315
+South Dakota,233,South Dakota,SDAK,MVFC,#CD1241
+South Dakota Mines,613,South Dakota Mines,,,
+South Dakota St.,2571,South Dakota State,SDST,MVFC,#0033a0
+South Fla.,58,South Florida,USF,American Athletic,#006747
+Southeast Mo. St.,2546,Southeast Missouri State,SEMO,OVC,#c8102e
+Southeastern La.,2545,SE Louisiana,SELA,Southland,#215732
+Southern California,30,USC,USC,Big Ten,#990000
+Southern Ill.,79,Southern Illinois,SIU,MVFC,#85283D
+Southern Miss.,2572,Southern Miss,USM,Sun Belt,#ffc72c
+Southern U.,2582,Southern,SOU,SWAC,#004B97
+Southern Utah,253,Southern Utah,SUU,Big Sky,#c72026
+St. Thomas (MN),2900,St. Thomas (MN),STMN,Pioneer,#000000
+Stanford,24,Stanford,STAN,ACC,#8c1515
+Stetson,56,Stetson,STET,Pioneer,#0a5640
+Stonehill,284,Stonehill,STO,NEC,#000000
+Stony Brook,2619,Stony Brook,STBK,Coastal Athletic,#990000
+Syracuse,183,Syracuse,SYR,ACC,#f76900
+TCU,2628,TCU,TCU,Big 12,#4d1979
+Tarleton St.,2627,Tarleton State,TAR,UAC,#000000
+Temple,218,Temple,TEM,American Athletic,#a41e35
+Tennessee,2633,Tennessee,TENN,SEC,#ff8200
+Tennessee St.,2634,Tennessee State,TNST,OVC,#171796
+Tennessee Tech,2635,Tennessee Tech,TNTC,Southern,#5A4099
+Texas,251,Texas,TEX,SEC,#bf5700
+Texas A&M,245,Texas A&M,TA&M,SEC,#500000
+Texas Southern,2640,Texas Southern,TXSO,SWAC,#860038
+Texas St.,326,Texas State,TXST,Pac-12,#501214
+Texas Tech,2641,Texas Tech,TTU,Big 12,#c30020
+The Citadel,2643,The Citadel,CIT,Southern,#7badd3
+Thomas More,2646,Thomas More,,,
+Toledo,2649,Toledo,TOL,Mid-American,#0b2240
+Towson,119,Towson,TOW,Coastal Athletic,#FFC229
+Troy,2653,Troy,TROY,Sun Belt,#862633
+Tulane,2655,Tulane,TULN,American Athletic,#006747
+Tulsa,202,Tulsa,TLSA,American Athletic,#003595
+Tusculum,2839,Tusculum,,,
+UAB,5,UAB,UAB,American Athletic,#1a5632
+UAlbany,399,UAlbany,UALB,Coastal Athletic,#3D2777
+UC Davis,302,UC Davis,UCD,Big Sky,#002855
+UCF,2116,UCF,UCF,Big 12,#000000
+UCLA,26,UCLA,UCLA,Big Ten,#2774ae
+UConn,41,UConn,CONN,FBS Independents,#000e2f
+UIW,2916,Incarnate Word,UIW,Southland,#000000
+ULM,2433,UL Monroe,ULM,Sun Belt,#840029
+UNI,2460,Northern Iowa,UNI,MVFC,#473282
+UNLV,2439,UNLV,UNLV,Mountain West,#cf0a2c
+UT Martin,2630,UT Martin,UTM,OVC,#FF6700
+UT Permian Basin,110243,UT Permian Basin,,,
+UTEP,2638,UTEP,UTEP,Mountain West,#ff8200
+UTRGV,292,UT Rio Grande Valley,RGV,Southland,#null
+UTSA,2636,UTSA,UTSA,American Athletic,#0c2340
+UVA Wise,2842,UVA Wise,,,
+Utah,254,Utah,UTAH,Big 12,#be0000
+Utah St.,328,Utah State,USU,Pac-12,#0f2439
+Utah Tech,3101,Utah Tech,UTU,Big Sky,#000000
+VMI,2678,VMI,VMI,Southern,#ae122a
+Valparaiso,2674,Valparaiso,VAL,Pioneer,#794500
+Vanderbilt,238,Vanderbilt,VAN,SEC,#000000
+Villanova,222,Villanova,VILL,Patriot,#00205b
+Virginia,258,Virginia,UVA,ACC,#232d4b
+Virginia St.,330,Virginia State,,,
+Virginia Tech,259,Virginia Tech,VT,ACC,#861f41
+Wagner,2681,Wagner,WAG,NEC,#00483A
+Wake Forest,154,Wake Forest,WAKE,ACC,#ceb888
+Washington,264,Washington,WASH,Big Ten,#33006f
+Washington St.,265,Washington State,WSU,Pac-12,#a60f2d
+Weber St.,2692,Weber State,WEB,Big Sky,#18005a
+West Ala.,2695,West Alabama,,,
+West Florida,110242,West Florida,WFL,UAC,#null
+West Ga.,2698,West Georgia,WGA,UAC,#0033a1
+West Virginia,277,West Virginia,WVU,Big 12,#eaaa00
+West Virginia St.,2707,West Virginia State,,,
+Western Caro.,2717,Western Carolina,WCU,Southern,#492F91
+Western Ill.,2710,Western Illinois,WIU,OVC,#4e1e8a
+Western Ky.,98,Western Kentucky,WKU,Conference USA,#c60c30
+Western Mich.,2711,Western Michigan,WMU,Mid-American,#532e1f
+William & Mary,2729,William & Mary,W&M,Patriot,#115740
+Winona St.,2851,Winona State,,,
+Winston-Salem,2736,Winston-Salem State,,,
+Wisconsin,275,Wisconsin,WIS,Big Ten,#a00000
+Wofford,2747,Wofford,WOF,Southern,#533B23
+Wyoming,2751,Wyoming,WYO,Mountain West,#492f24
+Yale,43,Yale,YALE,Ivy,#004a81
+Youngstown St.,2754,Youngstown State,YSU,MVFC,#E51936

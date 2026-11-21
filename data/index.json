@@ -53,7 +53,8 @@
           "id": "week-12",
           "label": "Week 12"
         }
-      ]
+      ],
+      "players": true
     },
     {
       "season": "nfl-2026",

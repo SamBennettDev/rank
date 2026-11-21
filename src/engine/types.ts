@@ -225,4 +225,6 @@ export interface SeasonIndexEntry {
   demo: boolean;
   league?: "nfl";
   snapshots: { id: string; label: string }[];
+  /** True when rankings/<season>/players.json and teams/<id>.json are published. */
+  players?: boolean;
 }
