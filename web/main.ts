@@ -14,6 +14,8 @@ import { graphView } from "./views/graph";
 import { listView } from "./views/list";
 import { teamView } from "./views/team";
 import { matchupsView } from "./views/matchups";
+import { playersView } from "./views/players";
+import { playerView } from "./views/player";
 import { applyLeaderTheme } from "./theme";
 import { useLogos } from "./team";
 import type { SeasonIndexEntry } from "../src/engine/types";
@@ -36,7 +38,7 @@ function defaultEntry(): SeasonIndexEntry {
   return entry;
 }
 
-function renderChrome(ctx: Ctx, view: View, teamId?: number) {
+function renderChrome(ctx: Ctx, view: View, teamId?: number, extra?: string) {
   const s = ctx.entry.season;
   // Icons always; labels hide on narrow screens so the header stays on one row.
   const link = (label: string, icon: SVGSVGElement, v: View, on: boolean) =>
@@ -59,6 +61,9 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       "list",
       view === "list" || view === "team",
     ),
+    ...(ctx.entry.players
+      ? [link("Players", navIcons.players(), "players", view === "players" || view === "player")]
+      : []),
     link("Graph", navIcons.graph(), "graph", view === "graph"),
     link("Matchups", navIcons.matchups(), "matchups", view === "matchups"),
     link("Method", navIcons.about(), "about", view === "about"),
@@ -73,7 +78,8 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number) {
       season,
       snap,
       view,
-      view === "team" ? teamId : undefined,
+      view === "team" || view === "player" ? teamId : undefined,
+      view === "player" || view === "players" ? extra : undefined,
     ));
   // College football and the NFL switch from the header at every screen width.
   const leagueOf = (x: SeasonIndexEntry) => x.league ?? "cfb";
@@ -207,9 +213,10 @@ async function route() {
       location.replace(href(season, entry.snapshots.at(-1)!.id, view));
       return;
     }
-    if (!["list", "graph", "team", "about", "matchups"].includes(view))
+    if (!["list", "graph", "team", "about", "matchups", "players", "player"].includes(view))
       view = "list";
-    const teamId = view === "team" ? Number(parts[3]) : undefined;
+    const teamId = view === "team" || view === "player" ? Number(parts[3]) : undefined;
+    const extra = view === "player" ? parts[4] : view === "players" ? parts[3] : undefined;
 
     const [ranking, games, teams] = await Promise.all([
       loadRanking(season, snapId),
@@ -219,13 +226,17 @@ async function route() {
     useLogos(entry.league, teams.values());
     const ctx = makeCtx({ seasons, entry, snapId, ranking, games, teams });
     applyLeaderTheme(ctx);
-    renderChrome(ctx, view, teamId);
+    renderChrome(ctx, view, teamId, extra);
 
     cleanup?.();
     cleanup = null;
     document.body.dataset.view = view;
     const node =
-      view === "graph"
+      view === "players"
+        ? playersView(ctx, extra)
+        : view === "player"
+          ? playerView(ctx, teamId!, Number(extra))
+          : view === "graph"
         ? graphView(ctx, (fn) => (cleanup = fn))
         : view === "team"
           ? teamView(ctx, teamId!)

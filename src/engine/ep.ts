@@ -9,6 +9,9 @@
  *
  *   EP(down, togo, ytg) = Σ_k field[down][k] · hat_k(ytg)  +  Σ_j togo[down][j] · hat_j(togo)
  *
+ * and, when the goal line is the line to gain ("& goal"), the field curve plus goalToGo[down]
+ * in place of the yards-to-go terms (there, yards to go and to goal are the same number).
+ *
  * where hat_k is 1 at knot k, falling linearly to 0 at the neighbouring knots (values are
  * clamped to the first and last knot). The yards-to-go terms are measured against 10 to go,
  * whose coefficient is fixed at 0. Evaluating needs only + − × /.
@@ -27,6 +30,8 @@ export interface EpModel {
   field: number[][];
   /** togo[down - 1][j]: points added at yards-to-go knot j (0 at the reference). */
   togo: number[][];
+  /** goalToGo[down - 1]: points added when it is "& goal". */
+  goalToGo: number[];
   /** Average value of a kickoff for the kicking team, before it happens. */
   kickoff: number;
   /** Field-goal make chance: logistic(fgIntercept + fgSlope × kick distance in yards). */
@@ -55,14 +60,18 @@ export function hats(knots: readonly number[], x: number): number[] {
 }
 
 /** Number of model coefficients: per down, the field knots and the non-reference to-go knots. */
-export const EP_PARAMS = 4 * (FIELD_KNOTS.length + TOGO_KNOTS.length - 1);
+export const EP_PARAMS = 4 * (FIELD_KNOTS.length + TOGO_KNOTS.length);
 
 /** The model's feature row for a state (used to fit and to evaluate). */
 export function epFeatures(down: number, togo: number, ytg: number): number[] {
   const x = new Array<number>(EP_PARAMS).fill(0);
-  const per = FIELD_KNOTS.length + TOGO_KNOTS.length - 1;
+  const per = FIELD_KNOTS.length + TOGO_KNOTS.length;
   const base = (down - 1) * per;
   hats(FIELD_KNOTS, ytg).forEach((v, k) => (x[base + k] = v));
+  if (togo >= ytg) {
+    x[base + per - 1] = 1;
+    return x;
+  }
   let j = FIELD_KNOTS.length;
   hats(TOGO_KNOTS, togo).forEach((v, k) => {
     if (k === TOGO_REFERENCE) return;
@@ -90,6 +99,7 @@ export function expectedPoints(
     adj = m.togo[down - 1]!;
   let ep = 0;
   hats(FIELD_KNOTS, ytg).forEach((v, k) => (ep += v * field[k]!));
+  if (togo >= ytg) return ep + m.goalToGo[down - 1]!;
   hats(TOGO_KNOTS, togo).forEach((v, k) => (ep += v * adj[k]!));
   return ep;
 }

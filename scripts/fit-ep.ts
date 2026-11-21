@@ -54,9 +54,10 @@ function fitCurves(seasons: number[]) {
     }
   for (let i = 0; i < n; i++) xtx[i * n + i]! += 1;
   const beta = choleskySolve(xtx, xty, n);
-  const per = FIELD_KNOTS.length + TOGO_KNOTS.length - 1;
+  const per = FIELD_KNOTS.length + TOGO_KNOTS.length;
   const field: number[][] = [],
-    togo: number[][] = [];
+    togo: number[][] = [],
+    goalToGo: number[] = [];
   for (let d = 0; d < 4; d++) {
     field.push(FIELD_KNOTS.map((_, k) => round(beta[d * per + k]!)));
     const t: number[] = [];
@@ -65,8 +66,9 @@ function fitCurves(seasons: number[]) {
       t.push(k === TOGO_REFERENCE ? 0 : round(beta[d * per + j++]!)),
     );
     togo.push(t);
+    goalToGo.push(round(beta[d * per + per - 1]!));
   }
-  return { field, togo, rows };
+  return { field, togo, goalToGo, rows };
 }
 
 const base = {
@@ -129,7 +131,7 @@ console.log(
 );
 
 const final = fitCurves(SEASONS);
-const model: EpModel = { ...base, field: final.field, togo: final.togo };
+const model: EpModel = { ...base, field: final.field, togo: final.togo, goalToGo: final.goalToGo };
 
 // Kickoffs: the average value for the kicking team (− the receiver's first-play EP).
 let kSum = 0,

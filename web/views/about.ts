@@ -1,6 +1,8 @@
 import { computeSeason } from "../../src/engine/season";
 import type { Ctx } from "../ctx";
-import { h, type Child } from "../dom";
+import { h, svg, type Child } from "../dom";
+import { loadEpModel } from "../players";
+import { expectedPoints } from "../../src/engine/ep";
 import { fetchText, rankingPath, seasonFiles } from "../store";
 
 export function aboutView(ctx: Ctx): HTMLElement {
@@ -172,6 +174,8 @@ export function aboutView(ctx: Ctx): HTMLElement {
           : "On 2014–2019, the résumé ranking picks 68.5% of next week’s winners and the final ranking has the winner above the loser in 83.6% of games; on 2021–2026, 67.2% and 82.5%. Ordering by quality instead picks more next-week winners (71.7% and 70.0%) with lower season-end agreement (81.5% and 80.6%): quality measures strength, résumé what was won. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
+    epDetails(),
+    ctx.entry.players ? playerDetails() : "",
     details(
       "Data & receipts",
       h(
@@ -213,6 +217,10 @@ export function aboutView(ctx: Ctx): HTMLElement {
         file(files.gamesCsv),
         file(files.configJson),
         m.playsSha256 ? file(files.playsCsv) : "",
+        ctx.entry.players ? file(`seasons/${season}/players.csv`) : "",
+        ctx.entry.players ? file(`seasons/${season}/roster.csv`) : "",
+        ctx.entry.players ? file(`rankings/${season}/players.json`) : "",
+        ctx.entry.players ? file("models/ep.json") : "",
         file(rankingPath(season, ctx.snapId)),
       ),
     ),
@@ -266,5 +274,102 @@ export function aboutView(ctx: Ctx): HTMLElement {
       button,
       result,
     ),
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Our expected-points model: curves by down and its out-of-sample calibration.
+type LoadedEp = Awaited<ReturnType<typeof loadEpModel>>;
+function epDetails(): HTMLElement {
+  const body = h("div", {}, h("div", { class: "loading" }, h("span"), h("span"), h("span")));
+  const el = h(
+    "details",
+    { class: "method-accordion" },
+    h("summary", {}, "Expected points (our model)"),
+    h(
+      "p",
+      {},
+      "Every snap is worth the points the offense can expect from its down, distance and field position: the next score in the half, a touchdown 7, a field goal 3, a safety 2, the opponent's scores negative, 0 if nobody scores again. We fit those averages ourselves on every FBS and FCS play from 2014 to 2025 (2020 left out) in the NCAA stats mirror: for each down, a piecewise-linear curve in yards to goal plus an adjustment for yards to go. A play's EPA is the expected points after it minus before it, or the points if it scored. Offense, defense and every player rating are built from EPA.",
+    ),
+    body,
+  );
+  let loaded = false;
+  el.addEventListener("toggle", () => {
+    if (loaded || !el.open) return;
+    loaded = true;
+    void loadEpModel().then((m) => body.replaceChildren(epChart(m), calibration(m)));
+  });
+  return el;
+}
+
+function epChart(m: LoadedEp): HTMLElement {
+  const W = 640, H = 260, pad = { l: 40, r: 14, t: 12, b: 34 };
+  const x = (ytg: number) => pad.l + ((100 - ytg) / 99) * (W - pad.l - pad.r);
+  const lo = -3.5, hi = 6.5;
+  const y = (v: number) => pad.t + ((hi - v) / (hi - lo)) * (H - pad.t - pad.b);
+  const root = svg("svg", { class: "epchart", viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Expected points by field position for each down" });
+  for (let v = -3; v <= 6; v += 3) {
+    root.appendChild(svg("line", { class: "grid", x1: pad.l, x2: W - pad.r, y1: y(v), y2: y(v) }));
+    const t = svg("text", { class: "gl", x: pad.l - 6, y: y(v) + 4, "text-anchor": "end" });
+    t.textContent = String(v);
+    root.appendChild(t);
+  }
+  for (const ytg of [99, 75, 50, 25, 1]) {
+    const t = svg("text", { class: "gl", x: x(ytg), y: H - 12, "text-anchor": "middle" });
+    t.textContent = ytg === 99 ? "Own 1" : ytg === 1 ? "Opp 1" : ytg === 50 ? "50" : ytg > 50 ? `Own ${100 - ytg}` : `Opp ${ytg}`;
+    root.appendChild(t);
+  }
+  for (let d = 1; d <= 4; d++) {
+    const pts: string[] = [];
+    for (let ytg = 99; ytg >= 1; ytg--)
+      pts.push(`${pts.length ? "L" : "M"}${x(ytg).toFixed(1)},${y(expectedPoints(m, d, Math.min(d === 1 ? 10 : 5, ytg), ytg)).toFixed(1)}`);
+    root.appendChild(svg("path", { class: `ln d${d}`, d: pts.join(" ") }));
+  }
+  const colors = ["var(--brand)", "#3b82f6", "#a855f7", "var(--loss)"];
+  const legend = h(
+    "div",
+    { class: "eplegend" },
+    ...["1st & 10", "2nd & 5", "3rd & 5", "4th & 5"].map((l, i) => h("span", {}, h("i", { style: `background:${colors[i]}` }), l)),
+  );
+  return h(
+    "div",
+    {},
+    legend,
+    root,
+    h("p", { class: "hint" }, `Fitted on ${m.plays.toLocaleString()} plays. A field goal's make chance is logistic(${m.fgIntercept} + ${m.fgSlope} × distance in yards); an average kickoff is worth ${m.kickoff} expected points to the kicking team.`),
+  );
+}
+
+function calibration(m: LoadedEp): HTMLElement {
+  const c = m.holdout;
+  return h(
+    "div",
+    {},
+    h("p", {}, `Checked on ${c.season}, which was held out of the fit: plays the model put at each value went on to score, on average, close to what it said. Its typical miss is ${c.rmse} points per play, against ${c.rmseConstant} for a flat guess.`),
+    h(
+      "table",
+      { class: "mf" },
+      h("thead", {}, h("tr", {}, h("th", {}, "Predicted"), h("th", {}, "Plays"), h("th", {}, "Model"), h("th", {}, "Actual next score"))),
+      h("tbody", {}, ...c.calibration.map((r) => h("tr", {}, h("td", {}, `${r.bin > 0 ? "+" : ""}${r.bin}`), h("td", {}, r.plays.toLocaleString()), h("td", {}, r.predicted.toFixed(2)), h("td", {}, r.actual.toFixed(2))))),
+    ),
+  );
+}
+
+function playerDetails(): HTMLElement {
+  return h(
+    "details",
+    { class: "method-accordion" },
+    h("summary", {}, "Player ratings"),
+    h("p", {}, "Every FBS and FCS player is rated on one scale: how many more expected points he added than an average player would have against the same opponents."),
+    h(
+      "ol",
+      {},
+      h("li", {}, "Defenses: from every game's passing and rushing, fit each team's pass and rush offense and defense in EPA per play. An average offense expects the league average minus the defense's rating. Each rating is pulled toward average with 200 plays of evidence."),
+      h("li", {}, "Quarterbacks, running backs, receivers and tight ends: game by game, his EPA minus what an average player would gain on the same number of dropbacks, targets and rushes against that defense. Garbage time is left out."),
+      h("li", {}, "Kickers: field-goal points over the model's make chance for each kick's distance."),
+      h("li", {}, "Defenders: sacks, interceptions and pass breakups at the expected points they save in our model, tackles at a small fixed credit, each game weighted by 0.5 + the opponent's quality ÷ 100."),
+      h("li", {}, "Every total is divided by the player's plays (tries, games) plus a fixed number of average ones, so small samples are pulled toward average, then turned into points per game. Boards rank by points per game."),
+    ),
+    h("p", { class: "hint" }, "Each player's page shows every step with his own numbers. Offensive linemen are not rated: public play-by-play has no per-player blocking data."),
   );
 }

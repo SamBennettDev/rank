@@ -32,6 +32,11 @@ export const navIcons = {
     ),
   about: () =>
     icon('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>', 18),
+  players: () =>
+    icon(
+      '<circle cx="12" cy="7.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-6 7-6s6.2 2.4 7 6"/>',
+      18,
+    ),
   matchups: () =>
     icon('<path d="M4 7h13l-3-3M20 17H7l3 3M17 7l-3 3M7 17l3-3"/>', 18),
 };

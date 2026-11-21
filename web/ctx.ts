@@ -8,7 +8,7 @@ import type {
   Team,
 } from "../src/engine/types";
 
-export type View = "list" | "graph" | "team" | "about" | "matchups";
+export type View = "list" | "graph" | "team" | "about" | "matchups" | "players" | "player";
 export interface Ctx {
   seasons: SeasonIndexEntry[];
   entry: SeasonIndexEntry;
@@ -39,8 +39,16 @@ export const href = (
   season: string,
   snap: string,
   view: View,
-  teamId?: number,
-) => `#/${season}/${snap}/${view}${teamId === undefined ? "" : `/${teamId}`}`;
+  ...ids: (number | string | undefined)[]
+) =>
+  `#/${season}/${snap}/${view}${ids
+    .filter((x) => x !== undefined)
+    .map((x) => `/${x}`)
+    .join("")}`;
+export const playerHref = (ctx: Ctx, teamId: number, playerId: number) =>
+  href(ctx.entry.season, ctx.snapId, "player", teamId, playerId);
+export const boardHref = (ctx: Ctx, group: string) =>
+  href(ctx.entry.season, ctx.snapId, "players", group);
 export const teamHref = (ctx: Ctx, id: number) =>
   href(ctx.entry.season, ctx.snapId, "team", id);
 export const rankLabel = (rank: number | null, tied: boolean) =>

@@ -19,6 +19,17 @@ import { arrowLeft } from "../icons";
 import { logo, shortConf, svgLogo, teamVars } from "../team";
 import { loadRanking } from "../store";
 import { matchupCard } from "./matchups";
+import { marginGap } from "../../src/engine/springs";
+import {
+  GROUPS,
+  GROUP_NAME,
+  STAT_COLS,
+  loadTeamPlayers,
+  type TeamPlayersFile,
+  fmtSigned,
+  stat,
+} from "../players";
+import { boardHref, playerHref } from "../ctx";
 
 export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   const team = ctx.byId.get(teamId);
@@ -48,8 +59,9 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         a.gameId - b.gameId,
     );
 
-  const stat = (label: string, value: Node | string) =>
-    h("div", { class: "tstat" }, h("b", {}, value), h("span", {}, label));
+  const stat = (label: string, value: Node | string, note?: string) =>
+    h("div", { class: "tstat" }, h("b", {}, value), h("span", {}, label), note ? h("small", {}, note) : "");
+  const of = `of ${ctx.ranked.length}`;
   const hero = h(
     "section",
     { class: "thero tv", style: teamVars(tl?.color) },
@@ -82,20 +94,21 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         "div",
         { class: "tstats" },
         stat(
-          "Current rank",
-          team.resumeRank === null ? "—" : String(team.resumeRank),
+          "Rank",
+          team.resumeRank === null ? "—" : `#${team.resumeRank}`,
+          `${of} · by résumé`,
         ),
         stat("Record", record(team)),
-        stat("Résumé", fmtScore(team.resume)),
+        stat("Résumé", fmtScore(team.resume), team.resumeRank === null ? "" : `#${team.resumeRank} ${of}`),
         stat(
           "Quality",
-          team.height === null
-            ? "—"
-            : `${team.height.toFixed(2)} · #${rankLabel(team.rank, team.tied)}`,
+          team.height === null ? "—" : team.height.toFixed(2),
+          team.rank === null ? "" : `#${rankLabel(team.rank, team.tied)} ${of}`,
         ),
         stat(
           "Schedule",
-          team.scheduleRank === null ? "—" : `#${team.scheduleRank}`,
+          fmtScore(team.schedule),
+          team.scheduleRank === null ? "" : `#${team.scheduleRank} ${of}`,
         ),
         stat(
           "This week",
@@ -167,8 +180,10 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
             ),
           )
         : "",
+      calcPanel(ctx, teamId),
       h("div", { class: "tgrid" }, whyPanel(ctx, teamId), history),
       unitsPanel(ctx, teamId),
+      ...(ctx.entry.players ? [playersPanel(ctx, teamId)] : []),
       gameLog(ctx, teamId, games),
     ),
   );
@@ -605,4 +620,183 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
     ),
     ...rows,
   );
+}
+
+// ---------------------------------------------------------------------------
+// How the rank and quality were calculated, step by step, with this team's numbers.
+function calcPanel(ctx: Ctx, teamId: number): HTMLElement {
+  const me = ctx.byId.get(teamId)!;
+  const sp = ctx.ranking.manifest.springs;
+  const b = breakdown(ctx, teamId);
+  const lines = [...b.lines].sort(
+    (x, y) =>
+      (x.edge.seasonType === "postseason" ? 99 : x.edge.week) - (y.edge.seasonType === "postseason" ? 99 : y.edge.week) ||
+      x.edge.gameId - y.edge.gameId,
+  );
+  const f1 = (v: number) => (v < 0 ? "−" : "") + Math.abs(v).toFixed(1);
+  const rows = lines.map((l) => {
+    const margin = l.edge.winnerPoints - l.edge.loserPoints;
+    const gap = marginGap(margin);
+    const os = l.opponent.strength ?? 0;
+    const target = l.won ? os + gap : os - gap;
+    return { l, margin, gap, os, target };
+  });
+  const sum = rows.reduce((a, r) => a + r.target, 0);
+  const strength = me.strength ?? 0;
+  const ranked = ctx.ranked.length;
+  const step = (n: number, title: string, ...body: (Node | string)[]) =>
+    h("li", { class: "cstep" }, h("div", { class: "cstep-n" }, String(n)), h("div", { class: "cstep-b" }, h("h3", {}, title), ...body));
+  const term = (v: string, label: string, cls = "") => h("span", { class: `term ${cls}` }, h("b", {}, v), h("small", {}, label));
+  const op = (x: string) => h("span", { class: "eqop" }, x);
+  const eq = (...parts: (Node | string)[]) => h("div", { class: "eq" }, ...parts);
+
+  const springTable = h(
+    "div",
+    { class: "atable k-spring" },
+    h("div", { class: "arow ahead" }, ...["When", "Opponent", "Margin", "Gap", "Opp. strength", "Says"].map((x, i) => h("span", { class: i >= 2 ? "n" : "" }, x))),
+    ...rows.map((r) =>
+      h(
+        "div",
+        { class: "arow" },
+        h("span", { class: "wk" }, r.l.edge.seasonType === "postseason" ? "Bowl" : `Wk ${r.l.edge.week}`),
+        h(
+          "span",
+          { class: "aop" },
+          logo(ctx.teams.get(r.l.opponent.id), 22, { lazy: true }),
+          h("span", {}, `${r.l.where === -1 ? "at" : "vs"} ${r.l.opponent.school}`),
+          h("span", { class: `res ${r.l.won ? "w" : "l"}` }, `${r.l.won ? "W" : "L"} ${r.l.won ? r.l.edge.winnerPoints : r.l.edge.loserPoints}–${r.l.won ? r.l.edge.loserPoints : r.l.edge.winnerPoints}`),
+        ),
+        h("span", { class: "n" }, `${r.l.won ? "+" : "−"}${r.margin}`),
+        h("span", { class: "n", title: `100 × ${r.margin}^0.75` }, r.gap.toFixed(1)),
+        h("span", { class: "n" }, f1(r.os)),
+        h("span", { class: `n says ${r.l.won ? "pos" : "neg"}` }, h("b", {}, f1(r.target)), h("small", {}, r.l.won ? "opp + gap" : "opp − gap")),
+      ),
+    ),
+  );
+
+  return h(
+    "section",
+    { class: "panel calc" },
+    h("div", { class: "section-heading" }, h("h2", {}, `How ${me.school}'s rank is calculated`), h("span", { class: "scope-label" }, ctx.ranking.snapshot.label)),
+    h(
+      "ol",
+      { class: "csteps" },
+      step(
+        1,
+        "Every game is a spring",
+        h("p", {}, "Each game wants the winner 100 × margin^0.75 points above the loser: a 1-point win is worth 100, 7 points 430, 14 points 724. Each extra point counts a little less. So each game says where this team should sit: the opponent's strength plus the gap after a win, minus it after a loss."),
+        springTable,
+      ),
+      step(
+        2,
+        "Solve every spring at once",
+        h("p", {}, `All ${ctx.ranking.teams.length + (ctx.ranking.opponents?.length ?? 0)} teams' springs are solved together, so each team sits at the average of what its games say, with ${sp.strengthShrink} of a game's weight pulling toward 0 (an average team). At the answer this holds exactly:`),
+        eq(term(f1(sum), "sum of what the games say"), op("÷"), term(`${rows.length} + ${sp.strengthShrink}`, "games + pull"), op("="), term(f1(strength), "strength", "hl")),
+        h("p", { class: "hint" }, `Strength is points above an average team. Opponents' strengths come from the same solve, so beating a team that later wins a lot keeps paying off.`),
+      ),
+      step(
+        3,
+        "Turn strength into quality",
+        h("p", {}, "Quality is 100 × the chance of beating an average team:"),
+        eq(term("100 × logistic", ""), op("("), term(String(sp.qualityScale), "scale"), op("×"), term(f1(strength), "strength"), op(")"), op("="), term((me.height ?? 0).toFixed(2), `quality · #${rankLabel(me.rank, me.tied)} of ${ranked}`, "hl")),
+      ),
+      step(
+        4,
+        "Score the résumé, which is the ranking",
+        h("p", {}, "Each game earns points from the opponent's quality: a win earns 50 + half the beaten team's quality, a loss half the winner's. The résumé is the average, and teams are ranked by it."),
+        eq(
+          term(fmtScore(b.earned + b.lost, 1), "points from all games"),
+          op("÷"),
+          term(String(b.games), "games"),
+          op("="),
+          term(fmtScore(me.resume), `résumé · #${me.resumeRank ?? "—"} of ${ranked}`, "hl"),
+        ),
+        h("p", { class: "hint" }, "Every game's points are in the chart below."),
+      ),
+    ),
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Pass and rush units and the team's best players, from the player files.
+function playersPanel(ctx: Ctx, teamId: number): HTMLElement {
+  const box = h("section", { class: "tplayers" }, h("div", { class: "loading pad" }, h("span"), h("span"), h("span")));
+  void loadTeamPlayers(ctx.entry.season, teamId)
+    .then((tf) => box.replaceChildren(...teamPlayers(ctx, tf)))
+    .catch(() => box.replaceChildren());
+  return box;
+}
+
+function teamPlayers(ctx: Ctx, tf: TeamPlayersFile): HTMLElement[] {
+  const u = tf.units;
+  const of = ctx.ranked.length;
+  const unit = (label: string, v: number, rank: number | null, hint: string) =>
+    h(
+      "div",
+      { class: "unit", title: hint },
+      h("div", { class: "k" }, label),
+      h("div", { class: "rk" }, rank === null ? "—" : `#${rank}`, h("small", {}, `of ${of}`)),
+      h("div", { class: "v" }, h("b", {}, fmtSigned(v, 3)), " EPA / play vs avg"),
+    );
+  const units = h(
+    "div",
+    { class: "panel unitsp" },
+    h("h2", {}, "Passing and rushing"),
+    h("p", { class: "hint" }, "Opponent-adjusted expected points per play from our model · higher is better on both sides of the ball"),
+    h(
+      "div",
+      { class: "units four" },
+      unit("Pass offense", u.passOffense, u.passOffenseRank, "EPA per dropback above average, adjusted for the defenses faced"),
+      unit("Rush offense", u.rushOffense, u.rushOffenseRank, "EPA per rush above average, adjusted for the defenses faced"),
+      unit("Pass defense", u.passDefense, u.passDefenseRank, "EPA per dropback prevented, adjusted for the offenses faced"),
+      unit("Rush defense", u.rushDefense, u.rushDefenseRank, "EPA per rush prevented, adjusted for the offenses faced"),
+    ),
+  );
+  const best = GROUPS.map((g) => tf.players.filter((p) => p.group === g).sort((a, b) => a.rank - b.rank)[0]).filter((p) => p !== undefined);
+  const leaders = h(
+    "div",
+    { class: "panel leaders" },
+    h("div", { class: "section-heading" }, h("h2", {}, "Team leaders"), h("span", { class: "scope-label" }, "Rank among all FBS + FCS players")),
+    h(
+      "div",
+      { class: "lcards" },
+      ...best.map((p) => {
+        const s = (n: string) => stat(tf.groupStats[p.group], p.totals, n);
+        return h(
+          "a",
+          { class: "lcard", href: playerHref(ctx, p.teamId, p.id) },
+          h("div", { class: "lc-top" }, h("span", { class: "lc-g" }, p.group), h("span", { class: "lc-rk" }, `#${p.rank}`)),
+          h("div", { class: "lc-name" }, p.name),
+          h("div", { class: "lc-meta" }, [p.position, p.year].filter(Boolean).join(" · ")),
+          h("div", { class: "lc-line" }, STAT_COLS[p.group].slice(0, 3).map((c) => `${c.value(s)} ${c.label}`).join(" · ")),
+          h("div", { class: "lc-val" }, h("b", {}, fmtSigned(p.valuePerGame)), " pts / game"),
+        );
+      }),
+    ),
+  );
+  const roster = h(
+    "details",
+    { class: "panel rosterp" },
+    h("summary", {}, h("span", {}, "Every rated player"), h("span", { class: "muted" }, `${tf.players.length} players`)),
+    ...GROUPS.filter((g) => tf.players.some((p) => p.group === g)).map((g) =>
+      h(
+        "div",
+        { class: "rgroup" },
+        h("h3", {}, h("a", { href: boardHref(ctx, g) }, GROUP_NAME[g])),
+        ...tf.players
+          .filter((p) => p.group === g)
+          .sort((a, b) => a.rank - b.rank)
+          .map((p) =>
+            h(
+              "a",
+              { class: "rrow", href: playerHref(ctx, p.teamId, p.id) },
+              h("span", { class: "nm" }, p.name, h("small", {}, ` ${[p.position, p.year].filter(Boolean).join(" · ")}`)),
+              h("span", { class: "n" }, `#${p.rank}`),
+              h("span", { class: "n" }, fmtSigned(p.valuePerGame)),
+            ),
+          ),
+      ),
+    ),
+  );
+  return [units, leaders, roster];
 }
