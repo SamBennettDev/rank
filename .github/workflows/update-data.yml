@@ -26,9 +26,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Fetch results
+      - name: Fetch results, plays and players (NCAA stats mirror, no key)
         env:
-          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
           INPUT_YEAR: ${{ inputs.year }}
         run: |
           YEAR="${INPUT_YEAR:-}"
@@ -38,9 +37,6 @@ jobs:
           fi
           echo "YEAR=$YEAR" >> "$GITHUB_ENV"
           npm run fetch -- "$YEAR"
-      - name: Fetch play-by-play summary
-        # Public sportsdataverse release, no key. If it lags or is missing, keep the last summary.
-        run: npm run fetch-plays -- "$YEAR" || echo "::warning::Play-by-play summary for $YEAR was not updated"
       - name: Fetch NFL results
         # Public nflverse schedule, no key. A failure here must not block the college update.
         run: npm run fetch-nfl -- "$YEAR" || echo "::warning::NFL results for $YEAR were not updated"

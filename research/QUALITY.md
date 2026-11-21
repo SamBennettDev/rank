@@ -128,7 +128,8 @@ Each game with play-by-play on both sides gets the target gap
 `(1 − α) × gap(score margin) + α × gap(efficiency margin)`, the same signed `x^0.75` shape;
 games without it keep the score gap. The efficiency margins come from `fetch-plays`' team-game
 rows (scrimmage EPA with garbage time removed, net special-teams EPA, success rate), built for
-history with `npm run fetch-plays -- <year> --out /tmp/rank-backtest/plays_<year>.csv`. The
+history with `npm run fetch-plays -- <year> --out /tmp/rank-backtest/plays_<year>.csv` (the cfbfastR
+fetcher, removed when the site moved to the NCAA mirror; it is in commit 7d29c54). The
 play-by-play release starts in 2014 and before 2022 covers only games with an FBS team, so
 there is no untouched holdout; settings were picked on 2014–2019 and checked on 2022–2026,
 where FCS games are covered too.

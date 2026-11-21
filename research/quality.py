@@ -26,7 +26,8 @@ Schedules come from sportsdataverse/cfbfastR-data at scripts/history.ts's revisi
 Before 2014 that file has FBS games only (FCS teams appear just in their FBS games).
 Efficiency blends (section 3 of QUALITY.md) add "eff" and "alpha" to a springs config and read
 play-by-play team-game rows from /tmp/rank-backtest/plays_<year>.csv, built with
-`npm run fetch-plays -- <year> --out /tmp/rank-backtest/plays_<year>.csv` (2014 on).
+`npm run fetch-plays -- <year> --out /tmp/rank-backtest/plays_<year>.csv` (2014 on; that cfbfastR
+fetcher is in commit 7d29c54, since removed).
 Needs numpy.
 """
 import csv, io, json, os, sys, urllib.request

@@ -17,6 +17,9 @@ charting, pressure data beyond ESPN's FBS-only "hurries", and grades.
 
 ## Recommendation
 
+**Adopted (November 2026):** the site now uses the `ncaa_mfb_*` releases exclusively for college
+data, with our own expected-points model (`data/models/ep.json`); see `docs/METHODOLOGY.md`.
+
 - **Player boards and anything that must treat FBS and FCS alike: the `ncaa_mfb_*` releases.**
   It is the only free source with FCS–FCS games at play and player depth, it is official NCAA
   stat-crew data, and its ESPN game ids join it to `games.csv`. EPA has to come from our own

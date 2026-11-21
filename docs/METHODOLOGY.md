@@ -65,6 +65,17 @@ The official ranking is résumé. Quality picks more next-week winners and has l
 
 2021–2026 were looked at during design, so they are a check rather than an untouched holdout.
 
+## Data
+
+All college data comes from one free source: the sportsdataverse `ncaa_mfb_*` releases, a public mirror of stats.ncaa.org published as one parquet file per season (`scripts/ncaa.ts`, `scripts/fetch-ncaa.ts`). From it:
+
+- **teams.csv**: FBS and FCS teams by stats.ncaa.org division. Ids, abbreviations, conferences and colours come from `data/teams-meta.csv`, a fixed crosswalk from stats.ncaa.org team names (ids match ESPN's so logos load); a team missing from it keeps its stats.ncaa.org id. Opponents outside the NCAA get a stable id from their name.
+- **games.csv**: every game of those teams from the schedules and linescores. A game's id is its NCAA contest id (unplayed games are numbered 990,000,000 and up in kickoff order). Kickoffs are the stat crew's local clock, read as US Eastern time (noon when missing). A schedule entry written "Opponent @City" is a neutral site. Week 1 runs through Labor Day and each later week Tuesday to Monday; games from the Tuesday after the second Saturday of December are postseason (earlier FCS playoff rounds keep regular-season week labels).
+- **plays.csv, players.csv**: from the play-by-play with our expected-points model (below), and defense from the box scores.
+- **roster.csv**: position, class, height, weight, hometown, high school.
+
+The mirror runs about two days behind the games.
+
 ## Dates, scope and provisional evidence
 
 The source supplies kickoffs and final scores, without historical result-availability timestamps. Assume scores become available **six hours after kickoff**; unusual delays and retrospective corrections remain limitations. Calendar weeks run from Monday noon UTC to the following Monday. Snapshot inclusion and backtesting use this same calendar.
@@ -90,9 +101,25 @@ P(home wins) = logistic(edge / sqrt(probabilityScale² + 3 × variance / π²))
 
 `start` is 0 for FBS teams and −`divisionGap` for FCS teams, centred on 0. Settings (`config.matchup`): winBonus 3, divisionGap 31.644079, shrink 1, homeField 2.668394, homeFieldShrink 64, probabilityScale 12, residualScale 14.934045, all chosen on 2014–2019. Variance is the matchup contrast under `residualScale² × A⁻¹`, where `A` is the penalized information matrix. `npm run backtest -- --history 2021-2025 --include-repo --summary` evaluates these odds from week 4 at Monday cutoffs. Teams with fewer than three model games, or a graph in several pieces, are `provisional`.
 
+## Expected points
+
+Our own model (`src/engine/ep.ts`, fitted by `npm run fit-ep`, published in `data/models/ep.json`). A state's expected points (EP) are the average points of the next score in the half from the offense's side: a touchdown 7 (with its try), a field goal 3, a safety 2, the opponent's scores negative, 0 if nobody scores again in the half. For each down, EP is a piecewise-linear curve in yards to goal (knots at 1, 5, 10, 20, 35, 50, 65, 80, 90, 99) plus a piecewise-linear adjustment for yards to go (knots at 1, 3, 6, 10, 15, 25, measured against 10 to go); when the line to gain is the goal line, a goal-to-go term replaces the yards-to-go adjustment. The 64 coefficients are least squares over every down-and-distance play of regulation in the mirror's 2014–2025 play-by-play (2020 left out, 2.87 million plays) with a one-play ridge, solved by Cholesky. Fitted first without 2025, the model's predictions on 2025 match the average next score within 0.25 points in every one-point bin (RMSE 5.02 against 5.33 for a constant).
+
+A play's expected points added (EPA) are its points if it scored (from the offense's side), otherwise the EP of the next down-and-distance play in the half (negated if the other team has the ball), or 0 at the end of the half, minus its EP. A kickoff's EPA, from the kicking team's side, is minus the receiving team's EP on its first play, less the average of that value (−0.81). A play is a success with half the yards to go on first down, 70% on second, all of them on third and fourth, or a touchdown. Field goals: the make chance is logistic(3.726 − 0.0762 × distance in yards), fitted on 43,248 kicks.
+
 ## Unit ratings
 
-Offense, defense and special teams are explanatory outputs from public cfbfastR play-by-play, leaving the ranking and matchup predictions unchanged. Garbage-time thresholds exclude score gaps above 38 in quarter 2, 28 in quarter 3, and 22 in quarter 4. Opponent/site-adjusted EPA per snap yields offense/defense, weighted by snaps and shrunk toward average; net special-teams EPA yields a separate game-based fit. Mean snaps convert offense/defense to points per game. Missing covered plays produce null unit statistics.
+Offense, defense and special teams are explanatory outputs from the mirror's play-by-play and our expected points, leaving the ranking and matchup predictions unchanged. Garbage-time thresholds exclude score gaps above 38 in quarter 2, 28 in quarter 3, and 22 in quarter 4. Opponent/site-adjusted EPA per snap yields offense/defense, weighted by snaps and shrunk toward average; net special-teams EPA yields a separate game-based fit. Mean snaps convert offense/defense to points per game. Missing covered plays produce null unit statistics.
+
+## Player ratings
+
+Players are rated on one scale for FBS and FCS (`src/engine/players.ts`), leaving the ranking unchanged. From every team-game's passing and rushing in `players.csv`, fit per-play EPA ≈ μ + offense[team] − defense[opponent] separately for passes and rushes, weighted by plays, each rating pulled toward 0 with 200 plays of evidence. An average offense expects μ − defense[opponent] per play against that defense.
+
+- **Quarterbacks** (dropbacks and rushes), **running backs** (rushes and targets), **receivers and tight ends** (targets and rushes): EPA over expected is, game by game, his EPA minus his plays × what an average offense gains against that defense for each play type. Garbage time is left out. Rating = EPA over expected ÷ (plays + 100 for quarterbacks, 60 for running backs, 40 for receivers and tight ends).
+- **Kickers**: field-goal points over expected (3 × made − 3 × make chance) ÷ (tries + 8).
+- **Defenders** (line, linebackers, backs): each game's credits, a sack 1.83, an interception 3.96 and a pass breakup 1.12 expected points (what each saves against an average play of its kind in our model), a solo tackle 0.2 and an assisted tackle 0.1, times 0.5 + the opponent's quality ÷ 100. Rating = adjusted credits ÷ (games + 2).
+
+Points per game = rating × plays ÷ games (the rating itself for defenders). Each position board ranks all rated players by points per game. A player's position group is his roster position, or what he did most when it is missing; offensive linemen, punters and long snappers are not rated. Players are matched to rosters by team and name (suffixes ignored). Boards and team files are computed for the season's latest snapshot and verified byte for byte with the rankings.
 
 ## Determinism and changes
 
