@@ -137,7 +137,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h(
       "p",
       { class: "method-caption" },
-      "Every game is a spring holding its winner above its loser by the margin, each extra point counting a little less than the last. The result is every team’s quality. Résumé, the ranking, is strength of record: how hard the team’s record would be for a good team against the same schedule.",
+      "Every game is a spring holding its winner above its loser by the margin, each extra point counting a little less than the last. The result is every team’s quality. Résumé, the ranking, is strength of record: how hard the team’s record would be for a good team of its division against the same schedule. FBS and FCS are ranked separately.",
     ),
     details(
       "Résumé, quality and schedule",
@@ -151,7 +151,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Résumé, the ranking. "),
-        "Strength of record, 0–100. A benchmark team plays this team’s exact schedule: its chance of winning each game comes from the opponent’s strength, and together those give its whole range of possible records. The score is 100 × (the chance it does worse + half the chance it does exactly as well). The résumé averages five benchmarks: a top-10, top-25, top-50 and top-100 team, and an average team. Beating strong teams counts most, a loss to a strong team costs little, and a perfect record against a weak schedule still counts for a lot.",
+        "Strength of record, 0–100. A benchmark team plays this team’s exact schedule: its chance of winning each game comes from the opponent’s strength, and together those give its whole range of possible records. The score is 100 × (the chance it does worse + half the chance it does exactly as well). The résumé averages five benchmarks from the team’s own division: its top-10, top-25, top-50 and top-100 team, and its average team. FBS and FCS are ranked separately; quality is one board for both. Beating strong teams counts most, a loss to a strong team costs little, and a perfect record against a weak schedule still counts for a lot.",
       ),
       h(
         "p",
@@ -171,7 +171,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         { class: "muted" },
         ctx.entry.league
           ? "The settings were chosen on college football (2014–2019) and are reused for the NFL unchanged; they have not been tuned or backtested on NFL games. The matchup odds come from a separate margin model that is likewise uncalibrated for the NFL."
-          : "On 2014–2019, the résumé ranking picks 68.4% of next week’s winners and the final ranking has the winner above the loser in 83.6% of games; on 2021–2026, 67.5% and 82.7%. Ordering by quality instead picks more next-week winners (71.7% and 70.0%) with lower season-end agreement (81.5% and 80.4%): quality measures strength, résumé what was won. The matchup odds come from a separate, calibrated margin model.",
+          : "On 2014–2019, the résumé ranking picks 68.1% of next week’s winners and the final ranking has the winner above the loser in 83.3% of games within a division; on 2021–2026, 67.4% and 81.8%. Ordering by quality instead picks more next-week winners (71.7% and 70.0%) with lower season-end agreement (81.5% and 80.4%): quality measures strength, résumé what was won. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     epDetails(),

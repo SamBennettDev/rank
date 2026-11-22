@@ -110,7 +110,8 @@ function conferencesByStrength(teams: RankedTeam[]) {
 export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
   let query = "",
     board: Board = "resume",
-    division: Division = "all",
+    // Résumé is ranked within FBS and within FCS, so its board has no combined view.
+    division: Division = ctx.entry.league ? "all" : "fbs",
     conference = "";
   const field = ctx.ranking.teams;
   const body = h("div", { class: "home-rows" });
@@ -155,6 +156,23 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
       h("span", { class: "hr-val" }, value(t, board)),
       moveCell(t, board),
     );
+
+  // The division switch: All, FBS, FCS; the résumé board offers FBS and FCS only.
+  const divisionSlot = h("div", { class: "division-slot" });
+  const paintDivisions = () =>
+    divisionSlot.replaceChildren(
+      segment(
+        "Division",
+        DIVISIONS.filter(([v]) => board !== "resume" || v !== "all"),
+        () => division,
+        (v) => {
+          division = v;
+          draw();
+        },
+        "division",
+      ),
+    );
+  paintDivisions();
 
   const draw = () => {
     root.dataset.board = board;
@@ -227,26 +245,15 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
           ),
         ),
       ),
-      ...(ctx.entry.league
-        ? []
-        : [
-            segment(
-              "Division",
-              DIVISIONS,
-              () => division,
-              (v) => {
-                division = v;
-                draw();
-              },
-              "division",
-            ),
-          ]),
+      ...(ctx.entry.league ? [] : [divisionSlot]),
       segment(
         "Ranking board",
         BOARDS,
         () => board,
         (v) => {
           board = v;
+          if (board === "resume" && division === "all") division = "fbs";
+          paintDivisions();
           draw();
         },
         "boards",

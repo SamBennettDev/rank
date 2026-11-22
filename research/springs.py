@@ -57,6 +57,7 @@ def load(year):
     won = hp > ap
     return dict(
         n=len(ids), names=[names[t] for t in ids],
+        division=np.array([0 if division[t] == "fbs" else 1 for t in ids]),
         order=np.array([last + 1 if r["post"] else r["week"] for r in rows]),
         winner=np.where(won, home, away), loser=np.where(won, away, home), margin=np.abs(hp - ap),
     )
@@ -88,13 +89,18 @@ def rank(n, w, l, margin):
     return quality(n, w, l, margin)
 
 
-def strength_of_record(n, w, l, margin, top):
-    """100 × (P(benchmark wins fewer) + ½ P(as many)) against each team's schedule; top=0 is an average team."""
+def strength_of_record(n, w, l, margin, top, division=None):
+    """100 × (P(benchmark wins fewer) + ½ P(as many)) against each team's schedule, the benchmark
+    from the team's own division (top=0: the division's average team)."""
     s = solve(n, w, l, np.ones(len(w)), margin_gap(margin), STRENGTH_SHRINK)
     played = np.zeros(n, bool); played[w] = played[l] = True
-    ranked = np.sort(s[played])[::-1]
-    bench = ranked[: min(top, len(ranked))].mean() if top and len(ranked) else 0.0
-    p_win = 1 / (1 + np.exp(-QUALITY_SCALE * (bench - s)))
+    division = np.zeros(n, int) if division is None else division
+    bench = np.zeros(n)
+    for d in set(division.tolist()):
+        member = played & (division == d)
+        ranked = np.sort(s[member])[::-1]
+        k = len(ranked) if top == 0 else min(top, len(ranked))
+        bench[division == d] = ranked[:k].mean() if k else 0.0
     games = [[] for _ in range(n)]
     for a, b in zip(w, l):
         games[a].append((b, 1)); games[b].append((a, 0))
@@ -104,35 +110,41 @@ def strength_of_record(n, w, l, margin, top):
             continue
         dist = np.zeros(len(g) + 1); dist[0] = 1.0
         for o, _ in g:
-            dist[1:] = dist[1:] * (1 - p_win[o]) + dist[:-1] * p_win[o]
-            dist[0] *= 1 - p_win[o]
+            p = 1 / (1 + np.exp(-QUALITY_SCALE * (bench[i] - s[o])))
+            dist[1:] = dist[1:] * (1 - p) + dist[:-1] * p
+            dist[0] *= 1 - p
         wins = sum(r for _, r in g)
         out[i] = 100 * (dist[:wins].sum() + 0.5 * dist[wins])
     return out
 
 
-def resume(n, w, l, margin):
-    """The ranking: strength of record averaged over a top-10, top-25, top-50, top-100 and average team."""
-    return sum(strength_of_record(n, w, l, margin, t) for t in (10, 25, 50, 100, 0)) / 5
+def resume(n, w, l, margin, division=None):
+    """The ranking: strength of record averaged over a top-10, top-25, top-50, top-100 and average
+    team of the team's own division; FBS and FCS are ranked separately."""
+    return sum(strength_of_record(n, w, l, margin, t, division) for t in (10, 25, 50, 100, 0)) / 5
 
 
 def evaluate(years):
-    for board, order in (("quality", rank), ("résumé", resume)):
+    """Quality is one board for FBS and FCS, so every game counts; résumé ranks each division
+    separately, so it is scored on games between teams of the same division."""
+    for board in ("quality", "résumé"):
         right = games = agree = counted = 0
         for y in years:
             S = load(y)
-            W, L, M, O = S["winner"], S["loser"], S["margin"], S["order"]
+            W, L, M, O, D = S["winner"], S["loser"], S["margin"], S["order"], S["division"]
+            same = np.ones(len(W), bool) if board == "quality" else D[W] == D[L]
+            order = (lambda n, w, l, m: rank(n, w, l, m)) if board == "quality" else (lambda n, w, l, m: resume(n, w, l, m, D))
             for wk in sorted(set(O)):
                 if wk < 4:
                     continue
                 p = O < wk
                 h = order(S["n"], W[p], L[p], M[p])
                 played = np.zeros(S["n"], bool); played[W[p]] = played[L[p]] = True
-                c = (O == wk) & played[W] & played[L]
+                c = (O == wk) & played[W] & played[L] & same
                 d = h[W[c]] - h[L[c]]
                 right += np.sum(d > 0) + 0.5 * np.sum(d == 0); games += c.sum()
             h = order(S["n"], W, L, M)
-            agree += np.sum(h[W] > h[L]); counted += len(W)
+            agree += np.sum((h[W] > h[L]) & same); counted += same.sum()
         print(f"{years[0]}-{years[-1]} {board}: picks {100 * right / games:.2f}% of {games} next-week games; "
               f"final ranking has the winner above the loser in {100 * agree / counted:.2f}% of {counted} games")
 

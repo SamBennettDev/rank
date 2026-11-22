@@ -80,7 +80,7 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number, extra?: string) {
       snap,
       view,
       view === "team" || view === "player" ? teamId : undefined,
-      view === "player" || view === "players" ? extra : undefined,
+      view === "player" || view === "players" || view === "graph" ? extra : undefined,
     ));
   // College football and the NFL switch from the header at every screen width.
   const leagueOf = (x: SeasonIndexEntry) => x.league ?? "cfb";
@@ -225,7 +225,7 @@ async function route() {
     if (!["list", "graph", "team", "about", "matchups", "players", "player"].includes(view))
       view = "list";
     const teamId = view === "team" || view === "player" ? Number(parts[3]) : undefined;
-    const extra = view === "player" ? parts[4] : view === "players" ? parts[3] : undefined;
+    const extra = view === "player" ? parts[4] : view === "players" || view === "graph" ? parts[3] : undefined;
 
     const [ranking, games, teams] = await Promise.all([
       loadRanking(season, snapId),
@@ -246,7 +246,7 @@ async function route() {
         : view === "player"
           ? playerView(ctx, teamId!, Number(extra))
           : view === "graph"
-        ? graphView(ctx, (fn) => (cleanup = fn))
+        ? graphView(ctx, (fn) => (cleanup = fn), extra)
         : view === "team"
           ? teamView(ctx, teamId!)
           : view === "about"

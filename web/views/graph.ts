@@ -5,6 +5,7 @@ import {
   type Ctx,
   fmtHeight,
   fmtScore,
+  href,
   rankLabel,
   record,
   teamHref,
@@ -21,10 +22,13 @@ type EdgeMode = "none" | "upsets" | "all";
 export function graphView(
   ctx: Ctx,
   onCleanup: (fn: () => void) => void,
+  divisionParam?: string,
 ): HTMLElement {
-  // Height and rank are résumé, the official ranking.
+  // Height and rank are résumé, the official ranking, which is ranked within each division.
+  const divisions = ctx.ranking.manifest.classifications;
+  const division = divisions.includes(divisionParam ?? "") ? divisionParam! : divisions[0]!;
   const nodes = ctx.ranked
-    .filter((t) => t.resumeRank !== null)
+    .filter((t) => t.resumeRank !== null && t.classification === division)
     .sort((a, b) => b.resume! - a.resume! || a.id - b.id);
   const L = computeLayout(
     nodes.map((t) => ({ id: t.id, height: t.resume!, lane: t.conference })),
@@ -268,7 +272,9 @@ export function graphView(
   // ---------------------------------------------------------------- side panel
   const panel = h("aside", { class: "gpanel", "aria-live": "polite" });
   const defaultPanel = () => {
-    const ups = upsets(ctx).slice(0, 12);
+    const ups = upsets(ctx)
+      .filter((u) => L.pos.has(u.edge.winner) && L.pos.has(u.edge.loser))
+      .slice(0, 12);
     panel.replaceChildren(
       h(
         "div",
@@ -508,6 +514,23 @@ export function graphView(
     "div",
     { class: "gtools" },
     h("h1", {}, "The Graph"),
+    divisions.length > 1
+      ? h(
+          "div",
+          { class: "seg", role: "group", "aria-label": "Division" },
+          ...divisions.map((d) =>
+            h(
+              "a",
+              {
+                href: href(ctx.entry.season, ctx.snapId, "graph", d),
+                class: d === division ? "on" : "",
+                "aria-current": d === division ? "page" : false,
+              },
+              d.toUpperCase(),
+            ),
+          ),
+        )
+      : "",
     modeSeg,
     h(
       "label",

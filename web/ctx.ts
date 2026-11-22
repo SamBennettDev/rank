@@ -82,10 +82,12 @@ export function dataThrough(ctx: Ctx): { short: string; long: string; iso: strin
 }
 export function upsets(ctx: Ctx) {
   return ctx.edges
+    // Résumé is ranked within each division, so upsets compare teams of the same one.
     .filter(
       (e) =>
         ctx.byId.get(e.winner)?.resumeRank != null &&
-        ctx.byId.get(e.loser)?.resumeRank != null,
+        ctx.byId.get(e.loser)?.resumeRank != null &&
+        ctx.byId.get(e.winner)!.classification === ctx.byId.get(e.loser)!.classification,
     )
     .map((edge) => ({
       edge,
@@ -113,7 +115,9 @@ export interface GameLine {
  */
 export function breakdown(ctx: Ctx, teamId: number) {
   const m = ctx.ranking.manifest;
-  const bench = m.resumeBenchmarks?.find((b) => b.label === "Top-25 team")?.strength ?? 0;
+  const division = ctx.byId.get(teamId)?.classification;
+  const bench =
+    m.resumeBenchmarks?.find((b) => b.label === "Top-25 team" && b.classification === division)?.strength ?? 0;
   const lines: GameLine[] = ctx.edges
     .filter((e) => e.winner === teamId || e.loser === teamId)
     .map((edge) => {
@@ -158,7 +162,7 @@ export const METRIC_HINT: Record<Metric, string> = {
   overall:
     "Quality, 0–100: 100 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting a little less.",
   resume:
-    "Strength of record, 0–100: how unlikely this record would be for a good team against the same schedule, averaged over five benchmarks (a top-10, top-25, top-50 and top-100 team, and an average team).",
+    "Strength of record, 0–100: how unlikely this record would be for a good team of the same division against the same schedule, averaged over five benchmarks (its top-10, top-25, top-50 and top-100 team, and its average team). FBS and FCS are ranked separately.",
   schedule:
     "Strength of schedule: the average quality (0–100) of the opponents played.",
   offense:

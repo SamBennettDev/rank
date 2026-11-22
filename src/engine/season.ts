@@ -165,6 +165,8 @@ export async function computeSeason(
         margin: e.winnerPoints - e.loserPoints,
       })),
       config.springs,
+      // Résumé benchmarks within each ranked division (FBS, FCS, …).
+      resultTeams.map((t) => config.classifications.indexOf(t.classification)),
     );
     const onGraph = (id: number) => wins.has(id) || losses.has(id);
     const at = (values: ArrayLike<number>, id: number) =>
@@ -220,8 +222,15 @@ export async function computeSeason(
       rankValues(
         teams.map((t, i) => (eligible.has(i) ? at(values, t.id) : null)),
       );
-    const resumeRanks = rankBy(graph.resume),
-      scheduleRanks = rankBy(graph.schedule);
+    // Résumé ranks within each division; quality and schedule across the whole field.
+    const resumeRanks = teams.map((): number | null => null);
+    for (const c of config.classifications)
+      rankValues(
+        teams.map((t, i) => (eligible.has(i) && t.classification === c ? at(graph.resume, t.id) : null)),
+      ).forEach((r, i) => {
+        if (r !== null) resumeRanks[i] = r;
+      });
+    const scheduleRanks = rankBy(graph.schedule);
     const allTeams: RankedTeam[] = teams.map((t, i) => {
       const height = at(graph.quality, t.id);
       const rank = ranks[i] ?? null;
@@ -317,10 +326,13 @@ export async function computeSeason(
       gamesSha256,
       playsSha256,
       snapsPerGame: units ? round6(units.snapsPerGame) : null,
-      resumeBenchmarks: RESUME_BENCHMARKS.map((b, j) => ({
-        label: b.label,
-        strength: round6(graph.benchmarks[j]!),
-      })),
+      resumeBenchmarks: config.classifications.flatMap((c, g) =>
+        RESUME_BENCHMARKS.map((b, j) => ({
+          classification: c,
+          label: b.label,
+          strength: round6(graph.benchmarks.get(g)![j]!),
+        })),
+      ),
       counts,
     };
     files.push({

@@ -926,3 +926,4 @@ body[data-view="player"] main { max-width: none; padding: 0 0 64px; }
 @media (max-width: 1000px) { .through { display: none; } }
 .spring-equation .total b.neg { color: var(--loss); }
 .k-sor .arow { grid-template-columns: minmax(130px, 1.4fr) repeat(4, minmax(80px, 1fr)); }
+.division-slot { display: contents; }

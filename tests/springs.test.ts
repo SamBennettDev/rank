@@ -157,13 +157,31 @@ describe("résumé: strength of record", () => {
   it("averages the benchmarks, strongest teams first, then an average team", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
     const r = rankByQuality(4, springs, S);
-    expect(r.benchmarks.at(-1)).toBe(0);
+    // Without divisions, the average team is the mean strength of every team that played.
+    const mean = Array.from(r.strength).reduce((x, y) => x + y, 0) / 4;
+    expect(r.benchmarks.get(-1)!.at(-1)).toBeCloseTo(mean, 9);
     for (let i = 0; i < 4; i++) {
       const parts = r.resumeParts[i]!;
       expect(parts).toHaveLength(5);
       expect(r.resume[i]).toBeCloseTo(parts.reduce((a, b) => a + b, 0) / 5, 12);
     }
     expect(r.resume[0]!).toBeGreaterThan(r.resume[2]!);
+  });
+
+  it("scores each division against its own benchmarks", () => {
+    // 0–2 are one division (0 > 1 > 2), 3–5 another (3 > 4 > 5); 2 beats 3 across them.
+    const springs = [win(0, 1, 7), win(1, 2, 7), win(0, 2, 14), win(3, 4, 7), win(4, 5, 7), win(3, 5, 14), win(2, 3, 3)];
+    const group = [0, 0, 0, 1, 1, 1];
+    const r = rankByQuality(6, springs, S, group);
+    // With three teams per division, a "top-10" benchmark is the division's mean.
+    const top0 = (r.strength[0]! + r.strength[1]! + r.strength[2]!) / 3;
+    const top1 = (r.strength[3]! + r.strength[4]! + r.strength[5]!) / 3;
+    expect(r.benchmarks.get(0)![0]).toBeCloseTo(top0, 9);
+    expect(r.benchmarks.get(1)![0]).toBeCloseTo(top1, 9);
+    expect(r.benchmarks.get(1)![0]!).toBeLessThan(r.benchmarks.get(0)![0]!);
+    // Team 3's record is judged against division 1's benchmarks.
+    const g3 = springs.flatMap((s) => (s.winner === 3 ? [{ opponent: s.loser, won: true }] : s.loser === 3 ? [{ opponent: s.winner, won: false }] : []));
+    expect(r.resumeParts[3]![0]).toBeCloseTo(strengthOfRecord(g3, r.benchmarks.get(1)![0]!, r.strength, S.qualityScale).score, 12);
   });
 
   it("averages opponents' quality per game played as the schedule", () => {

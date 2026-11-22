@@ -1,6 +1,6 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams (`quality-springs-2-sor`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at gently diminishing returns. The official ranking is **résumé**, strength of record (0–100: how unlikely the record would be for a good team against the same schedule); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams (`quality-springs-2-sor`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at gently diminishing returns. The official ranking is **résumé**, strength of record (0–100: how unlikely the record would be for a good team of the same division against the same schedule), ranked separately for FBS and FCS; quality, one board for both divisions, is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## Quality: SpringRank with margins
 
@@ -42,9 +42,9 @@ SOR(b)    = 100 × (P(benchmark wins fewer games) + ½ P(benchmark wins exactly 
 résumé    = average of SOR(b) over five benchmarks
 ```
 
-The benchmarks are the average strength of the 10, 25, 50 and 100 strongest teams, and an average team (strength 0: the solve makes all strengths sum to 0). The tough benchmarks separate the best records; the gentle ones separate the rest. Only wins and losses count: a win over a strong team counts for a lot, a loss to a strong team costs little, and a perfect record against a weak schedule still scores well, because even a top-25 team often drops a game in twelve.
+The benchmarks come from the team's own division: the average strength of its 10, 25, 50 and 100 strongest teams, and its average team (published per division in `manifest.resumeBenchmarks`). An FBS record is judged against FBS teams and an FCS record against FCS teams, and résumé is ranked within each division (`resumeRank`, `resumeChange`). Every game still counts, against opponents of any division, with strengths from the one combined quality model. The tough benchmarks separate the best records; the gentle ones separate the rest. Only wins and losses count: a win over a strong team counts for a lot, a loss to a strong team costs little, and a perfect record against a weak schedule still scores well, because even a top-25 team often drops a game in twelve.
 
-Its **schedule** is the average quality of the opponents it played. Both are ranked among the ranked field (`resumeRank`, `scheduleRank`); neither changes the ranking. Version 1's résumé (average game points, a win 50 + half the loser's quality) let one extra win outweigh a much harder schedule; `research/resume.py` compares the two.
+Its **schedule** is the average quality of the opponents it played. Schedule is ranked across the whole field (`scheduleRank`) and does not change the ranking. Version 1's résumé (average game points, a win 50 + half the loser's quality) let one extra win outweigh a much harder schedule; `research/resume.py` compares the two.
 
 Each game's `margin` is published in `springs`, the benchmark strengths in `manifest.resumeBenchmarks`, and each team's `height` (quality), `strength`, `resume`, `resumeParts` (strength of record against each benchmark), `resumeRank`, `schedule` and `scheduleRank` in `teams`, with `change`, `resumeChange` and `scheduleChange` giving places gained on each board since the previous snapshot. Published six-decimal qualities sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
 
@@ -54,8 +54,10 @@ The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen.
 
 | Seasons | Résumé: next-week winners | Résumé: season end | Quality: next-week winners | Quality: season end |
 |---|---:|---:|---:|---:|
-| 2014–2019 (design, 6,797 and 8,770 games) | 68.4% | 83.6% | 71.7% | 81.5% |
-| 2021–2026 through week 12 (7,011 and 9,221 games) | 67.5% | 82.7% | 70.0% | 80.4% |
+| 2014–2019 (design) | 68.1% | 83.3% | 71.7% | 81.5% |
+| 2021–2026 through week 12 | 67.4% | 81.8% | 70.0% | 80.4% |
+
+Résumé ranks each division separately, so it is scored on games between teams of the same division (6,668 next-week and 8,120 season games on 2014–2019; 6,886 and 8,492 on 2021–2026); quality on every game (6,797 and 8,770; 7,011 and 9,221). On those same-division games, division benchmarks score like a single set of benchmarks for both (68.2% and 83.0%; 67.2% and 81.8%).
 
 The official ranking is résumé. Quality picks more next-week winners and has lower season-end agreement, as a strength measure should: résumé rewards what was won, quality how good a team is. Against version 1 on the same games, quality picks 1.2 and 1.0 points more next-week winners (70.4% → 71.7%, 69.0% → 70.0%) with lower log loss, and the average-game-points résumé was unchanged by it. Strength of record matches that résumé's accuracy (68.5% → 68.4% and 83.6% → 83.6% on 2014–2019; 67.2% → 67.5% and 82.4% → 82.7% on 2021–2026). On 2008–2013, never used in design, quality picks 73.5% against version 1's 72.3% (`research/quality.py 2008-2013`).
 

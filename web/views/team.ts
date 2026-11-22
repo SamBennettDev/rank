@@ -63,6 +63,8 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   const stat = (label: string, value: Node | string, note?: string) =>
     h("div", { class: "tstat" }, h("b", {}, value), h("span", {}, label), note ? h("small", {}, note) : "");
   const of = `of ${ctx.ranked.length}`;
+  const div = team.classification.toUpperCase();
+  const ofDivision = `of ${ctx.ranked.filter((t) => t.classification === team.classification).length} ${div}`;
   const hero = h(
     "section",
     { class: "thero tv", style: teamVars(tl?.color) },
@@ -97,10 +99,10 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         stat(
           "Rank",
           team.resumeRank === null ? "—" : `#${team.resumeRank}`,
-          `${of} · by résumé`,
+          `${ofDivision} · by résumé`,
         ),
         stat("Record", record(team)),
-        stat("Résumé", fmtScore(team.resume), team.resumeRank === null ? "" : `#${team.resumeRank} ${of}`),
+        stat("Résumé", fmtScore(team.resume), team.resumeRank === null ? "" : `#${team.resumeRank} ${ofDivision}`),
         stat(
           "Quality",
           team.height === null ? "—" : team.height.toFixed(2),
@@ -262,13 +264,13 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
   return h(
     "div",
     { class: "panel why" },
-    h("h2", {}, "Résumé: game by game against a top-25 team"),
+    h("h2", {}, `Résumé: game by game against a top-25 ${me.classification.toUpperCase()} team`),
     h(
       "div",
       { class: "spring-equation" },
       h("div", {}, h("b", {}, String(b.wins)), h("small", {}, "Wins")),
       h("span", { "aria-hidden": "true" }, "−"),
-      h("div", {}, h("b", {}, b.expected.toFixed(2)), h("small", {}, "A top-25 team’s expected wins")),
+      h("div", {}, h("b", {}, b.expected.toFixed(2)), h("small", {}, `A top-25 ${me.classification.toUpperCase()} team’s expected wins`)),
       h("span", { "aria-hidden": "true" }, "="),
       h(
         "div",
@@ -630,19 +632,27 @@ function calcPanel(ctx: Ctx, teamId: number): HTMLElement {
       step(
         4,
         "Score the résumé: strength of record",
-        h("p", {}, `The ranking asks how hard ${me.wins}-${me.losses} would be for a good team against this exact schedule. For each benchmark, every game's chance comes from the opponent's strength (as in step 3); together they give the benchmark's whole range of possible records. The score is 100 × (the chance it does worse + half the chance it does exactly as well). The résumé averages five benchmarks, from a top-10 team to an average team.`),
+        h("p", {}, `The ranking asks how hard ${me.wins}-${me.losses} would be for a good ${me.classification.toUpperCase()} team against this exact schedule. For each benchmark, every game's chance comes from the opponent's strength (as in step 3); together they give the benchmark's whole range of possible records. The score is 100 × (the chance it does worse + half the chance it does exactly as well). The résumé averages five ${me.classification.toUpperCase()} benchmarks, from a top-10 team to an average team, and ranks ${me.classification.toUpperCase()} teams against each other.`),
         sorTable(ctx, me),
         eq(
-          ...(me.resumeParts ?? []).flatMap((v, k) => [...(k ? [op("+")] : []), term(v.toFixed(1), ctx.ranking.manifest.resumeBenchmarks[k]?.label ?? "")]),
+          ...(me.resumeParts ?? []).flatMap((v, k) => [...(k ? [op("+")] : []), term(v.toFixed(1), benchmarksFor(ctx, me)[k]?.label ?? "")]),
           op("÷"),
           term(String(me.resumeParts?.length ?? 5), "benchmarks"),
           op("="),
-          term(fmtScore(me.resume), `résumé · #${me.resumeRank ?? "—"} of ${ranked}`, "hl"),
+          term(fmtScore(me.resume), `résumé · #${me.resumeRank ?? "—"} of ${ctx.ranked.filter((t) => t.classification === me.classification).length} ${me.classification.toUpperCase()}`, "hl"),
         ),
-        h("p", { class: "hint" }, `Game by game against a top-25 team: ${b.wins} wins against ${b.expected.toFixed(2)} expected, in the chart below.`),
+        h("p", { class: "hint" }, `Game by game against a top-25 ${me.classification.toUpperCase()} team: ${b.wins} wins against ${b.expected.toFixed(2)} expected, in the chart below.`),
       ),
     ),
   );
+}
+
+/** The team's division's résumé benchmarks, labelled with the division ("Top-25 FBS team"). */
+function benchmarksFor(ctx: Ctx, me: RankedTeam) {
+  const div = me.classification.toUpperCase();
+  return ctx.ranking.manifest.resumeBenchmarks
+    .filter((b) => b.classification === me.classification)
+    .map((b) => ({ ...b, label: b.label.replace(/ team$/, ` ${div} team`) }));
 }
 
 /** Each benchmark's expected wins, chance of a worse or equal record, and score for this team. */
@@ -659,7 +669,7 @@ function sorTable(ctx: Ctx, me: RankedTeam): HTMLElement {
     "div",
     { class: "atable k-sor" },
     h("div", { class: "arow ahead" }, ...["Benchmark", "Strength", "Expected wins", `${me.wins} wins vs expected`, "Score"].map((x, i) => h("span", { class: i ? "n" : "" }, x))),
-    ...m.resumeBenchmarks.map((bm, k) => {
+    ...benchmarksFor(ctx, me).map((bm, k) => {
       const r = strengthOfRecord(local, bm.strength, s, m.springs.qualityScale);
       return h(
         "div",

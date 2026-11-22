@@ -41,8 +41,8 @@ export const quality = (strength: number, scale: number) => {
 export const qualityPoints = (q: number) => QUALITY_POINTS * q;
 
 /**
- * Résumé benchmarks: the average strength of the 10, 25, 50 and 100 strongest teams, and an
- * average team (strength 0: the solve makes every team's strengths sum to 0).
+ * Résumé benchmarks within a team's division: the average strength of its 10, 25, 50 and 100
+ * strongest teams, and its average team.
  */
 export const RESUME_BENCHMARKS = [
   { label: "Top-10 team", top: 10 },
@@ -52,14 +52,14 @@ export const RESUME_BENCHMARKS = [
   { label: "Average team", top: 0 },
 ] as const;
 
-/** Benchmark strengths for the teams that have played (strongest first, summed in that order). */
-export function benchmarkStrengths(strength: ArrayLike<number>, played: ArrayLike<boolean>): number[] {
+/** Benchmark strengths among the member teams (strongest first, summed in that order). */
+export function benchmarkStrengths(strength: ArrayLike<number>, members: ArrayLike<boolean>): number[] {
   const order = Array.from(strength, (s, i) => ({ s, i }))
-    .filter((x) => played[x.i])
+    .filter((x) => members[x.i])
     .sort((a, b) => b.s - a.s || a.i - b.i);
   return RESUME_BENCHMARKS.map(({ top }) => {
-    if (top === 0 || order.length === 0) return 0;
-    const k = Math.min(top, order.length);
+    if (order.length === 0) return 0;
+    const k = top === 0 ? order.length : Math.min(top, order.length);
     let sum = 0;
     for (let j = 0; j < k; j++) sum += order[j]!.s;
     return sum / k;
@@ -145,13 +145,15 @@ export function solveStrength(
 
 /**
  * The ranking and its two companions. Quality (0–100 points) comes from one margin
- * SpringRank. Résumé is strength of record averaged over the benchmarks (see
- * `strengthOfRecord`); schedule is the average quality of the opponents it played.
+ * SpringRank. Résumé is strength of record averaged over the benchmarks of the team's own
+ * division (`group[i]`, 0, 1, …; −1 or omitted: benchmarks from every team that played), see
+ * `strengthOfRecord`; schedule is the average quality of the opponents it played.
  */
 export function rankByQuality(
   n: number,
   springs: readonly Spring[],
   settings: SpringSettings,
+  group?: ArrayLike<number>,
 ) {
   const strength = solveStrength(n, springs, settings);
   const q = Array.from(strength, (s) =>
@@ -168,10 +170,18 @@ export function rankByQuality(
     schedules[s.winner]!.push({ opponent: s.loser, won: true });
     schedules[s.loser]!.push({ opponent: s.winner, won: false });
   });
-  const benchmarks = benchmarkStrengths(strength, Array.from(games, (g) => g > 0));
-  const resumeParts = schedules.map((g) =>
-    g.length ? benchmarks.map((b) => strengthOfRecord(g, b, strength, settings.qualityScale).score) : benchmarks.map(() => 0),
+  const groupOf = (i: number) => (group ? group[i]! : -1);
+  const groups = [...new Set(Array.from({ length: n }, (_, i) => groupOf(i)))].sort((a, b) => a - b);
+  const benchmarks = new Map<number, number[]>(
+    groups.map((gr) => [
+      gr,
+      benchmarkStrengths(strength, Array.from(games, (count, i) => count > 0 && (gr < 0 || groupOf(i) === gr))),
+    ]),
   );
+  const resumeParts = schedules.map((g, i) => {
+    const bench = benchmarks.get(groupOf(i))!;
+    return g.length ? bench.map((b) => strengthOfRecord(g, b, strength, settings.qualityScale).score) : bench.map(() => 0);
+  });
   const resume = Float64Array.from(resumeParts, (parts) => {
     let sum = 0;
     for (const v of parts) sum += v;

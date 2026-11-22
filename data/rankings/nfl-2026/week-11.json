@@ -32,22 +32,27 @@
     "snapsPerGame": null,
     "resumeBenchmarks": [
       {
+        "classification": "nfl",
         "label": "Top-10 team",
         "strength": 347.52026
       },
       {
+        "classification": "nfl",
         "label": "Top-25 team",
         "strength": 109.035337
       },
       {
+        "classification": "nfl",
         "label": "Top-50 team",
         "strength": 0
       },
       {
+        "classification": "nfl",
         "label": "Top-100 team",
         "strength": 0
       },
       {
+        "classification": "nfl",
         "label": "Average team",
         "strength": 0
       }
