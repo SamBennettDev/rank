@@ -7,7 +7,14 @@ const OUT = new URL("./out/", import.meta.url);
 mkdirSync(OUT, { recursive: true });
 const SITE = "https://site.api.espn.com/apis/site/v2/sports/football/college-football";
 const log = [];
-const say = (s) => { console.log(s); log.push(s); };
+const say = (s) => {
+  console.log(s);
+  log.push(s);
+  writeFileSync(new URL("log.txt", OUT), log.join("\n") + "\n"); // written as it goes, so a failed run still leaves a trace
+};
+say(`probe start ${new Date().toISOString()} node ${process.version}`);
+process.on("uncaughtException", (e) => { say(`FATAL ${e?.stack ?? e}`); process.exit(1); });
+process.on("unhandledRejection", (e) => { say(`FATAL ${e?.stack ?? e}`); process.exit(1); });
 
 async function get(url, tries = 4) {
   for (let i = 1; ; i++) {
@@ -44,8 +51,10 @@ for (const group of [80, 81]) {
   }
 }
 // Also by date for last Saturday, to see what a date query returns.
-const sat = await get(`${SITE}/scoreboard?groups=81&dates=20261121&limit=500`);
-writeFileSync(new URL("scoreboard_fcs_20261121.json", OUT), JSON.stringify(sat, null, 1));
+try {
+  const sat = await get(`${SITE}/scoreboard?groups=81&dates=20261121&limit=500`);
+  writeFileSync(new URL("scoreboard_fcs_20261121.json", OUT), JSON.stringify(sat, null, 1));
+} catch (e) { say(`date scoreboard: ${e}`); }
 
 // 2. Coverage: for every completed game, does the summary have plays and a box score?
 const done = [...events.values()].filter(({ e }) => e.competitions?.[0]?.status?.type?.completed);
@@ -79,4 +88,4 @@ for (const [name, x] of [["fcs", pick(81)], ["fbs", pick(80)]]) {
   writeFileSync(new URL(`roster_${name}_${teamId}.json`, OUT), JSON.stringify(await get(`${SITE}/teams/${teamId}/roster`), null, 1));
 }
 for (const g of [80, 81]) writeFileSync(new URL(`teams_group${g}.json`, OUT), JSON.stringify(await get(`${SITE}/teams?groups=${g}&limit=400`), null, 1));
-writeFileSync(new URL("log.txt", OUT), log.join("\n") + "\n");
+say(`probe done ${new Date().toISOString()}`);

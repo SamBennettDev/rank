@@ -23,7 +23,7 @@ jobs:
         with: { ref: claude/confident-babbage-j34g83 }
       - uses: actions/setup-node@v7
         with: { node-version: 22 }
-      - run: node tmp-espn/probe.mjs
+      - run: node tmp-espn/probe.mjs || echo "::warning::probe exited non-zero"
       - name: Commit output
         if: always()
         run: |
