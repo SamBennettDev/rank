@@ -41,15 +41,61 @@ export const quality = (strength: number, scale: number) => {
 export const qualityPoints = (q: number) => QUALITY_POINTS * q;
 
 /**
- * Résumé points for one game, 0–100, from 0–100 quality points. A win earns 50 plus
- * half the loser's quality (50–100); a loss earns half the winner's quality (0–50).
- * Beating a good team or losing to a bad one moves a résumé most; beating a bad team
- * or losing to a good one barely does.
+ * Résumé benchmarks: the average strength of the 10, 25, 50 and 100 strongest teams, and an
+ * average team (strength 0: the solve makes every team's strengths sum to 0).
  */
-export const gamePoints = (winnerQuality: number, loserQuality: number) => ({
-  win: (QUALITY_POINTS + loserQuality) / 2,
-  loss: winnerQuality / 2,
-});
+export const RESUME_BENCHMARKS = [
+  { label: "Top-10 team", top: 10 },
+  { label: "Top-25 team", top: 25 },
+  { label: "Top-50 team", top: 50 },
+  { label: "Top-100 team", top: 100 },
+  { label: "Average team", top: 0 },
+] as const;
+
+/** Benchmark strengths for the teams that have played (strongest first, summed in that order). */
+export function benchmarkStrengths(strength: ArrayLike<number>, played: ArrayLike<boolean>): number[] {
+  const order = Array.from(strength, (s, i) => ({ s, i }))
+    .filter((x) => played[x.i])
+    .sort((a, b) => b.s - a.s || a.i - b.i);
+  return RESUME_BENCHMARKS.map(({ top }) => {
+    if (top === 0 || order.length === 0) return 0;
+    const k = Math.min(top, order.length);
+    let sum = 0;
+    for (let j = 0; j < k; j++) sum += order[j]!.s;
+    return sum / k;
+  });
+}
+
+/**
+ * How likely a team of strength `bench` would be to do worse than this record against this
+ * schedule, half-counting an equal record: 100 × (P(fewer wins) + ½ P(as many)).
+ * Each game's chance comes from the calibrated quality logistic; the benchmark's distribution
+ * of wins is built game by game (Poisson-binomial), with only + − × /.
+ */
+export function strengthOfRecord(
+  games: readonly { opponent: number; won: boolean }[],
+  bench: number,
+  strength: ArrayLike<number>,
+  scale: number,
+): { score: number; expectedWins: number; wins: number } {
+  let dist = [1],
+    expectedWins = 0,
+    wins = 0;
+  for (const g of games) {
+    const p = quality(bench - strength[g.opponent]!, scale);
+    expectedWins += p;
+    if (g.won) wins++;
+    const next = new Array<number>(dist.length + 1).fill(0);
+    for (let k = 0; k < dist.length; k++) {
+      next[k]! += dist[k]! * (1 - p);
+      next[k + 1]! += dist[k]! * p;
+    }
+    dist = next;
+  }
+  let below = 0;
+  for (let k = 0; k < wins; k++) below += dist[k]!;
+  return { score: QUALITY_POINTS * (below + dist[wins]! / 2), expectedWins, wins };
+}
 
 /**
  * Heights that minimise
@@ -99,8 +145,8 @@ export function solveStrength(
 
 /**
  * The ranking and its two companions. Quality (0–100 points) comes from one margin
- * SpringRank. Résumé is a team's average game points
- * (see `gamePoints`); schedule is the average quality of the opponents it played.
+ * SpringRank. Résumé is strength of record averaged over the benchmarks (see
+ * `strengthOfRecord`); schedule is the average quality of the opponents it played.
  */
 export function rankByQuality(
   n: number,
@@ -111,25 +157,32 @@ export function rankByQuality(
   const q = Array.from(strength, (s) =>
     qualityPoints(quality(s, settings.qualityScale)),
   );
-  const points = springs.map((s) => gamePoints(q[s.winner]!, q[s.loser]!));
-  const earned = new Float64Array(n),
-    faced = new Float64Array(n),
+  const faced = new Float64Array(n),
     games = new Float64Array(n);
-  springs.forEach((s, e) => {
-    earned[s.winner]! += points[e]!.win;
-    earned[s.loser]! += points[e]!.loss;
+  const schedules: { opponent: number; won: boolean }[][] = Array.from({ length: n }, () => []);
+  springs.forEach((s) => {
     faced[s.winner]! += q[s.loser]!;
     faced[s.loser]! += q[s.winner]!;
     games[s.winner]!++;
     games[s.loser]!++;
+    schedules[s.winner]!.push({ opponent: s.loser, won: true });
+    schedules[s.loser]!.push({ opponent: s.winner, won: false });
   });
-  const perGame = (x: Float64Array) =>
-    x.map((v, i) => (games[i]! > 0 ? v / games[i]! : 0));
+  const benchmarks = benchmarkStrengths(strength, Array.from(games, (g) => g > 0));
+  const resumeParts = schedules.map((g) =>
+    g.length ? benchmarks.map((b) => strengthOfRecord(g, b, strength, settings.qualityScale).score) : benchmarks.map(() => 0),
+  );
+  const resume = Float64Array.from(resumeParts, (parts) => {
+    let sum = 0;
+    for (const v of parts) sum += v;
+    return sum / parts.length;
+  });
   return {
     strength,
     quality: Float64Array.from(q),
-    points,
-    resume: perGame(earned),
-    schedule: perGame(faced),
+    benchmarks,
+    resumeParts,
+    resume,
+    schedule: faced.map((v, i) => (games[i]! > 0 ? v / games[i]! : 0)),
   };
 }

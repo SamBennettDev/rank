@@ -88,13 +88,32 @@ def rank(n, w, l, margin):
     return quality(n, w, l, margin)
 
 
+def strength_of_record(n, w, l, margin, top):
+    """100 × (P(benchmark wins fewer) + ½ P(as many)) against each team's schedule; top=0 is an average team."""
+    s = solve(n, w, l, np.ones(len(w)), margin_gap(margin), STRENGTH_SHRINK)
+    played = np.zeros(n, bool); played[w] = played[l] = True
+    ranked = np.sort(s[played])[::-1]
+    bench = ranked[: min(top, len(ranked))].mean() if top and len(ranked) else 0.0
+    p_win = 1 / (1 + np.exp(-QUALITY_SCALE * (bench - s)))
+    games = [[] for _ in range(n)]
+    for a, b in zip(w, l):
+        games[a].append((b, 1)); games[b].append((a, 0))
+    out = np.zeros(n)
+    for i, g in enumerate(games):
+        if not g:
+            continue
+        dist = np.zeros(len(g) + 1); dist[0] = 1.0
+        for o, _ in g:
+            dist[1:] = dist[1:] * (1 - p_win[o]) + dist[:-1] * p_win[o]
+            dist[0] *= 1 - p_win[o]
+        wins = sum(r for _, r in g)
+        out[i] = 100 * (dist[:wins].sum() + 0.5 * dist[wins])
+    return out
+
+
 def resume(n, w, l, margin):
-    """The ranking: average game points, 50 + half the loser's quality for a win, half the winner's for a loss."""
-    q = quality(n, w, l, margin)
-    points = np.zeros(n); games = np.zeros(n)
-    np.add.at(points, w, 50 + q[l] / 2); np.add.at(points, l, q[w] / 2)
-    np.add.at(games, w, 1); np.add.at(games, l, 1)
-    return np.where(games > 0, points / np.maximum(games, 1), 0)
+    """The ranking: strength of record averaged over a top-10, top-25, top-50, top-100 and average team."""
+    return sum(strength_of_record(n, w, l, margin, t) for t in (10, 25, 50, 100, 0)) / 5
 
 
 def evaluate(years):

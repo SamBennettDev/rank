@@ -1,7 +1,7 @@
 {
   "label": "2026 season",
   "demo": false,
-  "algorithmVersion": "quality-springs-2",
+  "algorithmVersion": "quality-springs-2-sor",
   "classifications": [
     "fbs",
     "fcs"

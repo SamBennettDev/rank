@@ -1,4 +1,5 @@
 import { buildEdges } from "../src/engine/graph";
+import { quality } from "../src/engine/springs";
 import type {
   Edge,
   Game,
@@ -100,17 +101,22 @@ export interface GameLine {
   opponent: RankedTeam;
   where: -1 | 0 | 1;
   margin: number;
-  /** Points this game earned, 0–100: 50 + half the beaten team's quality, or half the winner's. */
+  /** Chance a typical top-25 team would have won this game (against this opponent). */
+  chance: number;
+  /** Result against that benchmark: 1 − chance for a win, −chance for a loss. */
   value: number;
 }
-/** Rebuilds a team's résumé: the average of the points its games earned. */
+/**
+ * A team's games against the résumé's top-25 benchmark: each game's chance that a typical
+ * top-25 team wins it (from strengths and the calibrated quality logistic, as the engine
+ * computes it), and the team's wins against those expected wins.
+ */
 export function breakdown(ctx: Ctx, teamId: number) {
-  const springs = new Map(ctx.ranking.springs.map((s) => [s.gameId, s]));
+  const m = ctx.ranking.manifest;
+  const bench = m.resumeBenchmarks?.find((b) => b.label === "Top-25 team")?.strength ?? 0;
   const lines: GameLine[] = ctx.edges
     .filter((e) => e.winner === teamId || e.loser === teamId)
-    .flatMap((edge) => {
-      const spring = springs.get(edge.gameId);
-      if (!spring) return [];
+    .map((edge) => {
       const won = edge.winner === teamId,
         opponent = ctx.byId.get(won ? edge.loser : edge.winner)!,
         home = won ? edge.winnerIsHome : !edge.winnerIsHome;
@@ -118,28 +124,12 @@ export function breakdown(ctx: Ctx, teamId: number) {
         margin = won
           ? edge.winnerPoints - edge.loserPoints
           : edge.loserPoints - edge.winnerPoints;
-      return [
-        {
-          edge,
-          won,
-          opponent,
-          where,
-          margin,
-          value: won ? spring.win : spring.loss,
-        },
-      ];
+      const chance = quality(bench - (opponent.strength ?? 0), m.springs.qualityScale);
+      return { edge, won, opponent, where, margin, chance, value: (won ? 1 : 0) - chance };
     });
-  // Points from wins and from losses; both are positive on the 0–100 scale.
-  const earned = lines.reduce((sum, l) => sum + (l.won ? l.value : 0), 0);
-  const lost = lines.reduce((sum, l) => sum + (l.won ? 0 : l.value), 0);
-  const games = lines.length;
-  return {
-    lines,
-    earned,
-    lost,
-    games,
-    resume: games ? (earned + lost) / games : 0,
-  };
+  const wins = lines.filter((l) => l.won).length;
+  const expected = lines.reduce((sum, l) => sum + l.chance, 0);
+  return { lines, wins, expected, games: lines.length, bench };
 }
 export type Metric =
   | "overall"
@@ -168,7 +158,7 @@ export const METRIC_HINT: Record<Metric, string> = {
   overall:
     "Quality, 0–100: 100 × the chance of beating an average team. It comes from a spring graph where every game wants its winner above its loser by the margin, each extra point counting a little less.",
   resume:
-    "Points per game, 0–100. A win earns 50 plus half the beaten team's quality; a loss earns half the winner's quality.",
+    "Strength of record, 0–100: how unlikely this record would be for a good team against the same schedule, averaged over five benchmarks (a top-10, top-25, top-50 and top-100 team, and an average team).",
   schedule:
     "Strength of schedule: the average quality (0–100) of the opponents played.",
   offense:

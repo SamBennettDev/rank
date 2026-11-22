@@ -1,6 +1,6 @@
 # Methodology
 
-Rank publishes one ranking for FBS and FCS teams (`quality-springs-2`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at gently diminishing returns. The official ranking is **résumé** (0–100: a win earns 50 plus half the beaten team's quality, a loss half the winner's, averaged per game); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
+Rank publishes one ranking for FBS and FCS teams (`quality-springs-2-sor`, `src/engine/springs.ts`). **Quality** comes from one SpringRank with margins counted at gently diminishing returns. The official ranking is **résumé**, strength of record (0–100: how unlikely the record would be for a good team against the same schedule); quality is the second board. **Schedule** is the average quality of the opponents played. No home field or head-to-head rules. Every team starts the season at 0; no polls, preseason, recruiting or conference membership enter.
 
 ## Quality: SpringRank with margins
 
@@ -34,23 +34,19 @@ Quality, published as each team's `height`, is team strength and the second boar
 
 ## Résumé and schedule
 
-Each game gives résumé points to both teams:
+Résumé is **strength of record**. A benchmark team of strength `b` plays the team's exact schedule. Its chance of beating opponent `o` is the calibrated quality logistic of their difference, and those chances give its whole distribution of wins (Poisson-binomial, built game by game):
 
 ```text
-winner earns  50 + quality[loser] / 2     (50 to 100)
-loser earns   quality[winner] / 2          (0 to 50)
+p[o]      = logistic(qualityScale × (b − s[o]))
+SOR(b)    = 100 × (P(benchmark wins fewer games) + ½ P(benchmark wins exactly as many))
+résumé    = average of SOR(b) over five benchmarks
 ```
 
-| Result | Points |
-|---|---|
-| Beat a good team (quality 90) | 95 |
-| Lose to a good team (quality 90) | 45 |
-| Beat a bad team (quality 10) | 55 |
-| Lose to a bad team (quality 10) | 5 |
+The benchmarks are the average strength of the 10, 25, 50 and 100 strongest teams, and an average team (strength 0: the solve makes all strengths sum to 0). The tough benchmarks separate the best records; the gentle ones separate the rest. Only wins and losses count: a win over a strong team counts for a lot, a loss to a strong team costs little, and a perfect record against a weak schedule still scores well, because even a top-25 team often drops a game in twelve.
 
-A team's **résumé** is its games' points divided by the games it played, so an extra game is no advantage by itself. Its **schedule** is the average quality of the opponents it played. Both are ranked among the ranked field (`resumeRank`, `scheduleRank`); neither changes the ranking.
+Its **schedule** is the average quality of the opponents it played. Both are ranked among the ranked field (`resumeRank`, `scheduleRank`); neither changes the ranking. Version 1's résumé (average game points, a win 50 + half the loser's quality) let one extra win outweigh a much harder schedule; `research/resume.py` compares the two.
 
-Each game's `margin`, `win` (the winner's résumé points) and `loss` (the loser's) are published in `springs`, and each team's `height` (quality), `strength`, `resume`, `resumeRank`, `schedule` and `scheduleRank` in `teams`, with `change`, `resumeChange` and `scheduleChange` giving places gained on each board since the previous snapshot. Published six-decimal qualities sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
+Each game's `margin` is published in `springs`, the benchmark strengths in `manifest.resumeBenchmarks`, and each team's `height` (quality), `strength`, `resume`, `resumeParts` (strength of record against each benchmark), `resumeRank`, `schedule` and `scheduleRank` in `teams`, with `change`, `resumeChange` and `scheduleChange` giving places gained on each board since the previous snapshot. Published six-decimal qualities sort descending, with competition ranks for exact ties. A team with any counted result is ranked; only teams with no results are unranked. Team IDs break display-order ties. Filters preserve full-field ranks.
 
 ## Settings and accuracy
 
@@ -58,10 +54,10 @@ The settings were chosen on public 2014–2019 schedules (FBS + FCS) and frozen.
 
 | Seasons | Résumé: next-week winners | Résumé: season end | Quality: next-week winners | Quality: season end |
 |---|---:|---:|---:|---:|
-| 2014–2019 (design, 6,797 and 8,770 games) | 68.5% | 83.6% | 71.7% | 81.5% |
-| 2021–2026 through week 12 (6,889 and 9,099 games) | 67.2% | 82.5% | 70.0% | 80.6% |
+| 2014–2019 (design, 6,797 and 8,770 games) | 68.4% | 83.6% | 71.7% | 81.5% |
+| 2021–2026 through week 12 (7,011 and 9,221 games) | 67.5% | 82.7% | 70.0% | 80.4% |
 
-The official ranking is résumé. Quality picks more next-week winners and has lower season-end agreement, as a strength measure should: résumé rewards what was won, quality how good a team is. Against version 1 on the same games, quality picks 1.2 and 1.0 points more next-week winners (70.4% → 71.7%, 69.0% → 70.0%) with lower log loss, and résumé is unchanged (68.6% → 68.5%, 83.4% → 83.6%; 67.1% → 67.2%, 82.5% → 82.5%). On 2008–2013, never used in design, quality picks 73.5% against version 1's 72.3% (`research/quality.py 2008-2013`).
+The official ranking is résumé. Quality picks more next-week winners and has lower season-end agreement, as a strength measure should: résumé rewards what was won, quality how good a team is. Against version 1 on the same games, quality picks 1.2 and 1.0 points more next-week winners (70.4% → 71.7%, 69.0% → 70.0%) with lower log loss, and the average-game-points résumé was unchanged by it. Strength of record matches that résumé's accuracy (68.5% → 68.4% and 83.6% → 83.6% on 2014–2019; 67.2% → 67.5% and 82.4% → 82.7% on 2021–2026). On 2008–2013, never used in design, quality picks 73.5% against version 1's 72.3% (`research/quality.py 2008-2013`).
 
 2021–2026 were looked at during design, so they are a check rather than an untouched holdout.
 

@@ -4,7 +4,7 @@ import { DEFAULT_SETTINGS } from "../src/engine/defaults";
 import { computeSeason } from "../src/engine/season";
 import {
   marginGap,
-  gamePoints,
+  strengthOfRecord,
   quality,
   solveSprings,
   rankByQuality,
@@ -125,48 +125,52 @@ describe("quality", () => {
   });
 });
 
-describe("résumé and schedule", () => {
-  it("earns 50 + half the beaten team's quality, or half the winner's", () => {
-    expect(gamePoints(90, 10)).toEqual({ win: 55, loss: 45 });
-    expect(gamePoints(10, 90)).toEqual({ win: 95, loss: 5 });
-    expect(gamePoints(50, 50)).toEqual({ win: 75, loss: 25 });
+describe("résumé: strength of record", () => {
+  // Strengths for: 0 strong, 1 strong, 2 weak, 3 weak, plus team 4 whose schedule varies.
+  const strength = [800, 700, -600, -700, 0];
+  const scale = S.qualityScale;
+
+  it("counts an unbeaten record against strong teams for more than against weak ones", () => {
+    const tough = strengthOfRecord([{ opponent: 0, won: true }, { opponent: 1, won: true }], 500, strength, scale);
+    const soft = strengthOfRecord([{ opponent: 2, won: true }, { opponent: 3, won: true }], 500, strength, scale);
+    expect(tough.score).toBeGreaterThan(soft.score);
+    expect(soft.expectedWins).toBeGreaterThan(tough.expectedWins);
   });
 
-  it("costs more to lose to a bad team than to a good one", () => {
-    // 0 is strong (beats 2 and 3 by a lot), 3 is weak (loses to everyone else).
-    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
-    const loseToGood = rankByQuality(5, [...base, win(0, 4)], S).resume;
-    const loseToBad = rankByQuality(5, [...base, win(3, 4)], S).resume;
-    expect(loseToBad[4]!).toBeLessThan(loseToGood[4]!);
+  it("costs less to lose to a strong team than to a weak one", () => {
+    const toStrong = strengthOfRecord([{ opponent: 0, won: false }, { opponent: 2, won: true }], 500, strength, scale);
+    const toWeak = strengthOfRecord([{ opponent: 3, won: false }, { opponent: 2, won: true }], 500, strength, scale);
+    expect(toStrong.score).toBeGreaterThan(toWeak.score);
   });
 
-  it("rewards beating a good team more than beating a bad one", () => {
-    const base = [win(0, 2, 30), win(0, 3, 35), win(1, 3, 28), win(2, 3, 21)];
-    const beatGood = rankByQuality(5, [...base, win(4, 0)], S).resume;
-    const beatBad = rankByQuality(5, [...base, win(4, 3)], S).resume;
-    expect(beatGood[4]!).toBeGreaterThan(beatBad[4]!);
+  it("is 100 × (P(fewer wins) + ½ P(as many)) for the benchmark", () => {
+    const p0 = quality(500 - 800, scale),
+      p2 = quality(500 + 600, scale);
+    // One win in two games: P(0 wins) + ½ P(1 win).
+    const zero = (1 - p0) * (1 - p2),
+      one = p0 * (1 - p2) + (1 - p0) * p2;
+    const r = strengthOfRecord([{ opponent: 0, won: false }, { opponent: 2, won: true }], 500, strength, scale);
+    expect(r.score).toBeCloseTo(100 * (zero + one / 2), 12);
+    expect(r.expectedWins).toBeCloseTo(p0 + p2, 12);
   });
 
-  it("averages game points and opponents' quality per game played", () => {
+  it("averages the benchmarks, strongest teams first, then an average team", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
-    const {
-      quality: q,
-      points,
-      resume,
-      schedule,
-    } = rankByQuality(4, springs, S);
-    const earned = [0, 0, 0, 0],
-      faced = [0, 0, 0, 0];
-    springs.forEach((s, e) => {
-      expect(points[e]).toEqual(gamePoints(q[s.winner]!, q[s.loser]!));
-      earned[s.winner]! += points[e]!.win;
-      earned[s.loser]! += points[e]!.loss;
-      faced[s.winner]! += q[s.loser]!;
-      faced[s.loser]! += q[s.winner]!;
-    });
-    const games = [2, 2, 3, 1];
-    expect(Array.from(resume)).toEqual(earned.map((t, i) => t / games[i]!));
-    expect(Array.from(schedule)).toEqual(faced.map((t, i) => t / games[i]!));
+    const r = rankByQuality(4, springs, S);
+    expect(r.benchmarks.at(-1)).toBe(0);
+    for (let i = 0; i < 4; i++) {
+      const parts = r.resumeParts[i]!;
+      expect(parts).toHaveLength(5);
+      expect(r.resume[i]).toBeCloseTo(parts.reduce((a, b) => a + b, 0) / 5, 12);
+    }
+    expect(r.resume[0]!).toBeGreaterThan(r.resume[2]!);
+  });
+
+  it("averages opponents' quality per game played as the schedule", () => {
+    const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
+    const { quality: q, schedule } = rankByQuality(4, springs, S);
+    expect(schedule[3]).toBe(q[2]);
+    expect(schedule[0]).toBeCloseTo((q[1]! + q[2]!) / 2, 12);
   });
 });
 

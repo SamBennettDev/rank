@@ -6,7 +6,7 @@ Open, deterministic college football rankings for **every FBS and FCS team**. Li
 
 The ranking itself is **résumé**, and two boards are built from quality:
 
-- **Résumé (the ranking):** points per game, 0–100. A win earns 50 plus half the beaten team's quality; a loss earns half the winner's quality.
+- **Résumé (the ranking):** strength of record, 0–100: how unlikely this record would be for a good team against the same schedule, averaged over five benchmarks (a top-10, top-25, top-50 and top-100 team, and an average team).
 - **Quality:** team strength from the spring graph, shown as the second board.
 - **Schedule:** the average quality of the opponents played.
 
@@ -16,7 +16,7 @@ No home field or head-to-head rules.
 - **Explainable game by game.** Each team page walks through its rank in four steps with its own numbers: every game's spring, the solve, quality, and résumé.
 - **Players on one scale.** Position boards (QB, RB, WR, TE, K, DL, LB, DB) rate every FBS and FCS player against what an average player does against the same opponents, using our own expected-points model. Each player page shows the calculation step by step.
 - **Free public data.** College scores, play-by-play, box scores and rosters come from sportsdataverse's ESPN-based release files, published on GitHub. No API key.
-- **Measured.** On 2014–2019, where the settings were chosen, the weekly résumé rankings pick 68.5% of next week's winners and the final ranking has the winner above the loser in 83.6% of games (67.2% and 82.5% on 2021–2026). Ordering by quality instead picks 71.7% of next week's winners with 81.5% season-end agreement (70.0% and 80.6%). `research/springs.py` reproduces both; `research/QUALITY.md` compares the alternatives.
+- **Measured.** On 2014–2019, where the settings were chosen, the weekly résumé rankings pick 68.4% of next week's winners and the final ranking has the winner above the loser in 83.6% of games (67.5% and 82.7% on 2021–2026). Ordering by quality instead picks 71.7% of next week's winners with 81.5% season-end agreement (70.0% and 80.4%). `research/springs.py` reproduces both; `research/QUALITY.md` and `research/resume.py` compare the alternatives.
 - **Reproduce every number.** The Node scripts and the browser share one engine; Recompute on the method page rebuilds every published file byte for byte.
 
 Matchup odds come from a separate calibrated margin model and never change the ranking. See [methodology](docs/METHODOLOGY.md).

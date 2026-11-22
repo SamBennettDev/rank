@@ -2,7 +2,7 @@
   "label": "NFL 2026 season",
   "demo": false,
   "league": "nfl",
-  "algorithmVersion": "quality-springs-2",
+  "algorithmVersion": "quality-springs-2-sor",
   "classifications": [
     "nfl"
   ],

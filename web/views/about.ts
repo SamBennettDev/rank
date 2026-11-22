@@ -137,7 +137,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
     h(
       "p",
       { class: "method-caption" },
-      "Every game is a spring holding its winner above its loser by the margin, each extra point counting a little less than the last. The result is every team’s quality. Résumé, the ranking, and schedule are built from it: a team’s résumé is the average of what its games earned.",
+      "Every game is a spring holding its winner above its loser by the margin, each extra point counting a little less than the last. The result is every team’s quality. Résumé, the ranking, is strength of record: how hard the team’s record would be for a good team against the same schedule.",
     ),
     details(
       "Résumé, quality and schedule",
@@ -151,7 +151,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Résumé, the ranking. "),
-        "Each team averages its games on a 0–100 scale. A win earns 50 plus half the beaten team’s quality; a loss earns half the winning team’s quality. Beating a 90 team earns 95 and losing to it still earns 45; beating a 10 team earns 55 and losing to it earns only 5.",
+        "Strength of record, 0–100. A benchmark team plays this team’s exact schedule: its chance of winning each game comes from the opponent’s strength, and together those give its whole range of possible records. The score is 100 × (the chance it does worse + half the chance it does exactly as well). The résumé averages five benchmarks: a top-10, top-25, top-50 and top-100 team, and an average team. Beating strong teams counts most, a loss to a strong team costs little, and a perfect record against a weak schedule still counts for a lot.",
       ),
       h(
         "p",
@@ -171,7 +171,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         { class: "muted" },
         ctx.entry.league
           ? "The settings were chosen on college football (2014–2019) and are reused for the NFL unchanged; they have not been tuned or backtested on NFL games. The matchup odds come from a separate margin model that is likewise uncalibrated for the NFL."
-          : "On 2014–2019, the résumé ranking picks 68.5% of next week’s winners and the final ranking has the winner above the loser in 83.6% of games; on 2021–2026, 67.2% and 82.5%. Ordering by quality instead picks more next-week winners (71.7% and 70.0%) with lower season-end agreement (81.5% and 80.6%): quality measures strength, résumé what was won. The matchup odds come from a separate, calibrated margin model.",
+          : "On 2014–2019, the résumé ranking picks 68.4% of next week’s winners and the final ranking has the winner above the loser in 83.6% of games; on 2021–2026, 67.5% and 82.7%. Ordering by quality instead picks more next-week winners (71.7% and 70.0%) with lower season-end agreement (81.5% and 80.4%): quality measures strength, résumé what was won. The matchup odds come from a separate, calibrated margin model.",
       ),
     ),
     epDetails(),

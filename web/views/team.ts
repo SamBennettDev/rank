@@ -19,7 +19,8 @@ import { arrowLeft } from "../icons";
 import { logo, shortConf, svgLogo, teamVars } from "../team";
 import { loadRanking } from "../store";
 import { matchupCard } from "./matchups";
-import { marginGap } from "../../src/engine/springs";
+import { marginGap, strengthOfRecord } from "../../src/engine/springs";
+import type { RankedTeam } from "../../src/engine/types";
 import {
   GROUPS,
   GROUP_NAME,
@@ -257,36 +258,26 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
     (l.edge.seasonType === "postseason" ? 99 : l.edge.week) * 1e9 +
     l.edge.gameId;
   const lines = [...b.lines].sort((x, y) => order(x) - order(y));
+  const above = b.wins - b.expected;
   return h(
     "div",
     { class: "panel why" },
-    h("h2", {}, "Résumé: where this team’s points come from"),
+    h("h2", {}, "Résumé: game by game against a top-25 team"),
     h(
       "div",
       { class: "spring-equation" },
-      h(
-        "div",
-        { class: "total" },
-        h("b", {}, fmtScore(b.earned + b.lost)),
-        h(
-          "small",
-          {},
-          b.lost > 0
-            ? `${fmtScore(b.earned)} from wins, ${fmtScore(b.lost)} from losses`
-            : "From wins",
-        ),
-      ),
-      h("span", { "aria-hidden": "true" }, "÷"),
-      h("div", {}, h("b", {}, String(b.games)), h("small", {}, "Games")),
+      h("div", {}, h("b", {}, String(b.wins)), h("small", {}, "Wins")),
+      h("span", { "aria-hidden": "true" }, "−"),
+      h("div", {}, h("b", {}, b.expected.toFixed(2)), h("small", {}, "A top-25 team’s expected wins")),
       h("span", { "aria-hidden": "true" }, "="),
       h(
         "div",
-        {},
-        h("b", {}, fmtScore(me.resume)),
-        h("small", {}, `Résumé, #${me.resumeRank ?? "—"}`),
+        { class: "total" },
+        h("b", { class: above < 0 ? "neg" : "" }, `${above >= 0 ? "+" : "−"}${Math.abs(above).toFixed(2)}`),
+        h("small", {}, `Résumé ${fmtScore(me.resume)}, #${me.resumeRank ?? "—"}`),
       ),
     ),
-    breakdownChart(ctx, me.resume!, lines),
+    breakdownChart(ctx, lines),
     h(
       "details",
       { class: "quiet-details" },
@@ -294,113 +285,49 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Résumé is the ranking. Quality measures team strength from margins: every game is a spring that wants the winner 100 × margin^0.75 points above the loser, so a 1-point win is worth 100, a 7-point win 430 and a 14-point win 724, each extra point counting a little less. That gives every team a strength in points, and from it a quality: 100 × its chance of beating an average team, from 0 to 100. Résumé, the ranking, averages the games: a win earns 50 plus half the beaten team’s quality and a loss earns half the winner’s, on a 0–100 scale, so beating a good team or losing to a bad one moves it most. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
+        `Résumé is the ranking. It asks how hard this record would be for a good team against the same schedule. Each bar is one game: a typical top-25 team’s chance of winning it, from the opponent’s strength, set against what this team did. A win over a strong opponent counts for a lot, a win over a weak one for little, and a loss to a strong team costs little. Quality measures team strength from margins: every game is a spring that wants the winner 100 × margin^0.75 points above the loser. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
       ),
     ),
   );
 }
 
-function breakdownChart(
-  ctx: Ctx,
-  rating: number,
-  lines: GameLine[],
-): SVGSVGElement {
+/** Each game's result against a top-25 team: +(1 − chance) for a win, −chance for a loss. */
+function breakdownChart(ctx: Ctx, lines: GameLine[]): SVGSVGElement {
   const W = 560;
   const row = 30;
   const pad = { l: 178, r: 24, t: 24, b: 28 };
   const H = pad.t + row * lines.length + pad.b;
-  const vals = [0, 100];
-  let lo = Math.min(...vals),
-    hi = Math.max(...vals);
-  const span = Math.max(hi - lo, 2);
-  lo -= span * 0.06;
-  hi += span * 0.06;
-  const x = (v: number) => pad.l + ((v - lo) / (hi - lo)) * (W - pad.l - pad.r);
+  const x = (v: number) => pad.l + ((v + 1) / 2) * (W - pad.l - pad.r);
   const root = svg("svg", {
     viewBox: `0 0 ${W} ${H}`,
     role: "img",
-    "aria-label":
-      "Points each game earned, 0 to 100: above 50 for a win, below 50 for a loss",
+    "aria-label": "Each game against a top-25 team: a win gains 1 minus that team's chance of winning it, a loss costs its chance",
   });
-  const step = 25;
-  for (let v = 0; v <= 100; v += step) {
-    root.appendChild(
-      svg("line", {
-        class: "tl",
-        x1: x(v),
-        x2: x(v),
-        y1: pad.t - 6,
-        y2: H - pad.b,
-      }),
-    );
-    const t = svg("text", {
-      class: "tk",
-      x: x(v),
-      y: 12,
-      "text-anchor": "middle",
-    });
-    t.textContent = String(v);
-    root.appendChild(t);
+  for (const v of [-1, -0.5, 0, 0.5, 1]) {
+    root.appendChild(svg("line", { class: v === 0 ? "rline" : "tl", x1: x(v), x2: x(v), y1: pad.t - 6, y2: H - pad.b }));
+    const tk = svg("text", { class: "tk", x: x(v), y: 12, "text-anchor": "middle" });
+    tk.textContent = v === 0 ? "0" : `${v > 0 ? "+" : "−"}${Math.abs(v)}`;
+    root.appendChild(tk);
   }
-  // Bars start at 50, the line between a win and a loss; the marker is the average.
-  const rx = x(rating);
-  const lineY = (i: number) => pad.t + row * i + row / 2;
-  const label = (y: number, text: string, cls = "rl") => {
-    const t = svg("text", { class: cls, x: 40, y: y + 4 });
-    t.textContent = text;
-    root.appendChild(t);
-  };
-  const stem = (y: number, v: number, title: string, logoId?: number) => {
-    const g = svg("g", { class: `brow ${v >= 50 ? "up" : "down"}` });
-    g.appendChild(
-      svg("line", {
-        class: "stem",
-        x1: x(50),
-        x2: x(v),
-        y1: y,
-        y2: y,
-        style: "stroke-width:4px",
-      }),
-    );
-    g.appendChild(svg("circle", { class: "pt", cx: x(v), cy: y, r: 4 }));
-    const tt = svg("title", {});
-    tt.textContent = title;
-    g.appendChild(tt);
-    root.appendChild(g);
-    if (logoId !== undefined) root.appendChild(badge(ctx, logoId, 18, y, 22));
-  };
   lines.forEach((l, i) => {
-    const y = lineY(i);
+    const y = pad.t + row * i + row / 2;
     const o = l.opponent;
     const score = `${l.won ? "W" : "L"} ${l.won ? l.edge.winnerPoints : l.edge.loserPoints}–${l.won ? l.edge.loserPoints : l.edge.winnerPoints}`;
-    label(
-      y,
-      `${l.where === 1 ? "vs" : l.where === -1 ? "at" : "vs"} ${o.abbreviation || o.school} · ${score}`,
-    );
-    stem(
-      y,
-      l.value,
-      `${score} against ${o.school} (quality ${(o.height ?? 0).toFixed(2)} of 100): ${fmtScore(l.value)} points`,
-      o.id,
-    );
+    const lab = svg("text", { class: "rl", x: 40, y: y + 4 });
+    lab.textContent = `${l.where === -1 ? "at" : "vs"} ${o.abbreviation || o.school} · ${score}`;
+    root.appendChild(lab);
+    const g = svg("g", { class: `brow ${l.value >= 0 ? "up" : "down"}` });
+    g.appendChild(svg("line", { class: "stem", x1: x(0), x2: x(l.value), y1: y, y2: y, style: "stroke-width:4px" }));
+    g.appendChild(svg("circle", { class: "pt", cx: x(l.value), cy: y, r: 4 }));
+    const tt = svg("title", {});
+    tt.textContent = `A top-25 team beats ${o.school} ${(100 * l.chance).toFixed(0)}% of the time. ${l.won ? "Won" : "Lost"}: ${l.value >= 0 ? "+" : "−"}${Math.abs(l.value).toFixed(2)}`;
+    g.appendChild(tt);
+    root.appendChild(g);
+    root.appendChild(badge(ctx, o.id, 18, y, 22));
   });
-  root.appendChild(
-    svg("line", {
-      class: "rline",
-      x1: rx,
-      x2: rx,
-      y1: pad.t - 6,
-      y2: H - pad.b + 4,
-    }),
-  );
-  const rt = svg("text", {
-    class: "rlab",
-    x: Math.min(Math.max(rx, pad.l + 40), W - pad.r - 40),
-    y: H - 6,
-    "text-anchor": "middle",
-  });
-  rt.textContent = `Average ${fmtScore(rating)} per game`;
-  root.appendChild(rt);
+  const foot = svg("text", { class: "rlab", x: x(0), y: H - 6, "text-anchor": "middle" });
+  foot.textContent = "← loss costs · win gains →";
+  root.appendChild(foot);
   return root;
 }
 
@@ -600,9 +527,9 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
         "span",
         {
           class: `r ${l.won ? "pos" : "neg"}`,
-          title: `Points for ${l.won ? "beating" : "losing to"} ${o.school}, quality ${(o.height ?? 0).toFixed(2)} of 100: ${l.won ? "50 + half their quality" : "half their quality"}.`,
+          title: `A typical top-25 team beats ${o.school} ${(100 * l.chance).toFixed(0)}% of the time; ${l.won ? "winning gains" : "losing costs"} ${Math.abs(l.value).toFixed(2)}.`,
         },
-        fmtScore(l.value),
+        `${l.value >= 0 ? "+" : "−"}${Math.abs(l.value).toFixed(2)}`,
       ),
     );
   });
@@ -616,7 +543,7 @@ function gameLog(ctx: Ctx, teamId: number, games: Edge[]): HTMLElement {
       h("div"),
       h("div", {}, "Opponent"),
       h("div", {}, "Result"),
-      h("div", { class: "r" }, "Pull"),
+      h("div", { class: "r", title: "Result against a top-25 team: a win gains 1 − its chance of winning the game, a loss costs that chance" }, "vs Top 25"),
     ),
     ...rows,
   );
@@ -702,18 +629,48 @@ function calcPanel(ctx: Ctx, teamId: number): HTMLElement {
       ),
       step(
         4,
-        "Score the résumé, which is the ranking",
-        h("p", {}, "Each game earns points from the opponent's quality: a win earns 50 + half the beaten team's quality, a loss half the winner's. The résumé is the average, and teams are ranked by it."),
+        "Score the résumé: strength of record",
+        h("p", {}, `The ranking asks how hard ${me.wins}-${me.losses} would be for a good team against this exact schedule. For each benchmark, every game's chance comes from the opponent's strength (as in step 3); together they give the benchmark's whole range of possible records. The score is 100 × (the chance it does worse + half the chance it does exactly as well). The résumé averages five benchmarks, from a top-10 team to an average team.`),
+        sorTable(ctx, me),
         eq(
-          term(fmtScore(b.earned + b.lost, 1), "points from all games"),
+          ...(me.resumeParts ?? []).flatMap((v, k) => [...(k ? [op("+")] : []), term(v.toFixed(1), ctx.ranking.manifest.resumeBenchmarks[k]?.label ?? "")]),
           op("÷"),
-          term(String(b.games), "games"),
+          term(String(me.resumeParts?.length ?? 5), "benchmarks"),
           op("="),
           term(fmtScore(me.resume), `résumé · #${me.resumeRank ?? "—"} of ${ranked}`, "hl"),
         ),
-        h("p", { class: "hint" }, "Every game's points are in the chart below."),
+        h("p", { class: "hint" }, `Game by game against a top-25 team: ${b.wins} wins against ${b.expected.toFixed(2)} expected, in the chart below.`),
       ),
     ),
+  );
+}
+
+/** Each benchmark's expected wins, chance of a worse or equal record, and score for this team. */
+function sorTable(ctx: Ctx, me: RankedTeam): HTMLElement {
+  const m = ctx.ranking.manifest;
+  const games = ctx.edges
+    .filter((e) => e.winner === me.id || e.loser === me.id)
+    .map((e) => ({ opponent: e.winner === me.id ? e.loser : e.winner, won: e.winner === me.id }));
+  const strength = new Map([...ctx.ranking.teams, ...(ctx.ranking.opponents ?? [])].map((t) => [t.id, t.strength ?? 0]));
+  const ids = [...new Set(games.map((g) => g.opponent))];
+  const s = ids.map((id) => strength.get(id) ?? 0);
+  const local = games.map((g) => ({ opponent: ids.indexOf(g.opponent), won: g.won }));
+  return h(
+    "div",
+    { class: "atable k-sor" },
+    h("div", { class: "arow ahead" }, ...["Benchmark", "Strength", "Expected wins", `${me.wins} wins vs expected`, "Score"].map((x, i) => h("span", { class: i ? "n" : "" }, x))),
+    ...m.resumeBenchmarks.map((bm, k) => {
+      const r = strengthOfRecord(local, bm.strength, s, m.springs.qualityScale);
+      return h(
+        "div",
+        { class: "arow" },
+        h("span", {}, bm.label),
+        h("span", { class: "n" }, bm.strength.toFixed(0)),
+        h("span", { class: "n" }, r.expectedWins.toFixed(2)),
+        h("span", { class: "n" }, `${r.wins - r.expectedWins >= 0 ? "+" : "−"}${Math.abs(r.wins - r.expectedWins).toFixed(2)}`),
+        h("span", { class: "n" }, h("b", {}, (me.resumeParts?.[k] ?? r.score).toFixed(1))),
+      );
+    }),
   );
 }
 

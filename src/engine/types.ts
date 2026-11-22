@@ -140,8 +140,10 @@ export interface RankedTeam {
   height: number | null;
   /** Points better than an average team, from the margin SpringRank. */
   strength: number | null;
-  /** Résumé, 0–100: average game points (a win earns 50 + half the loser's quality, a loss half the winner's). */
+  /** Résumé, 0–100: strength of record averaged over the benchmarks (see springs.ts). */
   resume: number | null;
+  /** Strength of record against each of manifest.resumeBenchmarks, in that order. */
+  resumeParts?: number[] | null;
   resumeRank: number | null;
   /** Strength of schedule: average quality of the opponents played. */
   schedule: number | null;
@@ -180,6 +182,8 @@ export interface Manifest {
   playsSha256: string | null;
   /** Average scrimmage snaps per team per game, used to turn EPA per snap into points per game; null without plays. */
   snapsPerGame: number | null;
+  /** The résumé's benchmark teams: a top-10, top-25, top-50 and top-100 team, and an average team. */
+  resumeBenchmarks: { label: string; strength: number }[];
   counts: GameCounts;
 }
 
@@ -202,10 +206,6 @@ export interface PublishedSpring {
   loser: number;
   /** Winning margin in points; the spring wants 100 × margin^0.75. */
   margin: number;
-  /** Résumé points the winner earns: 50 + half the loser's quality, 50 to 100. */
-  win: number;
-  /** Résumé points the loser earns: half the winner's quality, 0 to 50. */
-  loss: number;
 }
 
 export interface MatchupPrediction {

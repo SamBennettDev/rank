@@ -13,11 +13,11 @@ import type {
   Team,
 } from "./types";
 import { fitUnits } from "./units";
-import { rankByQuality } from "./springs";
+import { RESUME_BENCHMARKS, rankByQuality } from "./springs";
 import { makeMatchupContext } from "./matchup";
 
 /** Bump when anything that changes output bytes changes (formatting, rounding, fields). */
-export const ENGINE_VERSION = "rank-engine-10";
+export const ENGINE_VERSION = "rank-engine-11";
 
 export interface SeasonFiles {
   season: string;
@@ -238,6 +238,9 @@ export async function computeSeason(
         height,
         strength: at(graph.strength, t.id),
         resume: at(graph.resume, t.id),
+        resumeParts: onGraph(t.id)
+          ? graph.resumeParts[resultIndex.get(t.id)!]!.map(round6)
+          : null,
         resumeRank: resumeRanks[i] ?? null,
         schedule: at(graph.schedule, t.id),
         scheduleRank: scheduleRanks[i] ?? null,
@@ -314,6 +317,10 @@ export async function computeSeason(
       gamesSha256,
       playsSha256,
       snapsPerGame: units ? round6(units.snapsPerGame) : null,
+      resumeBenchmarks: RESUME_BENCHMARKS.map((b, j) => ({
+        label: b.label,
+        strength: round6(graph.benchmarks[j]!),
+      })),
       counts,
     };
     files.push({
@@ -324,13 +331,11 @@ export async function computeSeason(
         snapshot: snap,
         manifest,
         predictions,
-        springs: resultEdges.map((e, k) => ({
+        springs: resultEdges.map((e) => ({
           gameId: e.gameId,
           winner: e.winner,
           loser: e.loser,
           margin: e.winnerPoints - e.loserPoints,
-          win: round6(graph.points[k]!.win),
-          loss: round6(graph.points[k]!.loss),
         })),
         teams: ranked,
         ...(opponents.length ? { opponents } : {}),
