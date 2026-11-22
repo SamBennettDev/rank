@@ -151,17 +151,14 @@ function steps(ctx: Ctx, tf: TeamPlayersFile, pf: PlayersFile, p: TeamPlayer): H
     first = step(
       1,
       "Credit every play that saved points",
-      h("p", {}, "Each sack, interception and pass breakup is worth the expected points it takes away in our model, compared with an average play of that kind. Tackles get a small fixed credit."),
+      h("p", {}, "Each sack, interception and pass breakup credited to him in the play-by-play is worth the expected points it takes away in our model, compared with an average play of that kind. Tackles are shown but not counted: box scores exist only for games with an FBS team, so counting them would not treat FCS players alike."),
       eq(
         term(fmtNum(s("sacks")), `sacks × ${c.sack}`),
         op("+"),
         term(fmtNum(s("def_int")), `INT × ${c.interception}`),
         op("+"),
         term(fmtNum(s("pbu")), `PBU × ${c.breakup}`),
-        op("+"),
-        term(fmtNum(s("solo")), `solo × ${c.solo}`),
-        op("+"),
-        term(fmtNum(s("assists")), `assisted × ${c.assist}`),
+
       ),
     );
     const credits = p.lines.reduce((a, l) => a + l.credits, 0);

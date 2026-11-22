@@ -70,7 +70,7 @@ export interface MatchupSettings {
   calibrationId: string;
 }
 
-/** One team's play-by-play summary for one game (see scripts/ncaa-plays.ts). */
+/** One team's play-by-play summary for one game (see scripts/espn-players.ts). */
 export interface TeamGamePlays {
   gameId: number;
   teamId: number;

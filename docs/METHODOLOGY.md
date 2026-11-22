@@ -67,14 +67,14 @@ The official ranking is résumé. Quality picks more next-week winners and has l
 
 ## Data
 
-All college data comes from one free source: the sportsdataverse `ncaa_mfb_*` releases, a public mirror of stats.ncaa.org published as one parquet file per season (`scripts/ncaa.ts`, `scripts/fetch-ncaa.ts`). From it:
+College data comes from sportsdataverse's ESPN-based release files, public parquet files published on GitHub and refreshed about daily (`scripts/fetch-espn.ts`, `scripts/espn-players.ts`). No key is needed. Ids are ESPN's for teams, games and players.
 
-- **teams.csv**: FBS and FCS teams by stats.ncaa.org division. Ids, abbreviations, conferences and colours come from `data/teams-meta.csv`, a fixed crosswalk from stats.ncaa.org team names (ids match ESPN's so logos load); a team missing from it keeps its stats.ncaa.org id. Opponents outside the NCAA get a stable id from their name.
-- **games.csv**: every game of those teams from the schedules and linescores. A game's id is its NCAA contest id (unplayed games are numbered 990,000,000 and up in kickoff order). Kickoffs are the stat crew's local clock, read as US Eastern time (noon when missing). A schedule entry written "Opponent @City" is a neutral site. Week 1 runs through Labor Day and each later week Tuesday to Monday; games from the Tuesday after the second Saturday of December are postseason (earlier FCS playoff rounds keep regular-season week labels).
-- **plays.csv, players.csv**: from the play-by-play with our expected-points model (below), and defense from the box scores.
-- **roster.csv**: position, class, height, weight, hometown, high school.
+- **teams.csv**: FBS and FCS programs from `espn_cfb_teams` (all-star and placeholder entries left out): school, abbreviation, conference (CFBD's naming), colour.
+- **games.csv**: every game with an FBS or FCS team from `cfb_schedules`: week, season type, kickoff, neutral site, score.
+- **plays.csv, players.csv**: from the `cfbfastR_cfb_pbp` play-by-play (about 99% of this season's FBS and FCS games) with our expected-points model (below). Defensive box scores (`espn_cfb_player_box`) cover games with an FBS team.
+- **roster.csv**: `espn_cfb_rosters` (every FBS team and most FCS teams); a player missing there keeps the name and position his plays carry.
 
-The mirror runs about two days behind the games.
+The NCAA stats mirror (`ncaa_mfb_*`, a stats.ncaa.org scrape) is used only for its 2014–2025 history, to fit the expected-points model. `research/DATA.md` compares the sources.
 
 ## Dates, scope and provisional evidence
 
@@ -109,7 +109,7 @@ A play's expected points added (EPA) are its points if it scored (from the offen
 
 ## Unit ratings
 
-Offense, defense and special teams are explanatory outputs from the mirror's play-by-play and our expected points, leaving the ranking and matchup predictions unchanged. Garbage-time thresholds exclude score gaps above 38 in quarter 2, 28 in quarter 3, and 22 in quarter 4. Opponent/site-adjusted EPA per snap yields offense/defense, weighted by snaps and shrunk toward average; net special-teams EPA yields a separate game-based fit. Mean snaps convert offense/defense to points per game. Missing covered plays produce null unit statistics.
+Offense, defense and special teams are explanatory outputs from the play-by-play and our expected points, leaving the ranking and matchup predictions unchanged. Garbage-time thresholds exclude score gaps above 38 in quarter 2, 28 in quarter 3, and 22 in quarter 4. Opponent/site-adjusted EPA per snap yields offense/defense, weighted by snaps and shrunk toward average; net special-teams EPA yields a separate game-based fit. Mean snaps convert offense/defense to points per game. Missing covered plays produce null unit statistics.
 
 ## Player ratings
 
@@ -117,9 +117,9 @@ Players are rated on one scale for FBS and FCS (`src/engine/players.ts`), leavin
 
 - **Quarterbacks** (dropbacks and rushes), **running backs** (rushes and targets), **receivers and tight ends** (targets and rushes): EPA over expected is, game by game, his EPA minus his plays × what an average offense gains against that defense for each play type. Garbage time is left out. Rating = EPA over expected ÷ (plays + 100 for quarterbacks, 60 for running backs, 40 for receivers and tight ends).
 - **Kickers**: field-goal points over expected (3 × made − 3 × make chance) ÷ (tries + 8).
-- **Defenders** (line, linebackers, backs): each game's credits, a sack 1.83, an interception 3.96 and a pass breakup 1.12 expected points (what each saves against an average play of its kind in our model), a solo tackle 0.2 and an assisted tackle 0.1, times 0.5 + the opponent's quality ÷ 100. Rating = adjusted credits ÷ (games + 2).
+- **Defenders** (line, linebackers, backs): each game's credits from the play-by-play, a sack 1.83, an interception 3.96 and a pass breakup 1.12 expected points (what each saves against an average play of its kind in our model), times 0.5 + the opponent's quality ÷ 100. Rating = adjusted credits ÷ (games + 2). Tackles, tackles for loss and hurries are shown where box scores exist (games with an FBS team) but not counted, so FCS defenders are judged alike.
 
-Points per game = rating × plays ÷ games (the rating itself for defenders). Each position board ranks all rated players by points per game. A player's position group is his roster position, or what he did most when it is missing; offensive linemen, punters and long snappers are not rated. Players are matched to rosters by team and name (suffixes ignored). Boards and team files are computed for the season's latest snapshot and verified byte for byte with the rankings.
+Points per game = rating × plays ÷ games (the rating itself for defenders). Each position board ranks all rated players by points per game. A player's position group is his roster position, or what he did most when it is missing; offensive linemen, punters and long snappers are not rated. Players are identified by ESPN athlete id. Boards and team files are computed for the season's latest snapshot and verified byte for byte with the rankings.
 
 ## Determinism and changes
 

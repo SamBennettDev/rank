@@ -289,7 +289,7 @@ function epDetails(): HTMLElement {
     h(
       "p",
       {},
-      "Every snap is worth the points the offense can expect from its down, distance and field position: the next score in the half, a touchdown 7, a field goal 3, a safety 2, the opponent's scores negative, 0 if nobody scores again. We fit those averages ourselves on every FBS and FCS play from 2014 to 2025 (2020 left out) in the NCAA stats mirror: for each down, a piecewise-linear curve in yards to goal plus an adjustment for yards to go. A play's EPA is the expected points after it minus before it, or the points if it scored. Offense, defense and every player rating are built from EPA.",
+      "Every snap is worth the points the offense can expect from its down, distance and field position: the next score in the half, a touchdown 7, a field goal 3, a safety 2, the opponent's scores negative, 0 if nobody scores again. We fit those averages ourselves on every FBS and FCS play from 2014 to 2025 (2020 left out) in the NCAA stats mirror's history, and apply them to this season's ESPN play-by-play: for each down, a piecewise-linear curve in yards to goal plus an adjustment for yards to go. A play's EPA is the expected points after it minus before it, or the points if it scored. Offense, defense and every player rating are built from EPA.",
     ),
     body,
   );
@@ -367,7 +367,7 @@ function playerDetails(): HTMLElement {
       h("li", {}, "Defenses: from every game's passing and rushing, fit each team's pass and rush offense and defense in EPA per play. An average offense expects the league average minus the defense's rating. Each rating is pulled toward average with 200 plays of evidence."),
       h("li", {}, "Quarterbacks, running backs, receivers and tight ends: game by game, his EPA minus what an average player would gain on the same number of dropbacks, targets and rushes against that defense. Garbage time is left out."),
       h("li", {}, "Kickers: field-goal points over the model's make chance for each kick's distance."),
-      h("li", {}, "Defenders: sacks, interceptions and pass breakups at the expected points they save in our model, tackles at a small fixed credit, each game weighted by 0.5 + the opponent's quality ÷ 100."),
+      h("li", {}, "Defenders: sacks, interceptions and pass breakups credited in the play-by-play, at the expected points they save in our model, each game weighted by 0.5 + the opponent's quality ÷ 100. Tackles are shown where box scores exist (games with an FBS team) but not counted, so FCS defenders are judged alike."),
       h("li", {}, "Every total is divided by the player's plays (tries, games) plus a fixed number of average ones, so small samples are pulled toward average, then turned into points per game. Boards rank by points per game."),
     ),
     h("p", { class: "hint" }, "Each player's page shows every step with his own numbers. Offensive linemen are not rated: public play-by-play has no per-player blocking data."),

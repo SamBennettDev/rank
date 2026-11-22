@@ -15,7 +15,7 @@ No home field or head-to-head rules.
 - **Every team starts at zero.** No preseason, polls, recruiting or conference bonus. FBS and FCS share one graph, and results against lower-division teams count.
 - **Explainable game by game.** Each team page walks through its rank in four steps with its own numbers: every game's spring, the solve, quality, and résumé.
 - **Players on one scale.** Position boards (QB, RB, WR, TE, K, DL, LB, DB) rate every FBS and FCS player against what an average player does against the same opponents, using our own expected-points model. Each player page shows the calculation step by step.
-- **One free source.** All college data (scores, play-by-play, box scores, rosters) comes from the NCAA stats mirror published by sportsdataverse. No API key.
+- **Free public data.** College scores, play-by-play, box scores and rosters come from sportsdataverse's ESPN-based release files, published on GitHub. No API key.
 - **Measured.** On 2014–2019, where the settings were chosen, the weekly résumé rankings pick 68.5% of next week's winners and the final ranking has the winner above the loser in 83.6% of games (67.2% and 82.5% on 2021–2026). Ordering by quality instead picks 71.7% of next week's winners with 81.5% season-end agreement (70.0% and 80.6%). `research/springs.py` reproduces both; `research/QUALITY.md` compares the alternatives.
 - **Reproduce every number.** The Node scripts and the browser share one engine; Recompute on the method page rebuilds every published file byte for byte.
 
@@ -48,7 +48,6 @@ data/seasons/<year>/players.csv       per player-game passing, rushing, receivin
 data/seasons/<year>/roster.csv        player bios: position, class, height, weight, hometown
 data/seasons/<year>/config.json       algorithm version, spring and matchup settings
 data/models/ep.json                   our expected-points and field-goal models, with 2025 holdout calibration
-data/teams-meta.csv                   fixed crosswalk: stats.ncaa.org team name -> id, conference, colour
 data/rankings/<year>/<snapshot>.json  quality, résumé, schedule, every game's springs, and game odds
 data/rankings/<year>/players.json     player settings, team pass/rush units and the position boards
 data/rankings/<year>/teams/<id>.json  a team's units and every rated player with game-by-game lines
@@ -59,15 +58,15 @@ Each ranking file lists ranked FBS/FCS teams in `teams` with their `height` (qua
 
 ## Update results
 
-College data comes only from the sportsdataverse `ncaa_mfb_*` releases, a public mirror of stats.ncaa.org (no key). It runs about two days behind the games.
+College data comes from sportsdataverse's ESPN-based release files (`cfb_schedules`, `cfbfastR_cfb_pbp`, `espn_cfb_rosters`, `espn_cfb_teams`, `espn_cfb_player_box`), no key. They refresh about daily, so a Saturday's games usually arrive Saturday night or Sunday.
 
 ```sh
-npm run fetch -- 2026     # teams, games, plays, players and roster from the mirror
+npm run fetch -- 2026     # teams, games, plays, players and roster
 npm run compute
 npm run verify
 ```
 
-Commit the changed data. GitHub’s **Update data** workflow does this hourly and publishes. Team ids, conferences and colours come from `data/teams-meta.csv`; a new team or a conference move needs a row there (the fetch lists unmatched teams).
+Commit the changed data. GitHub’s **Update data** workflow does this hourly and publishes when anything changed. Ids are ESPN's for teams, games and players.
 
 ## Deploy
 
@@ -77,7 +76,7 @@ GitHub Settings → Pages → Source: **GitHub Actions**, with custom domain `ra
 
 ```text
 src/engine/  spring graph, résumé and schedule, expected points, player ratings, matchup model, pipeline
-scripts/     the NCAA mirror fetch, expected-points fit, computation, verification and backtesting
+scripts/     the data fetch, expected-points fit, computation, verification and backtesting
 web/         static TypeScript site, sharing the same engine
 tests/       spring math, matchup model, chronology and determinism
 research/    reproduces the ranking's accuracy on past seasons and compares quality models

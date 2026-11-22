@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "fetch": "tsx scripts/fetch-ncaa.ts",
+    "fetch": "tsx scripts/fetch-espn.ts",
     "demo": "tsx scripts/make-demo.ts",
     "compute": "tsx scripts/compute.ts",
     "verify": "tsx scripts/verify.ts",

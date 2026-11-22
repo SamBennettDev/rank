@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v7
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Fetch results, plays and players (NCAA stats mirror, no key)
+      - name: Fetch results, plays and players (sportsdataverse ESPN-based releases, no key)
         env:
           INPUT_YEAR: ${{ inputs.year }}
         run: |

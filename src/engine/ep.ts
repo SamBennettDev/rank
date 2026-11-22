@@ -1,5 +1,5 @@
 /**
- * Our expected-points model (fitted by scripts/fit-ep.ts on the NCAA stats mirror's
+ * Our expected-points model (fitted by scripts/fit-ep.ts on the NCAA stats mirror's 2014–2025
  * play-by-play). Expected points (EP) are the points of the next score in the half from
  * the offense's side: a touchdown 7, a field goal 3, a safety 2, the opponent's scores
  * negative, 0 when nobody scores again in the half.

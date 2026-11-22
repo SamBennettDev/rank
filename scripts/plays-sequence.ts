@@ -1,5 +1,7 @@
 /**
- * Puts the mirror's play-by-play (ncaa_mfb_pbp_cfbfastr) in game order and works out,
+ * Puts cfbfastR-style play-by-play in game order (the ESPN-based `cfbfastR_cfb_pbp` release the
+ * site is built from, or the NCAA mirror's `ncaa_mfb_pbp_cfbfastr` history the expected-points
+ * model is fitted on) and works out,
  * for every play, the score before and after it, who scored on it, the next score in
  * the half, and (given a model) its expected points added.
  */
@@ -9,7 +11,7 @@ import {
   isState,
   isSuccess,
 } from "../src/engine/ep";
-import { flag, mirror, num, type Row, text } from "./ncaa";
+import { flag, mirror, num, release, type Row, text } from "./ncaa";
 
 export const PBP_COLUMNS = [
   "game_id",
@@ -50,7 +52,36 @@ export const PBP_COLUMNS = [
   "yds_sacked",
 ];
 
+/** Player ids, names and positions of the ESPN release (the mirror has names only). */
+const ROLES = {
+  passer: [["completion_player_id", "completion_player", "position_completion"], ["incompletion_player_id", "incompletion_player", "position_incompletion"], ["interception_thrown_player_id", "interception_thrown_player", "position_interception_thrown"], ["sack_taken_player_id", "sack_taken_player", "position_sack_taken"]],
+  receiver: [["reception_player_id", "reception_player", "position_reception"], ["target_player_id", "target_player", "position_target"]],
+  rusher: [["rush_player_id", "rush_player", "position_rush"]],
+  kicker: [["field_goal_attempt_player_id", "field_goal_attempt_player", ""]],
+  sacker: [["sack_player_id", "sack_player", "position_sack"]],
+  interceptor: [["interception_player_id", "interception_player", "position_interception"]],
+  breakup: [["pass_breakup_player_id", "pass_breakup_player", "position_pass_breakup"]],
+  forcer: [["fumble_forced_player_id", "fumble_forced_player", "position_fumble_forced"]],
+} as const;
+export type Role = keyof typeof ROLES;
+export const ESPN_COLUMNS = [
+  ...PBP_COLUMNS,
+  "home_team_id",
+  "away_team_id",
+  ...new Set(Object.values(ROLES).flatMap((cs) => cs.flatMap((c) => c.filter(Boolean)))),
+];
+export interface Who {
+  id: string;
+  name: string;
+  position: string;
+}
+
 export interface Play {
+  /** ESPN team ids of the home and away sides (ESPN release only). */
+  homeId: string;
+  awayId: string;
+  /** Players by role, with ESPN ids (ESPN release only). */
+  who: Partial<Record<Role, Who>>;
   game: number;
   half: number;
   period: number;
@@ -101,15 +132,33 @@ export interface Play {
 const scoreValue = (delta: number, afterTd: boolean) =>
   delta >= 6 ? 7 : delta === 3 ? 3 : delta === 2 && !afterTd ? 2 : 0;
 
+/** The NCAA mirror's play-by-play for a season (history for the expected-points model). */
 export async function seasonPlays(year: number): Promise<Play[]> {
   const rows = await mirror("ncaa_mfb_pbp_cfbfastr", year, PBP_COLUMNS);
   return sequence(rows);
 }
 
-/** Orders plays by game and play id and annotates scores and next scores. */
-export function sequence(rows: Row[]): Play[] {
+/**
+ * The ESPN-based cfbfastR play-by-play for a season. Its play ids are larger than a double can
+ * hold exactly, so plays keep the file's order within each game.
+ */
+export async function espnSeasonPlays(year: number): Promise<Play[]> {
+  const rows = await release("cfbfastR_cfb_pbp", `play_by_play_${year}.parquet`, ESPN_COLUMNS);
+  return sequence(rows, true);
+}
+
+const who = (r: Row, role: Role): Who | undefined => {
+  for (const [idCol, nameCol, posCol] of ROLES[role]) {
+    const id = text(r[idCol]);
+    if (id && id !== "NA") return { id, name: text(r[nameCol]), position: posCol ? text(r[posCol]) : "" };
+  }
+  return undefined;
+};
+
+/** Orders plays by game (then play id, or file order) and annotates scores and next scores. */
+export function sequence(rows: Row[], fileOrder = false): Play[] {
   const sorted = rows
-    .map((r) => ({ r, game: num(r.game_id), id: num(r.id_play) }))
+    .map((r, i) => ({ r, game: num(r.game_id), id: fileOrder ? i : num(r.id_play) }))
     .filter((x) => Number.isFinite(x.game) && Number.isFinite(x.id))
     .sort((a, b) => a.game - b.game || a.id - b.id);
   const plays: Play[] = [];
@@ -146,7 +195,16 @@ export function sequence(rows: Row[]): Play[] {
     const kickoff = flag(r.kickoff_play);
     const type = text(r.play_type);
     const tryPlay = /extra point|two point|conversion/i.test(type);
+    const roles: Partial<Record<Role, Who>> = {};
+    if (fileOrder)
+      for (const role of Object.keys(ROLES) as Role[]) {
+        const w = who(r, role);
+        if (w) roles[role] = w;
+      }
     plays.push({
+      homeId: text(r.home_team_id),
+      awayId: text(r.away_team_id),
+      who: roles,
       game,
       half: num(r.half),
       period: num(r.period),

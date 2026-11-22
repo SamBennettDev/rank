@@ -52,6 +52,9 @@ runner, where the hourly update runs.
 
 ### Recommendation
 
+**Adopted (November 22, 2026): option 1 alone** (the ESPN-based releases, without CFBD). Defender
+ratings use only play-by-play credits, which every game has.
+
 1. **Primary, no key: the sportsdataverse ESPN-based releases.** Scores and schedule from
    `cfb_schedules`, plays from `cfbfastR_cfb_pbp` (EPA recomputed with our own model, whose inputs
    are down, distance and yards to goal), bios from `espn_cfb_rosters`. ESPN ids are already this

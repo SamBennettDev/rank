@@ -13,9 +13,10 @@
  *    total divided by (plays + `shrink` for his position): small samples are pulled
  *    toward average (0). Value per game = rating × plays ÷ games.
  * 3. Kickers: field-goal points over the model's make chance, per try (+ shrink).
- * 4. Defenders: each game's credits (sacks, interceptions, pass breakups at the EPA they
- *    save in our model; tackles at a fixed small credit) × an opponent factor
- *    0.5 + opponent quality / 100, divided by (games + shrink).
+ * 4. Defenders: each game's credits (sacks, interceptions and pass breakups credited in the
+ *    play-by-play, at the EPA they save in our model) × an opponent factor
+ *    0.5 + opponent quality / 100, divided by (games + shrink). Tackles are left out: box
+ *    scores exist only for games with an FBS team, so they would not treat FCS players alike.
  * Boards rank FBS and FCS players together by value per game.
  */
 import { choleskySolve } from "./linalg";
@@ -29,14 +30,14 @@ export interface PlayerSettings {
   unitPlays: number;
   /** Plays (tries for kickers, games for defenders) of average performance added to each player. */
   shrink: Record<Group, number>;
-  /** EPA a defender's play saves: sack, interception, pass breakup; fixed tackle credits. */
-  credit: { sack: number; interception: number; breakup: number; solo: number; assist: number };
+  /** EPA a defender's play saves: sack, interception, pass breakup. */
+  credit: { sack: number; interception: number; breakup: number };
 }
 
 export const DEFAULT_PLAYER_SETTINGS: PlayerSettings = {
   unitPlays: 200,
   shrink: { QB: 100, RB: 60, WR: 40, TE: 40, K: 8, DL: 2, LB: 2, DB: 2 },
-  credit: { sack: 1.83, interception: 3.96, breakup: 1.12, solo: 0.2, assist: 0.1 },
+  credit: { sack: 1.83, interception: 3.96, breakup: 1.12 },
 };
 
 const POSITION_GROUP: Record<string, Group> = {
@@ -135,7 +136,7 @@ export function groupOf(position: string, t: PlayerGame): Group | null {
   if (t.dropbacks >= 20) return "QB";
   if (t.fga > 0) return "K";
   if (t.rushes + t.targets > 0) return t.rushes > t.targets ? "RB" : "WR";
-  if (t.sacks > t.pbu + t.defInt) return "DL";
+  if (t.sacks + t.hurries > t.pbu + t.defInt) return "DL";
   if (t.pbu + t.defInt > 0) return "DB";
   if (t.tackles > 0) return "LB";
   return null;
@@ -197,9 +198,7 @@ export function ratePlayers(
       } else if (group === "DL" || group === "LB" || group === "DB") {
         const c = s.credit;
         line.credits =
-          c.sack * g.sacks + c.interception * g.defInt + c.breakup * g.pbu +
-          c.solo * g.solo + c.assist * Math.max(0, g.assists);
-        if (g.solo === 0 && g.assists === 0) line.credits += c.solo * g.tackles;
+          c.sack * g.sacks + c.interception * g.defInt + c.breakup * g.pbu;
         line.factor = 0.5 + (quality.get(g.opponentId) ?? 0) / 100;
         line.plays = 1;
         line.epa = line.credits * line.factor;

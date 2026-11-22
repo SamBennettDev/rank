@@ -1,7 +1,8 @@
 /**
  * players.csv (one row per player per game) and roster.csv (one row per player), built by
- * scripts/fetch-ncaa.ts from the NCAA stats mirror. Offensive numbers leave out garbage
- * time; EPA comes from our expected-points model (src/engine/ep.ts).
+ * scripts/fetch-espn.ts from the sportsdataverse ESPN-based releases; ids are ESPN's.
+ * Offensive numbers leave out garbage time; EPA comes from our expected-points model
+ * (src/engine/ep.ts).
  */
 import { parseCsvObjects } from "./csv";
 
@@ -36,10 +37,12 @@ export interface PlayerGame {
   fga: number;
   fgm: number;
   fgValue: number;
-  /** Defense, from the box score. */
+  /** Tackles, solo tackles, tackles for loss and QB hurries: from the box score, where there is one. */
   tackles: number;
   solo: number;
-  assists: number;
+  tfl: number;
+  hurries: number;
+  /** Sacks, pass breakups and interceptions credited in the play-by-play. */
   sacks: number;
   pbu: number;
   defInt: number;
@@ -68,7 +71,7 @@ export const PLAYER_COLUMNS = [
   "rushes", "rush_epa", "rush_success", "rush_yards", "rush_td",
   "targets", "target_epa", "target_success", "receptions", "rec_yards", "rec_td",
   "fga", "fgm", "fg_value",
-  "tackles", "solo", "assists", "sacks", "pbu", "def_int",
+  "tackles", "solo", "tfl", "hurries", "sacks", "pbu", "def_int",
 ];
 
 export const ROSTER_COLUMNS = [

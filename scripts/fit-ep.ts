@@ -22,7 +22,7 @@ import {
 } from "../src/engine/ep";
 import { choleskySolve } from "../src/engine/linalg";
 import { DATA_DIR } from "./lib";
-import { addEpa, nextState, type Play, seasonPlays } from "./ncaa-sequence";
+import { addEpa, nextState, type Play, seasonPlays } from "./plays-sequence";
 
 const SEASONS = [2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025];
 const HOLDOUT = 2025;

@@ -67,7 +67,7 @@ const game = (gameId: number, teamId: number, opponentId: number, playerId: numb
   dropbacks: 0, passEpa: 0, passSuccess: 0, attempts: 0, completions: 0, passYards: 0, passTd: 0,
   interceptions: 0, sacksTaken: 0, rushes: 0, rushEpa: 0, rushSuccess: 0, rushYards: 0, rushTd: 0,
   targets: 0, targetEpa: 0, targetSuccess: 0, receptions: 0, recYards: 0, recTd: 0,
-  fga: 0, fgm: 0, fgValue: 0, tackles: 0, solo: 0, assists: 0, sacks: 0, pbu: 0, defInt: 0,
+  fga: 0, fgm: 0, fgValue: 0, tackles: 0, solo: 0, tfl: 0, hurries: 0, sacks: 0, pbu: 0, defInt: 0,
   ...over,
 });
 const person = (id: number, teamId: number, position: string): RosterPlayer => ({

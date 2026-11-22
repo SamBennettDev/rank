@@ -134,7 +134,7 @@ function board(ctx: Ctx, file: PlayersFile, group: Group): HTMLElement {
       "p",
       { class: "hint foot-note" },
       isDefense(group)
-        ? `Credits: sack ${file.settings.credit.sack}, interception ${file.settings.credit.interception}, pass breakup ${file.settings.credit.breakup}, solo tackle ${file.settings.credit.solo}, assisted tackle ${file.settings.credit.assist} expected points; each game × (0.5 + opponent quality ÷ 100); divided by games + ${file.settings.shrink[group]}.`
+        ? `Credits: sack ${file.settings.credit.sack}, interception ${file.settings.credit.interception}, pass breakup ${file.settings.credit.breakup} expected points, from the play-by-play; each game × (0.5 + opponent quality ÷ 100); divided by games + ${file.settings.shrink[group]}. Tackles are shown where box scores exist but not counted.`
         : group === "K"
           ? `Field-goal points over expected per try, with ${file.settings.shrink.K} average tries added. Ranked by points added per game.`
           : `Expected points added over an average player against the same defenses, divided by plays + ${file.settings.shrink[group]} (the pull toward average). Garbage time is left out.`,

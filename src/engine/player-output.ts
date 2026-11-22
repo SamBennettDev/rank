@@ -27,7 +27,7 @@ const r3 = (x: number) => Math.round(x * 1e3) / 1e3;
 const PASSING = ["dropbacks", "attempts", "completions", "pass_yards", "pass_td", "interceptions", "sacks_taken", "pass_epa", "pass_success"];
 const RUSHING = ["rushes", "rush_yards", "rush_td", "rush_epa", "rush_success"];
 const RECEIVING = ["targets", "receptions", "rec_yards", "rec_td", "target_epa", "target_success"];
-const DEFENSE = ["tackles", "solo", "assists", "sacks", "pbu", "def_int"];
+const DEFENSE = ["tackles", "solo", "tfl", "sacks", "pbu", "def_int", "hurries"];
 export const GROUP_STATS: Record<Group, string[]> = {
   QB: [...PASSING, ...RUSHING],
   RB: [...RUSHING, ...RECEIVING],
