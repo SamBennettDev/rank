@@ -29,7 +29,7 @@ import {
   fmtSigned,
   stat,
 } from "../players";
-import { boardHref, playerHref } from "../ctx";
+import { boardHref, dataThrough, playerHref } from "../ctx";
 
 export function teamView(ctx: Ctx, teamId: number): HTMLElement {
   const team = ctx.byId.get(teamId);
@@ -86,7 +86,7 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
           h(
             "div",
             { class: "team-hero-meta" },
-            `${shortConf(team.conference)} · ${team.classification.toUpperCase()} · ${seasonLabel(ctx.entry)}`,
+            `${shortConf(team.conference)} · ${team.classification.toUpperCase()} · ${seasonLabel(ctx.entry)}${((t) => (t ? ` · through ${t.short}` : ""))(dataThrough(ctx))}`,
           ),
         ),
       ),

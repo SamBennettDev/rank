@@ -59,6 +59,26 @@ export const fmtHeight = (v: number | null, d = 1) =>
 export const fmtScore = (v: number | null, d = 2) =>
   v === null ? "—" : v.toFixed(d);
 export const record = (t: RankedTeam) => `${t.wins}-${t.losses}`;
+/**
+ * The latest result counted in the snapshot on screen: the kickoff of its most recent game,
+ * as "Nov 21" (short) and "Saturday, Nov 21" (long). Dated in US Eastern time, as college
+ * football slates are, so a Saturday-night kickoff still reads as Saturday everywhere.
+ */
+export function dataThrough(ctx: Ctx): { short: string; long: string; iso: string } | null {
+  const kickoff = new Map(ctx.games.map((g) => [g.id, g.startDate]));
+  let latest = "";
+  for (const e of ctx.edges) {
+    const k = kickoff.get(e.gameId) ?? "";
+    if (k > latest) latest = k;
+  }
+  const d = new Date(latest);
+  if (!latest || Number.isNaN(d.getTime())) return null;
+  return {
+    iso: latest,
+    short: d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" }),
+    long: d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", timeZone: "America/New_York" }),
+  };
+}
 export function upsets(ctx: Ctx) {
   return ctx.edges
     .filter(

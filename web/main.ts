@@ -5,6 +5,7 @@ import {
   type View,
   href,
   makeCtx,
+  dataThrough,
   postseasonName,
   seasonLabel,
 } from "./ctx";
@@ -180,8 +181,16 @@ function renderChrome(ctx: Ctx, view: View, teamId?: number, extra?: string) {
     ),
     weekSel,
   );
+  const through = dataThrough(ctx);
   picker.replaceChildren(
     ...(leagueSwitch ? [leagueSwitch] : []),
+    through
+      ? h(
+          "span",
+          { class: "through", title: `Results counted through the latest game on ${through.long}` },
+          `Thru ${through.short}`,
+        )
+      : "",
     sameLeague.length > 1
       ? h("div", { class: "sel season" }, seasonSel)
       : h("span", { class: "season-tag" }, seasonLabel(ctx.entry)),

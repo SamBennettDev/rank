@@ -1,4 +1,4 @@
-import { type Ctx, boardHref, playerHref, teamHref } from "../ctx";
+import { type Ctx, boardHref, dataThrough, playerHref, teamHref } from "../ctx";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
 import {
@@ -29,6 +29,7 @@ export function playersView(ctx: Ctx, groupParam?: string): HTMLElement {
       "header",
       { class: "page-head" },
       h("div", { class: "eyebrow" }, "Players · FBS + FCS"),
+      ...((t) => (t ? [h("p", { class: "freshness" }, h("i", { "aria-hidden": "true" }), `Results through ${t.long} · play-by-play can trail by a day`)] : []))(dataThrough(ctx)),
       h("h1", {}, GROUP_NAME[group]),
       h(
         "p",
