@@ -1,0 +1,43 @@
+probe start 2026-11-22T18:30:38.333Z node v22.23.5
+scoreboard group 80 type 2 week 1: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=1&year=2026&limit=500
+scoreboard group 80 type 2 week 2: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=2&year=2026&limit=500
+scoreboard group 80 type 2 week 3: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=3&year=2026&limit=500
+scoreboard group 80 type 2 week 4: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=4&year=2026&limit=500
+scoreboard group 80 type 2 week 5: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=5&year=2026&limit=500
+scoreboard group 80 type 2 week 6: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=6&year=2026&limit=500
+scoreboard group 80 type 2 week 7: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=7&year=2026&limit=500
+scoreboard group 80 type 2 week 8: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=8&year=2026&limit=500
+scoreboard group 80 type 2 week 9: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=9&year=2026&limit=500
+scoreboard group 80 type 2 week 10: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=10&year=2026&limit=500
+scoreboard group 80 type 2 week 11: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=11&year=2026&limit=500
+scoreboard group 80 type 2 week 12: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=12&year=2026&limit=500
+scoreboard group 80 type 2 week 13: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=13&year=2026&limit=500
+scoreboard group 80 type 2 week 14: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=14&year=2026&limit=500
+scoreboard group 80 type 2 week 15: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=15&year=2026&limit=500
+scoreboard group 80 type 2 week 16: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=2&week=16&year=2026&limit=500
+scoreboard group 80 type 3 week 1: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=3&week=1&year=2026&limit=500
+scoreboard group 80 type 3 week 2: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=80&seasontype=3&week=2&year=2026&limit=500
+scoreboard group 81 type 2 week 1: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=1&year=2026&limit=500
+scoreboard group 81 type 2 week 2: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=2&year=2026&limit=500
+scoreboard group 81 type 2 week 3: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=3&year=2026&limit=500
+scoreboard group 81 type 2 week 4: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=4&year=2026&limit=500
+scoreboard group 81 type 2 week 5: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=5&year=2026&limit=500
+scoreboard group 81 type 2 week 6: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=6&year=2026&limit=500
+scoreboard group 81 type 2 week 7: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=7&year=2026&limit=500
+scoreboard group 81 type 2 week 8: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=8&year=2026&limit=500
+scoreboard group 81 type 2 week 9: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=9&year=2026&limit=500
+scoreboard group 81 type 2 week 10: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=10&year=2026&limit=500
+scoreboard group 81 type 2 week 11: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=11&year=2026&limit=500
+scoreboard group 81 type 2 week 12: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=12&year=2026&limit=500
+scoreboard group 81 type 2 week 13: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=13&year=2026&limit=500
+scoreboard group 81 type 2 week 14: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=14&year=2026&limit=500
+scoreboard group 81 type 2 week 15: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=15&year=2026&limit=500
+scoreboard group 81 type 2 week 16: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=2&week=16&year=2026&limit=500
+scoreboard group 81 type 3 week 1: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=3&week=1&year=2026&limit=500
+scoreboard group 81 type 3 week 2: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&seasontype=3&week=2&year=2026&limit=500
+date scoreboard: Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?groups=81&dates=20261121&limit=500
+events 0, completed 0
+FATAL Error: 403 https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams?groups=80&limit=400
+    at get (file:///home/runner/work/rank/rank/tmp-espn/probe.mjs:24:49)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///home/runner/work/rank/rank/tmp-espn/probe.mjs:90:94
