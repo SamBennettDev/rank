@@ -1,0 +1,108 @@
+{
+ "data": {
+  "contests": [
+   {
+    "__typename": "Contest",
+    "id": "6604804",
+    "sportCode": "MFB",
+    "sportUrl": "football",
+    "division": 12,
+    "clock": "",
+    "currentPeriod": "FINAL",
+    "finalMessage": "FINAL",
+    "gameState": "F",
+    "statusCodeDisplay": "final",
+    "network": null,
+    "startTime": "19:00",
+    "startTimeEpoch": 1795132800,
+    "week": "12",
+    "seasonYear": 2026,
+    "winner": 276,
+    "hasStartTime": true,
+    "hasBoxscore": true,
+    "hasPbp": true,
+    "hasScoringSummary": true,
+    "hasPreview": false,
+    "hasRecap": false,
+    "hasTeamStats": true,
+    "linescores": [
+     {
+      "__typename": "Linescore",
+      "period": "1",
+      "home": "0",
+      "visit": "10"
+     },
+     {
+      "__typename": "Linescore",
+      "period": "2",
+      "home": "7",
+      "visit": "7"
+     },
+     {
+      "__typename": "Linescore",
+      "period": "3",
+      "home": "3",
+      "visit": "0"
+     },
+     {
+      "__typename": "Linescore",
+      "period": "4",
+      "home": "0",
+      "visit": "21"
+     }
+    ],
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "teamId": "206",
+      "isHome": true,
+      "color": "#A6192E",
+      "seoname": "nicholls-st",
+      "nameFull": "Nicholls State University",
+      "nameShort": "Nicholls",
+      "name6Char": "NICHST",
+      "teamRank": null,
+      "gameRank": null,
+      "score": 10,
+      "seed": null,
+      "record": "(4-7)",
+      "divisionName": "fcs",
+      "division": 12,
+      "isWinner": false
+     },
+     {
+      "__typename": "ContestTeam",
+      "teamId": "276",
+      "isHome": false,
+      "color": "#1D4C30",
+      "seoname": "southeastern-la",
+      "nameFull": "Southeastern Louisiana University",
+      "nameShort": "Southeastern La.",
+      "name6Char": "SE LA",
+      "teamRank": null,
+      "gameRank": null,
+      "score": 38,
+      "seed": null,
+      "record": "(5-6)",
+      "divisionName": "fcs",
+      "division": 12,
+      "isWinner": true
+     }
+    ],
+    "liveVideos": [],
+    "championship": null,
+    "championshipGame": null,
+    "links": [],
+    "location": null,
+    "stats": {
+     "__typename": "LinescoreStatsFootball",
+     "down": 2,
+     "distance": 29,
+     "possession": "visit",
+     "yardline": null,
+     "yardsFromGoal": 70
+    }
+   }
+  ]
+ }
+}

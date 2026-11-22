@@ -1,0 +1,38 @@
+{
+ "games_fcs_w12": {
+  "status": 200,
+  "rows": 64,
+  "games": 64,
+  "completed": 64
+ },
+ "games_fcs_w13": {
+  "status": 200,
+  "rows": 2,
+  "games": 2,
+  "completed": 0
+ },
+ "plays_fcs_w12": {
+  "status": 200,
+  "rows": 11168,
+  "games": 64,
+  "completed": 0
+ },
+ "plays_fcs_w13": {
+  "status": 200,
+  "rows": 0,
+  "games": 0,
+  "completed": 0
+ },
+ "players_fcs_w12": {
+  "status": 200,
+  "rows": 64,
+  "games": 64,
+  "completed": 0
+ },
+ "roster_fcs": {
+  "status": 200,
+  "rows": 13915,
+  "games": 13914,
+  "completed": 0
+ }
+}

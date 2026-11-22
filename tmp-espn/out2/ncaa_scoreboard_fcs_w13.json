@@ -1,0 +1,702 @@
+{
+ "data": {
+  "contests": [
+   {
+    "__typename": "Contest",
+    "championshipId": null,
+    "bracketId": null,
+    "contestId": 6604947,
+    "url": "/game/6604947",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795723200,
+    "startTime": "15:00",
+    "startDate": "11/26/2026",
+    "hasStartTime": true,
+    "broadcasterId": null,
+    "broadcasterName": null,
+    "roundNumber": null,
+    "roundDescription": "",
+    "sportUrl": "football",
+    "stage": 1,
+    "tba": false,
+    "isChampionship": false,
+    "championshipGame": null,
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "alabama-st",
+      "nameShort": "Alabama St.",
+      "name6Char": "ALA ST",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "swac"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "tuskegee",
+      "nameShort": "Tuskegee",
+      "name6Char": "TUSK",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "siac"
+     }
+    ],
+    "liveVideos": []
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 102,
+    "contestId": 6645232,
+    "url": "/game/6645232",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795885200,
+    "startTime": "12:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "monmouth",
+      "nameShort": "Monmouth",
+      "name6Char": "MONMTH",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 16,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "caa"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "harvard",
+      "nameShort": "Harvard",
+      "name6Char": "HARV",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "ivy-league"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 106,
+    "contestId": 6645236,
+    "url": "/game/6645236",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795885200,
+    "startTime": "12:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "lehigh",
+      "nameShort": "Lehigh",
+      "name6Char": "LEHIGH",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 12,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "patriot"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "albany-ny",
+      "nameShort": "UAlbany",
+      "name6Char": "ALBANY",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "caa"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 104,
+    "contestId": 6645234,
+    "url": "/game/6645234",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795888800,
+    "startTime": "13:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "north-dakota",
+      "nameShort": "North Dakota",
+      "name6Char": "NO DAK",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 9,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "mvfc"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "idaho-st",
+      "nameShort": "Idaho St.",
+      "name6Char": "ID ST",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "big-sky"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": null,
+    "bracketId": null,
+    "contestId": 6640232,
+    "url": "/game/6640232",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795892400,
+    "startTime": "14:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": null,
+    "broadcasterName": null,
+    "roundNumber": null,
+    "roundDescription": "",
+    "sportUrl": "football",
+    "stage": 1,
+    "tba": false,
+    "isChampionship": false,
+    "championshipGame": null,
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "southern-u",
+      "nameShort": "Southern U.",
+      "name6Char": "SOUTHR",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "swac"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "grambling",
+      "nameShort": "Grambling",
+      "name6Char": "GRAMB",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "swac"
+     }
+    ],
+    "liveVideos": []
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 114,
+    "contestId": 6645244,
+    "url": "/game/6645244",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795892400,
+    "startTime": "14:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "tennessee-tech",
+      "nameShort": "Tennessee Tech",
+      "name6Char": "TNTECH",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 11,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "socon"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "dayton",
+      "nameShort": "Dayton",
+      "name6Char": "DAYTON",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "pioneer"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 116,
+    "contestId": 6645246,
+    "url": "/game/6645246",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795896000,
+    "startTime": "15:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "weber-st",
+      "nameShort": "Weber St.",
+      "name6Char": "WEB ST",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 14,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "big-sky"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "western-ill",
+      "nameShort": "Western Ill.",
+      "name6Char": "W ILL",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "ovc"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 108,
+    "contestId": 6645238,
+    "url": "/game/6645238",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795899600,
+    "startTime": "16:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "illinois-st",
+      "nameShort": "Illinois St.",
+      "name6Char": "ILL ST",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 13,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "mvfc"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "austin-peay",
+      "nameShort": "Austin Peay",
+      "name6Char": "A PEAY",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "uac-"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 112,
+    "contestId": 6645242,
+    "url": "/game/6645242",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795899600,
+    "startTime": "16:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48617,
+    "broadcasterName": "ESPN+",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "northern-ariz",
+      "nameShort": "Northern Ariz.",
+      "name6Char": "NAU",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 10,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "big-sky"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "long-island",
+      "nameShort": "LIU",
+      "name6Char": "LIU",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "nec"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   },
+   {
+    "__typename": "Contest",
+    "championshipId": 6429,
+    "bracketId": 110,
+    "contestId": 6645240,
+    "url": "/game/6645240",
+    "gameState": "P",
+    "statusCodeDisplay": "pre",
+    "currentPeriod": "",
+    "contestClock": "",
+    "finalMessage": "",
+    "startTimeEpoch": 1795914000,
+    "startTime": "20:00",
+    "startDate": "11/28/2026",
+    "hasStartTime": true,
+    "broadcasterId": 48616,
+    "broadcasterName": "ESPNU",
+    "roundNumber": 1,
+    "roundDescription": "First Round",
+    "sportUrl": "football",
+    "stage": 3,
+    "tba": false,
+    "isChampionship": true,
+    "championshipGame": {
+     "__typename": "ChampionshipGame",
+     "round": {
+      "__typename": "Round",
+      "roundNumber": 1,
+      "title": "First Round",
+      "subtitle": ""
+     }
+    },
+    "teams": [
+     {
+      "__typename": "ContestTeam",
+      "isHome": true,
+      "seoname": "montana",
+      "nameShort": "Montana",
+      "name6Char": "MONT",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": 15,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "big-sky"
+     },
+     {
+      "__typename": "ContestTeam",
+      "isHome": false,
+      "seoname": "uiw",
+      "nameShort": "UIW",
+      "name6Char": "INCWRD",
+      "name8Char": "",
+      "name10Char": "",
+      "seed": null,
+      "teamRank": null,
+      "score": null,
+      "isWinner": false,
+      "conferenceSeo": "southland"
+     }
+    ],
+    "liveVideos": [
+     {
+      "__typename": "Stream",
+      "state": "pre",
+      "enabled": false,
+      "stateCode": 1,
+      "doNotSyndicate": false,
+      "syndicateOnly": false
+     }
+    ]
+   }
+  ]
+ }
+}
