@@ -1,4 +1,4 @@
-import { type Ctx, dataThrough, fmtScore, rankLabel, record, teamHref } from "../ctx";
+import { type Ctx, fmtScore, rankLabel, record, teamHref } from "../ctx";
 import type { RankedTeam } from "../../src/engine/types";
 import { h } from "../dom";
 import { searchIcon } from "../icons";
@@ -185,19 +185,7 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
       );
   };
 
-  const through = dataThrough(ctx);
   root.append(
-    through
-      ? h(
-          "p",
-          { class: "freshness" },
-          h("i", { "aria-hidden": "true" }),
-          `Results through ${through.long} · ${ctx.ranking.snapshot.label}`,
-          !ctx.entry.league && ctx.snapId === ctx.entry.snapshots.at(-1)?.id
-            ? " · data refreshed about daily"
-            : "",
-        )
-      : "",
     h(
       "div",
       { class: "home-tools" },
