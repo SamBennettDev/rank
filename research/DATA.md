@@ -34,3 +34,32 @@ Files are parquet with ZSTD compression: reading them in Node needs `hyparquet-c
 next to `hyparquet`. URL pattern:
 `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/<tag>/<tag>_<year>.parquet`
 (e.g. `ncaa_mfb_pbp/ncaa_mfb_pbp_2026.parquet`).
+
+## Round 2: what works from GitHub Actions (November 22, 2026)
+
+The stats.ncaa mirror stalled after November 17: its own scraper of stats.ncaa.org has been
+timing out daily (its raw-capture logs show `captured: 0` and `EXIT=1`), so no games after
+November 17 reached the published files. Everything below was tested from a GitHub Actions
+runner, where the hourly update runs.
+
+| Source | From Actions | Last Saturday (Nov 21, "week 12") | What it gives | Limits |
+|---|---|---|---|---|
+| **sportsdataverse ESPN-based releases** (`cfb_schedules`, `cfbfastR_cfb_pbp`, `espn_cfb_rosters`) | ✓ (GitHub downloads) | schedule refreshed Nov 22 14:20 UTC; plays for 50 of 56 FCS–FCS and 43 of 47 FBS games by Saturday night | scores, kickoffs, sites and divisions for every division; structured plays with ESPN player ids and positions (642 of 650 FCS–FCS and 675 of 695 FBS games this season); bios for all 138 FBS and 99 FCS teams | none; refreshed about daily |
+| **CFBD API** (repository key) | ✓ | all 64 FCS games with plays (11,168) and player box scores | games, structured plays (players only in text), full defensive box scores for FBS and FCS (TOT, SOLO, SACKS, TFL, PD, QB HUR) with ESPN athlete ids, rosters (13,915 FCS players) | free tier 1,000 calls a month, shared with CBB (629 left on Nov 22) |
+| **ncaa.com** (`sdataprod.ncaa.com` persisted GraphQL queries, as used by henrygd/ncaa-api) | ✓ | 64 of 64 FCS final; box score and play-by-play for 40 of 40 sampled | scores; play-by-play as text only ("1 and 10 at 35"); box scores with names and numbers, no positions or ids | unofficial internal API |
+| **ESPN site API** (`site.api.espn.com`) | ✗ 403 on every request | — | — | blocks cloud/datacenter traffic |
+| **stats.ncaa.org** | ✗ (Akamai) | — | — | blocks automated clients |
+
+### Recommendation
+
+1. **Primary, no key: the sportsdataverse ESPN-based releases.** Scores and schedule from
+   `cfb_schedules`, plays from `cfbfastR_cfb_pbp` (EPA recomputed with our own model, whose inputs
+   are down, distance and yards to goal), bios from `espn_cfb_rosters`. ESPN ids are already this
+   site's team ids, so logos work without the crosswalk, and players get stable ids instead of
+   name matching.
+2. **CFBD for what the releases lack, within the free tier:** defensive box scores for FCS games
+   (`/games/players?classification=fcs`, one call per week) and FBS, bios for FCS teams missing from
+   ESPN rosters (`/roster?classification=fcs`, weekly), and scores if the schedule release lags
+   (`/games`). About 4 calls a refresh, 2–3 refreshes a day: well under 1,000 a month.
+3. **ncaa.com as an emergency fallback for scores only.**
+4. **Keep the stats.ncaa mirror's history** for fitting the expected-points model (2014–2025, fixed).
