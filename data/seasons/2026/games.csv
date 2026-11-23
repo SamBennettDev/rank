@@ -1601,6 +1601,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401872617,2026,10,regular,2026-11-07T19:00:00.000Z,false,true,2460,Northern Iowa,15,2571,South Dakota State,41
 401872618,2026,4,regular,2026-09-26T17:00:00.000Z,false,true,2771,Merrimack,17,2441,New Haven,10
 401872619,2026,12,regular,2026-11-21T17:00:00.000Z,false,true,163,Princeton,12,219,Pennsylvania,19
+401872642,2026,14,regular,2026-12-05T19:00:00.000Z,false,false,2504,Prairie View A&M,,2010,Alabama A&M,
 401872643,2026,12,regular,2026-11-21T17:00:00.000Z,false,true,2385,Mercyhurst,31,2441,New Haven,13
 401873620,2026,3,regular,2026-09-19T17:00:00.000Z,false,true,2385,Mercyhurst,49,2249,Glenville State,20
 401874035,2026,1,regular,2026-08-27T23:00:00.000Z,false,true,110242,West Florida,34,79,Southern Illinois,31
@@ -1614,3 +1615,11 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401913104,2026,1,regular,2026-08-29T23:00:00.000Z,false,true,2916,Incarnate Word,76,2824,Oklahoma Panhandle,14
 401915931,2026,11,regular,2026-11-14T18:00:00.000Z,false,true,2130,Chicago State,45,2355,Virginia Lynchburg,0
 401917058,2026,1,regular,2026-09-06T15:00:00.000Z,false,true,2097,Campbell,28,2717,Western Carolina,19
+401934095,2026,13,regular,2026-11-28T17:00:00.000Z,false,false,2405,Monmouth,,108,Harvard,
+401934096,2026,13,regular,2026-11-28T18:00:00.000Z,false,false,155,North Dakota,,304,Idaho State,
+401934097,2026,13,regular,2026-11-28T17:00:00.000Z,false,false,2329,Lehigh,,399,UAlbany,
+401934098,2026,13,regular,2026-11-28T21:00:00.000Z,false,false,2287,Illinois State,,2046,Austin Peay,
+401934099,2026,13,regular,2026-11-28T20:00:00.000Z,false,false,2692,Weber State,,2710,Western Illinois,
+401934100,2026,13,regular,2026-11-28T19:00:00.000Z,false,false,2635,Tennessee Tech,,2168,Dayton,
+401934101,2026,13,regular,2026-11-28T21:00:00.000Z,false,false,2464,Northern Arizona,,2341,Long Island University,
+401934102,2026,13,regular,2026-11-29T01:00:00.000Z,false,false,149,Montana,,2916,Incarnate Word,
