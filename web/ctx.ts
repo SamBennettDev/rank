@@ -164,7 +164,7 @@ export const METRIC_HINT: Record<Metric, string> = {
   resume:
     "Strength of record, 0–100: how unlikely this record would be for a good team of the same division against the same schedule, averaged over five benchmarks (its top-10, top-25, top-50 and top-100 team, and its average team). FBS and FCS are ranked separately.",
   schedule:
-    "Strength of schedule: the average quality (0–100) of the opponents played.",
+    "Strength of schedule: how many of these games an average team of the same division would be expected to win (fewer means harder). Ranked per game played, within each division.",
   offense:
     "Offensive points per game above average from opponent-adjusted play-by-play, excluding garbage time.",
   defense:

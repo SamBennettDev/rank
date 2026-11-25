@@ -218,19 +218,23 @@ export async function computeSeason(
       eligible.has(i) ? at(graph.quality, t.id) : null,
     );
     const ranks = rankValues(eligibleHeights);
-    const rankBy = (values: ArrayLike<number>) =>
-      rankValues(
-        teams.map((t, i) => (eligible.has(i) ? at(values, t.id) : null)),
-      );
-    // Résumé ranks within each division; quality and schedule across the whole field.
-    const resumeRanks = teams.map((): number | null => null);
-    for (const c of config.classifications)
-      rankValues(
-        teams.map((t, i) => (eligible.has(i) && t.classification === c ? at(graph.resume, t.id) : null)),
-      ).forEach((r, i) => {
-        if (r !== null) resumeRanks[i] = r;
-      });
-    const scheduleRanks = rankBy(graph.schedule);
+    // Résumé and schedule rank within each division; quality across the whole field.
+    const withinDivision = (values: ArrayLike<number>, sign: 1 | -1) => {
+      const out = teams.map((): number | null => null);
+      for (const c of config.classifications)
+        rankValues(
+          teams.map((t, i) => {
+            const v = eligible.has(i) && t.classification === c ? at(values, t.id) : null;
+            return v === null ? null : sign * v;
+          }),
+        ).forEach((r, i) => {
+          if (r !== null) out[i] = r;
+        });
+      return out;
+    };
+    const resumeRanks = withinDivision(graph.resume, 1);
+    // The hardest schedule (fewest expected wins per game for an average team) ranks first.
+    const scheduleRanks = withinDivision(graph.scheduleShare, -1);
     const allTeams: RankedTeam[] = teams.map((t, i) => {
       const height = at(graph.quality, t.id);
       const rank = ranks[i] ?? null;

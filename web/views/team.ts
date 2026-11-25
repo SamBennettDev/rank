@@ -110,8 +110,8 @@ export function teamView(ctx: Ctx, teamId: number): HTMLElement {
         ),
         stat(
           "Schedule",
-          fmtScore(team.schedule),
-          team.scheduleRank === null ? "" : `#${team.scheduleRank} ${of}`,
+          team.schedule === null ? "—" : `${team.schedule.toFixed(1)}/${team.wins + team.losses}`,
+          team.scheduleRank === null ? "" : `avg ${div} team's wins · #${team.scheduleRank} ${ofDivision}`,
         ),
         stat(
           "This week",
@@ -287,7 +287,7 @@ function whyPanel(ctx: Ctx, teamId: number): HTMLElement {
       h(
         "p",
         {},
-        `Résumé is the ranking. It asks how hard this record would be for a good team against the same schedule. Each bar is one game: a typical top-25 team’s chance of winning it, from the opponent’s strength, set against what this team did. A win over a strong opponent counts for a lot, a win over a weak one for little, and a loss to a strong team costs little. Quality measures team strength from margins: every game is a spring that wants the winner 100 × margin^0.75 points above the loser. Schedule is the average quality of the opponents played${me.schedule === null ? "" : ` (${me.schedule.toFixed(2)} here, #${me.scheduleRank ?? "—"})`}.`,
+        `Résumé is the ranking. It asks how hard this record would be for a good team against the same schedule. Each bar is one game: a typical top-25 team’s chance of winning it, from the opponent’s strength, set against what this team did. A win over a strong opponent counts for a lot, a win over a weak one for little, and a loss to a strong team costs little. Quality measures team strength from margins: every game is a spring that wants the winner 100 × margin^0.75 points above the loser. Schedule is how many of these games an average ${me.classification.toUpperCase()} team would be expected to win${me.schedule === null ? "" : ` (${me.schedule.toFixed(1)} of ${me.wins + me.losses} here, #${me.scheduleRank ?? "—"} in ${me.classification.toUpperCase()})`}; fewer means harder.`,
       ),
     ),
   );

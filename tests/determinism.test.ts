@@ -85,13 +85,13 @@ describe("determinism", () => {
     // Résumé (strength of record): with two teams every benchmark is strength 0, so the
     // winner scores 100 × (1 − P(benchmark beats the loser) / 2) = 50 + 50 × q(loser) and
     // the loser 50 × (1 − P(benchmark beats the winner)) = 50 × q(winner).
-    // Schedule: the opponent's quality.
+    // Schedule: the games the division's average team (strength 0 here) would win against it.
     expect(away.height).toBeCloseTo(100 * qAway, 5);
     expect(home.height).toBeCloseTo(100 * qHome, 5);
     expect(away.resume).toBeCloseTo(50 + 50 * qHome, 5);
     expect(home.resume).toBeCloseTo(50 * qAway, 5);
-    expect(away.schedule).toBeCloseTo(100 * qHome, 5);
-    expect(home.schedule).toBeCloseTo(100 * qAway, 5);
+    expect(away.schedule).toBeCloseTo(qAway, 5);
+    expect(home.schedule).toBeCloseTo(qHome, 5);
     expect([away.resumeRank, home.resumeRank]).toEqual([1, 2]);
     expect([away.scheduleRank, home.scheduleRank]).toEqual([2, 1]);
   });

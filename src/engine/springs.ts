@@ -147,7 +147,8 @@ export function solveStrength(
  * The ranking and its two companions. Quality (0–100 points) comes from one margin
  * SpringRank. Résumé is strength of record averaged over the benchmarks of the team's own
  * division (`group[i]`, 0, 1, …; −1 or omitted: benchmarks from every team that played), see
- * `strengthOfRecord`; schedule is the average quality of the opponents it played.
+ * `strengthOfRecord`; schedule is how many of its games its division's average team would be
+ * expected to win (fewer means harder), and scheduleShare that number per game played.
  */
 export function rankByQuality(
   n: number,
@@ -159,12 +160,9 @@ export function rankByQuality(
   const q = Array.from(strength, (s) =>
     qualityPoints(quality(s, settings.qualityScale)),
   );
-  const faced = new Float64Array(n),
-    games = new Float64Array(n);
+  const games = new Float64Array(n);
   const schedules: { opponent: number; won: boolean }[][] = Array.from({ length: n }, () => []);
   springs.forEach((s) => {
-    faced[s.winner]! += q[s.loser]!;
-    faced[s.loser]! += q[s.winner]!;
     games[s.winner]!++;
     games[s.loser]!++;
     schedules[s.winner]!.push({ opponent: s.loser, won: true });
@@ -182,6 +180,10 @@ export function rankByQuality(
     const bench = benchmarks.get(groupOf(i))!;
     return g.length ? bench.map((b) => strengthOfRecord(g, b, strength, settings.qualityScale).score) : bench.map(() => 0);
   });
+  // The division's average team (the last benchmark) against each schedule.
+  const schedule = Float64Array.from(schedules, (g, i) =>
+    g.length ? strengthOfRecord(g, benchmarks.get(groupOf(i))!.at(-1)!, strength, settings.qualityScale).expectedWins : 0,
+  );
   const resume = Float64Array.from(resumeParts, (parts) => {
     let sum = 0;
     for (const v of parts) sum += v;
@@ -193,6 +195,7 @@ export function rankByQuality(
     benchmarks,
     resumeParts,
     resume,
-    schedule: faced.map((v, i) => (games[i]! > 0 ? v / games[i]! : 0)),
+    schedule,
+    scheduleShare: schedule.map((v, i) => (games[i]! > 0 ? v / games[i]! : 0)),
   };
 }

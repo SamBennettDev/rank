@@ -9,7 +9,7 @@ The ranking itself is **résumé**, and two boards are built from quality:
 - **Résumé (the ranking):** strength of record, 0–100: how unlikely this record would be for a good team of the same division against the same schedule, averaged over five benchmarks (that division's top-10, top-25, top-50 and top-100 team, and its average team). FBS and FCS are ranked separately.
 - **Quality:** one board for FBS and FCS together.
 - **Quality** is team strength from the spring graph, shown as the second board.
-- **Schedule:** the average quality of the opponents played.
+- **Schedule:** how many of the team's games an average team of its division would be expected to win (fewer means harder), ranked per game within FBS and within FCS.
 
 No home field or head-to-head rules.
 

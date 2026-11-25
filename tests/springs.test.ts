@@ -184,11 +184,15 @@ describe("résumé: strength of record", () => {
     expect(r.resumeParts[3]![0]).toBeCloseTo(strengthOfRecord(g3, r.benchmarks.get(1)![0]!, r.strength, S.qualityScale).score, 12);
   });
 
-  it("averages opponents' quality per game played as the schedule", () => {
+  it("counts the games an average team would win against each schedule", () => {
     const springs = [win(0, 1, 3), win(1, 2, 14), win(0, 2, 1), win(3, 2, 35)];
-    const { quality: q, schedule } = rankByQuality(4, springs, S);
-    expect(schedule[3]).toBe(q[2]);
-    expect(schedule[0]).toBeCloseTo((q[1]! + q[2]!) / 2, 12);
+    const r = rankByQuality(4, springs, S);
+    const avg = r.benchmarks.get(-1)!.at(-1)!;
+    const expected = quality(avg - r.strength[1]!, S.qualityScale) + quality(avg - r.strength[2]!, S.qualityScale);
+    expect(r.schedule[0]).toBeCloseTo(expected, 12);
+    expect(r.scheduleShare[0]).toBeCloseTo(expected / 2, 12);
+    // Team 2 lost to everyone and faced the strongest teams: the hardest schedule.
+    expect(r.scheduleShare[2]!).toBeLessThan(r.scheduleShare[3]!);
   });
 });
 

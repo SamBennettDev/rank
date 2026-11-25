@@ -131,7 +131,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "div",
         { class: "recipe-block" },
         h("b", {}, "Schedule"),
-        h("span", {}, "Opponents’ quality"),
+        h("span", {}, "Average team’s expected wins"),
       ),
     ),
     h(
@@ -157,7 +157,7 @@ export function aboutView(ctx: Ctx): HTMLElement {
         "p",
         {},
         h("b", {}, "Schedule. "),
-        "The average quality of the opponents a team has played, from 0 to 100.",
+        "How many of a team’s games an average team of its division would be expected to win against the same opponents (fewer means harder), ranked per game played within FBS and within FCS.",
       ),
       h(
         "p",

@@ -28,10 +28,11 @@ const placeLabel = (t: RankedTeam, b: Board) =>
     : place(t, b) === null
       ? "—"
       : String(place(t, b));
+/** Schedule: games the division's average team would win against it, of the games played. */
+const fmtSchedule = (t: RankedTeam) =>
+  t.schedule === null ? "—" : `${t.schedule.toFixed(1)}/${t.wins + t.losses}`;
 const value = (t: RankedTeam, b: Board) =>
-  b === "resume"
-    ? fmtScore(t.resume)
-    : fmt2(b === "schedule" ? t.schedule : t.height);
+  b === "resume" ? fmtScore(t.resume) : b === "schedule" ? fmtSchedule(t) : fmt2(t.height);
 
 const change = (t: RankedTeam, b: Board) =>
   b === "resume"
@@ -92,13 +93,16 @@ function segment<T extends string>(
   return group;
 }
 
-/** Conferences ordered by the average résumé of their ranked teams, strongest first. */
+/**
+ * Conferences ordered by the average quality of their ranked teams, strongest first. Quality is
+ * one scale for FBS and FCS, so FBS and FCS conferences compare fairly.
+ */
 function conferencesByStrength(teams: RankedTeam[]) {
   const sums = new Map<string, { total: number; n: number }>();
   for (const t of teams) {
-    if (t.resume === null) continue;
+    if (t.height === null) continue;
     const s = sums.get(t.conference) ?? { total: 0, n: 0 };
-    s.total += t.resume;
+    s.total += t.height;
     s.n++;
     sums.set(t.conference, s);
   }
@@ -150,23 +154,45 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
       h(
         "span",
         { class: `hr-col${board === "schedule" ? " on" : ""}` },
-        fmt2(t.schedule),
+        fmtSchedule(t),
         h("small", {}, t.scheduleRank ?? "—"),
       ),
       h("span", { class: "hr-val" }, value(t, board)),
       moveCell(t, board),
     );
 
-  // The division switch: All, FBS, FCS; the résumé board offers FBS and FCS only.
+  // Conferences of the division shown, by average quality.
+  const confSelect = h("select", {
+    "aria-label": "Conference, strongest first by average quality",
+    onchange: (event: Event) => {
+      conference = (event.target as HTMLSelectElement).value;
+      draw();
+    },
+  });
+  const paintConferences = () => {
+    const list = conferencesByStrength(field.filter((t) => division === "all" || t.classification === division));
+    if (conference && !list.some((c) => c.name === conference)) conference = "";
+    confSelect.replaceChildren(
+      h("option", { value: "" }, ctx.entry.league ? "All divisions" : "All conferences"),
+      ...list.map((c) =>
+        h("option", { value: c.name, selected: c.name === conference }, `${c.name} · quality ${c.avg.toFixed(1)}`),
+      ),
+    );
+  };
+  paintConferences();
+
+  // The division switch: All, FBS, FCS. Résumé and schedule are measured within a division,
+  // so their boards offer FBS and FCS only.
   const divisionSlot = h("div", { class: "division-slot" });
   const paintDivisions = () =>
     divisionSlot.replaceChildren(
       segment(
         "Division",
-        DIVISIONS.filter(([v]) => board !== "resume" || v !== "all"),
+        DIVISIONS.filter(([v]) => board === "quality" || v !== "all"),
         () => division,
         (v) => {
           division = v;
+          paintConferences();
           draw();
         },
         "division",
@@ -223,28 +249,7 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
           },
         }),
       ),
-      h(
-        "label",
-        { class: "sel home-conf" },
-        h(
-          "select",
-          {
-            "aria-label": "Conference, strongest first",
-            onchange: (event: Event) => {
-              conference = (event.target as HTMLSelectElement).value;
-              draw();
-            },
-          },
-          h(
-            "option",
-            { value: "" },
-            ctx.entry.league ? "All divisions" : "All conferences",
-          ),
-          ...conferencesByStrength(field).map((c) =>
-            h("option", { value: c.name }, `${c.name} · ${c.avg.toFixed(2)}`),
-          ),
-        ),
-      ),
+      h("label", { class: "sel home-conf" }, confSelect),
       ...(ctx.entry.league ? [] : [divisionSlot]),
       segment(
         "Ranking board",
@@ -252,7 +257,10 @@ export function listView(ctx: Ctx, _onCleanup: (fn: () => void) => void) {
         () => board,
         (v) => {
           board = v;
-          if (board === "resume" && division === "all") division = "fbs";
+          if (board !== "quality" && division === "all") {
+            division = "fbs";
+            paintConferences();
+          }
           paintDivisions();
           draw();
         },

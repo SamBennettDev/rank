@@ -145,7 +145,7 @@ export interface RankedTeam {
   /** Strength of record against each of its division's manifest.resumeBenchmarks, in that order. */
   resumeParts?: number[] | null;
   resumeRank: number | null;
-  /** Strength of schedule: average quality of the opponents played. */
+  /** Strength of schedule: games its division's average team would be expected to win against it (fewer = harder; ranked per game, within the division). */
   schedule: number | null;
   scheduleRank: number | null;
   component: number | null;
