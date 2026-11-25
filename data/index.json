@@ -52,6 +52,10 @@
         {
           "id": "week-12",
           "label": "Week 12"
+        },
+        {
+          "id": "week-13",
+          "label": "Week 13"
         }
       ],
       "players": true
