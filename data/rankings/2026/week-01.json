@@ -28,8 +28,8 @@
       "fcs"
     ],
     "teamsSha256": "13dba3e50b5e0832df8b423de09027ffa60c42bc411c2f93ccbb218e282cd557",
-    "gamesSha256": "020083d790f7db3c4192af297e8c272628c03d211be0c1c5df24c2b504b06250",
-    "playsSha256": "90ca35632d9f3df359db79bc7a605c54b544e0777603482ea676222bc711abcd",
+    "gamesSha256": "06e24d3c603a451e5ce0803084e92909afd8aa189dcd12df3f6dc320d59f3717",
+    "playsSha256": "a269e5e4baae63855172655fc0ee56a579935d8e916a3fef929932e18b90269f",
     "snapsPerGame": 59.264151,
     "resumeBenchmarks": [
       {
@@ -443,7 +443,11 @@
     {"gameId":401869141,"home":2377,"away":2320,"startDate":"2026-11-22T00:00:00.000Z","neutralSite":false,"strengthEdge":-4.629329,"homeProbability":0.425109,"provisional":true},
     {"gameId":401864549,"home":23,"away":2449,"startDate":"2026-11-27T20:30:00.000Z","neutralSite":false,"strengthEdge":-10.382215,"homeProbability":0.337428,"provisional":true},
     {"gameId":401858313,"home":153,"away":152,"startDate":"2026-11-28T17:00:00.000Z","neutralSite":false,"strengthEdge":14.580447,"homeProbability":0.721437,"provisional":true},
-    {"gameId":401864547,"home":62,"away":16,"startDate":"2026-11-29T04:00:00.000Z","neutralSite":false,"strengthEdge":3.704004,"homeProbability":0.560084,"provisional":true}
+    {"gameId":401934097,"home":2329,"away":399,"startDate":"2026-11-28T17:00:00.000Z","neutralSite":false,"strengthEdge":9.284451,"homeProbability":0.646441,"provisional":true},
+    {"gameId":401934096,"home":155,"away":304,"startDate":"2026-11-28T18:00:00.000Z","neutralSite":false,"strengthEdge":1.037337,"homeProbability":0.516902,"provisional":true},
+    {"gameId":401934101,"home":2464,"away":2341,"startDate":"2026-11-28T21:00:00.000Z","neutralSite":false,"strengthEdge":12.45689,"homeProbability":0.692854,"provisional":true},
+    {"gameId":401864547,"home":62,"away":16,"startDate":"2026-11-29T04:00:00.000Z","neutralSite":false,"strengthEdge":3.704004,"homeProbability":0.560084,"provisional":true},
+    {"gameId":401872642,"home":2504,"away":2010,"startDate":"2026-12-05T19:00:00.000Z","neutralSite":false,"strengthEdge":0.494228,"homeProbability":0.508044,"provisional":true}
   ],
   "springs": [
     {"gameId":401856766,"winner":153,"loser":2628,"margin":5},
