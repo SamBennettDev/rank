@@ -162,7 +162,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873076,2026,11,regular,2026-11-22T18:00:00.000Z,false,true,21,Philadelphia Eagles,19,23,Pittsburgh Steelers,16
 401873077,2026,11,regular,2026-11-23T01:20:00.000Z,true,true,25,San Francisco 49ers,35,16,Minnesota Vikings,10
 401873078,2026,11,regular,2026-11-24T01:15:00.000Z,false,true,28,Washington Commanders,22,4,Cincinnati Bengals,20
-401873079,2026,12,regular,2026-11-26T01:00:00.000Z,false,false,14,Los Angeles Rams,,9,Green Bay Packers,
+401873079,2026,12,regular,2026-11-26T01:00:00.000Z,false,true,14,Los Angeles Rams,26,9,Green Bay Packers,13
 401873080,2026,12,regular,2026-11-26T21:30:00.000Z,false,false,6,Dallas Cowboys,,21,Philadelphia Eagles,
 401873081,2026,12,regular,2026-11-26T18:00:00.000Z,false,false,8,Detroit Lions,,3,Chicago Bears,
 401873082,2026,12,regular,2026-11-27T01:20:00.000Z,false,false,2,Buffalo Bills,,12,Kansas City Chiefs,
