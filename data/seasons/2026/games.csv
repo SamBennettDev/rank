@@ -221,7 +221,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401856876,2026,13,regular,2026-11-28T20:30:00.000Z,false,false,252,BYU,,2132,Cincinnati,
 401856877,2026,13,regular,2026-11-28T23:15:00.000Z,false,false,197,Oklahoma State,,2305,Kansas,
 401856878,2026,13,regular,2026-11-28T19:00:00.000Z,false,false,66,Iowa State,,2306,Kansas State,
-401856879,2026,13,regular,2026-11-27T01:00:00.000Z,false,false,2641,Texas Tech,,2628,TCU,
+401856879,2026,13,regular,2026-11-27T01:00:00.000Z,false,true,2641,Texas Tech,48,2628,TCU,27
 401856880,2026,13,regular,2026-11-28T02:00:00.000Z,false,false,254,Utah,,277,West Virginia,
 401856881,2026,4,regular,2026-09-26T23:00:00.000Z,false,true,277,West Virginia,24,197,Oklahoma State,41
 401856882,2026,11,regular,2026-11-15T00:45:00.000Z,false,true,8,Arkansas,34,2579,South Carolina,6
@@ -1369,7 +1369,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401868351,2026,11,regular,2026-11-14T18:30:00.000Z,false,true,2747,Wofford,17,2193,East Tennessee State,20
 401868352,2026,12,regular,2026-11-21T20:00:00.000Z,false,true,2382,Mercer,28,2193,East Tennessee State,25
 401868353,2026,12,regular,2026-11-21T20:00:00.000Z,false,true,2011,Alabama State,10,2504,Prairie View A&M,45
-401868354,2026,13,regular,2026-11-26T20:00:00.000Z,false,false,2011,Alabama State,,2657,Tuskegee,
+401868354,2026,13,regular,2026-11-26T20:00:00.000Z,false,true,2011,Alabama State,45,2657,Tuskegee,0
 401868355,2026,2,regular,2026-09-12T23:00:00.000Z,true,true,2016,Alcorn State,53,2029,Arkansas-Pine Bluff,51
 401868356,2026,1,regular,2026-09-05T21:00:00.000Z,false,true,2572,Southern Miss,49,2016,Alcorn State,3
 401868358,2026,4,regular,2026-09-26T20:00:00.000Z,false,true,2016,Alcorn State,43,2640,Texas Southern,40

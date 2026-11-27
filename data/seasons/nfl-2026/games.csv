@@ -163,9 +163,9 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401873077,2026,11,regular,2026-11-23T01:20:00.000Z,true,true,25,San Francisco 49ers,35,16,Minnesota Vikings,10
 401873078,2026,11,regular,2026-11-24T01:15:00.000Z,false,true,28,Washington Commanders,22,4,Cincinnati Bengals,20
 401873079,2026,12,regular,2026-11-26T01:00:00.000Z,false,true,14,Los Angeles Rams,26,9,Green Bay Packers,13
-401873080,2026,12,regular,2026-11-26T21:30:00.000Z,false,false,6,Dallas Cowboys,,21,Philadelphia Eagles,
+401873080,2026,12,regular,2026-11-26T21:30:00.000Z,false,true,6,Dallas Cowboys,38,21,Philadelphia Eagles,39
 401873081,2026,12,regular,2026-11-26T18:00:00.000Z,false,true,8,Detroit Lions,35,3,Chicago Bears,39
-401873082,2026,12,regular,2026-11-27T01:20:00.000Z,false,false,2,Buffalo Bills,,12,Kansas City Chiefs,
+401873082,2026,12,regular,2026-11-27T01:20:00.000Z,false,true,2,Buffalo Bills,13,12,Kansas City Chiefs,10
 401873083,2026,12,regular,2026-11-27T20:00:00.000Z,false,false,23,Pittsburgh Steelers,,7,Denver Broncos,
 401873084,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,16,Minnesota Vikings,,1,Atlanta Falcons,
 401873085,2026,12,regular,2026-11-29T18:00:00.000Z,false,false,34,Houston Texans,,33,Baltimore Ravens,
