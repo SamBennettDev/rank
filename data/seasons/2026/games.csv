@@ -461,7 +461,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401858533,2026,12,regular,2026-11-21T17:00:00.000Z,false,true,2509,Purdue,10,275,Wisconsin,42
 401858534,2026,12,regular,2026-11-21T23:15:00.000Z,false,true,30,USC,35,120,Maryland,21
 401858535,2026,12,regular,2026-11-21T20:30:00.000Z,false,true,264,Washington,27,84,Indiana,24
-401858536,2026,13,regular,2026-11-27T17:00:00.000Z,false,false,2294,Iowa,,158,Nebraska,
+401858536,2026,13,regular,2026-11-27T17:08:00.000Z,false,false,2294,Iowa,,158,Nebraska,
 401858537,2026,13,regular,2026-11-28T17:30:00.000Z,false,false,77,Northwestern,,356,Illinois,
 401858538,2026,13,regular,2026-11-29T00:00:00.000Z,false,false,84,Indiana,,2509,Purdue,
 401858539,2026,13,regular,2026-11-28T20:30:00.000Z,false,false,120,Maryland,,213,Penn State,
@@ -1477,6 +1477,7 @@ id,season,week,season_type,start_date,neutral_site,completed,home_id,home_team,h
 401869154,2026,9,regular,2026-10-31T16:00:00.000Z,false,true,2441,New Haven,14,2184,Duquesne,41
 401869155,2026,11,regular,2026-11-14T17:00:00.000Z,false,true,2184,Duquesne,20,2385,Mercyhurst,10
 401869156,2026,1,regular,2026-08-29T17:00:00.000Z,false,true,2130,Chicago State,28,127991,Roosevelt,44
+401869533,2026,14,regular,2026-12-05T01:00:00.000Z,true,false,254,Utah,,2641,Texas Tech,
 401869535,2026,14,regular,2026-12-05T00:00:00.000Z,false,false,2335,Liberty,,55,Jacksonville State,
 401869542,2026,14,regular,2026-12-05T01:00:00.000Z,false,false,68,Boise State,,21,San Diego State,
 401869842,2026,5,regular,2026-10-03T23:30:00.000Z,false,true,2348,Louisiana Tech,31,349,Army,29
